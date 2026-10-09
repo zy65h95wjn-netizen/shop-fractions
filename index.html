@@ -27,6 +27,7 @@ body{margin:0;font-size:14px;touch-action:manipulation;overscroll-behavior:none}
   --fg:#f2f4f7; --muted:#8d96a3; --line:#262d38;
   --op:#4aa3ff; --sign-bg:#1c2738; --danger:#ff6b5e; --danger-bg:#3a1d1c; --danger-line:#532826;
   --tape:#f7cf3f; --tape-ink:#14130d; --mark:#c22a17;
+  --cu-edge:#8a4a22; --cu:#c56c33; --cu-lite:#f8c8a0; --cu-dark:#64300f; --bore:#170d07;
   --ui:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   color-scheme:dark;
 }
@@ -71,8 +72,12 @@ body{
 .chip .val{grid-column:1 / -1;font-size:20px;font-weight:600;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .chip[aria-pressed="true"]{background:var(--tape);border-color:var(--tape);color:var(--tape-ink)}
 .chip[aria-pressed="true"] .lab,.chip[aria-pressed="true"] .off,.chip[aria-pressed="true"] .arr{color:var(--tape-ink)}
-.chip:disabled,.chip.tile{cursor:default}
-.round.tiles{grid-template-columns:.62fr 1.38fr}
+.chip:disabled{cursor:default}
+.tape.tube{border-radius:0;cursor:pointer}
+.tape.tube text{font-size:10px;font-weight:600;fill:var(--muted);stroke:none}
+.tape.tube text.on{fill:var(--tape);font-weight:800;font-size:11px}
+.main.walk{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bigno{background:var(--tape);color:var(--tape-ink);font-size:.64em;font-weight:700;min-width:1.75em;height:1.5em;line-height:1.5em;padding:0 .3em;border-radius:10px;text-align:center;font-variant-numeric:tabular-nums;flex:none}
 .chip:disabled .val{color:var(--muted)}
 
 /* key panels */
@@ -110,7 +115,12 @@ body{
 /* x-ray stamp list */
 .list{flex:1;min-height:0}
 .rows{list-style:none;margin:0;padding:0 2px;flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-.row{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:12px;padding:4px 2px;border-bottom:1px solid var(--line)}
+.row{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:12px;padding:4px 6px;border-bottom:1px solid var(--line);cursor:pointer}
+.row.done{opacity:.4}
+.row.on{background:var(--key-hi);border-radius:9px;border-bottom-color:transparent;box-shadow:inset 0 0 0 1.5px var(--tape)}
+.ops.xr.walk{grid-auto-flow:row;grid-template-columns:1fr 1.7fr}
+.ops.sm{height:40px}
+.ops.sm .k{font-size:15px}
 .row:last-child{border-bottom:0}
 .no{background:var(--tape);color:var(--tape-ink);font-weight:700;font-size:18px;border-radius:7px;height:31px;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
 .pos{font-size:25px;font-weight:600;line-height:1.1;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
@@ -141,10 +151,6 @@ body{
     <button class="chip" id="chip-down" type="button" data-round="down" aria-pressed="false" disabled></button>
     <button class="chip" id="chip-up" type="button" data-round="up" aria-pressed="false" disabled></button>
   </div>
-  <div class="round tiles" id="xr-tiles" hidden>
-    <div class="chip tile"><span class="lab">Shots</span><span class="off"></span><span class="val" id="xr-shots">–</span></div>
-    <div class="chip tile"><span class="lab">Shot length</span><span class="off"></span><span class="val" id="xr-gap">–</span></div>
-  </div>
   <div class="pads" id="pads">
     <section class="panel">
       <h2 class="plab">Whole / Decimal</h2>
@@ -159,17 +165,18 @@ body{
     </section>
   </div>
   <section class="panel list" id="xr-list" hidden>
-    <h2 class="plab blue">Stamp · inches from the end</h2>
+    <h2 class="plab blue">Stamp · inches from the end · tap to jump</h2>
     <ol class="rows" id="xr-rows"></ol>
   </section>
   <div class="ops" id="ops"></div>
   <div class="ops xr" id="xr-ops" hidden></div>
+  <div class="ops xr sm" id="xr-ops2" hidden></div>
 </div>
 
 <script>
 (function(){
 "use strict";
-const VERSION = "v2";
+const VERSION = "v3";
 const RD = 16n; // rounding grid: 16ths
 
 /* ---------- exact fraction math (BigInt) ---------- */
@@ -248,7 +255,7 @@ function layout(L){
 const blank = () => ({ w: "", n: "", d: "", neg: false });
 const has = e => !!(e.w || e.n || e.d);
 let entry = blank(), tokens = [], exact = null, picked = null, lastExpr = "", msg = "";
-let mode = "calc", xEntry = blank(), xRes = null;
+let mode = "calc", xEntry = blank(), xRes = null, xSel = 0, tubeXs = [];
 try { if (localStorage.getItem("sf-mode") === "xray") mode = "xray"; } catch (e) {}
 const cur = () => picked ? roundTo(exact, picked) : exact;
 
@@ -306,15 +313,15 @@ function clearAll(){
 }
 function xrGo(){
   if (!has(xEntry)) throw "Enter the tube length";
-  xRes = layout(entryValue(xEntry));
+  xRes = layout(entryValue(xEntry)); xSel = 0;
 }
 
 /* ---------- render ---------- */
 const $ = id => document.getElementById(id);
 const exprEl = $("expr"), mainEl = $("main"), subEl = $("sub"), tapeEl = $("tape");
 const chips = { down: $("chip-down"), up: $("chip-up") };
-const roundEl = $("round"), tilesEl = $("xr-tiles"), padsEl = $("pads"), listEl = $("xr-list"), rowsEl = $("xr-rows");
-const opsEl = $("ops"), xopsEl = $("xr-ops");
+const roundEl = $("round"), padsEl = $("pads"), listEl = $("xr-list"), rowsEl = $("xr-rows");
+const opsEl = $("ops"), xopsEl = $("xr-ops"), xops2El = $("xr-ops2");
 $("ver").textContent = VERSION;
 
 function entryHTML(e){
@@ -325,6 +332,7 @@ function entryHTML(e){
 }
 function drawTape(f){
   const x0 = 16, step = 18;
+  tapeEl.setAttribute("viewBox", "0 0 320 46");
   let fl = 0n, pos = null, lo = -1, hi = -1;
   if (f) {
     fl = floorDiv(f.n, f.d);
@@ -352,22 +360,41 @@ function drawTape(f){
   tapeEl.innerHTML = s;
   tapeEl.setAttribute("aria-label", f ? "Tape measure with a mark at " + txt(f) : "Tape measure");
 }
-function drawTube(res){
-  const x0 = 10, w = 300;
-  let s = '<rect x="0" y="0" width="320" height="46" fill="var(--tape)"/>' +
-    '<rect x="' + (x0 - 1.5) + '" y="0" width="3" height="46" fill="var(--tape-ink)"/>' +
-    '<rect x="' + (x0 + w - 1.5) + '" y="0" width="3" height="46" fill="var(--tape-ink)"/>';
+function drawTube(res, sel){
+  // Copper tube, side view. The 1 in end zones are drawn wider than scale so they can be seen; the span between is to scale.
+  const xL = 8, xR = 312, y0 = 8, h = 24, cap = 11, cy = y0 + h / 2;
+  tapeEl.setAttribute("viewBox", "0 0 320 50");
+  let s = '<defs><linearGradient id="cu" x1="0" y1="0" x2="0" y2="1">' +
+    '<stop offset="0" style="stop-color:var(--cu-edge)"/><stop offset=".18" style="stop-color:var(--cu)"/>' +
+    '<stop offset=".36" style="stop-color:var(--cu-lite)"/><stop offset=".62" style="stop-color:var(--cu)"/>' +
+    '<stop offset="1" style="stop-color:var(--cu-dark)"/></linearGradient>' +
+    '<pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">' +
+    '<rect width="1.7" height="4" style="fill:var(--bore)" opacity=".6"/></pattern></defs>';
+  s += '<ellipse cx="' + xL + '" cy="' + cy + '" rx="3.2" ry="' + (h / 2) + '" fill="url(#cu)"/>';
+  s += '<rect x="' + xL + '" y="' + y0 + '" width="' + (xR - xL) + '" height="' + h + '" fill="url(#cu)"/>';
+  tubeXs = [];
   if (res) {
     const L = Number(res.length.n) / Number(res.length.d), N = res.shots;
-    res.stamps.forEach(function(p, k){
-      const x = x0 + (Number(p.n) / Number(p.d)) / L * w;
-      s += '<rect x="' + (x - 0.8).toFixed(2) + '" y="0" width="1.6" height="22" fill="var(--tape-ink)"/>';
-      if (N <= 9 || k === 0 || k === N || (k % 5 === 0 && N - k >= 2))
-        s += '<text class="sm" x="' + x.toFixed(2) + '" y="38" text-anchor="middle">' + k + "</text>";
+    const sx = function(p){ return xL + cap + (Number(p.n) / Number(p.d) - 1) / (L - 2) * (xR - xL - 2 * cap); };
+    tubeXs = res.stamps.map(sx);
+    for (let k = 2; k <= N; k += 2)
+      s += '<rect x="' + tubeXs[k - 1].toFixed(2) + '" y="' + y0 + '" width="' + (tubeXs[k] - tubeXs[k - 1]).toFixed(2) + '" height="' + h + '" style="fill:var(--bore)" opacity=".16"/>';
+    if (sel > 0)
+      s += '<rect x="' + tubeXs[sel - 1].toFixed(2) + '" y="' + y0 + '" width="' + (tubeXs[sel] - tubeXs[sel - 1]).toFixed(2) + '" height="' + h + '" fill="#fff" opacity=".3"/>';
+    tubeXs.forEach(function(x, k){
+      const on = k === sel;
+      if (on) s += '<rect x="' + (x - 1.7).toFixed(2) + '" y="' + (y0 - 2) + '" width="3.4" height="' + (h + 4) + '" style="fill:var(--tape)"/>' +
+        '<path d="M' + (x - 5).toFixed(2) + " 0L" + (x + 5).toFixed(2) + " 0L" + x.toFixed(2) + ' 6.5Z" style="fill:var(--tape)"/>';
+      else s += '<rect x="' + (x - 0.7).toFixed(2) + '" y="' + y0 + '" width="1.4" height="' + h + '" style="fill:var(--bore)" opacity=".85"/>';
+      if (on || N <= 17 || k === 0 || k === N || (k % 5 === 0 && N - k >= 2))
+        s += '<text' + (on ? ' class="on"' : "") + ' x="' + x.toFixed(2) + '" y="45" text-anchor="middle">' + k + "</text>";
     });
   }
+  s += '<rect x="' + xL + '" y="' + y0 + '" width="' + cap + '" height="' + h + '" fill="url(#hatch)"/>' +
+    '<rect x="' + (xR - cap) + '" y="' + y0 + '" width="' + cap + '" height="' + h + '" fill="url(#hatch)"/>' +
+    '<ellipse cx="' + xR + '" cy="' + cy + '" rx="3.2" ry="' + (h / 2) + '" style="fill:var(--bore);stroke:var(--cu)" stroke-width="1.2"/>';
   tapeEl.innerHTML = s;
-  tapeEl.setAttribute("aria-label", res ? "Tube with " + (res.shots + 1) + " stamp marks" : "Tube");
+  tapeEl.setAttribute("aria-label", res ? "Copper tube with " + (res.shots + 1) + " stamp marks, stamp " + sel + " selected" : "Copper tube");
 }
 function chipHTML(dir, f){
   const lab = '<span class="arr">' + (dir === "down" ? "↓" : "↑") + "</span>" + (dir === "down" ? "Down" : "Up");
@@ -381,31 +408,52 @@ function fit(){
   let size = parseFloat(getComputedStyle(mainEl).fontSize);
   while (mainEl.scrollWidth > mainEl.clientWidth && size > 20) { size -= 3; mainEl.style.fontSize = size + "px"; }
 }
+function gapRange(res){
+  return res.minGap.n * res.maxGap.d === res.maxGap.n * res.minGap.d ? txt(res.minGap) : txt(res.minGap) + " – " + txt(res.maxGap);
+}
 function renderXray(){
-  const res = xRes;
-  exprEl.textContent = msg || "Tube length (inches)";
+  const res = xRes, N = res ? res.shots : 0;
+  exprEl.textContent = msg || (res
+    ? txt(res.length) + "″ tube · " + N + (N === 1 ? " shot of " : " shots of ") + gapRange(res)
+    : "Tube length (inches)");
   exprEl.classList.toggle("err", !!msg);
-  mainEl.innerHTML = res ? html(res.length) : entryHTML(xEntry);
-  subEl.textContent = res
-    ? res.shots + (res.shots === 1 ? " shot" : " shots") + " · stamps 0 to " + res.shots
-    : "Equal shots, 12 to 14 apart, 1 in off each end";
-  $("xr-shots").textContent = res ? res.shots : "–";
-  $("xr-gap").textContent = !res ? "–" : res.minGap.n * res.maxGap.d === res.maxGap.n * res.minGap.d
-    ? txt(res.minGap) : txt(res.minGap) + " – " + txt(res.maxGap);
+  mainEl.classList.toggle("walk", !!res);
+  mainEl.innerHTML = res ? '<span class="bigno">' + xSel + "</span><span>" + html(res.stamps[xSel]) + "</span>" : entryHTML(xEntry);
+  subEl.textContent = !res ? "Equal shots, 12 to 14 apart, 1 in off each end"
+    : "Stamp " + xSel + " of " + N + " · " + (xSel ? txt(res.gaps[xSel - 1]) + " past stamp " + (xSel - 1) : "1 in from the end");
   rowsEl.innerHTML = !res ? "" : res.stamps.map(function(p, k){
-    return '<li class="row"><span class="no">' + k + '</span><span class="pos">' + txt(p) +
-      '<span class="in">″</span></span><span class="gap">' + (k ? "+" + txt(res.gaps[k - 1]) : "start") + "</span></li>";
+    return '<li class="row' + (k === xSel ? " on" : k < xSel ? " done" : "") + '" data-k="' + k + '" role="button"><span class="no">' + k +
+      '</span><span class="pos">' + txt(p) + '<span class="in">″</span></span><span class="gap">' +
+      (k ? "+" + txt(res.gaps[k - 1]) : "start") + "</span></li>";
   }).join("");
-  if (res) rowsEl.scrollTop = 0;
-  $("k-xr-go").hidden = !!res; $("k-xr-edit").hidden = !res; $("k-xr-new").hidden = !res;
-  drawTube(res);
+  const row = res && rowsEl.children[xSel];
+  if (row) {
+    const a = rowsEl.getBoundingClientRect(), b = row.getBoundingClientRect();
+    rowsEl.scrollTop += (b.top + b.height / 2) - (a.top + a.height / 2);
+  }
+  xopsEl.classList.toggle("walk", !!res);
+  $("k-xr-go").hidden = !!res; $("k-xr-back").hidden = !res; $("k-xr-next").hidden = !res;
+  $("k-xr-back").disabled = !res || xSel === 0; $("k-xr-next").disabled = !res || xSel === N;
+  drawTube(res, xSel);
   fit();
+}
+/* keep the screen awake while walking a tube (where the phone allows it) */
+let wake = null;
+function setWake(on){
+  try {
+    if (on && !wake && navigator.wakeLock) {
+      navigator.wakeLock.request("screen").then(function(l){ wake = l; l.addEventListener("release", function(){ wake = null; }); }).catch(function(){});
+    } else if (!on && wake) { wake.release().catch(function(){}); wake = null; }
+  } catch (e) {}
 }
 function render(){
   const x = mode === "xray";
   $("tab-calc").setAttribute("aria-selected", String(!x));
   $("tab-xray").setAttribute("aria-selected", String(x));
-  roundEl.hidden = x; opsEl.hidden = x; tilesEl.hidden = !x; xopsEl.hidden = !x;
+  roundEl.hidden = x; opsEl.hidden = x; xopsEl.hidden = !x; xops2El.hidden = !(x && !!xRes);
+  tapeEl.classList.toggle("tube", x);
+  if (!x) mainEl.classList.remove("walk");
+  setWake(x && !!xRes);
   padsEl.hidden = x && !!xRes; listEl.hidden = !(x && !!xRes);
   $("k-sign").disabled = x;
   if (x) { renderXray(); return; }
@@ -462,8 +510,27 @@ $("ops").innerHTML =
 
 xopsEl.innerHTML =
   key("k-xr-go", "go", "Lay out stamps", 'data-act="xr-go"') +
+  key("k-xr-back", "txt", "Back", 'data-act="xr-back"') +
+  key("k-xr-next", "go", "Next stamp", 'data-act="xr-next"');
+xops2El.innerHTML =
   key("k-xr-edit", "txt", "Edit length", 'data-act="xr-edit"') +
   key("k-xr-new", "txt", "New tube", 'data-act="xr-new"');
+
+rowsEl.addEventListener("click", function(ev){
+  const li = ev.target.closest("li[data-k]");
+  if (!li || !xRes) return;
+  xSel = Number(li.dataset.k); msg = ""; render();
+});
+tapeEl.addEventListener("click", function(ev){
+  if (mode !== "xray" || !xRes || !tubeXs.length) return;
+  const r = tapeEl.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width * 320;
+  let best = 0;
+  tubeXs.forEach(function(v, k){ if (Math.abs(v - x) < Math.abs(tubeXs[best] - x)) best = k; });
+  xSel = best; msg = ""; render();
+});
+document.addEventListener("visibilitychange", function(){
+  if (document.visibilityState === "visible") setWake(mode === "xray" && !!xRes);
+});
 
 $("app").addEventListener("click", function(ev){
   const b = ev.target.closest("button");
@@ -473,6 +540,8 @@ $("app").addEventListener("click", function(ev){
     if (b.dataset.mode) { mode = b.dataset.mode; try { localStorage.setItem("sf-mode", mode); } catch (e) {} }
     else if (b.dataset.act === "xr-go") xrGo();
     else if (b.dataset.act === "xr-edit") xRes = null;
+    else if (b.dataset.act === "xr-back") { if (xRes && xSel > 0) xSel--; }
+    else if (b.dataset.act === "xr-next") { if (xRes && xSel < xRes.shots) xSel++; }
     else if (b.dataset.act === "xr-new") { xRes = null; xEntry = blank(); }
     else if (b.dataset.pad) digit(b.dataset.pad, b.dataset.key);
     else if (b.dataset.op) op(b.dataset.op);
