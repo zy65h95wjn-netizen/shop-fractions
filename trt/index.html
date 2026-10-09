@@ -39,6 +39,14 @@
     .hero .number{font-weight:860;font-size:clamp(44px,13vw,62px);letter-spacing:-3.8px;line-height:1.1;color:#d4fff0;margin:12px 0 0}
     .hero .number small{font-size:20px;letter-spacing:0;color:#c2eee0;font-weight:700}
     .hero .secondary{font-size:16px;font-weight:730;color:var(--gold);margin:8px 0 18px}
+    .hero-levels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0 12px}
+    .hero-level-card{min-width:0;border:1px solid #4c817c8a;background:#0b1d2690;border-radius:13px;padding:13px 10px 12px}
+    .hero-level-label{font-size:12px;color:#b3d7d1;font-weight:800;letter-spacing:.15px}
+    .hero-level-value{font-size:clamp(29px,8.8vw,46px);color:#d4fff0;font-weight:850;letter-spacing:-1.6px;line-height:1.15;margin-top:7px;font-variant-numeric:tabular-nums}
+    .hero-level-value small{display:block;font-size:12px;font-weight:700;letter-spacing:0;color:#aad0ca;margin-top:5px}
+    .hero-level-info{color:#ffce8e;font-size:12px;line-height:1.5;margin:8px 0 10px}
+    .hero-level-note{font-size:11px;line-height:1.5;color:#9cbfbd;margin:0 0 14px}
+    .hero-calibrate{min-height:39px;margin:0 0 15px;border:1px solid #5eaa9f;border-radius:10px;background:#173c3c;color:#c5ffeb;padding:9px 12px;font-weight:800;font-size:12px}
     .hero-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-top:1px solid #4a70746d;padding-top:14px;color:#aacecb;font-size:12px;line-height:1.5}
     .circle{width:8px;height:8px;display:inline-block;flex:0 0 8px;border-radius:100%;background:var(--mint)}
     .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
@@ -139,13 +147,18 @@
   <div id="error" class="invalid" role="alert" hidden>Enter a valid concentration, positive interval, vial size and dose.</div>
   <section id="view-dose">
     <div class="panel hero" aria-live="polite">
-      <div class="eyebrow">Volume per injection</div>
-      <div class="number"><span id="hero-volume">0.200</span> <small>mL</small></div>
-      <div class="secondary"><span id="hero-units">20</span> marks on a U-100 syringe</div>
+      <div class="eyebrow">Estimated testosterone · cycle average</div>
+      <div class="hero-levels">
+        <div class="hero-level-card"><div class="hero-level-label">Total T</div><div class="hero-level-value"><span id="hero-total">—</span><small>ng/dL</small></div></div>
+        <div class="hero-level-card"><div class="hero-level-label">Free T</div><div class="hero-level-value"><span id="hero-free">—</span><small>pg/mL</small></div></div>
+      </div>
+      <div class="hero-level-info" id="hero-level-info">Load your timed lab calibration to see projected levels.</div>
+      <div class="hero-level-note">Illustrative steady-state model, not a blood test or dose recommendation.</div>
+      <button id="hero-calibrate" class="hero-calibrate" type="button">Set up projection on Levels →</button>
       <div class="hero-foot"><span class="circle"></span><span id="hero-description">40 mg every 3 days · 200 mg/mL</span></div>
     </div>
     <div class="stats">
-      <div class="stat"><div class="eyebrow">Per injection</div><div class="value" id="stat-shot">40</div><div class="unit">mg testosterone</div></div>
+      <div class="stat"><div class="eyebrow">Per injection</div><div class="value"><span id="stat-shot">40</span> <span style="font-size:13px;color:#b9d1d8">mg</span></div><div class="unit"><span id="stat-volume">0.200</span> mL · <span id="stat-marks">20</span> U-100 marks</div></div>
       <div class="stat"><div class="eyebrow">Weekly average</div><div class="value" id="stat-week">93.33</div><div class="unit">mg per 7 days</div></div>
     </div>
     <div class="panel">
@@ -281,7 +294,7 @@
     </div>
   </section>
   <aside class="notice"><strong>Medication math, not medical advice.</strong> This tool does not recommend or validate a dose, schedule, route, or syringe. Check the medication label and prescribed instructions; confirm any treatment change with your clinician.</aside>
-  <footer class="footer"><strong>TRT Calc v1.1</strong> · Works offline after first install on a supported HTTPS host<br>Settings are stored in this browser on this device. No analytics or external libraries.</footer>
+  <footer class="footer"><strong>TRT Calc v1.2</strong> · Works offline after first install on a supported HTTPS host<br>Settings are stored in this browser on this device. No analytics or external libraries.</footer>
 </main>
 <script>
 (function () {
@@ -319,9 +332,9 @@
     el('dose-label').textContent=state.mode==='shot'?'Dose per injection':'Target weekly average';
     el('mode-explainer').textContent=state.mode==='shot'?'Enter your mg per shot. The weekly average adjusts to match the injection interval.':'Enter a weekly mg average. Per-injection mg adjusts with the chosen interval.';
     document.querySelectorAll('[data-days]').forEach(b=>b.classList.toggle('on',Number(b.dataset.days)===state.interval));
-    if(!out){['hero-volume','hero-units','stat-shot','stat-week','rounded-mark','rounded-mg','rounded-delta','vial-shots','vial-days','compare-weekly'].forEach(id=>el(id).textContent='—');el('hero-description').textContent='Check entered values';el('schedule-body').replaceChildren();return}
-    el('hero-volume').textContent=precise(out.ml);
-    el('hero-units').textContent=format(out.marks,2);
+    if(!out){['stat-volume','stat-marks','stat-shot','stat-week','rounded-mark','rounded-mg','rounded-delta','vial-shots','vial-days','compare-weekly'].forEach(id=>el(id).textContent='—');el('hero-description').textContent='Check entered values';el('schedule-body').replaceChildren();return}
+    el('stat-volume').textContent=precise(out.ml);
+    el('stat-marks').textContent=format(out.marks,2);
     el('hero-description').textContent=`${format(out.shot)} mg every ${format(state.interval,2)} ${state.interval===1?'day':'days'} · ${format(state.concentration)} mg/mL`;
     el('stat-shot').textContent=format(out.shot);
     el('stat-week').textContent=format(out.weekly);
@@ -361,6 +374,7 @@
   for(const b of document.querySelectorAll('[data-days]'))b.addEventListener('click',()=>{state.interval=Number(b.dataset.days);el('interval').value=String(state.interval);save();render()});
   for(const b of document.querySelectorAll('[data-mode]'))b.addEventListener('click',()=>{if(state.mode===b.dataset.mode)return;const previous=compute(state);state.mode=b.dataset.mode;if(previous)state.dose=Number((state.mode==='shot'?previous.shot:previous.weekly).toFixed(7));el('dose').value=String(state.dose);save();render()});
   for(const b of document.querySelectorAll('[data-tab]'))b.addEventListener('click',()=>setTab(b.dataset.tab));
+  el('hero-calibrate').addEventListener('click',()=>setTab('levels'));
   for(const b of document.querySelectorAll('[data-convert-mode]'))b.addEventListener('click',()=>{if(state.convMode===b.dataset.convertMode)return;const val=Number(el('conv-input').value),conc=Number(el('conv-concentration').value);if(Number.isFinite(val)&&val>=0&&Number.isFinite(conc)&&conc>0){state.convInput=state.convMode==='mg'?val/conc:val*conc;el('conv-input').value=String(Number(state.convInput.toFixed(7)))}state.convMode=b.dataset.convertMode;save();updateConverter()});
   el('conv-input').addEventListener('input',e=>{state.convInput=Number(e.target.value);save();updateConverter()});
   el('conv-concentration').addEventListener('input',e=>{const val=e.target.value;if(val!==''){state.concentration=Number(val);el('concentration').value=val;save();render()}else updateConverter()});
@@ -446,7 +460,37 @@ function drawGraph(points,interval){
  const peak=points.reduce((m,p)=>p.value>m.value?p:m,points[0]);node('circle',{cx:x(peak.t),cy:y(peak.value),r:4.5,fill:'#79e3c7',stroke:'#e2fff3','stroke-width':2},svg);
  svg.setAttribute('aria-label',(state.metric==='free'?'Free testosterone':'Total testosterone')+' illustrative curve for '+nf(interval*24,1)+' hours');
 }
+function updateHeroLevels(){
+ const total=$('hero-total'),free=$('hero-free'),info=$('hero-level-info'),action=$('hero-calibrate');
+ const dose=window.TRTMath?.compute(window.TRTCalcState||{}),days=window.TRTCalcState?.interval;
+ const validDose=dose&&finite(days,.5,14)&&dose.shot>0;
+ if(!isValid()||!validDose){
+  total.textContent='—';free.textContent='—';action.hidden=false;
+  info.textContent=!validateAnchor(state.anchor)?'Add a timed lab calibration on Levels to see estimates.':'Check model settings and enter a positive dose to see estimates.';
+  return;
+ }
+ // Match the Levels tab's central kinetic/binding model. Integrate both metrics over
+ // one complete injection cycle; these are time averages, not laboratory values.
+ let sumTT=0,sumFT=0,minTT=Infinity,maxTT=-Infinity,minFT=Infinity,maxFT=-Infinity;
+ const n=180;
+ for(let i=0;i<=n;i++){
+  const t=days*i/n;
+  const tt=projectedTotal(t,dose.shot,days,state.half,state.abs),ft=projectedFree(tt);
+  if(!Number.isFinite(tt)||!Number.isFinite(ft)){
+   total.textContent='—';free.textContent='—';info.textContent='Model could not calculate these settings.';action.hidden=false;return;
+  }
+  const w=(i===0||i===n)?.5:1;
+  sumTT+=w*tt;sumFT+=w*ft;
+  minTT=Math.min(minTT,tt);maxTT=Math.max(maxTT,tt);
+  minFT=Math.min(minFT,ft);maxFT=Math.max(maxFT,ft);
+ }
+ total.textContent=nf(sumTT/n);
+ free.textContent=nf(sumFT/n);
+ info.textContent='Modeled cycle range: Total '+nf(minTT)+'–'+nf(maxTT)+' ng/dL · Free '+nf(minFT)+'–'+nf(maxFT)+' pg/mL';
+ action.hidden=true;
+}
 function render(){
+ updateHeroLevels();
  for(const n of fieldNames){const el=$('level-'+n);if(document.activeElement!==el)el.value=String(state[n])}
  for(const n of refs){const el=$('anchor-'+n);if(document.activeElement!==el)el.value=state.anchor?String(state.anchor[n]):''}
  const okay=isValid();$('levels-empty').hidden=okay;$('levels-calculated').hidden=!okay;
