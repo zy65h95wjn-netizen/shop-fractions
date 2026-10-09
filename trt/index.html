@@ -11,7 +11,7 @@
   <meta name="apple-mobile-web-app-title" content="TRT Calc">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-  <title>TRT Calc · Dose & Volume</title>
+  <title>TRT Calc · Dose & Levels</title>
   <style>
     :root{color-scheme:dark;--bg:#0b1019;--panel:#121b29;--panel2:#172333;--line:#29384a;--ink:#eef5fa;--muted:#8ea3b6;--mint:#79e3c7;--gold:#ffce8e;--red:#ff9e9e;--radius:19px}
     *,*::before,*::after{box-sizing:border-box}
@@ -30,8 +30,8 @@
     .eyebrow{font-size:11px;color:#9eafbc;font-weight:800;letter-spacing:1.55px;text-transform:uppercase}
     h1{font-size:28px;letter-spacing:-1.2px;line-height:1.16;margin:5px 0 4px;font-weight:830}
     .subtitle{color:var(--muted);font-size:13px;margin:0 0 19px;line-height:1.55}
-    .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:5px;background:#141e2a;border:1px solid #273648;border-radius:14px;margin-bottom:16px}
-    .tab{border:0;background:transparent;color:#9bacbc;padding:12px 4px;border-radius:10px;font-size:13px;font-weight:800;min-height:43px}
+    .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px;background:#141e2a;border:1px solid #273648;border-radius:14px;margin-bottom:16px}
+    .tab{border:0;background:transparent;color:#9bacbc;padding:12px 1px;border-radius:10px;font-size:12px;font-weight:800;min-height:43px}
     .tab.active{background:#2c4150;color:#e3fcf5;box-shadow:inset 0 0 0 1px #3c6267}
     .panel{background:linear-gradient(155deg,#162332,#121b29 70%);border:1px solid var(--line);border-radius:var(--radius);padding:17px;margin-bottom:12px;box-shadow:0 8px 35px #02040624}
     .hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 100% 0%,#1b5757b0 0%,transparent 62%),linear-gradient(145deg,#142f37,#15232f 66%);border-color:#34605c;padding:21px 19px 16px}
@@ -86,6 +86,35 @@
     .converter-box{border:1px solid #36596a;border-radius:14px;padding:15px;background:#10273566;margin:13px 0}
     .converter-result{font-size:32px;letter-spacing:-1.2px;font-weight:850;color:var(--mint);margin:7px 0}
     .footer{margin-top:23px;text-align:center;color:#74889b;font-size:11px;line-height:1.8}
+    .level-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+    .level-kpi{border:1px solid #2b4c50;border-radius:13px;padding:12px 8px;background:#10232b;min-width:0}
+    .level-kpi .value{font-size:24px;font-weight:850;line-height:1.3;letter-spacing:-.7px;color:#e5fff6}
+    .level-kpi .label{font-size:11px;color:#abc2ca;font-weight:750;margin:3px 0}
+    .level-kpi .unit{font-size:10px;color:#849eaf}
+    .level-tabs{display:flex;gap:8px;margin-bottom:13px}
+    .level-tabs button{flex:1;background:#132838;color:#b5c8d9;border:1px solid #335160;border-radius:9px;min-height:40px;font-size:12px;font-weight:800}
+    .level-tabs button.active{background:#235449;color:#baf8e0;border-color:#73b9a7}
+    .curve{width:100%;height:auto;max-width:100%;display:block;overflow:visible;touch-action:pan-y}
+    .chart-legend{display:flex;align-items:center;gap:7px;font-size:11px;color:#abc2ce;margin:10px 0}
+    .chart-line{width:19px;height:3px;background:#79e3c7;display:inline-block;border-radius:3px}
+    .chart-band{width:17px;height:9px;background:#517a7b55;border:1px solid #598488;display:inline-block;border-radius:2px;margin-left:13px}
+    .time-slider{width:100%;accent-color:#79e3c7;height:30px;margin:7px 0 4px}
+    .projection-note{padding:12px;border-radius:11px;border:1px solid #435264;background:#111f2d;color:#abc0cb;font-size:12px;line-height:1.65;margin-top:12px}
+    .lab-reference{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+    .lab-reference .field{margin:0}
+    details summary{cursor:pointer;font-weight:800;font-size:13px;color:#c7e3e6;padding:10px 0}
+    details[open] summary{margin-bottom:11px}
+    input[type=range]{accent-color:#79e3c7}
+    .tiny{font-size:11px;color:#9bafbc;line-height:1.5}
+    .level-empty{text-align:center;padding:23px 12px;color:#bed0de;font-size:14px;line-height:1.7}
+    .level-empty strong{color:#effff8}
+    .history-item{border-top:1px solid #293b4d;padding:10px 1px;font-size:12px;color:#bdd0db;line-height:1.55}
+    .history-item b{color:#effff8}
+    .level-picker{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:8px 0;border-top:1px solid #2b4051}
+    .level-picker strong{font-size:17px;color:#e5fff5}
+    .warn-text{color:#f5cb93}
+    .mini-btn{border:1px solid #35556b;border-radius:8px;background:#193243;color:#cce0e9;font-size:12px;padding:8px 10px}
+
     .footer strong{color:#9fb8c7}
     .invalid{background:#432322;color:#ffd5cd;border:1px solid #8a4e4e;padding:12px;border-radius:11px;font-size:12px;line-height:1.5;margin-bottom:12px}
     [hidden]{display:none!important}
@@ -96,13 +125,14 @@
 <body>
 <main class="app">
   <div class="topbar">
-    <div class="brand"><div class="mark" aria-hidden="true">T<span style="font-size:12px">+</span></div><div><div class="brand-name">TRT Calc</div><div class="brand-sub">Dose · volume · frequency</div></div></div>
+    <div class="brand"><div class="mark" aria-hidden="true">T<span style="font-size:12px">+</span></div><div><div class="brand-name">TRT Calc</div><div class="brand-sub">Dose · levels · volume</div></div></div>
     <div class="pill">● LOCAL MATH</div>
   </div>
   <h1>Know your numbers.</h1>
-  <p class="subtitle">Testosterone dose and syringe-volume conversions. No sign-in, no tracking, no guesswork.</p>
+  <p class="subtitle">Dose conversions and a clearly labeled experimental blood-level projection. No sign-in or tracking.</p>
   <nav class="tabs" aria-label="Calculator views">
     <button class="tab active" type="button" data-tab="dose" aria-selected="true">Calculator</button>
+    <button class="tab" type="button" data-tab="levels" aria-selected="false">Levels</button>
     <button class="tab" type="button" data-tab="compare" aria-selected="false">Compare</button>
     <button class="tab" type="button" data-tab="convert" aria-selected="false">Quick convert</button>
   </nav>
@@ -153,6 +183,85 @@
       <div id="copy-feedback" class="copy-feedback" role="status" aria-live="polite"></div>
     </div>
   </section>
+  <section id="view-levels" hidden>
+    <div class="panel hero">
+      <div class="eyebrow">Experimental · Lab-anchored model</div>
+      <div class="sectionline" style="margin:6px 0 0"><h1 style="margin:0">Projected levels</h1><span class="mini">Steady state</span></div>
+      <p class="subtitle" style="margin:8px 0 0">Peak, trough and average over an injection cycle. A modeled scenario, <b>not a blood test.</b></p>
+    </div>
+    <div id="levels-empty" class="panel level-empty"><strong>No personal lab calibration loaded.</strong><br>Open your private setup link once or enter a timed lab below. Your lab values stay on this device.</div>
+    <div id="levels-calculated" hidden>
+      <div class="panel">
+        <div class="sectionline"><h2>Predicted testosterone</h2><span id="levels-schedule" class="mini">40 mg E3D</span></div>
+        <div class="level-tabs" role="group" aria-label="Select projected hormone metric">
+          <button id="levels-total" class="active" type="button" data-level-metric="total" aria-pressed="true">Total T · ng/dL</button>
+          <button id="levels-free" type="button" data-level-metric="free" aria-pressed="false">Free T · pg/mL</button>
+        </div>
+        <div class="level-kpis">
+          <div class="level-kpi"><div class="label">Peak</div><div class="value" id="level-peak">—</div><div class="unit" id="level-peak-unit">ng/dL</div></div>
+          <div class="level-kpi"><div class="label">Trough</div><div class="value" id="level-trough">—</div><div class="unit" id="level-trough-unit">ng/dL</div></div>
+          <div class="level-kpi"><div class="label">Average</div><div class="value" id="level-average">—</div><div class="unit" id="level-average-unit">ng/dL</div></div>
+        </div>
+        <svg id="level-curve" class="curve" viewBox="0 0 620 270" role="img" aria-label="Estimated levels over injection cycle"></svg>
+        <div class="chart-legend"><i class="chart-line"></i> Central scenario <i class="chart-band"></i> Assumption range</div>
+        <label for="level-time" class="tiny">Explore the cycle · hours after injection</label>
+        <input type="range" id="level-time" class="time-slider" min="0" max="72" step="1" value="24">
+        <div class="level-picker"><span id="level-time-label">At +24 hours</span><strong id="level-time-value">—</strong></div>
+        <div class="level-picker"><span>Est. total T at selected hour</span><strong id="level-time-tt">—</strong></div>
+        <div class="level-picker"><span>Est. free T at selected hour</span><strong id="level-time-ft">—</strong></div>
+        <div class="projection-note"><b>How to read this:</b> Shading spans 25 plausible absorption/elimination assumptions, <b>not</b> a confidence interval. The actual peaks and troughs may fall outside it. Route, dose timing and individual clearance aren't measured by one sample.</div>
+      </div>
+      <div class="panel">
+        <div class="sectionline"><h2>Same weekly mg · different timing</h2><span class="mini">Illustrative</span></div>
+        <div class="comparison-scroll"><table class="compare-table"><thead><tr><th>Schedule</th><th>mg / shot</th><th>Peak TT</th><th>Trough TT</th></tr></thead><tbody id="levels-compare"></tbody></table></div>
+        <p class="hint">Dose totals are matched per week; results use the same uncertain kinetic model. This is not a dosing recommendation.</p>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="sectionline"><h2>Private lab setup</h2><span class="mini">Your device only</span></div>
+      <p class="hint">When installed as an iPhone Home Screen app, Safari's local storage doesn't always transfer. If the reference above is empty, copy your personal setup link and import it here.</p>
+      <div class="actions"><button class="action" id="level-paste" type="button">Import from clipboard</button><button class="action secondary" id="level-manual" type="button">Paste manually</button></div>
+      <div id="level-paste-area" hidden style="margin-top:12px">
+        <textarea id="level-paste-text" aria-label="Private lab setup link" rows="3" placeholder="Paste your private setup link here" style="width:100%;border-radius:10px;background:#0c1723;color:#e7fcf5;border:1px solid #355067;font:12px system-ui;padding:11px;resize:vertical"></textarea>
+        <button class="action" id="level-import" type="button" style="margin-top:8px;width:100%">Apply private setup</button>
+      </div>
+      <p class="tiny" id="level-import-status" role="status" aria-live="polite" style="margin:10px 0 0"></p>
+    </div>
+    <div class="panel">
+      <div class="sectionline"><h2>Current serum binding</h2><span class="mini">Editable · local only</span></div>
+      <div class="fieldgrid">
+        <div class="field"><label for="level-shbg">SHBG</label><div class="inputwrap"><input id="level-shbg" type="number" inputmode="decimal" min="0" max="200" step="any" value="30"><span class="suffix">nmol/L</span></div></div>
+        <div class="field"><label for="level-albumin">Albumin</label><div class="inputwrap"><input id="level-albumin" type="number" inputmode="decimal" min="1" max="6.5" step="any" value="4.3"><span class="suffix">g/dL</span></div></div>
+      </div>
+      <div class="field"><label for="level-route">Injection route · informational</label><select id="level-route"><option value="IM">Intramuscular (IM)</option><option value="SubQ">Subcutaneous (SubQ)</option></select></div>
+      <p class="hint">Free T uses a Vermeulen-style SHBG/albumin binding model adjusted to match the calibration's measured free T. Changing the route <b>does not automatically change absorption</b>: route-specific kinetics are not known from your single timed IM draw.</p>
+      <details id="levels-model-settings">
+        <summary>Advanced curve assumptions</summary>
+        <div class="fieldgrid">
+          <div class="field"><label for="level-half">Elimination half-life</label><div class="inputwrap"><input id="level-half" type="number" inputmode="decimal" min="3" max="8" step="0.25" value="5"><span class="suffix">days</span></div></div>
+          <div class="field"><label for="level-abs">Absorption half-life</label><div class="inputwrap"><input id="level-abs" type="number" inputmode="decimal" min="0.35" max="1.5" step="0.05" value="0.75"><span class="suffix">days</span></div></div>
+        </div>
+        <p class="hint">Defaults come from the prior Curve Lab thought experiment; they are <b>not measured personal PK parameters</b>. Adjustments recalibrate the reference at its draw time.</p>
+      </details>
+    </div>
+    <div class="panel">
+      <div class="sectionline"><h2>Timed lab calibration</h2><span class="mini" id="levels-cal-status">Not set</span></div>
+      <p class="hint">A measured total T, measured free T (preferably equilibrium dialysis), the injection amount/schedule, and the hours after injection when blood was taken.</p>
+      <div class="lab-reference">
+        <div class="field"><label for="anchor-tt">Measured total T</label><div class="inputwrap"><input id="anchor-tt" type="number" inputmode="decimal" min="1" max="3000" step="any" placeholder="e.g. 700"><span class="suffix">ng/dL</span></div></div>
+        <div class="field"><label for="anchor-ft">Measured free T</label><div class="inputwrap"><input id="anchor-ft" type="number" inputmode="decimal" min="1" max="800" step="any" placeholder="e.g. 140"><span class="suffix">pg/mL</span></div></div>
+        <div class="field"><label for="anchor-dose">Dose at that lab</label><div class="inputwrap"><input id="anchor-dose" type="number" inputmode="decimal" min="1" max="200" step="any" placeholder="mg"><span class="suffix">mg</span></div></div>
+        <div class="field"><label for="anchor-days">Lab regimen interval</label><div class="inputwrap"><input id="anchor-days" type="number" inputmode="decimal" min="0.5" max="14" step="any" placeholder="days"><span class="suffix">days</span></div></div>
+        <div class="field"><label for="anchor-hours">Draw after last shot</label><div class="inputwrap"><input id="anchor-hours" type="number" inputmode="decimal" min="0" max="336" step="any" placeholder="hours"><span class="suffix">hours</span></div></div>
+        <div class="field"><label for="anchor-shbg">SHBG at lab</label><div class="inputwrap"><input id="anchor-shbg" type="number" inputmode="decimal" min="0" max="200" step="any" placeholder="nmol/L"><span class="suffix">nmol/L</span></div></div>
+        <div class="field"><label for="anchor-albumin">Albumin at lab</label><div class="inputwrap"><input id="anchor-albumin" type="number" inputmode="decimal" min="1" max="6.5" step="any" placeholder="g/dL"><span class="suffix">g/dL</span></div></div>
+      </div>
+      <p id="anchor-detail" class="hint">Your personal timed lab reference will show here when loaded.</p>
+      <div id="level-history"></div>
+      <div class="actions"><button class="action secondary" id="level-reset" type="button">Clear local lab profile</button></div>
+    </div>
+    <aside class="notice"><strong>Important limitations:</strong> This extrapolation assumes steady state, approximately linear dose response and negligible endogenous testosterone. The June sample was <b>not a trough</b>. Total/free estimates, especially with low SHBG, can differ substantially from actual dialysis labs. This cannot predict estradiol, hematocrit, side effects, or how you feel. Never adjust a prescription based on the chart.</aside>
+  </section>
   <section id="view-compare" hidden>
     <div class="panel hero"><div class="eyebrow">Same weekly average</div><div class="number"><span id="compare-weekly">93.33</span> <small>mg / wk</small></div><div class="hero-foot">Mathematical equivalence only—not equivalent blood levels or a schedule recommendation.</div></div>
     <div class="panel">
@@ -172,7 +281,7 @@
     </div>
   </section>
   <aside class="notice"><strong>Medication math, not medical advice.</strong> This tool does not recommend or validate a dose, schedule, route, or syringe. Check the medication label and prescribed instructions; confirm any treatment change with your clinician.</aside>
-  <footer class="footer"><strong>TRT Calc v1.0</strong> · Works offline after first install on a supported HTTPS host<br>Settings are stored in this browser on this device. No analytics or external libraries.</footer>
+  <footer class="footer"><strong>TRT Calc v1.1</strong> · Works offline after first install on a supported HTTPS host<br>Settings are stored in this browser on this device. No analytics or external libraries.</footer>
 </main>
 <script>
 (function () {
@@ -201,7 +310,8 @@
   function save(){safeSave(KEY,JSON.stringify(state))}
   function setTab(tab){
     document.querySelectorAll('[data-tab]').forEach(b=>{let active=b.dataset.tab===tab;b.classList.toggle('active',active);b.setAttribute('aria-selected',String(active))});
-    for(const name of ['dose','compare','convert'])el('view-'+name).hidden=tab!==name;
+    for(const name of ['dose','levels','compare','convert'])el('view-'+name).hidden=tab!==name;
+    if(tab==='levels')window.dispatchEvent(new CustomEvent('trt-levels-visible'));
   }
   function render(){
     const out=compute(state); el('error').hidden=!!out;
@@ -256,9 +366,145 @@
   el('conv-concentration').addEventListener('input',e=>{const val=e.target.value;if(val!==''){state.concentration=Number(val);el('concentration').value=val;save();render()}else updateConverter()});
   el('reset').addEventListener('click',()=>{Object.assign(state,defaults);syncInputs();el('conv-input').value=String(state.convInput);save();render();el('copy-feedback').textContent='Example restored.'});
   el('copy').addEventListener('click',async()=>{const c=compute(state);if(!c){el('copy-feedback').textContent='Correct the inputs first.';return}const summary=`TRT Calc · ${format(state.concentration)} mg/mL\n${format(c.shot,3)} mg every ${format(state.interval,2)} days\n${precise(c.ml)} mL = ${format(c.marks,2)} U-100 marks per injection\nWeekly average: ${format(c.weekly,3)} mg\nRounded to ${format(state.step,2)} U-100 marks: ${format(c.roundedMarks,2)} marks = ${format(c.roundedMg,3)} mg\nMathematical conversion only; not a dose recommendation.`;try{await navigator.clipboard.writeText(summary);el('copy-feedback').textContent='Copied to clipboard.'}catch{el('copy-feedback').textContent='Copy is unavailable in this browser.'}});
+  window.TRTCalcState=state;
   window.TRTMath=Object.freeze({compute});
+  document.addEventListener('input',event=>{if(['concentration','dose','interval'].includes(event.target.id))window.dispatchEvent(new CustomEvent('trt-dose-changed'))});
+  document.addEventListener('click',event=>{if(event.target.closest('[data-days],[data-mode],.use-btn,#reset'))window.dispatchEvent(new CustomEvent('trt-dose-changed'))});
   load();
   if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostname==='localhost'))window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(()=>{})});
+})();
+</script>
+<script>
+(() => {
+'use strict';
+const KEY='trt-calc-levels-v1';
+const $=id=>document.getElementById(id);
+const fieldNames=['shbg','albumin','route','half','abs'];
+const refs=['tt','ft','dose','days','hours','shbg','albumin'];
+const state={shbg:30,albumin:4.3,route:'IM',half:5,abs:.75,metric:'total',time:24,anchor:null,history:[]};
+function finite(v,min,max){return Number.isFinite(v)&&v>=min&&v<=max}
+function validateAnchor(a){return a&&finite(a.tt,1,3000)&&finite(a.ft,1,800)&&finite(a.dose,1,200)&&finite(a.days,.5,14)&&finite(a.hours,0,336)&&a.hours/24<=a.days&&finite(a.shbg,0,200)&&finite(a.albumin,1,6.5)}
+function isValid(){return validateAnchor(state.anchor)&&finite(state.shbg,0,200)&&finite(state.albumin,1,6.5)&&finite(state.half,3,8)&&finite(state.abs,.35,1.5)}
+function pack(){return JSON.stringify({shbg:state.shbg,albumin:state.albumin,route:state.route,half:state.half,abs:state.abs,metric:state.metric,anchor:state.anchor,history:state.history})}
+function save(){try{localStorage.setItem(KEY,pack())}catch{}}
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY));if(!x||typeof x!=='object')return;for(const n of ['shbg','albumin','half','abs'])if(typeof x[n]==='number')state[n]=x[n];if(['IM','SubQ'].includes(x.route))state.route=x.route;if(['total','free'].includes(x.metric))state.metric=x.metric;if(validateAnchor(x.anchor))state.anchor=x.anchor;if(Array.isArray(x.history))state.history=x.history.filter(y=>typeof y==='string').slice(0,6)}catch{}}
+function importPrivateProfile(value){
+ const match=String(value).trim().match(/(?:#profile=|^)([A-Za-z0-9_-]{8,3000})(?:$|\s)/);
+ if(!match)return false;
+ try{
+  const base=match[1].replace(/-/g,'+').replace(/_/g,'/');
+  const data=JSON.parse(decodeURIComponent(escape(atob(base))));
+  if(data.version!==1||!validateAnchor(data.anchor)||!finite(data.shbg,0,200)||!finite(data.albumin,1,6.5))return false;
+  state.anchor=data.anchor;state.shbg=data.shbg;state.albumin=data.albumin;
+  if(['IM','SubQ'].includes(data.route))state.route=data.route;
+  if(Array.isArray(data.history))state.history=data.history.filter(z=>typeof z==='string').slice(0,6);
+  save();render();
+  $('level-import-status').textContent='Lab calibration loaded and saved on this device.';
+  return true;
+ }catch{return false}
+}
+function applyPrivateLink(){
+ if(!/^#profile=/.test(location.hash))return;
+ if(importPrivateProfile(location.hash)){
+  try{history.replaceState(null,'',location.href.split('#')[0])}catch{}
+ }
+}
+function val(id){const v=$(id).value.trim();return v===''?NaN:Number(v)}
+function shape(t,period,h,a){const ke=Math.LN2/h,ka=Math.LN2/a;return ka/(ka-ke)*(Math.exp(-ke*t)/(1-Math.exp(-ke*period))-Math.exp(-ka*t)/(1-Math.exp(-ka*period)))}
+function projectedTotal(t,dose,days,h,a){const ref=state.anchor;if(!validateAnchor(ref)||!finite(h,3,8)||!finite(a,.35,1.5))return NaN;return ref.tt*(dose/ref.dose)*shape(t,days,h,a)/shape(ref.hours/24,ref.days,h,a)}
+// Vermeulen-style single-binding-site estimate, then adjust to *measured dialysis FT* at the reference.
+// Absolute calculated FT differs materially from dialysis in some men, especially with low SHBG.
+function calculatedFT(tt,shbg,albumin){
+ if(!finite(tt,0,30000)||!finite(shbg,0,200)||!finite(albumin,1,6.5))return NaN;
+ const T=tt*0.0347e-9,S=shbg*1e-9,N=1+3.6e4*(albumin*10/69000),b=N+1e9*(S-T),aa=1e9*N;
+ const f=2*T/(b+Math.sqrt(b*b+4*aa*T));
+ return f*1e9/0.00347;
+}
+function projectedFree(tt){const ref=state.anchor;if(!validateAnchor(ref))return NaN;
+ const base=calculatedFT(ref.tt,ref.shbg,ref.albumin);
+ return calculatedFT(tt,state.shbg,state.albumin)*ref.ft/base;
+}
+function metricAt(t,h=state.half,a=state.abs){const c=window.TRTMath?.compute;const dosage=c&&c(window.TRTCalcState||{});if(!dosage)return NaN;const tt=projectedTotal(t,dosage.shot,window.TRTCalcState.interval,h,a);return state.metric==='free'?projectedFree(tt):tt}
+function dataAt(t,h=state.half,a=state.abs){const c=window.TRTMath?.compute;const dose=c&&c(window.TRTCalcState||{});if(!dose)return null;const tt=projectedTotal(t,dose.shot,window.TRTCalcState.interval,h,a);return {tt,ft:projectedFree(tt)}}
+const scenarios=[];for(const h of [3,4,5,6.5,8])for(const a of [.35,.55,.75,1.1,1.5])scenarios.push({h,a});
+const nf=(n,d=0)=>Number.isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:d}):'—';
+function node(tag,attrs,parent,text){const x=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const[k,v]of Object.entries(attrs||{}))x.setAttribute(k,String(v));if(text!==undefined)x.textContent=text;parent.appendChild(x);return x}
+function drawGraph(points,interval){
+ const svg=$('level-curve');svg.replaceChildren();
+ const W=620,H=270,P={l:53,r:13,t:20,b:32};const w=W-P.l-P.r,h=H-P.t-P.b;
+ const all=points.flatMap(p=>[p.lo,p.hi]);const min=Math.min(...all),max=Math.max(...all);if(!Number.isFinite(min)||!Number.isFinite(max))return;
+ const spread=Math.max(10,(max-min)*1.25,max*.04);const low=Math.max(0,min-spread*.12),high=max+spread*.12;
+ const x=t=>P.l+w*t/interval,y=v=>P.t+h*(1-(v-low)/(high-low));
+ const def=node('defs',{},svg);const grad=node('linearGradient',{id:'level-fill-grad',x1:'0',x2:'0',y1:'0',y2:'1'},def);node('stop',{offset:'0%','stop-color':'#79e3c7','stop-opacity':'.17'},grad);node('stop',{offset:'100%','stop-color':'#79e3c7','stop-opacity':'0'},grad);
+ for(let i=0;i<=4;i++){const gy=P.t+i*h/4;node('line',{x1:P.l,x2:W-P.r,y1:gy,y2:gy,stroke:'#395064','stroke-width':1},svg);node('text',{x:P.l-7,y:gy+4,'text-anchor':'end',fill:'#a4b9c8','font-size':12},svg,nf(high-(high-low)*i/4))}
+ for(let i=0;i<=4;i++){node('text',{x:P.l+w*i/4,y:H-7,'text-anchor':'middle',fill:'#aec1cb','font-size':12},svg,nf(interval*24*i/4)+'h')}
+ const d=points.map((p,i)=>(i?'L':'M')+x(p.t).toFixed(2)+' '+y(p.value).toFixed(2)).join(' ');
+ const band=points.map((p,i)=>(i?'L':'M')+x(p.t).toFixed(2)+' '+y(p.hi).toFixed(2)).join(' ')+points.slice().reverse().map(p=>'L'+x(p.t).toFixed(2)+' '+y(p.lo).toFixed(2)).join(' ')+'Z';
+ node('path',{d:band,fill:'#518b87','fill-opacity':'.25'},svg);
+ node('path',{d:d+' L'+x(interval)+' '+y(low)+' L'+x(0)+' '+y(low)+' Z',fill:'url(#level-fill-grad)'},svg);
+ node('path',{d,fill:'none',stroke:'#79e3c7','stroke-width':3.1,'stroke-linejoin':'round','stroke-linecap':'round'},svg);
+ const peak=points.reduce((m,p)=>p.value>m.value?p:m,points[0]);node('circle',{cx:x(peak.t),cy:y(peak.value),r:4.5,fill:'#79e3c7',stroke:'#e2fff3','stroke-width':2},svg);
+ svg.setAttribute('aria-label',(state.metric==='free'?'Free testosterone':'Total testosterone')+' illustrative curve for '+nf(interval*24,1)+' hours');
+}
+function render(){
+ for(const n of fieldNames){const el=$('level-'+n);if(document.activeElement!==el)el.value=String(state[n])}
+ for(const n of refs){const el=$('anchor-'+n);if(document.activeElement!==el)el.value=state.anchor?String(state.anchor[n]):''}
+ const okay=isValid();$('levels-empty').hidden=okay;$('levels-calculated').hidden=!okay;
+ $('levels-empty').textContent=validateAnchor(state.anchor)?'Check the current SHBG, albumin, model assumptions, or dose for invalid values.':'No timed lab calibration loaded yet. Open your private setup link once or enter a timed lab below.';
+ $('levels-cal-status').textContent=validateAnchor(state.anchor)?'Local reference loaded':'Not set';
+ $('anchor-detail').textContent=validateAnchor(state.anchor)?'Measured values anchor the model at '+nf(state.anchor.hours)+'h on '+nf(state.anchor.dose)+' mg every '+nf(state.anchor.days)+' days. Original lab route and sampling method should be verified.':'Only a timed lab reference can calibrate a projection.';
+ $('levels-total').classList.toggle('active',state.metric==='total');$('levels-free').classList.toggle('active',state.metric==='free');
+ document.querySelectorAll('[data-level-metric]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.levelMetric===state.metric)));
+ $('level-history').replaceChildren();if(state.history.length){const h=document.createElement('h2');h.textContent='Other known lab observations';h.style.margin='16px 0 6px';$('level-history').appendChild(h);for(const item of state.history){const p=document.createElement('div');p.className='history-item';p.textContent=item;$('level-history').appendChild(p)}}
+ if(!okay)return;
+ const input=window.TRTCalcState||{},days=input.interval;if(!finite(days,.5,14)||!window.TRTMath?.compute(input)||!finite(input.dose,0,2000)){ $('levels-calculated').hidden=true;$('levels-empty').hidden=false;$('levels-empty').textContent='Check the dose and injection interval on the Calculator tab.';return }
+ const out=window.TRTMath.compute(input);
+ $('levels-schedule').textContent=nf(out.shot,1)+' mg every '+nf(days,2)+' days · '+state.route;
+ const n=120,pts=[];let max=-Infinity,min=Infinity,sum=0;
+ for(let i=0;i<=n;i++){const t=days*i/n,mid=dataAt(t),value=state.metric==='free'?mid?.ft:mid?.tt;
+ const vals=scenarios.map(s=>{const v=dataAt(t,s.h,s.a);return state.metric==='free'?v?.ft:v?.tt});
+ const lo=Math.min(...vals),hi=Math.max(...vals);pts.push({t,value,lo,hi});min=Math.min(min,value);max=Math.max(max,value);sum+=(i===0||i===n?0.5:1)*value;}
+ if(!Number.isFinite(max))return;
+ const units=state.metric==='total'?'ng/dL':'pg/mL';
+ $('level-peak').textContent=nf(max);$('level-trough').textContent=nf(min);$('level-average').textContent=nf(sum/n);
+ const compare=$('levels-compare');compare.replaceChildren();
+ const weekly=out.weekly;
+ for(const [label,period] of [['Daily',1],['EOD',2],['E3D',3],['Weekly',7]]){
+   const shot=weekly*period/7;let peak=-Infinity,trough=Infinity;
+   for(let i=0;i<=180;i++) {const v=projectedTotal(period*i/180,shot,period,state.half,state.abs);peak=Math.max(peak,v);trough=Math.min(trough,v)}
+   const tr=document.createElement('tr');if(Math.abs(period-days)<1e-8)tr.style.background='#193f3c';
+   for(const value of [label,nf(shot,1),nf(peak),nf(trough)]){const td=document.createElement('td');td.textContent=value;tr.appendChild(td)}
+   compare.appendChild(tr);
+ }
+
+ for(const id of ['level-peak-unit','level-trough-unit','level-average-unit'])$(id).textContent=units;
+ const slider=$('level-time');slider.max=String(days*24);state.time=Math.min(state.time,days*24);slider.value=String(state.time);drawGraph(pts,days);
+ renderHour();
+}
+function renderHour(){if(!isValid())return;const c=dataAt(state.time/24);if(!c)return;
+ $('level-time-label').textContent='At +'+nf(state.time,0)+' hours';$('level-time-value').textContent=nf(state.metric==='total'?c.tt:c.ft)+' '+(state.metric==='total'?'ng/dL':'pg/mL');$('level-time-tt').textContent=nf(c.tt)+' ng/dL';$('level-time-ft').textContent=nf(c.ft)+' pg/mL';}
+for(const n of fieldNames){$('level-'+n).addEventListener(n==='route'?'change':'input',e=>{state[n]=n==='route'?e.target.value:(e.target.value.trim()===''?NaN:Number(e.target.value));save();render()})}
+for(const n of refs){$('anchor-'+n).addEventListener('input',()=>{const obj={};for(const k of refs)obj[k]=val('anchor-'+k);state.anchor=obj;save();render()})}
+for(const b of document.querySelectorAll('[data-level-metric]'))b.addEventListener('click',()=>{state.metric=b.dataset.levelMetric;save();render()});
+$('level-time').addEventListener('input',e=>{state.time=Number(e.target.value);renderHour()});
+$('level-paste').addEventListener('click',async()=>{
+ try{
+  const v=await navigator.clipboard.readText();
+  if(importPrivateProfile(v))return;
+  $('level-import-status').textContent='Clipboard has no valid TRT setup link. Paste the link manually below.';
+ }catch{$('level-import-status').textContent='Clipboard access unavailable. Paste the link manually below.'}
+ $('level-paste-area').hidden=false;
+});
+$('level-manual').addEventListener('click',()=>{$('level-paste-area').hidden=false;$('level-paste-text').focus()});
+$('level-import').addEventListener('click',()=>{
+ if(importPrivateProfile($('level-paste-text').value)){$('level-paste-text').value='';$('level-paste-area').hidden=true}
+ else $('level-import-status').textContent='Invalid private setup link; copy it again from ChatGPT.';
+});
+$('level-reset').addEventListener('click',()=>{if(!confirm('Clear the calibration and lab history saved in this browser?'))return;state.anchor=null;state.history=[];save();render()});
+load();applyPrivateLink();render();
+window.addEventListener('trt-levels-visible',render);
+window.addEventListener('trt-dose-changed',render);
+window.TRTLevels=Object.freeze({shape,projectedTotal,calculatedFT,projectedFree,validateAnchor});
 })();
 </script>
 </body>

@@ -1,7 +1,7 @@
 {
-  "name": "TRT Calc · Dose & Volume",
+  "name": "TRT Calc · Dose & Levels",
   "short_name": "TRT Calc",
-  "description": "A private testosterone dosage and syringe-volume calculator",
+  "description": "Testosterone dose conversions and experimental lab-anchored levels projections. Private calibration stays on device.",
   "id": "./",
   "start_url": "./",
   "scope": "./",
