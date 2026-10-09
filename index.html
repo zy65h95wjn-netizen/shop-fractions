@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Shop Fractions</title>
+<meta name="description" content="Fraction calculator that rounds up or down to the nearest 1/16.">
+<meta name="theme-color" content="#0b0e13">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Fractions">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<style>
+:root{padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+html{-webkit-text-size-adjust:100%;overscroll-behavior:none}
+body{margin:0;font-size:14px;touch-action:manipulation;overscroll-behavior:none}
+[hidden]{display:none!important}
+</style>
+<style>
+/* Layout: one dark screen. Readout, tape strip, Down/Up row, then a Whole/Decimal panel beside a
+   Numerator-over-Denominator panel (blue bar between = fraction bar), operators along the bottom. */
+:root{
+  --bg:#0b0e13; --readout:#161b23; --panel:#11151b; --key:#1d232d; --key-hi:#232a35; --press:#303947;
+  --fg:#f2f4f7; --muted:#8d96a3; --line:#262d38;
+  --op:#4aa3ff; --sign-bg:#1c2738; --danger:#ff6b5e; --danger-bg:#3a1d1c; --danger-line:#532826;
+  --tape:#f7cf3f; --tape-ink:#14130d; --mark:#c22a17;
+  --ui:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color-scheme:dark;
+}
+html{box-sizing:border-box;height:100%}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  height:100%;background:var(--bg);color:var(--fg);font-family:var(--ui);
+  padding-inline:16px;padding-block:8px;display:flex;justify-content:center;
+  -webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;
+}
+.app{width:100%;max-width:440px;height:100%;min-height:600px;display:flex;flex-direction:column;gap:8px}
+
+/* readout */
+.readout{background:var(--readout);border:1px solid var(--line);border-radius:12px;padding:8px 14px 10px;display:flex;flex-direction:column;gap:2px;flex:none}
+.expr{min-height:19px;font-size:15px;color:var(--muted);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.expr.err{color:var(--danger);font-weight:600}
+.main{font-weight:600;font-size:52px;line-height:58px;height:58px;text-align:right;white-space:nowrap;overflow:hidden;font-variant-numeric:lining-nums}
+.main .neg{margin-right:.08em}
+.fr{display:inline-flex;flex-direction:column;align-items:center;font-size:.5em;line-height:1.08;vertical-align:middle;margin-left:.3em;position:relative;top:-.08em}
+.fr span{padding:0 .22em;min-width:1.1em;text-align:center}
+.fr span:first-child{border-bottom:2px solid currentColor}
+.fr .ph{color:transparent;background:var(--key-hi);border-radius:4px}
+.sub{min-height:18px;font-size:14px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tape{display:block;width:100%;height:auto;border-radius:8px;flex:none}
+.tape text{font-family:var(--ui);font-weight:700;font-size:13px;fill:var(--tape-ink);paint-order:stroke;stroke:var(--tape);stroke-width:5px;stroke-linejoin:round}
+.round{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:none}
+.chip{
+  font:inherit;color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:7px 12px 6px;display:grid;grid-template-columns:auto 1fr;align-items:baseline;column-gap:8px;text-align:left;cursor:pointer;min-width:0;
+}
+.chip .lab{font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.chip .arr{color:var(--op);font-size:15px;font-weight:700;margin-right:3px}
+.chip .off{font-size:12px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.chip .val{grid-column:1 / -1;font-size:20px;font-weight:600;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip[aria-pressed="true"]{background:var(--tape);border-color:var(--tape);color:var(--tape-ink)}
+.chip[aria-pressed="true"] .lab,.chip[aria-pressed="true"] .off,.chip[aria-pressed="true"] .arr{color:var(--tape-ink)}
+.chip:disabled{cursor:default}
+.chip:disabled .val{color:var(--muted)}
+
+/* key panels */
+.pads{flex:1;min-height:0;display:grid;grid-template-columns:.95fr 1fr;gap:10px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:8px;display:flex;flex-direction:column;gap:6px;min-height:0}
+.plab{margin:0;display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);line-height:16px;padding-inline:3px;flex:none;white-space:nowrap}
+.plab::after{content:"";flex:1;height:1px;background:var(--line)}
+.plab.blue{color:var(--op)}
+.whole{flex:1;display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:6px;min-height:0}
+.pad{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:6px}
+.bar{height:3px;border-radius:2px;background:var(--op);flex:none;margin-block:2px}
+.ops{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;height:56px;flex:none}
+.k{
+  font-family:var(--ui);font-size:26px;font-weight:500;color:var(--fg);
+  background:linear-gradient(var(--key-hi),var(--key));
+  border:1px solid var(--line);border-radius:10px;min-height:0;padding:0;cursor:pointer;touch-action:manipulation;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 1px 2px rgba(0,0,0,.45);
+  display:flex;align-items:center;justify-content:center;transition:transform .08s;
+}
+.pad .k{font-size:23px}
+.k:active{background:var(--press);transform:scale(.96)}
+.k.wide{grid-column:span 2}
+.k.clear{color:var(--danger);background:var(--danger-bg);border-color:var(--danger-line);font-weight:600}
+.k.sign{color:var(--op);background:var(--sign-bg);font-size:22px;font-weight:600}
+.k.op{color:var(--op);font-size:32px;font-weight:400}
+.k.eq{background:var(--tape);border-color:var(--tape);color:var(--tape-ink);font-size:34px;font-weight:600}
+.k.eq:active{background:var(--tape);filter:brightness(.88)}
+.k svg{width:26px;height:20px}
+.k:focus-visible,.chip:focus-visible{outline:2px solid var(--op);outline-offset:2px}
+@media (max-height:660px){
+  .main{font-size:42px;line-height:46px;height:46px}
+  .k{font-size:23px}.pad .k{font-size:20px}.ops{height:48px}
+}
+@media (prefers-reduced-motion: reduce){.k{transition:none}.k:active{transform:none}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <section class="readout" aria-label="Readout">
+    <div class="expr" id="expr" aria-live="polite"></div>
+    <div class="main" id="main" aria-live="polite">0</div>
+    <div class="sub" id="sub">Rounds to the nearest 1/16 after =</div>
+  </section>
+  <svg class="tape" id="tape" viewBox="0 0 320 46" role="img" aria-label="Tape measure"></svg>
+  <div class="round">
+    <button class="chip" id="chip-down" type="button" data-round="down" aria-pressed="false" disabled></button>
+    <button class="chip" id="chip-up" type="button" data-round="up" aria-pressed="false" disabled></button>
+  </div>
+  <div class="pads">
+    <section class="panel">
+      <h2 class="plab">Whole / Decimal</h2>
+      <div class="whole" id="pad-w"></div>
+    </section>
+    <section class="panel">
+      <h2 class="plab blue">Numerator</h2>
+      <div class="pad" id="pad-n"></div>
+      <div class="bar" aria-hidden="true"></div>
+      <h2 class="plab blue">Denominator</h2>
+      <div class="pad" id="pad-d"></div>
+    </section>
+  </div>
+  <div class="ops" id="ops"></div>
+</div>
+
+<script>
+(function(){
+"use strict";
+const RD = 16n; // rounding grid: 16ths
+
+/* ---------- exact fraction math (BigInt) ---------- */
+const abs = a => a < 0n ? -a : a;
+function gcd(a, b){ a = abs(a); b = abs(b); while (b) { [a, b] = [b, a % b]; } return a; }
+function F(n, d){
+  if (d === 0n) throw new Error("div0");
+  if (d < 0n) { n = -n; d = -d; }
+  const g = gcd(n, d) || 1n;
+  return { n: n / g, d: d / g };
+}
+const OPS = {
+  "+": (a, b) => F(a.n * b.d + b.n * a.d, a.d * b.d),
+  "−": (a, b) => F(a.n * b.d - b.n * a.d, a.d * b.d),
+  "×": (a, b) => F(a.n * b.n, a.d * b.d),
+  "÷": (a, b) => F(a.n * b.d, a.d * b.n)
+};
+function floorDiv(n, d){ let q = n / d; if (n % d !== 0n && n < 0n) q -= 1n; return q; }
+function onGrid(f){ return (f.n * RD) % f.d === 0n; }
+function roundTo(f, dir){
+  const q = floorDiv(f.n * RD, f.d);
+  return F(dir === "up" && !onGrid(f) ? q + 1n : q, RD);
+}
+function parts(f){ const a = abs(f.n); return { neg: f.n < 0n, w: a / f.d, n: a % f.d, d: f.d }; }
+function txt(f){
+  const p = parts(f);
+  const s = p.n ? (p.w ? p.w + " " : "") + p.n + "/" + p.d : "" + p.w;
+  return (p.neg ? "−" : "") + s;
+}
+function html(f){
+  const p = parts(f);
+  return (p.neg ? '<span class="neg">−</span>' : "") + (p.w || !p.n ? p.w : "") +
+    (p.n ? '<span class="fr"><span>' + p.n + "</span><span>" + p.d + "</span></span>" : "");
+}
+function dec(f, places){
+  const v = Number(f.n) / Number(f.d);
+  return (+v.toFixed(places)).toString().replace("-", "−");
+}
+function evaluate(t){ // × and ÷ before + and −
+  const vals = [t[0].f], pend = [];
+  for (let i = 1; i < t.length; i += 2) {
+    const o = t[i], v = t[i + 1].f;
+    if (o === "×" || o === "÷") vals.push(OPS[o](vals.pop(), v));
+    else { pend.push(o); vals.push(v); }
+  }
+  let r = vals[0];
+  pend.forEach((o, i) => { r = OPS[o](r, vals[i + 1]); });
+  return r;
+}
+
+/* ---------- state ---------- */
+const blank = () => ({ w: "", n: "", d: "", neg: false });
+const has = e => !!(e.w || e.n || e.d);
+let entry = blank(), tokens = [], exact = null, picked = null, lastExpr = "", msg = "";
+const cur = () => picked ? roundTo(exact, picked) : exact;
+
+function entryValue(e){
+  if (e.n && !e.d) throw "Add the bottom number";
+  if (e.d && !e.n) throw "Add the top number";
+  let f = F(0n, 1n);
+  if (e.w) { const s = e.w.split("."), fr = s[1] || ""; f = F(BigInt((s[0] || "0") + fr), 10n ** BigInt(fr.length)); }
+  if (e.n) f = OPS["+"](f, F(BigInt(e.n), BigInt(e.d)));
+  return e.neg ? F(-f.n, f.d) : f;
+}
+function startFresh(){ if (exact) { exact = null; picked = null; lastExpr = ""; } }
+
+function digit(pad, k){
+  startFresh();
+  if (pad === "w") {
+    let w = entry.w;
+    if (k === "back") w = w.slice(0, -1);
+    else if (k === ".") { if (!w.includes(".")) w = (w || "0") + "."; }
+    else if (w.length < 8) w = (w === "0" ? "" : w) + k;
+    entry.w = w;
+  } else {
+    let v = entry[pad];
+    if (k === "back") v = v.slice(0, -1);
+    else if (v.length < 4 && !(v === "" && k === "0")) v += k;
+    entry[pad] = v;
+  }
+}
+function pushEntry(){ const f = entryValue(entry); tokens.push({ f: f, t: txt(f) }); entry = blank(); }
+function lastIsOp(){ return tokens.length && typeof tokens[tokens.length - 1] === "string"; }
+function op(o){
+  if (has(entry)) pushEntry();
+  else if (exact) { const f = cur(); tokens = [{ f: f, t: txt(f) }]; }
+  else if (lastIsOp()) tokens.pop();
+  else return;
+  tokens.push(o); entry = blank(); exact = null; picked = null; lastExpr = "";
+}
+function equals(){
+  if (has(entry)) pushEntry();
+  else if (lastIsOp()) tokens.pop();
+  if (!tokens.length) return;
+  const text = tokens.map(t => t.t || t).join(" ");
+  try { exact = evaluate(tokens); }
+  catch (e) { tokens = []; throw "Can't divide by zero"; }
+  lastExpr = text + " ="; tokens = []; picked = null;
+}
+function sign(){
+  if (!has(entry) && exact) { const f = cur(); exact = F(-f.n, f.d); picked = null; lastExpr = ""; }
+  else entry.neg = !entry.neg;
+}
+function clearAll(){ entry = blank(); tokens = []; exact = null; picked = null; lastExpr = ""; }
+
+/* ---------- render ---------- */
+const $ = id => document.getElementById(id);
+const exprEl = $("expr"), mainEl = $("main"), subEl = $("sub"), tapeEl = $("tape");
+const chips = { down: $("chip-down"), up: $("chip-up") };
+
+function entryHTML(e){
+  let s = (e.neg ? '<span class="neg">−</span>' : "") + e.w;
+  if (e.n || e.d) s += '<span class="fr"><span' + (e.n ? "" : ' class="ph"') + ">" + (e.n || "0") +
+    "</span><span" + (e.d ? "" : ' class="ph"') + ">" + (e.d || "0") + "</span></span>";
+  return s || "0";
+}
+function drawTape(f){
+  const x0 = 16, step = 18;
+  let fl = 0n, pos = null, lo = -1, hi = -1;
+  if (f) {
+    fl = floorDiv(f.n, f.d);
+    const r = F(f.n - fl * f.d, f.d);
+    pos = Number(r.n) / Number(r.d);
+    lo = Number((r.n * RD) / r.d);
+    hi = onGrid(r) ? lo : lo + 1;
+  }
+  let s = '<rect x="0" y="0" width="320" height="46" fill="var(--tape)"/>';
+  for (let i = 0; i <= 16; i++) {
+    const h = i % 16 === 0 ? 30 : i % 8 === 0 ? 22 : i % 4 === 0 ? 16 : i % 2 === 0 ? 11 : 7;
+    const x = x0 + i * step, hot = i === lo || i === hi;
+    s += '<rect x="' + (x - (hot ? 1.5 : 0.6)) + '" y="0" width="' + (hot ? 3 : 1.2) + '" height="' + (hot ? h + 4 : h) + '" fill="var(--tape-ink)"/>';
+  }
+  if (picked && f) {
+    const px = x0 + (picked === "down" ? lo : hi) * step;
+    s += '<path d="M' + (px - 5) + " 46L" + px + " 38L" + (px + 5) + ' 46Z" fill="var(--tape-ink)"/>';
+  }
+  if (pos !== null) {
+    const mx = x0 + pos * 16 * step;
+    s += '<rect x="' + (mx - 1) + '" y="0" width="2" height="46" fill="var(--mark)"/>';
+  }
+  s += '<text x="' + (x0 + 5) + '" y="41">' + fl + "</text>";
+  s += '<text x="' + (x0 + 16 * step - 5) + '" y="41" text-anchor="end">' + (fl + 1n) + "</text>";
+  tapeEl.innerHTML = s;
+  tapeEl.setAttribute("aria-label", f ? "Tape measure with a mark at " + txt(f) : "Tape measure");
+}
+function chipHTML(dir, f){
+  const lab = '<span class="arr">' + (dir === "down" ? "↓" : "↑") + "</span>" + (dir === "down" ? "Down" : "Up");
+  if (!f) return '<span class="lab">' + lab + '</span><span class="off"></span><span class="val">–</span>';
+  const r = roundTo(f, dir), diff = OPS["−"](r, f);
+  const off = diff.n === 0n ? "" : (diff.n > 0n ? "+" : "") + dec(diff, 4);
+  return '<span class="lab">' + lab + '</span><span class="off">' + off + '</span><span class="val">' + txt(r) + "</span>";
+}
+function fit(){
+  mainEl.style.fontSize = "";
+  let size = parseFloat(getComputedStyle(mainEl).fontSize);
+  while (mainEl.scrollWidth > mainEl.clientWidth && size > 20) { size -= 3; mainEl.style.fontSize = size + "px"; }
+}
+function render(){
+  exprEl.textContent = msg || (exact ? lastExpr : tokens.map(t => t.t || t).join(" "));
+  exprEl.classList.toggle("err", !!msg);
+  if (exact) {
+    const grid = onGrid(exact);
+    mainEl.innerHTML = html(cur());
+    subEl.textContent = picked
+      ? "Rounded " + picked + " to 1/16 · exact " + txt(exact) + " (" + dec(exact, 4) + ")"
+      : (grid ? "Lands on a 16th · " : "Exact · ") + dec(exact, 4);
+    for (const dir of ["down", "up"]) {
+      chips[dir].innerHTML = chipHTML(dir, exact);
+      chips[dir].disabled = grid;
+      chips[dir].setAttribute("aria-pressed", String(picked === dir));
+    }
+    drawTape(exact);
+  } else {
+    mainEl.innerHTML = entryHTML(entry);
+    subEl.textContent = has(entry) || tokens.length ? " " : "Rounds to the nearest 1/16 after =";
+    for (const dir of ["down", "up"]) {
+      chips[dir].innerHTML = chipHTML(dir, null);
+      chips[dir].disabled = true;
+      chips[dir].setAttribute("aria-pressed", "false");
+    }
+    drawTape(null);
+  }
+  fit();
+}
+
+/* ---------- keys ---------- */
+const BACK = '<svg viewBox="0 0 28 22" aria-hidden="true"><path d="M9 1h17a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H9L1 11Z" fill="currentColor" opacity=".85"/><path d="M13 7l8 8M21 7l-8 8" stroke="var(--key)" stroke-width="2.4" stroke-linecap="round"/></svg>';
+function key(id, cls, label, attrs, aria){
+  return '<button type="button" class="k ' + cls + '" id="' + id + '" ' + attrs + (aria ? ' aria-label="' + aria + '"' : "") + ">" + label + "</button>";
+}
+function numKey(pad, k, cls){
+  const names = { w: "whole", n: "top", d: "bottom" };
+  const label = k === "back" ? BACK : k;
+  const aria = k === "back" ? "Delete " + names[pad] + " digit" : names[pad] + " " + (k === "." ? "decimal point" : k);
+  return key("k-" + pad + "-" + (k === "." ? "dot" : k), cls || "", label, 'data-pad="' + pad + '" data-key="' + k + '"', aria);
+}
+$("pad-w").innerHTML =
+  key("k-clear", "clear", "C", 'data-act="clear"', "Clear") +
+  key("k-sign", "sign", "+/−", 'data-act="sign"', "Change sign") +
+  ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "back"].map(k => numKey("w", k)).join("");
+for (const pad of ["n", "d"]) {
+  $("pad-" + pad).innerHTML =
+    ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"].map(k => numKey(pad, k)).join("") + numKey(pad, "back", "wide");
+}
+$("ops").innerHTML =
+  [["+", "plus", "Add"], ["−", "minus", "Subtract"], ["×", "times", "Multiply"], ["÷", "divide", "Divide"]]
+    .map(o => key("k-op-" + o[1], "op", o[0], 'data-op="' + o[0] + '"', o[2])).join("") +
+  key("k-eq", "eq", "=", 'data-act="eq"', "Equals");
+
+$("app").addEventListener("click", function(ev){
+  const b = ev.target.closest("button");
+  if (!b || b.disabled) return;
+  msg = "";
+  try {
+    if (b.dataset.pad) digit(b.dataset.pad, b.dataset.key);
+    else if (b.dataset.op) op(b.dataset.op);
+    else if (b.dataset.round) picked = picked === b.dataset.round ? null : b.dataset.round;
+    else if (b.dataset.act === "clear") clearAll();
+    else if (b.dataset.act === "sign") sign();
+    else if (b.dataset.act === "eq") equals();
+  } catch (e) {
+    if (typeof e === "string") msg = e; else throw e;
+  }
+  render();
+});
+render();
+})();
+</script>
+<script>
+if ("serviceWorker" in navigator) { window.addEventListener("load", function(){ navigator.serviceWorker.register("sw.js").catch(function(){}); }); }
+</script>
+</body>
+</html>
