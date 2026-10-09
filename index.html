@@ -39,6 +39,13 @@ body{
 }
 .app{width:100%;max-width:440px;height:100%;min-height:600px;display:flex;flex-direction:column;gap:8px}
 
+/* mode tabs */
+.tabs{display:grid;grid-template-columns:1fr 1fr auto;align-items:center;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:3px;flex:none}
+.tab{font-family:var(--ui);font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--muted);background:none;border:0;border-radius:7px;height:30px;padding:0;cursor:pointer;touch-action:manipulation}
+.tab[aria-selected="true"]{background:var(--key-hi);color:var(--fg);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.tab:focus-visible{outline:2px solid var(--op);outline-offset:1px}
+.ver{font-size:10px;color:var(--muted);padding:0 7px 0 5px;font-variant-numeric:tabular-nums}
+
 /* readout */
 .readout{background:var(--readout);border:1px solid var(--line);border-radius:12px;padding:8px 14px 10px;display:flex;flex-direction:column;gap:2px;flex:none}
 .expr{min-height:19px;font-size:15px;color:var(--muted);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
@@ -51,6 +58,7 @@ body{
 .fr .ph{color:transparent;background:var(--key-hi);border-radius:4px}
 .sub{min-height:18px;font-size:14px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tape{display:block;width:100%;height:auto;border-radius:8px;flex:none}
+.tape text.sm{font-size:11px}
 .tape text{font-family:var(--ui);font-weight:700;font-size:13px;fill:var(--tape-ink);paint-order:stroke;stroke:var(--tape);stroke-width:5px;stroke-linejoin:round}
 .round{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:none}
 .chip{
@@ -63,7 +71,8 @@ body{
 .chip .val{grid-column:1 / -1;font-size:20px;font-weight:600;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .chip[aria-pressed="true"]{background:var(--tape);border-color:var(--tape);color:var(--tape-ink)}
 .chip[aria-pressed="true"] .lab,.chip[aria-pressed="true"] .off,.chip[aria-pressed="true"] .arr{color:var(--tape-ink)}
-.chip:disabled{cursor:default}
+.chip:disabled,.chip.tile{cursor:default}
+.round.tiles{grid-template-columns:.62fr 1.38fr}
 .chip:disabled .val{color:var(--muted)}
 
 /* key panels */
@@ -92,6 +101,21 @@ body{
 .k.eq{background:var(--tape);border-color:var(--tape);color:var(--tape-ink);font-size:34px;font-weight:600}
 .k.eq:active{background:var(--tape);filter:brightness(.88)}
 .k svg{width:26px;height:20px}
+.k:disabled{opacity:.3;cursor:default}
+.ops.xr{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:1fr}
+.k.go{background:var(--tape);border-color:var(--tape);color:var(--tape-ink);font-size:19px;font-weight:700;letter-spacing:.01em}
+.k.go:active{background:var(--tape);filter:brightness(.88)}
+.k.txt{font-size:17px;font-weight:600}
+
+/* x-ray stamp list */
+.list{flex:1;min-height:0}
+.rows{list-style:none;margin:0;padding:0 2px;flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.row{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:12px;padding:4px 2px;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.no{background:var(--tape);color:var(--tape-ink);font-weight:700;font-size:18px;border-radius:7px;height:31px;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+.pos{font-size:25px;font-weight:600;line-height:1.1;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.pos .in{color:var(--muted);font-weight:400;margin-left:1px}
+.gap{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .k:focus-visible,.chip:focus-visible{outline:2px solid var(--op);outline-offset:2px}
 @media (max-height:660px){
   .main{font-size:42px;line-height:46px;height:46px}
@@ -102,17 +126,26 @@ body{
 </head>
 <body>
 <div class="app" id="app">
+  <nav class="tabs" aria-label="Mode">
+    <button class="tab" id="tab-calc" type="button" data-mode="calc" aria-selected="true">Calculator</button>
+    <button class="tab" id="tab-xray" type="button" data-mode="xray" aria-selected="false">X-ray layout</button>
+    <span class="ver" id="ver"></span>
+  </nav>
   <section class="readout" aria-label="Readout">
     <div class="expr" id="expr" aria-live="polite"></div>
     <div class="main" id="main" aria-live="polite">0</div>
     <div class="sub" id="sub">Rounds to the nearest 1/16 after =</div>
   </section>
   <svg class="tape" id="tape" viewBox="0 0 320 46" role="img" aria-label="Tape measure"></svg>
-  <div class="round">
+  <div class="round" id="round">
     <button class="chip" id="chip-down" type="button" data-round="down" aria-pressed="false" disabled></button>
     <button class="chip" id="chip-up" type="button" data-round="up" aria-pressed="false" disabled></button>
   </div>
-  <div class="pads">
+  <div class="round tiles" id="xr-tiles" hidden>
+    <div class="chip tile"><span class="lab">Shots</span><span class="off"></span><span class="val" id="xr-shots">–</span></div>
+    <div class="chip tile"><span class="lab">Shot length</span><span class="off"></span><span class="val" id="xr-gap">–</span></div>
+  </div>
+  <div class="pads" id="pads">
     <section class="panel">
       <h2 class="plab">Whole / Decimal</h2>
       <div class="whole" id="pad-w"></div>
@@ -125,12 +158,18 @@ body{
       <div class="pad" id="pad-d"></div>
     </section>
   </div>
+  <section class="panel list" id="xr-list" hidden>
+    <h2 class="plab blue">Stamp · inches from the end</h2>
+    <ol class="rows" id="xr-rows"></ol>
+  </section>
   <div class="ops" id="ops"></div>
+  <div class="ops xr" id="xr-ops" hidden></div>
 </div>
 
 <script>
 (function(){
 "use strict";
+const VERSION = "v2";
 const RD = 16n; // rounding grid: 16ths
 
 /* ---------- exact fraction math (BigInt) ---------- */
@@ -149,6 +188,7 @@ const OPS = {
   "÷": (a, b) => F(a.n * b.d, a.d * b.n)
 };
 function floorDiv(n, d){ let q = n / d; if (n % d !== 0n && n < 0n) q -= 1n; return q; }
+function ceilDiv(n, d){ return -floorDiv(-n, d); }
 function onGrid(f){ return (f.n * RD) % f.d === 0n; }
 function roundTo(f, dir){
   const q = floorDiv(f.n * RD, f.d);
@@ -181,10 +221,35 @@ function evaluate(t){ // × and ÷ before + and −
   return r;
 }
 
+/* ---------- x-ray stamp layout ----------
+   Stamp 0 sits END inches in, the last stamp END inches from the far end. The span between is cut into
+   the fewest equal shots that are MIN_SHOT..MAX_SHOT long. Each stamp location is rounded to the nearest
+   1/16, mirrored from both ends, so shots differ by at most 1/16 and the last stamp lands on the mark. */
+const MIN_SHOT = 12n, MAX_SHOT = 14n, END = 1n, MAX_LEN = 1200n;
+function layout(L){
+  if (L.n > MAX_LEN * L.d) throw "Too long. Max is " + MAX_LEN + " in";
+  const span = OPS["−"](L, F(2n * END, 1n));
+  if (span.n <= 0n) throw "No equal split from 12 to 14 at this length";
+  const nMin = ceilDiv(span.n, span.d * MAX_SHOT), nMax = floorDiv(span.n, span.d * MIN_SHOT);
+  if (nMin > nMax) throw "No equal split from 12 to 14 at this length";
+  const N = Number(nMin), b = span.d * nMin, first = RD * END, pos = [];
+  for (let k = 0; k <= N; k++) pos.push(first + floorDiv(2n * BigInt(k) * RD * span.n + b, 2n * b));
+  if ((span.n * RD) % span.d === 0n) {
+    const T = span.n * RD / span.d;
+    for (let k = Math.floor(N / 2) + 1; k <= N; k++) pos[k] = first + T - (pos[N - k] - first);
+  }
+  let lo = pos[1] - pos[0], hi = lo;
+  const gaps = [];
+  for (let k = 1; k <= N; k++) { const g = pos[k] - pos[k - 1]; gaps.push(F(g, RD)); if (g < lo) lo = g; if (g > hi) hi = g; }
+  return { length: L, shots: N, stamps: pos.map(p => F(p, RD)), gaps: gaps, minGap: F(lo, RD), maxGap: F(hi, RD) };
+}
+
 /* ---------- state ---------- */
 const blank = () => ({ w: "", n: "", d: "", neg: false });
 const has = e => !!(e.w || e.n || e.d);
 let entry = blank(), tokens = [], exact = null, picked = null, lastExpr = "", msg = "";
+let mode = "calc", xEntry = blank(), xRes = null;
+try { if (localStorage.getItem("sf-mode") === "xray") mode = "xray"; } catch (e) {}
 const cur = () => picked ? roundTo(exact, picked) : exact;
 
 function entryValue(e){
@@ -196,9 +261,10 @@ function entryValue(e){
   return e.neg ? F(-f.n, f.d) : f;
 }
 function startFresh(){ if (exact) { exact = null; picked = null; lastExpr = ""; } }
+function calcEntry(){ startFresh(); return entry; }
 
 function digit(pad, k){
-  startFresh();
+  const entry = mode === "xray" ? xEntry : calcEntry();
   if (pad === "w") {
     let w = entry.w;
     if (k === "back") w = w.slice(0, -1);
@@ -234,12 +300,22 @@ function sign(){
   if (!has(entry) && exact) { const f = cur(); exact = F(-f.n, f.d); picked = null; lastExpr = ""; }
   else entry.neg = !entry.neg;
 }
-function clearAll(){ entry = blank(); tokens = []; exact = null; picked = null; lastExpr = ""; }
+function clearAll(){
+  if (mode === "xray") { xEntry = blank(); xRes = null; return; }
+  entry = blank(); tokens = []; exact = null; picked = null; lastExpr = "";
+}
+function xrGo(){
+  if (!has(xEntry)) throw "Enter the tube length";
+  xRes = layout(entryValue(xEntry));
+}
 
 /* ---------- render ---------- */
 const $ = id => document.getElementById(id);
 const exprEl = $("expr"), mainEl = $("main"), subEl = $("sub"), tapeEl = $("tape");
 const chips = { down: $("chip-down"), up: $("chip-up") };
+const roundEl = $("round"), tilesEl = $("xr-tiles"), padsEl = $("pads"), listEl = $("xr-list"), rowsEl = $("xr-rows");
+const opsEl = $("ops"), xopsEl = $("xr-ops");
+$("ver").textContent = VERSION;
 
 function entryHTML(e){
   let s = (e.neg ? '<span class="neg">−</span>' : "") + e.w;
@@ -276,6 +352,23 @@ function drawTape(f){
   tapeEl.innerHTML = s;
   tapeEl.setAttribute("aria-label", f ? "Tape measure with a mark at " + txt(f) : "Tape measure");
 }
+function drawTube(res){
+  const x0 = 10, w = 300;
+  let s = '<rect x="0" y="0" width="320" height="46" fill="var(--tape)"/>' +
+    '<rect x="' + (x0 - 1.5) + '" y="0" width="3" height="46" fill="var(--tape-ink)"/>' +
+    '<rect x="' + (x0 + w - 1.5) + '" y="0" width="3" height="46" fill="var(--tape-ink)"/>';
+  if (res) {
+    const L = Number(res.length.n) / Number(res.length.d), N = res.shots;
+    res.stamps.forEach(function(p, k){
+      const x = x0 + (Number(p.n) / Number(p.d)) / L * w;
+      s += '<rect x="' + (x - 0.8).toFixed(2) + '" y="0" width="1.6" height="22" fill="var(--tape-ink)"/>';
+      if (N <= 9 || k === 0 || k === N || (k % 5 === 0 && N - k >= 2))
+        s += '<text class="sm" x="' + x.toFixed(2) + '" y="38" text-anchor="middle">' + k + "</text>";
+    });
+  }
+  tapeEl.innerHTML = s;
+  tapeEl.setAttribute("aria-label", res ? "Tube with " + (res.shots + 1) + " stamp marks" : "Tube");
+}
 function chipHTML(dir, f){
   const lab = '<span class="arr">' + (dir === "down" ? "↓" : "↑") + "</span>" + (dir === "down" ? "Down" : "Up");
   if (!f) return '<span class="lab">' + lab + '</span><span class="off"></span><span class="val">–</span>';
@@ -288,7 +381,34 @@ function fit(){
   let size = parseFloat(getComputedStyle(mainEl).fontSize);
   while (mainEl.scrollWidth > mainEl.clientWidth && size > 20) { size -= 3; mainEl.style.fontSize = size + "px"; }
 }
+function renderXray(){
+  const res = xRes;
+  exprEl.textContent = msg || "Tube length (inches)";
+  exprEl.classList.toggle("err", !!msg);
+  mainEl.innerHTML = res ? html(res.length) : entryHTML(xEntry);
+  subEl.textContent = res
+    ? res.shots + (res.shots === 1 ? " shot" : " shots") + " · stamps 0 to " + res.shots
+    : "Equal shots, 12 to 14 apart, 1 in off each end";
+  $("xr-shots").textContent = res ? res.shots : "–";
+  $("xr-gap").textContent = !res ? "–" : res.minGap.n * res.maxGap.d === res.maxGap.n * res.minGap.d
+    ? txt(res.minGap) : txt(res.minGap) + " – " + txt(res.maxGap);
+  rowsEl.innerHTML = !res ? "" : res.stamps.map(function(p, k){
+    return '<li class="row"><span class="no">' + k + '</span><span class="pos">' + txt(p) +
+      '<span class="in">″</span></span><span class="gap">' + (k ? "+" + txt(res.gaps[k - 1]) : "start") + "</span></li>";
+  }).join("");
+  if (res) rowsEl.scrollTop = 0;
+  $("k-xr-go").hidden = !!res; $("k-xr-edit").hidden = !res; $("k-xr-new").hidden = !res;
+  drawTube(res);
+  fit();
+}
 function render(){
+  const x = mode === "xray";
+  $("tab-calc").setAttribute("aria-selected", String(!x));
+  $("tab-xray").setAttribute("aria-selected", String(x));
+  roundEl.hidden = x; opsEl.hidden = x; tilesEl.hidden = !x; xopsEl.hidden = !x;
+  padsEl.hidden = x && !!xRes; listEl.hidden = !(x && !!xRes);
+  $("k-sign").disabled = x;
+  if (x) { renderXray(); return; }
   exprEl.textContent = msg || (exact ? lastExpr : tokens.map(t => t.t || t).join(" "));
   exprEl.classList.toggle("err", !!msg);
   if (exact) {
@@ -340,27 +460,49 @@ $("ops").innerHTML =
     .map(o => key("k-op-" + o[1], "op", o[0], 'data-op="' + o[0] + '"', o[2])).join("") +
   key("k-eq", "eq", "=", 'data-act="eq"', "Equals");
 
+xopsEl.innerHTML =
+  key("k-xr-go", "go", "Lay out stamps", 'data-act="xr-go"') +
+  key("k-xr-edit", "txt", "Edit length", 'data-act="xr-edit"') +
+  key("k-xr-new", "txt", "New tube", 'data-act="xr-new"');
+
 $("app").addEventListener("click", function(ev){
   const b = ev.target.closest("button");
   if (!b || b.disabled) return;
   msg = "";
   try {
-    if (b.dataset.pad) digit(b.dataset.pad, b.dataset.key);
+    if (b.dataset.mode) { mode = b.dataset.mode; try { localStorage.setItem("sf-mode", mode); } catch (e) {} }
+    else if (b.dataset.act === "xr-go") xrGo();
+    else if (b.dataset.act === "xr-edit") xRes = null;
+    else if (b.dataset.act === "xr-new") { xRes = null; xEntry = blank(); }
+    else if (b.dataset.pad) digit(b.dataset.pad, b.dataset.key);
     else if (b.dataset.op) op(b.dataset.op);
     else if (b.dataset.round) picked = picked === b.dataset.round ? null : b.dataset.round;
     else if (b.dataset.act === "clear") clearAll();
-    else if (b.dataset.act === "sign") sign();
+    else if (b.dataset.act === "sign") { if (mode === "calc") sign(); }
     else if (b.dataset.act === "eq") equals();
   } catch (e) {
     if (typeof e === "string") msg = e; else throw e;
   }
   render();
 });
+window.shopFractions = { layout: layout, F: F, version: VERSION };
 render();
 })();
 </script>
 <script>
-if ("serviceWorker" in navigator) { window.addEventListener("load", function(){ navigator.serviceWorker.register("sw.js").catch(function(){}); }); }
+if ("serviceWorker" in navigator) {
+  var hadController = !!navigator.serviceWorker.controller, reloaded = false;
+  navigator.serviceWorker.addEventListener("controllerchange", function(){
+    if (hadController && !reloaded) { reloaded = true; location.reload(); }
+  });
+  window.addEventListener("load", function(){
+    navigator.serviceWorker.register("sw.js").then(function(reg){
+      document.addEventListener("visibilitychange", function(){
+        if (document.visibilityState === "visible") reg.update().catch(function(){});
+      });
+    }).catch(function(){});
+  });
+}
 </script>
 </body>
 </html>
