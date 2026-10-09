@@ -1,4 +1,4 @@
-const VERSION='trt-calc-v1.2.0';
+const VERSION='trt-calc-v1.3.0';
 const ASSETS=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.svg','./apple-touch-icon.png'];
 self.addEventListener('install',event=>event.waitUntil(
   caches.open(VERSION).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())
