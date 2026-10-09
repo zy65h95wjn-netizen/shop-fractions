@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b1019">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Private, offline-friendly testosterone dosage and volume calculator. Mathematical conversions only.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="TRT Calc">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <title>TRT Calc · Dose & Volume</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1019;--panel:#121b29;--panel2:#172333;--line:#29384a;--ink:#eef5fa;--muted:#8ea3b6;--mint:#79e3c7;--gold:#ffce8e;--red:#ff9e9e;--radius:19px}
+    *,*::before,*::after{box-sizing:border-box}
+    html{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
+    body{margin:0;min-height:100dvh;color:var(--ink);background:radial-gradient(ellipse at 85% -14%,#1e4252 0%,transparent 46%),linear-gradient(180deg,#0e1520,var(--bg) 55%);font-variant-numeric:tabular-nums}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--mint);outline-offset:3px}
+    .app{width:min(100%,540px);margin:auto;padding:calc(21px + env(safe-area-inset-top)) 17px calc(30px + env(safe-area-inset-bottom))}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:23px}
+    .brand{display:flex;align-items:center;gap:11px}
+    .mark{width:40px;height:40px;border-radius:13px;background:linear-gradient(145deg,#79e3c7,#2b8d85);display:grid;place-items:center;box-shadow:0 8px 26px #44d8bd22;color:#092320;font-weight:900;font-size:17px;letter-spacing:-1px}
+    .brand-name{font-size:18px;font-weight:850;letter-spacing:-.65px}
+    .brand-sub{margin-top:2px;color:var(--muted);font-size:11px;letter-spacing:.6px;text-transform:uppercase;font-weight:650}
+    .pill{border:1px solid #31584f;border-radius:100px;background:#12362f66;color:#9ee9d1;font-size:11px;font-weight:750;padding:7px 9px;white-space:nowrap}
+    .eyebrow{font-size:11px;color:#9eafbc;font-weight:800;letter-spacing:1.55px;text-transform:uppercase}
+    h1{font-size:28px;letter-spacing:-1.2px;line-height:1.16;margin:5px 0 4px;font-weight:830}
+    .subtitle{color:var(--muted);font-size:13px;margin:0 0 19px;line-height:1.55}
+    .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:5px;background:#141e2a;border:1px solid #273648;border-radius:14px;margin-bottom:16px}
+    .tab{border:0;background:transparent;color:#9bacbc;padding:12px 4px;border-radius:10px;font-size:13px;font-weight:800;min-height:43px}
+    .tab.active{background:#2c4150;color:#e3fcf5;box-shadow:inset 0 0 0 1px #3c6267}
+    .panel{background:linear-gradient(155deg,#162332,#121b29 70%);border:1px solid var(--line);border-radius:var(--radius);padding:17px;margin-bottom:12px;box-shadow:0 8px 35px #02040624}
+    .hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 100% 0%,#1b5757b0 0%,transparent 62%),linear-gradient(145deg,#142f37,#15232f 66%);border-color:#34605c;padding:21px 19px 16px}
+    .hero::after{content:"";position:absolute;right:-33px;top:-42px;border:1px solid #79e3c72a;border-radius:50%;width:186px;height:186px;pointer-events:none}
+    .hero .number{font-weight:860;font-size:clamp(44px,13vw,62px);letter-spacing:-3.8px;line-height:1.1;color:#d4fff0;margin:12px 0 0}
+    .hero .number small{font-size:20px;letter-spacing:0;color:#c2eee0;font-weight:700}
+    .hero .secondary{font-size:16px;font-weight:730;color:var(--gold);margin:8px 0 18px}
+    .hero-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-top:1px solid #4a70746d;padding-top:14px;color:#aacecb;font-size:12px;line-height:1.5}
+    .circle{width:8px;height:8px;display:inline-block;flex:0 0 8px;border-radius:100%;background:var(--mint)}
+    .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
+    .stat{min-height:93px;border:1px solid var(--line);border-radius:16px;background:#131e2b;padding:14px}
+    .stat .value{font-size:25px;letter-spacing:-.7px;font-weight:840;margin:9px 0 2px}
+    .stat .unit{font-size:12px;color:#bfd3df;font-weight:600}
+    .sectionline{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}
+    h2{font-size:16px;letter-spacing:-.3px;margin:0;font-weight:810}
+    .mini{font-size:11px;color:var(--muted);font-weight:650}
+    .mode{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:4px;border:1px solid #304153;border-radius:11px;background:#0e1621;margin-bottom:17px}
+    .mode button{min-height:43px;background:none;color:#9cafc1;border:0;border-radius:8px;font-size:13px;font-weight:800}
+    .mode button.selected{background:#263d4a;color:#f0fff9}
+    .fieldgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .field{min-width:0;margin-bottom:15px}
+    .field label{display:block;font-size:12px;font-weight:750;color:#bed0de;margin-bottom:8px}
+    .inputwrap{position:relative}
+    input[type=number],select{display:block;width:100%;height:49px;border:1px solid #355067;border-radius:11px;background:#0c1723;color:#fff;padding:0 57px 0 13px;min-width:0;font-size:17px;font-weight:760;outline:none;font-variant-numeric:tabular-nums;appearance:textfield;-moz-appearance:textfield}
+    input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+    select{padding-right:30px;font-size:14px;font-weight:730;appearance:auto}
+    input:focus,select:focus{border-color:var(--mint)}
+    .suffix{position:absolute;right:13px;top:50%;transform:translateY(-50%);color:#a9bdcb;font-size:12px;font-weight:750;pointer-events:none}
+    .presets{display:flex;gap:7px;flex-wrap:wrap;margin-top:-3px;margin-bottom:4px}
+    .chip{color:#bbd1e0;background:#192739;border:1px solid #304355;padding:9px 11px;min-height:38px;font-size:12px;font-weight:750;border-radius:10px}
+    .chip.on{border-color:#64bba8;background:#1c413f;color:#b8f9e6}
+    .hint{font-size:12px;color:var(--muted);line-height:1.6;margin:8px 0 0}
+    .subsection{border-top:1px solid #29384a;margin:18px 0 16px}
+    .line-item{display:flex;justify-content:space-between;gap:8px;align-items:baseline;font-size:13px;color:#aabccc;padding:10px 0;border-bottom:1px solid #26374a}
+    .line-item:last-child{border:0;padding-bottom:0}
+    .line-item strong{font-size:15px;color:#e9f5fa;font-weight:800;text-align:right}
+    .line-item strong.accent{color:var(--mint)}
+    .line-item strong.warn{color:var(--gold)}
+    .notice{border:1px solid #484335;border-radius:13px;background:#27231875;padding:14px;font-size:12px;line-height:1.65;color:#d2c5a9;margin:12px 0}
+    .notice strong{color:var(--gold)}
+    .actions{display:flex;gap:10px;margin:14px 0 0}
+    .action{flex:1;min-height:45px;border:1px solid #3e8579;border-radius:11px;background:#214a45;color:#e1fff3;font-weight:780;font-size:13px}
+    .action.secondary{background:#15212f;color:#c2d2de;border-color:#324455}
+    .copy-feedback{min-height:18px;font-size:12px;color:var(--mint);margin:8px 0 0}
+    .compare-table{width:100%;border-collapse:collapse;font-size:12px}
+    .compare-table th{text-align:left;color:#8ea3b6;font-size:10px;letter-spacing:.5px;text-transform:uppercase;padding:8px 3px;border-bottom:1px solid #304255}
+    .compare-table td{padding:12px 3px;color:#d8e7f2;border-bottom:1px solid #293a49;vertical-align:middle;font-weight:650}
+    .compare-table tr:last-child td{border-bottom:0}
+    .use-btn{border-radius:8px;background:#223e40;color:#aaf5db;border:1px solid #407168;padding:8px 9px;font-weight:750;font-size:11px;min-height:37px}
+    .comparison-scroll{overflow-x:auto}
+    .table-number{white-space:nowrap}
+    .converter-box{border:1px solid #36596a;border-radius:14px;padding:15px;background:#10273566;margin:13px 0}
+    .converter-result{font-size:32px;letter-spacing:-1.2px;font-weight:850;color:var(--mint);margin:7px 0}
+    .footer{margin-top:23px;text-align:center;color:#74889b;font-size:11px;line-height:1.8}
+    .footer strong{color:#9fb8c7}
+    .invalid{background:#432322;color:#ffd5cd;border:1px solid #8a4e4e;padding:12px;border-radius:11px;font-size:12px;line-height:1.5;margin-bottom:12px}
+    [hidden]{display:none!important}
+    @media(max-width:370px){.app{padding-left:12px;padding-right:12px}.panel{padding:14px}.hero .number{font-size:45px}.stat .value{font-size:22px}.chip{padding:8px}}
+    @media(prefers-reduced-motion:no-preference){.panel,.tab,.chip,.action{transition:border-color .15s,background .15s,color .15s}}
+  </style>
+</head>
+<body>
+<main class="app">
+  <div class="topbar">
+    <div class="brand"><div class="mark" aria-hidden="true">T<span style="font-size:12px">+</span></div><div><div class="brand-name">TRT Calc</div><div class="brand-sub">Dose · volume · frequency</div></div></div>
+    <div class="pill">● LOCAL MATH</div>
+  </div>
+  <h1>Know your numbers.</h1>
+  <p class="subtitle">Testosterone dose and syringe-volume conversions. No sign-in, no tracking, no guesswork.</p>
+  <nav class="tabs" aria-label="Calculator views">
+    <button class="tab active" type="button" data-tab="dose" aria-selected="true">Calculator</button>
+    <button class="tab" type="button" data-tab="compare" aria-selected="false">Compare</button>
+    <button class="tab" type="button" data-tab="convert" aria-selected="false">Quick convert</button>
+  </nav>
+  <div id="error" class="invalid" role="alert" hidden>Enter a valid concentration, positive interval, vial size and dose.</div>
+  <section id="view-dose">
+    <div class="panel hero" aria-live="polite">
+      <div class="eyebrow">Volume per injection</div>
+      <div class="number"><span id="hero-volume">0.200</span> <small>mL</small></div>
+      <div class="secondary"><span id="hero-units">20</span> marks on a U-100 syringe</div>
+      <div class="hero-foot"><span class="circle"></span><span id="hero-description">40 mg every 3 days · 200 mg/mL</span></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="eyebrow">Per injection</div><div class="value" id="stat-shot">40</div><div class="unit">mg testosterone</div></div>
+      <div class="stat"><div class="eyebrow">Weekly average</div><div class="value" id="stat-week">93.33</div><div class="unit">mg per 7 days</div></div>
+    </div>
+    <div class="panel">
+      <div class="sectionline"><h2>Set your calculation</h2><span class="mini">Editable · auto-saved</span></div>
+      <div class="mode" role="group" aria-label="Calculation direction">
+        <button type="button" class="selected" data-mode="shot" aria-pressed="true">Start with shot</button>
+        <button type="button" data-mode="week" aria-pressed="false">Start with week</button>
+      </div>
+      <div class="fieldgrid">
+        <div class="field"><label for="concentration">Vial concentration</label><div class="inputwrap"><input id="concentration" type="number" min="0.01" max="10000" step="any" inputmode="decimal" value="200"><span class="suffix">mg/mL</span></div></div>
+        <div class="field"><label for="dose" id="dose-label">Dose per injection</label><div class="inputwrap"><input id="dose" type="number" min="0" max="100000" step="any" inputmode="decimal" value="40"><span class="suffix" id="dose-suffix">mg</span></div></div>
+      </div>
+      <div class="field"><label for="interval">Injection interval</label><div class="inputwrap"><input id="interval" type="number" min="0.01" max="365" step="any" inputmode="decimal" value="3"><span class="suffix">days</span></div></div>
+      <div class="presets" aria-label="Common timing shortcuts">
+        <button class="chip" type="button" data-days="1">Daily</button>
+        <button class="chip" type="button" data-days="2">EOD</button>
+        <button class="chip on" type="button" data-days="3">E3D</button>
+        <button class="chip" type="button" data-days="3.5">2× / week</button>
+        <button class="chip" type="button" data-days="7">Weekly</button>
+      </div>
+      <p class="hint" id="mode-explainer">Enter your mg per shot. The weekly average adjusts to match the injection interval.</p>
+      <div class="subsection"></div>
+      <div class="sectionline"><h2>Real-world measurements</h2><span class="mini">U-100 only</span></div>
+      <div class="fieldgrid">
+        <div class="field"><label for="syringe-step">Graduation size</label><select id="syringe-step"><option value="0">No rounding</option><option value="1">1 mark</option><option value="0.5" selected>0.5 mark</option><option value="0.1">0.1 mark</option></select></div>
+        <div class="field"><label for="vial">Vial volume</label><div class="inputwrap"><input id="vial" type="number" min="0.01" max="1000" step="any" inputmode="decimal" value="10"><span class="suffix">mL</span></div></div>
+      </div>
+      <div class="line-item"><span>Nearest selected graduation</span><strong id="rounded-mark" class="accent">20 marks</strong></div>
+      <div class="line-item"><span>Implied dose at that mark</span><strong id="rounded-mg">40 mg</strong></div>
+      <div class="line-item"><span>Weekly difference from exact math</span><strong id="rounded-delta">0 mg</strong></div>
+      <div class="line-item"><span>Theoretical full injections / vial</span><strong id="vial-shots">50</strong></div>
+      <div class="line-item"><span>Approximate vial supply</span><strong id="vial-days">150 days</strong></div>
+      <p class="hint">A U-100 mark represents 0.01 mL, <strong>not</strong> 1 mg of testosterone. Choose a graduation your actual syringe supports. Calculations ignore loss in the needle, priming, and vial discard/expiration dates.</p>
+      <div class="actions"><button class="action" id="copy" type="button">Copy calculation</button><button class="action secondary" id="reset" type="button">Reset example</button></div>
+      <div id="copy-feedback" class="copy-feedback" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+  <section id="view-compare" hidden>
+    <div class="panel hero"><div class="eyebrow">Same weekly average</div><div class="number"><span id="compare-weekly">93.33</span> <small>mg / wk</small></div><div class="hero-foot">Mathematical equivalence only—not equivalent blood levels or a schedule recommendation.</div></div>
+    <div class="panel">
+      <div class="sectionline"><h2>Frequency comparison</h2><span class="mini">Tap Use to calculate</span></div>
+      <div class="comparison-scroll"><table class="compare-table"><thead><tr><th>Schedule</th><th>mg / shot</th><th>mL</th><th>U-100</th><th></th></tr></thead><tbody id="schedule-body"></tbody></table></div>
+      <p class="hint">All rows hold the same averaged mg/week. Different dosing intervals can change peaks, troughs and tolerability; ask your prescriber before changing your regimen.</p>
+    </div>
+  </section>
+  <section id="view-convert" hidden>
+    <div class="panel">
+      <div class="sectionline"><h2>One-step converter</h2><span class="mini">Independent quick math</span></div>
+      <div class="mode" role="group" aria-label="Conversion direction"><button type="button" class="selected" data-convert-mode="mg" aria-pressed="true">mg → volume</button><button type="button" data-convert-mode="ml" aria-pressed="false">mL → mg</button></div>
+      <div class="field"><label for="conv-input" id="conv-label">Testosterone amount</label><div class="inputwrap"><input id="conv-input" type="number" min="0" max="100000" step="any" inputmode="decimal" value="40"><span class="suffix" id="conv-suffix">mg</span></div></div>
+      <div class="field"><label for="conv-concentration">Vial concentration</label><div class="inputwrap"><input id="conv-concentration" type="number" min="0.01" max="10000" step="any" inputmode="decimal" value="200"><span class="suffix">mg/mL</span></div></div>
+      <div class="converter-box"><div class="eyebrow">Converted result</div><div class="converter-result" id="conv-result">0.200 mL</div><div class="hint" id="conv-second">20 U-100 marks</div></div>
+      <p class="hint">Conversions are based on the concentration on your vial label. U-100 markings apply only to U-100 syringes.</p>
+    </div>
+  </section>
+  <aside class="notice"><strong>Medication math, not medical advice.</strong> This tool does not recommend or validate a dose, schedule, route, or syringe. Check the medication label and prescribed instructions; confirm any treatment change with your clinician.</aside>
+  <footer class="footer"><strong>TRT Calc v1.0</strong> · Works offline after first install on a supported HTTPS host<br>Settings are stored in this browser on this device. No analytics or external libraries.</footer>
+</main>
+<script>
+(function () {
+  'use strict';
+  const KEY='trt-calc-v1';
+  const defaults={concentration:200,dose:40,interval:3,vial:10,step:0.5,mode:'shot',convMode:'mg',convInput:40};
+  const state={...defaults};
+  const el=id=>document.getElementById(id);
+  const format=(number,precision=2)=>Number.isFinite(number)?number.toLocaleString('en-US',{maximumFractionDigits:precision}):'—';
+  const precise=(number,places=3)=>Number.isFinite(number)?number.toLocaleString('en-US',{minimumFractionDigits:places,maximumFractionDigits:places}):'—';
+  function compute({concentration,dose,interval,vial,step,mode}){
+    if(!Number.isFinite(concentration)||concentration<=0||!Number.isFinite(dose)||dose<0||!Number.isFinite(interval)||interval<=0||!Number.isFinite(vial)||vial<=0||!Number.isFinite(step)||step<0) return null;
+    const shot=mode==='shot'?dose:dose*interval/7;
+    const weekly=shot*7/interval;
+    const ml=shot/concentration;
+    const marks=ml*100;
+    const roundedMarks=step===0?marks:Math.round((marks+Number.EPSILON)/step)*step;
+    const roundedMg=roundedMarks/100*concentration;
+    const deltaWeek=(roundedMg-shot)*7/interval;
+    const vialShots=ml>0?Math.floor((vial+1e-10)/ml):0;
+    const vialDays=vialShots*interval;
+    return {shot,weekly,ml,marks,roundedMarks,roundedMg,deltaWeek,vialShots,vialDays};
+  }
+  function safeRead(key){try{return window.localStorage.getItem(key)}catch{return null}}
+  function safeSave(key,val){try{window.localStorage.setItem(key,val)}catch{}}
+  function save(){safeSave(KEY,JSON.stringify(state))}
+  function setTab(tab){
+    document.querySelectorAll('[data-tab]').forEach(b=>{let active=b.dataset.tab===tab;b.classList.toggle('active',active);b.setAttribute('aria-selected',String(active))});
+    for(const name of ['dose','compare','convert'])el('view-'+name).hidden=tab!==name;
+  }
+  function render(){
+    const out=compute(state); el('error').hidden=!!out;
+    document.querySelectorAll('[data-mode]').forEach(b=>{const yes=b.dataset.mode===state.mode;b.classList.toggle('selected',yes);b.setAttribute('aria-pressed',String(yes))});
+    el('dose-label').textContent=state.mode==='shot'?'Dose per injection':'Target weekly average';
+    el('mode-explainer').textContent=state.mode==='shot'?'Enter your mg per shot. The weekly average adjusts to match the injection interval.':'Enter a weekly mg average. Per-injection mg adjusts with the chosen interval.';
+    document.querySelectorAll('[data-days]').forEach(b=>b.classList.toggle('on',Number(b.dataset.days)===state.interval));
+    if(!out){['hero-volume','hero-units','stat-shot','stat-week','rounded-mark','rounded-mg','rounded-delta','vial-shots','vial-days','compare-weekly'].forEach(id=>el(id).textContent='—');el('hero-description').textContent='Check entered values';el('schedule-body').replaceChildren();return}
+    el('hero-volume').textContent=precise(out.ml);
+    el('hero-units').textContent=format(out.marks,2);
+    el('hero-description').textContent=`${format(out.shot)} mg every ${format(state.interval,2)} ${state.interval===1?'day':'days'} · ${format(state.concentration)} mg/mL`;
+    el('stat-shot').textContent=format(out.shot);
+    el('stat-week').textContent=format(out.weekly);
+    el('rounded-mark').textContent=`${format(out.roundedMarks,2)} marks`;
+    el('rounded-mg').textContent=`${format(out.roundedMg,3)} mg`;
+    const roundStr=Math.abs(out.deltaWeek)<1e-9?'0 mg':`${out.deltaWeek>0?'+':'−'}${format(Math.abs(out.deltaWeek),3)} mg`;
+    el('rounded-delta').textContent=roundStr;
+    el('rounded-delta').className=Math.abs(out.deltaWeek)>0.000001?'warn':'';
+    el('vial-shots').textContent=out.ml===0?'—':format(out.vialShots,0);
+    el('vial-days').textContent=out.ml===0?'—':`${format(out.vialDays,1)} days`;
+    el('compare-weekly').textContent=format(out.weekly);
+    const tbody=el('schedule-body');tbody.replaceChildren();
+    const schedules=[['Daily',1],['EOD',2],['E3D',3],['2× / wk',3.5],['Weekly',7]];
+    for (const [label,days] of schedules){
+      const s=compute({...state,mode:'week',dose:out.weekly,interval:days});
+      const tr=document.createElement('tr');
+      for(const value of [label,format(s.shot),precise(s.ml),format(s.marks,2)]){const td=document.createElement('td');td.className='table-number';td.textContent=value;tr.appendChild(td)}
+      const td=document.createElement('td');const button=document.createElement('button');button.type='button';button.className='use-btn';button.textContent='Use';button.setAttribute('aria-label',`Use ${label} at the same weekly average`);button.addEventListener('click',()=>{state.mode='week';state.dose=Number(out.weekly.toFixed(7));state.interval=days;syncInputs();save();render();setTab('dose')});td.appendChild(button);tr.appendChild(td);tbody.appendChild(tr);
+    }
+    updateConverter();
+  }
+  function updateConverter(){
+    const isMg=state.convMode==='mg';
+    document.querySelectorAll('[data-convert-mode]').forEach(b=>{const selected=b.dataset.convertMode===state.convMode;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',String(selected))});
+    el('conv-label').textContent=isMg?'Testosterone amount':'Volume to convert';el('conv-suffix').textContent=isMg?'mg':'mL';
+    const raw=Number(el('conv-input').value),conc=Number(el('conv-concentration').value);
+    const valid=el('conv-input').value!==''&&el('conv-concentration').value!==''&&Number.isFinite(raw)&&raw>=0&&Number.isFinite(conc)&&conc>0;
+    if(!valid){el('conv-result').textContent='—';el('conv-second').textContent='Enter valid numbers';return}
+    const ml=isMg?raw/conc:raw;
+    el('conv-result').textContent=isMg?`${precise(ml)} mL`:`${format(raw*conc,3)} mg`;
+    el('conv-second').textContent=`${format(ml*100,2)} U-100 marks${isMg?' · '+format(raw,3)+' mg':''}`;
+  }
+  function syncInputs(){for(const name of ['concentration','dose','interval','vial'])el(name).value=String(state[name]);el('syringe-step').value=String(state.step);el('conv-concentration').value=String(state.concentration)}
+  function load(){const saved=safeRead(KEY);if(saved){try{const obj=JSON.parse(saved);for(const key of ['concentration','dose','interval','vial','step'])if(typeof obj[key]==='number'&&Number.isFinite(obj[key]))state[key]=obj[key];if(obj.mode==='shot'||obj.mode==='week')state.mode=obj.mode;if(obj.convMode==='mg'||obj.convMode==='ml')state.convMode=obj.convMode;if(typeof obj.convInput==='number'&&Number.isFinite(obj.convInput))state.convInput=obj.convInput}catch{}}syncInputs();el('conv-input').value=String(state.convInput);render()}
+  for(const name of ['concentration','dose','interval','vial'])el(name).addEventListener('input',e=>{state[name]=e.target.value===''?NaN:Number(e.target.value);if(name==='concentration')el('conv-concentration').value=e.target.value;save();render()});
+  el('syringe-step').addEventListener('change',e=>{state.step=Number(e.target.value);save();render()});
+  for(const b of document.querySelectorAll('[data-days]'))b.addEventListener('click',()=>{state.interval=Number(b.dataset.days);el('interval').value=String(state.interval);save();render()});
+  for(const b of document.querySelectorAll('[data-mode]'))b.addEventListener('click',()=>{if(state.mode===b.dataset.mode)return;const previous=compute(state);state.mode=b.dataset.mode;if(previous)state.dose=Number((state.mode==='shot'?previous.shot:previous.weekly).toFixed(7));el('dose').value=String(state.dose);save();render()});
+  for(const b of document.querySelectorAll('[data-tab]'))b.addEventListener('click',()=>setTab(b.dataset.tab));
+  for(const b of document.querySelectorAll('[data-convert-mode]'))b.addEventListener('click',()=>{if(state.convMode===b.dataset.convertMode)return;const val=Number(el('conv-input').value),conc=Number(el('conv-concentration').value);if(Number.isFinite(val)&&val>=0&&Number.isFinite(conc)&&conc>0){state.convInput=state.convMode==='mg'?val/conc:val*conc;el('conv-input').value=String(Number(state.convInput.toFixed(7)))}state.convMode=b.dataset.convertMode;save();updateConverter()});
+  el('conv-input').addEventListener('input',e=>{state.convInput=Number(e.target.value);save();updateConverter()});
+  el('conv-concentration').addEventListener('input',e=>{const val=e.target.value;if(val!==''){state.concentration=Number(val);el('concentration').value=val;save();render()}else updateConverter()});
+  el('reset').addEventListener('click',()=>{Object.assign(state,defaults);syncInputs();el('conv-input').value=String(state.convInput);save();render();el('copy-feedback').textContent='Example restored.'});
+  el('copy').addEventListener('click',async()=>{const c=compute(state);if(!c){el('copy-feedback').textContent='Correct the inputs first.';return}const summary=`TRT Calc · ${format(state.concentration)} mg/mL\n${format(c.shot,3)} mg every ${format(state.interval,2)} days\n${precise(c.ml)} mL = ${format(c.marks,2)} U-100 marks per injection\nWeekly average: ${format(c.weekly,3)} mg\nRounded to ${format(state.step,2)} U-100 marks: ${format(c.roundedMarks,2)} marks = ${format(c.roundedMg,3)} mg\nMathematical conversion only; not a dose recommendation.`;try{await navigator.clipboard.writeText(summary);el('copy-feedback').textContent='Copied to clipboard.'}catch{el('copy-feedback').textContent='Copy is unavailable in this browser.'}});
+  window.TRTMath=Object.freeze({compute});
+  load();
+  if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostname==='localhost'))window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(()=>{})});
+})();
+</script>
+</body>
+</html>

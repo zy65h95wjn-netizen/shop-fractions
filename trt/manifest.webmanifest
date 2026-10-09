@@ -1,0 +1,25 @@
+{
+  "name": "TRT Calc · Dose & Volume",
+  "short_name": "TRT Calc",
+  "description": "A private testosterone dosage and syringe-volume calculator",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1019",
+  "theme_color": "#0b1019",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
