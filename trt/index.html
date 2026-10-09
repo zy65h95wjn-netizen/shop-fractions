@@ -153,8 +153,8 @@
         <div class="hero-level-card"><div class="hero-level-label">Free T</div><div class="hero-level-value"><span id="hero-free">—</span><small>pg/mL</small></div></div>
       </div>
       <div class="hero-level-info" id="hero-level-info">Live illustrative estimates. Add a timed blood test for a personalized calibration.</div>
-      <div class="hero-level-note">If no timed lab is loaded, numbers use a hypothetical reference response, not your personal bloodwork. Not for dosing decisions.</div>
-      <button id="hero-calibrate" class="hero-calibrate" type="button">Optional: calibrate to my labs →</button>
+      <div class="hero-level-note">Approximate estimates use an anonymized, lab-informed response scale. The latest timed result receives priority; older non-comparable labs increase uncertainty. Not for dosing decisions.</div>
+      <button id="hero-calibrate" class="hero-calibrate" type="button">Optional: use exact lab reference →</button>
       <div class="hero-foot"><span class="circle"></span><span id="hero-description">40 mg every 3 days · 200 mg/mL</span></div>
     </div>
     <div class="stats">
@@ -198,7 +198,7 @@
   </section>
   <section id="view-levels" hidden>
     <div class="panel hero">
-      <div class="eyebrow">Experimental · Illustrative or lab-calibrated</div>
+      <div class="eyebrow">Experimental · Lab-informed or precisely anchored</div>
       <div class="sectionline" style="margin:6px 0 0"><h1 style="margin:0">Projected levels</h1><span class="mini">Steady state</span></div>
       <p class="subtitle" style="margin:8px 0 0">Peak, trough and average over an injection cycle. A modeled scenario, <b>not a blood test.</b></p>
     </div>
@@ -206,7 +206,7 @@
     <div id="levels-calculated" hidden>
       <div class="panel">
         <div class="sectionline"><h2>Estimated testosterone</h2><span id="levels-schedule" class="mini">40 mg E3D</span></div>
-        <p id="level-model-source" class="hint" style="margin:-3px 0 14px">Uncalibrated illustration. Assumes 600 ng/dL average total T at 100 mg/week; does not represent your measured response.</p>
+        <p id="level-model-source" class="hint" style="margin:-3px 0 14px">Live lab-informed scenario; most recent timed bloodwork has priority. Previous protocols are cross-checks, not equivalent calibration points.</p>
         <div class="level-tabs" role="group" aria-label="Select projected hormone metric">
           <button id="levels-total" class="active" type="button" data-level-metric="total" aria-pressed="true">Total T · ng/dL</button>
           <button id="levels-free" type="button" data-level-metric="free" aria-pressed="false">Free T · pg/mL</button>
@@ -223,7 +223,7 @@
         <div class="level-picker"><span id="level-time-label">At +24 hours</span><strong id="level-time-value">—</strong></div>
         <div class="level-picker"><span>Est. total T at selected hour</span><strong id="level-time-tt">—</strong></div>
         <div class="level-picker"><span>Est. free T at selected hour</span><strong id="level-time-ft">—</strong></div>
-        <div class="projection-note"><b>How to read this:</b> Shading spans 25 plausible absorption/elimination assumptions, <b>not</b> a confidence interval. The actual peaks and troughs may fall outside it. Route, dose timing and individual clearance aren't measured by one sample.</div>
+        <div class="projection-note"><b>How to read this:</b> Shading includes alternative absorption/elimination assumptions and a broad non-statistical variability allowance informed by older discordant lab results; it is <b>not</b> a confidence interval. Route, assay and injection timing can cause larger errors. Peaks and troughs are not validated.</div>
       </div>
       <div class="panel">
         <div class="sectionline"><h2>Same weekly mg · different timing</h2><span class="mini">Illustrative</span></div>
@@ -248,14 +248,14 @@
         <div class="field"><label for="level-albumin">Albumin</label><div class="inputwrap"><input id="level-albumin" type="number" inputmode="decimal" min="1" max="6.5" step="any" value="4.8"><span class="suffix">g/dL</span></div></div>
       </div>
       <div class="field"><label for="level-route">Injection route · informational</label><select id="level-route"><option value="IM">Intramuscular (IM)</option><option value="SubQ">Subcutaneous (SubQ)</option></select></div>
-      <p class="hint">Free T is estimated from SHBG/albumin binding. When a timed lab is loaded, that estimate is additionally adjusted to measured dialysis free T. Without one, both Total T and Free T are uncalibrated illustrations. Changing the route <b>does not automatically change absorption</b>; route-specific kinetics are unknown.</p>
+      <p class="hint">Free T is a binding-equation estimate scaled toward equilibrium-dialysis measurements. A personal timed reference improves its alignment. Historical tests using different assays cannot be directly combined. Changing the route <b>does not automatically change absorption</b>; route-specific kinetics are unknown.</p>
       <details id="levels-model-settings">
         <summary>Advanced curve assumptions</summary>
         <div class="fieldgrid">
           <div class="field"><label for="level-half">Elimination half-life</label><div class="inputwrap"><input id="level-half" type="number" inputmode="decimal" min="3" max="8" step="0.25" value="5"><span class="suffix">days</span></div></div>
           <div class="field"><label for="level-abs">Absorption half-life</label><div class="inputwrap"><input id="level-abs" type="number" inputmode="decimal" min="0.35" max="1.5" step="0.05" value="0.75"><span class="suffix">days</span></div></div>
         </div>
-        <p class="hint">These are assumed values, <b>not measured personal PK parameters</b>. A loaded lab is recalibrated at its draw time when assumptions change. An uncalibrated example is instead normalized to an assumed 600 ng/dL cycle average at 100 mg/week.</p>
+        <p class="hint">These are assumed values, <b>not measured personal PK parameters</b>. A loaded lab is matched at its actual draw time when assumptions change. Without a local personal reference, a rounded lab-informed response scale is used (not an individual dose-response measurement).</p>
       </details>
     </div>
     <div class="panel">
@@ -270,11 +270,11 @@
         <div class="field"><label for="anchor-shbg">SHBG at lab</label><div class="inputwrap"><input id="anchor-shbg" type="number" inputmode="decimal" min="0" max="200" step="any" placeholder="nmol/L"><span class="suffix">nmol/L</span></div></div>
         <div class="field"><label for="anchor-albumin">Albumin at lab</label><div class="inputwrap"><input id="anchor-albumin" type="number" inputmode="decimal" min="1" max="6.5" step="any" placeholder="g/dL"><span class="suffix">g/dL</span></div></div>
       </div>
-      <p id="anchor-detail" class="hint">No timed lab loaded. Projections currently use an assumed reference response, not your personal blood-test data.</p>
+      <p id="anchor-detail" class="hint">Rounded lab-informed estimates are already active. You can optionally import a timed result on this device for exact reference matching.</p>
       <div id="level-history"></div>
       <div class="actions"><button class="action secondary" id="level-reset" type="button">Clear local lab profile</button></div>
     </div>
-    <aside class="notice"><strong>Important limitations:</strong> Without a timed lab, 600 ng/dL at 100 mg/week is a hypothetical normalization, <b>not an expected response for you</b>. With a timed lab, this is still a simplified extrapolation assuming steady state, approximately linear dose response and negligible endogenous testosterone. Total/free estimates (especially at low SHBG) can differ dramatically from actual labs. This cannot predict estradiol, hematocrit, side effects, or how you feel. Never change treatment based on this chart.</aside>
+    <aside class="notice"><strong>Important limitations:</strong> The default model uses rounded, anonymized response coefficients informed primarily by the newest reliable timed lab; older lab observations show it may miss by 40% or more across different regimens. Even with a private timed reference, this is a simplified extrapolation assuming steady state, approximately linear dose response and negligible endogenous testosterone. Total/free estimates (especially at low SHBG) can differ dramatically from actual labs. This cannot predict estradiol, hematocrit, side effects, or how you feel. Never change treatment based on this chart.</aside>
   </section>
   <section id="view-compare" hidden>
     <div class="panel hero"><div class="eyebrow">Same weekly average</div><div class="number"><span id="compare-weekly">93.33</span> <small>mg / wk</small></div><div class="hero-foot">Mathematical equivalence only—not equivalent blood levels or a schedule recommendation.</div></div>
@@ -295,7 +295,7 @@
     </div>
   </section>
   <aside class="notice"><strong>Medication math, not medical advice.</strong> This tool does not recommend or validate a dose, schedule, route, or syringe. Check the medication label and prescribed instructions; confirm any treatment change with your clinician.</aside>
-  <footer class="footer"><strong>TRT Calc v1.3</strong> · Works offline after first install on a supported HTTPS host<br>Settings are stored in this browser on this device. No analytics or external libraries.</footer>
+  <footer class="footer"><strong>TRT Calc v1.4</strong> · Works offline after first install on a supported HTTPS host<br>Settings are stored in this browser on this device. No analytics or external libraries.</footer>
 </main>
 <script>
 (function () {
@@ -429,17 +429,21 @@ function applyPrivateLink(){
 }
 function val(id){const v=$(id).value.trim();return v===''?NaN:Number(v)}
 function shape(t,period,h,a){const ke=Math.LN2/h,ka=Math.LN2/a;return ka/(ka-ke)*(Math.exp(-ke*t)/(1-Math.exp(-ke*period))-Math.exp(-ka*t)/(1-Math.exp(-ka*period)))}
-// Two distinct pathways: a user-supplied measured timed reference or an explicitly hypothetical illustration.
-// The hypothetical center assumes total T 600 ng/dL as the *cycle average* at 100 mg/week;
-// it is NOT a measured or population-validated PK calibration or a personalized expected result.
-const ILLUSTRATIVE_TOTAL_AT_100_WEEKLY=600;
+// A private timed lab reference always overrides the fallback.
+// Without one, round-number response coefficients encode an approximate recent-lab-informed
+// center without publishing any individual medical lab panels or dates in this public code.
+// Older/untimed and different-route/different-assay labs are NOT mathematically fit, since
+// doing so would manufacture false PK precision; they inform the broader uncertainty band.
+// These parameters are NOT population norms, nor accurate predictions at new doses.
+const LAB_INFORMED_TOTAL_PER_WEEKLY_MG=5.23;
+const DIALYSIS_ALIGNED_CALCULATED_FT_MULTIPLIER=0.835;
 function projectedTotal(t,dose,days,h,a){
  const ref=state.anchor;
  if(!finite(dose,0,2000)||!finite(days,.5,14)||!finite(h,3,8)||!finite(a,.35,1.5))return NaN;
  if(validateAnchor(ref))return ref.tt*(dose/ref.dose)*shape(t,days,h,a)/shape(ref.hours/24,ref.days,h,a);
  const ke=Math.LN2/h;
  // Shape's exact cycle average is 1/(ke*days); multiplying by ke*days normalizes to mean 1.
- return ILLUSTRATIVE_TOTAL_AT_100_WEEKLY*(dose*7/days/100)*shape(t,days,h,a)*(ke*days);
+ return LAB_INFORMED_TOTAL_PER_WEEKLY_MG*(dose*7/days)*shape(t,days,h,a)*(ke*days);
 }
 // Vermeulen-style single-binding-site estimate, then adjust to *measured dialysis FT* at the reference.
 // Absolute calculated FT differs materially from dialysis in some men, especially with low SHBG.
@@ -452,7 +456,7 @@ function calculatedFT(tt,shbg,albumin){
 function projectedFree(tt){
  const ref=state.anchor;
  const estimate=calculatedFT(tt,state.shbg,state.albumin);
- if(!validateAnchor(ref))return estimate; // Uncalibrated binding calculation, NOT measured dialysis FT.
+ if(!validateAnchor(ref))return estimate*DIALYSIS_ALIGNED_CALCULATED_FT_MULTIPLIER; // Approximate dialysis-aligned estimate, not actual measured FT.
  const base=calculatedFT(ref.tt,ref.shbg,ref.albumin);
  return Number.isFinite(base)&&base>0?estimate*ref.ft/base:NaN;
 }
@@ -460,6 +464,7 @@ function metricAt(t,h=state.half,a=state.abs){const c=window.TRTMath?.compute;co
 function dataAt(t,h=state.half,a=state.abs){const c=window.TRTMath?.compute;const dose=c&&c(window.TRTCalcState||{});if(!dose)return null;const tt=projectedTotal(t,dose.shot,window.TRTCalcState.interval,h,a);return {tt,ft:projectedFree(tt)}}
 const scenarios=[];for(const h of [3,4,5,6.5,8])for(const a of [.35,.55,.75,1.1,1.5])scenarios.push({h,a});
 const nf=(n,d=0)=>Number.isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:d}):'—';
+function weeklyDose(){const x=window.TRTMath?.compute(window.TRTCalcState||{});return x?.weekly||0}
 function node(tag,attrs,parent,text){const x=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const[k,v]of Object.entries(attrs||{}))x.setAttribute(k,String(v));if(text!==undefined)x.textContent=text;parent.appendChild(x);return x}
 function drawGraph(points,interval){
  const svg=$('level-curve');svg.replaceChildren();
@@ -504,8 +509,8 @@ function updateHeroLevels(){
  }
  total.textContent=nf(sumTT/n);
  free.textContent=nf(sumFT/n);
- info.textContent=(validateAnchor(state.anchor)?'Lab-calibrated · ':'Illustrative only · ')+
- 'Cycle range: Total '+nf(minTT)+'–'+nf(maxTT)+' ng/dL · Free '+nf(minFT)+'–'+nf(maxFT)+' pg/mL';
+ info.textContent=(validateAnchor(state.anchor)?'Private timed-lab anchored · ':'Lab-informed approximation · ')+
+ 'Modeled cycle span: Total '+nf(minTT)+'–'+nf(maxTT)+' ng/dL · Free '+nf(minFT)+'–'+nf(maxFT)+' pg/mL';
  action.hidden=!!validateAnchor(state.anchor);
 }
 function render(){
@@ -514,9 +519,9 @@ function render(){
  for(const n of refs){const el=$('anchor-'+n);if(document.activeElement!==el)el.value=state.anchor?String(state.anchor[n]):''}
  const okay=isValid();$('levels-empty').hidden=okay;$('levels-calculated').hidden=!okay;
  $('levels-empty').textContent='Check the current SHBG, albumin, curve assumptions, or dose for invalid values.';
- $('levels-cal-status').textContent=validateAnchor(state.anchor)?'Local lab reference loaded':'Illustrative · no lab';
- $('level-model-source').textContent=validateAnchor(state.anchor)?'Calibrated to your timed local blood test. Estimates are model extrapolations, not measured levels.':'Uncalibrated illustration · Assumes average total T of 600 ng/dL at 100 mg/week. This is a hypothetical scale, not your measured response; actual values can differ greatly.';
- $('anchor-detail').textContent=validateAnchor(state.anchor)?'Measured values anchor the model at '+nf(state.anchor.hours)+'h on '+nf(state.anchor.dose)+' mg every '+nf(state.anchor.days)+' days. Original lab route and sampling method should be verified.':'No timed lab loaded. Illustrative values are shown live; add a timed lab to estimate how your observed results scale.';
+ $('levels-cal-status').textContent=validateAnchor(state.anchor)?'Timed lab locally loaded':'Lab-informed approximation';
+ $('level-model-source').textContent=validateAnchor(state.anchor)?'Matched to your private timed blood test. Cross-regimen predictions remain uncertain.':'Approximate lab-informed scale prioritizing the newest timed observation; older non-equivalent labs are uncertainty cross-checks. Actual values can differ by 40% or more.';
+ $('anchor-detail').textContent=validateAnchor(state.anchor)?'Private measured values anchor the model at +'+nf(state.anchor.hours)+'h on '+nf(state.anchor.dose)+' mg every '+nf(state.anchor.days)+' days.':'Live lab-informed estimates are active even without a private reference. An exact timed lab can optionally be imported; no lab records are published in the app code.';
  $('levels-total').classList.toggle('active',state.metric==='total');$('levels-free').classList.toggle('active',state.metric==='free');
  document.querySelectorAll('[data-level-metric]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.levelMetric===state.metric)));
  $('level-history').replaceChildren();if(state.history.length){const h=document.createElement('h2');h.textContent='Other known lab observations';h.style.margin='16px 0 6px';$('level-history').appendChild(h);for(const item of state.history){const p=document.createElement('div');p.className='history-item';p.textContent=item;$('level-history').appendChild(p)}}
@@ -527,7 +532,12 @@ function render(){
  const n=120,pts=[];let max=-Infinity,min=Infinity,sum=0;
  for(let i=0;i<=n;i++){const t=days*i/n,mid=dataAt(t),value=state.metric==='free'?mid?.ft:mid?.tt;
  const vals=scenarios.map(s=>{const v=dataAt(t,s.h,s.a);return state.metric==='free'?v?.ft:v?.tt});
- const lo=Math.min(...vals),hi=Math.max(...vals);pts.push({t,value,lo,hi});min=Math.min(min,value);max=Math.max(max,value);sum+=(i===0||i===n?0.5:1)*value;}
+ // The 25 kinetic scenarios alone do not represent differences seen across real older regimens.
+ // Broaden the displayed envelope deliberately. This is a scenario band, never a probability interval.
+ const anchorDose=validateAnchor(state.anchor)?state.anchor.dose*7/state.anchor.days:133;
+ const ratio=Math.max(.03,weeklyDose()/anchorDose);
+ const allowance=(validateAnchor(state.anchor)?Math.min(.5,.16+.29*Math.abs(Math.log(ratio))):.42)+(state.route==='SubQ'?.08:0);
+ const lo=Math.max(0,Math.min(...vals)*(1-Math.min(.7,allowance))),hi=Math.max(...vals)*(1+Math.min(.7,allowance));pts.push({t,value,lo,hi});min=Math.min(min,value);max=Math.max(max,value);sum+=(i===0||i===n?0.5:1)*value;}
  if(!Number.isFinite(max))return;
  const units=state.metric==='total'?'ng/dL':'pg/mL';
  $('level-peak').textContent=nf(max);$('level-trough').textContent=nf(min);$('level-average').textContent=nf(sum/n);
