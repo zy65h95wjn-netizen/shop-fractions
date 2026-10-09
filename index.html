@@ -51,6 +51,7 @@ body{
 .readout{background:var(--readout);border:1px solid var(--line);border-radius:12px;padding:8px 14px 10px;display:flex;flex-direction:column;gap:2px;flex:none}
 .expr{min-height:19px;font-size:15px;color:var(--muted);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
 .expr.err{color:var(--danger);font-weight:600}
+.expr.warn{color:var(--tape);font-weight:600}
 .main{font-weight:600;font-size:52px;line-height:58px;height:58px;text-align:right;white-space:nowrap;overflow:hidden;font-variant-numeric:lining-nums}
 .main .neg{margin-right:.08em}
 .fr{display:inline-flex;flex-direction:column;align-items:center;font-size:.5em;line-height:1.08;vertical-align:middle;margin-left:.3em;position:relative;top:-.08em}
@@ -176,7 +177,7 @@ body{
 <script>
 (function(){
 "use strict";
-const VERSION = "v5";
+const VERSION = "v6";
 
 /* iPhone home-screen apps lay the page out shorter than the screen (by about the status bar height),
    which leaves dead space at the bottom. Measure the shortfall and stretch the page to cover it. */
@@ -250,12 +251,16 @@ function evaluate(t){ // × and ÷ before + and −
    the fewest equal shots that are MIN_SHOT..MAX_SHOT long. Each stamp location is rounded to the nearest
    1/16, mirrored from both ends, so shots differ by at most 1/16 and the last stamp lands on the mark. */
 const MIN_SHOT = 12n, MAX_SHOT = 13n, END = 1n, MAX_LEN = 1200n;
+// When no count fits MIN_SHOT..MAX_SHOT, one fewer shot is allowed as long as each stays at or under this (13 3/8).
+const OVER_MAX = F(107n, 8n);
 function layout(L){
   if (L.n > MAX_LEN * L.d) throw "Too long. Max is " + MAX_LEN + " in";
   const span = OPS["−"](L, F(2n * END, 1n));
   const tooShort = "Too short for a " + MIN_SHOT + " in shot";
   if (span.n <= 0n) throw tooShort;
-  const nMin = ceilDiv(span.n, span.d * MAX_SHOT), nMax = floorDiv(span.n, span.d * MIN_SHOT);
+  let nMin = ceilDiv(span.n, span.d * MAX_SHOT), over = false;
+  const nMax = floorDiv(span.n, span.d * MIN_SHOT);
+  if (nMin > nMax && nMax >= 1n && span.n * OVER_MAX.d <= OVER_MAX.n * span.d * nMax) { nMin = nMax; over = true; }
   if (nMin > nMax) {
     // No count gives equal shots inside the limits. Report the count on each side (text after "|" is the hint line).
     if (nMax < 1n) throw tooShort;
@@ -272,7 +277,7 @@ function layout(L){
   let lo = pos[1] - pos[0], hi = lo;
   const gaps = [];
   for (let k = 1; k <= N; k++) { const g = pos[k] - pos[k - 1]; gaps.push(F(g, RD)); if (g < lo) lo = g; if (g > hi) hi = g; }
-  return { length: L, shots: N, stamps: pos.map(p => F(p, RD)), gaps: gaps, minGap: F(lo, RD), maxGap: F(hi, RD) };
+  return { length: L, shots: N, stamps: pos.map(p => F(p, RD)), gaps: gaps, minGap: F(lo, RD), maxGap: F(hi, RD), over: over };
 }
 
 /* ---------- state ---------- */
@@ -438,9 +443,10 @@ function gapRange(res){
 function renderXray(){
   const res = xRes, N = res ? res.shots : 0;
   exprEl.textContent = msg || (res
-    ? txt(res.length) + "″ tube · " + N + (N === 1 ? " shot of " : " shots of ") + gapRange(res)
+    ? (res.over ? "Over 13″ · " : "") + txt(res.length) + "″ tube · " + N + (N === 1 ? " shot of " : " shots of ") + gapRange(res)
     : "Tube length (inches)");
   exprEl.classList.toggle("err", !!msg);
+  exprEl.classList.toggle("warn", !msg && !!res && res.over);
   mainEl.classList.toggle("walk", !!res);
   mainEl.innerHTML = res ? '<span class="bigno">' + xSel + "</span><span>" + html(res.stamps[xSel]) + "</span>" : entryHTML(xEntry);
   subEl.textContent = !res ? (xHint || "Equal shots, 12 to 13 apart, 1 in off each end")
@@ -476,7 +482,7 @@ function render(){
   $("tab-xray").setAttribute("aria-selected", String(x));
   roundEl.hidden = x; opsEl.hidden = x; xopsEl.hidden = !x; xops2El.hidden = !(x && !!xRes);
   tapeEl.classList.toggle("tube", x);
-  if (!x) mainEl.classList.remove("walk");
+  if (!x) { mainEl.classList.remove("walk"); exprEl.classList.remove("warn"); }
   setWake(x && !!xRes);
   padsEl.hidden = x && !!xRes; listEl.hidden = !(x && !!xRes);
   $("k-sign").disabled = x;

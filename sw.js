@@ -1,5 +1,5 @@
 // Offline support: keep a copy of the app on the phone, serve it from there, refresh the copy when online.
-const CACHE = "shop-fractions-v5";
+const CACHE = "shop-fractions-v6";
 const FILES = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
 
 self.addEventListener("install", event => {
