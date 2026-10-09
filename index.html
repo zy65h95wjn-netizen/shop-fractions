@@ -176,7 +176,7 @@ body{
 <script>
 (function(){
 "use strict";
-const VERSION = "v4";
+const VERSION = "v5";
 
 /* iPhone home-screen apps lay the page out shorter than the screen (by about the status bar height),
    which leaves dead space at the bottom. Measure the shortfall and stretch the page to cover it. */
@@ -249,13 +249,20 @@ function evaluate(t){ // × and ÷ before + and −
    Stamp 0 sits END inches in, the last stamp END inches from the far end. The span between is cut into
    the fewest equal shots that are MIN_SHOT..MAX_SHOT long. Each stamp location is rounded to the nearest
    1/16, mirrored from both ends, so shots differ by at most 1/16 and the last stamp lands on the mark. */
-const MIN_SHOT = 12n, MAX_SHOT = 14n, END = 1n, MAX_LEN = 1200n;
+const MIN_SHOT = 12n, MAX_SHOT = 13n, END = 1n, MAX_LEN = 1200n;
 function layout(L){
   if (L.n > MAX_LEN * L.d) throw "Too long. Max is " + MAX_LEN + " in";
   const span = OPS["−"](L, F(2n * END, 1n));
-  if (span.n <= 0n) throw "No equal split from 12 to 14 at this length";
+  const tooShort = "Too short for a " + MIN_SHOT + " in shot";
+  if (span.n <= 0n) throw tooShort;
   const nMin = ceilDiv(span.n, span.d * MAX_SHOT), nMax = floorDiv(span.n, span.d * MIN_SHOT);
-  if (nMin > nMax) throw "No equal split from 12 to 14 at this length";
+  if (nMin > nMax) {
+    // No count gives equal shots inside the limits. Report the count on each side (text after "|" is the hint line).
+    if (nMax < 1n) throw tooShort;
+    const each = function(n){ return txt(F(floorDiv(2n * span.n * RD + span.d * n, 2n * span.d * n), RD)); };
+    throw "No equal split between " + MIN_SHOT + " and " + MAX_SHOT + "|" + nMax + (nMax === 1n ? " shot" : " shots") +
+      " would be " + each(nMax) + " each, " + nMin + " would be " + each(nMin);
+  }
   const N = Number(nMin), b = span.d * nMin, first = RD * END, pos = [];
   for (let k = 0; k <= N; k++) pos.push(first + floorDiv(2n * BigInt(k) * RD * span.n + b, 2n * b));
   if ((span.n * RD) % span.d === 0n) {
@@ -272,7 +279,7 @@ function layout(L){
 const blank = () => ({ w: "", n: "", d: "", neg: false });
 const has = e => !!(e.w || e.n || e.d);
 let entry = blank(), tokens = [], exact = null, picked = null, lastExpr = "", msg = "";
-let mode = "calc", xEntry = blank(), xRes = null, xSel = 0, tubeXs = [];
+let mode = "calc", xEntry = blank(), xRes = null, xSel = 0, tubeXs = [], xHint = "";
 try { if (localStorage.getItem("sf-mode") === "xray") mode = "xray"; } catch (e) {}
 const cur = () => picked ? roundTo(exact, picked) : exact;
 
@@ -436,7 +443,7 @@ function renderXray(){
   exprEl.classList.toggle("err", !!msg);
   mainEl.classList.toggle("walk", !!res);
   mainEl.innerHTML = res ? '<span class="bigno">' + xSel + "</span><span>" + html(res.stamps[xSel]) + "</span>" : entryHTML(xEntry);
-  subEl.textContent = !res ? "Equal shots, 12 to 14 apart, 1 in off each end"
+  subEl.textContent = !res ? (xHint || "Equal shots, 12 to 13 apart, 1 in off each end")
     : "Stamp " + xSel + " of " + N + " · " + (xSel ? txt(res.gaps[xSel - 1]) + " past stamp " + (xSel - 1) : "1 in from the end");
   rowsEl.innerHTML = !res ? "" : res.stamps.map(function(p, k){
     return '<li class="row' + (k === xSel ? " on" : k < xSel ? " done" : "") + '" data-k="' + k + '" role="button"><span class="no">' + k +
@@ -552,7 +559,7 @@ document.addEventListener("visibilitychange", function(){
 $("app").addEventListener("click", function(ev){
   const b = ev.target.closest("button");
   if (!b || b.disabled) return;
-  msg = "";
+  msg = ""; xHint = "";
   try {
     if (b.dataset.mode) { mode = b.dataset.mode; try { localStorage.setItem("sf-mode", mode); } catch (e) {} }
     else if (b.dataset.act === "xr-go") xrGo();
@@ -567,7 +574,7 @@ $("app").addEventListener("click", function(ev){
     else if (b.dataset.act === "sign") { if (mode === "calc") sign(); }
     else if (b.dataset.act === "eq") equals();
   } catch (e) {
-    if (typeof e === "string") msg = e; else throw e;
+    if (typeof e === "string") { const parts = e.split("|"); msg = parts[0]; xHint = parts[1] || ""; } else throw e;
   }
   render();
 });
