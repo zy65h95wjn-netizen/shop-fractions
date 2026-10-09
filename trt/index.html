@@ -147,7 +147,7 @@
   <div id="error" class="invalid" role="alert" hidden>Enter a valid concentration, positive interval, vial size and dose.</div>
   <section id="view-dose">
     <div class="panel hero" aria-live="polite">
-      <div class="eyebrow">Estimated testosterone · cycle average</div>
+      <div class="eyebrow">Estimated testosterone · pre-dose trough</div>
       <div class="hero-levels">
         <div class="hero-level-card"><div class="hero-level-label">Total T</div><div class="hero-level-value"><span id="hero-total">—</span><small>ng/dL</small></div></div>
         <div class="hero-level-card"><div class="hero-level-label">Free T</div><div class="hero-level-value"><span id="hero-free">—</span><small>pg/mL</small></div></div>
@@ -296,7 +296,7 @@
     </div>
   </section>
   <aside class="notice"><strong>Medication math, not medical advice.</strong> This tool does not recommend or validate a dose, schedule, route, or syringe. Check the medication label and prescribed instructions; confirm any treatment change with your clinician.</aside>
-  <footer class="footer"><strong>TRT Calc v1.5</strong> · Works offline after first install on a supported HTTPS host<br>Settings are stored in this browser on this device. No analytics or external libraries.</footer>
+  <footer class="footer"><strong>TRT Calc v1.6</strong> · Works offline after first install on a supported HTTPS host<br>Settings are stored in this browser on this device. No analytics or external libraries.</footer>
 </main>
 <script>
 (function () {
@@ -403,7 +403,9 @@ function validateAnchor(a){return a&&finite(a.tt,1,3000)&&finite(a.ft,1,800)&&fi
 function isValid(){return finite(state.shbg,0,200)&&finite(state.albumin,1,6.5)&&finite(state.half,3,8)&&finite(state.abs,.35,1.5)}
 function pack(){return JSON.stringify({shbg:state.shbg,albumin:state.albumin,route:state.route,half:state.half,abs:state.abs,metric:state.metric,peakAssumption:state.peakAssumption,modelVersion:2,anchor:state.anchor,history:state.history})}
 function save(){try{localStorage.setItem(KEY,pack())}catch{}}
-function load(){try{const x=JSON.parse(localStorage.getItem(KEY));if(!x||typeof x!=='object')return;for(const n of ['shbg','albumin','half','abs'])if(typeof x[n]==='number')state[n]=x[n];if(['IM','SubQ'].includes(x.route))state.route=x.route;if(['total','free'].includes(x.metric))state.metric=x.metric;if(typeof x.peakAssumption==='boolean')state.peakAssumption=x.peakAssumption;if(x.modelVersion!==2&&x.half===5)state.half=3; // migrate previous untouched 5-day model defaultif(validateAnchor(x.anchor))state.anchor=x.anchor;if(Array.isArray(x.history))state.history=x.history.filter(y=>typeof y==='string').slice(0,6);
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY));if(!x||typeof x!=='object')return;for(const n of ['shbg','albumin','half','abs'])if(typeof x[n]==='number')state[n]=x[n];if(['IM','SubQ'].includes(x.route))state.route=x.route;if(['total','free'].includes(x.metric))state.metric=x.metric;if(typeof x.peakAssumption==='boolean')state.peakAssumption=x.peakAssumption;if(x.modelVersion!==2&&x.half===5)state.half=3; // migrate previous untouched 5-day model default
+  if(validateAnchor(x.anchor))state.anchor=x.anchor;
+  if(Array.isArray(x.history))state.history=x.history.filter(y=>typeof y==='string').slice(0,6);
  // Old version saved generic 30/4.3 defaults, even without a lab. Upgrade that untouched pair to the requested values.
  if(!validateAnchor(state.anchor)&&x.shbg===30&&x.albumin===4.3){state.shbg=11;state.albumin=4.8}
  }catch{}}
@@ -505,9 +507,9 @@ function updateHeroLevels(){
   info.textContent='Check the dose, interval, SHBG, albumin or curve assumptions.';
   return;
  }
- // Match the Levels tab's central kinetic/binding model. Integrate both metrics over
- // one complete injection cycle; these are time averages, not laboratory values.
- let sumTT=0,sumFT=0,minTT=Infinity,maxTT=-Infinity,minFT=Infinity,maxFT=-Infinity;
+ // Main display: central-model trough immediately BEFORE the next injection.
+ // Ranges below are within-cycle central-model trough-to-peak spans, not confidence bounds.
+ let minTT=Infinity,maxTT=-Infinity,minFT=Infinity,maxFT=-Infinity;
  const n=180;
  for(let i=0;i<=n;i++){
   const t=days*i/n;
@@ -515,15 +517,19 @@ function updateHeroLevels(){
   if(!Number.isFinite(tt)||!Number.isFinite(ft)){
    total.textContent='—';free.textContent='—';info.textContent='Model could not calculate these settings.';action.hidden=false;return;
   }
-  const w=(i===0||i===n)?.5:1;
-  sumTT+=w*tt;sumFT+=w*ft;
   minTT=Math.min(minTT,tt);maxTT=Math.max(maxTT,tt);
   minFT=Math.min(minFT,ft);maxFT=Math.max(maxFT,ft);
  }
- total.textContent=nf(sumTT/n);
- free.textContent=nf(sumFT/n);
+ // At t=days, the depot is at steady-state pre-dose trough (not cycle average).
+ const troughTT=projectedTotal(days,dose.shot,days,state.half,state.abs);
+ const troughFT=projectedFree(troughTT);
+ if(!Number.isFinite(troughTT)||!Number.isFinite(troughFT)){
+  total.textContent='—';free.textContent='—';info.textContent='Model could not calculate the trough.';action.hidden=false;return;
+ }
+ total.textContent=nf(troughTT);
+ free.textContent=nf(troughFT);
  info.textContent=(validateAnchor(state.anchor)?'Private timed-lab anchored · ':'Lab-informed approximation · ')+
- 'Modeled cycle span: Total '+nf(minTT)+'–'+nf(maxTT)+' ng/dL · Free '+nf(minFT)+'–'+nf(maxFT)+' pg/mL';
+ 'Modeled cycle range (trough–peak): Total '+nf(minTT)+'–'+nf(maxTT)+' ng/dL · Free '+nf(minFT)+'–'+nf(maxFT)+' pg/mL';
  action.hidden=!!validateAnchor(state.anchor);
 }
 function render(){
