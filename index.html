@@ -31,11 +31,11 @@ body{margin:0;font-size:14px;touch-action:manipulation;overscroll-behavior:none}
   --ui:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   color-scheme:dark;
 }
-html{box-sizing:border-box;height:100%}
+html{box-sizing:border-box;height:calc(100% + var(--short, 0px))}
 *,*::before,*::after{box-sizing:inherit}
 body{
   height:100%;background:var(--bg);color:var(--fg);font-family:var(--ui);
-  padding-inline:16px;padding-block:8px;display:flex;justify-content:center;
+  padding-inline:16px;padding-block:14px;display:flex;justify-content:center;
   -webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;
 }
 .app{width:100%;max-width:440px;height:100%;min-height:600px;display:flex;flex-direction:column;gap:8px}
@@ -176,7 +176,24 @@ body{
 <script>
 (function(){
 "use strict";
-const VERSION = "v3";
+const VERSION = "v4";
+
+/* iPhone home-screen apps lay the page out shorter than the screen (by about the status bar height),
+   which leaves dead space at the bottom. Measure the shortfall and stretch the page to cover it. */
+function fixHeight(){
+  let d = 0;
+  try {
+    if (window.navigator.standalone === true && window.matchMedia("(orientation: portrait)").matches) {
+      const short = window.screen.height - document.documentElement.clientHeight;
+      if (short > 0 && short < 140) d = short;
+    }
+  } catch (e) {}
+  document.documentElement.style.setProperty("--short", d + "px");
+}
+fixHeight();
+window.addEventListener("resize", fixHeight);
+window.addEventListener("orientationchange", function(){ setTimeout(fixHeight, 300); });
+window.addEventListener("pageshow", fixHeight);
 const RD = 16n; // rounding grid: 16ths
 
 /* ---------- exact fraction math (BigInt) ---------- */
