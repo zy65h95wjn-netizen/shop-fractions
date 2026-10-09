@@ -153,7 +153,7 @@
         <div class="hero-level-card"><div class="hero-level-label">Free T</div><div class="hero-level-value"><span id="hero-free">—</span><small>pg/mL</small></div></div>
       </div>
       <div class="hero-level-info" id="hero-level-info">Live illustrative estimates. Add a timed blood test for a personalized calibration.</div>
-      <div class="hero-level-note">Approximate estimates use an anonymized, lab-informed response scale. The latest timed result receives priority; older non-comparable labs increase uncertainty. Not for dosing decisions.</div>
+      <div class="hero-level-note">Live scenario grounded primarily in your newer near-peak lab. An older higher-dose trough checks the assumed curve, but route and assay differences remain uncertain. Not for dosing decisions.</div>
       <button id="hero-calibrate" class="hero-calibrate" type="button">Optional: use exact lab reference →</button>
       <div class="hero-foot"><span class="circle"></span><span id="hero-description">40 mg every 3 days · 200 mg/mL</span></div>
     </div>
@@ -252,10 +252,10 @@
       <details id="levels-model-settings">
         <summary>Advanced curve assumptions</summary>
         <div class="fieldgrid">
-          <div class="field"><label for="level-half">Elimination half-life</label><div class="inputwrap"><input id="level-half" type="number" inputmode="decimal" min="3" max="8" step="0.25" value="5"><span class="suffix">days</span></div></div>
+          <div class="field"><label for="level-half">Elimination half-life</label><div class="inputwrap"><input id="level-half" type="number" inputmode="decimal" min="3" max="8" step="0.25" value="3"><span class="suffix">days</span></div></div>
           <div class="field"><label for="level-abs">Absorption half-life</label><div class="inputwrap"><input id="level-abs" type="number" inputmode="decimal" min="0.35" max="1.5" step="0.05" value="0.75"><span class="suffix">days</span></div></div>
         </div>
-        <p class="hint">These are assumed values, <b>not measured personal PK parameters</b>. A loaded lab is matched at its actual draw time when assumptions change. Without a local personal reference, a rounded lab-informed response scale is used (not an individual dose-response measurement).</p>
+        <p class="hint">3-day effective half-life is the exploratory central scenario that approximately reconciles the newer near-peak sample with the older higher-dose trough, assuming evenly spaced injections and comparable routes. It is <b>not your measured elimination half-life</b>. Change it to explore uncertainty; the raw laboratory values and injection times cannot establish it uniquely.</p>
       </details>
     </div>
     <div class="panel">
@@ -270,11 +270,12 @@
         <div class="field"><label for="anchor-shbg">SHBG at lab</label><div class="inputwrap"><input id="anchor-shbg" type="number" inputmode="decimal" min="0" max="200" step="any" placeholder="nmol/L"><span class="suffix">nmol/L</span></div></div>
         <div class="field"><label for="anchor-albumin">Albumin at lab</label><div class="inputwrap"><input id="anchor-albumin" type="number" inputmode="decimal" min="1" max="6.5" step="any" placeholder="g/dL"><span class="suffix">g/dL</span></div></div>
       </div>
+      <label class="hint" style="display:flex;align-items:center;gap:10px;cursor:pointer;margin-top:10px"><input type="checkbox" id="level-is-peak" checked style="width:19px;height:19px;accent-color:#79e3c7"> Treat my calibrated lab sample as a near-peak measurement</label>
       <p id="anchor-detail" class="hint">Rounded lab-informed estimates are already active. You can optionally import a timed result on this device for exact reference matching.</p>
       <div id="level-history"></div>
       <div class="actions"><button class="action secondary" id="level-reset" type="button">Clear local lab profile</button></div>
     </div>
-    <aside class="notice"><strong>Important limitations:</strong> The default model uses rounded, anonymized response coefficients informed primarily by the newest reliable timed lab; older lab observations show it may miss by 40% or more across different regimens. Even with a private timed reference, this is a simplified extrapolation assuming steady state, approximately linear dose response and negligible endogenous testosterone. Total/free estimates (especially at low SHBG) can differ dramatically from actual labs. This cannot predict estradiol, hematocrit, side effects, or how you feel. Never change treatment based on this chart.</aside>
+    <aside class="notice"><strong>Important limitations:</strong> The default model prioritizes the newest near-peak lab, with older higher-dose trough results as rough cross-checks. It may miss actual levels by 40% or more across different regimens. Even with a private timed reference, this is a simplified extrapolation assuming steady state, approximately linear dose response and negligible endogenous testosterone. Total/free estimates (especially at low SHBG) can differ dramatically from actual labs. This cannot predict estradiol, hematocrit, side effects, or how you feel. Never change treatment based on this chart.</aside>
   </section>
   <section id="view-compare" hidden>
     <div class="panel hero"><div class="eyebrow">Same weekly average</div><div class="number"><span id="compare-weekly">93.33</span> <small>mg / wk</small></div><div class="hero-foot">Mathematical equivalence only—not equivalent blood levels or a schedule recommendation.</div></div>
@@ -295,7 +296,7 @@
     </div>
   </section>
   <aside class="notice"><strong>Medication math, not medical advice.</strong> This tool does not recommend or validate a dose, schedule, route, or syringe. Check the medication label and prescribed instructions; confirm any treatment change with your clinician.</aside>
-  <footer class="footer"><strong>TRT Calc v1.4</strong> · Works offline after first install on a supported HTTPS host<br>Settings are stored in this browser on this device. No analytics or external libraries.</footer>
+  <footer class="footer"><strong>TRT Calc v1.5</strong> · Works offline after first install on a supported HTTPS host<br>Settings are stored in this browser on this device. No analytics or external libraries.</footer>
 </main>
 <script>
 (function () {
@@ -396,13 +397,13 @@ const KEY='trt-calc-levels-v1';
 const $=id=>document.getElementById(id);
 const fieldNames=['shbg','albumin','route','half','abs'];
 const refs=['tt','ft','dose','days','hours','shbg','albumin'];
-const state={shbg:11,albumin:4.8,route:'IM',half:5,abs:.75,metric:'total',time:24,anchor:null,history:[]};
+const state={shbg:11,albumin:4.8,route:'IM',half:3,abs:.75,metric:'total',time:24,peakAssumption:true,anchor:null,history:[]};
 function finite(v,min,max){return Number.isFinite(v)&&v>=min&&v<=max}
 function validateAnchor(a){return a&&finite(a.tt,1,3000)&&finite(a.ft,1,800)&&finite(a.dose,1,200)&&finite(a.days,.5,14)&&finite(a.hours,0,336)&&a.hours/24<=a.days&&finite(a.shbg,0,200)&&finite(a.albumin,1,6.5)}
 function isValid(){return finite(state.shbg,0,200)&&finite(state.albumin,1,6.5)&&finite(state.half,3,8)&&finite(state.abs,.35,1.5)}
-function pack(){return JSON.stringify({shbg:state.shbg,albumin:state.albumin,route:state.route,half:state.half,abs:state.abs,metric:state.metric,anchor:state.anchor,history:state.history})}
+function pack(){return JSON.stringify({shbg:state.shbg,albumin:state.albumin,route:state.route,half:state.half,abs:state.abs,metric:state.metric,peakAssumption:state.peakAssumption,modelVersion:2,anchor:state.anchor,history:state.history})}
 function save(){try{localStorage.setItem(KEY,pack())}catch{}}
-function load(){try{const x=JSON.parse(localStorage.getItem(KEY));if(!x||typeof x!=='object')return;for(const n of ['shbg','albumin','half','abs'])if(typeof x[n]==='number')state[n]=x[n];if(['IM','SubQ'].includes(x.route))state.route=x.route;if(['total','free'].includes(x.metric))state.metric=x.metric;if(validateAnchor(x.anchor))state.anchor=x.anchor;if(Array.isArray(x.history))state.history=x.history.filter(y=>typeof y==='string').slice(0,6);
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY));if(!x||typeof x!=='object')return;for(const n of ['shbg','albumin','half','abs'])if(typeof x[n]==='number')state[n]=x[n];if(['IM','SubQ'].includes(x.route))state.route=x.route;if(['total','free'].includes(x.metric))state.metric=x.metric;if(typeof x.peakAssumption==='boolean')state.peakAssumption=x.peakAssumption;if(x.modelVersion!==2&&x.half===5)state.half=3; // migrate previous untouched 5-day model defaultif(validateAnchor(x.anchor))state.anchor=x.anchor;if(Array.isArray(x.history))state.history=x.history.filter(y=>typeof y==='string').slice(0,6);
  // Old version saved generic 30/4.3 defaults, even without a lab. Upgrade that untouched pair to the requested values.
  if(!validateAnchor(state.anchor)&&x.shbg===30&&x.albumin===4.3){state.shbg=11;state.albumin=4.8}
  }catch{}}
@@ -413,7 +414,7 @@ function importPrivateProfile(value){
   const base=match[1].replace(/-/g,'+').replace(/_/g,'/');
   const data=JSON.parse(decodeURIComponent(escape(atob(base))));
   if(data.version!==1||!validateAnchor(data.anchor)||!finite(data.shbg,0,200)||!finite(data.albumin,1,6.5))return false;
-  state.anchor=data.anchor;state.shbg=data.shbg;state.albumin=data.albumin;
+  state.anchor=data.anchor;state.shbg=data.shbg;state.albumin=data.albumin;if(typeof data.peakAssumption==='boolean')state.peakAssumption=data.peakAssumption;
   if(['IM','SubQ'].includes(data.route))state.route=data.route;
   if(Array.isArray(data.history))state.history=data.history.filter(z=>typeof z==='string').slice(0,6);
   save();render();
@@ -435,12 +436,24 @@ function shape(t,period,h,a){const ke=Math.LN2/h,ka=Math.LN2/a;return ka/(ka-ke)
 // Older/untimed and different-route/different-assay labs are NOT mathematically fit, since
 // doing so would manufacture false PK precision; they inform the broader uncertainty band.
 // These parameters are NOT population norms, nor accurate predictions at new doses.
-const LAB_INFORMED_TOTAL_PER_WEEKLY_MG=5.23;
+// Updated central absorption/elimination scenario is shorter and checked against a
+// second approximate historical high-dose trough. The second test is not proof of
+// a unique personal half-life: interval asymmetry, route, date and assay are unknown.
+const LAB_INFORMED_TOTAL_PER_WEEKLY_MG=5.15;
 const DIALYSIS_ALIGNED_CALCULATED_FT_MULTIPLIER=0.835;
+function peakTime(period,h,a){
+ const ke=Math.LN2/h,ka=Math.LN2/a;
+ return Math.max(0,Math.min(period,Math.log(ka*(1-Math.exp(-ke*period))/(ke*(1-Math.exp(-ka*period))))/(ka-ke)));
+}
 function projectedTotal(t,dose,days,h,a){
  const ref=state.anchor;
  if(!finite(dose,0,2000)||!finite(days,.5,14)||!finite(h,3,8)||!finite(a,.35,1.5))return NaN;
- if(validateAnchor(ref))return ref.tt*(dose/ref.dose)*shape(t,days,h,a)/shape(ref.hours/24,ref.days,h,a);
+ if(validateAnchor(ref)){
+  // An explicitly designated near-peak blood draw anchors the modeled cycle maximum.
+  // Otherwise anchor strictly at the recorded collection time as before.
+  const referenceTime=state.peakAssumption?peakTime(ref.days,h,a):ref.hours/24;
+  return ref.tt*(dose/ref.dose)*shape(t,days,h,a)/shape(referenceTime,ref.days,h,a);
+ }
  const ke=Math.LN2/h;
  // Shape's exact cycle average is 1/(ke*days); multiplying by ke*days normalizes to mean 1.
  return LAB_INFORMED_TOTAL_PER_WEEKLY_MG*(dose*7/days)*shape(t,days,h,a)*(ke*days);
@@ -521,7 +534,8 @@ function render(){
  $('levels-empty').textContent='Check the current SHBG, albumin, curve assumptions, or dose for invalid values.';
  $('levels-cal-status').textContent=validateAnchor(state.anchor)?'Timed lab locally loaded':'Lab-informed approximation';
  $('level-model-source').textContent=validateAnchor(state.anchor)?'Matched to your private timed blood test. Cross-regimen predictions remain uncertain.':'Approximate lab-informed scale prioritizing the newest timed observation; older non-equivalent labs are uncertainty cross-checks. Actual values can differ by 40% or more.';
- $('anchor-detail').textContent=validateAnchor(state.anchor)?'Private measured values anchor the model at +'+nf(state.anchor.hours)+'h on '+nf(state.anchor.dose)+' mg every '+nf(state.anchor.days)+' days.':'Live lab-informed estimates are active even without a private reference. An exact timed lab can optionally be imported; no lab records are published in the app code.';
+ $('anchor-detail').textContent=validateAnchor(state.anchor)?(state.peakAssumption?'Private measured near-peak result calibrates the cycle maximum. Draw was at +':'Private measured result calibrates the exact +')+nf(state.anchor.hours)+'h on '+nf(state.anchor.dose)+' mg every '+nf(state.anchor.days)+' days. Historical trough comparisons are approximate.':'Live lab-informed estimates are active even without a private reference. An exact timed lab can optionally be imported; no lab records are published in the app code.';
+ $('level-is-peak').checked=state.peakAssumption;
  $('levels-total').classList.toggle('active',state.metric==='total');$('levels-free').classList.toggle('active',state.metric==='free');
  document.querySelectorAll('[data-level-metric]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.levelMetric===state.metric)));
  $('level-history').replaceChildren();if(state.history.length){const h=document.createElement('h2');h.textContent='Other known lab observations';h.style.margin='16px 0 6px';$('level-history').appendChild(h);for(const item of state.history){const p=document.createElement('div');p.className='history-item';p.textContent=item;$('level-history').appendChild(p)}}
@@ -558,6 +572,7 @@ function render(){
 function renderHour(){if(!isValid())return;const c=dataAt(state.time/24);if(!c)return;
  $('level-time-label').textContent='At +'+nf(state.time,0)+' hours';$('level-time-value').textContent=nf(state.metric==='total'?c.tt:c.ft)+' '+(state.metric==='total'?'ng/dL':'pg/mL');$('level-time-tt').textContent=nf(c.tt)+' ng/dL';$('level-time-ft').textContent=nf(c.ft)+' pg/mL';}
 for(const n of fieldNames){$('level-'+n).addEventListener(n==='route'?'change':'input',e=>{state[n]=n==='route'?e.target.value:(e.target.value.trim()===''?NaN:Number(e.target.value));save();render()})}
+$('level-is-peak').addEventListener('change',e=>{state.peakAssumption=e.target.checked;save();render()});
 for(const n of refs){$('anchor-'+n).addEventListener('input',()=>{const obj={};for(const k of refs)obj[k]=val('anchor-'+k);state.anchor=obj;save();render()})}
 for(const b of document.querySelectorAll('[data-level-metric]'))b.addEventListener('click',()=>{state.metric=b.dataset.levelMetric;save();render()});
 $('level-time').addEventListener('input',e=>{state.time=Number(e.target.value);renderHour()});
@@ -578,7 +593,7 @@ $('level-reset').addEventListener('click',()=>{if(!confirm('Clear personal calib
 load();applyPrivateLink();render();
 window.addEventListener('trt-levels-visible',render);
 window.addEventListener('trt-dose-changed',render);
-window.TRTLevels=Object.freeze({shape,projectedTotal,calculatedFT,projectedFree,validateAnchor});
+window.TRTLevels=Object.freeze({shape,peakTime,projectedTotal,calculatedFT,projectedFree,validateAnchor});
 })();
 </script>
 </body>
