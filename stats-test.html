@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Stats Check</title>
+<style>
+  /* Layout: one narrow column. Form on top, three verdicts under it, numbers and raw reply last. */
+  :root {
+    --bg: #f2f5f0;
+    --surface: #ffffff;
+    --ink: #17211b;
+    --muted: #586a5e;
+    --line: #d3dbd3;
+    --accent: #2c7a4c;
+    --accent-ink: #ffffff;
+    --good: #1c7440;
+    --warn: #8f5d00;
+    --bad: #ad3327;
+    --wait: #5c6b61;
+    --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-data: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101612;
+      --surface: #18211b;
+      --ink: #e6efe8;
+      --muted: #9bad9f;
+      --line: #2b382f;
+      --accent: #63c486;
+      --accent-ink: #0c1a11;
+      --good: #6fd092;
+      --warn: #e3b352;
+      --bad: #f29082;
+      --wait: #9bad9f;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.5 var(--font-body);
+    padding-inline: 16px;
+    padding-block: calc(24px + env(safe-area-inset-top, 0px)) calc(40px + env(safe-area-inset-bottom, 0px));
+  }
+  main { max-width: 620px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+  [hidden] { display: none !important; }
+
+  .eyebrow { margin: 0; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  h1 { margin: 2px 0 8px; font-size: 30px; line-height: 1.15; letter-spacing: -.01em; text-wrap: balance; }
+  h2 { margin: 0; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .lede { margin: 0; color: var(--muted); max-width: 58ch; }
+
+  form { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+  .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .row .field { flex: 1 1 160px; }
+  label { font-size: 14px; font-weight: 600; }
+  .hint { font-size: 13px; color: var(--muted); margin: 0; }
+  input, select {
+    font: inherit; color: var(--ink); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; width: 100%; min-width: 0;
+  }
+  .keybox { display: flex; gap: 8px; }
+  .keybox input { flex: 1 1 auto; font-family: var(--font-data); }
+  button { font: inherit; cursor: pointer; border-radius: 8px; }
+  .ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); padding: 10px 12px; flex: 0 0 auto; }
+  .go { background: var(--accent); color: var(--accent-ink); border: 0; padding: 12px 16px; font-weight: 700; }
+  .go[disabled] { opacity: .6; cursor: progress; }
+  :is(input, select, button, summary):focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .formnote { margin: 0; font-size: 14px; color: var(--bad); }
+
+  .verdicts { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+  .verdicts li { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: start; }
+  .chip { font: 600 12px/1 var(--font-data); letter-spacing: .04em; text-transform: uppercase; padding: 7px 0; text-align: center; border-radius: 6px; border: 1.5px solid currentColor; color: var(--wait); }
+  .chip[data-state="yes"] { color: var(--good); }
+  .chip[data-state="no"] { color: var(--bad); }
+  .chip[data-state="maybe"] { color: var(--warn); }
+  .q { margin: 0; font-weight: 600; }
+  .a { margin: 2px 0 0; color: var(--muted); font-size: 15px; overflow-wrap: anywhere; }
+
+  .who { margin: 0; display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: 15px; }
+  .who div { display: flex; gap: 6px; min-width: 0; }
+  .who dt { color: var(--muted); }
+  .who dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+  .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+  th, td { padding: 10px 8px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--line); }
+  th:first-child, td:first-child { padding-left: 12px; }
+  th:last-child, td:last-child { padding-right: 12px; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody td { font-family: var(--font-data); font-size: 14px; }
+  tbody td:first-child { font-family: var(--font-body); font-weight: 600; }
+  .small { font-size: 13px; color: var(--muted); margin: 0; }
+
+  details { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  summary { cursor: pointer; padding: 12px 14px; font-weight: 600; }
+  .rawwrap { padding: 0 14px 14px; display: flex; flex-direction: column; gap: 10px; }
+  pre { margin: 0; max-height: 320px; overflow: auto; font: 12.5px/1.45 var(--font-data); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .copyrow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  section { display: flex; flex-direction: column; gap: 12px; }
+  @media (prefers-reduced-motion: no-preference) { .go { transition: opacity .15s; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Victory Garden &middot; first gate</p>
+    <h1>Stats Check</h1>
+    <p class="lede">Pulls one player's Fortnite numbers so we can see exactly what the stats service sends back. Your key is used for this one lookup and is not saved.</p>
+  </header>
+
+  <form id="check" novalidate>
+    <div class="field">
+      <label for="key">API key</label>
+      <div class="keybox">
+        <input id="key" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Paste the key from fortnite-api.com">
+        <button class="ghost" type="button" id="showkey" aria-pressed="false">Show</button>
+      </div>
+    </div>
+    <div class="field">
+      <label for="name">Her player name</label>
+      <input id="name" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Exactly as it shows in the game">
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="platform">Account it belongs to</label>
+        <select id="platform">
+          <option value="epic">Epic Games</option>
+          <option value="psn">PlayStation</option>
+          <option value="xbl">Xbox</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="window">Time span</label>
+        <select id="window">
+          <option value="lifetime">All time</option>
+          <option value="season">This season</option>
+        </select>
+      </div>
+    </div>
+    <p class="formnote" id="formnote" hidden></p>
+    <button class="go" type="submit" id="go">Run the check</button>
+  </form>
+
+  <section aria-live="polite">
+    <h2>What this run tells us</h2>
+    <ul class="verdicts">
+      <li>
+        <span class="chip" id="c1" data-state="wait">Not run</span>
+        <div><p class="q">Do her numbers come back?</p><p class="a" id="a1">Fill in the two boxes and run the check.</p></div>
+      </li>
+      <li>
+        <span class="chip" id="c2" data-state="wait">Not run</span>
+        <div><p class="q">Can a web page call the service directly?</p><p class="a" id="a2">If yes, the app needs no extra server in the middle.</p></div>
+      </li>
+      <li>
+        <span class="chip" id="c3" data-state="wait">Not run</span>
+        <div><p class="q">Is Zero Build listed on its own?</p><p class="a" id="a3">Shows how the service groups her matches.</p></div>
+      </li>
+    </ul>
+    <p class="small" id="ranfrom"></p>
+  </section>
+
+  <section id="numbers" hidden>
+    <h2>Her numbers</h2>
+    <dl class="who" id="who"></dl>
+    <div class="scroll">
+      <table>
+        <thead><tr><th scope="col">Group</th><th scope="col">Matches</th><th scope="col">Wins</th><th scope="col">Win %</th><th scope="col">Elims</th><th scope="col">K/D</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p class="small" id="fresh"></p>
+  </section>
+
+  <details id="rawbox" hidden>
+    <summary>Full reply from the service</summary>
+    <div class="rawwrap">
+      <div class="copyrow">
+        <button class="ghost" type="button" id="copy">Copy reply</button>
+        <span class="small" id="copied">Paste this to Claude. It does not contain your key.</span>
+      </div>
+      <pre id="raw" tabindex="0"></pre>
+    </div>
+  </details>
+</main>
+
+<script>
+(function () {
+  var API = 'https://fortnite-api.com';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var where = location.protocol === 'file:' ? 'a file saved on this device' : location.origin;
+  $('ranfrom').textContent = 'This page is running from ' + where + '.';
+
+  $('showkey').addEventListener('click', function () {
+    var input = $('key');
+    var showing = input.type === 'text';
+    input.type = showing ? 'password' : 'text';
+    this.textContent = showing ? 'Show' : 'Hide';
+    this.setAttribute('aria-pressed', String(!showing));
+  });
+
+  function verdict(n, state, label, text) {
+    var chip = $('c' + n);
+    chip.dataset.state = state;
+    chip.textContent = label;
+    $('a' + n).textContent = text;
+  }
+
+  function num(v, digits) {
+    if (typeof v !== 'number' || !isFinite(v)) return '—';
+    return v.toLocaleString(undefined, { maximumFractionDigits: digits || 0, minimumFractionDigits: digits || 0 });
+  }
+
+  // Every key name under "stats", two levels deep, e.g. "all > solo".
+  function groupPaths(stats) {
+    var out = [];
+    Object.keys(stats || {}).forEach(function (top) {
+      var inner = stats[top];
+      if (inner && typeof inner === 'object') {
+        Object.keys(inner).forEach(function (k) { if (inner[k] !== null) out.push(top + ' > ' + k); });
+      }
+    });
+    return out;
+  }
+
+  function fetchWithTimeout(url, options, ms) {
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, ms);
+    options.signal = ctrl.signal;
+    return fetch(url, options).finally(function () { clearTimeout(timer); });
+  }
+
+  // Can this device reach the service at all? Resolves even when direct calls are not allowed.
+  function reachable() {
+    return fetchWithTimeout(API + '/v2/news', { mode: 'no-cors', cache: 'no-store' }, 15000)
+      .then(function () { return true; }, function () { return false; });
+  }
+
+  function showNumbers(data) {
+    var all = data.stats && data.stats.all;
+    var modes = [['overall', 'Overall'], ['solo', 'Solo'], ['duo', 'Duos'], ['trio', 'Trios'], ['squad', 'Squads'], ['ltm', 'Limited-time']];
+    var body = $('rows');
+    body.textContent = '';
+    modes.forEach(function (m) {
+      var s = all && all[m[0]];
+      if (!s || typeof s !== 'object') return;
+      var tr = document.createElement('tr');
+      [m[1], num(s.matches), num(s.wins), num(s.winRate, 1), num(s.kills), num(s.kd, 2)].forEach(function (cell) {
+        var td = document.createElement('td');
+        td.textContent = cell;
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+
+    var who = $('who');
+    who.textContent = '';
+    var facts = [];
+    if (data.account && data.account.name) facts.push(['Player', data.account.name]);
+    if (data.battlePass && typeof data.battlePass.level === 'number') facts.push(['Battle Pass level', String(data.battlePass.level)]);
+    facts.forEach(function (f) {
+      var div = document.createElement('div');
+      var dt = document.createElement('dt'); dt.textContent = f[0];
+      var dd = document.createElement('dd'); dd.textContent = f[1];
+      div.appendChild(dt); div.appendChild(dd); who.appendChild(div);
+    });
+
+    var stamp = all && all.overall && all.overall.lastModified;
+    var when = stamp ? new Date(stamp) : null;
+    $('fresh').textContent = when && !isNaN(when)
+      ? 'The service last updated these on ' + when.toLocaleString() + '. Compare that with her last match to see how far behind it runs.'
+      : 'The reply did not say when these were last updated.';
+    $('numbers').hidden = body.children.length === 0;
+  }
+
+  function showRaw(text) {
+    var pretty = text;
+    try { pretty = JSON.stringify(JSON.parse(text), null, 2); } catch (e) {}
+    $('raw').textContent = pretty;
+    $('rawbox').hidden = false;
+  }
+
+  $('copy').addEventListener('click', function () {
+    var pre = $('raw');
+    var note = $('copied');
+    var fallback = function () {
+      var range = document.createRange();
+      range.selectNodeContents(pre);
+      var sel = getSelection();
+      sel.removeAllRanges(); sel.addRange(range);
+      note.textContent = 'The reply is selected. Copy it from here.';
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(pre.textContent).then(function () { note.textContent = 'Copied. Paste it to Claude.'; }, fallback);
+    } else { fallback(); }
+  });
+
+  $('check').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var key = $('key').value.trim();
+    var name = $('name').value.trim();
+    var note = $('formnote');
+    if (!key || !name) {
+      note.textContent = !key ? 'Paste your API key first.' : 'Type her player name first.';
+      note.hidden = false;
+      (!key ? $('key') : $('name')).focus();
+      return;
+    }
+    note.hidden = true;
+    $('numbers').hidden = true;
+    $('rawbox').hidden = true;
+
+    var go = $('go');
+    go.disabled = true;
+    go.textContent = 'Checking…';
+    [1, 2, 3].forEach(function (n) { verdict(n, 'wait', 'Checking', 'Waiting on the service.'); });
+
+    var url = API + '/v2/stats/br/v2?name=' + encodeURIComponent(name) +
+      '&accountType=' + encodeURIComponent($('platform').value) +
+      '&timeWindow=' + encodeURIComponent($('window').value);
+
+    fetchWithTimeout(url, { headers: { Authorization: key }, cache: 'no-store' }, 20000)
+      .then(function (res) {
+        return res.text().then(function (text) { return { status: res.status, text: text }; });
+      })
+      .then(function (reply) {
+        var json = null;
+        try { json = JSON.parse(reply.text); } catch (e) {}
+        var said = json && json.error ? ' The service said: "' + json.error + '".' : '';
+        showRaw(reply.text);
+        verdict(2, 'yes', 'Yes', 'This page reached the service straight from the browser and read its reply, so no extra server is needed.');
+
+        if (reply.status === 200 && json && json.data) {
+          showNumbers(json.data);
+          verdict(1, 'yes', 'Yes', 'Got a full set of numbers for ' + ((json.data.account && json.data.account.name) || name) + '.');
+          var paths = groupPaths(json.data.stats);
+          var zb = paths.filter(function (p) { return /zero|no[\s_-]?build|\bzb\b/i.test(p); });
+          if (zb.length) {
+            verdict(3, 'yes', 'Yes', 'Found: ' + zb.join(', ') + '.');
+          } else {
+            verdict(3, 'no', 'No', 'It groups matches as: ' + (paths.join(', ') || 'nothing recognizable') + '. No Zero Build group, so the Overall row is every mode combined.');
+          }
+          return;
+        }
+
+        var why;
+        if (reply.status === 403) why = 'The service refused this player. That usually means her stats are set to private in her Fortnite account settings.' + said;
+        else if (reply.status === 404) why = 'No player found under that name. Check the spelling and the account type.' + said;
+        else if (reply.status === 401) why = 'The service rejected the key. Copy it again from fortnite-api.com.' + said;
+        else if (reply.status === 429) why = 'Too many lookups in a row. Wait a minute and run it again.' + said;
+        else if (reply.status === 400) why = 'The service did not accept the request as sent.' + said;
+        else why = 'The service answered with code ' + reply.status + '.' + said;
+        verdict(1, 'no', 'No', why);
+        verdict(3, 'maybe', 'Unknown', 'No numbers came back, so there is nothing to inspect yet.');
+      })
+      .catch(function (err) {
+        var timedOut = err && err.name === 'AbortError';
+        return reachable().then(function (up) {
+          if (timedOut) {
+            verdict(1, 'maybe', 'Unknown', 'The service took longer than 20 seconds to answer. Run it again.');
+            verdict(2, 'maybe', 'Unknown', 'A timeout says nothing about direct calls either way.');
+          } else if (up) {
+            verdict(1, 'maybe', 'Unknown', 'The lookup never got through, so her numbers were not tested.');
+            verdict(2, 'no', 'No', 'The service is up, but the browser was not allowed to read its reply. Check the key once more. If the key is right, the app needs a small relay server.');
+          } else if (!/^https?:$/.test(location.protocol) || location.origin === 'null') {
+            verdict(1, 'maybe', 'Unknown', 'This viewer does not let pages make outside calls, so nothing was tested.');
+            verdict(2, 'maybe', 'Unknown', 'Open the web link to this page in Safari or another regular browser and run it there.');
+          } else {
+            verdict(1, 'maybe', 'Unknown', 'This device could not reach the service at all.');
+            verdict(2, 'maybe', 'Unknown', 'Check the internet connection, or whether a blocker or work network is stopping fortnite-api.com, then run it again.');
+          }
+          verdict(3, 'maybe', 'Unknown', 'No numbers came back, so there is nothing to inspect yet.');
+        });
+      })
+      .finally(function () {
+        go.disabled = false;
+        go.textContent = 'Run the check again';
+      });
+  });
+})();
+</script>
+</body>
+</html>
