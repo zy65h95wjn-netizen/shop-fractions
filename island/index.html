@@ -259,8 +259,15 @@ a.btn{display:flex;align-items:center;justify-content:center;text-decoration:non
 .sp .tick svg{width:15px;height:15px}
 .sp.got .tick{opacity:1;transform:scale(1)}
 .sp .new{position:absolute;top:-6px;left:-2px;z-index:3;font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;background:var(--ember);color:var(--ink)}
-.sp.pop .pod{animation:catch .55s cubic-bezier(.3,1.6,.5,1)}
-@keyframes catch{0%{transform:scale(.7)}60%{transform:scale(1.16)}100%{transform:scale(1)}}
+.sp.pop .pod{animation:catch .8s cubic-bezier(.3,1.5,.5,1)}
+@keyframes catch{0%{transform:scale(.65) rotate(-24deg);filter:brightness(2.4)}55%{transform:scale(1.2) rotate(8deg);filter:brightness(1.6)}100%{transform:scale(1) rotate(0);filter:none}}
+.fx .ring{position:absolute;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;border:2px solid currentColor;box-shadow:0 0 18px currentColor, inset 0 0 12px currentColor;animation:ring .95s cubic-bezier(.2,.7,.3,1) both}
+@keyframes ring{0%{transform:scale(.3);opacity:.95}100%{transform:scale(2.8);opacity:0}}
+.fx .bloom{position:absolute;width:130px;height:130px;margin:-65px 0 0 -65px;border-radius:50%;background:radial-gradient(circle,#FFFFFF 0%,currentColor 28%,transparent 68%);opacity:0;animation:bloom .75s ease-out both}
+@keyframes bloom{0%{transform:scale(.2);opacity:1}100%{transform:scale(1.7);opacity:0}}
+.fx .caught{position:absolute;white-space:nowrap;font-family:var(--head);font-weight:700;font-size:15px;letter-spacing:.03em;color:var(--moon);opacity:0;animation:caught 1.7s ease-out both}
+@keyframes caught{0%{opacity:0;transform:translate(-50%,8px) scale(.85)}18%{opacity:1;transform:translate(-50%,-8px) scale(1)}70%{opacity:1}100%{opacity:0;transform:translate(-50%,-58px)}}
+.pt.drift{animation-duration:1.9s;animation-timing-function:ease-out}
 .sp.holding .pod{transform:scale(.92);transition:transform .45s ease}
 .sp.hint .pod{animation:hint 2.4s ease-in-out 3}
 @keyframes hint{0%,100%{box-shadow:0 0 0 0 rgba(255,208,138,0)}50%{box-shadow:0 0 0 6px rgba(255,208,138,.35), 0 0 26px rgba(255,208,138,.55)}}
@@ -667,9 +674,9 @@ function renderToday(){
       (st.note ? '<span class="twinkle">'+ICON.sparkle+'</span>' : '')+'</span><h1>Today</h1></div>'+
     '<button class="iconbtn" id="refreshAll" aria-label="Refresh">'+ICON.refresh+'</button></div>'+
     playerStrip() + hero + phCard() +
-    '<div class="list" style="gap:12px"><div class="between" style="align-items:center"><h2 class="rule" style="flex:1">Wishlist in the shop</h2><button class="chip" data-go="shop" style="height:32px">See shop</button></div>'+wishHtml+'</div>'+
     (evHtml ? '<div class="list" style="gap:12px"><h2 class="rule">Coming up</h2>'+evHtml+'</div>' : '')+
     (newsHtml ? '<div class="list" style="gap:12px"><h2 class="rule">In the game now</h2>'+newsHtml+'</div>' : '')+
+    '<div class="list" style="gap:12px"><div class="between" style="align-items:center"><h2 class="rule" style="flex:1">Wishlist in the shop</h2><button class="chip" data-go="shop" style="height:32px">See shop</button></div>'+wishHtml+'</div>'+
   '</section>';
 }
 
@@ -793,13 +800,34 @@ function sparkBurst(x, y, color){
     setTimeout(function(n){ return function(){ n.remove(); }; }(p), 1250);
   }
 }
+function magicCatch(x, y, color, name){
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var fx = $('#fx'), cols = [color, '#ECE6FF', '#FFD08A', color];
+  function add(cls, life, delay){ var e = document.createElement('span'); e.className = cls; e.style.left = x+'px'; e.style.top = y+'px'; e.style.color = color; if(delay) e.style.animationDelay = delay; fx.appendChild(e); setTimeout(function(){ e.remove(); }, life); return e; }
+  add('bloom', 900);
+  add('ring', 1100);
+  var r2 = add('ring', 1300, '.14s'); r2.style.color = '#ECE6FF';
+  for(var i=0;i<28;i++){
+    var p = document.createElement('span'), a = i/28*Math.PI*2 + Math.random()*.4, drift = i%4===0;
+    var d = drift ? 10+Math.random()*30 : 40+Math.random()*70, sz = drift ? 3+Math.random()*3 : 4+Math.random()*8;
+    p.className = 'pt'+(drift?' drift':''); p.style.left = x+'px'; p.style.top = y+'px'; p.style.width = p.style.height = sz.toFixed(1)+'px';
+    p.style.color = cols[i%4]; p.style.background = i%3===0 ? 'transparent' : 'currentColor';
+    if(i%3===0) p.innerHTML = ICON.star;
+    p.style.setProperty('--dx', Math.round(Math.cos(a)*d)+'px');
+    p.style.setProperty('--dy', Math.round(drift ? -110-Math.random()*70 : Math.sin(a)*d*0.6 - 40 - Math.random()*40)+'px');
+    fx.appendChild(p);
+    setTimeout(function(n){ return function(){ n.remove(); }; }(p), 2000);
+  }
+  if(name){ var t = add('caught', 1800); t.textContent = name; t.style.top = (y-52)+'px'; t.style.textShadow = '0 0 12px '+color+', 0 0 2px #000'; }
+}
 function toggleSprite(b){
   var id = b.dataset.sprite; if(S.got[id]) delete S.got[id]; else S.got[id] = true; save('sprites', S.got);
   var g = !!S.got[id]; b.classList.toggle('got', g); b.setAttribute('aria-pressed', g);
   if(g){
     b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop');
     var r = $('.pod', b).getBoundingClientRect();
-    sparkBurst(r.left + r.width/2, r.top + r.height/2, b.style.getPropertyValue('--c') || '#B98CFF');
+    var nmEl = $('.nm', b);
+    magicCatch(r.left + r.width/2, r.top + r.height/2, b.style.getPropertyValue('--c') || '#B98CFF', nmEl ? nmEl.textContent : '');
   }
   updateSpriteCount();
   if((S.spriteGroup==='todo' && g) || (S.spriteGroup==='got' && !g)) setTimeout(function(){ if(S.tab==='sprites') rerender(['sprites']); }, 600);
