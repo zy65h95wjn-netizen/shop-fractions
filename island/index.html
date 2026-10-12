@@ -114,7 +114,7 @@ a{color:var(--accent)}
 .hero .moon::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#160E29;opacity:0;animation:heroMoonShade var(--cloud-time,27s) linear var(--cloud-phase,0s) infinite}
 .hero .moon::before{content:"";position:absolute;inset:0;border-radius:inherit;background:#F4F0FF;box-shadow:0 0 75px 20px rgba(217,194,255,.4);opacity:0}
 .hero .cloud{position:absolute;left:calc(50% - 180px);top:67px;width:300px;height:90px;opacity:0;
-  background:radial-gradient(ellipse at 32% 56%,rgba(207,198,236,.30),transparent 65%),radial-gradient(ellipse at 68% 42%,rgba(150,120,200,.32),transparent 62%);
+  background:radial-gradient(closest-side at 36% 56%,rgba(207,198,236,.30),transparent),radial-gradient(closest-side at 64% 44%,rgba(170,140,215,.26),transparent);
   animation:heroCloud var(--cloud-time,27s) linear var(--cloud-phase,0s) infinite}
 .hero .bat{position:absolute;left:calc(50% - 64px);top:88px;width:34px;height:18px;fill:#0A0612;filter:drop-shadow(0 0 1.5px rgba(217,194,255,.95)) drop-shadow(0 0 6px rgba(185,140,255,.55));opacity:0;--scatter-x:-130px;--scatter-y:-48px;--scatter-r:-14deg}
 .hero .bat + .bat{left:calc(50% + 54px);top:71px;width:15px;height:8px;--scatter-x:140px;--scatter-y:-34px;--scatter-r:18deg}
@@ -144,7 +144,7 @@ a{color:var(--accent)}
 .hero.scene-paused *,.hero.scene-paused *::before,.hero.scene-paused *::after{animation-play-state:paused!important}
 @keyframes heroFog{from{transform:translateX(-9%)}to{transform:translateX(9%)}}
 @keyframes heroCloud{0%,62%{opacity:0;transform:translateX(-110px)}68%{opacity:.7}76%{opacity:.85}86%,100%{opacity:0;transform:translateX(235px)}}
-@keyframes heroMoonShade{0%,65%,87%,100%{opacity:0}72%{opacity:.3}77%{opacity:.42}82%{opacity:.2}}
+@keyframes heroMoonShade{0%,65%,87%,100%{opacity:0}72%{opacity:.12}77%{opacity:.18}82%{opacity:.08}}
 @keyframes heroBatPass{0%{opacity:0;transform:translate(-120px,70px) rotate(-10deg)}12%,78%{opacity:1}100%{opacity:0;transform:translate(245px,-60px) rotate(8deg)}}
 @keyframes heroEmber{0%,12%{opacity:0;transform:translate(0,0)}28%{opacity:.95}70%{opacity:.6}100%{opacity:0;transform:translate(var(--ember-x),-150px)}}
 @keyframes heroCandle{0%,100%{opacity:.42}27%{opacity:.56}46%{opacity:.45}71%{opacity:.62}86%{opacity:.48}}
