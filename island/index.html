@@ -230,6 +230,11 @@ a.btn{display:flex;align-items:center;justify-content:center;text-decoration:non
 .player .pl-l{display:flex;flex-direction:column;gap:3px;min-width:0}
 .player .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
 .player b{font-size:18px;font-weight:700;color:var(--moon);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player .pl-r{flex:0 0 auto;display:flex;align-items:center;gap:8px}
+.player .wins{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:50px;height:50px;padding:0 8px;border-radius:12px;background:rgba(185,140,255,.14);border:1px solid var(--line2);color:var(--moon);font-family:var(--head);font-weight:700;font-size:19px;line-height:1}
+.player .wins svg{width:16px;height:12px;color:var(--firefly);margin-bottom:3px;filter:drop-shadow(0 0 4px rgba(255,208,138,.6))}
+.ev .what .cd{display:inline-block;margin-top:4px;font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--accent)}
+.ev .what .cd.hot{color:var(--ember);text-shadow:0 0 10px rgba(255,122,46,.45)}
 .player .lvl{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:58px;height:50px;padding:0 8px;border-radius:12px;background:linear-gradient(160deg,#FFB15C,#FF7A2E);color:#2A1206;font-family:var(--head);font-weight:700;font-size:21px;line-height:1;box-shadow:0 0 18px rgba(255,122,46,.45)}
 .player .lvl small{font-family:var(--body);font-size:9.5px;letter-spacing:.16em;font-weight:800;opacity:.8;margin-bottom:3px}
 .jar{flex:0 0 auto;width:92px;height:116px}
@@ -588,6 +593,12 @@ function powerHourState(){
   var last = list.filter(function(p){ return p.e<=now; }).pop();
   return {mode:'none', last:last};
 }
+function countdown(x){
+  var t = new Date(); t.setHours(0,0,0,0);
+  var n = Math.round((x.d - t)/86400000), ends = /ends$/i.test(x.name), hot = ends && /fortnitemares/i.test(x.name);
+  var txt = ends ? (n<=0 ? 'Last day!' : n===1 ? '1 day left' : n+' days left') : (n<=0 ? 'Today' : n===1 ? 'Tomorrow' : 'In '+n+' days');
+  return '<span class="cd'+(hot?' hot':'')+'">'+txt+'</span>';
+}
 function upcomingEvents(){
   var ev = S.eventsData; if(!ev) return [];
   var today = new Date(); today.setHours(0,0,0,0);
@@ -617,10 +628,12 @@ function phCard(){
 }
 function playerStrip(){
   var st = S.settings || {}; if(!st.epic) return '';
-  var c = null; Object.keys(S.stats||{}).some(function(k){ var x = S.stats[k]; if(x && x.user===st.epic && x.bp!=null){ c = x; return true; } return false; });
+  var c = null, ck = ''; ['season','lifetime'].concat(Object.keys(S.stats||{})).some(function(k){ var x = S.stats[k]; if(x && x.user===st.epic && x.bp!=null){ c = x; ck = k; return true; } return false; });
+  var crown = '<svg viewBox="0 0 16 12" aria-hidden="true"><path fill="currentColor" d="M1 3l3.5 3L8 0l3.5 6L15 3l-1.5 9h-11z"/></svg>';
+  var wins = c && c.o && c.o.wins!=null ? '<span class="wins" aria-label="'+c.o.wins+' wins'+(ck==='season'?' this season':'')+'">'+crown+esc(fmtNum(c.o.wins))+'</span>' : '';
   var season = (S.spritesData && S.spritesData.season) || 'Battle Royale';
   return '<button class="player" data-go="me" aria-label="Open stats"><span class="pl-l"><span class="eyebrow">Fortnite · '+esc(season)+'</span><b>'+esc((c && c.name) || st.epic)+'</b></span>'+
-    (c ? '<span class="lvl"><small>LVL</small>'+esc(String(c.bp))+'</span>' : '')+'</button>';
+    (c ? '<span class="pl-r">'+wins+'<span class="lvl"><small>LVL</small>'+esc(String(c.bp))+'</span></span>' : '')+'</button>';
 }
 function renderToday(){
   var st = S.settings || {}, sk = st.skin;
@@ -638,7 +651,7 @@ function renderToday(){
   var ups = upcomingEvents();
   var evHtml = ups.length ? '<div class="list">'+ups.map(function(x){
     return '<div class="ev"><div class="date"><b>'+x.d.getDate()+'</b><span>'+x.d.toLocaleDateString([], {month:'short'})+'</span></div>'+
-      '<div class="what"><b>'+esc(x.name)+'</b><span>'+esc(x.note||'')+'</span></div></div>';
+      '<div class="what"><b>'+esc(x.name)+'</b><span>'+esc(x.note||'')+'</span>'+countdown(x)+'</div></div>';
   }).join('')+'</div>' : '';
 
   var newsHtml = '';
