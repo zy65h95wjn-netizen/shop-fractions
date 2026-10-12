@@ -230,6 +230,20 @@ a.btn{display:flex;align-items:center;justify-content:center;text-decoration:non
 .player .pl-l{display:flex;flex-direction:column;gap:3px;min-width:0}
 .player .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
 .player b{font-size:18px;font-weight:700;color:var(--moon);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini{display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--line);text-align:left;color:var(--text);min-width:0}
+.mini .k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.mini b{font-family:var(--head);font-size:21px;color:var(--moon);line-height:1.1;font-variant-numeric:tabular-nums}
+.mini b small{font-size:13px;color:var(--muted)}
+.mini .s{font-size:12.5px;color:var(--muted)}
+.mini .bar{height:5px;border-radius:9px;background:var(--line);overflow:hidden}
+.mini .bar i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#5E3591,#D9C2FF);box-shadow:0 0 8px rgba(185,140,255,.6)}
+.costume{display:flex;gap:14px;align-items:stretch;padding:0;border-radius:18px;background:var(--card);border:1px solid var(--line2);overflow:hidden;text-align:left;color:var(--text);width:100%;box-shadow:0 0 24px rgba(185,140,255,.12)}
+.costume .art{flex:0 0 118px;height:146px;background:#1C1330}
+.costume .art img{width:100%;height:100%;object-fit:cover;object-position:top}
+.costume .tx{display:flex;flex-direction:column;justify-content:center;gap:5px;padding:12px 14px 12px 0;min-width:0}
+.costume .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ember);font-weight:700}
+.costume b{font-family:var(--head);font-size:18px;line-height:1.15;color:var(--moon)}
+.costume .s{font-size:13px;color:var(--muted)}
 .player .pl-r{flex:0 0 auto;display:flex;align-items:center;gap:8px}
 .player .wins{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:50px;height:50px;padding:0 8px;border-radius:12px;background:rgba(185,140,255,.14);border:1px solid var(--line2);color:var(--moon);font-family:var(--head);font-weight:700;font-size:19px;line-height:1}
 .player .wins svg{width:16px;height:12px;color:var(--firefly);margin-bottom:3px;filter:drop-shadow(0 0 4px rgba(255,208,138,.6))}
@@ -642,6 +656,23 @@ function playerStrip(){
   return '<button class="player" data-go="me" aria-label="Open stats"><span class="pl-l"><span class="eyebrow">Fortnite · '+esc(season)+'</span><b>'+esc((c && c.name) || st.epic)+'</b></span>'+
     (c ? '<span class="pl-r">'+wins+'<span class="lvl"><small>LVL</small>'+esc(String(c.bp))+'</span></span>' : '')+'</button>';
 }
+function todayMinis(){
+  var c = spriteCounts(), all = c.all, nw = all.filter(isNewSprite).length;
+  var shop = '<button class="mini" data-go="shop"><span class="k">New shop in</span><b data-reset>'+dur(nextShopReset()-Date.now())+'</b><span class="s">Resets at '+new Date(nextShopReset()).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'})+'</span></button>';
+  var spr = all.length ? '<button class="mini" data-go="sprites"><span class="k">Sprites</span><b>'+c.got+'<small> / '+all.length+'</small></b><span class="bar"><i style="width:'+c.pct.toFixed(1)+'%"></i></span><span class="s">'+(nw ? nw+' new this week' : (c.left ? c.left+' still out there' : 'Every last one.'))+'</span></button>' : '';
+  return '<div class="grid2">'+shop+spr+'</div>';
+}
+function costumeCard(){
+  var es = ((S.shop && S.shop.entries) || []).filter(function(e){ return e.typeVal==='outfit' && e.img; });
+  if(!es.length) return '';
+  var day = (S.shop.date || new Date().toISOString()).slice(0,10), h = 0;
+  for(var i=0;i<day.length;i++) h = (h*31 + day.charCodeAt(i)) >>> 0;
+  var e = es[h % es.length];
+  var bg = e.c1 && e.c3 ? 'background:linear-gradient(180deg,'+e.c3+' 0%,'+e.c1+' 100%)' : '';
+  return '<div class="list" style="gap:12px"><h2 class="rule">Costume inspo</h2>'+
+    '<button class="costume" data-entry="'+esc(e.key)+'"><span class="art" style="'+bg+'">'+imgTag(e.img, e.name)+'</span>'+
+    '<span class="tx"><span class="k">Costume of the day</span><b>'+esc(e.name)+'</b><span class="s">In today\'s shop · '+fmtNum(e.price)+' V-Bucks</span><span class="s">A new pick every day.</span></span></button></div>';
+}
 function renderToday(){
   var st = S.settings || {}, sk = st.skin;
   var hero = sk && sk.img
@@ -673,7 +704,7 @@ function renderToday(){
       '<i class="gl g1">'+ICON.star+'</i><i class="gl g2">'+ICON.star+'</i><i class="gl g3">'+ICON.star+'</i><i class="gl g4">'+ICON.star+'</i>'+
       (st.note ? '<span class="twinkle">'+ICON.sparkle+'</span>' : '')+'</span><h1>Today</h1></div>'+
     '<button class="iconbtn" id="refreshAll" aria-label="Refresh">'+ICON.refresh+'</button></div>'+
-    playerStrip() + hero + phCard() +
+    playerStrip() + hero + phCard() + todayMinis() + costumeCard() +
     (evHtml ? '<div class="list" style="gap:12px"><h2 class="rule">Coming up</h2>'+evHtml+'</div>' : '')+
     (newsHtml ? '<div class="list" style="gap:12px"><h2 class="rule">In the game now</h2>'+newsHtml+'</div>' : '')+
     '<div class="list" style="gap:12px"><div class="between" style="align-items:center"><h2 class="rule" style="flex:1">Wishlist in the shop</h2><button class="chip" data-go="shop" style="height:32px">See shop</button></div>'+wishHtml+'</div>'+
@@ -1341,6 +1372,7 @@ setInterval(function(){
     el.textContent = (el.dataset.long && ms >= 86400000) ? dur(ms) : hms(ms);
   });
   var r = $('#shopReset'); if(r) r.textContent = dur(nextShopReset()-Date.now());
+  $$('[data-reset]').forEach(function(x){ x.textContent = dur(nextShopReset()-Date.now()); });
   if(S.shop && S.shop.date && S.shop.date.slice(0,10) !== new Date().toISOString().slice(0,10) && !S.loading.shop && !S.err.shop) fetchShop(true);
 }, 1000);
 
