@@ -106,11 +106,11 @@ a{color:var(--accent)}
 
 /* the go-to skin, framed in a moonlit window */
 .hero{position:relative;height:330px;width:100%;padding:0;border-radius:200px 200px 16px 16px;overflow:hidden;border:1.5px solid rgba(185,140,255,.55);
-  background:radial-gradient(90% 70% at 50% 100%, rgba(94,53,145,.85), rgba(20,13,34,.96) 70%);
+  background:linear-gradient(180deg, rgba(10,6,18,.18), rgba(10,6,18,.34)), url(img/haunted-bg.jpg) center top/cover no-repeat, #140D22;
   box-shadow:0 0 0 6px rgba(185,140,255,.06), 0 0 44px rgba(185,140,255,.22), inset 0 0 50px rgba(0,0,0,.6);
   display:flex;align-items:flex-end;justify-content:center;color:var(--text)}
 .hero .sky{position:absolute;inset:0;z-index:0}
-.hero .moon{position:absolute;z-index:0;left:50%;top:32px;transform:translateX(-50%);width:178px;height:178px;border-radius:50%;background:radial-gradient(circle at 40% 38%, #F8F5FF, #D6CCF4 58%, #A897DA);box-shadow:0 0 70px 12px rgba(236,230,255,.22)}
+.hero .moon{position:absolute;z-index:0;left:50%;top:30px;transform:translateX(-50%);width:140px;height:140px;border-radius:50%;background:radial-gradient(circle at 40% 38%, #F8F5FF, #D6CCF4 58%, #A897DA);box-shadow:0 0 90px 26px rgba(236,230,255,.28)}
 .hero .moon::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#160E29;opacity:0;animation:heroMoonShade var(--cloud-time,27s) linear var(--cloud-phase,0s) infinite}
 .hero .moon::before{content:"";position:absolute;inset:0;border-radius:inherit;background:#F4F0FF;box-shadow:0 0 75px 20px rgba(217,194,255,.4);opacity:0}
 .hero .cloud{position:absolute;left:calc(50% - 180px);top:67px;width:300px;height:90px;opacity:0;
