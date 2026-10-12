@@ -116,7 +116,7 @@ a{color:var(--accent)}
 .hero .cloud{position:absolute;left:calc(50% - 180px);top:67px;width:300px;height:90px;opacity:0;
   background:radial-gradient(ellipse at 32% 56%,rgba(207,198,236,.30),transparent 65%),radial-gradient(ellipse at 68% 42%,rgba(150,120,200,.32),transparent 62%);
   animation:heroCloud var(--cloud-time,27s) linear var(--cloud-phase,0s) infinite}
-.hero .bat{position:absolute;left:calc(50% - 64px);top:88px;width:30px;height:16px;fill:#0A0612;opacity:0;--scatter-x:-130px;--scatter-y:-48px;--scatter-r:-14deg}
+.hero .bat{position:absolute;left:calc(50% - 64px);top:88px;width:34px;height:18px;fill:#0A0612;filter:drop-shadow(0 0 1.5px rgba(217,194,255,.95)) drop-shadow(0 0 6px rgba(185,140,255,.55));opacity:0;--scatter-x:-130px;--scatter-y:-48px;--scatter-r:-14deg}
 .hero .bat + .bat{left:calc(50% + 54px);top:71px;width:15px;height:8px;--scatter-x:140px;--scatter-y:-34px;--scatter-r:18deg}
 .hero.bats-passing .bat{animation:heroBatPass 4.6s linear both}
 .hero.bats-passing .bat + .bat{animation-duration:4.2s;animation-delay:.4s}
@@ -145,7 +145,7 @@ a{color:var(--accent)}
 @keyframes heroFog{from{transform:translateX(-9%)}to{transform:translateX(9%)}}
 @keyframes heroCloud{0%,62%{opacity:0;transform:translateX(-110px)}68%{opacity:.7}76%{opacity:.85}86%,100%{opacity:0;transform:translateX(235px)}}
 @keyframes heroMoonShade{0%,65%,87%,100%{opacity:0}72%{opacity:.3}77%{opacity:.42}82%{opacity:.2}}
-@keyframes heroBatPass{0%{opacity:0;transform:translate(-120px,16px) rotate(-6deg)}12%,78%{opacity:.95}100%{opacity:0;transform:translate(245px,-22px) rotate(5deg)}}
+@keyframes heroBatPass{0%{opacity:0;transform:translate(-120px,70px) rotate(-10deg)}12%,78%{opacity:1}100%{opacity:0;transform:translate(245px,-60px) rotate(8deg)}}
 @keyframes heroEmber{0%,12%{opacity:0;transform:translate(0,0)}28%{opacity:.95}70%{opacity:.6}100%{opacity:0;transform:translate(var(--ember-x),-150px)}}
 @keyframes heroCandle{0%,100%{opacity:.42}27%{opacity:.56}46%{opacity:.45}71%{opacity:.62}86%{opacity:.48}}
 @keyframes heroLightning{0%{opacity:0}12%{opacity:.6}35%{opacity:.12}49%{opacity:.28}100%{opacity:0}}
@@ -973,7 +973,7 @@ function heroAtmosphere(){
     '<span class="candle" aria-hidden="true"></span><span class="lightning" aria-hidden="true"></span>';
 }
 function bindHeroScene(el){
-  var batsTimer = null, active = false, pointer = null, sx = 0, sy = 0, moved = false;
+  var batsTimer = null, batsFirst = true, active = false, pointer = null, sx = 0, sy = 0, moved = false;
   var empty = el.classList.contains('empty');
   el.style.setProperty('--cloud-time', (23+Math.random()*6).toFixed(2)+'s');
   el.style.setProperty('--cloud-phase', (-Math.random()*23).toFixed(2)+'s');
@@ -983,7 +983,8 @@ function bindHeroScene(el){
     batsTimer = setTimeout(function(){
       batsTimer = null;
       if(active && el.isConnected) el.classList.add('bats-passing');
-    }, 18000+Math.random()*17000);
+    }, batsFirst ? 5000+Math.random()*4000 : 18000+Math.random()*17000);
+    batsFirst = false;
   }
   function sync(){
     var next = !document.hidden && !heroMotion.matches;
