@@ -109,15 +109,51 @@ a{color:var(--accent)}
   background:radial-gradient(90% 70% at 50% 100%, rgba(94,53,145,.85), rgba(20,13,34,.96) 70%);
   box-shadow:0 0 0 6px rgba(185,140,255,.06), 0 0 44px rgba(185,140,255,.22), inset 0 0 50px rgba(0,0,0,.6);
   display:flex;align-items:flex-end;justify-content:center;color:var(--text)}
+.hero .sky{position:absolute;inset:0;z-index:0}
 .hero .moon{position:absolute;z-index:0;left:50%;top:32px;transform:translateX(-50%);width:178px;height:178px;border-radius:50%;background:radial-gradient(circle at 40% 38%, #F8F5FF, #D6CCF4 58%, #A897DA);box-shadow:0 0 70px 12px rgba(236,230,255,.22)}
+.hero .moon::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#160E29;opacity:0;animation:heroMoonShade var(--cloud-time,27s) linear var(--cloud-phase,0s) infinite}
+.hero .moon::before{content:"";position:absolute;inset:0;border-radius:inherit;background:#F4F0FF;box-shadow:0 0 75px 20px rgba(217,194,255,.4);opacity:0}
+.hero .cloud{position:absolute;left:calc(50% - 180px);top:67px;width:260px;height:72px;opacity:0;
+  background:radial-gradient(ellipse at 32% 56%,rgba(20,13,34,.42),transparent 65%),radial-gradient(ellipse at 68% 42%,rgba(50,34,73,.36),transparent 62%);
+  animation:heroCloud var(--cloud-time,27s) linear var(--cloud-phase,0s) infinite}
+.hero .bat{position:absolute;left:calc(50% - 64px);top:88px;width:19px;height:10px;fill:#0A0612;opacity:0;--scatter-x:-130px;--scatter-y:-48px;--scatter-r:-14deg}
+.hero .bat + .bat{left:calc(50% + 54px);top:71px;width:15px;height:8px;--scatter-x:140px;--scatter-y:-34px;--scatter-r:18deg}
+.hero.bats-passing .bat{animation:heroBatPass 4.6s linear both}
+.hero.bats-passing .bat + .bat{animation-duration:4.2s;animation-delay:.4s}
 .hero img{position:relative;z-index:1;height:100%;width:auto;max-width:100%;object-fit:contain;object-position:bottom}
-.hero .mist{position:absolute;z-index:2;left:0;right:0;bottom:0;height:96px;background:linear-gradient(transparent, rgba(185,140,255,.16) 55%, rgba(10,6,18,.75))}
-.hero.empty{flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:36px;gap:8px;font-size:15px;color:var(--soft)}
+.hero .mist{position:absolute;z-index:2;left:0;right:0;bottom:0;height:96px;background:linear-gradient(transparent,rgba(185,140,255,.07) 60%,rgba(10,6,18,.6))}
+.hero .mist::before,.hero .mist::after{content:"";position:absolute;left:-40%;width:180%;bottom:-14px;height:100px;opacity:.7;
+  background:radial-gradient(ellipse at 28% 70%,rgba(207,198,236,.22),transparent 58%),radial-gradient(ellipse at 72% 60%,rgba(185,140,255,.15),transparent 56%);
+  animation:heroFog 23s ease-in-out -9s infinite alternate}
+.hero .mist::after{bottom:-24px;height:82px;opacity:.5;animation-duration:31s;animation-delay:-21s;animation-direction:alternate-reverse}
+.hero .embers{position:absolute;inset:0;z-index:2}
+.hero .ember{position:absolute;bottom:9px;left:18%;width:2px;height:2px;border-radius:50%;background:#FFB15C;box-shadow:0 0 5px rgba(255,122,46,.5);opacity:0;--ember-x:13px;animation:heroEmber 14s ease-in-out -3s infinite}
+.hero .ember:nth-child(2){left:37%;width:1px;height:1px;--ember-x:-17px;animation-duration:19s;animation-delay:-12s}
+.hero .ember:nth-child(3){left:68%;--ember-x:20px;animation-duration:17s;animation-delay:-8s}
+.hero .ember:nth-child(4){left:84%;width:1px;height:1px;--ember-x:-11px;animation-duration:12s;animation-delay:-6s}
+.hero .candle{position:absolute;z-index:2;left:8%;right:8%;bottom:-10px;height:56px;background:radial-gradient(ellipse at 50% 100%,rgba(255,122,46,.5),transparent 70%);opacity:.24;animation:heroCandle 4.7s ease-in-out infinite}
+.hero .lightning{position:absolute;inset:0;z-index:3;opacity:0;background:radial-gradient(ellipse at 50% 28%,rgba(244,240,255,.8),rgba(217,194,255,.25) 55%,transparent 85%)}
+.hero .sky,.hero .mist,.hero .embers,.hero .candle,.hero .lightning,.hero img{pointer-events:none}
+.hero.storm .lightning{animation:heroLightning .8s ease-out both}
+.hero.storm .moon::before{animation:heroLightning .8s ease-out both}
+.hero.storm .bat{animation:heroBatScatter .8s ease-out both}
+.hero.scene-paused *,.hero.scene-paused *::before,.hero.scene-paused *::after{animation-play-state:paused!important}
+@keyframes heroFog{from{transform:translateX(-9%)}to{transform:translateX(9%)}}
+@keyframes heroCloud{0%,62%{opacity:0;transform:translateX(-110px)}68%{opacity:.7}76%{opacity:.85}86%,100%{opacity:0;transform:translateX(235px)}}
+@keyframes heroMoonShade{0%,65%,87%,100%{opacity:0}72%{opacity:.16}77%{opacity:.24}82%{opacity:.1}}
+@keyframes heroBatPass{0%{opacity:0;transform:translate(-120px,16px) rotate(-6deg)}12%,78%{opacity:.8}100%{opacity:0;transform:translate(245px,-22px) rotate(5deg)}}
+@keyframes heroEmber{0%,12%{opacity:0;transform:translate(0,0)}28%{opacity:.55}70%{opacity:.3}100%{opacity:0;transform:translate(var(--ember-x),-82px)}}
+@keyframes heroCandle{0%,100%{opacity:.2}27%{opacity:.28}46%{opacity:.22}71%{opacity:.31}86%{opacity:.24}}
+@keyframes heroLightning{0%{opacity:0}12%{opacity:.42}35%{opacity:.08}49%{opacity:.18}100%{opacity:0}}
+@keyframes heroBatScatter{0%{opacity:0;transform:translate(0,0)}12%,40%{opacity:.85}100%{opacity:0;transform:translate(var(--scatter-x),var(--scatter-y)) rotate(var(--scatter-r))}}
+.hero.empty{border-radius:200px 200px 16px 16px;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:36px;gap:8px;font-size:15px;color:var(--soft)}
 .hero.empty .moon{opacity:.85}
-.hero.empty span{position:relative;z-index:3}
-.hero-cap{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:-8px;padding:0 4px}
-.hero-cap b{font-family:var(--head);font-size:19px;letter-spacing:.02em}
+.hero.empty .hero-prompt{position:relative;z-index:4;pointer-events:none}
+.hero-cap{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:-8px;padding:0 4px}
+.hero-cap > div{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;min-width:0}
+.hero-cap b{font-family:var(--head);font-size:19px;letter-spacing:.02em;overflow-wrap:anywhere}
 .hero-cap span{font-size:13px;color:var(--muted)}
+.hero-change{flex-shrink:0;min-height:44px;padding:6px 10px;border:1px solid var(--line2);border-radius:10px;background:transparent;color:var(--soft);font-size:13px}
 
 /* power hour */
 .ph{border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:6px;
@@ -301,6 +337,7 @@ textarea.input{height:120px;padding:12px 14px;resize:vertical;line-height:1.4}
 
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero .cloud,.hero .bat,.hero .ember,.hero .lightning,.hero .moon::before,.hero .moon::after{opacity:0!important}
 }
 </style>
 </head>
@@ -568,9 +605,9 @@ function phCard(){
 function renderToday(){
   var st = S.settings || {}, sk = st.skin;
   var hero = sk && sk.img
-    ? '<div class="list" style="gap:14px"><button class="hero" id="heroBtn" aria-label="Change go-to skin"><span class="moon"></span>'+imgTag(sk.img, sk.name)+'<span class="mist"></span></button>'+
-      '<div class="hero-cap"><b>'+esc(sk.name)+'</b><span>go-to look</span></div></div>'
-    : '<button class="hero empty" id="heroBtn"><span class="moon"></span><span class="mist"></span><span>Tap to pick your go-to skin</span></button>';
+    ? '<div class="list" style="gap:14px"><button class="hero" id="heroBtn" aria-label="Awaken lightning around '+esc(sk.name)+'">'+heroAtmosphere()+imgTag(sk.img, sk.name)+'</button>'+
+      '<div class="hero-cap"><div><b>'+esc(sk.name)+'</b><span>go-to look</span></div><button class="hero-change" id="changeSkin" aria-label="Change go-to skin">Change</button></div></div>'
+    : '<button class="hero empty" id="heroBtn" aria-label="Pick your go-to skin">'+heroAtmosphere()+'<span class="hero-prompt">Tap to pick your go-to skin</span></button>';
 
   var hits = wishHits(), wishHtml;
   if(S.loading.shop && !S.shop) wishHtml = '<div class="grid2"><div class="skel" style="height:200px"></div><div class="skel" style="height:200px"></div></div>';
@@ -863,6 +900,7 @@ function renderMe(){
 var RENDER = {today:renderToday, shop:renderShop, sprites:renderSprites, me:renderMe};
 function render(){
   var y = window.scrollY;
+  if(heroScene){ heroScene.destroy(); heroScene=null; }
   $('#views').innerHTML = RENDER[S.tab]();
   $$('.tab').forEach(function(t){ if(t.dataset.tab===S.tab) t.setAttribute('aria-current','page'); else t.removeAttribute('aria-current'); });
   bindView();
@@ -908,7 +946,8 @@ function bindView(){
   $$('[data-win]').forEach(function(b){ b.onclick = function(){ S.statWin=b.dataset.win; render(); fetchStats(S.statWin); }; });
   $$('[data-news]').forEach(function(b){ b.onclick = function(){ openNews(+b.dataset.news); }; });
   var x;
-  if((x=$('#heroBtn'))) x.onclick = function(){ openSearch('skin'); };
+  if((x=$('#heroBtn'))) bindHeroScene(x);
+  if((x=$('#changeSkin'))) x.onclick = function(){ openSearch('skin'); };
   if((x=$('#findSkin'))) x.onclick = function(){ openSearch('wish'); };
   if((x=$('#openWish'))) x.onclick = openWishlist;
   if((x=$('#openSettings'))) x.onclick = openSettings;
@@ -919,6 +958,76 @@ function bindView(){
   };
   if((x=$('#hello'))) bindLongPress(x);
 }
+
+/* ---- a quiet storm inside the arch ---- */
+var heroScene = null, heroStormUntil = 0;
+var heroMotion = matchMedia('(prefers-reduced-motion: reduce)');
+function heroAtmosphere(){
+  var bat = '<svg class="bat" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M0 2Q8 4 15 10L17 5L20 8L23 5L25 10Q32 4 40 2L35 13Q30 9 27 16Q23 13 20 20Q17 13 13 16Q10 9 5 13Z"/></svg>';
+  return '<span class="sky" aria-hidden="true"><span class="moon"></span><span class="cloud"></span>'+bat+bat+'</span>'+
+    '<span class="mist" aria-hidden="true"></span><span class="embers" aria-hidden="true"><i class="ember"></i><i class="ember"></i><i class="ember"></i><i class="ember"></i></span>'+
+    '<span class="candle" aria-hidden="true"></span><span class="lightning" aria-hidden="true"></span>';
+}
+function bindHeroScene(el){
+  var batsTimer = null, active = false, pointer = null, sx = 0, sy = 0, moved = false;
+  var empty = el.classList.contains('empty');
+  el.style.setProperty('--cloud-time', (23+Math.random()*6).toFixed(2)+'s');
+  el.style.setProperty('--cloud-phase', (-Math.random()*23).toFixed(2)+'s');
+  function scheduleBats(){
+    clearTimeout(batsTimer);
+    if(!active || !el.isConnected) return;
+    batsTimer = setTimeout(function(){
+      batsTimer = null;
+      if(active && el.isConnected) el.classList.add('bats-passing');
+    }, 45000+Math.random()*40000);
+  }
+  function sync(){
+    var next = !document.hidden && !heroMotion.matches;
+    el.classList.toggle('scene-paused', !next);
+    if(!empty){
+      el.setAttribute('aria-label', (heroMotion.matches ? 'Moonlit skin window: ' : 'Awaken lightning around ')+S.settings.skin.name);
+      el.setAttribute('aria-disabled', String(heroMotion.matches));
+    }
+    if(next===active) return;
+    active = next;
+    if(active) scheduleBats();
+    else {
+      clearTimeout(batsTimer); batsTimer=null; pointer=null; moved=true;
+      el.classList.remove('storm','bats-passing');
+    }
+  }
+  // Pointer events observe only this button; the existing touch swipe keeps ownership of the gesture.
+  el.addEventListener('pointerdown', function(e){
+    if(!e.isPrimary || e.button!==0){ moved=true; return; }
+    pointer=e.pointerId; sx=e.clientX; sy=e.clientY; moved=false;
+  });
+  function movement(e){
+    if(e.pointerId===pointer && (Math.abs(e.clientX-sx)>10 || Math.abs(e.clientY-sy)>10)) moved=true;
+  }
+  el.addEventListener('pointermove', movement, {passive:true});
+  el.addEventListener('pointerup', function(e){ movement(e); if(e.pointerId===pointer) pointer=null; });
+  el.addEventListener('pointercancel', function(){ moved=true; pointer=null; });
+  el.addEventListener('pointerleave', function(){ if(pointer!==null) moved=true; });
+  el.onclick = function(e){
+    if((e.detail && moved) || !el.isConnected || document.hidden) return;
+    if(empty){ openSearch('skin'); return; }
+    if(!active || heroMotion.matches || performance.now()<heroStormUntil) return;
+    heroStormUntil=performance.now()+2400;
+    clearTimeout(batsTimer); batsTimer=null;
+    el.classList.remove('bats-passing');
+    el.classList.add('storm');
+  };
+  el.addEventListener('animationend', function(e){
+    if(e.target===$('.lightning', el) && e.animationName==='heroLightning'){
+      el.classList.remove('storm'); scheduleBats();
+    } else if(e.target===$('.bat', el) && e.animationName==='heroBatPass'){
+      el.classList.remove('bats-passing'); scheduleBats();
+    }
+  });
+  heroScene = {sync:sync, destroy:function(){ active=false; clearTimeout(batsTimer); }};
+  sync();
+}
+heroMotion.addEventListener('change', function(){ if(heroScene) heroScene.sync(); });
 
 /* ---- the hidden note ---- */
 function bindLongPress(el){
@@ -1174,6 +1283,7 @@ setInterval(function(){
 
 /* refresh when she comes back to the app */
 document.addEventListener('visibilitychange', function(){
+  if(heroScene) heroScene.sync();
   if(document.visibilityState !== 'visible') return;
   delete S.err.shop;
   fetchShop(); fetchNews();
