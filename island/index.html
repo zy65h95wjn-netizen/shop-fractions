@@ -658,7 +658,9 @@ function headline(){
   if(fm){ var m = days(fm.d); return m <= 0 ? {big:'Final night', sub:'of Fortnitemares'} : {n:m, unit:m===1 ? 'night' : 'nights', sub:'left of Fortnitemares'}; }
   var nx = ups[0];
   if(nx){ var k = days(nx.d); if(k <= 0) return {big:'Today', sub:nx.name}; if(k <= 30) return {n:k, unit:k===1 ? 'day' : 'days', sub:'till '+nx.name}; }
-  return {big:'Today'};
+  // nothing coming up: back to counting down to her favorite night
+  var hn = n > 0 ? n : days(new Date(t.getFullYear()+1, 9, 31));
+  return {n:hn, unit:hn===1 ? 'night' : 'nights', sub:'till Halloween'};
 }
 /* stars are seeded so they sit still when the screen re-renders */
 function skyHtml(){
