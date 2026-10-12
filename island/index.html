@@ -158,8 +158,11 @@ a{color:var(--accent)}
 .sp.got .box{background:var(--accent);border-color:var(--accent)}
 .sp .box svg{width:16px;height:16px;opacity:0;color:var(--ink)}
 .sp.got .box svg{opacity:1}
-.sp .ico{width:38px;height:38px;border-radius:11px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.sp .ico{position:relative;width:52px;height:52px;border-radius:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .sp .ico svg{width:22px;height:22px}
+.sp .ico img{position:absolute;inset:2px;width:calc(100% - 4px);height:calc(100% - 4px);object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
+.sp:not(.got) .ico img{opacity:.55;filter:grayscale(.55) drop-shadow(0 2px 4px rgba(0,0,0,.5))}
+.sp .ico img.ok + svg{display:none}
 .sp .txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .sp .txt b{font-size:15px;font-weight:600}
 .sp .txt span{font-size:12.5px;color:var(--muted)}
@@ -207,6 +210,7 @@ textarea.input{height:120px;padding:12px 14px;resize:vertical;line-height:1.4}
 .detail-art img{width:100%;height:100%;object-fit:cover;object-position:top}
 .kv{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
 .kv span:first-child{color:var(--muted)}
+.kvcard .kv:last-child{border-bottom:0}
 </style>
 </head>
 <body>
@@ -375,13 +379,18 @@ function fetchStats(win, force){
   var st = S.settings || {};
   if(!st.key || !st.epic) return Promise.resolve();
   var c = S.stats[win];
-  if(!force && c && c.user === st.epic && Date.now()-c.at < 15*60000) return Promise.resolve();
+  if(!force && c && c.v===2 && c.user === st.epic && Date.now()-c.at < 15*60000) return Promise.resolve();
   S.loading['stats'+win] = true; delete S.err['stats'+win];
   rerender(['me']);
   var url = API+'/v2/stats/br/v2?name='+encodeURIComponent(st.epic)+'&accountType=epic&timeWindow='+win+'&image=none';
   return getJSON(url, {headers:{'Authorization': st.key}}).then(function(b){
     var d = b.data || {}, o = (d.stats && d.stats.all && d.stats.all.overall) || null;
-    S.stats[win] = {at: Date.now(), user: st.epic, name: d.account && d.account.name, bp: d.battlePass && d.battlePass.level, o: o};
+    var all = (d.stats && d.stats.all) || {}, modes = {}, inputs = {};
+    ['solo','duo','trio','squad','ltm'].forEach(function(m){ if(all[m]) modes[m] = all[m]; });
+    ['keyboardMouse','gamepad','touch'].forEach(function(k){ var x = d.stats && d.stats[k] && d.stats[k].overall; if(x && x.matches) inputs[k] = x.matches; });
+    S.stats[win] = {v:2, at: Date.now(), user: st.epic, name: d.account && d.account.name,
+      bp: d.battlePass && d.battlePass.level, bpProg: d.battlePass && d.battlePass.progress,
+      o: o, modes: modes, inputs: inputs};
     save('stats', S.stats);
   }).catch(function(e){ S.err['stats'+win] = e; })
     .then(function(){ S.loading['stats'+win] = false; rerender(['me']); });
@@ -549,7 +558,8 @@ function renderShop(){
 }
 
 /* ================= render: sprites ================= */
-function spriteColor(s){ return s.group==='tot' ? 'var(--r-tot)' : (RARITY[s.rarity] || 'var(--r-none)'); }
+var GROUP_COLOR = {gold:'var(--r-mythic)', cheat:'var(--r-epic)', hacker:'#4FD18B', bounty:'#FF6B6B', tot:'var(--r-tot)'};
+function spriteColor(s){ return GROUP_COLOR[s.group] || RARITY[s.rarity] || 'var(--r-none)'; }
 function isNewSprite(s){ return s.added && (Date.now()-localDate(s.added).getTime()) < 7*86400000; }
 function renderSprites(){
   var d = S.spritesData;
@@ -573,7 +583,7 @@ function renderSprites(){
       var sub = [s.rarity ? '<span class="rare-dot" style="background:'+RARITY[s.rarity]+'"></span>'+RARITY_NAME[s.rarity] : '', esc(s.how||'')].filter(Boolean).join(' · ');
       return '<button class="sp'+(g?' got':'')+'" data-sprite="'+esc(s.id)+'" aria-pressed="'+g+'">'+
         '<span class="box">'+ICON.check+'</span>'+
-        '<span class="ico" style="background:color-mix(in srgb, '+col+' 16%, #15181B);color:'+col+'">'+ICON.sparkle+'</span>'+
+        '<span class="ico" style="background:color-mix(in srgb, '+col+' 18%, #15181B);color:'+col+'">'+(s.img ? '<img src="'+esc(s.img)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onload="this.classList.add(\'ok\')" onerror="this.remove()">' : '')+ICON.sparkle+'</span>'+
         '<span class="txt"><b>'+esc(s.name)+'</b>'+(sub?'<span>'+sub+'</span>':'')+'</span>'+
         (isNewSprite(s)?'<span class="new">NEW</span>':'')+'</button>';
     }).join('')+'</div>' : '<div class="empty">You\'ve got every one. Nice.</div>')+
@@ -581,6 +591,53 @@ function renderSprites(){
 }
 
 /* ================= render: me ================= */
+function pct1(x){ return x==null ? '—' : (Math.round(x*10)/10)+'%'; }
+function dec2(x){ return x==null ? '—' : (Math.round(x*100)/100).toFixed(2); }
+function hoursPlayed(min){ if(min==null) return '—'; var h=Math.round(min/60); return h<48 ? h+'h' : fmtNum(h)+'h'; }
+function statsBody(c, e){
+  var o = c.o;
+  var cell = function(l,v,acc){ return '<div class="stat"><span>'+l+'</span><b'+(acc?' style="color:var(--accent)"':'')+'>'+v+'</b></div>'; };
+  var mini = function(l,v){ return '<div class="stat" style="padding:12px 14px;gap:4px"><span style="font-size:12px">'+l+'</span><b style="font-size:21px">'+v+'</b></div>'; };
+  var line = function(l,v){ return '<div class="kv" style="padding:12px 0"><span>'+l+'</span><span style="font-weight:600">'+v+'</span></div>'; };
+  var h = '';
+  // level
+  if(c.bp!=null){
+    h += '<div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="between" style="align-items:center"><span style="font-size:15px;color:var(--soft)">Season level</span><span style="font-family:var(--head);font-weight:700;font-size:26px;color:var(--accent)">'+fmtNum(c.bp)+'</span></div>'+
+      (c.bpProg!=null ? '<div class="prog"><i style="width:'+Math.max(0,Math.min(100,c.bpProg))+'%"></i></div><span class="small muted">'+Math.round(c.bpProg)+'% to level '+fmtNum(c.bp+1)+'</span>' : '')+'</div>';
+  }
+  // headline
+  h += '<div class="grid2">'+cell('Wins', fmtNum(o.wins), true)+cell('Eliminations', fmtNum(o.kills))+cell('Matches', fmtNum(o.matches))+cell('Win rate', pct1(o.winRate))+'</div>';
+  // combat + finishes
+  h += '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">'+
+    mini('K/D', dec2(o.kd))+mini('Elims / match', dec2(o.killsPerMatch))+mini('Top 10s', fmtNum(o.top10))+'</div>';
+  // the rest
+  var rows = [];
+  if(o.minutesPlayed!=null) rows.push(line('Time played', hoursPlayed(o.minutesPlayed)));
+  if(o.playersOutlived!=null) rows.push(line('Players outlived', fmtNum(o.playersOutlived)));
+  if(o.top25!=null) rows.push(line('Top 25 finishes', fmtNum(o.top25)));
+  if(o.lastModified){ var lm = Date.parse(o.lastModified); if(!isNaN(lm)) rows.push(line('Last match', ago(lm))); }
+  var inp = c.inputs || {}, tot = 0, best = null;
+  Object.keys(inp).forEach(function(k){ tot += inp[k]; if(!best || inp[k] > inp[best]) best = k; });
+  if(best && tot){ rows.push(line('Plays mostly on', ({keyboardMouse:'Keyboard & mouse', gamepad:'Controller', touch:'Touch'})[best]+' · '+Math.round(inp[best]/tot*100)+'%')); }
+  if(rows.length) h += '<div class="card kvcard" style="padding:4px 16px">'+rows.join('')+'</div>';
+  // by mode
+  var names = {solo:'Solo', duo:'Duos', trio:'Trios', squad:'Squads', ltm:'Other modes'};
+  var ms = Object.keys(c.modes||{}).filter(function(k){ return c.modes[k] && c.modes[k].matches; });
+  if(ms.length){
+    h += '<div class="section-h" style="margin:6px 0 -8px">By mode</div><div class="list">'+ms.map(function(k){
+      var m = c.modes[k];
+      return '<div class="card" style="padding:14px 16px;display:flex;flex-direction:column;gap:8px">'+
+        '<div class="between"><b style="font-family:var(--head);font-size:17px">'+names[k]+'</b><span class="small muted">'+fmtNum(m.matches)+' matches</span></div>'+
+        '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:13px;color:var(--muted)">'+
+          '<span>Wins<br><b style="color:var(--text);font-size:17px">'+fmtNum(m.wins)+'</b></span>'+
+          '<span>Win rate<br><b style="color:var(--text);font-size:17px">'+pct1(m.winRate)+'</b></span>'+
+          '<span>K/D<br><b style="color:var(--text);font-size:17px">'+dec2(m.kd)+'</b></span></div></div>';
+    }).join('')+'</div>';
+  }
+  h += '<div class="small muted">Zero Build and Build are combined'+(e ? ' · offline, from '+ago(c.at) : ' · updated '+ago(c.at))+'</div>';
+  if(e) h += '<div class="empty" style="padding:14px">'+statsError(e)+'</div>';
+  return h;
+}
 function renderMe(){
   var st = S.settings || {}, sk = st.skin, win = S.statWin, c = S.stats[win], e = S.err['stats'+win], loading = S.loading['stats'+win];
   var head = '<div class="between" style="align-items:center"><div class="row" style="gap:14px;min-width:0">'+
@@ -594,13 +651,7 @@ function renderMe(){
   } else if(loading && !(c && c.user===st.epic)){
     body = '<div class="grid2">'+Array(5).join('<div class="skel" style="height:92px"></div>')+'</div>';
   } else if(c && c.user===st.epic && c.o){
-    var o = c.o;
-    var cell = function(l,v){ return '<div class="stat"><span>'+l+'</span><b>'+v+'</b></div>'; };
-    body = (c.bp!=null ? '<div class="card between" style="align-items:center"><span style="font-size:15px;color:var(--soft)">Season level</span><span style="font-family:var(--head);font-weight:700;font-size:26px;color:var(--accent)">'+fmtNum(c.bp)+'</span></div>' : '')+
-      '<div class="grid2">'+cell('Wins', fmtNum(o.wins))+cell('Eliminations', fmtNum(o.kills))+cell('Matches', fmtNum(o.matches))+cell('Win rate', o.winRate!=null ? (Math.round(o.winRate*10)/10)+'%' : '—')+'</div>'+
-      '<div class="card between" style="align-items:center"><span style="font-size:15px;color:var(--soft)">Top 10 finishes</span><span style="font-family:var(--head);font-weight:700;font-size:22px">'+fmtNum(o.top10)+'</span></div>'+
-      '<div class="small muted">All modes combined'+(e ? ' · offline, from '+ago(c.at) : ' · updated '+ago(c.at))+'</div>'+
-      (e ? '<div class="empty" style="padding:14px">'+statsError(e)+'</div>' : '');
+    body = statsBody(c, e);
   } else if(c && c.user===st.epic && !c.o){
     body = '<div class="empty">No matches '+(win==='season'?'this season':'on record')+' yet.</div>';
   } else if(e){
