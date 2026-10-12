@@ -187,6 +187,44 @@ a{color:var(--accent)}
 .ph .dot{width:9px;height:9px;border-radius:50%;background:var(--ember);box-shadow:0 0 0 0 rgba(255,122,46,.6);animation:pulse 1.6s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 10px rgba(255,122,46,0)}100%{box-shadow:0 0 0 0 rgba(255,122,46,0)}}
 
+/* this week's sprite drop: the set, glowing in its own color */
+.drop{position:relative;border-radius:20px;padding:18px 0 16px;overflow:hidden;isolation:isolate;--c:#B98CFF;
+  background:radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--c) 24%, transparent), transparent 60%),radial-gradient(90% 80% at 100% 100%, rgba(94,53,145,.38), transparent 70%),rgba(20,13,34,.84);
+  border:1px solid color-mix(in srgb, var(--c) 48%, transparent);box-shadow:0 0 34px color-mix(in srgb, var(--c) 20%, transparent), inset 0 1px 0 rgba(255,255,255,.05)}
+.drop::before{content:"";position:absolute;z-index:-1;inset:-40% -60%;pointer-events:none;
+  background:linear-gradient(105deg, transparent 42%, color-mix(in srgb, var(--c) 18%, transparent) 50%, transparent 58%);animation:dropSweep 10s ease-in-out infinite}
+@keyframes dropSweep{0%,50%{transform:translateX(-42%)}100%{transform:translateX(42%)}}
+.drop .hd{padding:0 18px;display:flex;flex-direction:column;gap:4px}
+.drop .lbl{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ember)}
+.drop .lbl .dot{width:8px;height:8px;border-radius:50%;background:var(--ember);animation:pulse 1.6s infinite}
+.drop .lbl svg{width:15px;height:11px}
+.drop h3{font-size:25px;line-height:1.1;color:var(--moon);text-shadow:0 0 18px color-mix(in srgb, var(--c) 75%, transparent)}
+.drop .meta{font-size:13px;color:var(--muted)}
+.drop .bonus{margin:10px 18px 0;padding:8px 12px;border-radius:12px;font-size:13.5px;line-height:1.35;color:var(--soft);background:color-mix(in srgb, var(--c) 10%, transparent);border:1px solid color-mix(in srgb, var(--c) 28%, transparent)}
+.drop .bonus b{color:var(--c);font-weight:700}
+.drop-row{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding:18px 18px 4px;scroll-padding:0 18px;scroll-snap-type:x proximity;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+.drop-row::-webkit-scrollbar{display:none}
+.drop-row .sp{flex:0 0 70px;scroll-snap-align:start;gap:6px}
+.drop-row .sp:last-child{margin-right:30px}
+.drop-row .sp .nm{font-size:12px}
+.drop-row .sp .pod{animation:bob 4.6s ease-in-out infinite;animation-delay:calc(var(--i) * -.41s)}
+.drop-row .sp .tick{width:22px;height:22px}
+.drop-row .sp .tick svg{width:13px;height:13px}
+.drop-row .sp.next .pod::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px solid var(--c);opacity:0;pointer-events:none;animation:seek 2.4s ease-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes seek{0%{transform:scale(.88);opacity:.85}100%{transform:scale(1.28);opacity:0}}
+.drop .dprog{padding:6px 18px 0;display:flex;flex-direction:column;gap:8px}
+.drop .dprog .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:13.5px;color:var(--soft)}
+.drop .dprog .row b{font-family:var(--head);font-size:19px;color:var(--moon)}
+.drop .bar{height:6px;border-radius:9px;background:rgba(255,255,255,.07);overflow:hidden}
+.drop .bar i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg, color-mix(in srgb, var(--c) 45%, #12081F), var(--c) 70%, #FFF3DC);box-shadow:0 0 10px var(--c);transition:width .7s cubic-bezier(.3,1.2,.5,1)}
+.drop .foot{margin:14px 18px 0;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;color:var(--muted);line-height:1.35}
+.drop .foot b{color:var(--soft);font-weight:600}
+.drop .see{flex-shrink:0;min-height:34px;padding:0 13px;border-radius:17px;border:1px solid color-mix(in srgb, var(--c) 55%, transparent);background:color-mix(in srgb, var(--c) 14%, transparent);color:var(--moon);font-size:13px;font-weight:600}
+.drop.done{border-color:rgba(244,201,93,.65);box-shadow:0 0 40px rgba(244,201,93,.22), inset 0 1px 0 rgba(255,255,255,.05)}
+.drop.done .lbl{color:var(--firefly)}
+.drop.done .bar i{background:linear-gradient(90deg,#B98A2E,#F4C95D 70%,#FFF6DA);box-shadow:0 0 12px rgba(244,201,93,.8)}
+
 /* news */
 .news{display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:2px 18px 6px;scroll-snap-type:x mandatory}
 .news::-webkit-scrollbar{display:none}
@@ -702,10 +740,84 @@ function playerStrip(){
   return '<button class="player" data-go="me" aria-label="Open stats"><span class="pl-l"><span class="eyebrow">Fortnite · '+esc(season)+'</span><b>'+esc((c && c.name) || st.epic)+'</b></span>'+
     (c ? '<span class="pl-r">'+wins+'<span class="lvl"><small>LVL</small>'+esc(String(c.bp))+'</span></span>' : '')+'</button>';
 }
+/* this week's drop: the newest set of sprites (variants land as whole sets, usually Thursdays) */
+function dropSet(){
+  var d = S.spritesData, dated = ((d && d.sprites) || []).filter(function(s){ return s.added; });
+  if(!dated.length) return null;
+  var last = dated.reduce(function(m, s){ return s.added > m ? s.added : m; }, ''), tally = {};
+  dated.forEach(function(s){ if(s.added === last) tally[s.group] = (tally[s.group]||0) + 1; });
+  var grp = Object.keys(tally).sort(function(a, b){ return tally[b]-tally[a]; })[0];
+  var D = localDate(last), from = D.getTime() - 6*86400000;
+  var g = (d.groups||[]).filter(function(x){ return x.id === grp; })[0] || {};
+  return {group:grp, g:g, date:D, sprites:dated.filter(function(s){ return s.group === grp && localDate(s.added).getTime() >= from; })};
+}
+function dropName(s, setName){
+  var n = String(s.name||'');
+  if(setName && n.toLowerCase().indexOf(setName.toLowerCase()+' ') === 0) n = n.slice(setName.length+1);
+  return shortName(n);
+}
+function nextDropLine(){
+  var t = new Date(); t.setHours(0,0,0,0);
+  var nx = upcomingEvents().filter(function(x){ return x.kind === 'sprites'; })[0];
+  if(nx){
+    var k = Math.round((nx.d - t)/86400000);
+    return 'Next drop · <b>'+esc(nx.name.replace(/\s+Sprites?$/i, ''))+'</b> · '+(k <= 0 ? 'today' : k === 1 ? 'tomorrow' : 'in '+k+' days');
+  }
+  return 'New sprites usually land on <b>Thursdays</b>';
+}
+function dropCard(){
+  var x = dropSet(); if(!x || !x.sprites.length) return '';
+  var t = new Date(); t.setHours(0,0,0,0);
+  var age = Math.round((t - x.date)/86400000), col = GROUP_COLOR[x.group] || '#B98CFF';
+  var title = x.group === 'season' ? 'New sprites' : (x.g.name || 'New sprites');
+  var n = x.sprites.length, got = x.sprites.filter(function(s){ return S.got[s.id]; }).length, done = got === n;
+  // the ones she still needs come first; the first of those gets a seeking pulse
+  var order = x.sprites.map(function(s, i){ return {s:s, i:i}; }).sort(function(a, b){ return ((S.got[a.s.id]?1:0) - (S.got[b.s.id]?1:0)) || (a.i - b.i); });
+  var marked = false;
+  var row = order.map(function(o, i){
+    var s = o.s, g = !!S.got[s.id], nx = !g && !marked; if(nx) marked = true;
+    return '<button class="sp'+(g?' got':'')+(nx?' next':'')+'" data-sprite="'+esc(s.id)+'" aria-pressed="'+g+'" aria-label="'+esc(s.name)+(g?', caught':'')+'" style="--c:'+spriteColor(s)+';--i:'+i+'">'+
+      '<span class="pod">'+spriteArt(s)+'<span class="tick">'+ICON.check+'</span></span><span class="nm">'+esc(dropName(s, x.g.name))+'</span></button>';
+  }).join('');
+  var crown = '<svg viewBox="0 0 16 12" aria-hidden="true"><path fill="currentColor" d="M1 3l3.5 3L8 0l3.5 6L15 3l-1.5 9h-11z"/></svg>';
+  var lbl = done ? crown+'Set complete' : age < 7 ? '<i class="dot"></i>New this week' : 'Latest drop';
+  var when = x.date.toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'});
+  return '<div class="drop'+(done?' done':'')+'" id="dropCard" data-title="'+esc(title)+'" style="--c:'+col+'">'+
+    '<div class="hd"><span class="lbl">'+lbl+'</span><h3>'+esc(title)+'</h3><span class="meta">'+n+' sprite'+(n===1?'':'s')+' · dropped '+esc(when)+'</span></div>'+
+    (x.g.bonus ? '<div class="bonus"><b>Set bonus</b> · '+esc(x.g.bonus)+'</div>' : '')+
+    '<div class="drop-row">'+row+'</div>'+
+    '<div class="dprog"><div class="row"><span><b id="dropGot">'+got+'</b> of '+n+' caught</span><span class="small muted" id="dropLeft">'+(done ? 'All of them' : (n-got)+' still to find')+'</span></div>'+
+      '<div class="bar"><i id="dropBar" style="width:'+(got/n*100).toFixed(1)+'%"></i></div></div>'+
+    '<div class="foot"><span>'+nextDropLine()+'</span><button class="see" data-dropgroup="'+esc(x.group)+'">See the set</button></div></div>';
+}
+function updateDropCard(){
+  var card = $('#dropCard'); if(!card) return;
+  var sps = $$('.drop-row .sp', card), got = sps.filter(function(b){ return b.classList.contains('got'); }).length, n = sps.length;
+  $('#dropGot').textContent = got;
+  $('#dropLeft').textContent = got === n ? 'All of them' : (n-got)+' still to find';
+  $('#dropBar').style.width = (got/n*100).toFixed(1)+'%';
+  sps.forEach(function(b){ b.classList.remove('next'); });
+  var miss = sps.filter(function(b){ return !b.classList.contains('got'); })[0]; if(miss) miss.classList.add('next');
+  var wasDone = card.classList.contains('done');
+  if(got === n && !wasDone){ celebrateSet(card); setTimeout(function(){ rerender(['today']); }, 2100); }
+  else if(got < n && wasDone) setTimeout(function(){ rerender(['today']); }, 500);
+}
+function celebrateSet(card){
+  var title = card.dataset.title || 'Set';
+  toast(title+' set complete!');
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var vw = window.innerWidth;
+  $$('.drop-row .pod', card).forEach(function(p, i){
+    var r = p.getBoundingClientRect(); if(r.right < 0 || r.left > vw) return;
+    setTimeout(function(){ sparkBurst(r.left + r.width/2, r.top + r.height/2, '#F4C95D'); }, 260 + i*70);
+  });
+  var cr = card.getBoundingClientRect();
+  setTimeout(function(){ magicCatch(cr.left + cr.width/2, cr.top + 40, '#F4C95D', title+' complete'); }, 700);
+}
 function todayMinis(){
   var c = spriteCounts(), all = c.all, nw = all.filter(isNewSprite).length;
   var shop = '<button class="mini" data-go="shop"><span class="k">New shop in</span><b data-reset>'+dur(nextShopReset()-Date.now())+'</b><span class="s">Resets at '+new Date(nextShopReset()).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'})+'</span></button>';
-  var spr = all.length ? '<button class="mini" data-go="sprites"><span class="k">Sprites</span><b>'+c.got+'<small> / '+all.length+'</small></b><span class="bar"><i style="width:'+c.pct.toFixed(1)+'%"></i></span><span class="s">'+(nw ? nw+' new this week' : (c.left ? c.left+' still out there' : 'Every last one.'))+'</span></button>' : '';
+  var spr = all.length ? '<button class="mini" data-go="sprites"><span class="k">Sprites</span><b>'+c.got+'<small> / '+all.length+'</small></b><span class="bar"><i style="width:'+c.pct.toFixed(1)+'%"></i></span><span class="s">'+(c.left ? c.left+' still out there' : 'Every last one.')+'</span></button>' : '';
   return '<div class="grid2">'+shop+spr+'</div>';
 }
 function costumeCard(){
@@ -752,7 +864,7 @@ function renderToday(){
       (st.note ? '<span class="twinkle">'+ICON.sparkle+'</span>' : '')+'</span>'+
       '<h1>'+(hl.n!=null ? '<span class="n">'+hl.n+'</span> '+hl.unit : esc(hl.big))+'</h1>'+(hl.sub ? '<span class="sub">'+esc(hl.sub)+'</span>' : '')+'</div>'+
     '<button class="iconbtn" id="refreshAll" aria-label="Refresh">'+ICON.refresh+'</button></div>'+
-    playerStrip() + hero + phCard() + todayMinis() + costumeCard() +
+    playerStrip() + hero + (powerHourState().mode === 'none' ? '' : phCard()) + dropCard() + todayMinis() + costumeCard() +
     (evHtml ? '<div class="list" style="gap:12px"><h2 class="rule">Coming up</h2>'+evHtml+'</div>' : '')+
     (newsHtml ? '<div class="list" style="gap:12px"><h2 class="rule">In the game now</h2>'+newsHtml+'</div>' : '')+
     '<div class="list" style="gap:12px"><div class="between" style="align-items:center"><h2 class="rule" style="flex:1">Wishlist in the shop</h2><button class="chip" data-go="shop" style="height:32px">See shop</button></div>'+wishHtml+'</div>'+
@@ -909,11 +1021,12 @@ function toggleSprite(b){
     magicCatch(r.left + r.width/2, r.top + r.height/2, b.style.getPropertyValue('--c') || '#B98CFF', nmEl ? nmEl.textContent : '');
   }
   updateSpriteCount();
+  if(b.closest('.drop-row')) updateDropCard();
   if((S.spriteGroup==='todo' && g) || (S.spriteGroup==='got' && !g)) setTimeout(function(){ if(S.tab==='sprites') rerender(['sprites']); }, 600);
 }
 /* tap = catch, press and hold = sprite card */
-function bindSpriteGrid(){
-  var grid = $('.sgrid'); if(!grid) return;
+function bindSpriteGrid(grid){
+  grid = grid || $('.sgrid'); if(!grid) return;
   var timer = null, held = false, sx = 0, sy = 0, cur = null;
   function clear(){ clearTimeout(timer); timer = null; if(cur) cur.classList.remove('holding'); }
   grid.addEventListener('touchstart', function(e){
@@ -1084,6 +1197,8 @@ function bindView(){
   $$('[data-sgroup]').forEach(function(b){ b.onclick = function(){ S.spriteGroup=b.dataset.sgroup; render(); }; });
   var jb = $('#jarBtn'); if(jb) jb.onclick = function(){ S.spriteGroup = S.spriteGroup==='got' ? 'all' : 'got'; render(); };
   bindSpriteGrid();
+  var dr = $('.drop-row'); if(dr) bindSpriteGrid(dr);
+  $$('[data-dropgroup]').forEach(function(b){ b.onclick = function(){ S.spriteGroup = b.dataset.dropgroup; go('sprites'); }; });
   $$('[data-win]').forEach(function(b){ b.onclick = function(){ S.statWin=b.dataset.win; render(); fetchStats(S.statWin); }; });
   $$('[data-news]').forEach(function(b){ b.onclick = function(){ openNews(+b.dataset.news); }; });
   var x;
@@ -1439,7 +1554,7 @@ document.addEventListener('visibilitychange', function(){
   area.addEventListener('touchstart', function(e){
     if(e.touches.length!==1 || !$('#sheet').classList.contains('hidden') || $('.reveal')) { track=false; return; }
     // let carousels and chip rows scroll sideways on their own
-    if(e.target.closest('.chips, .news, input, textarea')) { track=false; return; }
+    if(e.target.closest('.chips, .news, .drop-row, input, textarea')) { track=false; return; }
     var p=e.touches[0]; sx=p.clientX; sy=p.clientY; st=Date.now(); track=true; decided=false; horiz=false; v=$('#views .view');
   }, {passive:true});
   area.addEventListener('touchmove', function(e){
