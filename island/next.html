@@ -172,6 +172,9 @@ a{color:var(--accent)}
 .btn{height:46px;padding:0 18px;border-radius:14px;border:0;background:linear-gradient(180deg,#CBA6FF,#9F6BF0);color:var(--ink);font-weight:700;font-size:15px;box-shadow:0 0 20px rgba(185,140,255,.3)}
 .btn.ghost{background:rgba(20,13,34,.8);color:var(--text);border:1px solid var(--line2);box-shadow:none}
 .btn.block{width:100%}
+a.btn{display:flex;align-items:center;justify-content:center;text-decoration:none}
+.buy-note{margin:8px 4px 14px;font-size:13.5px;line-height:1.4;color:var(--muted);text-align:center}
+.buy-note b{color:var(--soft);font-weight:600}
 .iconbtn{width:44px;height:44px;border-radius:14px;border:1px solid var(--line2);background:rgba(20,13,34,.8);display:inline-flex;align-items:center;justify-content:center;color:var(--soft);flex-shrink:0}
 .iconbtn svg{width:20px;height:20px}
 .skel{background:linear-gradient(90deg,#140D22 0%,#21173A 50%,#140D22 100%);background-size:200% 100%;animation:shimmer 1.2s infinite;border-radius:16px}
@@ -999,7 +1002,9 @@ function openEntry(key){
     }).join('')+'</div>' : '')+
     '<div style="height:18px"></div>'+
     '<button class="btn block" id="entryWish">'+(entryWished(e)?'On your wishlist ✓':'Add to wishlist')+'</button>'+
-    '<div style="height:10px"></div><button class="btn ghost block" data-close>Close</button>';
+    '<div style="height:10px"></div><a class="btn ghost block buy" href="https://www.fortnite.com/item-shop" target="_blank" rel="noopener">Buy on fortnite.com</a>'+
+    '<p class="buy-note">Opens Epic\'s web shop. '+(e.section && e.section!=='Item Shop' ? 'It should be under <b>'+esc(e.section)+'</b>. Tap it there, then sign in to buy.' : 'Find it in today\'s shop, tap it, then sign in to buy.')+'</p>'+
+    '<button class="btn ghost block" data-close>Close</button>';
   openSheet(html);
   $('#entryWish').onclick = function(){
     if(entryWished(e)){ e.items.forEach(function(i){ S.wishlist = S.wishlist.filter(function(w){ return w.id!==i.id; }); }); save('wishlist', S.wishlist); toast('Removed from wishlist'); }
