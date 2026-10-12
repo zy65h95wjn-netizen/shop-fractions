@@ -1,0 +1,408 @@
+{
+ "updated": "2026-10-12",
+ "season": "Chapter 7 Season 4",
+ "groups": [
+  {
+   "id": "season",
+   "name": "Season"
+  },
+  {
+   "id": "tot",
+   "name": "Trick or Treat"
+  }
+ ],
+ "sprites": [
+  {
+   "id": "jonesy",
+   "name": "Jonesy Sprite",
+   "group": "season",
+   "rarity": "rare",
+   "how": "In your inventory at match start",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "bush",
+   "name": "Bush Sprite",
+   "group": "season",
+   "rarity": "rare",
+   "how": "In your inventory at match start",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "adventure",
+   "name": "Adventure Sprite",
+   "group": "season",
+   "rarity": "rare",
+   "how": "In your inventory at match start",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "eightbit",
+   "name": "8-Bit Sprite",
+   "group": "season",
+   "rarity": "rare",
+   "how": "Blue cheat code panels",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "birthday",
+   "name": "Birthday Sprite",
+   "group": "season",
+   "rarity": "rare",
+   "how": "Cheat code FM1 at the Admin Panel",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "stormscout",
+   "name": "Storm Scout Sprite",
+   "group": "season",
+   "rarity": "rare",
+   "how": "Blue cheat codes (purple for rarer)",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "overshield",
+   "name": "Overshield Sprite",
+   "group": "season",
+   "rarity": "rare",
+   "how": "Chests or cheat code chests",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "onigiri",
+   "name": "Onigiri Sprite",
+   "group": "season",
+   "rarity": "rare",
+   "how": "Blue cheat code chests",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "megaman",
+   "name": "Mega Man Sprite",
+   "group": "season",
+   "rarity": "rare",
+   "how": "Blue cheat code chests",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "pond",
+   "name": "Pond Sprite",
+   "group": "season",
+   "rarity": "epic",
+   "how": "Epic cheat code chests",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "morgana",
+   "name": "Morgana Sprite",
+   "group": "season",
+   "rarity": "epic",
+   "how": "",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "sonic",
+   "name": "Sonic Sprite",
+   "group": "season",
+   "rarity": "epic",
+   "how": "Cheat code panels",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "tails",
+   "name": "Tails Sprite",
+   "group": "season",
+   "rarity": "epic",
+   "how": "Cheat code panels",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "shadow",
+   "name": "Shadow Sprite",
+   "group": "season",
+   "rarity": "epic",
+   "how": "Cheat code panels",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "killswitch",
+   "name": "Killswitch Sprite",
+   "group": "season",
+   "rarity": "epic",
+   "how": "Cheat code panels at night",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "blinky",
+   "name": "Blinky Sprite",
+   "group": "season",
+   "rarity": "legendary",
+   "how": "Beat the floating Pac-Man boss",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "crash",
+   "name": "Crash Bandicoot Sprite",
+   "group": "season",
+   "rarity": "legendary",
+   "how": "Beat Adam Smasher",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "xray",
+   "name": "X-Ray Sprite",
+   "group": "season",
+   "rarity": "legendary",
+   "how": "Purple or gold cheat codes",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "jackrabbit",
+   "name": "Jackrabbit Sprite",
+   "group": "season",
+   "rarity": "legendary",
+   "how": "Beat Hush",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "klombo",
+   "name": "Klombo Sprite",
+   "group": "season",
+   "rarity": "mythic",
+   "how": "",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "crown",
+   "name": "Crown Sprite",
+   "group": "season",
+   "rarity": "mythic",
+   "how": "",
+   "added": "2026-08-20"
+  },
+  {
+   "id": "spookydash",
+   "name": "Spooky Dash Sprite",
+   "group": "season",
+   "rarity": "mythic",
+   "how": "Pumpkin chests, chests, cheat codes",
+   "added": "2026-10-01"
+  },
+  {
+   "id": "vampire",
+   "name": "Vampire Sprite",
+   "group": "season",
+   "rarity": null,
+   "how": "",
+   "added": "2026-10-01"
+  },
+  {
+   "id": "deer",
+   "name": "The Deer Sprite",
+   "group": "season",
+   "rarity": null,
+   "how": "",
+   "added": "2026-10-01"
+  },
+  {
+   "id": "dumpsterdive",
+   "name": "Dumpster Dive Sprite",
+   "group": "season",
+   "rarity": null,
+   "how": "",
+   "added": "2026-10-01"
+  },
+  {
+   "id": "tot-crown",
+   "name": "Trick or Treat Crown Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-06"
+  },
+  {
+   "id": "tot-jonesy",
+   "name": "Trick or Treat Jonesy Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-adventure",
+   "name": "Trick or Treat Adventure Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-bushranger",
+   "name": "Trick or Treat Bushranger Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-eightbit",
+   "name": "Trick or Treat 8-Bit Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-birthday",
+   "name": "Trick or Treat Birthday Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-stormscout",
+   "name": "Trick or Treat Storm Scout Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-overshield",
+   "name": "Trick or Treat Overshield Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-onigiri",
+   "name": "Trick or Treat Onigiri Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-pond",
+   "name": "Trick or Treat Pond Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-morgana",
+   "name": "Trick or Treat Morgana Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-sonic",
+   "name": "Trick or Treat Sonic Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-tails",
+   "name": "Trick or Treat Tails Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-shadow",
+   "name": "Trick or Treat Shadow Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-killswitch",
+   "name": "Trick or Treat Killswitch Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-blinky",
+   "name": "Trick or Treat Blinky Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-crash",
+   "name": "Trick or Treat Crash Bandicoot Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-xray",
+   "name": "Trick or Treat X-Ray Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-jackrabbit",
+   "name": "Trick or Treat Jackrabbit Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-klombo",
+   "name": "Trick or Treat Klombo Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-spookydash",
+   "name": "Trick or Treat Spooky Dash Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-vampire",
+   "name": "Trick or Treat Vampire Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-deer",
+   "name": "Trick or Treat The Deer Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  },
+  {
+   "id": "tot-dumpsterdive",
+   "name": "Trick or Treat Dumpster Dive Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests and cheat codes",
+   "added": "2026-10-08"
+  }
+ ]
+}
