@@ -88,9 +88,11 @@ a{color:var(--accent)}
 .hello .twinkle{display:inline-flex;color:var(--firefly);opacity:.7;animation:twinkle 6s ease-in-out infinite;transition:transform .7s ease-out;filter:drop-shadow(0 0 5px rgba(255,208,138,.7))}
 .hello .twinkle svg{width:16px;height:16px}
 @keyframes twinkle{0%,82%,100%{opacity:.55;transform:scale(.85) rotate(0)}88%{opacity:1;transform:scale(1.35) rotate(25deg)}94%{opacity:.75;transform:scale(1) rotate(45deg)}}
-.hello .who{position:relative;font-size:18px;font-weight:600}
-.hello .nm{background:linear-gradient(100deg,#CFC6EC 0%,#CFC6EC 38%,#FFF3D6 47%,#FFFFFF 50%,#E6D3FF 54%,#CFC6EC 62%,#CFC6EC 100%);background-size:260% 100%;background-position:100% 0;
-  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shine 4.5s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(185,140,255,.35))}
+.hello .who{position:relative;font-size:20px;font-weight:600}
+.hello .who::before{content:"";position:absolute;left:-14px;right:-18px;top:-8px;bottom:-8px;border-radius:999px;background:radial-gradient(closest-side, rgba(185,140,255,.16), transparent);pointer-events:none;animation:halo 5s ease-in-out infinite}
+@keyframes halo{0%,100%{opacity:.6}50%{opacity:1}}
+.hello .nm{background:linear-gradient(100deg,#E4DCFA 0%,#E4DCFA 38%,#FFF3D6 47%,#FFFFFF 50%,#EBDDFF 54%,#E4DCFA 62%,#E4DCFA 100%);background-size:260% 100%;background-position:100% 0;
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shine 3.8s ease-in-out infinite;filter:drop-shadow(0 0 8px rgba(185,140,255,.5))}
 @keyframes shine{0%,25%{background-position:100% 0}75%,100%{background-position:0 0}}
 .hello .gl{position:absolute;display:block;color:var(--firefly);pointer-events:none;opacity:0;filter:drop-shadow(0 0 4px rgba(255,208,138,.9));animation:glit 3.6s ease-in-out infinite}
 .hello .gl svg{width:100%;height:100%;display:block}
@@ -195,7 +197,7 @@ a{color:var(--accent)}
 .sp.got{color:var(--moon)}
 .sp.got .pod{border-color:color-mix(in srgb, var(--c) 70%, transparent);background:radial-gradient(circle, color-mix(in srgb, var(--c) 28%, transparent), transparent 70%);box-shadow:0 0 22px color-mix(in srgb, var(--c) 42%, transparent), inset 0 0 18px color-mix(in srgb, var(--c) 22%, transparent)}
 .sp.got .pod img,.sp.got .pod .wisp{filter:drop-shadow(0 0 8px color-mix(in srgb, var(--c) 65%, transparent))}
-.sp .nm{font-size:12.5px;font-weight:600;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.4em}
+.sp .nm{font-size:13.5px;font-weight:600;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.4em}
 .sp .tick{position:absolute;z-index:3;right:-1px;bottom:-1px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:var(--ink);box-shadow:0 0 10px var(--c);opacity:0;transform:scale(.4);transition:opacity .2s, transform .3s cubic-bezier(.3,1.6,.5,1)}
 .sp .tick svg{width:15px;height:15px}
 .sp.got .tick{opacity:1;transform:scale(1)}
@@ -218,13 +220,13 @@ a{color:var(--accent)}
 .sp-card .orb img,.sp-card .orb .wisp{grid-area:1/1;width:78%;height:78%;object-fit:contain;filter:drop-shadow(0 0 12px color-mix(in srgb, var(--c) 60%, transparent))}
 .sp-card .orb .wisp{color:var(--c)}
 .sp-card .orb img.ok + .wisp{display:none}
-.sp-card h2{font-size:24px;color:var(--moon);justify-content:center;text-shadow:0 0 14px rgba(185,140,255,.5)}
-.sp-card .meta{font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap}
-.sp-card .pill{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;border:1px solid currentColor}
-.sp-card .how{margin:14px 0 4px;width:100%;text-align:left;border-radius:14px;background:rgba(20,13,34,.8);border:1px solid var(--line);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
-.sp-card .how span{font-size:12.5px;font-weight:700;color:var(--accent)}
-.sp-card .how p{margin:0;font-size:15px;line-height:1.45;color:var(--soft)}
-.sp-card .how p.lv{font-size:13.5px;color:var(--muted)}
+.sp-card h2{font-size:27px;color:var(--moon);justify-content:center;text-shadow:0 0 14px rgba(185,140,255,.5)}
+.sp-card .meta{font-size:15px;color:var(--muted);display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap}
+.sp-card .pill{font-size:13.5px;font-weight:700;padding:3px 9px;border-radius:999px;border:1px solid currentColor}
+.sp-card .how{margin:14px 0 4px;width:100%;text-align:left;border-radius:16px;background:rgba(20,13,34,.8);border:1px solid var(--line);padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.sp-card .how span{font-size:14px;font-weight:700;color:var(--accent)}
+.sp-card .how p{margin:0;font-size:17.5px;line-height:1.45;color:var(--soft)}
+.sp-card .how p.lv{font-size:15.5px;color:var(--muted);margin-top:4px}
 .sp-card .how + .how{margin-top:0}
 .sp-card .how{margin-bottom:10px}
 
