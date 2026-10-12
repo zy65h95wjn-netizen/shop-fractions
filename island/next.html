@@ -88,7 +88,18 @@ a{color:var(--accent)}
 .hello .twinkle{display:inline-flex;color:var(--firefly);opacity:.7;animation:twinkle 6s ease-in-out infinite;transition:transform .7s ease-out;filter:drop-shadow(0 0 5px rgba(255,208,138,.7))}
 .hello .twinkle svg{width:16px;height:16px}
 @keyframes twinkle{0%,82%,100%{opacity:.55;transform:scale(.85) rotate(0)}88%{opacity:1;transform:scale(1.35) rotate(25deg)}94%{opacity:.75;transform:scale(1) rotate(45deg)}}
-.hello.pressing .who{color:var(--moon);text-shadow:0 0 14px rgba(185,140,255,.9)}
+.hello .who{position:relative;font-size:18px;font-weight:600}
+.hello .nm{background:linear-gradient(100deg,#CFC6EC 0%,#CFC6EC 38%,#FFF3D6 47%,#FFFFFF 50%,#E6D3FF 54%,#CFC6EC 62%,#CFC6EC 100%);background-size:260% 100%;background-position:100% 0;
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shine 4.5s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(185,140,255,.35))}
+@keyframes shine{0%,25%{background-position:100% 0}75%,100%{background-position:0 0}}
+.hello .gl{position:absolute;display:block;color:var(--firefly);pointer-events:none;opacity:0;filter:drop-shadow(0 0 4px rgba(255,208,138,.9));animation:glit 3.6s ease-in-out infinite}
+.hello .gl svg{width:100%;height:100%;display:block}
+.hello .g1{width:11px;height:11px;left:-7px;top:-3px;animation-delay:.2s}
+.hello .g2{width:9px;height:9px;left:38%;top:-9px;color:var(--moon);animation-delay:1.3s}
+.hello .g3{width:12px;height:12px;left:62%;bottom:-6px;animation-delay:2.1s}
+.hello .g4{width:8px;height:8px;left:88%;top:-4px;color:#E6D3FF;animation-delay:2.9s}
+@keyframes glit{0%,100%{opacity:0;transform:scale(.3) rotate(0)}10%,20%{opacity:1;transform:scale(1.15) rotate(30deg)}34%{opacity:0;transform:scale(.4) rotate(70deg)}}
+.hello.pressing .nm{animation:none;background:none;color:var(--moon);-webkit-text-fill-color:var(--moon);filter:drop-shadow(0 0 10px rgba(185,140,255,.95))}
 .hello.pressing .twinkle{animation:none;opacity:1;transform:scale(2.2) rotate(90deg);filter:drop-shadow(0 0 10px var(--firefly))}
 
 /* the go-to skin, framed in a moonlit window */
@@ -213,6 +224,9 @@ a{color:var(--accent)}
 .sp-card .how{margin:14px 0 4px;width:100%;text-align:left;border-radius:14px;background:rgba(20,13,34,.8);border:1px solid var(--line);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
 .sp-card .how span{font-size:12.5px;font-weight:700;color:var(--accent)}
 .sp-card .how p{margin:0;font-size:15px;line-height:1.45;color:var(--soft)}
+.sp-card .how p.lv{font-size:13.5px;color:var(--muted)}
+.sp-card .how + .how{margin-top:0}
+.sp-card .how{margin-bottom:10px}
 
 /* ---- me ---- */
 .avatar{width:66px;height:66px;border-radius:33px;border:1.5px solid var(--accent);background:var(--card2);overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 18px var(--glow)}
@@ -573,7 +587,9 @@ function renderToday(){
   } else if(S.loading.news){ newsHtml = '<div class="skel" style="height:220px"></div>'; }
 
   return '<section class="view" id="v-today">'+
-    '<div class="between" style="align-items:flex-start"><div class="hello" id="hello"><span class="who">Hey, '+esc(st.name||'there')+(st.note ? '<span class="twinkle">'+ICON.sparkle+'</span>' : '')+'</span><h1>Today</h1></div>'+
+    '<div class="between" style="align-items:flex-start"><div class="hello" id="hello"><span class="who"><span class="nm">Hey, '+esc(st.name||'there')+'</span>'+
+      '<i class="gl g1">'+ICON.star+'</i><i class="gl g2">'+ICON.star+'</i><i class="gl g3">'+ICON.star+'</i><i class="gl g4">'+ICON.star+'</i>'+
+      (st.note ? '<span class="twinkle">'+ICON.sparkle+'</span>' : '')+'</span><h1>Today</h1></div>'+
     '<button class="iconbtn" id="refreshAll" aria-label="Refresh">'+ICON.refresh+'</button></div>'+
     hero + phCard() +
     '<div class="list" style="gap:12px"><div class="between" style="align-items:center"><h2 class="rule" style="flex:1">Wishlist in the shop</h2><button class="chip" data-go="shop" style="height:32px">See shop</button></div>'+wishHtml+'</div>'+
@@ -744,7 +760,7 @@ function bindSpriteGrid(){
 function openSprite(id){
   var d = S.spritesData, s = d && (d.sprites||[]).filter(function(x){ return x.id===id; })[0]; if(!s) return;
   if(!load('holdHintSeen', false)){ save('holdHintSeen', true); var h = $('.sp.hint'); if(h) h.classList.remove('hint'); }
-  var grp = ((d.groups||[]).filter(function(g){ return g.id===s.group; })[0] || {}).name || '';
+  var gobj = (d.groups||[]).filter(function(g){ return g.id===s.group; })[0] || {}, grp = gobj.name || '', bonus = gobj.bonus || '';
   var col = spriteColor(s), got = !!S.got[id];
   var meta = [grp ? '<span class="pill" style="color:'+col+'">'+esc(grp)+'</span>' : '',
     s.rarity ? '<span class="pill" style="color:'+(RARITY[s.rarity]||'var(--muted)')+'">'+esc(RARITY_NAME[s.rarity]||s.rarity)+'</span>' : '',
@@ -752,7 +768,9 @@ function openSprite(id){
   openSheet('<div class="grab"></div><div class="sp-card">'+
     '<div class="orb'+(got?'':' dim')+'" style="--c:'+col+'">'+spriteArt(s)+'</div>'+
     '<h2>'+esc(s.name)+'</h2>'+(meta?'<div class="meta">'+meta+'</div>':'')+
-    (s.how ? '<div class="how"><span>How to get it</span><p>'+esc(s.how)+'</p></div>' : '')+
+    (s.does ? '<div class="how"><span>What it does</span><p>'+esc(s.does)+'</p>'+(s.levels ? '<p class="lv">'+esc(s.levels)+'</p>' : '')+'</div>' : '')+
+    (bonus ? '<div class="how"><span>'+esc(grp)+' bonus</span><p>'+esc(bonus)+'</p></div>' : '')+
+    (s.how || s.where ? '<div class="how"><span>Finding it</span>'+(s.how ? '<p>'+esc(s.how)+'</p>' : '')+(s.where ? '<p class="lv">Spotted: '+esc(s.where)+'</p>' : '')+'</div>' : '')+
     '</div><div style="height:16px"></div>'+
     '<button class="btn block" id="spToggle">'+(got ? 'Caught ✓  (tap to undo)' : 'Mark as caught')+'</button>'+
     '<div style="height:10px"></div><button class="btn ghost block" data-close>Close</button>');

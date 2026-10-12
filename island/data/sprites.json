@@ -8,15 +8,18 @@
   },
   {
    "id": "gold",
-   "name": "Gold"
+   "name": "Gold",
+   "bonus": "Triple XP from eliminations."
   },
   {
    "id": "cheat",
-   "name": "Cheat Master"
+   "name": "Cheat Master",
+   "bonus": "Any cheat code you find in the world counts as entered right, no matter the inputs."
   },
   {
    "id": "hacker",
-   "name": "Loot Hacker"
+   "name": "Loot Hacker",
+   "bonus": "Better odds of items from Loot Hacks."
   },
   {
    "id": "bounty",
@@ -35,7 +38,10 @@
    "rarity": "rare",
    "how": "In your inventory at match start",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_L.webp",
+   "does": "After you take damage, it heals back some health or shield after a short delay.",
+   "levels": "Heals more with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "adventure",
@@ -44,7 +50,10 @@
    "rarity": "rare",
    "how": "In your inventory at match start",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_L.webp",
+   "does": "Upgrades a random item in your inventory.",
+   "levels": "Each level upgrades another random item.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "bush",
@@ -53,7 +62,9 @@
    "rarity": "rare",
    "how": "In your inventory at match start",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_L.webp",
+   "does": "After a short wait, it gives you a bush to hide in. Maxed out, every elimination gives you a fresh bush too.",
+   "levels": "The bush shows up faster with each level."
   },
   {
    "id": "eightbit",
@@ -62,7 +73,9 @@
    "rarity": "rare",
    "how": "Blue cheat code panels",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_L.webp",
+   "does": "Its first chest can hold an 8-Bit Shotgun that racks up a score multiplier.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "birthday",
@@ -71,7 +84,10 @@
    "rarity": "rare",
    "how": "Cheat code FM1 at the Admin Panel",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Birthday_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Birthday_L.webp",
+   "does": "Chests sometimes drop a slice of cake. Maxed out, eliminations can drop cake too.",
+   "levels": "Better cake odds with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "stormscout",
@@ -80,7 +96,10 @@
    "rarity": "rare",
    "how": "Blue cheat codes (purple for rarer)",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_L.webp",
+   "does": "Taking enough storm damage kicks you into Overdrive. Maxed out, it shows where the next storm circles will be.",
+   "levels": "Overdrive lasts longer with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "overshield",
@@ -89,7 +108,10 @@
    "rarity": "rare",
    "how": "Chests or cheat code chests",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_L.webp",
+   "does": "Gives you an extra layer of shield.",
+   "levels": "Bigger shield with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "onigiri",
@@ -98,7 +120,9 @@
    "rarity": "rare",
    "how": "Blue cheat code chests",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_L.webp",
+   "does": "Eating or drinking anything kicks you into Overdrive.",
+   "levels": "Overdrive lasts longer with each level."
   },
   {
    "id": "megaman",
@@ -107,7 +131,10 @@
    "rarity": "rare",
    "how": "Blue cheat code chests",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ImprovedSlide_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ImprovedSlide_L.webp",
+   "does": "Slides go farther and smoother, with less friction.",
+   "levels": "Slides farther with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "pond",
@@ -116,7 +143,9 @@
    "rarity": "epic",
    "how": "Epic cheat code chests",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_L.webp",
+   "does": "Jump again right after landing for a super jump. Charges refill over time.",
+   "levels": "Higher super jumps and faster recharge with each level."
   },
   {
    "id": "morgana",
@@ -125,7 +154,9 @@
    "rarity": "epic",
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_L.webp",
+   "does": "Your healing items heal you for more.",
+   "levels": "Extra healing grows with each level."
   },
   {
    "id": "sonic",
@@ -134,7 +165,10 @@
    "rarity": "epic",
    "how": "Cheat code panels",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Obsidian_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Obsidian_L.webp",
+   "does": "Makes you sprint faster.",
+   "levels": "Even faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "tails",
@@ -143,7 +177,10 @@
    "rarity": "epic",
    "how": "Cheat code panels",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_L.webp",
+   "does": "Jump, then hover and glide through the air with Tails.",
+   "levels": "Hovers faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "shadow",
@@ -152,7 +189,10 @@
    "rarity": "epic",
    "how": "Cheat code panels",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Scribe_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Scribe_L.webp",
+   "does": "Slowly reloads the weapons you aren't holding. Maxed out, it reloads the one in your hands too.",
+   "levels": "Reloads faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "killswitch",
@@ -161,7 +201,10 @@
    "rarity": "epic",
    "how": "Cheat code panels at night",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_L.webp",
+   "does": "Kicks in while you aim in midair, giving you hang time and sharper shots.",
+   "levels": "More accurate with each level.",
+   "where": "Out in the world at night"
   },
   {
    "id": "blinky",
@@ -170,7 +213,10 @@
    "rarity": "legendary",
    "how": "Beat the floating Pac-Man boss",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_L.webp",
+   "does": "Every time you get hit, it cloaks you for a moment.",
+   "levels": "The cloak lasts longer with each level.",
+   "where": "Out in the world at night"
   },
   {
    "id": "crash",
@@ -179,7 +225,10 @@
    "rarity": "legendary",
    "how": "Beat Adam Smasher",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_L.webp",
+   "does": "Spin in midair to whirl into nearby enemies, damaging them and knocking them back.",
+   "levels": "More damage and a shorter cooldown with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "xray",
@@ -188,7 +237,9 @@
    "rarity": "legendary",
    "how": "Purple or gold cheat codes",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_L.webp",
+   "does": "Every so often, it reveals enemies near you.",
+   "levels": "Reveals more often with each level."
   },
   {
    "id": "jackrabbit",
@@ -197,7 +248,10 @@
    "rarity": "legendary",
    "how": "Beat Hush",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_JazzJackrabbit_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_JazzJackrabbit_L.webp",
+   "does": "Gives you a double jump.",
+   "levels": "Less wait between jumps with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "klombo",
@@ -206,7 +260,10 @@
    "rarity": "mythic",
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_L.webp",
+   "does": "Hands out random items at each stage. Feed it items to move it to the next stage.",
+   "levels": "Better items with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "crown",
@@ -215,7 +272,9 @@
    "rarity": "mythic",
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_L.webp",
+   "does": "No special power. It only levels up from Victory Royales, and a single win masters it.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "spookydash",
@@ -224,7 +283,9 @@
    "rarity": "mythic",
    "how": "Pumpkin chests, chests, cheat codes",
    "added": "2026-10-01",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_PhaseDash_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_PhaseDash_L.webp",
+   "does": "Jump and you can pass through some objects in midair. Charges refill over time.",
+   "levels": "Faster recharge with each level."
   },
   {
    "id": "vampire",
@@ -233,7 +294,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-10-01",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_HealthSiphon_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_HealthSiphon_L.webp",
+   "does": "Heals you for part of the damage you deal.",
+   "levels": "Heals a bigger share with each level."
   },
   {
    "id": "deer",
@@ -242,7 +305,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-10-01",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreasedMelee_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreasedMelee_L.webp",
+   "does": "Your melee hits do extra damage.",
+   "levels": "More melee damage with each level."
   },
   {
    "id": "dumpsterdive",
@@ -251,7 +316,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-10-01",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_L.webp",
+   "does": "Pop out of hiding spots, or sometimes open containers, to find food that heals extra.",
+   "levels": "Better food with each level."
   },
   {
    "id": "gold-jonesy",
@@ -260,7 +327,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_Gold_L.webp",
+   "does": "After you take damage, it heals back some health or shield after a short delay.",
+   "levels": "Heals more with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "gold-adventure",
@@ -269,7 +339,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Gold_L.webp",
+   "does": "Upgrades a random item in your inventory.",
+   "levels": "Each level upgrades another random item.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "gold-bush",
@@ -278,7 +351,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Gold_L.webp",
+   "does": "After a short wait, it gives you a bush to hide in. Maxed out, every elimination gives you a fresh bush too.",
+   "levels": "The bush shows up faster with each level."
   },
   {
    "id": "gold-eightbit",
@@ -287,7 +362,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Gold_L.webp",
+   "does": "Its first chest can hold an 8-Bit Shotgun that racks up a score multiplier.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "gold-birthday",
@@ -296,7 +373,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Birthday_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Birthday_Gold_L.webp",
+   "does": "Chests sometimes drop a slice of cake. Maxed out, eliminations can drop cake too.",
+   "levels": "Better cake odds with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "gold-stormscout",
@@ -305,7 +385,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Gold_L.webp",
+   "does": "Taking enough storm damage kicks you into Overdrive. Maxed out, it shows where the next storm circles will be.",
+   "levels": "Overdrive lasts longer with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "gold-overshield",
@@ -314,7 +397,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Gold_L.webp",
+   "does": "Gives you an extra layer of shield.",
+   "levels": "Bigger shield with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "gold-onigiri",
@@ -323,7 +409,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Gold_L.webp",
+   "does": "Eating or drinking anything kicks you into Overdrive.",
+   "levels": "Overdrive lasts longer with each level."
   },
   {
    "id": "gold-pond",
@@ -332,7 +420,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Gold_L.webp",
+   "does": "Jump again right after landing for a super jump. Charges refill over time.",
+   "levels": "Higher super jumps and faster recharge with each level."
   },
   {
    "id": "gold-morgana",
@@ -341,7 +431,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_Gold_L.webp",
+   "does": "Your healing items heal you for more.",
+   "levels": "Extra healing grows with each level."
   },
   {
    "id": "gold-sonic",
@@ -350,7 +442,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Obsidian_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Obsidian_Gold_L.webp",
+   "does": "Makes you sprint faster.",
+   "levels": "Even faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "gold-tails",
@@ -359,7 +454,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_Gold_L.webp",
+   "does": "Jump, then hover and glide through the air with Tails.",
+   "levels": "Hovers faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "gold-shadow",
@@ -368,7 +466,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Scribe_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Scribe_Gold_L.webp",
+   "does": "Slowly reloads the weapons you aren't holding. Maxed out, it reloads the one in your hands too.",
+   "levels": "Reloads faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "gold-killswitch",
@@ -377,7 +478,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_Gold_L.webp",
+   "does": "Kicks in while you aim in midair, giving you hang time and sharper shots.",
+   "levels": "More accurate with each level.",
+   "where": "Out in the world at night"
   },
   {
    "id": "gold-blinky",
@@ -386,7 +490,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_Gold_L.webp",
+   "does": "Every time you get hit, it cloaks you for a moment.",
+   "levels": "The cloak lasts longer with each level.",
+   "where": "Out in the world at night"
   },
   {
    "id": "gold-crash",
@@ -395,7 +502,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_Gold_L.webp",
+   "does": "Spin in midair to whirl into nearby enemies, damaging them and knocking them back.",
+   "levels": "More damage and a shorter cooldown with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "gold-xray",
@@ -404,7 +514,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Gold_L.webp",
+   "does": "Every so often, it reveals enemies near you.",
+   "levels": "Reveals more often with each level."
   },
   {
    "id": "gold-jackrabbit",
@@ -413,7 +525,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_JazzJackrabbit_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_JazzJackrabbit_Gold_L.webp",
+   "does": "Gives you a double jump.",
+   "levels": "Less wait between jumps with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "gold-klombo",
@@ -422,7 +537,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_Gold_L.webp",
+   "does": "Hands out random items at each stage. Feed it items to move it to the next stage.",
+   "levels": "Better items with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "gold-crown",
@@ -431,7 +549,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Gold_L.webp",
+   "does": "No special power. It only levels up from Victory Royales, and a single win masters it.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "gold-spookydash",
@@ -440,7 +560,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_PhaseDash_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_PhaseDash_Gold_L.webp",
+   "does": "Jump and you can pass through some objects in midair. Charges refill over time.",
+   "levels": "Faster recharge with each level."
   },
   {
    "id": "gold-vampire",
@@ -449,7 +571,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_HealthSiphon_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_HealthSiphon_Gold_L.webp",
+   "does": "Heals you for part of the damage you deal.",
+   "levels": "Heals a bigger share with each level."
   },
   {
    "id": "gold-deer",
@@ -458,7 +582,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreasedMelee_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreasedMelee_Gold_L.webp",
+   "does": "Your melee hits do extra damage.",
+   "levels": "More melee damage with each level."
   },
   {
    "id": "gold-dumpsterdive",
@@ -467,7 +593,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_Gold_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_Gold_L.webp",
+   "does": "Pop out of hiding spots, or sometimes open containers, to find food that heals extra.",
+   "levels": "Better food with each level."
   },
   {
    "id": "cheat-jonesy",
@@ -476,7 +604,10 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_Cheatmaster_L.webp",
+   "does": "After you take damage, it heals back some health or shield after a short delay.",
+   "levels": "Heals more with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "cheat-adventure",
@@ -485,7 +616,10 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Cheatmaster_L.webp",
+   "does": "Upgrades a random item in your inventory.",
+   "levels": "Each level upgrades another random item.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "cheat-bush",
@@ -494,7 +628,9 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Cheatmaster_L.webp",
+   "does": "After a short wait, it gives you a bush to hide in. Maxed out, every elimination gives you a fresh bush too.",
+   "levels": "The bush shows up faster with each level."
   },
   {
    "id": "cheat-eightbit",
@@ -503,7 +639,9 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Cheatmaster_L.webp",
+   "does": "Its first chest can hold an 8-Bit Shotgun that racks up a score multiplier.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "cheat-birthday",
@@ -512,7 +650,10 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Birthday_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Birthday_Cheatmaster_L.webp",
+   "does": "Chests sometimes drop a slice of cake. Maxed out, eliminations can drop cake too.",
+   "levels": "Better cake odds with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "cheat-stormscout",
@@ -521,7 +662,10 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Cheatmaster_L.webp",
+   "does": "Taking enough storm damage kicks you into Overdrive. Maxed out, it shows where the next storm circles will be.",
+   "levels": "Overdrive lasts longer with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "cheat-overshield",
@@ -530,7 +674,10 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Cheatmaster_L.webp",
+   "does": "Gives you an extra layer of shield.",
+   "levels": "Bigger shield with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "cheat-onigiri",
@@ -539,7 +686,9 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Cheatmaster_L.webp",
+   "does": "Eating or drinking anything kicks you into Overdrive.",
+   "levels": "Overdrive lasts longer with each level."
   },
   {
    "id": "cheat-pond",
@@ -548,7 +697,9 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Cheatmaster_L.webp",
+   "does": "Jump again right after landing for a super jump. Charges refill over time.",
+   "levels": "Higher super jumps and faster recharge with each level."
   },
   {
    "id": "cheat-morgana",
@@ -557,7 +708,9 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_Cheatmaster_L.webp",
+   "does": "Your healing items heal you for more.",
+   "levels": "Extra healing grows with each level."
   },
   {
    "id": "cheat-sonic",
@@ -566,7 +719,10 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Obsidian_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Obsidian_Cheatmaster_L.webp",
+   "does": "Makes you sprint faster.",
+   "levels": "Even faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "cheat-tails",
@@ -575,7 +731,10 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_Cheatmaster_L.webp",
+   "does": "Jump, then hover and glide through the air with Tails.",
+   "levels": "Hovers faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "cheat-shadow",
@@ -584,7 +743,10 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Scribe_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Scribe_Cheatmaster_L.webp",
+   "does": "Slowly reloads the weapons you aren't holding. Maxed out, it reloads the one in your hands too.",
+   "levels": "Reloads faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "cheat-killswitch",
@@ -593,7 +755,10 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_Cheatmaster_L.webp",
+   "does": "Kicks in while you aim in midair, giving you hang time and sharper shots.",
+   "levels": "More accurate with each level.",
+   "where": "Out in the world at night"
   },
   {
    "id": "cheat-blinky",
@@ -602,7 +767,10 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_Cheatmaster_L.webp",
+   "does": "Every time you get hit, it cloaks you for a moment.",
+   "levels": "The cloak lasts longer with each level.",
+   "where": "Out in the world at night"
   },
   {
    "id": "cheat-crash",
@@ -611,7 +779,10 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_Cheatmaster_L.webp",
+   "does": "Spin in midair to whirl into nearby enemies, damaging them and knocking them back.",
+   "levels": "More damage and a shorter cooldown with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "cheat-xray",
@@ -620,7 +791,9 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Cheatmaster_L.webp",
+   "does": "Every so often, it reveals enemies near you.",
+   "levels": "Reveals more often with each level."
   },
   {
    "id": "cheat-jackrabbit",
@@ -629,7 +802,10 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_JazzJackrabbit_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_JazzJackrabbit_Cheatmaster_L.webp",
+   "does": "Gives you a double jump.",
+   "levels": "Less wait between jumps with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "cheat-klombo",
@@ -638,7 +814,10 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_Cheatmaster_L.webp",
+   "does": "Hands out random items at each stage. Feed it items to move it to the next stage.",
+   "levels": "Better items with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "cheat-crown",
@@ -647,7 +826,9 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Cheatmaster_L.webp",
+   "does": "No special power. It only levels up from Victory Royales, and a single win masters it.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "cheat-spookydash",
@@ -656,7 +837,9 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_PhaseDash_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_PhaseDash_Cheatmaster_L.webp",
+   "does": "Jump and you can pass through some objects in midair. Charges refill over time.",
+   "levels": "Faster recharge with each level."
   },
   {
    "id": "cheat-vampire",
@@ -665,7 +848,9 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_HealthSiphon_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_HealthSiphon_Cheatmaster_L.webp",
+   "does": "Heals you for part of the damage you deal.",
+   "levels": "Heals a bigger share with each level."
   },
   {
    "id": "cheat-deer",
@@ -674,7 +859,9 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreasedMelee_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreasedMelee_Cheatmaster_L.webp",
+   "does": "Your melee hits do extra damage.",
+   "levels": "More melee damage with each level."
   },
   {
    "id": "cheat-dumpsterdive",
@@ -683,7 +870,9 @@
    "rarity": null,
    "how": "Cheat Master Power Hours",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_Cheatmaster_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_Cheatmaster_L.webp",
+   "does": "Pop out of hiding spots, or sometimes open containers, to find food that heals extra.",
+   "levels": "Better food with each level."
   },
   {
    "id": "hacker-jonesy",
@@ -692,7 +881,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_Hacker_L.webp",
+   "does": "After you take damage, it heals back some health or shield after a short delay.",
+   "levels": "Heals more with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "hacker-adventure",
@@ -701,7 +893,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Hacker_L.webp",
+   "does": "Upgrades a random item in your inventory.",
+   "levels": "Each level upgrades another random item.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "hacker-bush",
@@ -710,7 +905,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Hacker_L.webp",
+   "does": "After a short wait, it gives you a bush to hide in. Maxed out, every elimination gives you a fresh bush too.",
+   "levels": "The bush shows up faster with each level."
   },
   {
    "id": "hacker-eightbit",
@@ -719,7 +916,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_EightBitBlaster_Hacker_L.webp",
+   "does": "Its first chest can hold an 8-Bit Shotgun that racks up a score multiplier.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "hacker-birthday",
@@ -728,7 +927,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Birthday_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Birthday_Hacker_L.webp",
+   "does": "Chests sometimes drop a slice of cake. Maxed out, eliminations can drop cake too.",
+   "levels": "Better cake odds with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "hacker-stormscout",
@@ -737,7 +939,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_Hacker_L.webp",
+   "does": "Taking enough storm damage kicks you into Overdrive. Maxed out, it shows where the next storm circles will be.",
+   "levels": "Overdrive lasts longer with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "hacker-overshield",
@@ -746,7 +951,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_Hacker_L.webp",
+   "does": "Gives you an extra layer of shield.",
+   "levels": "Bigger shield with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "hacker-onigiri",
@@ -755,7 +963,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_Hacker_L.webp",
+   "does": "Eating or drinking anything kicks you into Overdrive.",
+   "levels": "Overdrive lasts longer with each level."
   },
   {
    "id": "hacker-pond",
@@ -764,7 +974,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_Hacker_L.webp",
+   "does": "Jump again right after landing for a super jump. Charges refill over time.",
+   "levels": "Higher super jumps and faster recharge with each level."
   },
   {
    "id": "hacker-morgana",
@@ -773,7 +985,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_Hacker_L.webp",
+   "does": "Your healing items heal you for more.",
+   "levels": "Extra healing grows with each level."
   },
   {
    "id": "hacker-sonic",
@@ -782,7 +996,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Hacker_L.webp",
+   "does": "Makes you sprint faster.",
+   "levels": "Even faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "hacker-tails",
@@ -791,7 +1008,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_Monkey_Hacker_L.webp",
+   "does": "Jump, then hover and glide through the air with Tails.",
+   "levels": "Hovers faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "hacker-shadow",
@@ -800,7 +1020,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ReloadOverTime_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ReloadOverTime_Hacker_L.webp",
+   "does": "Slowly reloads the weapons you aren't holding. Maxed out, it reloads the one in your hands too.",
+   "levels": "Reloads faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "hacker-killswitch",
@@ -809,7 +1032,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_Hacker_L.webp",
+   "does": "Kicks in while you aim in midair, giving you hang time and sharper shots.",
+   "levels": "More accurate with each level.",
+   "where": "Out in the world at night"
   },
   {
    "id": "hacker-blinky",
@@ -818,7 +1044,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_Hacker_L.webp",
+   "does": "Every time you get hit, it cloaks you for a moment.",
+   "levels": "The cloak lasts longer with each level.",
+   "where": "Out in the world at night"
   },
   {
    "id": "hacker-crash",
@@ -827,7 +1056,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_Hacker_L.webp",
+   "does": "Spin in midair to whirl into nearby enemies, damaging them and knocking them back.",
+   "levels": "More damage and a shorter cooldown with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "hacker-xray",
@@ -836,7 +1068,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_Hacker_L.webp",
+   "does": "Every so often, it reveals enemies near you.",
+   "levels": "Reveals more often with each level."
   },
   {
    "id": "hacker-jackrabbit",
@@ -845,7 +1079,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_DoubleJump_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_DoubleJump_Hacker_L.webp",
+   "does": "Gives you a double jump.",
+   "levels": "Less wait between jumps with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "hacker-klombo",
@@ -854,7 +1091,10 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_Hacker_L.webp",
+   "does": "Hands out random items at each stage. Feed it items to move it to the next stage.",
+   "levels": "Better items with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "hacker-crown",
@@ -863,7 +1103,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_Hacker_L.webp",
+   "does": "No special power. It only levels up from Victory Royales, and a single win masters it.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "hacker-spookydash",
@@ -872,7 +1114,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_PhaseDash_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_PhaseDash_Hacker_L.webp",
+   "does": "Jump and you can pass through some objects in midair. Charges refill over time.",
+   "levels": "Faster recharge with each level."
   },
   {
    "id": "hacker-vampire",
@@ -881,7 +1125,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_HealthSiphon_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_HealthSiphon_Hacker_L.webp",
+   "does": "Heals you for part of the damage you deal.",
+   "levels": "Heals a bigger share with each level."
   },
   {
    "id": "hacker-deer",
@@ -890,7 +1136,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreasedMelee_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreasedMelee_Hacker_L.webp",
+   "does": "Your melee hits do extra damage.",
+   "levels": "More melee damage with each level."
   },
   {
    "id": "hacker-dumpsterdive",
@@ -899,7 +1147,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-08-20",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_Hacker_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_Hacker_L.webp",
+   "does": "Pop out of hiding spots, or sometimes open containers, to find food that heals extra.",
+   "levels": "Better food with each level."
   },
   {
    "id": "bounty-jonesy",
@@ -908,7 +1158,10 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_BountyHunter_L.webp",
+   "does": "After you take damage, it heals back some health or shield after a short delay.",
+   "levels": "Heals more with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "bounty-adventure",
@@ -917,7 +1170,10 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_BountyHunter_L.webp",
+   "does": "Upgrades a random item in your inventory.",
+   "levels": "Each level upgrades another random item.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "bounty-bush",
@@ -926,7 +1182,9 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_BountyHunter_L.webp",
+   "does": "After a short wait, it gives you a bush to hide in. Maxed out, every elimination gives you a fresh bush too.",
+   "levels": "The bush shows up faster with each level."
   },
   {
    "id": "bounty-eightbit",
@@ -935,7 +1193,9 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_8BitBlaster_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_8BitBlaster_BountyHunter_L.webp",
+   "does": "Its first chest can hold an 8-Bit Shotgun that racks up a score multiplier.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "bounty-birthday",
@@ -944,7 +1204,10 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Birthday_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Birthday_BountyHunter_L.webp",
+   "does": "Chests sometimes drop a slice of cake. Maxed out, eliminations can drop cake too.",
+   "levels": "Better cake odds with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "bounty-stormscout",
@@ -953,7 +1216,10 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_BountyHunter_L.webp",
+   "does": "Taking enough storm damage kicks you into Overdrive. Maxed out, it shows where the next storm circles will be.",
+   "levels": "Overdrive lasts longer with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "bounty-overshield",
@@ -962,7 +1228,10 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_BountyHunter_L.webp",
+   "does": "Gives you an extra layer of shield.",
+   "levels": "Bigger shield with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "bounty-onigiri",
@@ -971,7 +1240,9 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_BountyHunter_L.webp",
+   "does": "Eating or drinking anything kicks you into Overdrive.",
+   "levels": "Overdrive lasts longer with each level."
   },
   {
    "id": "bounty-pond",
@@ -980,7 +1251,9 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_BountyHunter_L.webp",
+   "does": "Jump again right after landing for a super jump. Charges refill over time.",
+   "levels": "Higher super jumps and faster recharge with each level."
   },
   {
    "id": "bounty-morgana",
@@ -989,7 +1262,9 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_BountyHunter_L.webp",
+   "does": "Your healing items heal you for more.",
+   "levels": "Extra healing grows with each level."
   },
   {
    "id": "bounty-sonic",
@@ -998,7 +1273,10 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_BountyHunter_L.webp",
+   "does": "Makes you sprint faster.",
+   "levels": "Even faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "bounty-tails",
@@ -1007,7 +1285,10 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFleaMonkey_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFleaMonkey_BountyHunter_L.webp",
+   "does": "Jump, then hover and glide through the air with Tails.",
+   "levels": "Hovers faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "bounty-shadow",
@@ -1016,7 +1297,10 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ReloadOverTime_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ReloadOverTime_BountyHunter_L.webp",
+   "does": "Slowly reloads the weapons you aren't holding. Maxed out, it reloads the one in your hands too.",
+   "levels": "Reloads faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "bounty-killswitch",
@@ -1025,7 +1309,10 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_BountyHunter_L.webp",
+   "does": "Kicks in while you aim in midair, giving you hang time and sharper shots.",
+   "levels": "More accurate with each level.",
+   "where": "Out in the world at night"
   },
   {
    "id": "bounty-blinky",
@@ -1034,7 +1321,10 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_BountyHunter_L.webp",
+   "does": "Every time you get hit, it cloaks you for a moment.",
+   "levels": "The cloak lasts longer with each level.",
+   "where": "Out in the world at night"
   },
   {
    "id": "bounty-crash",
@@ -1043,7 +1333,10 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_BountyHunter_L.webp",
+   "does": "Spin in midair to whirl into nearby enemies, damaging them and knocking them back.",
+   "levels": "More damage and a shorter cooldown with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "bounty-xray",
@@ -1052,7 +1345,9 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_BountyHunter_L.webp",
+   "does": "Every so often, it reveals enemies near you.",
+   "levels": "Reveals more often with each level."
   },
   {
    "id": "bounty-jackrabbit",
@@ -1061,7 +1356,10 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_DoubleJump_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_DoubleJump_BountyHunter_L.webp",
+   "does": "Gives you a double jump.",
+   "levels": "Less wait between jumps with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "bounty-klombo",
@@ -1070,7 +1368,10 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_BountyHunter_L.webp",
+   "does": "Hands out random items at each stage. Feed it items to move it to the next stage.",
+   "levels": "Better items with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "bounty-crown",
@@ -1079,7 +1380,9 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_BountyHunter_L.webp",
+   "does": "No special power. It only levels up from Victory Royales, and a single win masters it.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "bounty-spookydash",
@@ -1088,7 +1391,9 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_PhaseDash_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_PhaseDash_BountyHunter_L.webp",
+   "does": "Jump and you can pass through some objects in midair. Charges refill over time.",
+   "levels": "Faster recharge with each level."
   },
   {
    "id": "bounty-vampire",
@@ -1097,7 +1402,9 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_HealthSiphon_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_HealthSiphon_BountyHunter_L.webp",
+   "does": "Heals you for part of the damage you deal.",
+   "levels": "Heals a bigger share with each level."
   },
   {
    "id": "bounty-deer",
@@ -1106,7 +1413,9 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreasedMelee_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreasedMelee_BountyHunter_L.webp",
+   "does": "Your melee hits do extra damage.",
+   "levels": "More melee damage with each level."
   },
   {
    "id": "bounty-dumpsterdive",
@@ -1115,7 +1424,9 @@
    "rarity": null,
    "how": "Bounty Hunter Power Hours",
    "added": "2026-10-03",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_BountyHunter_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_BountyHunter_L.webp",
+   "does": "Pop out of hiding spots, or sometimes open containers, to find food that heals extra.",
+   "levels": "Better food with each level."
   },
   {
    "id": "tot-jonesy",
@@ -1124,7 +1435,10 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_TrickTreat_L.webp",
+   "does": "After you take damage, it heals back some health or shield after a short delay.",
+   "levels": "Heals more with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "tot-adventure",
@@ -1133,7 +1447,10 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_TrickTreat_L.webp",
+   "does": "Upgrades a random item in your inventory.",
+   "levels": "Each level upgrades another random item.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "tot-bushranger",
@@ -1142,7 +1459,9 @@
    "rarity": null,
    "how": "",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_TrickTreat_L.webp",
+   "does": "After a short wait, it gives you a bush to hide in. Maxed out, every elimination gives you a fresh bush too.",
+   "levels": "The bush shows up faster with each level."
   },
   {
    "id": "tot-eightbit",
@@ -1151,7 +1470,9 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_8BitBlaster_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_8BitBlaster_TrickTreat_L.webp",
+   "does": "Its first chest can hold an 8-Bit Shotgun that racks up a score multiplier.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "tot-birthday",
@@ -1160,7 +1481,10 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Birthday_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Birthday_TrickTreat_L.webp",
+   "does": "Chests sometimes drop a slice of cake. Maxed out, eliminations can drop cake too.",
+   "levels": "Better cake odds with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "tot-stormscout",
@@ -1169,7 +1493,10 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_StormScout_TrickTreat_L.webp",
+   "does": "Taking enough storm damage kicks you into Overdrive. Maxed out, it shows where the next storm circles will be.",
+   "levels": "Overdrive lasts longer with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "tot-overshield",
@@ -1178,7 +1505,10 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Overshield_TrickTreat_L.webp",
+   "does": "Gives you an extra layer of shield.",
+   "levels": "Bigger shield with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "tot-onigiri",
@@ -1187,7 +1517,9 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerC_TrickTreat_L.webp",
+   "does": "Eating or drinking anything kicks you into Overdrive.",
+   "levels": "Overdrive lasts longer with each level."
   },
   {
    "id": "tot-pond",
@@ -1196,7 +1528,9 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerA_TrickTreat_L.webp",
+   "does": "Jump again right after landing for a super jump. Charges refill over time.",
+   "levels": "Higher super jumps and faster recharge with each level."
   },
   {
    "id": "tot-morgana",
@@ -1205,7 +1539,9 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreaseHeals_TrickTreat_L.webp",
+   "does": "Your healing items heal you for more.",
+   "levels": "Extra healing grows with each level."
   },
   {
    "id": "tot-sonic",
@@ -1214,7 +1550,10 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFlea_TrickTreat_L.webp",
+   "does": "Makes you sprint faster.",
+   "levels": "Even faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "tot-tails",
@@ -1223,7 +1562,10 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFleaMonkey_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_NarrowFleaMonkey_TrickTreat_L.webp",
+   "does": "Jump, then hover and glide through the air with Tails.",
+   "levels": "Hovers faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "tot-shadow",
@@ -1232,7 +1574,10 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ReloadOverTime_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_ReloadOverTime_TrickTreat_L.webp",
+   "does": "Slowly reloads the weapons you aren't holding. Maxed out, it reloads the one in your hands too.",
+   "levels": "Reloads faster with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "tot-killswitch",
@@ -1241,7 +1586,10 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Killswitch_TrickTreat_L.webp",
+   "does": "Kicks in while you aim in midair, giving you hang time and sharper shots.",
+   "levels": "More accurate with each level.",
+   "where": "Out in the world at night"
   },
   {
    "id": "tot-blinky",
@@ -1250,7 +1598,10 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_GhostDamage_TrickTreat_L.webp",
+   "does": "Every time you get hit, it cloaks you for a moment.",
+   "levels": "The cloak lasts longer with each level.",
+   "where": "Out in the world at night"
   },
   {
    "id": "tot-crash",
@@ -1259,7 +1610,10 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BodySlam_TrickTreat_L.webp",
+   "does": "Spin in midair to whirl into nearby enemies, damaging them and knocking them back.",
+   "levels": "More damage and a shorter cooldown with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "tot-xray",
@@ -1268,7 +1622,9 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerB_TrickTreat_L.webp",
+   "does": "Every so often, it reveals enemies near you.",
+   "levels": "Reveals more often with each level."
   },
   {
    "id": "tot-jackrabbit",
@@ -1277,7 +1633,10 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_DoubleJump_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_DoubleJump_TrickTreat_L.webp",
+   "does": "Gives you a double jump.",
+   "levels": "Less wait between jumps with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "tot-klombo",
@@ -1286,7 +1645,10 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_TrickTreat_L.webp",
+   "does": "Hands out random items at each stage. Feed it items to move it to the next stage.",
+   "levels": "Better items with each level.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "tot-crown",
@@ -1295,7 +1657,9 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-06",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Crown_TrickTreat_L.webp",
+   "does": "No special power. It only levels up from Victory Royales, and a single win masters it.",
+   "where": "High, mountainous areas"
   },
   {
    "id": "tot-spookydash",
@@ -1304,7 +1668,9 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_PhaseDash_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_PhaseDash_TrickTreat_L.webp",
+   "does": "Jump and you can pass through some objects in midair. Charges refill over time.",
+   "levels": "Faster recharge with each level."
   },
   {
    "id": "tot-vampire",
@@ -1313,7 +1679,9 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_HealthSiphon_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_HealthSiphon_TrickTreat_L.webp",
+   "does": "Heals you for part of the damage you deal.",
+   "levels": "Heals a bigger share with each level."
   },
   {
    "id": "tot-deer",
@@ -1322,7 +1690,9 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreasedMelee_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_IncreasedMelee_TrickTreat_L.webp",
+   "does": "Your melee hits do extra damage.",
+   "levels": "More melee damage with each level."
   },
   {
    "id": "tot-dumpsterdive",
@@ -1331,7 +1701,9 @@
    "rarity": null,
    "how": "Chests and cheat codes",
    "added": "2026-10-08",
-   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_TrickTreat_L.webp"
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_TrickTreat_L.webp",
+   "does": "Pop out of hiding spots, or sometimes open containers, to find food that heals extra.",
+   "levels": "Better food with each level."
   }
  ]
 }
