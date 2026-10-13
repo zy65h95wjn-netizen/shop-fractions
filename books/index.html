@@ -21,6 +21,13 @@
 .library-filters{display:flex;gap:8px;overflow-x:auto;margin:6px 0 18px;padding:2px 0 5px}
 .library-filter{flex:none;min-height:44px;padding:9px 13px;background:#202b3d;color:var(--text);border:1px solid #49566c;border-radius:12px;font-size:13px;font-weight:700}
 .library-filter[aria-pressed="true"]{border-color:var(--gold);background:#51452e;color:#ffebc4}
+/* Swipe gestures change tabs; the page can still scroll vertically. */
+#app{touch-action:pan-y}
+#app.swipe-next{animation:swipeNext .22s ease-out}
+#app.swipe-prev{animation:swipePrev .22s ease-out}
+@keyframes swipeNext{from{opacity:.65;transform:translateX(18px)}to{opacity:1;transform:none}}
+@keyframes swipePrev{from{opacity:.65;transform:translateX(-18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#app.swipe-next,#app.swipe-prev{animation:none}}
 </style>
 </head>
 <body>
@@ -80,6 +87,47 @@ function discover(){return `<div class="top"><div><div class="eyebrow">Search th
 function settings(){const json=JSON.stringify(store),bytes=new Blob([json]).size;return `<div class="top"><div><div class="eyebrow">Manage your collection</div><h1>Settings & backup</h1></div></div><div class="panel stack"><h3>Your data stays here</h3><p class="hint">Your series, statuses, queue and wishlist are saved on this device using browser storage. They are not synced to another phone. Make backups occasionally—especially before switching phones or clearing website data.</p><p class="hint">Current saved collection: ${store.series.length} series · ${Math.round(bytes/1024)} KB</p><button class="btn block" data-export="1">Copy backup code</button><button class="btn secondary block" data-restore="1">Restore from backup</button></div>${sectionTitle('About')}<div class="panel"><p class="hint">The Lorekeeper is a personal audiobook tracker. “What’s next” finds your next unfinished book within each series; your queue is a separate, manually ordered list. Catalog data is supplied by Libex when online.</p></div>`;}
 function render(){const content=({home,library,discover,settings})[tab]();$('#app').innerHTML=content;$$('[data-tab]').forEach(b=>b.setAttribute('aria-current',b.dataset.tab===tab?'page':'false'));}
 function go(dest,filter){if(!['home','library','discover','settings'].includes(dest))return;if(dest==='library')libraryFilter=filter||'all';tab=dest;window.scrollTo(0,0);render();}
+/* Swipe across the page to switch tabs without intercepting vertical scrolling,
+   text entry, horizontal scrollers, or an open book/details sheet. */
+(()=>{
+ const pages=['home','library','discover','settings'], page=$('#app');
+ let gesture=null;
+ page.addEventListener('touchstart',e=>{
+   gesture=null;
+   if(e.touches.length!==1||$('#overlay').firstElementChild||e.target.closest('input,textarea,select,[contenteditable],[role="slider"]'))return;
+   const t=e.touches[0];
+   // Leave iOS Safari's browser-edge navigation gestures alone.
+   if(t.clientX<24||t.clientX>innerWidth-24)return;
+   for(let n=e.target;n&&n!==page;n=n.parentElement){
+     const css=getComputedStyle(n);
+     if(n.scrollWidth>n.clientWidth+3 && /^(auto|scroll)$/.test(css.overflowX))return;
+   }
+   gesture={x:t.clientX,y:t.clientY,horizontal:null};
+ },{passive:true});
+ page.addEventListener('touchmove',e=>{
+   if(!gesture)return;
+   if(e.touches.length!==1){gesture=null;return;}
+   const t=e.touches[0],dx=t.clientX-gesture.x,dy=t.clientY-gesture.y;
+   if(gesture.horizontal===null&&(Math.abs(dx)>12||Math.abs(dy)>12))
+     gesture.horizontal=Math.abs(dx)>Math.abs(dy)*1.35;
+   if(gesture.horizontal&&e.cancelable)e.preventDefault();
+ },{passive:false});
+ page.addEventListener('touchend',e=>{
+   if(!gesture)return;
+   const g=gesture;gesture=null;
+   if(!g.horizontal||e.changedTouches.length!==1||$('#overlay').firstElementChild)return;
+   const t=e.changedTouches[0],dx=t.clientX-g.x,dy=t.clientY-g.y;
+   if(Math.abs(dx)<65||Math.abs(dx)<Math.abs(dy)*1.35)return;
+   const index=pages.indexOf(tab),next=index+(dx<0?1:-1);
+   if(next<0||next>=pages.length)return;
+   go(pages[next]);
+   page.classList.remove('swipe-next','swipe-prev');
+   void page.offsetWidth;
+   page.classList.add(dx<0?'swipe-next':'swipe-prev');
+ });
+ page.addEventListener('touchcancel',()=>{gesture=null;},{passive:true});
+ page.addEventListener('animationend',e=>{if(e.target===page)page.classList.remove('swipe-next','swipe-prev');});
+})();
 function openModal(html){$('#overlay').innerHTML=`<div class="modalbg"><div class="modal" role="dialog" aria-modal="true" aria-label="Book details"><div class="grab"></div>${html}</div></div>`;}
 function closeModal(){$('#overlay').innerHTML='';}
 function modalHead(title){return `<div class="between"><h2>${esc(title)}</h2><button class="iconbtn" data-close="1" aria-label="Close">×</button></div>`;}
