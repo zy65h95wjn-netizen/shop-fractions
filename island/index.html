@@ -1396,16 +1396,63 @@ $('#scrim').onclick = closeSheet;
   sh.addEventListener('touchend', end); sh.addEventListener('touchcancel', end);
 })();
 
+/* ---- shop history: when an item was last for sale ---- */
+var HIST = load('hist', {}) || {};
+function histFor(id){
+  var h = HIST[id];
+  if(h && h.d && Date.now()-h.t < 12*3600000) return Promise.resolve(h.d);
+  return getJSON(API+'/v2/cosmetics/br/'+encodeURIComponent(id)+'?responseFlags=4', {timeout:10000}).then(function(b){
+    var d = ((b && b.data && b.data.shopHistory) || []).map(function(x){ return String(x).slice(0,10); }).sort().slice(-150);
+    HIST[id] = {t:Date.now(), d:d};
+    var ks = Object.keys(HIST);
+    if(ks.length > 80) ks.sort(function(a,c){ return HIST[a].t-HIST[c].t; }).slice(0, ks.length-80).forEach(function(k){ delete HIST[k]; });
+    save('hist', HIST);
+    return d;
+  });
+}
+function fillHist(id){
+  var row = function(){ return $('#sheet [data-hist="'+id+'"]'); };
+  if(!id){ var r0=row(); if(r0) r0.remove(); return; }
+  histFor(id).then(function(d){
+    var r = row(); if(!r) return;
+    var day = lastSeen(d, true);
+    if(day === undefined){ r.remove(); return; }
+    var v = r.lastElementChild; v.classList.remove('muted');
+    v.textContent = day ? seenText(day) : 'First time in the shop';
+  }).catch(function(){ var r=row(); if(r) r.remove(); });
+}
+function dayMs(s){ return Date.parse(s+'T00:00:00Z'); }
+/* last day it was for sale before its current run (inShop) or overall.
+   undefined = no data, null = never before */
+function lastSeen(d, inShop){
+  if(!d || !d.length) return inShop ? undefined : null;
+  var i = d.length-1;
+  if(inShop){
+    var prev = dayMs(new Date().toISOString().slice(0,10));
+    while(i>=0 && prev-dayMs(d[i]) <= 86400000){ prev = Math.min(prev, dayMs(d[i])); i--; }
+  }
+  return i>=0 ? d[i] : null;
+}
+function seenText(day){
+  var ms = dayMs(day), days = Math.round((dayMs(new Date().toISOString().slice(0,10))-ms)/86400000);
+  var thisYear = new Date().getUTCFullYear() === new Date(ms).getUTCFullYear();
+  var date = new Date(ms).toLocaleDateString([], {month:'short', day:'numeric', year: thisYear ? undefined : 'numeric', timeZone:'UTC'});
+  var ago = days<=1 ? 'yesterday' : days<60 ? days+' days ago' : days<730 ? Math.round(days/30.4)+' months ago' : Math.round(days/365)+' years ago';
+  return date+' · '+ago;
+}
+
 function openEntry(key){
   var e = S.shop && S.shop.entries.filter(function(x){ return x.key===key; })[0]; if(!e) return;
   var bg = e.c1 && e.c3 ? 'background:linear-gradient(180deg,'+e.c3+' 0%,'+e.c1+' 100%)' : '';
   var price = (e.regular && e.regular>e.price ? '<s>'+fmtNum(e.regular)+'</s> ' : '')+fmtNum(e.price)+' V-Bucks';
   var leaves = e.out ? Date.parse(e.out) : NaN;
+  var histId = (e.main && e.main.id) || (e.items[0] && e.items[0].id) || '';
   var html = '<div class="grab"></div><div class="detail-art" style="'+bg+'">'+imgTag(e.img, e.name)+'</div>'+
     '<h2 style="font-size:24px">'+esc(e.name)+'</h2><div class="muted small" style="margin:4px 0 12px">'+esc(e.kind)+(e.set?' · '+esc(e.set):'')+'</div>'+
     (e.desc && !isFiller(e.desc) ? '<p style="margin:0 0 12px;color:var(--soft)">'+esc(e.desc)+'</p>' : '')+
     '<div class="kv"><span>Price</span><span class="price">'+price+'</span></div>'+
     (!isNaN(leaves) ? '<div class="kv"><span>Leaves the shop</span><span>'+(leaves-Date.now() < 86400000 ? 'in '+dur(leaves-Date.now()) : esc(new Date(leaves).toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'})))+'</span></div>' : '')+
+    '<div class="kv" data-hist="'+esc(histId)+'"><span>Last time before this</span><span class="muted">Checking…</span></div>'+
     (e.items.length>1 ? '<div style="margin:16px 0 8px" class="section-h">Includes</div><div class="list">'+e.items.map(function(i){
       var on = inWish(i.id);
       return '<div class="res">'+imgTag(i.img, '')+'<span class="txt"><b>'+esc(i.name)+'</b><span>'+esc(i.type)+'</span></span>'+
@@ -1417,6 +1464,7 @@ function openEntry(key){
     '<p class="buy-note">Opens Epic\'s web shop. '+(e.section && e.section!=='Item Shop' ? 'It should be under <b>'+esc(e.section)+'</b>. Tap it there, then sign in to buy.' : 'Find it in today\'s shop, tap it, then sign in to buy.')+'</p>'+
     '<button class="btn ghost block" data-close>Close</button>';
   openSheet(html);
+  fillHist(histId);
   $('#entryWish').onclick = function(){
     if(entryWished(e)){ e.items.forEach(function(i){ S.wishlist = S.wishlist.filter(function(w){ return w.id!==i.id; }); }); save('wishlist', S.wishlist); toast('Removed from wishlist'); }
     else toggleWish(e.main);
@@ -1443,7 +1491,7 @@ function openWishlist(){
   if(!S.wishlist.length) html += '<div class="empty">Nothing yet. Heart something in the shop, or search for any skin.</div>';
   else html += '<div class="list">'+S.wishlist.map(function(w){
     var hit = isInShop(w.id);
-    return '<div class="res">'+imgTag(w.img,'')+'<span class="txt"><b>'+esc(w.name)+'</b><span>'+(hit?'<span style="color:var(--accent);font-weight:600">In the shop now</span>':esc(w.type||'Watching'))+'</span></span>'+
+    return '<div class="res">'+imgTag(w.img,'')+'<span class="txt"><b>'+esc(w.name)+'</b><span>'+(hit?'<span style="color:var(--accent);font-weight:600">In the shop now</span>':'<span data-whist="'+esc(w.id)+'">'+esc(w.type||'Watching')+'</span>')+'</span></span>'+
       '<button class="iconbtn" data-unwish="'+esc(w.id)+'" aria-label="Remove '+esc(w.name)+'">'+ICON.close+'</button></div>';
   }).join('')+'</div>';
   html += '<div style="height:14px"></div><button class="btn block" id="wishAdd">Watch for another skin</button>';
@@ -1453,6 +1501,14 @@ function openWishlist(){
     b.closest('.res').remove(); rerender([S.tab]);
   }; });
   $('#wishAdd').onclick = function(){ openSearch('wish'); };
+  S.wishlist.forEach(function(w){
+    if(isInShop(w.id)) return;
+    histFor(w.id).then(function(d){
+      var el = $('#sheet [data-whist="'+w.id+'"]'); if(!el) return;
+      var day = lastSeen(d, false);
+      el.textContent = day ? 'Last in shop '+seenText(day) : 'Not sold in the shop yet';
+    }).catch(function(){});
+  });
 }
 
 /* ---- search: wish (any cosmetic) or skin (outfits, sets go-to) ---- */
