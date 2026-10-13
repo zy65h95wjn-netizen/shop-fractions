@@ -22,7 +22,7 @@
 .library-filter{flex:none;min-height:44px;padding:9px 13px;background:#202b3d;color:var(--text);border:1px solid #49566c;border-radius:12px;font-size:13px;font-weight:700}
 .library-filter[aria-pressed="true"]{border-color:var(--gold);background:#51452e;color:#ffebc4}
 /* Swipe gestures change tabs; the page can still scroll vertically. */
-#app{touch-action:pan-y}
+#app{touch-action:pan-y;min-height:100dvh}
 #app.swipe-next{animation:swipeNext .22s ease-out}
 #app.swipe-prev{animation:swipePrev .22s ease-out}
 @keyframes swipeNext{from{opacity:.65;transform:translateX(18px)}to{opacity:1;transform:none}}
