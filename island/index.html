@@ -487,6 +487,7 @@ var RARITY = {rare:'var(--r-rare)',epic:'var(--r-epic)',legendary:'var(--r-legen
 var RARITY_NAME = {rare:'Rare',epic:'Epic',legendary:'Legendary',mythic:'Mythic'};
 
 /* ================= storage ================= */
+function isFiller(t){ t=String(t||'').trim(); return !t || /^random .*description\.?$/i.test(t) || /^(tbd|placeholder|description)\.?$/i.test(t); }
 function load(k, d){ try{ var v = localStorage.getItem(LS+k); return v==null ? d : JSON.parse(v); }catch(e){ return d; } }
 function save(k, v){ try{ localStorage.setItem(LS+k, JSON.stringify(v)); return true; }catch(e){ return false; } }
 function drop(k){ try{ localStorage.removeItem(LS+k); }catch(e){} }
@@ -574,7 +575,7 @@ function normShop(d){
       c1: hex(e.colors && e.colors.color1), c3: hex(e.colors && e.colors.color3),
       main: {id: main.id, name: main.name, img: im.icon || im.smallIcon || im.featured, type: (main.type && main.type.displayValue) || ''},
       items: items.map(function(i){ var m=i.images||{}; return {id:i.id, name:i.name, type:(i.type&&i.type.displayValue)||'', img:m.icon||m.smallIcon, set:i.set&&i.set.value, rarity:i.rarity&&i.rarity.displayValue}; }),
-      desc: main.description || '',
+      desc: isFiller(main.description) ? '' : main.description,
       set: main.set && main.set.value
     });
   });
@@ -1359,6 +1360,42 @@ function closeSheet(){
 }
 $('#scrim').onclick = closeSheet;
 
+/* swipe a popup down to close it */
+(function(){
+  var sh=$('#sheet'), sc=$('#scrim'), x0=0, y0=0, dy=0, ly=0, lt=0, v=0, track=false, drag=false;
+  sh.addEventListener('touchstart', function(e){
+    track = !(sh.classList.contains('full') || sh.dataset.locked || e.touches.length>1);
+    drag=false; dy=0; v=0;
+    if(track){ x0=e.touches[0].clientX; y0=e.touches[0].clientY; }
+  }, {passive:true});
+  sh.addEventListener('touchmove', function(e){
+    if(!track) return;
+    var x=e.touches[0].clientX, y=e.touches[0].clientY, now=Date.now();
+    if(!drag){
+      var ddy=y-y0, ddx=x-x0;
+      if(Math.abs(ddy)<8 && Math.abs(ddx)<8) return;
+      if(ddy>0 && sh.scrollTop<=0 && Math.abs(ddy)>Math.abs(ddx)){
+        drag=true; y0=y; ly=y; lt=now; sh.style.transition='none'; sc.style.transition='none';
+      } else { track=false; return; }
+    }
+    if(e.cancelable) e.preventDefault();
+    dy=Math.max(0, y-y0);
+    if(now>lt){ v=(y-ly)/(now-lt); ly=y; lt=now; }
+    sh.style.transform='translateY('+dy+'px)';
+    sc.style.opacity=String(Math.max(0, 1-dy/((sh.offsetHeight||1)*1.2)));
+  }, {passive:false});
+  function end(){
+    if(!drag){ track=false; return; }
+    drag=false; track=false;
+    sh.style.transition=''; sc.style.transition='';
+    if(dy > sh.offsetHeight*0.3 || (v > 0.5 && dy > 30)){
+      sh.style.transform='translateY(100%)'; sc.style.opacity='';
+      closeSheet(); setTimeout(function(){ sh.style.transform=''; }, 280);
+    } else { sh.style.transform=''; sc.style.opacity=''; }
+  }
+  sh.addEventListener('touchend', end); sh.addEventListener('touchcancel', end);
+})();
+
 function openEntry(key){
   var e = S.shop && S.shop.entries.filter(function(x){ return x.key===key; })[0]; if(!e) return;
   var bg = e.c1 && e.c3 ? 'background:linear-gradient(180deg,'+e.c3+' 0%,'+e.c1+' 100%)' : '';
@@ -1366,7 +1403,7 @@ function openEntry(key){
   var leaves = e.out ? Date.parse(e.out) : NaN;
   var html = '<div class="grab"></div><div class="detail-art" style="'+bg+'">'+imgTag(e.img, e.name)+'</div>'+
     '<h2 style="font-size:24px">'+esc(e.name)+'</h2><div class="muted small" style="margin:4px 0 12px">'+esc(e.kind)+(e.set?' · '+esc(e.set):'')+'</div>'+
-    (e.desc ? '<p style="margin:0 0 12px;color:var(--soft)">'+esc(e.desc)+'</p>' : '')+
+    (e.desc && !isFiller(e.desc) ? '<p style="margin:0 0 12px;color:var(--soft)">'+esc(e.desc)+'</p>' : '')+
     '<div class="kv"><span>Price</span><span class="price">'+price+'</span></div>'+
     (!isNaN(leaves) ? '<div class="kv"><span>Leaves the shop</span><span>'+(leaves-Date.now() < 86400000 ? 'in '+dur(leaves-Date.now()) : esc(new Date(leaves).toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'})))+'</span></div>' : '')+
     (e.items.length>1 ? '<div style="margin:16px 0 8px" class="section-h">Includes</div><div class="list">'+e.items.map(function(i){
