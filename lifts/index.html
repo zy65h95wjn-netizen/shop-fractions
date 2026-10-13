@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lift Log">
+<meta name="color-scheme" content="dark">
+<title>Lift Log</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0e14'/%3E%3Cpath d='M8 24v16m6-21v26m7-17v8m22-8v8m7-17v26m6-21v16M21 32h22' stroke='%23b7ef73' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:dark;--bg:#0b0e14;--panel:#151b24;--panel-2:#1b222d;--line:#303b49;--text:#f2f5f7;--muted:#a4b0bf;--accent:#b7ef73;--accent-ink:#17220e;--danger:#ffb1a8;--radius:18px}
+*{box-sizing:border-box}
+html{background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100dvh;color:var(--text);font:16px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(90% 350px at 50% -130px,#253c25 0%,transparent 100%),var(--bg)}
+button,input{font:inherit}
+button{-webkit-tap-highlight-color:transparent;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+button:disabled{opacity:.45;cursor:not-allowed}
+.shell{max-width:520px;margin:0 auto;padding:calc(env(safe-area-inset-top,0px) + 26px) 18px calc(env(safe-area-inset-bottom,0px) + 48px)}
+.brand{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.brand-mark{display:inline-flex;align-items:center;gap:9px;font-weight:850;font-size:12px;letter-spacing:.17em;color:var(--accent)}
+.brand-mark svg{width:31px;height:31px}
+.brand-date{font-size:12px;color:var(--muted);font-weight:650}
+h1{font-size:clamp(29px,7vw,38px);line-height:1.12;letter-spacing:-.055em;margin:0 0 6px;font-weight:820}
+.lead{color:var(--muted);margin:0 0 25px;font-size:14px}
+section{margin:0 0 26px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 16px 36px rgba(0,0,0,.12)}
+.section-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 13px}
+h2{font-size:17px;font-weight:800;letter-spacing:-.02em;margin:0}
+.hint,.section-sub{font-size:12px;color:var(--muted)}
+.select-lift{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:17px}
+.lift-btn{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;min-height:52px;padding:6px;color:var(--text);font-weight:750;font-size:14px}
+.lift-btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;color:var(--muted);font-size:13px;font-weight:700;margin-bottom:7px}
+input{display:block;width:100%;min-width:0;min-height:58px;padding:11px 13px;background:#0f141b;border:1px solid #45515f;border-radius:13px;color:var(--text);font-size:24px;font-weight:800;font-variant-numeric:tabular-nums}
+input::placeholder{color:#6e7d8c;font-weight:500}
+.save{width:100%;min-height:56px;border:0;border-radius:13px;margin-top:17px;background:var(--accent);color:var(--accent-ink);font-size:17px;font-weight:850}
+.save:active{transform:scale(.995)}
+.form-note{font-size:12px;text-align:center;color:var(--muted);margin:10px 0 0}
+.status{min-height:0;color:var(--accent);font-size:13px;font-weight:700;text-align:center}
+.status:not(:empty){margin:10px 0 0}
+.status.error{color:var(--danger)}
+.best-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.best-card{text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:15px;min-height:133px;padding:13px 10px;color:var(--text);overflow-wrap:anywhere}
+.best-card[aria-pressed="true"]{border-color:#90b85c;box-shadow:inset 0 0 0 1px #90b85c}
+.best-card .name{display:block;font-size:12px;color:var(--muted);font-weight:750}
+.best-card .value{display:block;font-size:clamp(19px,5vw,26px);line-height:1.15;font-weight:850;margin:15px 0 3px;font-variant-numeric:tabular-nums;letter-spacing:-.04em}
+.best-card .unit{font-size:12px;color:var(--accent);font-weight:750}
+.best-card .set{display:block;font-size:12px;color:var(--muted);margin-top:6px;font-variant-numeric:tabular-nums}
+.best-card.empty .value{color:#718091}
+.history-list{display:flex;flex-direction:column;gap:9px}
+.entry{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 12px 12px 15px}
+.entry-main{flex:1;min-width:0}
+.entry-main strong{font-size:19px;font-weight:820;font-variant-numeric:tabular-nums}
+.entry-main small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.entry-max{color:var(--accent);font-size:12px;font-weight:750;text-align:right;white-space:nowrap}
+.delete{border:1px solid #5b4247;background:#261b22;border-radius:11px;color:var(--danger);min-width:50px;min-height:48px;padding:0 8px;font-size:12px;font-weight:750}
+.empty-history{padding:30px 18px;text-align:center;border:1px dashed #40505c;border-radius:16px;color:var(--muted);font-size:14px;background:rgba(21,27,36,.55)}
+.foot{text-align:center;font-size:12px;color:var(--muted);line-height:1.6;margin-top:8px}
+@media(max-width:355px){.shell{padding-left:12px;padding-right:12px}.panel{padding:13px}.best-card{padding:12px 8px}.lift-btn{font-size:12px}.entry{gap:8px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <header>
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M3 11v10M8 7v18M13 13v6M19 13v6M24 7v18M29 11v10M13 16h6"/></svg> LIFT LOG</span>
+      <span class="brand-date" id="today"></span>
+    </div>
+    <h1>Put in the work.</h1>
+    <p class="lead">Three lifts. Every set. Your progress.</p>
+  </header>
+
+  <section class="panel" aria-labelledby="log-title">
+    <div class="section-top"><h2 id="log-title">Log a set</h2><span class="hint">Auto-dated</span></div>
+    <div class="select-lift" role="group" aria-label="Choose lift">
+      <button type="button" class="lift-btn" data-lift="Bench" aria-pressed="true">Bench</button>
+      <button type="button" class="lift-btn" data-lift="Squat" aria-pressed="false">Squat</button>
+      <button type="button" class="lift-btn" data-lift="Deadlift" aria-pressed="false">Deadlift</button>
+    </div>
+    <form id="log-form" novalidate>
+      <div class="fields">
+        <div><label for="weight">Weight (lb)</label><input id="weight" name="weight" type="number" inputmode="decimal" min="0.01" step="any" placeholder="225" required></div>
+        <div><label for="reps">Reps</label><input id="reps" name="reps" type="number" inputmode="numeric" min="1" step="1" placeholder="5" required></div>
+      </div>
+      <button class="save" type="submit">Save set <span aria-hidden="true">↗</span></button>
+      <p class="form-note">Saved on this device, no account needed.</p>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <section aria-labelledby="best-title">
+    <div class="section-top"><h2 id="best-title">Personal bests</h2><span class="section-sub">Estimated 1RM</span></div>
+    <div class="best-grid">
+      <button type="button" class="best-card empty" data-best="Bench" aria-pressed="true"><span class="name">BENCH</span><span class="value">—</span><span class="unit">lb est. 1RM</span><span class="set">No sets yet</span></button>
+      <button type="button" class="best-card empty" data-best="Squat" aria-pressed="false"><span class="name">SQUAT</span><span class="value">—</span><span class="unit">lb est. 1RM</span><span class="set">No sets yet</span></button>
+      <button type="button" class="best-card empty" data-best="Deadlift" aria-pressed="false"><span class="name">DEADLIFT</span><span class="value">—</span><span class="unit">lb est. 1RM</span><span class="set">No sets yet</span></button>
+    </div>
+  </section>
+
+  <section aria-labelledby="history-title">
+    <div class="section-top"><h2 id="history-title">Bench history</h2><span class="section-sub" id="history-count">0 sets</span></div>
+    <div id="history" class="history-list"></div>
+  </section>
+  <footer class="foot">Est. 1RM = weight × (1 + reps ÷ 30), Epley formula.<br>Stored in this browser on this device. Clearing site data removes logs.</footer>
+</main>
+<script>
+(function(){
+  "use strict";
+  const KEY = "lift-log.sets.v1";
+  const LIFTS = ["Bench","Squat","Deadlift"];
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+  const formatWeight = (weight) => Number(weight).toLocaleString(undefined,{maximumFractionDigits:2});
+  const estimatedMax = (set) => set.weight * (1 + set.reps / 30);
+  let selected = "Bench";
+  let sets = [];
+  let writable = true;
+
+  try {
+    const saved = localStorage.getItem(KEY);
+    if (saved !== null) {
+      const parsed = JSON.parse(saved);
+      if (!Array.isArray(parsed) || !parsed.every(s =>
+        s && typeof s.id === "string" && LIFTS.includes(s.lift) &&
+        typeof s.weight === "number" && Number.isFinite(s.weight) && s.weight > 0 &&
+        Number.isInteger(s.reps) && s.reps > 0 && typeof s.at === "string" &&
+        Number.isFinite(Date.parse(s.at))
+      )) throw new Error("Invalid saved data");
+      sets = parsed;
+    }
+  } catch (error) {
+    writable = false;
+    $("#status").textContent = "Saved data couldn't be read. Entries are protected; nothing will be overwritten.";
+    $("#status").classList.add("error");
+  }
+
+  $("#today").textContent = new Date().toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});
+
+  function message(text, error) {
+    $("#status").textContent = text;
+    $("#status").classList.toggle("error", Boolean(error));
+  }
+  function persist(next) {
+    if (!writable) { message("Storage is unavailable or saved data is unreadable.", true); return false; }
+    try { localStorage.setItem(KEY, JSON.stringify(next)); return true; }
+    catch (error) { message("Could not save on this device. Check Safari storage settings.", true); return false; }
+  }
+  function choose(lift) {
+    selected = lift;
+    $$("[data-lift]").forEach(b => b.setAttribute("aria-pressed",String(b.dataset.lift === selected)));
+    render();
+  }
+  function bestFor(lift) {
+    return sets.filter(s => s.lift === lift).sort((a,b) =>
+      estimatedMax(b) - estimatedMax(a) || b.weight - a.weight || Date.parse(b.at) - Date.parse(a.at)
+    )[0];
+  }
+  function render() {
+    $$("[data-best]").forEach(card => {
+      const best = bestFor(card.dataset.best);
+      card.classList.toggle("empty",!best);
+      card.setAttribute("aria-pressed",String(card.dataset.best === selected));
+      $(".value",card).textContent = best ? Math.round(estimatedMax(best)).toLocaleString() : "—";
+      $(".set",card).textContent = best ? formatWeight(best.weight) + " lb × " + best.reps + " reps" : "No sets yet";
+    });
+    const entries = sets.filter(s => s.lift === selected).sort((a,b) =>
+      Date.parse(b.at) - Date.parse(a.at) || b.id.localeCompare(a.id)
+    );
+    $("#history-title").textContent = selected + " history";
+    $("#history-count").textContent = entries.length + (entries.length === 1 ? " set" : " sets");
+    const list = $("#history");
+    list.replaceChildren();
+    if (!entries.length) {
+      const empty = document.createElement("div");
+      empty.className = "empty-history";
+      empty.textContent = "No " + selected.toLowerCase() + " sets yet. Log your first one above.";
+      list.append(empty);
+      return;
+    }
+    entries.forEach(set => {
+      const row = document.createElement("div");
+      row.className = "entry";
+      const left = document.createElement("div");
+      left.className = "entry-main";
+      const weight = document.createElement("strong");
+      weight.textContent = formatWeight(set.weight) + " lb × " + set.reps;
+      const date = document.createElement("small");
+      date.textContent = new Date(set.at).toLocaleString(undefined,{
+        month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit"
+      });
+      left.append(weight,date);
+      const max = document.createElement("span");
+      max.className = "entry-max";
+      max.textContent = Math.round(estimatedMax(set)) + " est.";
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "delete";
+      remove.textContent = "Delete";
+      remove.setAttribute("aria-label","Delete " + set.weight + " pounds for " + set.reps + " reps on " + date.textContent);
+      remove.addEventListener("click",() => {
+        if (!confirm("Delete this " + set.lift.toLowerCase() + " set (" + formatWeight(set.weight) + " lb × " + set.reps + ")?")) return;
+        const next = sets.filter(s => s.id !== set.id);
+        if (!persist(next)) return;
+        sets = next;
+        message("Set deleted.",false);
+        render();
+      });
+      row.append(left,max,remove);
+      list.append(row);
+    });
+  }
+
+  $$("[data-lift]").forEach(b => b.addEventListener("click",()=>choose(b.dataset.lift)));
+  $$("[data-best]").forEach(b => b.addEventListener("click",()=>choose(b.dataset.best)));
+  $("#log-form").addEventListener("submit",event => {
+    event.preventDefault();
+    const weight = Number($("#weight").value);
+    const reps = Number($("#reps").value);
+    if (!$("#weight").value || !Number.isFinite(weight) || weight <= 0 ||
+        !$("#reps").value || !Number.isInteger(reps) || reps <= 0) {
+      message("Enter a positive weight and a whole number of reps.",true);
+      return;
+    }
+    const set = { id: Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,10),
+      lift:selected,weight:weight,reps:reps,at:new Date().toISOString() };
+    const next = [...sets,set];
+    if (!persist(next)) return;
+    sets = next;
+    message("Saved " + formatWeight(weight) + " lb × " + reps + " to " + selected + ".",false);
+    render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>
