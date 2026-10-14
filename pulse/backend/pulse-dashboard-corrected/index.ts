@@ -57,6 +57,56 @@ async function getRestingSamples(): Promise<Sample[]> {
   }
   throw new Error("Resting-HR sample count exceeds safe paging limit");
 }
+// Imported step records are already daily totals (not overlapping Watch/iPhone
+// intervals). Keep daily step semantics exactly as the ingestion validator sets
+// them: one stored total per New York calendar day.
+type StepTotal = { start_at: string; value: number | string };
+async function getStepTotals(): Promise<StepTotal[]> {
+  if (!SERVICE_ROLE) throw Error("Server configuration unavailable");
+  const cutoff = new Date(Date.now() - 11 * 86400000).toISOString();
+  const u = new URL(PROJECT_URL + "/rest/v1/health_samples");
+  u.searchParams.set("select", "start_at,value");
+  u.searchParams.set("metric", "eq.step_count");
+  u.searchParams.set("start_at", "gte." + cutoff);
+  u.searchParams.set("order", "start_at.desc");
+  u.searchParams.set("limit", "32");
+  const r = await fetch(u, {headers:{
+    "apikey":SERVICE_ROLE,"Authorization":"Bearer "+SERVICE_ROLE
+  },cache:"no-store"});
+  if (!r.ok) throw Error("Unable to retrieve authorized daily step totals");
+  const records = await r.json();
+  if (!Array.isArray(records) || records.length >= 32 ||
+      records.some(s => typeof s.start_at !== "string" ||
+        !Number.isInteger(Number(s.value)) || Number(s.value) < 0 ||
+        Number(s.value) > 200000)) {
+    throw Error("Unexpected daily step-total response");
+  }
+  return records;
+}
+function shiftedDay(dateStr: string, delta: number): string {
+  const d = new Date(dateStr + "T12:00:00Z");
+  d.setUTCDate(d.getUTCDate() + delta);
+  return d.toISOString().slice(0, 10);
+}
+function stepSummary(records: StepTotal[], today: string) {
+  const values = new Map<string, number>();
+  for (const record of records) {
+    const day = dayInNY(record.start_at), value = Number(record.value);
+    if (values.has(day)) throw Error("Duplicate step-day totals");
+    values.set(day, value);
+  }
+  const previous = Array.from({length:7},(_,i)=>values.get(shiftedDay(today,i-7)))
+    .filter((v):v is number=>v!==undefined);
+  const average = previous.length ? Math.round(previous.reduce((a,b)=>a+b,0)/previous.length) : null;
+  return {
+    today: values.get(today) ?? null,
+    average_7d: average,
+    days_present: previous.length,
+    // The 7-day reference always means the seven completed calendar days
+    // before today; missing days are never silently interpreted as zero.
+    last_completed_day:shiftedDay(today,-1)
+  };
+}
 Deno.serve(async (req: Request): Promise<Response> => {
   const origin = req.headers.get("origin") || undefined;
   if (origin && origin !== ORIGIN) return response({ error: "Forbidden origin" }, 403);
@@ -119,6 +169,9 @@ Deno.serve(async (req: Request): Promise<Response> => {
     data.latest.resting_heart_rate = latestOverall
       ? { value: Number(latestOverall.value), unit: "bpm", at: latestOverall.end_at || latestOverall.start_at }
       : null;
+    // Authorization above is required before reading any step totals.
+    // This is only an extension of the existing key-gated dashboard API.
+    data.steps = stepSummary(await getStepTotals(),dayInNY(new Date().toISOString()));
     data.resting_hr_method = "latest_end_at_per_local_day";
     return response(data, 200, origin);
   } catch {
