@@ -89,7 +89,7 @@ Deno.serve(async (req: Request): Promise<Response> => {
     // PostgREST can use HTTP 401/403 for invalid credentials, missing API
     // privileges or JWT failures. Only the explicit SQLSTATE 28000 returned
     // by pulse_read's key guard is evidence of a rejected private key.
-    let authResult: Record<string, unknown>;
+    let authResult: any; // Runtime shape is checked below before accessing dashboard fields.
     try { authResult = await auth.json(); }
     catch { return response({ code: "upstream_auth_unavailable", error: "Authentication service unavailable" }, 503, origin); }
     if (!auth.ok) {
