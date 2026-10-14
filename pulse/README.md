@@ -4,6 +4,16 @@ Resting Beast (previously Pulse Protocol) is a mobile-first dashboard hosted at 
 
 The public URL, repository path, access keys and Supabase integration are intentionally unchanged by the rename.
 
+## Iron Citadel design (Oct 14, 2026)
+The chosen theme uses an original local, standalone fortress SVG in `pulse/assets/iron-citadel-scene.svg`, a fully themed stylesheet `pulse/nightshift-iron-v5.css`, and a color-only chart version `pulse/app-iron-v10.js`.
+
+- The castle, crimson banners, atmospheric stone and ember lighting are scenery. No measurements or UI controls are baked into imagery.
+- Live values, forms, swipe navigation, chart scrubbing, TRT timeline and saved history remain normal HTML/JavaScript interactions.
+- Today, Trends, Context, login, dialogs and bottom navigation share the theme.
+- The source CSP permits only same-origin image assets and retains the original Supabase connection restriction. Reduced-motion behavior is respected.
+- To return to the immediately preceding Nightshift look without backend/data changes, restore the previous references to `nightshift-v4.css` and `app-today-v9.js` and remove the new scenic header elements.
+- Screenshot rendering and Safari Home Screen behavior still require testing on the target iPhone after deployment.
+
 ## Today snapshot (step totals)
 - Heart rate and resting HR appear in a shared card with their original distinct calculations.
 - The step summary uses the existing `step_count` importer records (one complete daily total per New York day, already deduplicated upstream). The key-gated corrected dashboard function returns only the current day's synced total and the **previous completed day’s** imported total.

@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090e19"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://wosfukbzxrykwarxobfw.supabase.co; base-uri 'none'; form-action 'self'"><title>Resting Beast</title><link rel="stylesheet" href="./nightshift-v4.css"></head><body>
-<div class="shell"><header><div class="brand"><div class="mark" aria-hidden="true">✦</div><div><b>Resting Beast</b><small>YOUR PERSONAL SIGNAL</small></div></div><div class="top"><span id="status">Locked</span><button class="secondary" id="refresh" disabled>↻</button></div></header>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#100d0b"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https://wosfukbzxrykwarxobfw.supabase.co; base-uri 'none'; form-action 'self'"><title>Resting Beast</title><link rel="stylesheet" href="./nightshift-iron-v5.css"></head><body>
+<div class="shell"><header><div class="brand"><div class="mark" aria-hidden="true">♜</div><div><b>Resting Beast</b><small>THE IRON CITADEL</small></div></div><div class="top"><span id="status">Locked</span><button class="secondary" id="refresh" disabled>↻</button></div></header>
 <section id="connect" class="surface login"><p class="eyebrow">WELCOME TO YOUR SPACE</p><h1>Find your<br><em>rhythm.</em></h1><p>Your watch measurements already sync to the private CASS Health Lab database. Enter the access key to unlock the trends for this browser session. This app never needs daily entries.</p><form id="login"><label for="key">Private access key</label><div class="stack"><input id="key" type="password" required minlength="35" placeholder="Paste access key" autocomplete="off"><button class="primary">Unlock</button></div><p class="error" id="login-error"></p></form>
 <div class="key-verify-local">
   <button type="button" class="secondary" id="key-check-button">Check pasted key locally</button>
@@ -8,13 +8,18 @@
 </div><p class="hint">The key is kept in this browser session, not saved permanently. No health measurements are stored in this site's source code.</p></section>
 <section id="app" hidden>
 <section class="app-page" id="overview" data-page="today" aria-label="Today">
+<div class="citadel-hero" aria-label="Iron Citadel theme">
+  <p class="citadel-hero-kicker">RESTING BEAST · YOUR PERSONAL SIGNAL</p>
+  <h1>Today</h1>
+  <p>Your health. Your edge.</p>
+</div>
 <div class="signals-head">
-  <p class="section-caption">Live heart signals · Apple Health</p>
+  <p class="section-caption">LIVE SIGNALS · APPLE HEALTH</p>
   <button class="secondary lock-compact" id="lock" type="button">Lock</button>
 </div><p class="error" id="error"></p>
 <div class="today-stack">
   <article class="surface today-heart" aria-label="Heart measurements">
-    <div class="today-card-title"><span aria-hidden="true">♡</span><span>YOUR HEART</span></div>
+    <div class="today-card-title"><span aria-hidden="true">♥</span><span>HEART HEALTH</span></div>
     <div class="today-heart-values">
       <div class="today-heart-metric">
         <p class="eyebrow">RESTING HEART RATE</p>
@@ -29,7 +34,7 @@
     </div>
   </article>
   <article class="surface today-steps" aria-label="Daily step totals">
-    <div class="today-card-title"><span aria-hidden="true">↟</span><span>YOUR STEPS</span></div>
+    <div class="today-card-title"><span aria-hidden="true">♟</span><span>STEPS</span></div>
     <div class="today-step-values">
       <div>
         <p class="eyebrow">TODAY · SO FAR</p>
@@ -74,6 +79,7 @@
 </div>
 </section>
 <section class="app-page" id="trends" data-page="trends" aria-label="Trends" hidden>
+<div class="citadel-subhero"><p class="eyebrow">THE MEASURE OF TIME</p><h1>Trends</h1></div>
 <section class="surface chart"><div class="row"><div><p class="eyebrow">YOUR TIMELINE</p><h2>The long view.</h2></div><div class="controls"><select id="metric"><option value="resting_heart_rate">Resting HR</option><option value="heart_rate">Average HR</option><option value="hrv_sdnn">HRV</option><option value="blood_oxygen_saturation">Blood oxygen · SpO₂</option></select><select id="days"><option value="7">7d</option><option value="30" selected>30d</option><option value="90">90d</option></select></div></div><div class="chart-readout" aria-live="polite" aria-atomic="true"><span id="chart-day">Tap or drag to inspect daily averages</span><strong id="chart-reading"></strong></div>
 <canvas id="chart" tabindex="0" role="slider" aria-label="Inspect daily trend values. Drag on the chart, or use left and right arrow keys." aria-orientation="horizontal" aria-valuemin="1" aria-valuemax="90" aria-valuenow="90" aria-valuetext="Awaiting trend data"></canvas>
 <div class="chart-scrub-controls"><label for="chart-scrubber">Slide to inspect a date</label><input id="chart-scrubber" type="range" min="0" max="29" step="1" value="29" aria-label="Choose day to inspect on the trend chart"></div>
@@ -97,6 +103,7 @@
 </section>
 </section>
 <section class="app-page" id="context" data-page="context" aria-label="Context" hidden>
+<div class="citadel-subhero"><p class="eyebrow">THE FORCES BEHIND THE NUMBERS</p><h1>Context</h1></div>
 <div class="row spaced context-title"><div><p class="eyebrow">THE THINGS BEHIND THE NUMBERS</p><h2>Your world, logged.</h2></div><button id="add" class="primary">+ Log change</button></div><p class="hint context-intro">Set your baseline once. Update only when your dose, medication, nicotine, or caffeine use changes. Earlier entries remain in the timeline.</p>
 <div class="context"><article class="surface"><div class="context-head"><p class="eyebrow">TRT PROTOCOL</p><button type="button" class="secondary small-action" id="edit-trt">Set</button></div><h3 id="active-trt">Not logged</h3><p id="date-trt" class="hint">No baseline set</p></article><article class="surface"><div class="context-head"><p class="eyebrow">NICOTINE</p><button type="button" class="secondary small-action" id="edit-nicotine">Set</button></div><h3 id="active-nicotine">Not logged</h3><p id="date-nicotine" class="hint">No baseline set</p></article><article class="surface"><div class="context-head"><p class="eyebrow">CAFFEINE</p><button type="button" class="secondary small-action" id="edit-caffeine">Set</button></div><h3 id="active-caffeine">Not logged</h3><p id="date-caffeine" class="hint">No baseline set</p></article><article class="surface"><div class="context-head"><p class="eyebrow">OPTIONAL BP</p><button type="button" class="secondary small-action" id="edit-bp">Record</button></div><h3 id="active-bp">No reading</h3><p id="date-bp" class="hint">No measurements required</p></article></div>
 <section class="surface section"><div class="row"><h2>Medication lineup</h2><button class="secondary" id="add-med">+ Add medication</button></div><p class="hint">Current medications stay active until you record a change or stop date.</p><div id="med-list" class="hint">No medications logged.</div></section>
@@ -105,8 +112,8 @@
 <nav class="dock" aria-label="Resting Beast pages">
   <a href="#overview" data-page-link="today" aria-current="page" class="is-active"><span aria-hidden="true">⌂</span><span>Today</span></a>
   <a href="#trends" data-page-link="trends"><span aria-hidden="true">⌁</span><span>Trends</span></a>
-  <a href="#context" data-page-link="context"><span aria-hidden="true">✦</span><span>Context</span></a>
+  <a href="#context" data-page-link="context"><span aria-hidden="true">⚙</span><span>Context</span></a>
 </nav>
 <footer>Heart measurements import automatically from the existing Health pipeline. Blood pressure is optional. Missing readings aren't filled in or assumed to remain unchanged. No diagnosis or causation claims.<div id="updated"></div></footer></section></div>
 <dialog id="dlg"><form id="event-form"><div class="row"><h2>Record a change</h2><button type="button" class="secondary" id="cancel">×</button></div><label for="kind">Change type</label><select id="kind"><option value="trt">TRT protocol</option><option value="medication">Medication</option><option value="nicotine">Nicotine</option><option value="caffeine">Caffeine</option><option value="bp">Blood pressure reading</option></select><label for="when">Effective date and time</label><input id="when" type="datetime-local" required><div id="fields"></div><p class="hint" id="event-help">Enter a baseline once or record a change.</p><p class="error" id="save-error"></p><div class="row end"><button type="button" class="secondary" id="cancel2">Cancel</button><button class="primary" id="save">Save event</button></div></form></dialog>
-<script src="./app-today-v9.js" defer></script><script src="./compare.js?v=compare-1" defer></script><script src="./pages-v1.js" defer></script></body></html>
+<script src="./app-iron-v10.js" defer></script><script src="./compare.js?v=compare-1" defer></script><script src="./pages-v1.js" defer></script></body></html>
