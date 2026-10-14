@@ -7,7 +7,7 @@ This isolated directory hosts a mobile-first dashboard at `/shop-fractions/pulse
 - Reads existing Apple Health-derived heart rate, resting HR, HRV (SDNN) and daily averages from the active `cass-health-lab` Supabase project.
 - Appends dated TRT protocol, medication, nicotine, caffeine, and optional blood pressure changes. Last-known context carries forward until another event replaces it.
 - Displays historical events without assigning medical causation. Timezone for charts is America/New_York.
-- Stores the private access credential **only** in the browser's local storage. The static GitHub code includes only a publishable Supabase key, which is not a secret.
+- Keeps the private access credential **only** in this browser tab's session storage (not persistent), because GitHub Pages project paths share a browser origin with other apps. The static GitHub code includes only a publishable Supabase key, which is not a secret.
 - No manual entry for watch metrics; no requirement to wear a watch overnight.
 
 ## Not connected yet
@@ -32,5 +32,5 @@ This isolated directory hosts a mobile-first dashboard at `/shop-fractions/pulse
 
 - Move to dedicated `pulse-protocol` repository.
 - Add oxygen from the Health exporter after confirming source format and permission.
-- Consider Supabase Auth instead of a device-persisted access token before wider use.
+- Move to a dedicated web origin and Supabase Auth for persistent signed-in sessions before wider use.
 - Compare trend windows before/after event changes without claiming causation.
