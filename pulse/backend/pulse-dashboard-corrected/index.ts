@@ -96,9 +96,16 @@ function stepSummary(records: StepTotal[], today: string) {
     values.set(day, value);
   }
   const yesterday = shiftedDay(today,-1);
+  // Retain previous fields temporarily for any older cached frontend.
+  const previous = Array.from({length:7},(_,i)=>values.get(shiftedDay(today,i-7)))
+    .filter((v):v is number=>v!==undefined);
+  const average = previous.length
+    ? Math.round(previous.reduce((a,b)=>a+b,0)/previous.length) : null;
   return {
     today: values.get(today) ?? null,
     yesterday: values.get(yesterday) ?? null,
+    average_7d: average,
+    days_present: previous.length,
     // A missing current day stays null; no fallback to yesterday.
     last_completed_day:yesterday
   };
