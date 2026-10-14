@@ -4,6 +4,13 @@ Resting Beast (previously Pulse Protocol) is a mobile-first dashboard hosted at 
 
 The public URL, repository path, access keys and Supabase integration are intentionally unchanged by the rename.
 
+## Today snapshot (step totals)
+- Heart rate and resting HR appear in a shared card with their original distinct calculations.
+- The step summary uses the existing `step_count` importer records (one complete daily total per New York day, already deduplicated upstream). The key-gated corrected dashboard function returns only the current day's synced total and the average of the previous seven **completed** calendar days.
+- When today's step total has not yet been exported, Today displays an unknown/awaiting-sync state rather than yesterday's count or zero. Missing completed days are excluded and the number present is shown.
+- This dashboard update does not change the Apple Health Auto Export schedule or how step totals are created. To populate a live partial-day total, the exporter must send a current-day daily summary, which has not been verified.
+- Today also provides a seven-completed-day resting HR sparkline from final daily Watch estimates and current logged TRT protocol. These are visual comparisons, not evidence of causation.
+
 ## What works
 
 - Reads Apple Health-derived heart rate, resting HR, HRV (SDNN), and SpO₂ from `cass-health-lab`. **Resting HR is the latest revised estimate for each New York calendar day (greatest `end_at`), never the mean of that day's revised records.** Other metrics retain their existing aggregation.
