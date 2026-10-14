@@ -1,16 +1,12 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090e19"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://wosfukbzxrykwarxobfw.supabase.co; base-uri 'none'; form-action 'self'"><title>Pulse Protocol</title><link rel="stylesheet" href="./nightshift-v1.css"></head><body>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090e19"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://wosfukbzxrykwarxobfw.supabase.co; base-uri 'none'; form-action 'self'"><title>Pulse Protocol</title><link rel="stylesheet" href="./nightshift-v2.css"></head><body>
 <div class="shell"><header><div class="brand"><div class="mark" aria-hidden="true">✦</div><div><b>Pulse Protocol</b><small>YOUR PERSONAL SIGNAL</small></div></div><div class="top"><span id="status">Locked</span><button class="secondary" id="refresh" disabled>↻</button></div></header>
 <section id="connect" class="surface login"><p class="eyebrow">WELCOME TO YOUR SPACE</p><h1>Find your<br><em>rhythm.</em></h1><p>Your watch measurements already sync to the private CASS Health Lab database. Enter the access key to unlock the trends for this browser session. This app never needs daily entries.</p><form id="login"><label for="key">Private access key</label><div class="stack"><input id="key" type="password" required minlength="35" placeholder="Paste access key" autocomplete="off"><button class="primary">Unlock</button></div><p class="error" id="login-error"></p></form><p class="hint">The key is kept in this browser session, not saved permanently. No health measurements are stored in this site's source code.</p></section>
 <section id="app" hidden>
-<section class="hero" id="overview" aria-labelledby="hero-title">
-  <div class="hero-copy"><p class="eyebrow">THE LONG GAME · PERSONAL PERFORMANCE</p>
-    <h1 id="hero-title">Find your<br><em>rhythm.</em></h1>
-    <p class="hero-sub">Your heart, your habits, your story. One clear place to see what changes.</p>
-  </div>
-  <button class="secondary" id="lock">Lock</button>
-</section>
-<p class="section-caption">Today's signals · From your Apple Health feed</p><p class="error" id="error"></p>
+<div class="signals-head" id="overview">
+  <p class="section-caption">Live heart signals · Apple Health</p>
+  <button class="secondary lock-compact" id="lock" type="button">Lock</button>
+</div><p class="error" id="error"></p>
 <div class="metrics">
   <article class="surface metric featured metric-rhr">
     <div><div class="metric-symbol" aria-hidden="true">◉</div><p class="eyebrow">RESTING HEART RATE</p><p class="metric-foot">Latest daily estimate</p></div>
@@ -28,12 +24,17 @@
     <div><div class="metric-symbol" aria-hidden="true">♡</div><p class="eyebrow">LATEST HEART RATE</p></div>
     <div><div id="hr" class="number">—</div><p id="hr-at" class="hint">Awaiting data</p></div>
   </article>
-  <a class="surface metric-shortcut" href="#trends"><span class="shortcut-glyph" aria-hidden="true">↗</span><span class="shortcut-title">See the bigger picture</span><span class="shortcut-sub">Explore your trends →</span></a>
 </div>
 <section class="surface chart" id="trends"><div class="row"><div><p class="eyebrow">YOUR TIMELINE</p><h2>The long view.</h2></div><div class="controls"><select id="metric"><option value="resting_heart_rate">Resting HR</option><option value="heart_rate">Average HR</option><option value="hrv_sdnn">HRV</option><option value="blood_oxygen_saturation">Blood oxygen · SpO₂</option></select><select id="days"><option value="7">7d</option><option value="30" selected>30d</option><option value="90">90d</option></select></div></div><div class="chart-readout" aria-live="polite" aria-atomic="true"><span id="chart-day">Tap or drag to inspect daily averages</span><strong id="chart-reading"></strong></div>
 <canvas id="chart" tabindex="0" role="slider" aria-label="Inspect daily trend values. Drag on the chart, or use left and right arrow keys." aria-orientation="horizontal" aria-valuemin="1" aria-valuemax="90" aria-valuenow="90" aria-valuetext="Awaiting trend data"></canvas>
 <div class="chart-scrub-controls"><label for="chart-scrubber">Slide to inspect a date</label><input id="chart-scrubber" type="range" min="0" max="29" step="1" value="29" aria-label="Choose day to inspect on the trend chart"></div>
-<p class="hint">Resting HR uses the latest Apple Watch estimate recorded for each day; other chart metrics show daily averages. Touch the chart or use the slider to inspect a day. Blank days mean no reading. Gold markers show logged changes, not proven causes.</p></section>
+<div class="trt-sync" aria-labelledby="trt-sync-title">
+ <div class="trt-sync-head"><span id="trt-sync-title">TRT protocol over time</span><button id="compare-trt" type="button" class="secondary trt-jump" disabled>Compare TRT change ↗</button></div>
+ <strong id="trt-reading" aria-live="polite">Select a day to see the protocol</strong>
+ <div class="trt-rail-wrap"><div id="trt-rail" class="trt-rail" role="img" aria-label="TRT protocol timeline"></div><span id="trt-cursor" class="trt-cursor" hidden aria-hidden="true"></span></div>
+ <p class="hint" id="trt-details">The logged TRT regimen carries forward until changed. It is not an injection log.</p>
+</div>
+<p class="hint">Resting HR uses the latest estimate each day; other metrics use daily averages. Gold lines mark any logged change. The TRT lane shows recorded regimens, not confirmed injections or causes of heart-rate changes.</p></section>
 <section class="surface section comparison" id="patterns" aria-labelledby="comparison-heading">
   <div class="row comparison-header"><div><p class="eyebrow">BEFORE &amp; AFTER</p><h2 id="comparison-heading">What shifted?</h2></div></div>
   <div class="compare-controls">
@@ -56,4 +57,4 @@
 </nav>
 <footer>Heart measurements import automatically from the existing Health pipeline. Blood pressure is optional. Missing readings aren't filled in or assumed to remain unchanged. No diagnosis or causation claims.<div id="updated"></div></footer></section></div>
 <dialog id="dlg"><form id="event-form"><div class="row"><h2>Record a change</h2><button type="button" class="secondary" id="cancel">×</button></div><label for="kind">Change type</label><select id="kind"><option value="trt">TRT protocol</option><option value="medication">Medication</option><option value="nicotine">Nicotine</option><option value="caffeine">Caffeine</option><option value="bp">Blood pressure reading</option></select><label for="when">Effective date and time</label><input id="when" type="datetime-local" required><div id="fields"></div><p class="hint" id="event-help">Enter a baseline once or record a change.</p><p class="error" id="save-error"></p><div class="row end"><button type="button" class="secondary" id="cancel2">Cancel</button><button class="primary" id="save">Save event</button></div></form></dialog>
-<script src="./app-rhr-v5.js" defer></script><script src="./compare.js?v=compare-1" defer></script></body></html>
+<script src="./app-trt-v6.js" defer></script><script src="./compare.js?v=compare-1" defer></script></body></html>
