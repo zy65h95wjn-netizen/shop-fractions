@@ -4,6 +4,7 @@ const URL='https://wosfukbzxrykwarxobfw.supabase.co/rest/v1/rpc/';
 const PUBLIC_KEY='sb_publishable_jkbf7B7azIjxRZHwvQ_vGw_aGi8hcHf';
 const el=id=>document.getElementById(id), storage='pulse_protocol_key_v1';
 let secret=sessionStorage.getItem(storage)||'', state=null, busy=false;
+let chartSelection=null, chartViewport=null, chartDragging=false;
 const kinds={trt:'TRT',medication:'Medication',nicotine:'Nicotine',caffeine:'Caffeine',bp:'Blood pressure'};
 const unit={heart_rate:'bpm',resting_heart_rate:'bpm',hrv_sdnn:'ms',blood_oxygen_saturation:'%'};
 const fields={
@@ -26,6 +27,15 @@ function active(kind){return state.events.find(e=>e.kind===kind&&new Date(e.effe
 function renderContext(){for(let kind of ['trt','nicotine','caffeine','bp']){let e=active(kind);txt('active-'+kind,e?summary(e):kind==='bp'?'No reading':'Not logged');txt('date-'+kind,e?(kind==='bp'?'Measured ':'Effective ')+stamp(e.effective_at):kind==='bp'?'No measurements required':'No baseline set');}
 let med=new Map();for(let e of state.events){if(e.kind!=='medication'||new Date(e.effective_at)>new Date())continue;let name=(e.data?.name||'').trim().toLowerCase();if(name&&!med.has(name))med.set(name,e);}let box=el('med-list');box.replaceChildren();let count=0;for(let e of med.values()){if(e.data?.status==='stopped')continue;count++;let row=document.createElement('div'),b=document.createElement('strong'),span=document.createElement('span');row.className='med';b.textContent=e.data.name;span.textContent=[e.data.dose,e.data.frequency].filter(Boolean).join(' · ');row.append(b,span);box.append(row);}if(!count)box.textContent='No active medications logged.';}
 function renderHistory(){let box=el('history');box.replaceChildren();txt('history-count',state.events.length+' entries');if(!state.events.length){box.textContent='Nothing logged yet. Only log meaningful changes.';return;}for(let e of state.events.slice(0,35)){let row=document.createElement('div'),b=document.createElement('strong'),small=document.createElement('small');row.className='event';b.textContent=(kinds[e.kind]||e.kind)+' · '+summary(e);small.textContent=stamp(e.effective_at);row.append(b,small);box.append(row);}}
+function inspectChartAt(clientX){
+  if(!chartViewport)return;
+  const rect=el('chart').getBoundingClientRect();
+  const g=chartViewport;
+  const relative=Math.max(0,Math.min(1,(clientX-rect.left-g.left)/(g.right-g.left)));
+  const index=Math.round(relative*(g.data.length-1));
+  chartSelection=g.data[index]?.day||null;
+  chart();
+}
 function chart(){let c=el('chart'),ctx=c.getContext('2d'),bounds=c.getBoundingClientRect();if(!bounds.width)return;let ratio=Math.min(devicePixelRatio||1,3);c.width=bounds.width*ratio;c.height=bounds.height*ratio;ctx.setTransform(ratio,0,0,ratio,0,0);let W=bounds.width,H=bounds.height,metric=el('metric').value;let daysShown=Number(el('days').value);
 let today=nyDay(new Date());
 let byDate=new Map(state.daily.map(d=>[d.day,d]));
@@ -33,14 +43,68 @@ let data=Array.from({length:daysShown},(_,i)=>{
 let day=localShift(today,i-daysShown+1);
 let raw=byDate.get(day)?.[metric];
 return {day,value:raw==null?null:Number(raw)};
-});let good=data.filter(d=>d.value!==null&&Number.isFinite(d.value));ctx.clearRect(0,0,W,H);if(!good.length){ctx.fillStyle='#9fb3bf';ctx.font='13px sans-serif';ctx.fillText('No measurements for this period',28,H/2);return;}let values=good.map(d=>d.value),min=Math.min(...values),max=Math.max(...values),pad=Math.max((max-min)*.2,metric==='hrv_sdnn'?4:2);min=Math.max(0,min-pad);max+=pad;let left=37,right=W-12,top=10,bottom=H-29;let x=i=>left+(right-left)*i/Math.max(1,data.length-1),y=v=>bottom-(v-min)/(max-min)*(bottom-top);ctx.font='11px sans-serif';ctx.textAlign='right';for(let i=0;i<4;i++){let n=min+(max-min)*i/3,yy=y(n);ctx.strokeStyle='#293d48';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(left,yy);ctx.lineTo(right,yy);ctx.stroke();ctx.fillStyle='#8ea5ae';ctx.fillText(String(Math.round(n)),left-8,yy+4);}ctx.textAlign='left';ctx.fillText(data[0]?.day?.slice(5)||'',left,H-8);ctx.textAlign='right';ctx.fillText(data[data.length-1]?.day?.slice(5)||'',right,H-8);
+});let good=data.filter(d=>d.value!==null&&Number.isFinite(d.value));ctx.clearRect(0,0,W,H);
+let left=37,right=W-12,top=10,bottom=H-29;
+chartViewport={left,right,data,metric};
+if(!chartSelection || !data.some(d=>d.day===chartSelection)) chartSelection=good.length?good[good.length-1].day:null;
+const selectionIndex=data.findIndex(d=>d.day===chartSelection);
+const selected=selectionIndex>=0?data[selectionIndex]:null;
+const inspectionDay=el('chart-day'),inspectionValue=el('chart-reading');
+if(selected){
+  let date=new Date(selected.day+'T12:00:00Z').toLocaleDateString('en-US',{timeZone:'UTC',month:'short',day:'numeric',year:'numeric'});
+  inspectionDay.textContent=date+' · daily average';
+  inspectionValue.textContent=selected.value===null||!Number.isFinite(selected.value)?'No reading':selected.value.toFixed(1)+' '+unit[metric];
+}else{
+  inspectionDay.textContent='Tap or drag to inspect daily averages';
+  inspectionValue.textContent=good.length?'':'No measurements';
+}
+c.setAttribute('aria-valuemin','1');
+c.setAttribute('aria-valuemax',String(data.length));
+c.setAttribute('aria-valuenow',String(Math.max(1,selectionIndex+1)));
+c.setAttribute('aria-valuetext',(selected?inspectionDay.textContent+': '+inspectionValue.textContent:'No recorded data'));
+if(!good.length){ctx.fillStyle='#9fb3bf';ctx.font='13px sans-serif';ctx.fillText('No measurements for this period',28,H/2);return;}let values=good.map(d=>d.value),min=Math.min(...values),max=Math.max(...values),pad=Math.max((max-min)*.2,metric==='hrv_sdnn'?4:2);min=Math.max(0,min-pad);max+=pad;let x=i=>left+(right-left)*i/Math.max(1,data.length-1),y=v=>bottom-(v-min)/(max-min)*(bottom-top);ctx.font='11px sans-serif';ctx.textAlign='right';for(let i=0;i<4;i++){let n=min+(max-min)*i/3,yy=y(n);ctx.strokeStyle='#293d48';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(left,yy);ctx.lineTo(right,yy);ctx.stroke();ctx.fillStyle='#8ea5ae';ctx.fillText(String(Math.round(n)),left-8,yy+4);}ctx.textAlign='left';ctx.fillText(data[0]?.day?.slice(5)||'',left,H-8);ctx.textAlign='right';ctx.fillText(data[data.length-1]?.day?.slice(5)||'',right,H-8);
 ctx.strokeStyle='#7dd0c2';ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.beginPath();let drawing=false;data.forEach((d,i)=>{if(d.value===null||!Number.isFinite(d.value)){drawing=false;return;}if(!drawing)ctx.moveTo(x(i),y(d.value));else ctx.lineTo(x(i),y(d.value));drawing=true;});ctx.stroke();ctx.fillStyle='#9ce5d4';data.forEach((d,i)=>{if(d.value===null||!Number.isFinite(d.value))return;ctx.beginPath();ctx.arc(x(i),y(d.value),2,0,Math.PI*2);ctx.fill();});
-for(let e of state.events){if(e.kind==='bp')continue;let day=nyDay(e.effective_at),i=data.findIndex(d=>d.day===day);if(i<0)continue;ctx.strokeStyle='#d5ad6b';ctx.setLineDash([4,5]);ctx.beginPath();ctx.moveTo(x(i),top);ctx.lineTo(x(i),bottom);ctx.stroke();ctx.setLineDash([]);}}
+for(let e of state.events){if(e.kind==='bp')continue;let day=nyDay(e.effective_at),i=data.findIndex(d=>d.day===day);if(i<0)continue;ctx.strokeStyle='#d5ad6b';ctx.setLineDash([4,5]);ctx.beginPath();ctx.moveTo(x(i),top);ctx.lineTo(x(i),bottom);ctx.stroke();ctx.setLineDash([]);}
+if(selected){
+  const px=x(selectionIndex);
+  ctx.strokeStyle='#e7e7df';
+  ctx.lineWidth=1.2;
+  ctx.setLineDash([3,4]);
+  ctx.beginPath();ctx.moveTo(px,top);ctx.lineTo(px,bottom);ctx.stroke();ctx.setLineDash([]);
+  if(selected.value!==null&&Number.isFinite(selected.value)){
+    ctx.beginPath();ctx.arc(px,y(selected.value),6.5,0,Math.PI*2);
+    ctx.fillStyle='#13242b';ctx.fill();
+    ctx.lineWidth=2.6;ctx.strokeStyle='#faf3df';ctx.stroke();
+  }
+}}
 function render(){showMetric('heart_rate','hr');showMetric('resting_heart_rate','rhr');showMetric('hrv_sdnn','hrv');showMetric('blood_oxygen_saturation','spo2');renderContext();renderHistory();chart();window.PulseCompare?.render(state);}
 function openDialog(kind){el('kind').value=kind||'trt';el('fields').innerHTML=fields[el('kind').value];let d=new Date(Date.now()-new Date().getTimezoneOffset()*60000);el('when').value=d.toISOString().slice(0,16);txt('save-error','');el('dlg').showModal();}
 function payload(kind){let get=id=>el(id)?.value?.trim()||'';switch(kind){case'trt':return {dose_mg:Number(get('dose')),interval_days:Number(get('interval')),route:get('route')};case'medication':return {name:get('name'),status:get('med-status'),dose:get('med-dose'),frequency:get('frequency')};case'nicotine':case'caffeine':return {level:get('level'),notes:get('notes')};case'bp':return Object.assign({systolic:Number(get('sys')),diastolic:Number(get('dia'))},get('pulse')?{pulse:Number(get('pulse'))}:{})}}
 el('login').addEventListener('submit',async e=>{e.preventDefault();secret=el('key').value.trim();txt('login-error','');await refresh();if(state)el('key').value='';});
-el('refresh').addEventListener('click',refresh);el('days').addEventListener('change',chart);el('metric').addEventListener('change',chart);window.addEventListener('resize',()=>{if(state&&!el('app').hidden)chart();});
+el('refresh').addEventListener('click',refresh);el('days').addEventListener('change',chart);
+el('metric').addEventListener('change',()=>{chartSelection=null;chart();});
+const chartCanvas=el('chart');
+chartCanvas.addEventListener('pointerdown',e=>{
+  if(e.pointerType==='mouse'&&e.button!==0)return;
+  chartDragging=true;
+  if(chartCanvas.setPointerCapture)chartCanvas.setPointerCapture(e.pointerId);
+  inspectChartAt(e.clientX);
+});
+chartCanvas.addEventListener('pointermove',e=>{if(chartDragging)inspectChartAt(e.clientX);});
+for(const eventName of ['pointerup','pointercancel','lostpointercapture']){
+  chartCanvas.addEventListener(eventName,()=>{chartDragging=false;});
+}
+chartCanvas.addEventListener('keydown',e=>{
+  if(!chartViewport)return;
+  const points=chartViewport.data,oldIndex=Math.max(0,points.findIndex(d=>d.day===chartSelection));
+  let nextIndex;
+  if(e.key==='ArrowLeft')nextIndex=Math.max(0,oldIndex-1);
+  else if(e.key==='ArrowRight')nextIndex=Math.min(points.length-1,oldIndex+1);
+  else if(e.key==='Home')nextIndex=0;
+  else if(e.key==='End')nextIndex=points.length-1;
+  else return;
+  e.preventDefault();chartSelection=points[nextIndex].day;chart();
+});window.addEventListener('resize',()=>{if(state&&!el('app').hidden)chart();});
 el('lock').addEventListener('click',()=>{sessionStorage.removeItem(storage);secret='';state=null;visible(false);el('key').value='';});
 el('add').addEventListener('click',()=>openDialog('trt'));el('add-med').addEventListener('click',()=>openDialog('medication'));el('cancel').addEventListener('click',()=>el('dlg').close());el('cancel2').addEventListener('click',()=>el('dlg').close());el('kind').addEventListener('change',()=>{el('fields').innerHTML=fields[el('kind').value];});
 el('event-form').addEventListener('submit',async e=>{e.preventDefault();let btn=el('save');btn.disabled=true;txt('save-error','');try{let dt=new Date(el('when').value);if(isNaN(dt.getTime()))throw Error('Invalid effective date');let kind=el('kind').value;await rpc('pulse_write',{p_key:secret,p_kind:kind,p_effective_at:dt.toISOString(),p_data:payload(kind)});el('dlg').close();await refresh();}catch(err){txt('save-error',err.message||String(err));}finally{btn.disabled=false;}});
