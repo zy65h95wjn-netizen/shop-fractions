@@ -15,6 +15,7 @@ bp:'<label for="sys">Systolic (mmHg)</label><input id="sys" type="number" min="3
 };
 function txt(id,v){el(id).textContent=v;}
 function stamp(t){if(!t)return 'No measurement';let d=new Date(t);return isNaN(d.getTime())?'Unknown date':d.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});}
+function localShift(s,n){const d=new Date(s+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);}
 function nyDay(t){let parts=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(t));let map={};for(let part of parts)map[part.type]=part.value;return map.year+'-'+map.month+'-'+map.day;}
 function visible(v){el('connect').hidden=v;el('app').hidden=!v;el('refresh').disabled=!v;txt('status',v?'Protected':'Locked');}
 async function rpc(method,data){let r=await fetch(URL+method,{method:'POST',cache:'no-store',headers:{apikey:PUBLIC_KEY,'content-type':'application/json'},body:JSON.stringify(data)});let payload;try{payload=await r.json();}catch{throw Error('Unexpected server response '+r.status);}if(!r.ok){if(payload?.code==='28000'||r.status===401||r.status===403)throw Error('Invalid or expired private key.');throw Error(payload?.message||'Server error '+r.status);}return payload;}
@@ -29,7 +30,7 @@ function chart(){let c=el('chart'),ctx=c.getContext('2d'),bounds=c.getBoundingCl
 let today=nyDay(new Date());
 let byDate=new Map(state.daily.map(d=>[d.day,d]));
 let data=Array.from({length:daysShown},(_,i)=>{
-let day=window.PulseCompare.shiftDay(today,i-daysShown+1);
+let day=localShift(today,i-daysShown+1);
 let raw=byDate.get(day)?.[metric];
 return {day,value:raw==null?null:Number(raw)};
 });let good=data.filter(d=>d.value!==null&&Number.isFinite(d.value));ctx.clearRect(0,0,W,H);if(!good.length){ctx.fillStyle='#9fb3bf';ctx.font='13px sans-serif';ctx.fillText('No measurements for this period',28,H/2);return;}let values=good.map(d=>d.value),min=Math.min(...values),max=Math.max(...values),pad=Math.max((max-min)*.2,metric==='hrv_sdnn'?4:2);min=Math.max(0,min-pad);max+=pad;let left=37,right=W-12,top=10,bottom=H-29;let x=i=>left+(right-left)*i/Math.max(1,data.length-1),y=v=>bottom-(v-min)/(max-min)*(bottom-top);ctx.font='11px sans-serif';ctx.textAlign='right';for(let i=0;i<4;i++){let n=min+(max-min)*i/3,yy=y(n);ctx.strokeStyle='#293d48';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(left,yy);ctx.lineTo(right,yy);ctx.stroke();ctx.fillStyle='#8ea5ae';ctx.fillText(String(Math.round(n)),left-8,yy+4);}ctx.textAlign='left';ctx.fillText(data[0]?.day?.slice(5)||'',left,H-8);ctx.textAlign='right';ctx.fillText(data[data.length-1]?.day?.slice(5)||'',right,H-8);
