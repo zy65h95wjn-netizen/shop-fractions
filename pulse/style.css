@@ -26,3 +26,14 @@
   .compare-item-title{align-items:flex-start}
   .compare-item-title small{max-width:55%}
 }
+
+/* Inspect individual plotted daily averages without blocking vertical page scrolling. */
+.chart-readout{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:45px;padding:10px 12px;margin:12px 0 5px;background:#0f1b25;border:1px solid #36515c;border-radius:12px}
+.chart-readout span{color:#a6c0c8;font-size:12px;line-height:1.4}
+.chart-readout strong{color:#eff7ec;font-size:16px;white-space:nowrap;text-align:right}
+#chart{touch-action:pan-y;cursor:crosshair;user-select:none;-webkit-user-select:none}
+#chart:focus-visible{outline:2px solid #8bdacd;outline-offset:2px;border-radius:5px}
+@media(max-width:750px){
+  .chart-readout{padding:9px 11px;min-height:47px}
+  .chart-readout strong{font-size:15px}
+}
