@@ -1,4 +1,4 @@
-# Pulse Protocol — v0.3
+# Pulse Protocol — v0.4
 
 This isolated directory hosts a mobile-first dashboard at `/shop-fractions/pulse/`. It does **not** change the `/island/` app. This is a provisional location until a dedicated GitHub repo is created.
 
@@ -6,6 +6,7 @@ This isolated directory hosts a mobile-first dashboard at `/shop-fractions/pulse
 
 - Reads Apple Health-derived heart rate, resting HR, HRV (SDNN), and blood oxygen saturation (SpO₂, when available) with daily averages from the active `cass-health-lab` Supabase project.
 - Appends dated TRT protocol, medication, nicotine, caffeine, and optional blood pressure changes. Last-known context carries forward until another event replaces it.
+- Each context card has a **Set/Update** control. When a prior setting exists, its values prefill the change form; the effective date defaults to now. Current medications have **Update** and **Log stop** actions. Each action opens a form and writes only after explicit Save; no health or medication baselines are assumed or auto-inserted.
 - Displays historical events and **Changes & Trends** comparisons without assigning medical causation. Timezone for charts is America/New_York. The recent-trend view needs no manual events; the around-change view compares data before and after an effective date. The code fetches up to 90 days of daily measurements; the chart can display 7, 30 or 90 days independently.
 - The historical chart supports iPhone finger-drag/tap scrubbing (or arrow keys) to inspect the plotted **daily average** and date. A missing day is explicitly shown as **No reading**. This intentionally does not expose or request individual raw measurements.
 - Keeps the private access credential **only** in this browser tab's session storage (not persistent), because GitHub Pages project paths share a browser origin with other apps. The static GitHub code includes only a publishable Supabase key, which is not a secret.
