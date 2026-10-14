@@ -95,16 +95,12 @@ function stepSummary(records: StepTotal[], today: string) {
     if (values.has(day)) throw Error("Duplicate step-day totals");
     values.set(day, value);
   }
-  const previous = Array.from({length:7},(_,i)=>values.get(shiftedDay(today,i-7)))
-    .filter((v):v is number=>v!==undefined);
-  const average = previous.length ? Math.round(previous.reduce((a,b)=>a+b,0)/previous.length) : null;
+  const yesterday = shiftedDay(today,-1);
   return {
     today: values.get(today) ?? null,
-    average_7d: average,
-    days_present: previous.length,
-    // The 7-day reference always means the seven completed calendar days
-    // before today; missing days are never silently interpreted as zero.
-    last_completed_day:shiftedDay(today,-1)
+    yesterday: values.get(yesterday) ?? null,
+    // A missing current day stays null; no fallback to yesterday.
+    last_completed_day:yesterday
   };
 }
 Deno.serve(async (req: Request): Promise<Response> => {
