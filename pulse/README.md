@@ -1,6 +1,8 @@
-# Pulse Protocol — v0.5
+# Resting Beast — v0.6 (visual rename)
 
-This isolated directory hosts a mobile-first dashboard at `/shop-fractions/pulse/`. It does **not** change the `/island/` app. This is a provisional location until a dedicated GitHub repo is created.
+Resting Beast (previously Pulse Protocol) is a mobile-first dashboard hosted at `/shop-fractions/pulse/`. It does **not** change the `/island/` app. This is a provisional location until a dedicated GitHub repo is created.
+
+The public URL, repository path, access keys and Supabase integration are intentionally unchanged by the rename.
 
 ## What works
 
