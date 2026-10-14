@@ -4,7 +4,7 @@ const URL='https://wosfukbzxrykwarxobfw.supabase.co/rest/v1/rpc/';
 const PUBLIC_KEY='sb_publishable_jkbf7B7azIjxRZHwvQ_vGw_aGi8hcHf';
 const el=id=>document.getElementById(id), storage='pulse_protocol_key_v1';
 let secret=sessionStorage.getItem(storage)||'', state=null, busy=false;
-let chartSelection=null, chartViewport=null, chartDragging=false;
+let chartSelection=null, chartViewport=null, chartDragging=false, chartActiveTouch=null;
 const kinds={trt:'TRT',medication:'Medication',nicotine:'Nicotine',caffeine:'Caffeine',bp:'Blood pressure'};
 const unit={heart_rate:'bpm',resting_heart_rate:'bpm',hrv_sdnn:'ms',blood_oxygen_saturation:'%'};
 const fields={
@@ -49,6 +49,11 @@ chartViewport={left,right,data,metric};
 if(!chartSelection || !data.some(d=>d.day===chartSelection)) chartSelection=good.length?good[good.length-1].day:null;
 const selectionIndex=data.findIndex(d=>d.day===chartSelection);
 const selected=selectionIndex>=0?data[selectionIndex]:null;
+const nativeScrubber=el('chart-scrubber');
+nativeScrubber.min='0';
+nativeScrubber.max=String(Math.max(0,data.length-1));
+nativeScrubber.value=String(Math.max(0,selectionIndex));
+nativeScrubber.disabled=!data.length;
 const inspectionDay=el('chart-day'),inspectionValue=el('chart-reading');
 if(selected){
   let date=new Date(selected.day+'T12:00:00Z').toLocaleDateString('en-US',{timeZone:'UTC',month:'short',day:'numeric',year:'numeric'});
@@ -84,13 +89,56 @@ el('login').addEventListener('submit',async e=>{e.preventDefault();secret=el('ke
 el('refresh').addEventListener('click',refresh);el('days').addEventListener('change',chart);
 el('metric').addEventListener('change',()=>{chartSelection=null;chart();});
 const chartCanvas=el('chart');
+const chartScrubber=el('chart-scrubber');
+chartScrubber.addEventListener('input',()=>{
+  if(!chartViewport)return;
+  const index=Number(chartScrubber.value);
+  const day=chartViewport.data[index]?.day;
+  if(!day)return;
+  chartSelection=day;
+  chart();
+});
+// Use native touch events on iOS. Safari can cancel pointermove when it takes over a
+// canvas gesture to scroll; touchstart/touchmove with nonpassive listeners prevent that.
+chartCanvas.addEventListener('touchstart',e=>{
+  if(!chartViewport || e.touches.length!==1)return;
+  const touch=e.changedTouches[0];
+  if(!touch)return;
+  chartActiveTouch=touch.identifier;
+  if(e.cancelable)e.preventDefault();
+  inspectChartAt(touch.clientX);
+},{passive:false});
+chartCanvas.addEventListener('touchmove',e=>{
+  if(chartActiveTouch===null)return;
+  let touch=null;
+  for(const t of e.changedTouches){
+    if(t.identifier===chartActiveTouch){touch=t;break;}
+  }
+  if(!touch)return;
+  if(e.cancelable)e.preventDefault();
+  inspectChartAt(touch.clientX);
+},{passive:false});
+function endChartTouch(e){
+  if(chartActiveTouch===null)return;
+  for(const t of e.changedTouches){
+    if(t.identifier===chartActiveTouch){chartActiveTouch=null;break;}
+  }
+}
+chartCanvas.addEventListener('touchend',endChartTouch);
+chartCanvas.addEventListener('touchcancel',endChartTouch);
+window.addEventListener('touchend',endChartTouch);
+window.addEventListener('touchcancel',endChartTouch);
+// Mouse and pen retain normal pointer interaction; touch is handled above once.
 chartCanvas.addEventListener('pointerdown',e=>{
-  if(e.pointerType==='mouse'&&e.button!==0)return;
+  if(e.pointerType==='touch' || (e.pointerType==='mouse'&&e.button!==0))return;
   chartDragging=true;
   if(chartCanvas.setPointerCapture)chartCanvas.setPointerCapture(e.pointerId);
   inspectChartAt(e.clientX);
 });
-chartCanvas.addEventListener('pointermove',e=>{if(chartDragging)inspectChartAt(e.clientX);});
+chartCanvas.addEventListener('pointermove',e=>{
+  if(e.pointerType==='touch')return;
+  if(chartDragging)inspectChartAt(e.clientX);
+});
 for(const eventName of ['pointerup','pointercancel','lostpointercapture']){
   chartCanvas.addEventListener(eventName,()=>{chartDragging=false;});
 }
