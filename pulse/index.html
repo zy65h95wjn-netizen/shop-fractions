@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090e19"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://wosfukbzxrykwarxobfw.supabase.co; base-uri 'none'; form-action 'self'"><title>Resting Beast</title><link rel="stylesheet" href="./nightshift-v3.css"></head><body>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090e19"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://wosfukbzxrykwarxobfw.supabase.co; base-uri 'none'; form-action 'self'"><title>Resting Beast</title><link rel="stylesheet" href="./nightshift-v4.css"></head><body>
 <div class="shell"><header><div class="brand"><div class="mark" aria-hidden="true">✦</div><div><b>Resting Beast</b><small>YOUR PERSONAL SIGNAL</small></div></div><div class="top"><span id="status">Locked</span><button class="secondary" id="refresh" disabled>↻</button></div></header>
 <section id="connect" class="surface login"><p class="eyebrow">WELCOME TO YOUR SPACE</p><h1>Find your<br><em>rhythm.</em></h1><p>Your watch measurements already sync to the private CASS Health Lab database. Enter the access key to unlock the trends for this browser session. This app never needs daily entries.</p><form id="login"><label for="key">Private access key</label><div class="stack"><input id="key" type="password" required minlength="35" placeholder="Paste access key" autocomplete="off"><button class="primary">Unlock</button></div><p class="error" id="login-error"></p></form>
 <div class="key-verify-local">
@@ -12,22 +12,64 @@
   <p class="section-caption">Live heart signals · Apple Health</p>
   <button class="secondary lock-compact" id="lock" type="button">Lock</button>
 </div><p class="error" id="error"></p>
-<div class="metrics">
-  <article class="surface metric featured metric-rhr">
-    <div><div class="metric-symbol" aria-hidden="true">◉</div><p class="eyebrow">RESTING HEART RATE</p><p class="metric-foot">Latest daily estimate</p></div>
-    <div><div id="rhr" class="number">—</div><p id="rhr-at" class="hint">Awaiting data</p></div>
+<div class="today-stack">
+  <article class="surface today-heart" aria-label="Heart measurements">
+    <div class="today-card-title"><span aria-hidden="true">♡</span><span>YOUR HEART</span></div>
+    <div class="today-heart-values">
+      <div class="today-heart-metric">
+        <p class="eyebrow">RESTING HEART RATE</p>
+        <div id="rhr" class="number">—</div>
+        <p id="rhr-at" class="hint">Awaiting data</p>
+      </div>
+      <div class="today-heart-metric">
+        <p class="eyebrow">LATEST HEART RATE</p>
+        <div id="hr" class="number">—</div>
+        <p id="hr-at" class="hint">Awaiting data</p>
+      </div>
+    </div>
   </article>
-  <article class="surface metric metric-hrv">
-    <div><div class="metric-symbol" aria-hidden="true">⌁</div><p class="eyebrow">HRV · SDNN</p></div>
-    <div><div id="hrv" class="number">—</div><p id="hrv-at" class="hint">Awaiting data</p></div>
+  <article class="surface today-steps" aria-label="Daily step totals">
+    <div class="today-card-title"><span aria-hidden="true">↟</span><span>YOUR STEPS</span></div>
+    <div class="today-step-values">
+      <div>
+        <p class="eyebrow">TODAY · SO FAR</p>
+        <div id="steps-today" class="number">—</div>
+        <p class="hint" id="steps-today-note">Awaiting today's step sync</p>
+      </div>
+      <div>
+        <p class="eyebrow">7-DAY AVERAGE</p>
+        <div id="steps-week" class="number">—</div>
+        <p class="hint" id="steps-week-note">Previous 7 completed days</p>
+      </div>
+    </div>
   </article>
-  <article class="surface metric metric-spo2">
-    <div><div class="metric-symbol" aria-hidden="true">✧</div><p class="eyebrow">BLOOD OXYGEN</p></div>
-    <div><div id="spo2" class="number">—</div><p id="spo2-at" class="hint">Awaiting data</p></div>
+  <div class="today-supplemental">
+    <article class="surface today-mini metric-hrv">
+      <div class="metric-symbol" aria-hidden="true">⌁</div>
+      <p class="eyebrow">HRV · SDNN</p>
+      <div id="hrv" class="number">—</div>
+      <p id="hrv-at" class="hint">Awaiting data</p>
+    </article>
+    <article class="surface today-mini metric-spo2">
+      <div class="metric-symbol" aria-hidden="true">✧</div>
+      <p class="eyebrow">BLOOD OXYGEN</p>
+      <div id="spo2" class="number">—</div>
+      <p id="spo2-at" class="hint">Awaiting data</p>
+    </article>
+  </div>
+  <article class="surface today-week" aria-label="Weekly resting heart rate">
+    <div class="row">
+      <div><p class="eyebrow">7-DAY RESTING HR</p><h2>Weekly pulse.</h2></div>
+      <span id="today-rhr-delta" class="today-week-delta">Collecting history</span>
+    </div>
+    <canvas id="today-rhr-spark" aria-label="Resting HR during the last seven completed calendar days" role="img"></canvas>
+    <p class="hint" id="today-rhr-caption">Comparing seven completed days to the seven before.</p>
   </article>
-  <article class="surface metric metric-live">
-    <div><div class="metric-symbol" aria-hidden="true">♡</div><p class="eyebrow">LATEST HEART RATE</p></div>
-    <div><div id="hr" class="number">—</div><p id="hr-at" class="hint">Awaiting data</p></div>
+  <article class="surface today-trt">
+    <p class="eyebrow">CURRENT TRT PROTOCOL</p>
+    <h3 id="today-trt-regimen">Not logged</h3>
+    <p class="hint" id="today-trt-since">No baseline recorded</p>
+    <button type="button" class="secondary today-trt-link" id="today-trt-open">Explore with heart-rate trends →</button>
   </article>
 </div>
 </section>
@@ -67,4 +109,4 @@
 </nav>
 <footer>Heart measurements import automatically from the existing Health pipeline. Blood pressure is optional. Missing readings aren't filled in or assumed to remain unchanged. No diagnosis or causation claims.<div id="updated"></div></footer></section></div>
 <dialog id="dlg"><form id="event-form"><div class="row"><h2>Record a change</h2><button type="button" class="secondary" id="cancel">×</button></div><label for="kind">Change type</label><select id="kind"><option value="trt">TRT protocol</option><option value="medication">Medication</option><option value="nicotine">Nicotine</option><option value="caffeine">Caffeine</option><option value="bp">Blood pressure reading</option></select><label for="when">Effective date and time</label><input id="when" type="datetime-local" required><div id="fields"></div><p class="hint" id="event-help">Enter a baseline once or record a change.</p><p class="error" id="save-error"></p><div class="row end"><button type="button" class="secondary" id="cancel2">Cancel</button><button class="primary" id="save">Save event</button></div></form></dialog>
-<script src="./app-auth-v7.js" defer></script><script src="./compare.js?v=compare-1" defer></script><script src="./pages-v1.js" defer></script></body></html>
+<script src="./app-today-v8.js" defer></script><script src="./compare.js?v=compare-1" defer></script><script src="./pages-v1.js" defer></script></body></html>
