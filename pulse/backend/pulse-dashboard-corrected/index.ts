@@ -86,9 +86,19 @@ Deno.serve(async (req: Request): Promise<Response> => {
       body: JSON.stringify({ p_key: payload.p_key, p_days: 90 }),
       cache: "no-store"
     });
-    if (auth.status === 401 || auth.status === 403) return response({ error: "Invalid access key" }, 401, origin);
-    if (!auth.ok) throw new Error("Unable to validate dashboard access");
-    const data = await auth.json();
+    // PostgREST can use HTTP 401/403 for invalid credentials, missing API
+    // privileges or JWT failures. Only the explicit SQLSTATE 28000 returned
+    // by pulse_read's key guard is evidence of a rejected private key.
+    let authResult: Record<string, unknown>;
+    try { authResult = await auth.json(); }
+    catch { return response({ code: "upstream_auth_unavailable", error: "Authentication service unavailable" }, 503, origin); }
+    if (!auth.ok) {
+      if (authResult?.code === "28000") {
+        return response({ code: "key_mismatch", error: "Private key does not match" }, 401, origin);
+      }
+      return response({ code: "upstream_auth_unavailable", error: "Authentication service unavailable" }, 503, origin);
+    }
+    const data = authResult;
     if (!Array.isArray(data?.daily) || !Array.isArray(data?.events) || !data?.latest) {
       throw new Error("Unexpected dashboard response");
     }
