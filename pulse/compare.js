@@ -87,7 +87,9 @@
     const [y, m, d] = s.split('-');
     return Number(m) + '/' + Number(d) + '/' + y;
   }
+  let cachedState = null;
   function render(state) {
+    cachedState = state;
     if (!root.document || !state || !Array.isArray(state.daily) || !Array.isArray(state.events)) return;
     const modeEl = document.getElementById('compare-mode');
     const spanEl = document.getElementById('compare-span');
@@ -180,7 +182,7 @@
     const bind = () => {
       for (const id of ['compare-mode', 'compare-span', 'compare-event']) {
         const input = document.getElementById(id);
-        if (input) input.addEventListener('change', () => { if (root.PulseState) render(root.PulseState); });
+        if (input) input.addEventListener('change', () => { if (cachedState) render(cachedState); });
       }
     };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind, { once: true });
