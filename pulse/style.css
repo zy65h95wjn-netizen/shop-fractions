@@ -47,3 +47,22 @@
 #chart-scrubber::-moz-range-track{height:5px;border-radius:8px;background:#375c63}
 #chart-scrubber::-moz-range-thumb{width:19px;height:19px;border-radius:50%;background:#95ddd1;border:3px solid #0b1721}
 #chart-scrubber:focus-visible{outline:2px solid #8bdacd;outline-offset:2px}
+
+/* One-time baseline and medication change actions */
+.context-intro{margin:0 0 14px}
+.context-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.context-head .eyebrow{margin:5px 0 0;line-height:1.35;overflow-wrap:anywhere}
+.small-action{flex:none;font-size:11px;padding:7px 9px;min-height:32px}
+.med{align-items:center}
+.med-info{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1}
+.med-info strong,.med-info span{overflow-wrap:anywhere}
+.med-actions{display:flex;flex:none;gap:6px}
+.med-actions button{white-space:nowrap}
+#event-help{margin:16px 0 7px}
+@media(max-width:750px){
+  .context-head{align-items:flex-start}
+  .context article{min-height:145px}
+  .context-head .eyebrow{font-size:9px;letter-spacing:1.1px}
+  .med{align-items:flex-start;flex-direction:column}
+  .med-actions{align-self:flex-end}
+}
