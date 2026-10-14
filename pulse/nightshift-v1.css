@@ -145,6 +145,16 @@ select{background-color:#172235}
 .metric-live .metric-symbol{color:var(--peach)}
 .metric-live{background:linear-gradient(155deg,#30283c,#201f33);border-color:#bb93a959}
 .metric-foot{color:#a1b6c0;font-size:11px;line-height:1.5}
+.metric-shortcut{
+  min-height:170px;padding:21px;display:flex;flex-direction:column;justify-content:space-between;
+  background:linear-gradient(135deg,#2d2943,#1f2840);border-color:#a49ad052;
+  transition:background .2s,border-color .2s;
+}
+.metric-shortcut:hover,.metric-shortcut:focus-visible{background:linear-gradient(135deg,#353051,#25324c);border-color:#cec1f58a}
+.shortcut-glyph{font-size:32px;line-height:1;color:#efc1ae}
+.shortcut-title{font-size:16px;font-weight:780;letter-spacing:-.4px}
+.shortcut-sub{font-size:11px;color:#c5b7e5}
+
 .chart{
   margin:17px 0 0;padding:26px 29px 18px;
   background:
@@ -287,6 +297,11 @@ dialog input,dialog select{margin-bottom:5px}
  .metric-live{grid-column:span 2;min-height:137px}
  .metric-live .metric-symbol{display:none}
  .metric-live .number{font-size:45px}
+ .metric-shortcut{grid-column:span 2;min-height:89px;padding:16px 18px;display:grid;grid-template-columns:38px 1fr;column-gap:12px;align-items:center}
+ .metric-shortcut .shortcut-glyph{grid-row:span 2}
+ .metric-shortcut .shortcut-title{font-size:15px;align-self:end}
+ .metric-shortcut .shortcut-sub{align-self:start}
+
  .chart{padding:20px 15px 18px}
  .chart>.row{align-items:flex-start;flex-direction:column;gap:15px}
  .controls{width:100%;display:grid;grid-template-columns:1.55fr 1fr}
