@@ -437,3 +437,7 @@ dialog h2 { font-size: 25px; }
   .dock { position: static; transform: none; margin: 22px auto; }
   .shell { padding-bottom: 20px; }
 }
+
+/* Shared feedback stays above all protected pages, including detail views. */
+.sync-feedback { position: sticky; top: 0; z-index: 10; background: var(--bg, #100d0b); }
+#save-notice:empty { display: none; }

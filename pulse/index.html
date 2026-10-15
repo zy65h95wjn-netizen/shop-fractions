@@ -1,12 +1,13 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#100d0b"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; manifest-src 'self'; connect-src https://wosfukbzxrykwarxobfw.supabase.co; base-uri 'none'; form-action 'self'"><meta name="application-name" content="Resting Beast"><meta name="apple-mobile-web-app-title" content="Resting Beast"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png"><link rel="manifest" href="./manifest.webmanifest"><title>Resting Beast</title><link rel="stylesheet" href="./nightshift-iron-v8.css"></head><body>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#100d0b"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; manifest-src 'self'; connect-src https://wosfukbzxrykwarxobfw.supabase.co; base-uri 'none'; form-action 'self'"><meta name="application-name" content="Resting Beast"><meta name="apple-mobile-web-app-title" content="Resting Beast"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png"><link rel="manifest" href="./manifest.webmanifest"><title>Resting Beast</title><link rel="stylesheet" href="./nightshift-iron-v8.css"><link rel="stylesheet" href="./history-v1.css"></head><body>
 <div class="shell"><header><div class="brand"><div class="mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18M5 21V9H3V3h3v3h3V3h6v3h3V3h3v6h-2v12M9 21v-6a3 3 0 0 1 6 0v6M8 10h1m6 0h1"/></svg></div><div><b>Resting Beast</b><small>THE IRON CITADEL</small></div></div><div class="top"><span id="status">Locked</span><button class="secondary" id="refresh" aria-label="Refresh measurements" disabled>↻</button></div></header>
-<section id="connect" class="surface login"><p class="eyebrow">WELCOME TO YOUR SPACE</p><h1>Find your<br><em>rhythm.</em></h1><p>Your watch measurements already sync to the private CASS Health Lab database. Enter the access key to unlock the trends for this browser session. This app never needs daily entries.</p><form id="login"><label for="key">Private access key</label><div class="stack"><input id="key" name="password" type="password" required minlength="35" placeholder="Private access key" autocomplete="current-password"><button class="primary">Unlock</button></div><p class="error" id="login-error"></p></form>
+<section id="connect" class="surface login"><p class="eyebrow">WELCOME TO YOUR SPACE</p><h1>Find your<br><em>rhythm.</em></h1><p>Your watch measurements already sync to the private CASS Health Lab database. Enter the access key to unlock the trends for this browser session. This app never needs daily entries.</p><form id="login"><label for="key">Private access key</label><div class="stack"><input id="key" name="password" type="password" required minlength="35" placeholder="Private access key" autocomplete="current-password"><button class="primary">Unlock</button></div><p class="error" id="login-error" role="alert"></p></form>
 <div class="key-verify-local">
   <button type="button" class="secondary" id="key-check-button">Check pasted key locally</button>
   <p class="hint" id="key-check-result" aria-live="polite"></p>
 </div><p class="hint">The key is kept in this browser session, not saved permanently. No health measurements are stored in this site's source code.</p></section>
 <section id="app" hidden>
+<div class="sync-feedback"><p class="error" id="error" role="alert" aria-atomic="true"></p><p class="hint" id="save-notice" role="status" aria-atomic="true"></p></div>
 <section class="app-page" id="overview" data-page="today" aria-label="Today">
 <div class="citadel-hero" aria-label="Iron Citadel theme">
   <p class="citadel-hero-kicker">RESTING BEAST · YOUR PERSONAL SIGNAL</p>
@@ -16,19 +17,19 @@
 <div class="signals-head">
   <p class="section-caption">LIVE SIGNALS · APPLE HEALTH</p>
   <button class="secondary lock-compact" id="lock" type="button">Lock</button>
-</div><p class="error" id="error"></p>
+</div>
 <div class="today-stack">
   <article class="surface today-heart" aria-label="Heart measurements">
     <h2 class="today-card-title"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.9a5.5 5.5 0 0 0-7.8 0L12 6l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.3a5.5 5.5 0 0 0 0-7.8Z" fill="currentColor" stroke-width=".8"/></svg><span>HEART HEALTH</span></h2>
     <div class="today-heart-values">
       <div class="today-heart-metric">
         <p class="eyebrow">RESTING HEART RATE</p>
-        <div id="rhr" class="number">—</div>
+        <button type="button" class="history-open" data-history-metric="resting_heart_rate" aria-label="Explore resting heart rate history" aria-describedby="rhr rhr-at"><span id="rhr" class="number">—</span><span class="history-open-label" aria-hidden="true">History →</span></button>
         <p id="rhr-at" class="hint">Awaiting data</p>
       </div>
       <div class="today-heart-metric">
         <p class="eyebrow">LATEST HEART RATE</p>
-        <div id="hr" class="number">—</div>
+        <button type="button" class="history-open" data-history-metric="heart_rate" aria-label="Explore heart rate history" aria-describedby="hr hr-at"><span id="hr" class="number">—</span><span class="history-open-label" aria-hidden="true">History →</span></button>
         <p id="hr-at" class="hint">Awaiting data</p>
       </div>
     </div>
@@ -52,13 +53,13 @@
     <article class="surface today-mini metric-hrv">
       <div class="metric-symbol" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 12h4l3-8 4 16 4-12 3 4h4"/></svg></div>
       <p class="eyebrow">HRV · SDNN</p>
-      <div id="hrv" class="number">—</div>
+      <button type="button" class="history-open" data-history-metric="hrv_sdnn" aria-label="Explore HRV / SDNN history" aria-describedby="hrv hrv-at"><span id="hrv" class="number">—</span><span class="history-open-label" aria-hidden="true">History →</span></button>
       <p id="hrv-at" class="hint">Awaiting data</p>
     </article>
     <article class="surface today-mini metric-spo2">
       <div class="metric-symbol" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2C9 6.7 4.5 11.3 4.5 15.5a7.5 7.5 0 0 0 15 0C19.5 11.3 15 6.7 12 2Z"/><path d="M8 14a4 4 0 0 0 5 5"/></svg></div>
       <p class="eyebrow">BLOOD OXYGEN</p>
-      <div id="spo2" class="number">—</div>
+      <button type="button" class="history-open" data-history-metric="blood_oxygen_saturation" aria-label="Explore blood oxygen / SpO₂ history" aria-describedby="spo2 spo2-at"><span id="spo2" class="number">—</span><span class="history-open-label" aria-hidden="true">History →</span></button>
       <p id="spo2-at" class="hint">Awaiting data</p>
     </article>
   </div>
@@ -109,6 +110,26 @@
 <section class="surface section"><div class="row"><h2>Medication lineup</h2><button class="secondary" id="add-med">+ Add medication</button></div><p class="hint">Current medications stay active until you record a change or stop date.</p><div id="med-list" class="hint">No medications logged.</div></section>
 <section class="surface section"><div class="row"><h2>Your timeline of changes</h2><span id="history-count" class="hint"></span></div><div id="history" class="hint">No changes logged.</div></section>
 </section>
+<section id="history-explorer" aria-labelledby="history-title" hidden>
+  <div class="history-toolbar"><button id="history-back" type="button" class="secondary">← Today</button><button id="history-lock" type="button" class="secondary">Lock</button></div>
+  <div class="citadel-subhero history-heading"><p class="eyebrow">HISTORY EXPLORER</p><h1 id="history-title" tabindex="-1">Measurement history</h1></div>
+  <section class="surface history-latest" aria-labelledby="history-latest-label">
+    <p id="history-latest-label" class="eyebrow">LATEST READING</p>
+    <p id="history-latest-value" class="history-latest-value">—</p>
+    <p id="history-latest-at" class="hint"></p>
+  </section>
+  <section class="surface section history-plot" aria-label="Daily history">
+    <div class="history-ranges" role="group" aria-label="History date range"><button type="button" class="secondary" data-history-days="7" aria-pressed="false">7 days</button><button type="button" class="secondary" data-history-days="30" aria-pressed="true">30 days</button><button type="button" class="secondary" data-history-days="90" aria-pressed="false">90 days</button></div>
+    <p id="history-period" class="hint"></p>
+    <div class="chart-readout" aria-live="polite" aria-atomic="true"><span id="history-day"></span><strong id="history-reading"></strong></div>
+    <canvas id="history-chart" tabindex="0" role="slider" aria-label="Inspect daily history. Drag horizontally or use arrow keys." aria-orientation="horizontal" aria-valuemin="1" aria-valuemax="30" aria-valuenow="30"></canvas>
+    <p id="history-empty" class="hint" hidden></p>
+    <div class="history-scrub"><label for="history-scrubber">Slide to inspect a date</label><input id="history-scrubber" type="range" min="0" max="29" step="1" value="29"></div>
+    <p id="history-semantics" class="hint"></p>
+    <p class="hint">New York calendar days, including today. Today’s value may change as readings sync. Gaps mean no recorded value; readings are never filled in.</p>
+  </section>
+  <section class="surface section history-daily" aria-labelledby="history-list-title"><h2 id="history-list-title">Daily values</h2><p id="history-coverage" class="hint"></p><table><caption id="history-list-caption">Newest first · today at top</caption><thead><tr><th scope="col">New York date</th><th scope="col" id="history-unit">Value</th></tr></thead><tbody id="history-values"></tbody></table></section>
+</section>
 <nav class="dock" aria-label="Resting Beast pages">
   <a href="#overview" data-page-link="today" aria-current="page" class="is-active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>Today</span></a>
   <a href="#trends" data-page-link="trends"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3v18h18M6 15l5-6 4 3 6-8"/></svg><span>Trends</span></a>
@@ -116,4 +137,4 @@
 </nav>
 <footer>Heart measurements import automatically from the existing Health pipeline. Blood pressure is optional. Missing readings aren't filled in or assumed to remain unchanged. No diagnosis or causation claims.<div id="updated"></div></footer></section></div>
 <dialog id="dlg"><form id="event-form"><div class="row"><h2>Record a change</h2><button type="button" class="secondary" id="cancel" aria-label="Close dialog">×</button></div><label for="kind">Change type</label><select id="kind"><option value="trt">TRT protocol</option><option value="medication">Medication</option><option value="nicotine">Nicotine</option><option value="caffeine">Caffeine</option><option value="bp">Blood pressure reading</option></select><label for="when">Effective date and time</label><input id="when" type="datetime-local" required><div id="fields"></div><p class="hint" id="event-help">Enter a baseline once or record a change.</p><p class="error" id="save-error"></p><div class="row end"><button type="button" class="secondary" id="cancel2">Cancel</button><button class="primary" id="save">Save event</button></div></form></dialog>
-<script src="./app-iron-v11.js" defer></script><script src="./compare.js?v=compare-1" defer></script><script src="./pages-v1.js" defer></script></body></html>
+<script src="./history-v1.js" defer></script><script src="./app-iron-v11.js" defer></script><script src="./compare.js?v=compare-1" defer></script><script src="./pages-v1.js" defer></script></body></html>
