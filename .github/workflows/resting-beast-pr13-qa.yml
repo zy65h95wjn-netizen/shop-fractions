@@ -1,0 +1,31 @@
+name: Resting Beast PR13 isolated backend review
+on:
+  push:
+    branches: [qa/resting-beast-backend-safe-validation]
+permissions:
+  contents: read
+jobs:
+  isolated-backend-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: pulse/backend/integrity/tests/package-lock.json
+      - name: Confirm QA is based on exact PR13 code
+        shell: bash
+        run: |
+          git merge-base --is-ancestor 6c6f4ca6db4e0eb86d428e663d219b5f822657db HEAD
+          while IFS= read -r changed; do
+            test "$changed" = ".github/workflows/resting-beast-pr13-qa.yml" || { echo "Unexpected file: $changed"; exit 1; }
+          done < <(git diff --name-only 6c6f4ca6db4e0eb86d428e663d219b5f822657db HEAD)
+      - name: Isolated PostgreSQL and Edge assertions (synthetic only)
+        working-directory: pulse/backend/integrity/tests
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm test
