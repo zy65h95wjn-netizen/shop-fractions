@@ -55,7 +55,17 @@ def static_checks():
         ["git", "show", f"{BASELINE}:pulse/index.html"], cwd=ROOT).decode())
     current = Contract((ROOT / "pulse/index.html").read_text())
     assert current.ids == previous.ids, "DOM identifiers or their control types changed"
-    assert current.controls == previous.controls, "Forms, field constraints, or canvases changed"
+    # The sole permitted control change is semantic Password AutoFill metadata
+    # on the existing private-key input; all other controls stay identical.
+    expected_controls = []
+    for tag, attrs in previous.controls:
+        expected = dict(attrs)
+        if tag == "input" and expected.get("id") == "key":
+            assert expected.get("autocomplete") == "off"
+            expected.update(name="password", placeholder="Private access key",
+                            autocomplete="current-password")
+        expected_controls.append((tag, expected))
+    assert current.controls == expected_controls, "Forms or inputs changed beyond private-key AutoFill"
     expected_scripts = [dict(attrs, src=attrs.get("src", "").replace(
         "app-iron-v10.js", "app-iron-v11.js")) for attrs in previous.scripts]
     assert current.scripts == expected_scripts, "Unexpected application entry point change"
