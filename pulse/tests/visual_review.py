@@ -74,7 +74,9 @@ def static_checks():
     assert without_spark_paint(new_js, True) == without_spark_paint(old_js, False), (
         "Functional application JS changed outside RHR canvas rendering")
     subprocess.run(["node", "--check", str(ROOT / "pulse/app-iron-v11.js")], check=True)
-    assert current.csp == previous.csp, "CSP changed"
+    assert current.csp == previous.csp.replace(
+        "img-src 'self' data:;", "img-src 'self' data:; manifest-src 'self';"), (
+        "CSP changed beyond the same-origin manifest permission")
     for width in [768, 1536]:
         image = ROOT / f"pulse/assets/iron-citadel-fortress-{width}.webp"
         with Image.open(image) as art:
@@ -83,7 +85,7 @@ def static_checks():
             art.verify()
         assert image.stat().st_size < (150_000 if width == 768 else 450_000)
     ElementTree.parse(ROOT / "pulse/assets/iron-forged-grain.svg")
-    print("PASS: isolated RHR paint change; unchanged other JS, DOM IDs, forms, canvas contracts and CSP; optimized assets", flush=True)
+    print("PASS: isolated RHR paint change; unchanged other JS, DOM IDs, forms, canvas contracts and restricted CSP; optimized assets", flush=True)
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
