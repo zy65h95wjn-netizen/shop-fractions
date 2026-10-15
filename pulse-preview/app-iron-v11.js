@@ -366,7 +366,7 @@ function populateFields(kind,entry,stop=false){
 }
 function openDialog(kind,entry=null,stop=false){
   if(!state||!secret)return;
-  ++dialogGeneration;dialogOpen=true;dialogSubmitting=false;el('save').disabled=false;
+  ++dialogGeneration;dialogOpen=true;dialogSubmitting=false;el('save').disabled=true;
   const target=kind||'trt';
   el('kind').value=target;
   editingMedicationId=null;
@@ -494,7 +494,7 @@ el('med-list').addEventListener('click',event=>{
 });
 function invalidateDialog(){
   ++dialogGeneration;dialogOpen=false;dialogSubmitting=false;
-  editingMedicationId=null;el('save').disabled=false;
+  editingMedicationId=null;el('save').disabled=true;
 }
 function closeDialog(){invalidateDialog();el('dlg').close();}
 el('cancel').addEventListener('click',closeDialog);
@@ -503,7 +503,7 @@ el('dlg').addEventListener('cancel',invalidateDialog);
 // Native close is queued; an old close event must not invalidate a reopened dialog.
 el('dlg').addEventListener('close',()=>{if(!el('dlg').open)invalidateDialog();});
 el('kind').addEventListener('change',()=>{
-  ++dialogGeneration;dialogSubmitting=false;el('save').disabled=false;
+  ++dialogGeneration;dialogSubmitting=false;el('save').disabled=true;
   editingMedicationId=null;
   const k=el('kind').value;
   populateFields(k,['trt','nicotine','caffeine'].includes(k)?active(k):null);
@@ -534,7 +534,7 @@ el('event-form').addEventListener('submit',async e=>{
     else txt('save-notice','The earlier save could not be confirmed. Check the timeline before retrying.');
   }finally{
     if(currentSession()&&currentDialog()){
-      dialogSubmitting=false;el('save').disabled=false;
+      dialogSubmitting=false;el('save').disabled=true;
     }
   }
 });
