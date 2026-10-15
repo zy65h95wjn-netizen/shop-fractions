@@ -1,0 +1,7 @@
+{
+  "name": "resting-beast-backend-integrity-tests",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node run.mjs && node edge.mjs" },
+  "devDependencies": { "@electric-sql/pglite": "0.5.10", "typescript": "5.9.3" }
+}
