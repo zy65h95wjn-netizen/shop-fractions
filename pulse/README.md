@@ -1,4 +1,26 @@
-# Resting Beast — v0.6 (visual rename)
+# Resting Beast — v1.0
+
+## Beast’s Crest and Home Screen installation
+
+The approved 1254×1254 crest is proportionally downsampled with Lanczos into opaque RGB PNGs, with no crop, added artwork, transparency or baked-in corners: `beasts-crest-1024.png` (master), `apple-touch-icon.png` (180), `icon-192.png` and `icon-512.png`. Icons retain the full composition; iOS applies its own mask. Web manifest icons use `purpose: any` rather than claiming Android maskable safe-zone compatibility.
+
+`manifest.webmanifest` resolves its `id`, `start_url` and `scope` to `/shop-fractions/pulse/`. The app name is Resting Beast, display is standalone, theme is `#100d0b`, and launch background matches the existing CSS `#090a0c`. Apple standalone/title/status-bar metadata uses the existing viewport-fit and safe-area CSS. Only `manifest-src 'self'` is added to CSP; all existing directives remain intact.
+
+The shared `/shop-fractions/sw.js` controls nested apps when already registered and uses network-first caching with offline fallback for their files. It is unchanged. No worker is added or registered by this release; fresh installations require a connection for dashboard assets/data. Existing scripts, CSS, corrected RHR method, authentication and backend are unchanged.
+
+Verification: `python3 pulse/tests/install_contract.py`, `node pulse/tests/rhr_spark_labels.js`, and `python3 pulse/tests/visual_review.py --chromium <installed-chromium>` (Pillow, Playwright and browser required). Browser fixtures intercept backend requests; no real health service is contacted. The visual regression retains its original assertions and permits exactly the local-manifest CSP addition.
+
+Verification in this release environment: installation contract, seven-day RHR regression and the existing visual suite’s static checks passed. A temporary Playwright dependency was available, but its Chromium download returned an invalid archive, so the full local visual/browser suite could not run. No dependency was added to the repository. Real-device checks remain outstanding.
+
+### iPhone installation / replacing an older icon safely
+
+1. Keep your existing private access key available in its secure location. The key is held only in sessionStorage and may need re-entry in the new Home Screen app; never place it in a URL.
+2. Keep the old shortcut for now. In Safari open `https://zy65h95wjn-netizen.github.io/shop-fractions/pulse/` and reload online.
+3. Open Safari’s More menu if needed, tap Share, then Add to Home Screen. Keep Open as Web App enabled, confirm Resting Beast and the lion crest, and tap Add.
+4. Launch the new lion icon, enter your existing key if prompted, and confirm your saved history is visible before removing the old shortcut. Saved health/context events are server-backed; replacing a shortcut does not delete those records.
+5. Only then touch and hold the obsolete icon, choose Remove App or Delete Bookmark (the label depends on the old shortcut type), and confirm deletion of that old item. If only Remove from Home Screen is offered, it hides rather than deletes the installed app. Do not clear Safari History/Website Data, reset app storage, or delete anything inside the dashboard.
+
+No physical iPhone or Android installation is implied by automated browser checks. Final iOS icon masking, status-bar appearance and Home indicator clearance require real-device confirmation. To roll back only this release, revert its merge commit; no database restore or service-worker change is needed.
 
 ## Seven-day resting HR readability (Oct 15, 2026)
 
