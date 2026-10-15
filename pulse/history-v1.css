@@ -1,22 +1,22 @@
 /* Additive History Explorer, sharing Iron Citadel's surfaces and palette. */
 .history-open {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  display: block;
   min-height: 44px;
+  min-width: 44px;
   width: 100%;
-  margin-top: 6px;
-  padding: 8px 0;
+  margin: 0;
+  padding: 0;
   border: 0;
-  border-top: 1px solid var(--line);
+  border-radius: 2px;
+  appearance: none;
+  -webkit-appearance: none;
   background: transparent;
-  color: var(--gold);
-  font-size: 12px;
-  font-weight: 650;
+  color: inherit;
   text-align: left;
 }
-.today-mini .history-open { grid-column: 1 / -1; }
+.history-open .number { display: block; }
+.history-open-label { display: block; margin-top: 5px; color: var(--gold); font-size: 12px; font-weight: 650; line-height: 1.5; }
+.today-mini .history-open { grid-column: 2; }
 .history-toolbar { display: flex; justify-content: space-between; gap: 12px; margin-top: 18px; }
 .history-heading { padding: 24px 0 18px; }
 .history-heading h1 { font-size: clamp(30px, 7vw, 42px); line-height: 1.15; overflow-wrap: anywhere; }

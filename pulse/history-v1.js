@@ -167,12 +167,13 @@
     el('history-semantics').textContent=metric==='resting_heart_rate'?
       'Each day uses the latest revised Watch estimate supplied by the corrected dashboard.':
       'Daily averages from the dashboard, not individual raw measurements. The latest reading above is separate.';
-    el('history-list-caption').textContent=spec.daily+' · oldest first';
+    el('history-list-caption').textContent=spec.daily+' · newest first · today at top';
     el('history-empty').hidden=good.length>0;
     canvas.hidden=good.length===0;
     el('history-empty').textContent=good.length?'':'No daily readings recorded in this '+days+'-day range. Try another range or refresh after your next sync.';
     const body=el('history-values'),fragment=document.createDocumentFragment();
-    for(const point of points){
+    // Reverse only the list copy; the chart and scrubber remain chronological.
+    for(const point of points.slice().reverse()){
       const row=document.createElement('tr'),date=document.createElement('th'),value=document.createElement('td');
       date.scope='row';date.textContent=dateLabel(point.day);
       value.textContent=reading(point.value,spec.unit);row.dataset.day=point.day;

@@ -25,7 +25,7 @@ async function layout(page){
       overflow:[...document.querySelectorAll('#history-explorer *,.history-open')].filter(e=>{
         if(!e.getClientRects().length)return false;const r=e.getBoundingClientRect();return r.left< -1||r.right>width+1;
       }).map(e=>e.id||e.className),
-      smallTargets:[...document.querySelectorAll('.history-open,.history-ranges button,#history-back,#history-lock')].filter(e=>e.getClientRects().length&&e.getBoundingClientRect().height<44).map(e=>e.id||e.className)};
+      smallTargets:[...document.querySelectorAll('.history-open,.history-ranges button,#history-back,#history-lock')].filter(e=>{if(!e.getClientRects().length)return false;const r=e.getBoundingClientRect();return r.height<44||r.width<44;}).map(e=>e.id||e.className)};
   });
   assert.equal(result.scrollWidth,result.width,JSON.stringify(result));assert.deepEqual(result.overflow,[]);assert.deepEqual(result.smallTargets,[]);
 }
@@ -64,10 +64,12 @@ async function run(){
     await page.goto(base+'/pulse/');await unlock();await capture(page,engine+'-before-today-'+width);
     before=false;await page.reload();await page.locator('#app').waitFor({state:'visible'});await layout(page);
     await capture(page,engine+'-after-today-'+width);
+    assert.equal(await page.locator('[data-history-metric]').count(),4,'one entry control per metric');
     const requestCount=calls.length;
     for(const [metric,name] of [['resting_heart_rate','Resting heart rate'],['heart_rate','Heart rate'],['hrv_sdnn','HRV / SDNN'],['blood_oxygen_saturation','Blood oxygen / SpO₂']]){
       const opener=page.locator('[data-history-metric="'+metric+'"]');await opener.scrollIntoViewIfNeeded();
-      const scroll=await page.evaluate(()=>window.scrollY);await opener.click();
+      assert.equal(await opener.evaluate(e=>e.tagName),'BUTTON');
+      const scroll=await page.evaluate(()=>window.scrollY);await opener.locator('.number').tap();
       assert.equal(await page.locator('#history-title').innerText(),name);
       assert.ok(await page.locator('#overview').isHidden());
       await layout(page);
@@ -77,8 +79,10 @@ async function run(){
         // Every graph selection must report exactly the corresponding table value.
         const mismatches=await page.evaluate(()=>{
           const rows=[...document.querySelectorAll('#history-values tr')],range=document.getElementById('history-scrubber'),out=[];
-          rows.forEach((row,i)=>{range.value=i;range.dispatchEvent(new Event('input',{bubbles:true}));
-            if(document.getElementById('history-reading').textContent!==row.lastElementChild.textContent)out.push(row.dataset.day);});return out;
+          if(rows[0].dataset.day!=='2026-10-15')out.push('today is not at top');
+          if(rows.some((row,i)=>i>0&&row.dataset.day>=rows[i-1].dataset.day))out.push('list order');
+          rows.forEach((row,i)=>{range.value=Number(range.max)-i;range.dispatchEvent(new Event('input',{bubbles:true}));
+            if(document.getElementById('history-reading').textContent!==row.lastElementChild.textContent||!document.getElementById('history-day').textContent.startsWith(row.firstElementChild.textContent))out.push(row.dataset.day);});return out;
         });assert.deepEqual(mismatches,[]);await layout(page);
       }
       await page.locator('#history-chart').focus();await page.keyboard.press('Home');
@@ -88,6 +92,11 @@ async function run(){
       await page.locator('#history-back').click();
       await page.waitForFunction(y=>Math.abs(window.scrollY-y)<=2,scroll);
       assert.equal(await opener.evaluate(e=>document.activeElement===e),true);assert.equal(await page.locator('.dock a').count(),3);
+      // Native button semantics must support both keyboard activation keys.
+      for(const key of ['Enter','Space']){
+        await opener.focus();await page.keyboard.press(key);assert.ok(await page.locator('#history-explorer').isVisible());
+        await page.locator('#history-back').click();await page.waitForFunction(y=>Math.abs(window.scrollY-y)<=2,scroll);
+      }
     }
     assert.equal(calls.length,requestCount,'history must not initiate health reads');
     await page.locator('[data-history-metric="heart_rate"]').click();

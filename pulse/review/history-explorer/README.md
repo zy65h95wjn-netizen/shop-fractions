@@ -5,9 +5,9 @@ Branch: `feature/resting-beast-history-explorer`. Review only; do not merge or d
 
 ## Behavior
 
-Today has four independent, labeled History buttons: resting HR, heart rate, HRV / SDNN, and blood oxygen / SpO₂. Each opens a temporary detail view inside the protected app. The existing three-link dock stays intact; selecting a dock page dismisses the detail view. The Today Back button restores the opener's focus and the prior scroll position. History does not add a URL route or browser-history entry, so reloads use the existing page navigation.
+Today has four independently tappable measurement values: resting HR, heart rate, HRV / SDNN, and blood oxygen / SpO₂. Each value and its “History →” cue share one native button with a minimum 44×44px target; there are no duplicate controls. The existing `rhr`, `hr`, `hrv`, and `spo2` identifiers stay on the inner value spans, preserving their number/unit formatting. Buttons have metric-specific accessible names and descriptions that include the reading and timestamp. Each opens a temporary detail view inside the protected app. The existing three-link dock stays intact; selecting a dock page dismisses the detail view. The Today Back button restores the opener's focus and the prior scroll position. History does not add a URL route or browser-history entry, so reloads use the existing page navigation.
 
-The explorer shows the metric and unit, the dashboard's latest reading with its New York timestamp, a daily graph, 7/30/90-day controls, an accessible range input, keyboard inspection, and an oldest-first table. Every calendar date in the selected range appears; missing values say “No reading.” Plot lines stop at missing dates. A fully empty range has an explicit message. Horizontal chart drags inspect values; vertical drags are allowed to scroll the page. Swipes inside the detail view cannot accidentally switch the underlying page.
+The explorer shows the metric and unit, the dashboard's latest reading with its New York timestamp, a daily graph, 7/30/90-day controls, an accessible range input, keyboard inspection, and a newest-first table with today at the top. The graph and its date slider remain chronological, oldest to newest; only a copy of the list is reversed. Every calendar date in the selected range appears; missing values say “No reading.” Plot lines stop at missing dates. A fully empty range has an explicit message. Horizontal chart drags inspect values; vertical drags are allowed to scroll the page. Swipes inside the detail view cannot accidentally switch the underlying page.
 
 The selected range and inspection date survive normal live refreshes. A lock button delegates to the existing dashboard lock, which now also clears this feature's state, table, latest reading, canvas, and accessible value text. Pending Back restoration is canceled by page changes and locking. Existing auth-generation checks still reject late responses after lock.
 
@@ -26,7 +26,8 @@ The selected range and inspection date survive normal live refreshes. A lock but
 | --- | --- |
 | Pure helpers: four metrics × 7/30/90, NY midnight, DST and leap day, precision, missing/invalid data, no mutation | PASS |
 | Actual HTML/scripts in a modeled DOM/canvas at 320px, 390px, 430px | PASS |
-| Every selected chart value equals its corresponding daily-table value; line segments break at gaps | PASS |
+| Newest-first table, today first; chronological chart; selected chart dates and values equal their matching table rows; line segments break at gaps | PASS |
+| Four displayed values activate their correct history; one native button each, existing value formatting, accessible labels/descriptions, CSS minimum 44×44px | PASS in modeled integration/source contracts |
 | Latest versus daily values, live refresh preserving range/date, Back/focus, dock navigation, page swipes, history swipe isolation | PASS in modeled integration |
 | Lock clears history; stale in-flight response cannot unlock app or history | PASS in modeled integration |
 | Existing Trends keyboard/native range scrub, all logging dialogs, synthetic BP write, step totals untouched | PASS in modeled integration |
@@ -39,6 +40,12 @@ The selected range and inspection date survive normal live refreshes. A lock but
 The modeled integration runs the repository's actual `index.html`, `history-v1.js`, `app-iron-v11.js`, `compare.js`, and `pages-v1.js` in Node with a minimal DOM/event/canvas implementation and intercepted fetch responses. It checks behavior and paint commands, **not CSS layout, a native browser engine, or physical touch gestures**. It is supplemental evidence, not a substitute for browser acceptance.
 
 Browser setup was time-boxed: Playwright was available, but Chromium/WebKit binaries were absent. The Playwright browser-download command failed because it received an invalid/truncated archive; the system package fallback failed with `setgroups`/`seteuid` permission errors. No permission controls were bypassed. The browser acceptance command was attempted and stopped at `browserType.launch: Executable doesn't exist`. No current before/after screenshots were produced; older theme screenshots elsewhere in `pulse/review/` are not evidence for this feature.
+
+## UX refinement validation (2026-10-15)
+
+The follow-up on PR #11 changes only the entry controls, list presentation order, related tests, and this review record. `app-iron-v11.js`, navigation, the base theme, backend, authentication, and calculations are unchanged from the preceding PR commit `46f881f892812c11abf44861b6ca040ae907bfa2`.
+
+Actual-browser acceptance for the configured 320px, 390px, and 430px viewports was attempted again in both Chromium and WebKit. Both stopped at launch with missing-executable errors, before any viewport assertions could run. One Chromium installation attempt was bounded to **60 seconds**, repeatedly received invalid/truncated ZIP archives (`End of central directory record signature not found`), and exited at the timeout (124). Browser setup then stopped. The earlier system-package permission failure was not retried; no permission controls were bypassed. Current screenshots and native-browser layout/tap/keyboard results remain unavailable.
 
 ## Reproduce
 
@@ -59,6 +66,8 @@ With Playwright and its browsers already available in the review environment:
 node pulse/tests/history_browser.js
 HISTORY_BROWSER=webkit node pulse/tests/history_browser.js
 ```
+
+The browser suite also tests taps directly on the displayed values, native Enter/Space activation, no duplicate controls, minimum touch-target width/height, and date/value agreement between the reversed list and chronological graph. These browser assertions remain unexecuted here.
 
 The browser suite intercepts **all** non-local requests, uses a fixed date and synthetic data only, checks actual 320/390/430 layouts and 44px targets, all metric/range/table values, keyboard inspection, refresh, Back scroll/focus, dock, existing dialogs, empty data, lock, and console errors. It captures baseline Today from the base commit plus current Today, each History view, and empty states with a “SYNTHETIC QA DATA” banner. Outputs default to `/tmp/resting-beast-history-review`; use `HISTORY_REVIEW_OUTPUT` to choose another path and `HISTORY_BROWSER_PATH` for an existing browser executable. **This suite was syntax-checked but could not execute browser assertions here.**
 

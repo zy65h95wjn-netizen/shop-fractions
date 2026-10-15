@@ -23,15 +23,13 @@
     <div class="today-heart-values">
       <div class="today-heart-metric">
         <p class="eyebrow">RESTING HEART RATE</p>
-        <div id="rhr" class="number">—</div>
+        <button type="button" class="history-open" data-history-metric="resting_heart_rate" aria-label="Explore resting heart rate history" aria-describedby="rhr rhr-at"><span id="rhr" class="number">—</span><span class="history-open-label" aria-hidden="true">History →</span></button>
         <p id="rhr-at" class="hint">Awaiting data</p>
-        <button type="button" class="history-open" data-history-metric="resting_heart_rate" aria-label="Explore resting heart rate history">History <span aria-hidden="true">→</span></button>
       </div>
       <div class="today-heart-metric">
         <p class="eyebrow">LATEST HEART RATE</p>
-        <div id="hr" class="number">—</div>
+        <button type="button" class="history-open" data-history-metric="heart_rate" aria-label="Explore heart rate history" aria-describedby="hr hr-at"><span id="hr" class="number">—</span><span class="history-open-label" aria-hidden="true">History →</span></button>
         <p id="hr-at" class="hint">Awaiting data</p>
-        <button type="button" class="history-open" data-history-metric="heart_rate" aria-label="Explore heart rate history">History <span aria-hidden="true">→</span></button>
       </div>
     </div>
   </article>
@@ -54,16 +52,14 @@
     <article class="surface today-mini metric-hrv">
       <div class="metric-symbol" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 12h4l3-8 4 16 4-12 3 4h4"/></svg></div>
       <p class="eyebrow">HRV · SDNN</p>
-      <div id="hrv" class="number">—</div>
+      <button type="button" class="history-open" data-history-metric="hrv_sdnn" aria-label="Explore HRV / SDNN history" aria-describedby="hrv hrv-at"><span id="hrv" class="number">—</span><span class="history-open-label" aria-hidden="true">History →</span></button>
       <p id="hrv-at" class="hint">Awaiting data</p>
-      <button type="button" class="history-open" data-history-metric="hrv_sdnn" aria-label="Explore HRV / SDNN history">History <span aria-hidden="true">→</span></button>
     </article>
     <article class="surface today-mini metric-spo2">
       <div class="metric-symbol" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2C9 6.7 4.5 11.3 4.5 15.5a7.5 7.5 0 0 0 15 0C19.5 11.3 15 6.7 12 2Z"/><path d="M8 14a4 4 0 0 0 5 5"/></svg></div>
       <p class="eyebrow">BLOOD OXYGEN</p>
-      <div id="spo2" class="number">—</div>
+      <button type="button" class="history-open" data-history-metric="blood_oxygen_saturation" aria-label="Explore blood oxygen / SpO₂ history" aria-describedby="spo2 spo2-at"><span id="spo2" class="number">—</span><span class="history-open-label" aria-hidden="true">History →</span></button>
       <p id="spo2-at" class="hint">Awaiting data</p>
-      <button type="button" class="history-open" data-history-metric="blood_oxygen_saturation" aria-label="Explore blood oxygen / SpO₂ history">History <span aria-hidden="true">→</span></button>
     </article>
   </div>
   <article class="surface today-week" aria-label="Weekly resting heart rate">
@@ -131,7 +127,7 @@
     <p id="history-semantics" class="hint"></p>
     <p class="hint">New York calendar days, including today. Today’s value may change as readings sync. Gaps mean no recorded value; readings are never filled in.</p>
   </section>
-  <section class="surface section history-daily" aria-labelledby="history-list-title"><h2 id="history-list-title">Daily values</h2><p id="history-coverage" class="hint"></p><table><caption id="history-list-caption">Oldest first</caption><thead><tr><th scope="col">New York date</th><th scope="col" id="history-unit">Value</th></tr></thead><tbody id="history-values"></tbody></table></section>
+  <section class="surface section history-daily" aria-labelledby="history-list-title"><h2 id="history-list-title">Daily values</h2><p id="history-coverage" class="hint"></p><table><caption id="history-list-caption">Newest first · today at top</caption><thead><tr><th scope="col">New York date</th><th scope="col" id="history-unit">Value</th></tr></thead><tbody id="history-values"></tbody></table></section>
 </section>
 <nav class="dock" aria-label="Resting Beast pages">
   <a href="#overview" data-page-link="today" aria-current="page" class="is-active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>Today</span></a>

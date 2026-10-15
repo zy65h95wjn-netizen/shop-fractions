@@ -119,7 +119,17 @@ async function test(width){
   const env=environment(width),{window:w,document:d}=env,$=id=>d.getElementById(id);
   await settle();env.flush();
   assert.equal($('app').hidden,false);assert.equal($('steps-today').textContent,'1,234');
-  const open=metric=>d.querySelector('[data-history-metric="'+metric+'"]').click();
+  const open=metric=>d.querySelector('[data-history-metric="'+metric+'"]').querySelector('.number').click();
+  assert.equal(d.querySelectorAll('[data-history-metric]').length,4,'one control per measurement, no duplicate History buttons');
+  for(const id of ['rhr','hr','hrv','spo2']){
+    const button=$(id).parentElement;assert.equal(button.tagName,'BUTTON');
+    assert.equal(button.getAttribute('type'),'button');
+    assert.ok(button.getAttribute('aria-label').includes('history'));
+    assert.equal(button.getAttribute('aria-describedby'),id+' '+id+'-at');
+  }
+  assert.equal($('rhr').textContent,'84bpm','existing rounded Today value and unit formatting remain');
+  assert.equal($('hr').textContent,'102bpm');assert.equal($('hrv').textContent,'44ms');
+  assert.equal($('spo2').textContent,'98.6%','existing SpO₂ precision remains');
   const specs=[['resting_heart_rate','Resting heart rate','bpm'],['heart_rate','Heart rate','bpm'],['hrv_sdnn','HRV / SDNN','ms'],['blood_oxygen_saturation','Blood oxygen / SpO₂','%']];
   for(const [metric,name,unit] of specs){
     w.scrollY=375;open(metric);
@@ -130,12 +140,15 @@ async function test(width){
     for(const days of [7,30,90]){
       d.querySelector('[data-history-days="'+days+'"]').click();
       const expected=series(env.data.daily,metric,days,DAY),rows=$('history-values').children;
-      assert.equal(rows.length,days);assert.equal($('history-chart').getAttribute('aria-valuemax'),String(days));
+      assert.equal(rows.length,days);assert.equal(rows[0].dataset.day,DAY,'today must be the first list row');
+      assert.ok(rows.every((row,i)=>i===0||row.dataset.day<rows[i-1].dataset.day),'list is strictly newest-first');assert.equal($('history-chart').getAttribute('aria-valuemax'),String(days));
       for(let i=0;i<days;i++){
-        assert.equal(rows[i].dataset.day,expected[i].day);
-        assert.equal(rows[i].children[1].textContent,reading(expected[i].value,unit));
+        const row=rows[days-1-i];
+        assert.equal(row.dataset.day,expected[i].day);
+        assert.equal(row.children[1].textContent,reading(expected[i].value,unit));
         $('history-scrubber').value=String(i);$('history-scrubber').dispatchEvent(new FakeEvent('input'));
-        assert.equal($('history-reading').textContent,rows[i].children[1].textContent);
+        assert.equal($('history-reading').textContent,row.children[1].textContent);
+        assert.ok($('history-day').textContent.startsWith(row.children[0].textContent),'selected date and list date agree too');
       }
       const graph=$('history-chart').ctx.paths.find(p=>p.style==='#e5b878');
       let expectedLines=0;for(let i=1;i<expected.length;i++)if(expected[i-1].value!==null&&expected[i].value!==null)expectedLines++;
@@ -144,6 +157,7 @@ async function test(width){
     assert.ok($('history-list-caption').textContent.includes(metric==='resting_heart_rate'?'Watch estimate':'Daily average'));
     $('history-chart').dispatchEvent(new FakeEvent('keydown',{key:'Home',cancelable:true}));
     assert.equal($('history-chart').getAttribute('aria-valuenow'),'1');
+    assert.ok($('history-day').textContent.startsWith($('history-values').children.at(-1).children[0].textContent),'graph starts with oldest day, at bottom of list');
     $('history-chart').dispatchEvent(new FakeEvent('keydown',{key:'ArrowRight',cancelable:true}));
     assert.equal($('history-chart').getAttribute('aria-valuenow'),'2');
     $('history-chart').dispatchEvent(new FakeEvent('keydown',{key:'End',cancelable:true}));
@@ -168,7 +182,7 @@ async function test(width){
   $('refresh').click();await settle();
   assert.equal($('history-values').children.length,7,'live refresh preserves range');
   assert.equal($('history-chart').getAttribute('aria-valuenow'),'1','live refresh preserves selected day');
-  assert.equal($('history-values').children.at(-1).children[1].textContent,'77.375 bpm');
+  assert.equal($('history-values').children[0].children[1].textContent,'77.375 bpm');
   assert.equal($('history-latest-value').textContent,'104.25 bpm');
   w.RestingBeastPages.showPage('trends');env.flush();assert.equal($('history-explorer').hidden,true);assert.equal($('trends').hidden,false);
   $('chart').dispatchEvent(new FakeEvent('keydown',{key:'Home',cancelable:true}));
@@ -206,7 +220,7 @@ async function test(width){
   open('heart_rate');assert.equal($('history-explorer').hidden,true,'cannot reopen while locked');
   pending.resolve({ok:true,status:200,json:async()=>fixture()});await settle();assert.equal($('app').hidden,true,'late response cannot unlock history or app');
   assert.equal($('history-values').children.length,0);
-  console.log('PASS: modeled '+width+'px canvas: four entry points, 7/30/90 list/graph agreement, gaps, latest, refresh, Back/focus, lock/race, existing Trends and forms');
+  console.log('PASS: modeled '+width+'px canvas: four native value buttons, newest-first list/chronological graph agreement at 7/30/90, gaps, latest, refresh, Back/focus, lock/race, existing Trends and forms');
 }
 module.exports={fixture};
 if(require.main===module)(async()=>{for(const width of [320,390,430])await test(width);})().catch(e=>{console.error(e);process.exitCode=1;});

@@ -29,6 +29,7 @@ class Contract(HTMLParser):
     def __init__(self, source):
         super().__init__()
         self.ids, self.scripts, self.csp, self.controls = {}, [], None, []
+        self.history_buttons = []
         self.feed(source)
 
     def handle_starttag(self, tag, attrs):
@@ -36,6 +37,8 @@ class Contract(HTMLParser):
         if "id" in a:
             assert a["id"] not in self.ids, f"Duplicate ID: {a['id']}"
             self.ids[a["id"]] = tag
+        if tag == "button" and "data-history-metric" in a:
+            self.history_buttons.append(a)
         if tag == "script":
             self.scripts.append(a)
         if a.get("http-equiv") == "Content-Security-Policy":
@@ -55,7 +58,11 @@ def static_checks():
     current = Contract((ROOT / "pulse/index.html").read_text())
     added_ids = {name for name in current.ids if name not in previous.ids}
     assert all(name.startswith("history-") for name in added_ids), added_ids
-    assert {k: v for k, v in current.ids.items() if k not in added_ids} == previous.ids
+    expected_ids = dict(previous.ids)
+    for name in ["rhr", "hr", "hrv", "spo2"]:
+        assert previous.ids[name] == "div"
+        expected_ids[name] = "span"  # Same rendered identifier, now inside a native button.
+    assert {k: v for k, v in current.ids.items() if k not in added_ids} == expected_ids
     assert [(tag, a) for tag, a in current.controls if a.get("id") not in added_ids] == previous.controls
     assert [a for a in current.scripts if a.get("src") != "./history-v1.js"] == previous.scripts
     old_js = subprocess.check_output(
@@ -70,6 +77,17 @@ def static_checks():
         ',.dock,#history-explorer', ',.dock') == old_pages, "Navigation changes exceed detail close/swipe isolation"
     for name in ["app-iron-v11.js", "pages-v1.js", "history-v1.js"]:
         subprocess.run(["node", "--check", str(ROOT / "pulse" / name)], check=True)
+    expected_metrics = {"resting_heart_rate": "rhr", "heart_rate": "hr",
+                        "hrv_sdnn": "hrv", "blood_oxygen_saturation": "spo2"}
+    assert len(current.history_buttons) == 4, "Each metric must have only one History control"
+    for a in current.history_buttons:
+        metric = a["data-history-metric"]
+        name = expected_metrics.pop(metric)
+        assert a["type"] == "button" and a["aria-label"]
+        assert a["aria-describedby"] == f"{name} {name}-at"
+    history_css = (ROOT / "pulse/history-v1.css").read_text()
+    button_rules = history_css.split(".history-open {", 1)[1].split("}", 1)[0]
+    assert "min-height: 44px" in button_rules and "min-width: 44px" in button_rules
     assert current.csp == previous.csp, "CSP changed"
     assert (ROOT / "pulse/nightshift-iron-v8.css").read_bytes() == subprocess.check_output(
         ["git", "show", f"{BASELINE}:pulse/nightshift-iron-v8.css"], cwd=ROOT)
