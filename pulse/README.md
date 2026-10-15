@@ -4,6 +4,15 @@ Resting Beast (previously Pulse Protocol) is a mobile-first dashboard hosted at 
 
 The public URL, repository path, access keys and Supabase integration are intentionally unchanged by the rename.
 
+## Iron Citadel real-device visual refinement
+A genuine 7:56 PM iPhone Safari screenshot established that the v5 castle SVG rendered correctly but looked flat compared with the approved painterly Iron Citadel reference. The v6 correction:
+- Replaces the vector scenery used by the active stylesheet with `pulse/assets/iron-citadel-painting.webp`, cropped to contain only scenery (no fake UI or readings).
+- Keeps the art hosted locally under the site's existing image CSP.
+- Tightens the mobile hero, improves text/unit legibility, and separates the bpm/ms/% unit sizes from live numeric values.
+- Leaves the previously deployed SVG, stylesheet and script in the repo for rollback; the active app continues using `app-iron-v10.js`.
+- Adds print-only positioning so the dock does not overlap exported PDF footers.
+No changes to Health data, credential checks, importer, RHR method, step semantics, user history, or chart interactivity.
+
 ## Iron Citadel design (Oct 14, 2026)
 The chosen theme uses an original local, standalone fortress SVG in `pulse/assets/iron-citadel-scene.svg`, a fully themed stylesheet `pulse/nightshift-iron-v5.css`, and a color-only chart version `pulse/app-iron-v10.js`.
 
