@@ -20,9 +20,6 @@ jobs:
       matrix:
         browser: [chromium, webkit]
     env:
-      NODE_PATH: ${{ runner.temp }}/pr14-playwright/node_modules
-      CODEX_PRIMARY_RUNTIME_NODE_MODULES: ${{ runner.temp }}/pr14-playwright/node_modules
-      HISTORY_REVIEW_OUTPUT: ${{ runner.temp }}/pr14-history-${{ matrix.browser }}
       HISTORY_BROWSER: ${{ matrix.browser }}
       CI: 'true'
     steps:
@@ -54,6 +51,9 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p "${RUNNER_TEMP}/pr14-logs-${{ matrix.browser }}"
+          export NODE_PATH="${RUNNER_TEMP}/pr14-playwright/node_modules"
+          export CODEX_PRIMARY_RUNTIME_NODE_MODULES="${NODE_PATH}"
+          export HISTORY_REVIEW_OUTPUT="${RUNNER_TEMP}/pr14-history-${{ matrix.browser }}"
           node pulse/tests/history_browser.js 2>&1 | tee "${RUNNER_TEMP}/pr14-logs-${{ matrix.browser }}/history.log"
       - name: Run frontend reliability browser acceptance
         id: reliability
@@ -62,6 +62,7 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p "${RUNNER_TEMP}/pr14-logs-${{ matrix.browser }}"
+          export NODE_PATH="${RUNNER_TEMP}/pr14-playwright/node_modules"
           node pulse/tests/reliability_browser.js "${{ matrix.browser }}" 2>&1 | tee "${RUNNER_TEMP}/pr14-logs-${{ matrix.browser }}/reliability.log"
       - name: Upload synthetic browser evidence
         if: always()
