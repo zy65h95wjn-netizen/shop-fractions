@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-12",
+ "updated": "2026-10-15",
  "season": "Chapter 7 Season 4",
  "groups": [
   {
@@ -28,6 +28,11 @@
   {
    "id": "tot",
    "name": "Trick or Treat"
+  },
+  {
+   "id": "quack",
+   "name": "Quack",
+   "bonus": "The Quack Sprite shares 50% of its earned Sprite XP with other Sprites in your inventory."
   }
  ],
  "sprites": [
@@ -1704,6 +1709,184 @@
    "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerD_TrickTreat_L.webp",
    "does": "Pop out of hiding spots, or sometimes open containers, to find food that heals extra.",
    "levels": "Better food with each level."
+  },
+  {
+   "id": "honey",
+   "name": "Honey Sprite",
+   "group": "season",
+   "rarity": "epic",
+   "how": "Chests, pumpkins and cheat codes",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerE_L.webp",
+   "does": "Chance for ranged weapon hits to spawn bees where they land."
+  },
+  {
+   "id": "gold-honey",
+   "name": "Gold Honey Sprite",
+   "group": "gold",
+   "rarity": null,
+   "how": "Chests, pumpkins and cheat codes",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerE_Gold_L.webp",
+   "does": "Chance for ranged weapon hits to spawn bees where they land."
+  },
+  {
+   "id": "cheat-honey",
+   "name": "Cheat Master Honey Sprite",
+   "group": "cheat",
+   "rarity": null,
+   "how": "Chests, pumpkins and cheat codes",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerE_Cheatmaster_L.webp",
+   "does": "Chance for ranged weapon hits to spawn bees where they land."
+  },
+  {
+   "id": "hacker-honey",
+   "name": "Loot Hacker Honey Sprite",
+   "group": "hacker",
+   "rarity": null,
+   "how": "Chests, pumpkins and cheat codes",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerE_Hacker_L.webp",
+   "does": "Chance for ranged weapon hits to spawn bees where they land."
+  },
+  {
+   "id": "bounty-honey",
+   "name": "Bounty Hunter Honey Sprite",
+   "group": "bounty",
+   "rarity": null,
+   "how": "Chests, pumpkins and cheat codes",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerE_BountyHunter_L.webp",
+   "does": "Chance for ranged weapon hits to spawn bees where they land."
+  },
+  {
+   "id": "tot-honey",
+   "name": "Trick or Treat Honey Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests, pumpkins and cheat codes",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_WinnerE_TrickTreat_L.webp",
+   "does": "Chance for ranged weapon hits to spawn bees where they land."
+  },
+  {
+   "id": "willow",
+   "name": "One Wish Willow Sprite",
+   "group": "season",
+   "rarity": "mythic",
+   "how": "Chests, pumpkins and cheat codes",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_CargoLying_L.webp",
+   "does": "Extract defeated enemies’ equipped Sprites. Push nearby enemies away when damaged; removing Willow marks you on the map."
+  },
+  {
+   "id": "gold-willow",
+   "name": "Gold One Wish Willow Sprite",
+   "group": "gold",
+   "rarity": null,
+   "how": "Chests, pumpkins and cheat codes",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_CargoLying_Gold_L.webp",
+   "does": "Extract defeated enemies’ equipped Sprites. Push nearby enemies away when damaged; removing Willow marks you on the map."
+  },
+  {
+   "id": "cheat-willow",
+   "name": "Cheat Master One Wish Willow Sprite",
+   "group": "cheat",
+   "rarity": null,
+   "how": "Chests, pumpkins and cheat codes",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_CargoLying_Cheatmaster_L.webp",
+   "does": "Extract defeated enemies’ equipped Sprites. Push nearby enemies away when damaged; removing Willow marks you on the map."
+  },
+  {
+   "id": "hacker-willow",
+   "name": "Loot Hacker One Wish Willow Sprite",
+   "group": "hacker",
+   "rarity": null,
+   "how": "Chests, pumpkins and cheat codes",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_CargoLying_Hacker_L.webp",
+   "does": "Extract defeated enemies’ equipped Sprites. Push nearby enemies away when damaged; removing Willow marks you on the map."
+  },
+  {
+   "id": "bounty-willow",
+   "name": "Bounty Hunter One Wish Willow Sprite",
+   "group": "bounty",
+   "rarity": null,
+   "how": "Chests, pumpkins and cheat codes",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_CargoLying_BountyHunter_L.webp",
+   "does": "Extract defeated enemies’ equipped Sprites. Push nearby enemies away when damaged; removing Willow marks you on the map."
+  },
+  {
+   "id": "tot-willow",
+   "name": "Trick or Treat One Wish Willow Sprite",
+   "group": "tot",
+   "rarity": null,
+   "how": "Chests, pumpkins and cheat codes",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_CargoLying_TrickTreat_L.webp",
+   "does": "Extract defeated enemies’ equipped Sprites. Push nearby enemies away when damaged; removing Willow marks you on the map."
+  },
+  {
+   "id": "quack-jonesy",
+   "name": "Quack Jonesy Sprite",
+   "group": "quack",
+   "rarity": null,
+   "how": "Sprite Mastery rewards",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Jonesy_Quack_L.webp",
+   "does": "After you take damage, it heals back some health or shield after a short delay.",
+   "levels": "Heals more with each level.",
+   "where": "High, mountainous areas"
+  },
+  {
+   "id": "quack-adventure",
+   "name": "Quack Adventure Sprite",
+   "group": "quack",
+   "rarity": null,
+   "how": "Sprite Mastery rewards",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Dwarf_Quack_L.webp",
+   "does": "Upgrades a random item in your inventory.",
+   "levels": "Each level upgrades another random item.",
+   "where": "High, mountainous areas"
+  },
+  {
+   "id": "quack-bush",
+   "name": "Quack Bush Sprite",
+   "group": "quack",
+   "rarity": null,
+   "how": "Sprite Mastery rewards",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_BushRanger_Quack_L.webp",
+   "does": "After a short wait, it gives you a bush to hide in. Maxed out, every elimination gives you a fresh bush too.",
+   "levels": "The bush shows up faster with each level."
+  },
+  {
+   "id": "quack-klombo",
+   "name": "Quack Klombo Sprite",
+   "group": "quack",
+   "rarity": null,
+   "how": "Sprite Mastery rewards",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_Klombo_Quack_L.webp",
+   "does": "Hands out random items at each stage. Feed it items to move it to the next stage.",
+   "levels": "Better items with each level.",
+   "where": "High, mountainous areas"
+  },
+  {
+   "id": "quack-spookydash",
+   "name": "Quack Spooky Dash Sprite",
+   "group": "quack",
+   "rarity": null,
+   "how": "Sprite Mastery rewards",
+   "added": "2026-10-15",
+   "img": "https://fortnite.gg/img/x/sprites/icons/T_Icon_BR_Creature_Sprite_PhaseDash_Quack_L.webp",
+   "does": "Jump and you can pass through some objects in midair. Charges refill over time.",
+   "levels": "Faster recharge with each level."
   }
  ]
 }
