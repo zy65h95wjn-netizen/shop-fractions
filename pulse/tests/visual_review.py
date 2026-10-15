@@ -161,7 +161,7 @@ def run_browser(browser, engine, base, output):
         assert page.locator("#rhr").inner_text() == "—"
         assert page.locator("#today-rhr-delta").inner_text() == "0/7 days"
         assert "no reading" in page.locator("#today-rhr-spark").get_attribute("aria-label")
-        assert "2026-" in page.locator("#today-rhr-spark").get_attribute("aria-label")
+        assert "New York calendar days:" in page.locator("#today-rhr-spark").get_attribute("aria-label")
         layout_check(page)
         # Reserve enough room after the footer for the fixed dock, including
         # safe area. At the last scroll position every last content line is clear.
