@@ -1,0 +1,8 @@
+/* Preview-only disclosure; app styling remains byte-for-byte from PR #14. */
+.preview-banner {
+  position: sticky; top: 0; z-index: 9999;
+  padding: calc(9px + env(safe-area-inset-top, 0px)) 10px 9px;
+  text-align: center; font: 700 11px/1.4 system-ui, sans-serif;
+  letter-spacing: .065em; background: #322518; color: #ffe4ab;
+  border-bottom: 1px solid #e8b76a;
+}
