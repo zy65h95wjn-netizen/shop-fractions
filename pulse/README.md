@@ -1,5 +1,13 @@
 # Resting Beast — v0.6 (visual rename)
 
+## Seven-day resting HR readability (Oct 15, 2026)
+
+The Today chart now draws **each recorded day's resting-HR value (bpm) above its point**, a numeric vertical scale, and local month/day labels along the bottom. Its accessible label lists all seven completed New York calendar days and their actual readings or "no reading" when missing. The canvas is taller to keep dates and values legible on narrow phones. Missing readings never become zero, and missing days still break the trend line.
+
+The daily RHR data source, latest-revision-per-local-day calculation, comparison with the prior week, auth, import and edit behavior are unchanged. CSS is `nightshift-iron-v8.css` and frontend code is `app-iron-v11.js`; v7 and v10 remain available for rollback. No backend or database changes. Recheck actual Safari layout on the target iPhone.
+
+Regression commands: `node pulse/tests/rhr_spark_labels.js` and the existing `python3 pulse/tests/visual_review.py --chromium /usr/bin/chromium` (with browser dependencies installed).
+
 ## Iron Citadel reconstruction (v7, visual review)
 
 The active page now uses `nightshift-iron-v7.css`, a consolidated stylesheet for the current Today, Trends, Context, login, and dialog markup. Local, original scenery replaces the 270×172 painting: the detailed fortress is 1536×1024, with a retained 768×512 derivative. The app requests only the optimized 1536px source at every viewport, avoiding duplicate responsive-image downloads. The full composition is preserved rather than enlarged with `cover`. Panel bevels, steel grain, chamfers, restrained ember lighting, SVG icons, typography, touch targets, form sizing, and dock clearance share one visual treatment.
