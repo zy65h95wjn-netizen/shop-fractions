@@ -1,5 +1,13 @@
 # Resting Beast — v0.6 (visual rename)
 
+## Iron Citadel reconstruction (v7, visual review)
+
+The active page now uses `nightshift-iron-v7.css`, a consolidated stylesheet for the current Today, Trends, Context, login, and dialog markup. Local, original scenery replaces the 270×172 painting: the detailed fortress is 1536×1024, with a retained 768×512 derivative. The app requests only the optimized 1536px source at every viewport, avoiding duplicate responsive-image downloads. The full composition is preserved rather than enlarged with `cover`. Panel bevels, steel grain, chamfers, restrained ember lighting, SVG icons, typography, touch targets, form sizing, and dock clearance share one visual treatment.
+
+The application scripts, health calculations, auth/session handling, chart interactions, form constraints, page ownership, and CSP remain unchanged. No backend resources were modified, and no production deployment was performed.
+
+See [visual review, screenshots, verification limits, and rollback](review/README.md). To undo only this reconstruction, revert its commit; retain `app-iron-v10.js` and the corrected resting-HR pipeline.
+
 Resting Beast (previously Pulse Protocol) is a mobile-first dashboard hosted at `/shop-fractions/pulse/`. It does **not** change the `/island/` app. This is a provisional location until a dedicated GitHub repo is created.
 
 The public URL, repository path, access keys and Supabase integration are intentionally unchanged by the rename.
