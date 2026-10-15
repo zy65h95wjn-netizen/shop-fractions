@@ -756,9 +756,14 @@ function dropSet(){
   var last = dated.reduce(function(m, s){ return s.added > m ? s.added : m; }, ''), tally = {};
   dated.forEach(function(s){ if(s.added === last) tally[s.group] = (tally[s.group]||0) + 1; });
   var grp = Object.keys(tally).sort(function(a, b){ return tally[b]-tally[a]; })[0];
+  var mixed = Object.keys(tally).length > 1;
   var D = localDate(last), from = D.getTime() - 6*86400000;
   var g = (d.groups||[]).filter(function(x){ return x.id === grp; })[0] || {};
-  return {group:grp, g:g, date:D, sprites:dated.filter(function(s){ return s.group === grp && localDate(s.added).getTime() >= from; })};
+  var ev = ((S.eventsData && S.eventsData.events) || []).filter(function(x){ return x.kind === 'sprites' && x.date === last; })[0];
+  return {group:mixed ? 'all' : grp, g:mixed ? {} : g, date:D,
+    name:mixed && ev ? ev.name.replace(/\s+Sprites?$/i, '') : null,
+    sprites:mixed ? dated.filter(function(s){ return s.added === last; }) :
+      dated.filter(function(s){ return s.group === grp && localDate(s.added).getTime() >= from; })};
 }
 function dropName(s, setName){
   var n = String(s.name||'');
@@ -767,7 +772,7 @@ function dropName(s, setName){
 }
 function nextDropLine(){
   var t = new Date(); t.setHours(0,0,0,0);
-  var nx = upcomingEvents().filter(function(x){ return x.kind === 'sprites'; })[0];
+  var nx = upcomingEvents().filter(function(x){ return x.kind === 'sprites' && x.d > t; })[0];
   if(nx){
     var k = Math.round((nx.d - t)/86400000);
     return 'Next drop · <b>'+esc(nx.name.replace(/\s+Sprites?$/i, ''))+'</b> · '+(k <= 0 ? 'today' : k === 1 ? 'tomorrow' : 'in '+k+' days');
@@ -778,7 +783,7 @@ function dropCard(){
   var x = dropSet(); if(!x || !x.sprites.length) return '';
   var t = new Date(); t.setHours(0,0,0,0);
   var age = Math.round((t - x.date)/86400000), col = GROUP_COLOR[x.group] || '#B98CFF';
-  var title = x.group === 'season' ? 'New sprites' : (x.g.name || 'New sprites');
+  var title = x.name || (x.group === 'season' ? 'New sprites' : (x.g.name || 'New sprites'));
   var n = x.sprites.length, got = x.sprites.filter(function(s){ return S.got[s.id]; }).length, done = got === n;
   // the ones she still needs come first; the first of those gets a seeking pulse
   var order = x.sprites.map(function(s, i){ return {s:s, i:i}; }).sort(function(a, b){ return ((S.got[a.s.id]?1:0) - (S.got[b.s.id]?1:0)) || (a.i - b.i); });
@@ -797,7 +802,7 @@ function dropCard(){
     '<div class="drop-row">'+row+'</div>'+
     '<div class="dprog"><div class="row"><span><b id="dropGot">'+got+'</b> of '+n+' caught</span><span class="small muted" id="dropLeft">'+(done ? 'All of them' : (n-got)+' still to find')+'</span></div>'+
       '<div class="bar"><i id="dropBar" style="width:'+(got/n*100).toFixed(1)+'%"></i></div></div>'+
-    '<div class="foot"><span>'+nextDropLine()+'</span><button class="see" data-dropgroup="'+esc(x.group)+'">See the set</button></div></div>';
+    '<div class="foot"><span>'+nextDropLine()+'</span><button class="see" data-dropgroup="'+esc(x.group)+'">'+(x.group === 'all' ? 'See all sprites' : 'See the set')+'</button></div></div>';
 }
 function updateDropCard(){
   var card = $('#dropCard'); if(!card) return;
