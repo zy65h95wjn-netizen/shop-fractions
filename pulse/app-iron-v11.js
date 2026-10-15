@@ -301,7 +301,7 @@ function renderTodayRhr(){
   }
 }
 
-function render(){showMetric('heart_rate','hr');showMetric('resting_heart_rate','rhr');showMetric('hrv_sdnn','hrv');showMetric('blood_oxygen_saturation','spo2');renderTodaySteps();renderTodayTrt();renderTodayRhr();renderContext();renderHistory();chart();window.PulseCompare?.render(state);}
+function render(){showMetric('heart_rate','hr');showMetric('resting_heart_rate','rhr');showMetric('hrv_sdnn','hrv');showMetric('blood_oxygen_saturation','spo2');renderTodaySteps();renderTodayTrt();renderTodayRhr();renderContext();renderHistory();chart();window.PulseCompare?.render(state);window.PulseHistory?.render(state);}
 let editingMedicationId=null;
 function populateFields(kind,entry,stop=false){
   el('fields').innerHTML=fields[kind];
@@ -445,6 +445,7 @@ el('lock').addEventListener('click',()=>{
   ++authGeneration; // An old in-flight fetch must never unlock this page again.
   sessionStorage.removeItem(storage);
   secret='';state=null;
+  window.PulseHistory?.clear();
   visible(false);el('key').value='';
   txt('login-error','');txt('key-check-result','');
 });

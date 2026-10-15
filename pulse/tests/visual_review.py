@@ -16,11 +16,10 @@ from urllib.parse import urlparse
 from xml.etree import ElementTree
 
 from PIL import Image
-from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
-BASELINE = "de00cd26bef5e3169ffc1a0fcbb238959200eba8"
-UNCHANGED_SCRIPTS = ["compare.js", "pages-v1.js"]
+BASELINE = "f64a4c0ebd565e0f2d1eb818b44213f4d4920a25"
+UNCHANGED_SCRIPTS = ["compare.js"]
 EMPTY = {"resting_hr_method": "latest_end_at_per_local_day", "daily": [],
          "events": [], "latest": {}, "steps": {"today": None, "yesterday": None}}
 VIEWPORTS = [(320, 568), (360, 780), (390, 844), (430, 932), (768, 1024), (1440, 900)]
@@ -54,39 +53,26 @@ def static_checks():
     previous = Contract(subprocess.check_output(
         ["git", "show", f"{BASELINE}:pulse/index.html"], cwd=ROOT).decode())
     current = Contract((ROOT / "pulse/index.html").read_text())
-    assert current.ids == previous.ids, "DOM identifiers or their control types changed"
-    # The sole permitted control change is semantic Password AutoFill metadata
-    # on the existing private-key input; all other controls stay identical.
-    expected_controls = []
-    for tag, attrs in previous.controls:
-        expected = dict(attrs)
-        if tag == "input" and expected.get("id") == "key":
-            assert expected.get("autocomplete") == "off"
-            expected.update(name="password", placeholder="Private access key",
-                            autocomplete="current-password")
-        expected_controls.append((tag, expected))
-    assert current.controls == expected_controls, "Forms or inputs changed beyond private-key AutoFill"
-    expected_scripts = [dict(attrs, src=attrs.get("src", "").replace(
-        "app-iron-v10.js", "app-iron-v11.js")) for attrs in previous.scripts]
-    assert current.scripts == expected_scripts, "Unexpected application entry point change"
-    # The corrected health data/auth logic is unchanged. Only the RHR
-    # sparkline's canvas paint/label block is intentionally different.
+    added_ids = {name for name in current.ids if name not in previous.ids}
+    assert all(name.startswith("history-") for name in added_ids), added_ids
+    assert {k: v for k, v in current.ids.items() if k not in added_ids} == previous.ids
+    assert [(tag, a) for tag, a in current.controls if a.get("id") not in added_ids] == previous.controls
+    assert [a for a in current.scripts if a.get("src") != "./history-v1.js"] == previous.scripts
     old_js = subprocess.check_output(
-        ["git", "show", f"{BASELINE}:pulse/app-iron-v10.js"], cwd=ROOT).decode()
+        ["git", "show", f"{BASELINE}:pulse/app-iron-v11.js"], cwd=ROOT).decode()
     new_js = (ROOT / "pulse/app-iron-v11.js").read_text()
-    def without_spark_paint(js, updated):
-        func_at = js.index("function renderTodayRhr(){")
-        start_token = ("  // Keep the canvas accessible:" if updated
-                       else "  if(!bounds.width)return;")
-        start = js.index(start_token, func_at)
-        end = js.index("\n}\n\nfunction render()", start)
-        return js[:start] + "/* only RHR canvas rendering differs */" + js[end:]
-    assert without_spark_paint(new_js, True) == without_spark_paint(old_js, False), (
-        "Functional application JS changed outside RHR canvas rendering")
-    subprocess.run(["node", "--check", str(ROOT / "pulse/app-iron-v11.js")], check=True)
-    assert current.csp == previous.csp.replace(
-        "img-src 'self' data:;", "img-src 'self' data:; manifest-src 'self';"), (
-        "CSP changed beyond the same-origin manifest permission")
+    assert new_js.replace("window.PulseHistory?.render(state);", "").replace(
+        "  window.PulseHistory?.clear();\n", "") == old_js, "App changes exceed the render/lock hooks"
+    old_pages = subprocess.check_output(
+        ["git", "show", f"{BASELINE}:pulse/pages-v1.js"], cwd=ROOT).decode()
+    new_pages = (ROOT / "pulse/pages-v1.js").read_text()
+    assert new_pages.replace("    app.dispatchEvent(new Event('restingbeast:pagechange'));\n", "").replace(
+        ',.dock,#history-explorer', ',.dock') == old_pages, "Navigation changes exceed detail close/swipe isolation"
+    for name in ["app-iron-v11.js", "pages-v1.js", "history-v1.js"]:
+        subprocess.run(["node", "--check", str(ROOT / "pulse" / name)], check=True)
+    assert current.csp == previous.csp, "CSP changed"
+    assert (ROOT / "pulse/nightshift-iron-v8.css").read_bytes() == subprocess.check_output(
+        ["git", "show", f"{BASELINE}:pulse/nightshift-iron-v8.css"], cwd=ROOT)
     for width in [768, 1536]:
         image = ROOT / f"pulse/assets/iron-citadel-fortress-{width}.webp"
         with Image.open(image) as art:
@@ -95,7 +81,7 @@ def static_checks():
             art.verify()
         assert image.stat().st_size < (150_000 if width == 768 else 450_000)
     ElementTree.parse(ROOT / "pulse/assets/iron-forged-grain.svg")
-    print("PASS: isolated RHR paint change; unchanged other JS, DOM IDs, forms, canvas contracts and restricted CSP; optimized assets", flush=True)
+    print("PASS: additive history controls; isolated render/lock/navigation hooks; unchanged existing forms, calculations, theme, CSP and assets", flush=True)
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -320,9 +306,13 @@ def main():
     parser.add_argument("--output", type=Path, default=Path("/tmp/iron-citadel-review"))
     parser.add_argument("--chromium", default="/usr/bin/chromium")
     parser.add_argument("--webkit", help="Optional Playwright WebKit executable")
+    parser.add_argument("--static-only", action="store_true", help="Run source/HTML contracts without a browser")
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     static_checks()
+    if args.static_only:
+        return
+    from playwright.sync_api import sync_playwright
     server = ThreadingHTTPServer(("127.0.0.1", 0), functools.partial(QuietHandler, directory=str(ROOT)))
     threading.Thread(target=server.serve_forever, daemon=True).start()
     results = []

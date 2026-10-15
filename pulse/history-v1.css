@@ -1,0 +1,44 @@
+/* Additive History Explorer, sharing Iron Citadel's surfaces and palette. */
+.history-open {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: transparent;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 650;
+  text-align: left;
+}
+.today-mini .history-open { grid-column: 1 / -1; }
+.history-toolbar { display: flex; justify-content: space-between; gap: 12px; margin-top: 18px; }
+.history-heading { padding: 24px 0 18px; }
+.history-heading h1 { font-size: clamp(30px, 7vw, 42px); line-height: 1.15; overflow-wrap: anywhere; }
+.history-latest .eyebrow { color: var(--gold); }
+.history-latest-value { margin: 10px 0; font-family: Georgia, serif; font-size: 34px; line-height: 1.2; overflow-wrap: anywhere; }
+.history-ranges { display: flex; gap: 8px; }
+.history-ranges button { flex: 1; min-width: 0; padding-inline: 6px; }
+.history-ranges [aria-pressed="true"] { border-color: var(--gold); background: #63452b; color: #fff1d8; }
+#history-period { margin-top: 12px; }
+#history-chart { height: 225px; touch-action: pan-y; -webkit-touch-callout: none; user-select: none; -webkit-user-select: none; cursor: crosshair; }
+#history-chart:focus-visible { outline: 2px solid #ffe0a0; outline-offset: 3px; }
+.history-plot > .hint { margin-top: 12px; font-size: 12px; line-height: 1.6; }
+#history-empty { padding: 12px; border: 1px dashed var(--line-strong); }
+.history-scrub label { margin: 10px 0 0; }
+#history-scrubber { display: block; width: 100%; height: 44px; margin: 0; padding: 0; accent-color: var(--gold); background: transparent; border: 0; touch-action: pan-x; }
+.history-daily h2 { font-size: 24px; }
+.history-daily > .hint { margin-top: 8px; }
+.history-daily table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 12px; font-variant-numeric: tabular-nums; }
+.history-daily caption { color: var(--muted); text-align: left; padding-bottom: 12px; line-height: 1.5; }
+.history-daily th, .history-daily td { padding: 12px 4px; text-align: left; border-top: 1px solid var(--line); overflow-wrap: anywhere; }
+.history-daily th { font-weight: 500; }
+.history-daily thead th { color: var(--gold); font-weight: 650; }
+.history-daily td, .history-daily thead th:last-child { text-align: right; }
+.history-daily td { max-width: 130px; }
+.history-missing { color: var(--muted); }
