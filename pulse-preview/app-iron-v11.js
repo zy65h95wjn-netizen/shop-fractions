@@ -383,7 +383,8 @@ el('login').addEventListener('submit',async e=>{
   e.preventDefault();
   // Never normalize a credential before hashing: byte-for-byte equality matters.
   ++authGeneration;++refreshGeneration;
-  secret=el('key').value;
+  // Reopen only the fake, local demo; never accept an entered private key.
+  secret='synthetic-demo-only-unlock';
   txt('login-error','');
   await refresh();
   if(state)el('key').value='';
