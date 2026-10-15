@@ -26,14 +26,22 @@ jobs:
       - name: Checkout exact PR14 release candidate (including base history)
         uses: actions/checkout@v6
         with:
-          ref: 1f079c128d3e91bcb6e1958153dfa51065bb5a99
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
           persist-credentials: false
       - name: Confirm test target
         shell: bash
         run: |
-          test "$(git rev-parse HEAD)" = "1f079c128d3e91bcb6e1958153dfa51065bb5a99"
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
+          git merge-base --is-ancestor 1f079c128d3e91bcb6e1958153dfa51065bb5a99 HEAD
           git cat-file -e f64a4c0ebd565e0f2d1eb818b44213f4d4920a25:pulse/index.html
+          # Only the acceptance workflow and browser tests may differ from PR14.
+          while IFS= read -r file; do
+            case "$file" in
+              .github/workflows/resting-beast-pr14-browser-acceptance.yml|pulse/tests/history_browser.js|pulse/tests/reliability_browser.js) ;;
+              *) echo "Unexpected application modification: $file"; exit 1 ;;
+            esac
+          done < <(git diff --name-only 1f079c128d3e91bcb6e1958153dfa51065bb5a99 HEAD)
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
