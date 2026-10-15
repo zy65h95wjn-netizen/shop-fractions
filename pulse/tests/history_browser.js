@@ -90,12 +90,15 @@ async function run(){
       await page.keyboard.press('End');assert.equal(await page.locator('#history-chart').getAttribute('aria-valuenow'),'90');
       await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));await capture(page,engine+'-history-'+metric+'-'+width);
       await page.locator('#history-back').click();
-      await page.waitForFunction(y=>Math.abs(window.scrollY-y)<=2,scroll);
+      await page.waitForFunction(({y,metric})=>Math.abs(window.scrollY-y)<=2 &&
+        document.activeElement===document.querySelector('[data-history-metric="'+metric+'"]'),{y:scroll,metric});
       assert.equal(await opener.evaluate(e=>document.activeElement===e),true);assert.equal(await page.locator('.dock a').count(),3);
       // Native button semantics must support both keyboard activation keys.
       for(const key of ['Enter','Space']){
         await opener.focus();await page.keyboard.press(key);assert.ok(await page.locator('#history-explorer').isVisible());
-        await page.locator('#history-back').click();await page.waitForFunction(y=>Math.abs(window.scrollY-y)<=2,scroll);
+        await page.locator('#history-back').click();
+        await page.waitForFunction(({y,metric})=>Math.abs(window.scrollY-y)<=2 &&
+          document.activeElement===document.querySelector('[data-history-metric="'+metric+'"]'),{y:scroll,metric});
       }
     }
     assert.equal(calls.length,requestCount,'history must not initiate health reads');
@@ -104,7 +107,14 @@ async function run(){
     await page.locator('#refresh').click();await page.waitForFunction(()=>document.getElementById('history-latest-value').textContent==='104.25 bpm');
     assert.equal(await page.locator('#history-values tr').count(),7);
     await page.locator('[data-page-link="trends"]').click();assert.ok(await page.locator('#history-explorer').isHidden());assert.ok(await page.locator('#trends').isVisible());
-    await page.locator('#chart').focus();await page.keyboard.press('Home');assert.equal(await page.locator('#chart').getAttribute('aria-valuenow'),'1');
+    // Navigation redraws the previously hidden Trends chart on the next animation frame.
+    await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+    await page.waitForFunction(()=>document.getElementById('chart').getAttribute('aria-valuetext')!==null);
+    await page.locator('#chart').focus();
+    await page.keyboard.press('End');
+    await page.waitForFunction(()=>document.getElementById('chart').getAttribute('aria-valuenow')===document.getElementById('chart').getAttribute('aria-valuemax'));
+    await page.keyboard.press('Home');
+    await page.waitForFunction(()=>document.getElementById('chart').getAttribute('aria-valuenow')==='1');
     await page.locator('[data-page-link="context"]').click();
     for(const id of ['edit-trt','add-med','edit-nicotine','edit-caffeine','edit-bp']){await page.locator('#'+id).click();assert.ok(await page.locator('#dlg').isVisible());await page.locator('#cancel').click();}
     await page.locator('[data-page-link="today"]').click();await page.locator('[data-history-metric="heart_rate"]').click();
