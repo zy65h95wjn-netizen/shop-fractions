@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#100d0b"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; manifest-src 'self'; connect-src https://wosfukbzxrykwarxobfw.supabase.co; base-uri 'none'; form-action 'self'"><meta name="application-name" content="Resting Beast"><meta name="apple-mobile-web-app-title" content="Resting Beast"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png"><link rel="manifest" href="./manifest.webmanifest"><title>Resting Beast</title><link rel="stylesheet" href="./nightshift-iron-v8.css"></head><body>
 <div class="shell"><header><div class="brand"><div class="mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18M5 21V9H3V3h3v3h3V3h6v3h3V3h3v6h-2v12M9 21v-6a3 3 0 0 1 6 0v6M8 10h1m6 0h1"/></svg></div><div><b>Resting Beast</b><small>THE IRON CITADEL</small></div></div><div class="top"><span id="status">Locked</span><button class="secondary" id="refresh" aria-label="Refresh measurements" disabled>↻</button></div></header>
-<section id="connect" class="surface login"><p class="eyebrow">WELCOME TO YOUR SPACE</p><h1>Find your<br><em>rhythm.</em></h1><p>Your watch measurements already sync to the private CASS Health Lab database. Enter the access key to unlock the trends for this browser session. This app never needs daily entries.</p><form id="login"><label for="key">Private access key</label><div class="stack"><input id="key" name="password" type="password" required minlength="35" placeholder="Private access key" autocomplete="current-password"><button class="primary">Unlock</button></div><p class="error" id="login-error"></p></form>
+<section id="connect" class="surface login"><p class="eyebrow">WELCOME TO YOUR SPACE</p><h1>Find your<br><em>rhythm.</em></h1><p>Your watch measurements already sync to the private CASS Health Lab database. Enter the access key to unlock the trends for this browser session. This app never needs daily entries.</p><form id="login"><label for="key">Private access key</label><div class="stack"><input id="key" name="password" type="password" required minlength="35" placeholder="Private access key" autocomplete="current-password"><button class="primary">Unlock</button></div><p class="error" id="login-error" role="alert"></p></form>
 <div class="key-verify-local">
   <button type="button" class="secondary" id="key-check-button">Check pasted key locally</button>
   <p class="hint" id="key-check-result" aria-live="polite"></p>
 </div><p class="hint">The key is kept in this browser session, not saved permanently. No health measurements are stored in this site's source code.</p></section>
 <section id="app" hidden>
+<div class="sync-feedback"><p class="error" id="error" role="alert" aria-atomic="true"></p><p class="hint" id="save-notice" role="status" aria-atomic="true"></p></div>
 <section class="app-page" id="overview" data-page="today" aria-label="Today">
 <div class="citadel-hero" aria-label="Iron Citadel theme">
   <p class="citadel-hero-kicker">RESTING BEAST · YOUR PERSONAL SIGNAL</p>
@@ -16,7 +17,7 @@
 <div class="signals-head">
   <p class="section-caption">LIVE SIGNALS · APPLE HEALTH</p>
   <button class="secondary lock-compact" id="lock" type="button">Lock</button>
-</div><p class="error" id="error"></p>
+</div>
 <div class="today-stack">
   <article class="surface today-heart" aria-label="Heart measurements">
     <h2 class="today-card-title"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.9a5.5 5.5 0 0 0-7.8 0L12 6l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.3a5.5 5.5 0 0 0 0-7.8Z" fill="currentColor" stroke-width=".8"/></svg><span>HEART HEALTH</span></h2>
