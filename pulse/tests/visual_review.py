@@ -20,7 +20,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
 BASELINE = "de00cd26bef5e3169ffc1a0fcbb238959200eba8"
-SCRIPTS = ["app-iron-v10.js", "compare.js", "pages-v1.js"]
+UNCHANGED_SCRIPTS = ["compare.js", "pages-v1.js"]
 EMPTY = {"resting_hr_method": "latest_end_at_per_local_day", "daily": [],
          "events": [], "latest": {}, "steps": {"today": None, "yesterday": None}}
 VIEWPORTS = [(320, 568), (360, 780), (390, 844), (430, 932), (768, 1024), (1440, 900)]
@@ -46,7 +46,7 @@ class Contract(HTMLParser):
 
 
 def static_checks():
-    for name in SCRIPTS:
+    for name in UNCHANGED_SCRIPTS:
         current = (ROOT / "pulse" / name).read_bytes()
         old = subprocess.check_output(["git", "show", f"{BASELINE}:pulse/{name}"], cwd=ROOT)
         assert current == old, f"Functional source changed: {name}"
@@ -56,7 +56,24 @@ def static_checks():
     current = Contract((ROOT / "pulse/index.html").read_text())
     assert current.ids == previous.ids, "DOM identifiers or their control types changed"
     assert current.controls == previous.controls, "Forms, field constraints, or canvases changed"
-    assert current.scripts == previous.scripts, "Application entry points changed"
+    expected_scripts = [dict(attrs, src=attrs.get("src", "").replace(
+        "app-iron-v10.js", "app-iron-v11.js")) for attrs in previous.scripts]
+    assert current.scripts == expected_scripts, "Unexpected application entry point change"
+    # The corrected health data/auth logic is unchanged. Only the RHR
+    # sparkline's canvas paint/label block is intentionally different.
+    old_js = subprocess.check_output(
+        ["git", "show", f"{BASELINE}:pulse/app-iron-v10.js"], cwd=ROOT).decode()
+    new_js = (ROOT / "pulse/app-iron-v11.js").read_text()
+    def without_spark_paint(js, updated):
+        func_at = js.index("function renderTodayRhr(){")
+        start_token = ("  // Keep the canvas accessible:" if updated
+                       else "  if(!bounds.width)return;")
+        start = js.index(start_token, func_at)
+        end = js.index("\n}\n\nfunction render()", start)
+        return js[:start] + "/* only RHR canvas rendering differs */" + js[end:]
+    assert without_spark_paint(new_js, True) == without_spark_paint(old_js, False), (
+        "Functional application JS changed outside RHR canvas rendering")
+    subprocess.run(["node", "--check", str(ROOT / "pulse/app-iron-v11.js")], check=True)
     assert current.csp == previous.csp, "CSP changed"
     for width in [768, 1536]:
         image = ROOT / f"pulse/assets/iron-citadel-fortress-{width}.webp"
@@ -66,7 +83,7 @@ def static_checks():
             art.verify()
         assert image.stat().st_size < (150_000 if width == 768 else 450_000)
     ElementTree.parse(ROOT / "pulse/assets/iron-forged-grain.svg")
-    print("PASS: unchanged scripts, DOM IDs, forms, canvases, CSP; optimized image integrity", flush=True)
+    print("PASS: isolated RHR paint change; unchanged other JS, DOM IDs, forms, canvas contracts and CSP; optimized assets", flush=True)
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -143,6 +160,8 @@ def run_browser(browser, engine, base, output):
         assert "not zero" in page.locator("#steps-today-note").inner_text()
         assert page.locator("#rhr").inner_text() == "—"
         assert page.locator("#today-rhr-delta").inner_text() == "0/7 days"
+        assert "no reading" in page.locator("#today-rhr-spark").get_attribute("aria-label")
+        assert "2026-" in page.locator("#today-rhr-spark").get_attribute("aria-label")
         layout_check(page)
         # Reserve enough room after the footer for the fixed dock, including
         # safe area. At the last scroll position every last content line is clear.
