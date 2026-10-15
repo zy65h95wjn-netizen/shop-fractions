@@ -1,0 +1,56 @@
+name: Resting Beast synthetic preview smoke
+on:
+  push:
+    branches: [preview/resting-beast-synthetic-iphone]
+
+permissions:
+  contents: read
+
+jobs:
+  preview-smoke:
+    name: ${{ matrix.browser }} / 320-390-430px
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, webkit]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Confirm production source is untouched
+        shell: bash
+        run: |
+          git diff --name-only f64a4c0ebd565e0f2d1eb818b44213f4d4920a25 HEAD | tee /tmp/preview-files.txt
+          if grep -Ev '^(pulse-preview/|.github/workflows/resting-beast-preview-smoke.yml$)' /tmp/preview-files.txt; then
+            echo "Unexpected change outside preview"
+            exit 1
+          fi
+          ! grep -RE 'supabase.co|pulse_protocol_key_v1|sb_publishable_' pulse-preview/app-iron-v11.js pulse-preview/demo-data.js
+          grep -q "connect-src 'none'" pulse-preview/index.html
+      - name: Install isolated browser runner
+        shell: bash
+        run: |
+          mkdir -p "${RUNNER_TEMP}/preview-pw"
+          npm --prefix "${RUNNER_TEMP}/preview-pw" install --no-save --no-package-lock --ignore-scripts playwright@1.62.1
+          "${RUNNER_TEMP}/preview-pw/node_modules/.bin/playwright" install --with-deps "${{ matrix.browser }}"
+      - name: Exercise safe synthetic preview
+        shell: bash
+        env:
+          PREVIEW_BROWSER: ${{ matrix.browser }}
+        run: |
+          export NODE_PATH="${RUNNER_TEMP}/preview-pw/node_modules"
+          export PREVIEW_OUTPUT="${RUNNER_TEMP}/preview-screens-${{ matrix.browser }}"
+          node pulse-preview/tests/smoke.js
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: preview-smoke-${{ matrix.browser }}
+          retention-days: 3
+          if-no-files-found: warn
+          path: ${{ runner.temp }}/preview-screens-${{ matrix.browser }}/
