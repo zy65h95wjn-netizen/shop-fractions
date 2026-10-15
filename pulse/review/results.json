@@ -1,0 +1,91 @@
+{
+  "status": "passed",
+  "baseline": "de00cd26bef5e3169ffc1a0fcbb238959200eba8",
+  "static_checks": "passed: byte-identical application scripts; JS syntax; DOM IDs; form constraints; canvas attributes; script references; CSP; WebP dimensions, encoding and size; SVG integrity",
+  "browser_checks": [
+    {
+      "engine": "chromium",
+      "viewport": [
+        320,
+        568
+      ],
+      "scenery": {
+        "name": "iron-citadel-fortress-1536.webp",
+        "size": 408992
+      },
+      "console_errors": [],
+      "external_requests": []
+    },
+    {
+      "engine": "chromium",
+      "viewport": [
+        360,
+        780
+      ],
+      "scenery": {
+        "name": "iron-citadel-fortress-1536.webp",
+        "size": 408992
+      },
+      "console_errors": [],
+      "external_requests": []
+    },
+    {
+      "engine": "chromium",
+      "viewport": [
+        390,
+        844
+      ],
+      "scenery": {
+        "name": "iron-citadel-fortress-1536.webp",
+        "size": 408992
+      },
+      "console_errors": [],
+      "external_requests": []
+    },
+    {
+      "engine": "chromium",
+      "viewport": [
+        430,
+        932
+      ],
+      "scenery": {
+        "name": "iron-citadel-fortress-1536.webp",
+        "size": 408992
+      },
+      "console_errors": [],
+      "external_requests": []
+    },
+    {
+      "engine": "chromium",
+      "viewport": [
+        768,
+        1024
+      ],
+      "scenery": {
+        "name": "iron-citadel-fortress-1536.webp",
+        "size": 408992
+      },
+      "console_errors": [],
+      "external_requests": []
+    },
+    {
+      "engine": "chromium",
+      "viewport": [
+        1440,
+        900
+      ],
+      "scenery": {
+        "name": "iron-citadel-fortress-1536.webp",
+        "size": 408992
+      },
+      "console_errors": [],
+      "external_requests": []
+    }
+  ],
+  "device_limitations": [
+    "Actual iPhone Safari and Home Screen behavior not verified",
+    "Actual Android devices not verified",
+    "WebKit work stopped at user request",
+    "No populated live-health or real authentication/write session tested"
+  ]
+}

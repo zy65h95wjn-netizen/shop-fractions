@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#100d0b"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https://wosfukbzxrykwarxobfw.supabase.co; base-uri 'none'; form-action 'self'"><title>Resting Beast</title><link rel="stylesheet" href="./nightshift-iron-v6.css"></head><body>
-<div class="shell"><header><div class="brand"><div class="mark" aria-hidden="true">♜</div><div><b>Resting Beast</b><small>THE IRON CITADEL</small></div></div><div class="top"><span id="status">Locked</span><button class="secondary" id="refresh" disabled>↻</button></div></header>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#100d0b"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https://wosfukbzxrykwarxobfw.supabase.co; base-uri 'none'; form-action 'self'"><title>Resting Beast</title><link rel="stylesheet" href="./nightshift-iron-v7.css"></head><body>
+<div class="shell"><header><div class="brand"><div class="mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18M5 21V9H3V3h3v3h3V3h6v3h3V3h3v6h-2v12M9 21v-6a3 3 0 0 1 6 0v6M8 10h1m6 0h1"/></svg></div><div><b>Resting Beast</b><small>THE IRON CITADEL</small></div></div><div class="top"><span id="status">Locked</span><button class="secondary" id="refresh" aria-label="Refresh measurements" disabled>↻</button></div></header>
 <section id="connect" class="surface login"><p class="eyebrow">WELCOME TO YOUR SPACE</p><h1>Find your<br><em>rhythm.</em></h1><p>Your watch measurements already sync to the private CASS Health Lab database. Enter the access key to unlock the trends for this browser session. This app never needs daily entries.</p><form id="login"><label for="key">Private access key</label><div class="stack"><input id="key" type="password" required minlength="35" placeholder="Paste access key" autocomplete="off"><button class="primary">Unlock</button></div><p class="error" id="login-error"></p></form>
 <div class="key-verify-local">
   <button type="button" class="secondary" id="key-check-button">Check pasted key locally</button>
@@ -19,7 +19,7 @@
 </div><p class="error" id="error"></p>
 <div class="today-stack">
   <article class="surface today-heart" aria-label="Heart measurements">
-    <div class="today-card-title"><span aria-hidden="true">♥</span><span>HEART HEALTH</span></div>
+    <h2 class="today-card-title"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.9a5.5 5.5 0 0 0-7.8 0L12 6l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.3a5.5 5.5 0 0 0 0-7.8Z" fill="currentColor" stroke-width=".8"/></svg><span>HEART HEALTH</span></h2>
     <div class="today-heart-values">
       <div class="today-heart-metric">
         <p class="eyebrow">RESTING HEART RATE</p>
@@ -34,7 +34,7 @@
     </div>
   </article>
   <article class="surface today-steps" aria-label="Daily step totals">
-    <div class="today-card-title"><span aria-hidden="true">♟</span><span>STEPS</span></div>
+    <h2 class="today-card-title"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><ellipse cx="7" cy="6" rx="2.7" ry="4" transform="rotate(22 7 6)" fill="currentColor" stroke="none"/><path d="m4 12 3 1-1 4-3-1z" fill="currentColor" stroke="none"/><ellipse cx="17" cy="13" rx="2.7" ry="4" transform="rotate(-22 17 13)" fill="currentColor" stroke="none"/><path d="m17 19 3-1 1 3-3 1z" fill="currentColor" stroke="none"/></svg><span>STEPS</span></h2>
     <div class="today-step-values">
       <div>
         <p class="eyebrow">TODAY · SO FAR</p>
@@ -50,13 +50,13 @@
   </article>
   <div class="today-supplemental">
     <article class="surface today-mini metric-hrv">
-      <div class="metric-symbol" aria-hidden="true">⌁</div>
+      <div class="metric-symbol" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 12h4l3-8 4 16 4-12 3 4h4"/></svg></div>
       <p class="eyebrow">HRV · SDNN</p>
       <div id="hrv" class="number">—</div>
       <p id="hrv-at" class="hint">Awaiting data</p>
     </article>
     <article class="surface today-mini metric-spo2">
-      <div class="metric-symbol" aria-hidden="true">✧</div>
+      <div class="metric-symbol" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2C9 6.7 4.5 11.3 4.5 15.5a7.5 7.5 0 0 0 15 0C19.5 11.3 15 6.7 12 2Z"/><path d="M8 14a4 4 0 0 0 5 5"/></svg></div>
       <p class="eyebrow">BLOOD OXYGEN</p>
       <div id="spo2" class="number">—</div>
       <p id="spo2-at" class="hint">Awaiting data</p>
@@ -64,14 +64,14 @@
   </div>
   <article class="surface today-week" aria-label="Weekly resting heart rate">
     <div class="row">
-      <div><p class="eyebrow">7-DAY RESTING HR</p><h2>Weekly pulse.</h2></div>
+      <h2 class="instrument-title"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 14v7h3v-7zm7-6v13h3V8zm7-6v19h3V2z" fill="currentColor" stroke="none"/></svg><span>7-DAY RESTING HR</span></h2>
       <span id="today-rhr-delta" class="today-week-delta">Collecting history</span>
     </div>
     <canvas id="today-rhr-spark" aria-label="Resting HR during the last seven completed calendar days" role="img"></canvas>
     <p class="hint" id="today-rhr-caption">Comparing seven completed days to the seven before.</p>
   </article>
   <article class="surface today-trt">
-    <p class="eyebrow">CURRENT TRT PROTOCOL</p>
+    <p class="eyebrow"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m17 3 4 4M16 4l4 4M14 6l4 4-9 9-4-4zM4 20l-2 2m1-4 3 3m3-10 2 2m1-5 2 2"/></svg><span>CURRENT TRT PROTOCOL</span></p>
     <h3 id="today-trt-regimen">Not logged</h3>
     <p class="hint" id="today-trt-since">No baseline recorded</p>
     <button type="button" class="secondary today-trt-link" id="today-trt-open">Explore with heart-rate trends →</button>
@@ -110,10 +110,10 @@
 <section class="surface section"><div class="row"><h2>Your timeline of changes</h2><span id="history-count" class="hint"></span></div><div id="history" class="hint">No changes logged.</div></section>
 </section>
 <nav class="dock" aria-label="Resting Beast pages">
-  <a href="#overview" data-page-link="today" aria-current="page" class="is-active"><span aria-hidden="true">⌂</span><span>Today</span></a>
-  <a href="#trends" data-page-link="trends"><span aria-hidden="true">⌁</span><span>Trends</span></a>
-  <a href="#context" data-page-link="context"><span aria-hidden="true">⚙</span><span>Context</span></a>
+  <a href="#overview" data-page-link="today" aria-current="page" class="is-active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>Today</span></a>
+  <a href="#trends" data-page-link="trends"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3v18h18M6 15l5-6 4 3 6-8"/></svg><span>Trends</span></a>
+  <a href="#context" data-page-link="context"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h4m6 0h8M3 12h10m6 0h2M3 18h1m6 0h11"/><circle cx="10" cy="6" r="3"/><circle cx="16" cy="12" r="3"/><circle cx="7" cy="18" r="3"/></svg><span>Context</span></a>
 </nav>
 <footer>Heart measurements import automatically from the existing Health pipeline. Blood pressure is optional. Missing readings aren't filled in or assumed to remain unchanged. No diagnosis or causation claims.<div id="updated"></div></footer></section></div>
-<dialog id="dlg"><form id="event-form"><div class="row"><h2>Record a change</h2><button type="button" class="secondary" id="cancel">×</button></div><label for="kind">Change type</label><select id="kind"><option value="trt">TRT protocol</option><option value="medication">Medication</option><option value="nicotine">Nicotine</option><option value="caffeine">Caffeine</option><option value="bp">Blood pressure reading</option></select><label for="when">Effective date and time</label><input id="when" type="datetime-local" required><div id="fields"></div><p class="hint" id="event-help">Enter a baseline once or record a change.</p><p class="error" id="save-error"></p><div class="row end"><button type="button" class="secondary" id="cancel2">Cancel</button><button class="primary" id="save">Save event</button></div></form></dialog>
+<dialog id="dlg"><form id="event-form"><div class="row"><h2>Record a change</h2><button type="button" class="secondary" id="cancel" aria-label="Close dialog">×</button></div><label for="kind">Change type</label><select id="kind"><option value="trt">TRT protocol</option><option value="medication">Medication</option><option value="nicotine">Nicotine</option><option value="caffeine">Caffeine</option><option value="bp">Blood pressure reading</option></select><label for="when">Effective date and time</label><input id="when" type="datetime-local" required><div id="fields"></div><p class="hint" id="event-help">Enter a baseline once or record a change.</p><p class="error" id="save-error"></p><div class="row end"><button type="button" class="secondary" id="cancel2">Cancel</button><button class="primary" id="save">Save event</button></div></form></dialog>
 <script src="./app-iron-v10.js" defer></script><script src="./compare.js?v=compare-1" defer></script><script src="./pages-v1.js" defer></script></body></html>
