@@ -37,19 +37,26 @@ All four independently tappable values, preserved value IDs/formatting, native b
 
 Reproduction requires Node, Python and Pillow. Browser scripts additionally require Playwright. The runtime's existing Playwright package can be selected with `NODE_PATH="$CODEX_PRIMARY_RUNTIME_NODE_MODULES"`.
 
-## Browser attempts and release gate
+## Actual browser acceptance and remaining release gate (2026-10-15)
 
-Attempted the supplied real-browser suites targeting 320px, 390px and 430px using the already installed Playwright package:
+The earlier local/Codex attempts were unable to launch native browsers and produced no viewport results. A subsequent GitHub-hosted, test-only acceptance run overcame those environment blockers. The original hosted attempt ([run 38780413387](https://github.com/zy65h95wjn-netizen/shop-fractions/actions/runs/38780413387)) produced failed assertions in Trends keyboard access, post-unlock Trends ARIA state, and WebKit Back focus. Investigation showed the tests inspected asynchronous focus/redraw immediately. The application already schedules these transitions on animation frames; browser acceptance now explicitly waits for the DOM state, then independently exercises keyboard Home/End and focus restoration. **No production application, CSS, or backend source was modified to fix these test failures.**
 
-- `NODE_PATH="$CODEX_PRIMARY_RUNTIME_NODE_MODULES" node pulse/tests/reliability_browser.js chromium` — exit 2, missing Chromium executable.
-- Same command with `webkit` — exit 2, missing WebKit executable.
-- `NODE_PATH="$CODEX_PRIMARY_RUNTIME_NODE_MODULES" node pulse/tests/history_browser.js` — launch failed, missing Chromium executable.
+**PASS:** [GitHub Actions acceptance run 38781821579](https://github.com/zy65h95wjn-netizen/shop-fractions/actions/runs/38781821579), completed successfully on 2026-10-15. The QA branch started from this integration candidate's exact application source commit `1f079c128d3e91bcb6e1958153dfa51065bb5a99`. The run enforced that changes relative to that baseline were limited to the acceptance workflow and the two browser test scripts; it tested **unchanged candidate application code** with synthetic responses and blocked all unrecognized external requests. The reviewed browser script corrections were subsequently copied into this integration PR.
 
-No viewport assertions or screenshots ran. Browser setup stopped after the local executable checks/launch attempts; no downloads, package installations, escalation, or permission bypass. The reliability browser suite has also been extended for actual History alerts/rejection and lock/re-unlock chart labels; its assertions remain unexecuted.
+| Actual browser | History Explorer | Frontend reliability | Viewports |
+| --- | --- | --- | --- |
+| Chromium (Playwright 1.62.1) | PASS | PASS | 320, 390, 430px |
+| WebKit (Playwright 1.62.1; **not** physical iPhone Safari) | PASS | PASS | 320, 390, 430px |
 
-**Production approval remains blocked on real-browser/device acceptance.** No known remaining frontend defect was found by the executed checks, but modeled widths are not CSS layout evidence. Still unverified: actual 320/390/430 overflow and touch targets; sticky alert placement; browser accessibility tree/announcements; native dialog timing; iPhone Safari/Home Screen scrolling, gestures, BFCache and midnight resume; Apple Passwords/Face ID. Live authentication and writes were intentionally not exercised.
+Acceptance covered actual CSS width/overflow and 44px targets; all four metric buttons and native keyboard activation; 7/30/90-day ranges, newest-first daily table and chronological chart date/value agreement; refresh, focus/scroll restoration, page navigation, missing-data states, locking and stale response isolation; error banners, save races, reauthentication, chart ARIA values, midnight resume and Apple Passwords AutoFill markup. Both browsers reported all six viewport-specific history and all six viewport-specific reliability test scenarios as passed. Representative WebKit screenshots for Today/History at 320/390/430px were visually inspected and showed no obvious clipping or overlap; this is not a claim of exhaustive pixel comparison or physical-device validation.
 
-Before release, run both browser suites with approved installed browsers, then check Safari and the installed iPhone app using the History review checklist. PR #13's independent backend findings are outside this candidate and are not resolved or certified here.
+- [Chromium logs and synthetic screenshots](https://github.com/zy65h95wjn-netizen/shop-fractions/actions/runs/38781821579/artifacts/11995333391)
+- [WebKit logs and synthetic screenshots](https://github.com/zy65h95wjn-netizen/shop-fractions/actions/runs/38781821579/artifacts/11995293658)
+- QA workflow is on separate draft PR #15 and is **not** a proposed production workflow/deployment change.
+
+**Remaining release gate:** Physical iPhone Safari and installed Home Screen acceptance were not run. Verify tapping each value, horizontal chart dragging versus vertical scrolling, 7/30/90 controls, Back/scroll/focus, 3-page navigation, lock/re-unlock with actual Apple Passwords AutoFill, stale alerts, refresh after sleep/new New York day, and safe-area/keyboard behavior. Real private-key authentication and write operations were not exercised by hosted tests. Browser-level green does not certify actual iPhone gesture handling or end-to-end production flows.
+
+**Release recommendation: HOLD pending the physical iPhone acceptance and explicit release approval.** Do not merge/deploy as a side effect of acceptance. PR #13's independent backend integrity work is excluded and not certified here.
 
 ## Rollback
 
