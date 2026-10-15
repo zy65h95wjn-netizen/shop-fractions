@@ -4,7 +4,8 @@ const URL='https://wosfukbzxrykwarxobfw.supabase.co/rest/v1/rpc/';
 const CORRECTED_READ='https://wosfukbzxrykwarxobfw.supabase.co/functions/v1/pulse-dashboard-corrected';
 const PUBLIC_KEY='sb_publishable_jkbf7B7azIjxRZHwvQ_vGw_aGi8hcHf';
 const el=id=>document.getElementById(id), storage='pulse_protocol_key_v1';
-let secret=sessionStorage.getItem(storage)||'', state=null, authGeneration=0;
+let secret=sessionStorage.getItem(storage)||'', state=null, authGeneration=0, refreshGeneration=0;
+let dialogGeneration=0, dialogOpen=false, dialogSubmitting=false, displayedDay=null;
 let chartSelection=null, chartViewport=null, chartDragging=false, chartActiveTouch=null;
 const kinds={trt:'TRT',medication:'Medication',nicotine:'Nicotine',caffeine:'Caffeine',bp:'Blood pressure'};
 const unit={heart_rate:'bpm',resting_heart_rate:'bpm',hrv_sdnn:'ms',blood_oxygen_saturation:'%'};
@@ -20,7 +21,12 @@ function stamp(t){if(!t)return 'No measurement';let d=new Date(t);return isNaN(d
 function localShift(s,n){const d=new Date(s+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);}
 function nyDay(t){let parts=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(t));let map={};for(let part of parts)map[part.type]=part.value;return map.year+'-'+map.month+'-'+map.day;}
 function visible(v){el('connect').hidden=v;el('app').hidden=!v;el('refresh').disabled=!v;txt('status',v?'Protected':'Locked');}
-async function rpc(method,data){let r=await fetch(URL+method,{method:'POST',cache:'no-store',headers:{apikey:PUBLIC_KEY,'content-type':'application/json'},body:JSON.stringify(data)});let payload;try{payload=await r.json();}catch{throw Error('Unable to read server response ('+r.status+').');}if(!r.ok){if(payload?.code==='28000')throw Error('Private key does not match the current credential.');throw Error('Request unavailable: backend returned '+r.status+'. Your key has not been proven invalid.');}return payload;}
+function credentialRejected(){
+  const error=Error('Private key rejected. Unlock again with the current private access key.');
+  error.credentialRejected=true;
+  return error;
+}
+async function rpc(method,data){let r=await fetch(URL+method,{method:'POST',cache:'no-store',headers:{apikey:PUBLIC_KEY,'content-type':'application/json'},body:JSON.stringify(data)});let payload;try{payload=await r.json();}catch{throw Error('Unable to read server response ('+r.status+').');}if(!r.ok){if((r.status===401||r.status===403)&&payload?.code==='28000')throw credentialRejected();throw Error('Request unavailable: backend returned '+r.status+'. Your key has not been proven invalid.');}return payload;}
 async function readCorrected(requestKey){
   const r=await fetch(CORRECTED_READ,{
     method:'POST',cache:'no-store',
@@ -31,7 +37,7 @@ async function readCorrected(requestKey){
   try{value=await r.json();}catch{throw Error('Corrected dashboard returned an unreadable response.');}
   if(!r.ok){
     if(r.status===401 && value?.code==='key_mismatch')
-      throw Error('The entered key does not match the current private credential. No changes have been made.');
+      throw credentialRejected();
     throw Error('Authentication service is unavailable ('+r.status+'). The private key has not been proven invalid.');
   }
   if(value?.resting_hr_method!=='latest_end_at_per_local_day'){
@@ -39,24 +45,57 @@ async function readCorrected(requestKey){
   }
   return value;
 }
+// Session identity is independent of refresh ordering: a save must survive a
+// harmless refresh, while every operation from an old locked session is ignored.
+function lockDashboard(message=''){
+  ++authGeneration;++refreshGeneration;
+  sessionStorage.removeItem(storage);
+  secret='';
+  visible(false);el('key').value='';
+  closeDialog();
+  el('fields').replaceChildren();el('when').value='';txt('save-error','');
+  // Render an empty model to erase text, chart accessibility values, event
+  // handlers and Compare's cached model before dropping all protected state.
+  state={latest:{},daily:[],events:[],steps:null};
+  render();state=null;
+  for(const id of ['chart-day','chart-reading','trt-reading','trt-details'])txt(id,'');
+  el('trt-rail').replaceChildren();el('trt-rail').removeAttribute('aria-label');
+  el('trt-cursor').hidden=true;
+  for(const canvas of [el('chart'),el('today-rhr-spark')]){
+    canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+    for(const name of ['aria-label','aria-valuetext','aria-valuenow'])canvas.removeAttribute(name);
+  }
+  el('chart-scrubber').value='0';el('chart-scrubber').disabled=true;
+  chartSelection=null;chartViewport=null;chartDragging=false;chartActiveTouch=null;
+  window.PulseHistory?.clear();
+  txt('error','');txt('updated','');txt('save-notice','');
+  txt('key-check-result','');txt('login-error',message);
+}
 async function refresh(){
   if(!secret)return;
-  const generation=++authGeneration,requestKey=secret;
-  txt('error','');txt('status','Syncing…');
+  const generation=authGeneration,request=++refreshGeneration,requestKey=secret;
+  txt('error','');txt('status','Syncing…');el('refresh').disabled=true;
+  if(state)renderTodaySteps();
   try{
     const response=await readCorrected(requestKey);
-    if(generation!==authGeneration || requestKey!==secret)return;
+    if(generation!==authGeneration || requestKey!==secret || request!==refreshGeneration)return;
     if(!Array.isArray(response.daily)||!Array.isArray(response.events))throw Error('Unexpected dashboard format.');
     state=response;
     sessionStorage.setItem(storage,requestKey);
-    visible(true);render();
+    visible(true);render();txt('login-error','');
     txt('updated','Last refreshed '+stamp(new Date().toISOString()));
   }catch(e){
-    if(generation!==authGeneration)return;
+    if(generation!==authGeneration || requestKey!==secret)return;
+    // A confirmed rejection applies even if a newer read has already started.
+    if(e.credentialRejected){lockDashboard(e.message);return;}
+    if(request!==refreshGeneration)return;
     if(!state){visible(false);txt('login-error',e.message);}
-    else{visible(true);txt('error','Refresh failed: '+e.message);}
+    else{
+      visible(true);txt('status','Stale');renderTodaySteps();
+      txt('error','Refresh failed. Showing previously loaded data; it may be out of date. '+e.message);
+    }
   }finally{
-    if(generation===authGeneration)el('refresh').disabled=!secret;
+    if(generation===authGeneration && request===refreshGeneration)el('refresh').disabled=!secret;
   }
 }
 function showMetric(metric,id){let m=state.latest?.[metric];let n=el(id);n.textContent=m?(metric==='blood_oxygen_saturation'?Number(Number(m.value).toFixed(1)).toString():String(Math.round(Number(m.value)))):'—';if(m){let span=document.createElement('span');span.className='unit';span.textContent=unit[metric];n.append(span);}txt(id+'-at',m?(metric==='resting_heart_rate'?'Updated ':'Measured ')+stamp(m.at):'No readings yet');}
@@ -186,13 +225,24 @@ if(selected){
 // Today's count may not yet be exported; do not substitute yesterday's value.
 function renderTodaySteps(){
   const data=state.steps;
-  const current=data?.today,previous=data?.yesterday;
+  const today=nyDay(new Date());
+  displayedDay=today;
+  // The backend defines last_completed_day as the NY date of yesterday's
+  // slot, even when its count is missing. Never infer dates from receipt time.
+  const verified=data?.last_completed_day===localShift(today,-1);
+  const current=verified?data.today:null,previous=verified?data.yesterday:null;
+  const valid=x=>Number.isInteger(x)&&x>=0;
   const number=x=>Number(x).toLocaleString('en-US',{maximumFractionDigits:0});
-  txt('steps-today',Number.isInteger(current)&&current>=0?number(current):'—');
-  txt('steps-today-note',Number.isInteger(current)&&current>=0?
+  txt('steps-today',valid(current)?number(current):'—');
+  txt('steps-yesterday',valid(previous)?number(previous):'—');
+  if(!verified){
+    txt('steps-today-note','Step date unverified · refresh required');
+    txt('steps-yesterday-note','Counts withheld until New York dates are verified');
+    return;
+  }
+  txt('steps-today-note',valid(current)?
       'So far today · last synced total':'Today not synced yet · not zero');
-  txt('steps-yesterday',Number.isInteger(previous)&&previous>=0?number(previous):'—');
-  txt('steps-yesterday-note',Number.isInteger(previous)&&previous>=0?
+  txt('steps-yesterday-note',valid(previous)?
       'Completed day · last synced total':'Yesterday has not synced yet');
 }
 function renderTodayTrt(){
@@ -330,6 +380,8 @@ function populateFields(kind,entry,stop=false){
     'Set this once; it stays in effect until you record a change. Adjust the effective date if it began earlier.';
 }
 function openDialog(kind,entry=null,stop=false){
+  if(!state||!secret)return;
+  ++dialogGeneration;dialogOpen=true;dialogSubmitting=false;el('save').disabled=false;
   const target=kind||'trt';
   el('kind').value=target;
   editingMedicationId=null;
@@ -345,6 +397,7 @@ function payload(kind){let get=id=>el(id)?.value?.trim()||'';switch(kind){case't
 el('login').addEventListener('submit',async e=>{
   e.preventDefault();
   // Never normalize a credential before hashing: byte-for-byte equality matters.
+  ++authGeneration;++refreshGeneration;
   secret=el('key').value;
   txt('login-error','');
   await refresh();
@@ -441,13 +494,7 @@ chartCanvas.addEventListener('keydown',e=>{
   else return;
   e.preventDefault();chartSelection=points[nextIndex].day;chart();
 });window.addEventListener('resize',()=>{if(state&&!el('app').hidden){chart();renderTodayRhr();}});
-el('lock').addEventListener('click',()=>{
-  ++authGeneration; // An old in-flight fetch must never unlock this page again.
-  sessionStorage.removeItem(storage);
-  secret='';state=null;
-  visible(false);el('key').value='';
-  txt('login-error','');txt('key-check-result','');
-});
+el('lock').addEventListener('click',()=>lockDashboard());
 el('add').addEventListener('click',()=>openDialog('trt'));
 el('add-med').addEventListener('click',()=>openDialog('medication'));
 for(const kind of ['trt','nicotine','caffeine','bp']){
@@ -460,13 +507,66 @@ el('med-list').addEventListener('click',event=>{
   if(!entry||entry.data?.status==='stopped')return;
   openDialog('medication',entry,btn.dataset.medAction==='stop');
 });
-el('cancel').addEventListener('click',()=>el('dlg').close());
-el('cancel2').addEventListener('click',()=>el('dlg').close());
+function invalidateDialog(){
+  ++dialogGeneration;dialogOpen=false;dialogSubmitting=false;
+  editingMedicationId=null;el('save').disabled=false;
+}
+function closeDialog(){invalidateDialog();el('dlg').close();}
+el('cancel').addEventListener('click',closeDialog);
+el('cancel2').addEventListener('click',closeDialog);
+el('dlg').addEventListener('cancel',invalidateDialog);
+// Native close is queued; an old close event must not invalidate a reopened dialog.
+el('dlg').addEventListener('close',()=>{if(!el('dlg').open)invalidateDialog();});
 el('kind').addEventListener('change',()=>{
+  ++dialogGeneration;dialogSubmitting=false;el('save').disabled=false;
   editingMedicationId=null;
   const k=el('kind').value;
   populateFields(k,['trt','nicotine','caffeine'].includes(k)?active(k):null);
+  txt('save-error','');
 });
-el('event-form').addEventListener('submit',async e=>{e.preventDefault();let btn=el('save');btn.disabled=true;txt('save-error','');try{let dt=new Date(el('when').value);if(isNaN(dt.getTime()))throw Error('Invalid effective date');let kind=el('kind').value;await rpc('pulse_write',{p_key:secret,p_kind:kind,p_effective_at:dt.toISOString(),p_data:payload(kind)});el('dlg').close();editingMedicationId=null;await refresh();}catch(err){txt('save-error',err.message||String(err));}finally{btn.disabled=false;}});
+el('event-form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(!secret||!state||!dialogOpen||dialogSubmitting)return;
+  const generation=authGeneration,requestKey=secret,dialog=++dialogGeneration;
+  const currentSession=()=>generation===authGeneration&&requestKey===secret;
+  const currentDialog=()=>dialogOpen&&dialog===dialogGeneration;
+  dialogSubmitting=true;el('save').disabled=true;txt('save-error','');txt('save-notice','');
+  try{
+    const dt=new Date(el('when').value);
+    if(isNaN(dt.getTime()))throw Error('Invalid effective date');
+    const kind=el('kind').value,data=payload(kind);
+    await rpc('pulse_write',{p_key:requestKey,p_kind:kind,p_effective_at:dt.toISOString(),p_data:data});
+    if(!currentSession())return;
+    if(currentDialog())closeDialog();
+    else txt('save-notice','The earlier entry was saved. Your current editing session is unchanged.');
+    // A committed write remains committed after cancellation. Reconcile the
+    // timeline without closing or repopulating a newer editing session.
+    await refresh();
+  }catch(err){
+    if(!currentSession())return;
+    if(err.credentialRejected){lockDashboard(err.message);return;}
+    if(currentDialog())txt('save-error',err.message||String(err));
+    else txt('save-notice','The earlier save could not be confirmed. Check the timeline before retrying.');
+  }finally{
+    if(currentSession()&&currentDialog()){
+      dialogSubmitting=false;el('save').disabled=false;
+    }
+  }
+});
+function resumeDashboard(){
+  if(!secret||document.hidden)return;
+  // Revalidate cached labels synchronously, before a possibly slow request.
+  if(state)renderTodaySteps();
+  refresh();
+}
+document.addEventListener('visibilitychange',resumeDashboard);
+window.addEventListener('pageshow',resumeDashboard);
+window.addEventListener('focus',resumeDashboard);
 if(secret)refresh();else visible(false);
+setInterval(()=>{
+  if(!secret||document.hidden)return;
+  if(state&&displayedDay!==nyDay(new Date())){
+    renderTodaySteps();refresh();
+  }
+},1000);
 setInterval(()=>{if(secret&&!document.hidden)refresh();},300000);
