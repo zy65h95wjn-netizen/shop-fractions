@@ -5,32 +5,34 @@ const {environment,fixture,FakeEvent,settle}=require('./reliability_harness');
 const key='test-only-not-a-real-private-key-00000';
 const ok=data=>({ok:true,status:200,json:async()=>data});
 async function setup(){const e=environment();await settle();e.flush();e.$=id=>e.document.getElementById(id);return e;}
+const openHistory=e=>e.document.querySelector('[data-history-metric="heart_rate"]').click();
+const chartLabel='Inspect daily trend values. Drag on the chart, or use left and right arrow keys.';
 const submit=e=>e.$('event-form').dispatchEvent(new FakeEvent('submit',{cancelable:true}));
-function locked(e){assert.equal(e.$('app').hidden,true);assert.equal(e.$('status').textContent,'Locked');assert.equal(e.session.size,0);assert.equal(e.$('key').value,'');assert.equal(e.$('dlg').open,false);assert.equal(e.$('hr').textContent,'—');assert.equal(e.$('history').textContent.includes('40 mg'),false);assert.equal(e.$('chart').getAttribute('aria-valuetext'),null);assert.equal(e.$('trt-rail').children.length,0);assert.equal(e.$('fields').children.length,0);assert.equal(e.$('med-list').textContent.includes('Synthetic medication'),false);}
+function locked(e){assert.equal(e.$('app').hidden,true);assert.equal(e.$('status').textContent,'Locked');assert.equal(e.session.size,0);assert.equal(e.$('key').value,'');assert.equal(e.$('dlg').open,false);assert.equal(e.$('hr').textContent,'—');assert.equal(e.$('history').textContent.includes('40 mg'),false);assert.equal(e.$('chart').getAttribute('aria-valuetext'),null);assert.equal(e.$('trt-rail').children.length,0);assert.equal(e.$('fields').children.length,0);assert.equal(e.$('med-list').textContent.includes('Synthetic medication'),false);assert.equal(e.window.PulseHistory.isOpen(),false);assert.equal(e.$('history-values').children.length,0);for(const id of ['history-latest-value','history-latest-at','history-day','history-reading'])assert.equal(e.$(id).textContent,'');assert.equal(e.$('history-chart').getAttribute('aria-valuetext'),null);assert.equal(e.$('history-scrubber').getAttribute('aria-valuetext'),null);assert.equal(e.$('chart').getAttribute('aria-label'),chartLabel);assert.equal(e.$('today-rhr-spark').getAttribute('aria-label'),null);}
 (async()=>{
   for(const page of ['today','trends','context','history']){
     const e=await setup();assert.equal(e.$('app').hidden,false);
-    if(page==='history'){
-      // PR #11 optional interface contract; the PR itself is untouched.
-      let clears=0;e.window.PulseHistory={clear(){clears++;},render(){}};
-      e.historyClears=()=>clears;e.$('overview').hidden=true;
-    }else e.window.RestingBeastPages.showPage(page);
+    if(page==='history'){openHistory(e);assert.equal(e.window.PulseHistory.isOpen(),true);}
+    else e.window.RestingBeastPages.showPage(page);
     e.$('edit-bp').click();e.$('sys').value='123';
     e.next(401,{code:'key_mismatch'});e.$('refresh').click();await settle();locked(e);
     assert.match(e.$('login-error').textContent,/Unlock again/);
-    if(e.historyClears)assert.equal(e.historyClears(),1);
     // Valid login again with unchanged password semantics.
     e.$('key').value=key;e.$('login').dispatchEvent(new FakeEvent('submit',{cancelable:true}));await settle();
     assert.equal(e.$('app').hidden,false);assert.equal(e.$('key').value,'');
+    e.window.RestingBeastPages.showPage('trends');e.flush();assert.equal(e.$('chart').getAttribute('aria-label'),chartLabel);assert.ok(e.$('chart').getAttribute('aria-valuetext'));
+    e.window.RestingBeastPages.showPage('today');openHistory(e);assert.equal(e.$('history-latest-value').textContent,'101.5 bpm');
   }
-  console.log('PASS: explicit rejection locks/clears all pages, optional History hook, reauthentication');
+  console.log('PASS: explicit rejection locks/clears all pages, actual History clearing, reauthentication and restored Trends accessible name');
   {
     const e=await setup();
-    for(const page of ['today','trends','context']){
-      e.window.RestingBeastPages.showPage(page);e.next(503,{code:'key_mismatch'});e.$('refresh').click();await settle();
+    for(const page of ['today','trends','context','history']){
+      e.window.RestingBeastPages.showPage(page==='history'?'today':page);if(page==='history')openHistory(e);
+      const historyBefore=e.$('history-values').textContent,updated=e.$('updated').textContent;e.next(503,{code:'key_mismatch'});e.$('refresh').click();await settle();
       assert.equal(e.session.size,1);assert.equal(e.$('app').hidden,false);assert.equal(e.$('status').textContent,'Stale');
       assert.match(e.$('error').textContent,/previously loaded/);assert.equal(e.$('hr').textContent,'102bpm');
-      assert.equal(e.$('error').closest('.app-page'),null,'shared alert outside page visibility');
+      assert.equal(e.$('error').closest('.app-page'),null,'shared alert outside page visibility');assert.equal(e.$('error').closest('#history-explorer'),null);assert.equal(e.$('updated').textContent,updated,'failed refresh cannot advance freshness');
+      if(page==='history'){assert.equal(e.window.PulseHistory.isOpen(),true);assert.equal(e.$('history-values').textContent,historyBefore);assert.equal(e.$('history-latest-value').textContent,'101.5 bpm');}
     }
     for(const [status,payload] of [[401,{code:'upstream_auth_unavailable'}],[500,{}]]){
       e.next(status,payload);e.$('refresh').click();await settle();assert.equal(e.session.size,1);
@@ -40,7 +42,7 @@ function locked(e){assert.equal(e.$('app').hidden,true);assert.equal(e.$('status
   }
   console.log('PASS: network/5xx/unconfirmed 401 preserve safe cached data and credential; success clears stale alert');
   {
-    const e=await setup(),pending=e.defer();e.$('refresh').click();e.$('lock').click();locked(e);
+    const e=await setup(),pending=e.defer();openHistory(e);e.$('refresh').click();e.$('lock').click();locked(e);
     pending.resolve(ok(fixture()));await settle();locked(e);
     e.$('key').value=key;e.$('login').dispatchEvent(new FakeEvent('submit',{cancelable:true}));await settle();
     const old=e.defer();e.$('refresh').click();e.$('refresh').click();await settle();
@@ -69,7 +71,7 @@ function locked(e){assert.equal(e.$('app').hidden,true);assert.equal(e.$('status
   }
   console.log('PASS: NY midnight, spring/fall DST overnight, visible/pageshow/focus resume, zero versus missing, absent/stale marker');
   for(const outcome of ['success','failure','reject','lock']){
-    const e=await setup();e.$('edit-trt').click();const pending=e.defer();submit(e);
+    const e=await setup();openHistory(e);e.$('edit-trt').click();const pending=e.defer();submit(e);
     const write=e.calls.at(-1);assert.ok(write.url.endsWith('pulse_write'));assert.equal(write.body.p_data.dose_mg,40);
     e.$('cancel2').click();e.$('edit-bp').click();e.$('sys').value='127';e.$('dia').value='81';
     if(outcome==='lock'){e.$('lock').click();pending.resolve(ok({}));await settle();locked(e);continue;}
@@ -117,5 +119,22 @@ function locked(e){assert.equal(e.$('app').hidden,true);assert.equal(e.$('status
     const input=e.$('key');assert.equal(input.getAttribute('autocomplete'),'current-password');assert.equal(input.getAttribute('name'),'password');assert.equal(input.getAttribute('type'),'password');
     assert.equal(e.$('error').getAttribute('role'),'alert');assert.equal(e.$('login-error').getAttribute('role'),'alert');
   }
+  {
+    for(const empty of [false,true]){
+      const e=await setup();e.window.RestingBeastPages.showPage('trends');e.flush();
+      assert.equal(e.$('chart').getAttribute('aria-label'),chartLabel);
+      e.$('chart').dispatchEvent(new FakeEvent('keydown',{key:'Home',cancelable:true}));
+      assert.ok(e.$('chart').getAttribute('aria-valuetext'));
+      e.$('lock').click();locked(e);
+      if(empty){e.data.daily=[];e.data.latest={};}
+      e.$('key').value=key;e.$('login').dispatchEvent(new FakeEvent('submit',{cancelable:true}));await settle();
+      e.window.RestingBeastPages.showPage('trends');e.flush();
+      assert.equal(e.$('chart').getAttribute('aria-label'),chartLabel,'static accessible name survives lock and re-unlock, including empty data');
+      assert.ok(e.$('chart').getAttribute('aria-valuetext'));
+      if(empty)assert.equal(e.$('chart').getAttribute('aria-valuetext'),'No recorded data');
+      else assert.match(e.$('chart').getAttribute('aria-valuetext'),/bpm/);
+    }
+  }
+  console.log('PASS: manual lock/re-unlock Trends label regression with populated and empty data');
   console.log('PASS: all five logging payloads, Trends/chart inspection, existing login/AutoFill markup, accessible alerts');
 })().catch(e=>{console.error(e);process.exitCode=1;});

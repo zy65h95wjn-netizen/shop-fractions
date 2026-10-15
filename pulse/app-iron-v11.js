@@ -63,7 +63,9 @@ function lockDashboard(message=''){
   el('trt-cursor').hidden=true;
   for(const canvas of [el('chart'),el('today-rhr-spark')]){
     canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
-    for(const name of ['aria-label','aria-valuetext','aria-valuenow'])canvas.removeAttribute(name);
+    // Trends has a static instruction label; only the sparkline name contains data.
+    if(canvas!==el('chart'))canvas.removeAttribute('aria-label');
+    for(const name of ['aria-valuetext','aria-valuenow'])canvas.removeAttribute(name);
   }
   el('chart-scrubber').value='0';el('chart-scrubber').disabled=true;
   chartSelection=null;chartViewport=null;chartDragging=false;chartActiveTouch=null;
@@ -351,7 +353,7 @@ function renderTodayRhr(){
   }
 }
 
-function render(){showMetric('heart_rate','hr');showMetric('resting_heart_rate','rhr');showMetric('hrv_sdnn','hrv');showMetric('blood_oxygen_saturation','spo2');renderTodaySteps();renderTodayTrt();renderTodayRhr();renderContext();renderHistory();chart();window.PulseCompare?.render(state);}
+function render(){showMetric('heart_rate','hr');showMetric('resting_heart_rate','rhr');showMetric('hrv_sdnn','hrv');showMetric('blood_oxygen_saturation','spo2');renderTodaySteps();renderTodayTrt();renderTodayRhr();renderContext();renderHistory();chart();window.PulseCompare?.render(state);window.PulseHistory?.render(state);}
 let editingMedicationId=null;
 function populateFields(kind,entry,stop=false){
   el('fields').innerHTML=fields[kind];

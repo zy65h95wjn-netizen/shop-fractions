@@ -113,7 +113,7 @@ function environment(width=390){
     return {ok:true,status:200,json:async()=>structuredClone(response)};
   };
   const context=vm.createContext(window);
-  for(const file of ['app-iron-v11.js','compare.js','pages-v1.js'])vm.runInContext(fs.readFileSync(path.join(base,file),'utf8'),context,{filename:file});
+  for(const file of ['history-v1.js','app-iron-v11.js','compare.js','pages-v1.js'])vm.runInContext(fs.readFileSync(path.join(base,file),'utf8'),context,{filename:file});
   return {window,document,calls,session,context,data:response,
     at(t){now=t;},tick(ms){intervals.filter(x=>x.ms===ms).forEach(x=>x.fn());},
     next(status,payload){queue.push(async()=>({ok:status>=200&&status<300,status,json:async()=>payload}));},

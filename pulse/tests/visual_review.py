@@ -19,7 +19,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[2]
 BASELINE = "f64a4c0ebd565e0f2d1eb818b44213f4d4920a25"
-UNCHANGED_SCRIPTS = ["compare.js", "pages-v1.js"]
+UNCHANGED_SCRIPTS = ["compare.js"]
 EMPTY = {"resting_hr_method": "latest_end_at_per_local_day", "daily": [],
          "events": [], "latest": {}, "steps": {"today": None, "yesterday": None}}
 VIEWPORTS = [(320, 568), (360, 780), (390, 844), (430, 932), (768, 1024), (1440, 900)]
@@ -29,6 +29,7 @@ class Contract(HTMLParser):
     def __init__(self, source):
         super().__init__()
         self.ids, self.scripts, self.csp, self.controls = {}, [], None, []
+        self.history_buttons = []
         self.feed(source)
 
     def handle_starttag(self, tag, attrs):
@@ -36,6 +37,8 @@ class Contract(HTMLParser):
         if "id" in a:
             assert a["id"] not in self.ids, f"Duplicate ID: {a['id']}"
             self.ids[a["id"]] = tag
+        if tag == "button" and "data-history-metric" in a:
+            self.history_buttons.append(a)
         if tag == "script":
             self.scripts.append(a)
         if a.get("http-equiv") == "Content-Security-Policy":
@@ -53,10 +56,34 @@ def static_checks():
     previous = Contract(subprocess.check_output(
         ["git", "show", f"{BASELINE}:pulse/index.html"], cwd=ROOT).decode())
     current = Contract((ROOT / "pulse/index.html").read_text())
-    assert current.ids == {**previous.ids, "save-notice": "p"}
-    assert current.controls == previous.controls, "Existing forms, AutoFill and chart controls changed"
-    assert current.scripts == previous.scripts
+    added_ids = set(current.ids) - set(previous.ids)
+    assert "save-notice" in added_ids
+    assert all(name == "save-notice" or name.startswith("history-") for name in added_ids), added_ids
+    expected_ids = dict(previous.ids)
+    for name in ["rhr", "hr", "hrv", "spo2"]:
+        assert previous.ids[name] == "div"
+        expected_ids[name] = "span"
+    assert {k: v for k, v in current.ids.items() if k not in added_ids} == expected_ids
+    assert [(tag, a) for tag, a in current.controls if a.get("id") not in added_ids] == previous.controls, "Existing forms, AutoFill and chart controls changed"
+    assert [a for a in current.scripts if a.get("src") != "./history-v1.js"] == previous.scripts
+    assert len([a for a in current.scripts if a.get("src") == "./history-v1.js"]) == 1
     assert current.csp == previous.csp
+    old_pages = subprocess.check_output(
+        ["git", "show", f"{BASELINE}:pulse/pages-v1.js"], cwd=ROOT).decode()
+    new_pages = (ROOT / "pulse/pages-v1.js").read_text()
+    assert new_pages.replace("    app.dispatchEvent(new Event('restingbeast:pagechange'));\n", "").replace(
+        ',.dock,#history-explorer', ',.dock') == old_pages, "Navigation changes exceed detail close/swipe isolation"
+    expected_metrics = {"resting_heart_rate": "rhr", "heart_rate": "hr", "hrv_sdnn": "hrv", "blood_oxygen_saturation": "spo2"}
+    assert len(current.history_buttons) == 4, "Each metric must have only one History control"
+    for a in current.history_buttons:
+        name = expected_metrics.pop(a["data-history-metric"])
+        assert a["type"] == "button" and a["aria-label"]
+        assert a["aria-describedby"] == f"{name} {name}-at"
+    assert not expected_metrics
+    button_rules = (ROOT / "pulse/history-v1.css").read_text().split(".history-open {", 1)[1].split("}", 1)[0]
+    assert "min-height: 44px" in button_rules and "min-width: 44px" in button_rules
+    for name in ["pages-v1.js", "history-v1.js"]:
+        subprocess.run(["node", "--check", str(ROOT / "pulse" / name)], check=True)
     old_js = subprocess.check_output(
         ["git", "show", f"{BASELINE}:pulse/app-iron-v11.js"], cwd=ROOT).decode()
     new_js = (ROOT / "pulse/app-iron-v11.js").read_text()
@@ -71,7 +98,7 @@ def static_checks():
     ]:
         # The final block ends at the old Cancel binding on main.
         old_end = "el('cancel').addEventListener" if end == "function invalidateDialog(" else end
-        assert new_js[new_js.index(start):new_js.index(end)] == old_js[old_js.index(start):old_js.index(old_end)], start
+        assert new_js[new_js.index(start):new_js.index(end)].replace("window.PulseHistory?.render(state);", "") == old_js[old_js.index(start):old_js.index(old_end)], start
     old_css = subprocess.check_output(
         ["git", "show", f"{BASELINE}:pulse/nightshift-iron-v8.css"], cwd=ROOT).decode()
     css = (ROOT / "pulse/nightshift-iron-v8.css").read_text()
@@ -85,7 +112,7 @@ def static_checks():
             art.verify()
         assert image.stat().st_size < (150_000 if width == 768 else 450_000)
     ElementTree.parse(ROOT / "pulse/assets/iron-forged-grain.svg")
-    print("PASS: unchanged health calculations, logging schemas, forms/AutoFill, Trends/Compare/navigation, CSP and existing theme/assets", flush=True)
+    print("PASS: combined History/reliability contracts; unchanged health calculations, logging schemas, forms/AutoFill, isolated navigation, CSP and existing theme/assets", flush=True)
 
 
 class QuietHandler(SimpleHTTPRequestHandler):

@@ -21,6 +21,7 @@
   }
   function showPage(name,updateHash=true,scrollTop=true){
     if(!pages[name])return false;
+    app.dispatchEvent(new Event('restingbeast:pagechange'));
     current=name;
     for(const id of order)pages[id].hidden=id!==name;
     for(const link of links){
@@ -52,7 +53,7 @@
   // swipe from the screen edges or from any control/chart/dialog.
   function touchBlocked(target){
     return target?.closest?.(
-      'a,button,input,select,textarea,canvas,dialog,[role="slider"],.dock'
+      'a,button,input,select,textarea,canvas,dialog,[role="slider"],.dock,#history-explorer'
     );
   }
   app.addEventListener('touchstart',event=>{
