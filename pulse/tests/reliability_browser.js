@@ -70,6 +70,8 @@ const root=path.resolve(__dirname,'..'),engine=process.argv[2]==='webkit'?webkit
       read={status:200,json:fixture()};await page.locator('#key').fill('test-only-not-a-real-private-key-00000');await page.locator('#login .primary').click();await page.locator('#app').waitFor({state:'visible'});
       await page.evaluate(()=>window.RestingBeastPages.showPage('trends'));
       assert.equal(await page.locator('#chart').getAttribute('aria-label'),label);
+      // Page navigation draws Trends at the next frame after it becomes visible.
+      await page.waitForFunction(()=>document.getElementById('chart').getAttribute('aria-valuetext')!==null);
       assert.ok(await page.locator('#chart').getAttribute('aria-valuetext'));
       await page.evaluate(()=>window.RestingBeastPages.showPage('today'));await page.locator('#lock').click();
       assert.equal(await page.locator('#chart').getAttribute('aria-valuetext'),null);
