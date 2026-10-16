@@ -60,15 +60,36 @@ async function getRestingSamples(): Promise<Sample[]> {
 // Imported step records are already daily totals (not overlapping Watch/iPhone
 // intervals). Keep daily step semantics exactly as the ingestion validator sets
 // them: one stored total per New York calendar day.
-type StepTotal = { start_at: string; value: number | string };
+type StepTotal = { local_date: string; start_at: string; value: number | string };
+function validStepTotal(record: StepTotal): boolean {
+  if (!record || typeof record.local_date !== "string" ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(record.local_date) ||
+      typeof record.start_at !== "string" || !Number.isFinite(Date.parse(record.start_at)) ||
+      !["number", "string"].includes(typeof record.value) ||
+      (typeof record.value === "string" && record.value.trim() === "")) return false;
+  const value = Number(record.value);
+  if (!Number.isInteger(value) || value < 0 || value > 200000) return false;
+  // local_date is authoritative. Reject contradictory legacy rows; never
+  // silently derive a different day from the instant or repair health records.
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23"
+  }).formatToParts(new Date(record.start_at));
+  const p: Record<string, string> = {};
+  for (const part of parts) p[part.type] = part.value;
+  return record.local_date === p.year + "-" + p.month + "-" + p.day &&
+    p.hour === "00" && p.minute === "00" && p.second === "00" &&
+    new Date(record.start_at).getUTCMilliseconds() === 0;
+}
 async function getStepTotals(): Promise<StepTotal[]> {
   if (!SERVICE_ROLE) throw Error("Server configuration unavailable");
-  const cutoff = new Date(Date.now() - 11 * 86400000).toISOString();
+  const today = dayInNY(new Date().toISOString());
   const u = new URL(PROJECT_URL + "/rest/v1/health_samples");
-  u.searchParams.set("select", "start_at,value");
+  u.searchParams.set("select", "local_date,start_at,value");
   u.searchParams.set("metric", "eq.step_count");
-  u.searchParams.set("start_at", "gte." + cutoff);
-  u.searchParams.set("order", "start_at.desc");
+  u.searchParams.set("local_date", "gte." + shiftedDay(today, -10));
+  u.searchParams.set("and", "(local_date.lte." + today + ")");
+  u.searchParams.set("order", "local_date.desc");
   u.searchParams.set("limit", "32");
   const r = await fetch(u, {headers:{
     "apikey":SERVICE_ROLE,"Authorization":"Bearer "+SERVICE_ROLE
@@ -76,9 +97,7 @@ async function getStepTotals(): Promise<StepTotal[]> {
   if (!r.ok) throw Error("Unable to retrieve authorized daily step totals");
   const records = await r.json();
   if (!Array.isArray(records) || records.length >= 32 ||
-      records.some(s => typeof s.start_at !== "string" ||
-        !Number.isInteger(Number(s.value)) || Number(s.value) < 0 ||
-        Number(s.value) > 200000)) {
+      records.some(s => !validStepTotal(s))) {
     throw Error("Unexpected daily step-total response");
   }
   return records;
@@ -91,7 +110,8 @@ function shiftedDay(dateStr: string, delta: number): string {
 function stepSummary(records: StepTotal[], today: string) {
   const values = new Map<string, number>();
   for (const record of records) {
-    const day = dayInNY(record.start_at), value = Number(record.value);
+    if (!validStepTotal(record)) throw Error("Unexpected daily step-total response");
+    const day = record.local_date, value = Number(record.value);
     if (values.has(day)) throw Error("Duplicate step-day totals");
     values.set(day, value);
   }

@@ -1,0 +1,14 @@
+-- PROPOSAL ONLY. Requires separate approval. Run AFTER reverting the Edge reader.
+-- Review for intervening function changes and other local_date dependencies.
+\set ON_ERROR_STOP on
+BEGIN;
+SET LOCAL lock_timeout = '5s';
+SET LOCAL statement_timeout = '30s';
+\ir baseline/pulse_write.sql
+;
+\ir baseline/cass_ingest_health_export.sql
+;
+ALTER TABLE public.health_samples DROP CONSTRAINT health_samples_step_ny_midnight_check;
+-- Omit if this grant was present before this package or now has another approved use.
+REVOKE SELECT (local_date) ON public.health_samples FROM service_role;
+COMMIT;
