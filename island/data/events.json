@@ -1,8 +1,10 @@
 {
-  "updated": "2026-10-12",
+  "updated": "2026-10-16",
   "powerHours": [
     { "name": "Power Hour", "note": "Bounty Hunter Sprites", "start": "2026-10-03T18:00:00Z", "end": "2026-10-03T20:00:00Z" },
-    { "name": "Power Hour", "note": "Bounty Hunter Sprites", "start": "2026-10-04T01:00:00Z", "end": "2026-10-04T03:00:00Z" }
+    { "name": "Power Hour", "note": "Bounty Hunter Sprites", "start": "2026-10-04T01:00:00Z", "end": "2026-10-04T03:00:00Z" },
+    { "name": "Power Hour", "note": "Trick or Treat Sprites (drop in with Freddy's Nightmare)", "start": "2026-10-17T18:00:00Z", "end": "2026-10-17T20:00:00Z" },
+    { "name": "Power Hour", "note": "Trick or Treat Sprites (drop in with Freddy's Nightmare)", "start": "2026-10-18T01:00:00Z", "end": "2026-10-18T03:00:00Z" }
   ],
   "events": [
     { "name": "Honey & Obsession Sprites", "note": "New Sprites drop", "date": "2026-10-15", "kind": "sprites" },
