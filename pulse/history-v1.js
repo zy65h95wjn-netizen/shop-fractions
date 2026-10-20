@@ -31,7 +31,7 @@
     return p.year+'-'+p.month+'-'+p.day;
   }
   function series(daily,metric,days,today){
-    if(!Object.hasOwn(metrics,metric)||![7,30,90].includes(days)||!validDay(today))return [];
+    if(!Object.hasOwn(metrics,metric)||metric==='step_count'||![7,30,90].includes(days)||!validDay(today))return [];
     const byDay=new Map((Array.isArray(daily)?daily:[])
       .filter(row=>row && validDay(row.day)).map(row=>[row.day,row]));
     return Array.from({length:days},(_,i)=>{
