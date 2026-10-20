@@ -5,7 +5,8 @@
     resting_heart_rate:{name:'Resting heart rate',unit:'bpm',daily:'Latest daily Watch estimate'},
     heart_rate:{name:'Heart rate',unit:'bpm',daily:'Daily average'},
     hrv_sdnn:{name:'HRV / SDNN',unit:'ms',daily:'Daily average'},
-    blood_oxygen_saturation:{name:'Blood oxygen / SpO₂',unit:'%',daily:'Daily average'}
+    blood_oxygen_saturation:{name:'Blood oxygen / SpO₂',unit:'%',daily:'Daily average'},
+    step_count:{name:'Steps',unit:'steps',daily:'Imported daily total'}
   };
   function valueOf(raw){
     if((typeof raw!=='number' && typeof raw!=='string') || String(raw).trim()==='')return null;
@@ -30,7 +31,7 @@
     return p.year+'-'+p.month+'-'+p.day;
   }
   function series(daily,metric,days,today){
-    if(!Object.hasOwn(metrics,metric)||![7,30,90].includes(days)||!validDay(today))return [];
+    if(!Object.hasOwn(metrics,metric)||metric==='step_count'||![7,30,90].includes(days)||!validDay(today))return [];
     const byDay=new Map((Array.isArray(daily)?daily:[])
       .filter(row=>row && validDay(row.day)).map(row=>[row.day,row]));
     return Array.from({length:days},(_,i)=>{
@@ -149,22 +150,34 @@
     el('history-title').textContent=spec.name;
     el('history-unit').textContent='Value ('+spec.unit+')';
     // latest is the protected dashboard's actual latest reading, not a daily mean.
-    const latest=data.latest?.[metric],latestValue=valueOf(latest?.value);
-    el('history-latest-label').textContent=metric==='resting_heart_rate'?'LATEST REVISED WATCH ESTIMATE':'LATEST READING';
+    const isSteps=metric==='step_count';
+    const latest=isSteps?null:data.latest?.[metric];
+    const latestValue=isSteps?valueOf(data.steps?.today):valueOf(latest?.value);
+    el('history-latest-label').textContent=isSteps?'TODAY · SO FAR':metric==='resting_heart_rate'?'LATEST REVISED WATCH ESTIMATE':'LATEST READING';
     el('history-latest-value').textContent=reading(latestValue,spec.unit);
     const at=typeof latest?.at==='string'?new Date(latest.at):null;
-    el('history-latest-at').textContent=latestValue===null?'No latest reading available. Daily history may still be available.':
+    el('history-latest-at').textContent=isSteps?(latestValue===null?'Today has not synced yet · not zero':'Last synced daily total · may be incomplete'):
+      latestValue===null?'No latest reading available. Daily history may still be available.':
       at && Number.isFinite(at.getTime())?
         (metric==='resting_heart_rate'?'Updated ':'Measured ')+at.toLocaleString('en-US',{
           timeZone:'America/New_York',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'
         })+' · New York time':'Reading time unavailable';
-    points=series(data.daily,metric,days,eastDay(new Date()));
+    const today=eastDay(new Date());
+    const verifiedSteps=data.steps?.last_completed_day===shiftDay(today,-1);
+    const stepDays=verifiedSteps && Array.isArray(data.steps?.history)?data.steps.history:[];
+    points=isSteps?Array.from({length:days},(_,i)=>{
+      const day=shiftDay(today,i-days+1);
+      const item=stepDays.find(x=>x?.day===day);
+      const value=valueOf(item?.value);
+      return {day,value:value!==null && Number.isInteger(value) && value>=0?value:null};
+    }):series(data.daily,metric,days,today);
     const good=points.filter(p=>p.value!==null);
     if(!points.some(p=>p.day===selectedDay))selectedDay=(good[good.length-1]||points[points.length-1]).day;
     for(const button of view.querySelectorAll('[data-history-days]'))button.setAttribute('aria-pressed',String(Number(button.dataset.historyDays)===days));
     el('history-period').textContent=dateLabel(points[0].day)+' – '+dateLabel(points[points.length-1].day);
     el('history-coverage').textContent=good.length+'/'+days+' days recorded · '+(days-good.length)+' missing';
-    el('history-semantics').textContent=metric==='resting_heart_rate'?
+    el('history-semantics').textContent=isSteps?
+      'Imported daily step totals by New York calendar day. Today is partial; missing days are not zero.':metric==='resting_heart_rate'?
       'Each day uses the latest revised Watch estimate supplied by the corrected dashboard.':
       'Daily averages from the dashboard, not individual raw measurements. The latest reading above is separate.';
     el('history-list-caption').textContent=spec.daily+' · newest first · today at top';
