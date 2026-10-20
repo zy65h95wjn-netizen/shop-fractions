@@ -63,19 +63,19 @@ async function getRestingSamples(): Promise<Sample[]> {
 type StepTotal = { start_at: string; value: number | string };
 async function getStepTotals(): Promise<StepTotal[]> {
   if (!SERVICE_ROLE) throw Error("Server configuration unavailable");
-  const cutoff = new Date(Date.now() - 11 * 86400000).toISOString();
+  const cutoff = new Date(Date.now() - 100 * 86400000).toISOString();
   const u = new URL(PROJECT_URL + "/rest/v1/health_samples");
   u.searchParams.set("select", "start_at,value");
   u.searchParams.set("metric", "eq.step_count");
   u.searchParams.set("start_at", "gte." + cutoff);
   u.searchParams.set("order", "start_at.desc");
-  u.searchParams.set("limit", "32");
+  u.searchParams.set("limit", "128");
   const r = await fetch(u, {headers:{
     "apikey":SERVICE_ROLE,"Authorization":"Bearer "+SERVICE_ROLE
   },cache:"no-store"});
   if (!r.ok) throw Error("Unable to retrieve authorized daily step totals");
   const records = await r.json();
-  if (!Array.isArray(records) || records.length >= 32 ||
+  if (!Array.isArray(records) || records.length >= 128 ||
       records.some(s => typeof s.start_at !== "string" ||
         !Number.isInteger(Number(s.value)) || Number(s.value) < 0 ||
         Number(s.value) > 200000)) {
@@ -107,7 +107,8 @@ function stepSummary(records: StepTotal[], today: string) {
     average_7d: average,
     days_present: previous.length,
     // A missing current day stays null; no fallback to yesterday.
-    last_completed_day:yesterday
+    last_completed_day:yesterday,
+    history: Array.from({length:90},(_,i)=>{const day=shiftedDay(today,i-89);return {day,value:values.get(day)??null};})
   };
 }
 Deno.serve(async (req: Request): Promise<Response> => {
