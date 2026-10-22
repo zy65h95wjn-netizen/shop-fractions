@@ -473,11 +473,37 @@ body[data-moon-mode="halloween"] .hero .mist::after{
   background:radial-gradient(ellipse at 25% 70%,rgba(184,128,177,.35),transparent 59%),radial-gradient(ellipse at 73% 65%,rgba(225,117,85,.17),transparent 58%)}
 body[data-moon-mode="halloween"] .hero .ember{background:#FFC071;box-shadow:0 0 11px 3px rgba(255,115,44,.85)}
 body[data-moon-mode="halloween"] .hello .n{filter:drop-shadow(0 0 12px rgba(255,142,54,.27))}
+/* Only on Halloween: bare branches creep around the arch, ghost mist crosses it,
+   and a distant pair of eyes quietly appears between the trees. All sit behind the skin. */
+.hero .haunt-branches{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;filter:drop-shadow(0 0 3px rgba(7,2,14,.5))}
+.hero .haunt-branches path{fill:none;stroke:#08050F;stroke-linecap:round;stroke-linejoin:round}
+.hero .haunt-wisp{position:absolute;left:-23%;bottom:29px;width:67%;height:125px;border-radius:50%;opacity:0;pointer-events:none;filter:blur(13px);
+  background:radial-gradient(ellipse at 50% 55%,rgba(204,217,229,.26),rgba(146,113,192,.11) 41%,transparent 71%)}
+.hero .haunt-watcher{position:absolute;left:13%;bottom:95px;display:flex;gap:12px;opacity:0;pointer-events:none;filter:drop-shadow(0 0 4px rgba(255,157,85,.6))}
+.hero .haunt-watcher i{width:4px;height:3px;border-radius:70% 70% 50% 50%;background:#FFCE94;box-shadow:0 0 7px 1px rgba(255,126,51,.55)}
+body[data-moon-mode="halloween"] .hero .haunt-branches{opacity:.84}
+body[data-moon-mode="halloween"] .hero .haunt-wisp{animation:previewHauntWisp 19s ease-in-out -6s infinite}
+body[data-moon-mode="halloween"] .hero .haunt-watcher{animation:previewWatching 21s linear -4s infinite}
+body[data-moon-mode="halloween"] .hero .mist{background:linear-gradient(transparent,rgba(190,158,208,.18) 55%,rgba(9,6,19,.78))}
+@keyframes previewHauntWisp{
+  0%,12%,100%{opacity:0;transform:translateX(-9%) translateY(14px) scale(.85)}
+  30%,62%{opacity:.8;transform:translateX(48%) translateY(-7px) scale(1.15)}
+  85%{opacity:0;transform:translateX(118%) translateY(-23px) scale(1.25)}
+}
+@keyframes previewWatching{
+  0%,34%,57%,100%{opacity:0}
+  38%,47%,52%{opacity:.72}
+  49%{opacity:.04}
+}
 @keyframes previewHarvestMoon{
   0%,100%{box-shadow:0 0 36px 10px rgba(234,116,48,.35),0 0 85px 20px rgba(197,75,37,.12)}
   50%{box-shadow:0 0 48px 17px rgba(255,150,65,.50),0 0 105px 27px rgba(217,88,40,.18)}
 }
-@media (prefers-reduced-motion: reduce){body[data-moon-mode="halloween"] .hero .moon{animation:none}}
+@media (prefers-reduced-motion: reduce){
+  body[data-moon-mode="halloween"] .hero .moon,body[data-moon-mode="halloween"] .hero .haunt-wisp,
+  body[data-moon-mode="halloween"] .hero .haunt-watcher{animation:none}
+  body[data-moon-mode="halloween"] .hero .haunt-wisp{opacity:.35}
+}
 </style>
 </head>
 <body data-moon-mode="halloween">
@@ -1291,7 +1317,12 @@ var heroScene = null, heroStormUntil = 0;
 var heroMotion = matchMedia('(prefers-reduced-motion: reduce)');
 function heroAtmosphere(){
   var bat = '<svg class="bat" viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M0 2Q8 4 15 10L17 5L20 8L23 5L25 10Q32 4 40 2L35 13Q30 9 27 16Q23 13 20 20Q17 13 13 16Q10 9 5 13Z"/></svg>';
-  return '<span class="sky" aria-hidden="true"><span class="moon"></span><span class="cloud"></span>'+bat+bat+'</span>'+
+  var branches = '<svg class="haunt-branches" viewBox="0 0 560 330" preserveAspectRatio="none" aria-hidden="true" focusable="false">'+
+    '<path stroke-width="13" d="M-15 74Q35 104 48 151T85 252 M575 117Q532 145 521 196T482 307"/>'+
+    '<path stroke-width="7" d="M22 111Q41 70 75 57 M45 153Q68 128 107 126 M58 187Q86 159 125 164 M71 230Q99 218 119 188 M542 155Q523 102 496 87 M526 183Q501 148 464 146 M507 228Q477 204 452 183"/>'+
+    '<path stroke-width="3.3" d="M70 62L93 52 M90 126L105 104 M110 162L134 149 M494 93L481 73 M464 148L444 126 M453 182L436 164"/>'+
+    '</svg>';
+  return '<span class="sky" aria-hidden="true"><span class="moon"></span><span class="cloud"></span>'+bat+bat+branches+'<span class="haunt-wisp"></span><span class="haunt-watcher"><i></i><i></i></span></span>'+ 
     '<span class="mist" aria-hidden="true"></span><span class="embers" aria-hidden="true"><i class="ember"></i><i class="ember"></i><i class="ember"></i><i class="ember"></i><i class="ember"></i><i class="ember"></i><i class="ember"></i><i class="ember"></i></span>'+
     '<span class="candle" aria-hidden="true"></span><span class="lightning" aria-hidden="true"></span>';
 }
@@ -1306,7 +1337,7 @@ function bindHeroScene(el){
     batsTimer = setTimeout(function(){
       batsTimer = null;
       if(active && el.isConnected) el.classList.add('bats-passing');
-    }, batsFirst ? 5000+Math.random()*4000 : 18000+Math.random()*17000);
+    }, batsFirst ? 5000+Math.random()*4000 : (PREVIEW_DATE_MODE==='halloween' ? 11000+Math.random()*10000 : 18000+Math.random()*17000));
     batsFirst = false;
   }
   function sync(){
