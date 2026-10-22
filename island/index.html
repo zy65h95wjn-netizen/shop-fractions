@@ -114,6 +114,29 @@ a{color:var(--accent)}
 .hello h1 .n{color:#FFB37A;text-shadow:0 0 14px rgba(255,122,46,.75),0 0 32px rgba(255,122,46,.35)}
 .hello .sub{font-family:var(--head);font-size:14px;letter-spacing:.14em;color:var(--accent-2);opacity:.88;margin-top:3px;text-shadow:0 0 10px rgba(185,140,255,.55)}
 
+/* A letter meant to be found, without putting its contents in public source. */
+.note-invite{position:relative;isolation:isolate;display:flex;align-items:center;gap:16px;width:100%;min-height:122px;padding:18px;border-radius:22px;text-align:left;overflow:hidden;
+  border:1.5px solid rgba(255,208,138,.84);background:radial-gradient(ellipse at 7% 50%,rgba(255,174,94,.23),transparent 65%),linear-gradient(120deg,#39203E,#21122F 68%,#301C43);
+  box-shadow:0 0 0 3px rgba(255,208,138,.09),0 0 35px rgba(255,142,66,.34),inset 0 1px 0 rgba(255,255,255,.12);color:var(--moon)}
+.note-invite::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 32%,rgba(255,238,194,.18) 48%,transparent 65%);transform:translateX(-110%);animation:letterSweep 4.5s ease-in-out infinite}
+.note-invite.unread{animation:letterGlow 3s ease-in-out infinite}
+@keyframes letterGlow{0%,100%{box-shadow:0 0 0 3px rgba(255,208,138,.09),0 0 28px rgba(255,142,66,.28)}50%{box-shadow:0 0 0 4px rgba(255,208,138,.18),0 0 48px rgba(255,142,66,.58)}}
+@keyframes letterSweep{0%,37%{transform:translateX(-110%)}75%,100%{transform:translateX(110%)}}
+.note-invite .envelope{width:74px;height:74px;flex-shrink:0;display:grid;place-items:center;border-radius:18px;color:#FFF1D4;background:radial-gradient(circle at 50% 38%,rgba(255,212,149,.29),rgba(255,122,46,.08) 65%,transparent);filter:drop-shadow(0 0 15px rgba(255,176,93,.5));animation:letterFloat 3.4s ease-in-out infinite}
+.note-invite .envelope svg{width:65px;height:65px}
+@keyframes letterFloat{0%,100%{transform:rotate(-8deg) translateY(2px)}50%{transform:rotate(-4deg) translateY(-5px)}}
+.note-invite .letter-copy{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0}
+.note-invite .letter-kicker{font-size:11px;font-weight:700;letter-spacing:.15em;color:#FFD99E}
+.note-invite strong{font-family:var(--head);font-size:21px;line-height:1.15;color:#FFF5DE;text-shadow:0 0 14px rgba(255,195,130,.48)}
+.note-invite .letter-action{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:#FFE2B4;text-decoration:underline;text-underline-offset:4px}
+.note-invite.read{min-height:68px;padding:10px 15px;border-color:rgba(185,140,255,.4);background:rgba(35,20,50,.72);box-shadow:none}
+.note-invite.read::before{display:none}
+.note-invite.read .envelope{width:42px;height:42px;animation:none;filter:none}
+.note-invite.read .envelope svg{width:38px;height:38px}
+.note-invite.read strong{font-family:var(--body);font-size:15px;text-shadow:none}
+.note-invite.read .letter-kicker{display:none}
+.note-invite.read .letter-action{font-size:12px;color:var(--soft);text-decoration:none}
+
 /* night sky over the top of Today: stars, moonglow, a rare shooting star */
 #v-today{position:relative;isolation:isolate}
 .sky{position:absolute;z-index:-1;left:-18px;right:-18px;top:calc(-22px - var(--sat));height:calc(var(--sat) + 250px);pointer-events:none;overflow:hidden;
@@ -472,6 +495,7 @@ var API = 'https://fortnite-api.com';
 var LS = 'isl.';
 var ICON = {
   heart: '<svg viewBox="0 0 24 24" fill="FILL" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
+  letter: '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="5" y="14" width="54" height="38" rx="6" fill="#F5DAB4" stroke="#FFF2D7" stroke-width="2"/><path d="M6 18L32 38L58 18" stroke="#AD6591" stroke-width="2.5" stroke-linejoin="round"/><path d="M7 49L25 34M57 49L39 34" stroke="#C890AC" stroke-width="2"/><circle cx="32" cy="38" r="8" fill="#AE557A"/><path d="M32 43s-5-3.3-5-6.7a3 3 0 0 1 5-2 3 3 0 0 1 5 2c0 3.4-5 6.7-5 6.7Z" fill="#FFE4D6"/></svg>',
   person: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>',
   sparkle: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.2 6.3L20.5 11l-6.3 2.2L12 19.5l-2.2-6.3L3.5 11l6.3-2.2z"/><path d="M19 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z" opacity=".6"/></svg>',
   check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
@@ -847,6 +871,15 @@ function costumeCard(){
 }
 function renderToday(){
   var st = S.settings || {}, sk = st.skin;
+  var noteHtml = '';
+  if(st.note && st.note.trim()){
+    var noteRead = load('noteOpened', false);
+    noteHtml = '<button type="button" id="openLetter" class="note-invite '+(noteRead?'read':'unread')+'" aria-label="Open your personal letter">'+
+      '<span class="envelope">'+ICON.letter+'</span><span class="letter-copy">'+
+      (noteRead ? '<strong>Your personal letter</strong><span class="letter-action">Read it again →</span>' :
+        '<span class="letter-kicker">A LITTLE SOMETHING JUST FOR YOU</span><strong>You have a letter!</strong><span class="letter-action">Tap to open your surprise →</span>')+
+      '</span></button>';
+  }
   var hero = sk && sk.img
     ? '<div class="list" style="gap:14px"><button class="hero" id="heroBtn" aria-label="Awaken lightning around '+esc(sk.name)+'">'+heroAtmosphere()+imgTag(sk.img, sk.name)+'</button>'+
       '<div class="hero-cap"><div><b>'+esc(sk.name)+'</b><span>go-to look</span></div><button class="hero-change" id="changeSkin" aria-label="Change go-to skin">Change</button></div></div>'
@@ -878,7 +911,7 @@ function renderToday(){
       '<span class="pumpkin">'+ICON.pumpkin+'</span>'+'</span>'+
       '<h1>'+(hl.n!=null ? '<span class="n">'+hl.n+'</span> '+hl.unit : esc(hl.big))+'</h1>'+(hl.sub ? '<span class="sub">'+esc(hl.sub)+'</span>' : '')+'</div>'+
     '<button class="iconbtn" id="refreshAll" aria-label="Refresh">'+ICON.refresh+'</button></div>'+
-    playerStrip() + hero + (powerHourState().mode === 'none' ? '' : phCard()) + dropCard() + todayMinis() + costumeCard() +
+    noteHtml + playerStrip() + hero + (powerHourState().mode === 'none' ? '' : phCard()) + dropCard() + todayMinis() + costumeCard() +
     (evHtml ? '<div class="list" style="gap:12px"><h2 class="rule">Coming up</h2>'+evHtml+'</div>' : '')+
     (newsHtml ? '<div class="list" style="gap:12px"><h2 class="rule">In the game now</h2>'+newsHtml+'</div>' : '')+
     '<div class="list" style="gap:12px"><div class="between" style="align-items:center"><h2 class="rule" style="flex:1">Wishlist in the shop</h2><button class="chip" data-go="shop" style="height:32px">See shop</button></div>'+wishHtml+'</div>'+
@@ -1226,6 +1259,7 @@ function bindView(){
     x.style.transition='transform .6s'; x.style.transform='rotate(360deg)';
     Promise.all([loadLocalData(), fetchShop(true), fetchNews(true)]).then(function(){ render(); toast('Up to date'); });
   };
+  if((x=$('#openLetter'))) x.onclick = openNote;
   if((x=$('#hello'))) bindLongPress(x);
 }
 
@@ -1316,7 +1350,8 @@ function bindLongPress(el){
   el.addEventListener('contextmenu', function(e){ e.preventDefault(); });
 }
 function openNote(){
-  if($('.reveal')) return;
+  if(!(S.settings && S.settings.note) || $('.reveal')) return;
+  save('noteOpened', true);
   var lines = String(S.settings.note).split('\n');
   var el = document.createElement('div');
   el.className = 'reveal'; el.setAttribute('role','dialog'); el.setAttribute('aria-label','A note for you');
@@ -1342,7 +1377,7 @@ function openNote(){
   el.addEventListener('click', function(){
     if(!ready) return;
     el.classList.remove('show'); document.body.style.overflow = '';
-    setTimeout(function(){ el.remove(); }, 420);
+    setTimeout(function(){ el.remove(); rerender(['today']); }, 420);
   });
 }
 
@@ -1626,7 +1661,9 @@ function openSetup(first){
     var name = $('#uName').value.trim();
     if(!name){ toast('Add her name first'); $('#uName').focus(); return; }
     var s = S.settings || {}, epicChanged = s.epic !== $('#uEpic').value.trim() || s.key !== $('#uKey').value.trim();
-    s.name = name; s.epic = $('#uEpic').value.trim(); s.key = $('#uKey').value.trim(); s.note = $('#uNote').value.replace(/\s+$/,'');
+    var nextNote = $('#uNote').value.replace(/\s+$/,'');
+    if(s.note !== nextNote) drop('noteOpened');
+    s.name = name; s.epic = $('#uEpic').value.trim(); s.key = $('#uKey').value.trim(); s.note = nextNote;
     S.settings = s; save('settings', s);
     if(epicChanged){ S.stats = {}; save('stats', {}); }
     delete sh.dataset.locked; closeSheet(); render(); toast(first ? 'All set' : 'Saved');
