@@ -114,28 +114,14 @@ a{color:var(--accent)}
 .hello h1 .n{color:#FFB37A;text-shadow:0 0 14px rgba(255,122,46,.75),0 0 32px rgba(255,122,46,.35)}
 .hello .sub{font-family:var(--head);font-size:14px;letter-spacing:.14em;color:var(--accent-2);opacity:.88;margin-top:3px;text-shadow:0 0 10px rgba(185,140,255,.55)}
 
-/* A letter meant to be found, without putting its contents in public source. */
-.note-invite{position:relative;isolation:isolate;display:flex;align-items:center;gap:16px;width:100%;min-height:122px;padding:18px;border-radius:22px;text-align:left;overflow:hidden;
-  border:1.5px solid rgba(255,208,138,.84);background:radial-gradient(ellipse at 7% 50%,rgba(255,174,94,.23),transparent 65%),linear-gradient(120deg,#39203E,#21122F 68%,#301C43);
-  box-shadow:0 0 0 3px rgba(255,208,138,.09),0 0 35px rgba(255,142,66,.34),inset 0 1px 0 rgba(255,255,255,.12);color:var(--moon)}
-.note-invite::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 32%,rgba(255,238,194,.18) 48%,transparent 65%);transform:translateX(-110%);animation:letterSweep 4.5s ease-in-out infinite}
-.note-invite.unread{animation:letterGlow 3s ease-in-out infinite}
-@keyframes letterGlow{0%,100%{box-shadow:0 0 0 3px rgba(255,208,138,.09),0 0 28px rgba(255,142,66,.28)}50%{box-shadow:0 0 0 4px rgba(255,208,138,.18),0 0 48px rgba(255,142,66,.58)}}
-@keyframes letterSweep{0%,37%{transform:translateX(-110%)}75%,100%{transform:translateX(110%)}}
-.note-invite .envelope{width:74px;height:74px;flex-shrink:0;display:grid;place-items:center;border-radius:18px;color:#FFF1D4;background:radial-gradient(circle at 50% 38%,rgba(255,212,149,.29),rgba(255,122,46,.08) 65%,transparent);filter:drop-shadow(0 0 15px rgba(255,176,93,.5));animation:letterFloat 3.4s ease-in-out infinite}
-.note-invite .envelope svg{width:65px;height:65px}
-@keyframes letterFloat{0%,100%{transform:rotate(-8deg) translateY(2px)}50%{transform:rotate(-4deg) translateY(-5px)}}
-.note-invite .letter-copy{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0}
-.note-invite .letter-kicker{font-size:11px;font-weight:700;letter-spacing:.15em;color:#FFD99E}
-.note-invite strong{font-family:var(--head);font-size:21px;line-height:1.15;color:#FFF5DE;text-shadow:0 0 14px rgba(255,195,130,.48)}
-.note-invite .letter-action{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:#FFE2B4;text-decoration:underline;text-underline-offset:4px}
-.note-invite.read{min-height:68px;padding:10px 15px;border-color:rgba(185,140,255,.4);background:rgba(35,20,50,.72);box-shadow:none}
-.note-invite.read::before{display:none}
-.note-invite.read .envelope{width:42px;height:42px;animation:none;filter:none}
-.note-invite.read .envelope svg{width:38px;height:38px}
-.note-invite.read strong{font-family:var(--body);font-size:15px;text-shadow:none}
-.note-invite.read .letter-kicker{display:none}
-.note-invite.read .letter-action{font-size:12px;color:var(--soft);text-decoration:none}
+/* A quiet envelope beside the greeting: it breathes until she reads the note. */
+.header-actions{display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0}
+.letter-icon{position:relative;width:44px;height:44px;padding:0;border:0;background:none;display:grid;place-items:center;color:#FFF1D4}
+.letter-icon svg{width:34px;height:34px;transform:rotate(-5deg);filter:drop-shadow(0 0 4px rgba(255,179,100,.28))}
+.letter-icon.unread::before{content:"";position:absolute;inset:2px;border-radius:50%;background:radial-gradient(circle,rgba(255,169,88,.27),transparent 70%);animation:letterAura 5.5s ease-in-out infinite;pointer-events:none}
+.letter-icon.unread svg{animation:letterBreathe 5.5s ease-in-out infinite}
+@keyframes letterAura{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+@keyframes letterBreathe{0%,100%{transform:rotate(-5deg) scale(.93);filter:drop-shadow(0 0 3px rgba(255,179,100,.2))}50%{transform:rotate(-5deg) scale(1.08);filter:drop-shadow(0 0 12px rgba(255,179,100,.8))}}
 
 /* night sky over the top of Today: stars, moonglow, a rare shooting star */
 #v-today{position:relative;isolation:isolate}
@@ -874,11 +860,7 @@ function renderToday(){
   var noteHtml = '';
   if(st.note && st.note.trim()){
     var noteRead = load('noteOpened', false);
-    noteHtml = '<button type="button" id="openLetter" class="note-invite '+(noteRead?'read':'unread')+'" aria-label="Open your personal letter">'+
-      '<span class="envelope">'+ICON.letter+'</span><span class="letter-copy">'+
-      (noteRead ? '<strong>Your personal letter</strong><span class="letter-action">Read it again →</span>' :
-        '<span class="letter-kicker">A LITTLE SOMETHING JUST FOR YOU</span><strong>You have a letter!</strong><span class="letter-action">Tap to open your surprise →</span>')+
-      '</span></button>';
+    noteHtml = '<button type="button" id="openLetter" class="letter-icon '+(noteRead?'read':'unread')+'" aria-label="Open your personal letter" title="A little letter for you">'+ICON.letter+'</button>';
   }
   var hero = sk && sk.img
     ? '<div class="list" style="gap:14px"><button class="hero" id="heroBtn" aria-label="Awaken lightning around '+esc(sk.name)+'">'+heroAtmosphere()+imgTag(sk.img, sk.name)+'</button>'+
@@ -910,8 +892,8 @@ function renderToday(){
       '<i class="gl g1">'+ICON.star+'</i><i class="gl g2">'+ICON.star+'</i><i class="gl g3">'+ICON.star+'</i><i class="gl g4">'+ICON.star+'</i>'+
       '<span class="pumpkin">'+ICON.pumpkin+'</span>'+'</span>'+
       '<h1>'+(hl.n!=null ? '<span class="n">'+hl.n+'</span> '+hl.unit : esc(hl.big))+'</h1>'+(hl.sub ? '<span class="sub">'+esc(hl.sub)+'</span>' : '')+'</div>'+
-    '<button class="iconbtn" id="refreshAll" aria-label="Refresh">'+ICON.refresh+'</button></div>'+
-    noteHtml + playerStrip() + hero + (powerHourState().mode === 'none' ? '' : phCard()) + dropCard() + todayMinis() + costumeCard() +
+    '<div class="header-actions"><button class="iconbtn" id="refreshAll" aria-label="Refresh">'+ICON.refresh+'</button>'+noteHtml+'</div></div>'+
+    playerStrip() + hero + (powerHourState().mode === 'none' ? '' : phCard()) + dropCard() + todayMinis() + costumeCard() +
     (evHtml ? '<div class="list" style="gap:12px"><h2 class="rule">Coming up</h2>'+evHtml+'</div>' : '')+
     (newsHtml ? '<div class="list" style="gap:12px"><h2 class="rule">In the game now</h2>'+newsHtml+'</div>' : '')+
     '<div class="list" style="gap:12px"><div class="between" style="align-items:center"><h2 class="rule" style="flex:1">Wishlist in the shop</h2><button class="chip" data-go="shop" style="height:32px">See shop</button></div>'+wishHtml+'</div>'+
