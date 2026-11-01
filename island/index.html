@@ -475,51 +475,6 @@ textarea.input{height:120px;padding:12px 14px;resize:vertical;line-height:1.4}
   .hero .cloud,.hero .bat,.hero .ember,.hero .lightning,.hero .moon::before,.hero .moon::after{opacity:0!important}
 }
 
-/* October 31 only: the approved Halloween moonlight atmosphere. */
-body[data-moon-mode="halloween"] #v-today>.sky{
-  background:radial-gradient(42% 68% at 84% 0%,rgba(255,144,68,.17),transparent 70%),radial-gradient(78% 90% at 22% 0%,rgba(105,43,141,.33),transparent 75%)}
-body[data-moon-mode="halloween"] .hero{
-  border-color:rgba(227,125,78,.55);box-shadow:0 0 0 6px rgba(222,105,59,.045),0 0 43px rgba(171,67,44,.23),inset 0 0 48px rgba(0,0,0,.65)}
-body[data-moon-mode="halloween"] .hero .moon{
-  animation:halloweenHarvestMoon 11s ease-in-out infinite;
-  filter:sepia(1) saturate(4.6) hue-rotate(-17deg) brightness(1.02)}
-body[data-moon-mode="halloween"] .hero .candle{
-  background:radial-gradient(ellipse at 50% 100%,rgba(255,145,54,.91),transparent 70%)}
-body[data-moon-mode="halloween"] .hero .mist::before,
-body[data-moon-mode="halloween"] .hero .mist::after{
-  background:radial-gradient(ellipse at 25% 70%,rgba(184,128,177,.35),transparent 59%),radial-gradient(ellipse at 73% 65%,rgba(225,117,85,.17),transparent 58%)}
-body[data-moon-mode="halloween"] .hero .ember{background:#FFC071;box-shadow:0 0 11px 3px rgba(255,115,44,.85)}
-body[data-moon-mode="halloween"] .hello .n{filter:drop-shadow(0 0 12px rgba(255,142,54,.27))}
-.hero .haunt-branches{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;filter:drop-shadow(0 0 3px rgba(7,2,14,.5))}
-.hero .haunt-branches path{fill:none;stroke:#08050F;stroke-linecap:round;stroke-linejoin:round}
-.hero .haunt-wisp{position:absolute;left:-23%;bottom:29px;width:67%;height:125px;border-radius:50%;opacity:0;pointer-events:none;filter:blur(13px);
-  background:radial-gradient(ellipse at 50% 55%,rgba(204,217,229,.26),rgba(146,113,192,.11) 41%,transparent 71%)}
-.hero .haunt-watcher{position:absolute;left:13%;bottom:95px;display:flex;gap:12px;opacity:0;pointer-events:none;filter:drop-shadow(0 0 4px rgba(255,157,85,.6))}
-.hero .haunt-watcher i{width:4px;height:3px;border-radius:70% 70% 50% 50%;background:#FFCE94;box-shadow:0 0 7px 1px rgba(255,126,51,.55)}
-body[data-moon-mode="halloween"] .hero .haunt-branches{opacity:.84}
-body[data-moon-mode="halloween"] .hero .haunt-wisp{animation:halloweenHauntWisp 19s ease-in-out -6s infinite}
-body[data-moon-mode="halloween"] .hero .haunt-watcher{animation:halloweenWatching 21s linear -4s infinite}
-body[data-moon-mode="halloween"] .hero .mist{background:linear-gradient(transparent,rgba(190,158,208,.18) 55%,rgba(9,6,19,.78))}
-@keyframes halloweenHauntWisp{
-  0%,12%,100%{opacity:0;transform:translateX(-9%) translateY(14px) scale(.85)}
-  30%,62%{opacity:.8;transform:translateX(48%) translateY(-7px) scale(1.15)}
-  85%{opacity:0;transform:translateX(118%) translateY(-23px) scale(1.25)}
-}
-@keyframes halloweenWatching{
-  0%,34%,57%,100%{opacity:0}
-  38%,47%,52%{opacity:.72}
-  49%{opacity:.04}
-}
-@keyframes halloweenHarvestMoon{
-  0%,100%{box-shadow:0 0 36px 10px rgba(234,116,48,.35),0 0 85px 20px rgba(197,75,37,.12)}
-  50%{box-shadow:0 0 48px 17px rgba(255,150,65,.50),0 0 105px 27px rgba(217,88,40,.18)}
-}
-@media (prefers-reduced-motion: reduce){
-  body[data-moon-mode="halloween"] .hero .moon,body[data-moon-mode="halloween"] .hero .haunt-wisp,
-  body[data-moon-mode="halloween"] .hero .haunt-watcher{animation:none}
-  body[data-moon-mode="halloween"] .hero .haunt-wisp{opacity:.35}
-}
-
 /* November candidate: same layout and controls, quieter moonlit atmosphere. */
 .hello h1{font-size:32px;line-height:1.12;margin-top:5px;max-width:330px}
 .hello .sub{font-size:11px;letter-spacing:.12em;margin-top:8px}
@@ -606,23 +561,7 @@ body[data-moon-mode="halloween"] .hero .mist{background:linear-gradient(transpar
 /* ================= constants ================= */
 var API = 'https://fortnite-api.com';
 var LS = 'isl.';
-/* Use the visitor's local calendar, with no saved preference or debug override. */
-function isHalloweenDay(day){ return day.getMonth()===9 && day.getDate()===31; }
-var halloweenTimer = null;
-function syncHalloweenMode(){
-  document.body.setAttribute('data-moon-mode', isHalloweenDay(new Date()) ? 'halloween' : 'normal');
-}
-function scheduleHalloweenMode(){
-  syncHalloweenMode();
-  clearTimeout(halloweenTimer);
-  var now = new Date();
-  var nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 0, 0, 1);
-  halloweenTimer = setTimeout(scheduleHalloweenMode, Math.max(1000, nextMidnight-now));
-}
-scheduleHalloweenMode();
-document.addEventListener('visibilitychange', function(){ if(!document.hidden) scheduleHalloweenMode(); });
-window.addEventListener('pageshow', scheduleHalloweenMode);
-window.addEventListener('focus', scheduleHalloweenMode);
+
 var ICON = {
   heart: '<svg viewBox="0 0 24 24" fill="FILL" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
   letter: '<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="5" y="14" width="54" height="38" rx="6" fill="#F5DAB4" stroke="#FFF2D7" stroke-width="2"/><path d="M6 18L32 38L58 18" stroke="#AD6591" stroke-width="2.5" stroke-linejoin="round"/><path d="M7 49L25 34M57 49L39 34" stroke="#C890AC" stroke-width="2"/><circle cx="32" cy="38" r="8" fill="#AE557A"/><path d="M32 43s-5-3.3-5-6.7a3 3 0 0 1 5-2 3 3 0 0 1 5 2c0 3.4-5 6.7-5 6.7Z" fill="#FFE4D6"/></svg>',
@@ -848,31 +787,12 @@ function countdown(x){
 function upcomingEvents(){
   var ev = S.eventsData; if(!ev) return [];
   var today = new Date(); today.setHours(0,0,0,0);
-  return (ev.events||[]).map(function(x){ return {name:x.name, note:x.note, d:localDate(x.date), kind:x.kind}; })
+  return (ev.events||[]).filter(function(x){ return !/halloween|fortnitemares/i.test(x.name+' '+(x.note||'')); }).map(function(x){ return {name:x.name, note:x.note, d:localDate(x.date), kind:x.kind}; })
     .filter(function(x){ return x.d >= today; }).sort(function(a,b){ return a.d-b.d; }).slice(0,4);
 }
 function nextShopReset(){ var d=new Date(); d.setUTCHours(24,0,0,0); return d.getTime(); }
 
 /* ================= render: today ================= */
-/* the big headline: counts down to Halloween, then the end of Fortnitemares, then the next event */
-function headline(){
-  return {big:'November nights', sub:'A little magic after dark'};
-}
-function originalHeadline(){
-  var t = new Date(); t.setHours(0,0,0,0);
-  var days = function(d){ return Math.round((d - t)/86400000); };
-  var n = days(new Date(t.getFullYear(), 9, 31));
-  if(n === 0) return {big:'Halloween', sub:'is tonight'};
-  if(n > 0 && n <= 61) return {n:n, unit:n===1 ? 'night' : 'nights', sub:'till Halloween'};
-  var ups = upcomingEvents();
-  var fm = ups.filter(function(x){ return /fortnitemares/i.test(x.name) && /ends$/i.test(x.name); })[0];
-  if(fm){ var m = days(fm.d); return m <= 0 ? {big:'Final night', sub:'of Fortnitemares'} : {n:m, unit:m===1 ? 'night' : 'nights', sub:'left of Fortnitemares'}; }
-  var nx = ups[0];
-  if(nx){ var k = days(nx.d); if(k <= 0) return {big:'Today', sub:nx.name}; if(k <= 30) return {n:k, unit:k===1 ? 'day' : 'days', sub:'till '+nx.name}; }
-  // nothing coming up: back to counting down to her favorite night
-  var hn = n > 0 ? n : days(new Date(t.getFullYear()+1, 9, 31));
-  return {n:hn, unit:hn===1 ? 'night' : 'nights', sub:'till Halloween'};
-}
 /* stars are seeded so they sit still when the screen re-renders */
 function skyHtml(){
   var seed = 7, r = function(){ seed = (seed*16807) % 2147483647; return (seed-1)/2147483646; }, h = '';
@@ -998,17 +918,6 @@ function todayMinis(){
   var spr = all.length ? '<button class="mini" data-go="sprites"><span class="k">Sprites</span><b>'+c.got+'<small> / '+all.length+'</small></b><span class="bar"><i style="width:'+c.pct.toFixed(1)+'%"></i></span><span class="s">'+(c.left ? c.left+' still out there' : 'Every last one.')+'</span></button>' : '';
   return '<div class="grid2">'+shop+spr+'</div>';
 }
-function costumeCard(){
-  var es = ((S.shop && S.shop.entries) || []).filter(function(e){ return e.typeVal==='outfit' && e.img; });
-  if(!es.length) return '';
-  var day = (S.shop.date || new Date().toISOString()).slice(0,10), h = 0;
-  for(var i=0;i<day.length;i++) h = (h*31 + day.charCodeAt(i)) >>> 0;
-  var e = es[h % es.length];
-  var bg = e.c1 && e.c3 ? 'background:linear-gradient(180deg,'+e.c3+' 0%,'+e.c1+' 100%)' : '';
-  return '<div class="list" style="gap:12px"><h2 class="rule">Costume inspo</h2>'+
-    '<button class="costume" data-entry="'+esc(e.key)+'"><span class="art" style="'+bg+'">'+imgTag(e.img, e.name)+'</span>'+
-    '<span class="tx"><span class="k">Costume of the day</span><b>'+esc(e.name)+'</b><span class="s">In today\'s shop · '+fmtNum(e.price)+' V-Bucks</span><span class="s">A new pick every day.</span></span></button></div>';
-}
 function gardenOrbs(caught,total){
   var h='', cols=9, rows=Math.max(1,Math.ceil(total/cols));
   var freedom=Math.pow(1-Math.min(1,caught/Math.max(1,total)),3);
@@ -1059,7 +968,7 @@ function renderToday(){
     '<button class="orb-jar" data-go="sprites" aria-label="Open sprite collection, '+caught+' of '+total+' collected"><span class="orb-interior" aria-hidden="true">'+gardenOrbs(caught,total)+'</span></button>'+
     '<button class="orb-counter" data-go="sprites"><b>'+caught+'</b><span> / '+total+' collected</span><small>Tap to view your sprites</small></button>'+
     '<button class="garden-character" id="changeSkin" aria-label="Change go-to skin">'+(sk && sk.img ? imgTag(sk.img,sk.name) : '<span>Choose your character</span>')+'</button></div>'+
-    playerStrip() + (powerHourState().mode === 'none' ? '' : phCard()) + dropCard() + todayMinis() + costumeCard() +
+    playerStrip() + (powerHourState().mode === 'none' ? '' : phCard()) + dropCard() + todayMinis() +
     (evHtml ? '<div class="list" style="gap:12px"><h2 class="rule">Coming up</h2>'+evHtml+'</div>' : '')+
     (newsHtml ? '<div class="list" style="gap:12px"><h2 class="rule">In the game now</h2>'+newsHtml+'</div>' : '')+
     '<div class="list" style="gap:12px"><div class="between" style="align-items:center"><h2 class="rule" style="flex:1">Wishlist in the shop</h2><button class="chip" data-go="shop" style="height:32px">See shop</button></div>'+wishHtml+'</div>'+
@@ -1507,7 +1416,7 @@ function bindHeroScene(el){
     batsTimer = setTimeout(function(){
       batsTimer = null;
       if(active && el.isConnected) el.classList.add('bats-passing');
-    }, batsFirst ? 5000+Math.random()*4000 : (isHalloweenDay(new Date()) ? 11000+Math.random()*10000 : 18000+Math.random()*17000));
+    }, batsFirst ? 5000+Math.random()*4000 : (18000+Math.random()*17000));
     batsFirst = false;
   }
   function sync(){
