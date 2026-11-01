@@ -564,11 +564,15 @@ body[data-moon-mode="halloween"] .hero .mist{background:linear-gradient(transpar
 .orb-jar{position:absolute;left:19%;top:48%;width:29%;height:23%;border:0;padding:0;background:transparent;border-radius:20%;z-index:3}
 .orb-jar:focus-visible{outline:2px solid #ffd083;outline-offset:4px}
 .orb-interior{position:absolute;left:12%;right:12%;top:26%;bottom:8%;overflow:hidden;border-radius:22% 22% 18% 18%}
-.collected-orb{position:absolute;width:var(--orb-size);height:var(--orb-size);margin-left:calc(var(--orb-size)/-2);border-radius:50%;background:radial-gradient(circle,#fffde0 0 16%,#ffe29a 30%,#ffb42f 55%,#ff861d 75%,transparent);box-shadow:0 0 8px 3px #ffb536bb,0 0 20px 7px #ff9b263f;animation:orbFloat 4.5s ease-in-out var(--delay) infinite alternate}
-@keyframes orbFloat{from{transform:translate(-1px,1px);filter:brightness(.9)}to{transform:translate(2px,-3px);filter:brightness(1.2)}}
+.collected-orb{position:absolute;width:var(--orb-size);height:var(--orb-size);margin-left:calc(var(--orb-size)/-2);border-radius:50%;background:radial-gradient(circle,#fffde0 0 16%,#ffe29a 30%,#ffb42f 55%,#ff861d 75%,transparent);box-shadow:0 0 8px 3px #ffb536bb,0 0 20px 7px #ff9b263f;animation:orbFloat var(--duration) ease-in-out var(--delay) infinite}
+/* Light ribbons follow each spark; sparse jars have longer, freer paths. */
+.collected-orb::before,.collected-orb::after{content:"";position:absolute;pointer-events:none;right:40%;top:30%;width:var(--trail);height:calc(var(--orb-size)*.65);border-radius:70% 15% 70% 40%;background:linear-gradient(90deg,transparent,#ffad4922 25%,#ffd88999 85%,#fff3c3cc);transform-origin:right center;filter:blur(1px);animation:wispCurl calc(var(--duration)*.55) ease-in-out var(--delay) infinite alternate}
+.collected-orb::after{top:45%;opacity:.5;height:calc(var(--orb-size)*.35);animation-direction:alternate-reverse;animation-delay:calc(var(--delay) - 1.3s)}
+@keyframes orbFloat{0%,100%{transform:translate(0,0)}25%{transform:translate(var(--drift),calc(var(--rise)*-.45))}50%{transform:translate(calc(var(--drift)*-.35),calc(var(--rise)*-1))}75%{transform:translate(calc(var(--drift)*-.7),calc(var(--rise)*-.35))}}
+@keyframes wispCurl{0%{transform:rotate(-28deg) scaleX(.65);opacity:.35}50%{opacity:.85}100%{transform:rotate(32deg) scaleX(1);opacity:.55}}
 .orb-counter{position:absolute;left:15%;top:72%;width:39%;padding:8px 0;border:0;background:transparent;z-index:4;color:#fff3dc;text-shadow:0 2px 6px #000,0 0 12px #000}
 .orb-counter b{font:34px Georgia,serif}.orb-counter span{font:14px Georgia,serif}.orb-counter small{display:block;margin-top:6px;font:12px Georgia,serif;color:#ddc9ef}
-@media(prefers-reduced-motion:reduce){.collected-orb{animation:none}}
+@media(prefers-reduced-motion:reduce){.collected-orb,.collected-orb::before,.collected-orb::after{animation:none}}
 
 .garden-character::before{content:"";position:absolute;z-index:-1;left:12%;bottom:-1%;width:80%;height:5%;border-radius:50%;background:radial-gradient(ellipse,rgba(5,3,12,.8),transparent 70%);filter:blur(3px);pointer-events:none}
 .preview-notice{position:relative;z-index:30;text-align:center;padding:8px 10px;background:#231530;color:#dfc6fa;font:11px/1.4 system-ui} #v-today .garden-scene{margin-top:calc(-22px - var(--sat))}</style>
@@ -1006,11 +1010,12 @@ function costumeCard(){
 }
 function gardenOrbs(caught,total){
   var h='', cols=9, rows=Math.max(1,Math.ceil(total/cols));
+  var freedom=Math.pow(1-Math.min(1,caught/Math.max(1,total)),3);
   for(var i=0;i<caught;i++){
     var row=Math.floor(i/cols), col=i%cols, slots=Math.min(cols,caught-row*cols);
     var x=slots===1?50:12+col*(76/Math.max(1,slots-1));
     var y=8+row*(80/Math.max(1,rows-1));
-    h+='<i class="collected-orb" style="left:'+x+'%;bottom:'+y+'%;--delay:'+(-i*.47)+'s;--orb-size:'+(caught<10?12:caught<40?8:5)+'px"></i>';
+    h+='<i class="collected-orb" style="left:'+x+'%;bottom:'+y+'%;--drift:'+((i%2?1:-1)*(2+Math.min(x-6,94-x)*.35*freedom)).toFixed(2)+'px;--rise:'+(3+45*freedom).toFixed(2)+'px;--trail:'+(8+24*freedom).toFixed(2)+'px;--duration:'+(5.5+(i%7)*.43+2*(1-freedom)).toFixed(2)+'s;--delay:'+(-i*1.37)+'s;--orb-size:'+(caught<10?12:caught<40?8:5)+'px"></i>';
   }
   return h;
 }
