@@ -1102,7 +1102,7 @@ function renderSprites(){
   var c = spriteCounts(), all = c.all;
   var newCount = all.filter(isNewSprite).length;
   var list = S.spriteGroup==='all' ? all : S.spriteGroup==='todo' ? all.filter(function(s){ return !S.got[s.id]; }) : S.spriteGroup==='got' ? all.filter(function(s){ return S.got[s.id]; }) : all.filter(function(s){ return s.group===S.spriteGroup; });
-  var chipDefs = [['all','All',all.length]].concat(groups.map(function(g){ return [g.id, g.name, all.filter(function(s){return s.group===g.id;}).length]; })).concat([['got','Caught',c.got],['todo','Still need',c.left]]);
+  var chipDefs = [['todo','Still need',c.left],['all','All',all.length]].concat(groups.map(function(g){ return [g.id, g.name, all.filter(function(s){return s.group===g.id;}).length]; })).concat([['got','Caught',c.got]]);
   var upd = d.updated ? localDate(d.updated).toLocaleDateString([], {month:'short', day:'numeric'}) : '';
   var hintOn = !load('holdHintSeen', false);
   return '<section class="view" id="v-sprites"><div style="display:flex;flex-direction:column;gap:2px"><span class="muted" style="font-size:15px">'+esc(d.season||'')+'</span><h1>Sprites</h1></div>'+
