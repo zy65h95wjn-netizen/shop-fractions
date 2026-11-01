@@ -12,6 +12,7 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -518,6 +519,63 @@ body[data-moon-mode="halloween"] .hero .mist{background:linear-gradient(transpar
   body[data-moon-mode="halloween"] .hero .haunt-watcher{animation:none}
   body[data-moon-mode="halloween"] .hero .haunt-wisp{opacity:.35}
 }
+
+/* November candidate: same layout and controls, quieter moonlit atmosphere. */
+.hello h1{font-size:32px;line-height:1.12;margin-top:5px;max-width:330px}
+.hello .sub{font-size:11px;letter-spacing:.12em;margin-top:8px}
+.hero{border-color:rgba(195,179,235,.55);box-shadow:0 0 0 6px rgba(185,140,255,.045),0 0 38px rgba(147,134,218,.20),inset 0 0 50px rgba(0,0,0,.6)}
+.hero .haunt-branches{opacity:.6}
+.hero .candle{opacity:.25;animation:none}
+.hero .mist::before,.hero .mist::after{filter:saturate(.65)}
+.autumn-leaves{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden}
+.autumn-leaves i{position:absolute;top:-25px;left:15%;width:10px;height:17px;background:linear-gradient(135deg,#967044,#5f382b);border-radius:2px 90% 2px 90%;opacity:0;animation:novLeaf 19s linear -7s infinite}
+.autumn-leaves i:nth-child(2){left:70%;width:8px;height:14px;animation-delay:-14s;animation-duration:25s}
+.autumn-leaves i:nth-child(3){left:40%;width:7px;height:12px;animation-delay:-2s;animation-duration:23s}
+@keyframes novLeaf{0%{opacity:0;transform:translate(0,0) rotate(0)}12%,75%{opacity:.65}100%{opacity:0;transform:translate(75px,370px) rotate(300deg)}}
+@media(prefers-reduced-motion:reduce){.autumn-leaves i{animation:none;display:none}}
+
+/* Artwork-led November preview */
+#v-today{gap:20px}
+.garden-scene{position:relative;isolation:isolate;margin:calc(-22px - var(--sat)) -18px 0;aspect-ratio:3/4;min-height:560px;background:linear-gradient(0deg,#0a0612 0%,transparent 13%),url(img/november-empty-jar.webp) center center/cover no-repeat}
+.garden-scene>.sky{inset:0;height:38%;z-index:1;background:none}
+.garden-heading{position:absolute;z-index:2;left:14px;right:14px;top:calc(var(--sat) + 26px);text-align:center}
+.garden-heading .hello{align-items:center;width:100%}
+.garden-heading .who{font-size:13px;margin:0 0 9px;padding:0;opacity:.9}
+.garden-heading h1{font-family:Georgia,serif;font-size:44px;font-weight:400;letter-spacing:-.04em;max-width:none;white-space:nowrap;text-shadow:0 2px 12px #000,0 0 24px #d4b9ec}
+.garden-heading .sub{font-family:Georgia,serif;font-size:9px;letter-spacing:.23em;text-transform:uppercase;color:#eee2ff;margin-top:9px}
+.garden-actions{position:absolute;right:11px;top:144px;z-index:3;display:flex;gap:4px}
+.garden-actions .iconbtn{background:rgba(13,8,27,.4);border:1px solid #d9c2ff33;border-radius:50%;width:34px;height:34px}
+.garden-jar{position:absolute;right:4%;bottom:13%;width:44%;padding:15px 9px;border:1px solid #d5bdff66;border-radius:16px;color:#f4efff;background:rgba(15,9,28,.65);backdrop-filter:blur(8px);box-shadow:0 6px 24px #0006;z-index:3;text-align:center}
+.garden-jar span{display:block;font:21px Georgia,serif}.garden-jar b{display:block;margin:12px 0;font:26px Georgia,serif}.garden-jar small{font:12px var(--body);color:#d9ccec}.garden-jar em{display:block;font:14px/1.5 Georgia,serif;color:#e2d7ee}.garden-jar strong{display:block;font:11px var(--body);color:#e6c6ff;margin-top:14px}
+#v-today>.list:has(.hero){padding:12px;background:#160f25b3;border:1px solid #41334e;border-radius:18px}
+#v-today .hero{height:190px;border-radius:14px;box-shadow:none;border:0}
+#v-today .hero.empty{height:100px;border-radius:14px}
+@media(max-width:375px){.garden-heading h1{font-size:38px}.garden-jar span{font-size:18px}}
+
+/* Interactive scenic jar: each collected sprite adds one real glowing orb. */
+.garden-scene{aspect-ratio:896/1752;min-height:0;background:linear-gradient(0deg,#0a0612,transparent 10%),url(img/november-empty-jar.webp) center/100% 100% no-repeat}
+.garden-heading{top:5.5%}
+.garden-heading .who{font-family:Georgia,serif;font-size:15px;margin-bottom:14px}
+.garden-heading h1{font-size:clamp(34px,10vw,56px)}
+.garden-heading .sub{margin-top:13px;font-size:9px}
+.garden-actions{top:20%;right:4%}
+.garden-character{position:absolute;left:54%;top:35%;width:43%;height:44%;z-index:2;background:none;border:0;padding:0;filter:drop-shadow(0 8px 8px #060410) drop-shadow(-2px 0 4px #9e84bb55)}
+.garden-character img{width:100%;height:100%;object-fit:contain;object-position:center bottom;transform:scale(2);transform-origin:center bottom;pointer-events:none}
+.garden-character span{display:block;font:15px Georgia;color:#e7d5fa;padding:14px;background:#10091bb0;border:1px solid #bf9ce466;border-radius:14px}
+.orb-jar{position:absolute;left:19%;top:48%;width:29%;height:23%;border:0;padding:0;background:transparent;border-radius:20%;z-index:3}
+.orb-jar:focus-visible{outline:2px solid #ffd083;outline-offset:4px}
+.orb-interior{position:absolute;left:12%;right:12%;top:26%;bottom:8%;overflow:hidden;border-radius:22% 22% 18% 18%}
+.collected-orb{position:absolute;width:var(--orb-size);height:var(--orb-size);margin-left:calc(var(--orb-size)/-2);border-radius:50%;background:radial-gradient(circle,#fffde0 0 16%,#ffe29a 30%,#ffb42f 55%,#ff861d 75%,transparent);box-shadow:0 0 8px 3px #ffb536bb,0 0 20px 7px #ff9b263f;animation:orbFloat var(--duration) ease-in-out var(--delay) infinite}
+/* Light ribbons follow each spark; sparse jars have longer, freer paths. */
+.collected-orb::before,.collected-orb::after{content:"";position:absolute;pointer-events:none;right:40%;top:30%;width:var(--trail);height:calc(var(--orb-size)*.65);border-radius:70% 15% 70% 40%;background:linear-gradient(90deg,transparent,#ffad4922 25%,#ffd88999 85%,#fff3c3cc);transform-origin:right center;filter:blur(1px);animation:wispCurl calc(var(--duration)*.55) ease-in-out var(--delay) infinite alternate}
+.collected-orb::after{top:45%;opacity:.5;height:calc(var(--orb-size)*.35);animation-direction:alternate-reverse;animation-delay:calc(var(--delay) - 1.3s)}
+@keyframes orbFloat{0%,100%{transform:translate(0,0)}25%{transform:translate(var(--drift),calc(var(--rise)*-.45))}50%{transform:translate(calc(var(--drift)*-.35),calc(var(--rise)*-1))}75%{transform:translate(calc(var(--drift)*-.7),calc(var(--rise)*-.35))}}
+@keyframes wispCurl{0%{transform:rotate(-28deg) scaleX(.65);opacity:.35}50%{opacity:.85}100%{transform:rotate(32deg) scaleX(1);opacity:.55}}
+.orb-counter{position:absolute;left:15%;top:72%;width:39%;padding:8px 0;border:0;background:transparent;z-index:4;color:#fff3dc;text-shadow:0 2px 6px #000,0 0 12px #000}
+.orb-counter b{font:34px Georgia,serif}.orb-counter span{font:14px Georgia,serif}.orb-counter small{display:block;margin-top:6px;font:12px Georgia,serif;color:#ddc9ef}
+@media(prefers-reduced-motion:reduce){.collected-orb,.collected-orb::before,.collected-orb::after{animation:none}}
+
+.garden-character::before{content:"";position:absolute;z-index:-1;left:12%;bottom:-1%;width:80%;height:5%;border-radius:50%;background:radial-gradient(ellipse,rgba(5,3,12,.8),transparent 70%);filter:blur(3px);pointer-events:none}
 </style>
 </head>
 <body>
@@ -798,6 +856,9 @@ function nextShopReset(){ var d=new Date(); d.setUTCHours(24,0,0,0); return d.ge
 /* ================= render: today ================= */
 /* the big headline: counts down to Halloween, then the end of Fortnitemares, then the next event */
 function headline(){
+  return {big:'November nights', sub:'A little magic after dark'};
+}
+function originalHeadline(){
   var t = new Date(); t.setHours(0,0,0,0);
   var days = function(d){ return Math.round((d - t)/86400000); };
   var n = days(new Date(t.getFullYear(), 9, 31));
@@ -948,6 +1009,17 @@ function costumeCard(){
     '<button class="costume" data-entry="'+esc(e.key)+'"><span class="art" style="'+bg+'">'+imgTag(e.img, e.name)+'</span>'+
     '<span class="tx"><span class="k">Costume of the day</span><b>'+esc(e.name)+'</b><span class="s">In today\'s shop · '+fmtNum(e.price)+' V-Bucks</span><span class="s">A new pick every day.</span></span></button></div>';
 }
+function gardenOrbs(caught,total){
+  var h='', cols=9, rows=Math.max(1,Math.ceil(total/cols));
+  var freedom=Math.pow(1-Math.min(1,caught/Math.max(1,total)),3);
+  for(var i=0;i<caught;i++){
+    var row=Math.floor(i/cols), col=i%cols, slots=Math.min(cols,caught-row*cols);
+    var x=slots===1?50:12+col*(76/Math.max(1,slots-1));
+    var y=8+row*(80/Math.max(1,rows-1));
+    h+='<i class="collected-orb" style="left:'+x+'%;bottom:'+y+'%;--drift:'+((i%2?1:-1)*(2+Math.min(x-6,94-x)*.35*freedom)).toFixed(2)+'px;--rise:'+(3+45*freedom).toFixed(2)+'px;--trail:'+(8+24*freedom).toFixed(2)+'px;--duration:'+(5.5+(i%7)*.43+2*(1-freedom)).toFixed(2)+'s;--delay:'+(-i*1.37)+'s;--orb-size:'+(caught<10?12:caught<40?8:5)+'px"></i>';
+  }
+  return h;
+}
 function renderToday(){
   var st = S.settings || {}, sk = st.skin;
   var noteHtml = '';
@@ -956,9 +1028,9 @@ function renderToday(){
     noteHtml = '<button type="button" id="openLetter" class="letter-icon '+(noteRead?'read':'unread')+'" aria-label="Open your personal letter" title="A little letter for you">'+ICON.letter+'</button>';
   }
   var hero = sk && sk.img
-    ? '<div class="list" style="gap:14px"><button class="hero" id="heroBtn" aria-label="Awaken lightning around '+esc(sk.name)+'">'+heroAtmosphere()+imgTag(sk.img, sk.name)+'</button>'+
+    ? '<div class="list" style="gap:14px"><button class="hero" id="heroBtn" aria-label="Awaken lightning around '+esc(sk.name)+'">'+heroAtmosphere()+'<span class="autumn-leaves" aria-hidden="true"><i></i><i></i><i></i></span>'+imgTag(sk.img, sk.name)+'</button>'+
       '<div class="hero-cap"><div><b>'+esc(sk.name)+'</b><span>go-to look</span></div><button class="hero-change" id="changeSkin" aria-label="Change go-to skin">Change</button></div></div>'
-    : '<button class="hero empty" id="heroBtn" aria-label="Pick your go-to skin">'+heroAtmosphere()+'<span class="hero-prompt">Tap to pick your go-to skin</span></button>';
+    : '<button class="hero empty" id="heroBtn" aria-label="Pick your go-to skin">'+heroAtmosphere()+'<span class="autumn-leaves" aria-hidden="true"><i></i><i></i><i></i></span>'+'<span class="hero-prompt">Tap to pick your go-to skin</span></button>';
 
   var hits = wishHits(), wishHtml;
   if(S.loading.shop && !S.shop) wishHtml = '<div class="grid2"><div class="skel" style="height:200px"></div><div class="skel" style="height:200px"></div></div>';
@@ -979,14 +1051,15 @@ function renderToday(){
     }).join('')+'</div>';
   } else if(S.loading.news){ newsHtml = '<div class="skel" style="height:220px"></div>'; }
 
-  var hl = headline();
-  return '<section class="view" id="v-today">'+skyHtml()+
-    '<div class="between" style="align-items:flex-start"><div class="hello" id="hello"><span class="who"><span class="nm">Hello Beautiful</span>'+
-      '<i class="gl g1">'+ICON.star+'</i><i class="gl g2">'+ICON.star+'</i><i class="gl g3">'+ICON.star+'</i><i class="gl g4">'+ICON.star+'</i>'+
-      '<span class="pumpkin">'+ICON.pumpkin+'</span>'+'</span>'+
-      '<h1>'+(hl.n!=null ? '<span class="n">'+hl.n+'</span> '+hl.unit : esc(hl.big))+'</h1>'+(hl.sub ? '<span class="sub">'+esc(hl.sub)+'</span>' : '')+'</div>'+
-    '<div class="header-actions"><button class="iconbtn" id="refreshAll" aria-label="Refresh">'+ICON.refresh+'</button>'+noteHtml+'</div></div>'+
-    playerStrip() + hero + (powerHourState().mode === 'none' ? '' : phCard()) + dropCard() + todayMinis() + costumeCard() +
+  var caught = ((S.spritesData && S.spritesData.sprites)||[]).filter(function(x){return S.got[x.id];}).length;
+  var total = ((S.spritesData && S.spritesData.sprites)||[]).length;
+  return '<section class="view" id="v-today"><div class="garden-scene">'+skyHtml()+
+    '<div class="garden-heading"><div class="hello" id="hello"><span class="who"><span class="nm">Hello Beautiful</span></span><h1>Moonlit Drop</h1><span class="sub">A little magic after dark</span></div></div>'+
+    '<div class="garden-actions"><button class="iconbtn" id="refreshAll" aria-label="Refresh">'+ICON.refresh+'</button>'+noteHtml+'</div>'+
+    '<button class="orb-jar" data-go="sprites" aria-label="Open sprite collection, '+caught+' of '+total+' collected"><span class="orb-interior" aria-hidden="true">'+gardenOrbs(caught,total)+'</span></button>'+
+    '<button class="orb-counter" data-go="sprites"><b>'+caught+'</b><span> / '+total+' collected</span><small>Tap to view your sprites</small></button>'+
+    '<button class="garden-character" id="changeSkin" aria-label="Change go-to skin">'+(sk && sk.img ? imgTag(sk.img,sk.name) : '<span>Choose your character</span>')+'</button></div>'+
+    playerStrip() + (powerHourState().mode === 'none' ? '' : phCard()) + dropCard() + todayMinis() + costumeCard() +
     (evHtml ? '<div class="list" style="gap:12px"><h2 class="rule">Coming up</h2>'+evHtml+'</div>' : '')+
     (newsHtml ? '<div class="list" style="gap:12px"><h2 class="rule">In the game now</h2>'+newsHtml+'</div>' : '')+
     '<div class="list" style="gap:12px"><div class="between" style="align-items:center"><h2 class="rule" style="flex:1">Wishlist in the shop</h2><button class="chip" data-go="shop" style="height:32px">See shop</button></div>'+wishHtml+'</div>'+
