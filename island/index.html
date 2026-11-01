@@ -596,6 +596,7 @@ var S = {
   statWin: 'season',
   shopFilter: 'all',
   spriteGroup: null,
+  spriteEra: 'current',
   jarOrder: load('jarOrder', []),            // cosmetic display order; never replaces saved catches
   spritesData: null, eventsData: null,
   err: {}, loading: {}
@@ -631,23 +632,50 @@ function getJSON(url, opts){
 }
 
 /* ================= data: local json ================= */
+function validSpriteCatalog(d){
+  if(!d || !Array.isArray(d.sprites) || !d.sprites.length || !Array.isArray(d.groups)) throw new Error('Invalid sprite catalog');
+  var ids={}; d.sprites.forEach(function(s){
+    if(!s || typeof s.id!=='string' || typeof s.name!=='string' || ids[s.id]) throw new Error('Invalid sprite entry');
+    ids[s.id]=true;
+  });
+  return d;
+}
+var catalogLoadedAt=0;
 function loadLocalData(){
-  var bust = '?v=' + Math.floor(Date.now()/3600000);
-  return Promise.all([
-    getJSON('data/sprites.json'+bust, {cache:'no-store'}).catch(function(){ return load('spritesData', null); }),
-    getJSON('data/events.json'+bust, {cache:'no-store'}).catch(function(){ return load('eventsData', null); })
+  var bust = '?v=' + Math.floor(Date.now()/300000);
+  var remote='https://raw.githubusercontent.com/zy65h95wjn-netizen/shop-fractions/main/island/data/sprites.json';
+  // Scheduled token commits do not build Pages. Read the current catalog directly;
+  // retain the newest good local/cache copy whenever the network is unavailable.
+  var catalog=Promise.all([
+    getJSON(remote+bust,{cache:'no-store',timeout:8000}).then(validSpriteCatalog).catch(function(){return null;}),
+    getJSON('data/sprites.json'+bust,{cache:'no-store'}).then(validSpriteCatalog).catch(function(){return null;})
+  ]).then(function(rows){
+    try{rows.push(validSpriteCatalog(load('spritesData',null)));}catch(e){}
+    rows=rows.filter(Boolean).sort(function(a,b){return String(b.lastChecked||b.updated||'').localeCompare(String(a.lastChecked||a.updated||''));});
+    return rows[0]||null;
+  });
+  return Promise.all([catalog,
+    getJSON('data/events.json'+bust,{cache:'no-store'}).catch(function(){return load('eventsData',null);})
   ]).then(function(r){
-    S.spritesData = r[0]; S.eventsData = r[1];
-    // Existing collections predate the animated jar. Show their real catches
-    // immediately without rewriting the saved sprites or requiring setup.
-    if(S.spritesData && (!Array.isArray(S.jarOrder) || !S.jarOrder.length)){
-      S.jarOrder = S.spritesData.sprites.filter(function(s){ return S.got[s.id]; }).map(function(s){return s.id;});
+    S.spritesData=r[0]; S.eventsData=r[1]; catalogLoadedAt=Date.now();
+    if(S.spritesData && (!Array.isArray(S.jarOrder)||!S.jarOrder.length)){
+      S.jarOrder=S.spritesData.sprites.filter(function(s){return S.got[s.id];}).map(function(s){return s.id;});
       save('jarOrder',S.jarOrder);
     }
-    if(r[0]) save('spritesData', r[0]);
-    if(r[1]) save('eventsData', r[1]);
+    if(r[0]) save('spritesData',r[0]);
+    if(r[1]) save('eventsData',r[1]);
   });
 }
+function catalogStatus(){
+  var d=S.spritesData||{}, t=Date.parse(d.lastChecked||'');
+  if(!isFinite(t)||Date.now()-t>24*3600000) return '<span class="fine" style="color:var(--ember)">Sprite updates delayed · showing the last saved list.</span>';
+  return '<span class="fine">Catalog checked '+esc(ago(t))+' · checks every 6 hours</span>';
+}
+document.addEventListener('visibilitychange',function(){
+  if(!document.hidden && Date.now()-catalogLoadedAt>15*60000){
+    loadLocalData().then(function(){rerender(['today','sprites']);});
+  }
+});
 
 /* ================= data: shop ================= */
 function normShop(d){
@@ -835,7 +863,7 @@ function playerStrip(){
 }
 /* this week's drop: the newest set of sprites (variants land as whole sets, usually Thursdays) */
 function dropSet(){
-  var d = S.spritesData, dated = ((d && d.sprites) || []).filter(function(s){ return s.added; });
+  var d = S.spritesData, dated = ((d && d.sprites) || []).filter(function(s){ return s.added && !s.archived && s.available!==false; });
   if(!dated.length) return null;
   var last = dated.reduce(function(m, s){ return s.added > m ? s.added : m; }, ''), tally = {};
   dated.forEach(function(s){ if(s.added === last) tally[s.group] = (tally[s.group]||0) + 1; });
@@ -845,7 +873,7 @@ function dropSet(){
   var g = (d.groups||[]).filter(function(x){ return x.id === grp; })[0] || {};
   var ev = ((S.eventsData && S.eventsData.events) || []).filter(function(x){ return x.kind === 'sprites' && x.date === last; })[0];
   return {group:mixed ? 'all' : grp, g:mixed ? {} : g, date:D,
-    name:mixed && ev ? ev.name.replace(/\s+Sprites?$/i, '') : null,
+    name:mixed ? (ev ? ev.name.replace(/\s+Sprites?$/i, '') : d.season) : null,
     sprites:mixed ? dated.filter(function(s){ return s.added === last; }) :
       dated.filter(function(s){ return s.group === grp && localDate(s.added).getTime() >= from; })};
 }
@@ -861,7 +889,7 @@ function nextDropLine(){
     var k = Math.round((nx.d - t)/86400000);
     return 'Next drop · <b>'+esc(nx.name.replace(/\s+Sprites?$/i, ''))+'</b> · '+(k <= 0 ? 'today' : k === 1 ? 'tomorrow' : 'in '+k+' days');
   }
-  return 'New sprites usually land on <b>Thursdays</b>';
+  return 'New releases appear after the next catalog check';
 }
 function dropCard(){
   var x = dropSet(); if(!x || !x.sprites.length) return '';
@@ -915,7 +943,7 @@ function celebrateSet(card){
 function todayMinis(){
   var c = spriteCounts(), all = c.all, nw = all.filter(isNewSprite).length;
   var shop = '<button class="mini" data-go="shop"><span class="k">New shop in</span><b data-reset>'+dur(nextShopReset()-Date.now())+'</b><span class="s">Resets at '+new Date(nextShopReset()).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'})+'</span></button>';
-  var spr = all.length ? '<button class="mini" data-go="sprites"><span class="k">Sprites</span><b>'+c.got+'<small> / '+all.length+'</small></b><span class="bar"><i style="width:'+c.pct.toFixed(1)+'%"></i></span><span class="s">'+(c.left ? c.left+' still out there' : 'Every last one.')+'</span></button>' : '';
+  var spr = all.length ? '<button class="mini" data-go="sprites"><span class="k">Sprites</span><b>'+c.got+'<small> / '+all.length+'</small></b><span class="bar"><i style="width:'+c.pct.toFixed(1)+'%"></i></span><span class="s">'+(c.left ? c.left+' not marked in your collection' : 'Every last one.')+'</span></button>' : '';
   return '<div class="grid2">'+shop+spr+'</div>';
 }
 function gardenOrbs(caught,total){
@@ -1030,7 +1058,7 @@ function renderShop(){
 /* ================= render: sprites ================= */
 var GROUP_COLOR = {season:'#B98CFF', gold:'#F4C95D', cheat:'#E08BFF', hacker:'#7BE3A6', bounty:'#FF7A7A', tot:'#FF9446'};
 function spriteColor(s){ return GROUP_COLOR[s.group] || '#B98CFF'; }
-function isNewSprite(s){ return s.added && (Date.now()-localDate(s.added).getTime()) < 7*86400000; }
+function isNewSprite(s){ var age=s.added ? Date.now()-localDate(s.added).getTime() : -1; return !s.archived && s.available!==false && age>=0 && age<7*86400000; }
 function shortName(n){ return String(n||'').replace(/\s+Sprite$/,''); }
 function spriteArt(s){
   return (s.img ? '<img src="'+esc(s.img)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" draggable="false" onload="this.classList.add(\'ok\')" onerror="this.remove()">' : '')+ICON.wisp;
@@ -1076,22 +1104,28 @@ function spriteCounts(){
   var all = (S.spritesData && S.spritesData.sprites) || [], got = all.filter(function(s){ return S.got[s.id]; }).length;
   return {all:all, got:got, left:all.length-got, pct: all.length ? got/all.length*100 : 0};
 }
+function scopedSprites(){
+  return ((S.spritesData&&S.spritesData.sprites)||[]).filter(function(s){
+    return S.spriteEra==='archive' ? !!s.archived || s.available===false : !s.archived && s.available!==false;
+  });
+}
 function renderSprites(){
   var d = S.spritesData;
   if(!d) return '<section class="view"><h1>Sprites</h1><div class="empty">Couldn\'t load the sprite list.<button class="btn" data-retry="local">Try again</button></div></section>';
-  var groups = d.groups || [];
+  var groups = (d.groups || []).filter(function(g){return scopedSprites().some(function(s){return s.group===g.id;});});
   if(!S.spriteGroup) S.spriteGroup = 'all';
-  var c = spriteCounts(), all = c.all;
+  var c = spriteCounts(), all = scopedSprites(), scopedGot=all.filter(function(s){return S.got[s.id];}).length;
   var newCount = all.filter(isNewSprite).length;
   var list = S.spriteGroup==='all' ? all : S.spriteGroup==='todo' ? all.filter(function(s){ return !S.got[s.id]; }) : S.spriteGroup==='got' ? all.filter(function(s){ return S.got[s.id]; }) : all.filter(function(s){ return s.group===S.spriteGroup; });
-  var chipDefs = [['todo','Still need',c.left],['all','All',all.length]].concat(groups.map(function(g){ return [g.id, g.name, all.filter(function(s){return s.group===g.id;}).length]; })).concat([['got','Caught',c.got]]);
+  var chipDefs = [['todo','Still need',all.length-scopedGot],['all','All',all.length]].concat(groups.map(function(g){ return [g.id, g.name, all.filter(function(s){return s.group===g.id;}).length]; })).concat([['got','Caught',scopedGot]]);
   var upd = d.updated ? localDate(d.updated).toLocaleDateString([], {month:'short', day:'numeric'}) : '';
   var hintOn = !load('holdHintSeen', false);
   return '<section class="view" id="v-sprites"><div style="display:flex;flex-direction:column;gap:2px"><span class="muted" style="font-size:15px">'+esc(d.season||'')+'</span><h1>Sprites</h1></div>'+
-    '<div class="jar-row"><button class="jar-btn" id="jarBtn" aria-pressed="'+(S.spriteGroup==='got')+'" aria-label="Show the sprites I\'ve caught">'+jarSvg(c.pct)+'</button>'+'<div class="jar-txt"><span class="big" id="spCount">'+c.got+'<small> / '+all.length+'</small></span>'+
-      '<span class="sub" id="spLeft">'+(c.left ? c.left+' still out there' : 'Every last one.')+'</span>'+
-      '<span class="fine">Little Sprites drift inside. Every catch makes the jar glow.</span><span class="fine">Tap to catch. Hold for its card. Tap the jar to see your catch.</span>'+
+    '<div class="jar-row"><button class="jar-btn" id="jarBtn" aria-pressed="'+(S.spriteGroup==='got')+'" aria-label="Show the sprites I\'ve caught">'+jarSvg(c.pct)+'</button>'+'<div class="jar-txt"><span class="big" id="spCount">'+c.got+'<small> / '+c.all.length+'</small></span>'+
+      '<span class="sub" id="spLeft">'+(c.left ? c.left+' not marked in your collection' : 'Every last one.')+'</span>'+
+      '<span class="fine">Your jar keeps catches from every season.</span><span class="fine">Tap to catch. Hold for its card. Tap the jar to see your catch.</span>'+
       '<span class="fine">'+(upd?'List updated '+esc(upd):'')+(newCount?(upd?', ':'')+newCount+' new this week':'')+'</span></div></div>'+
+    catalogStatus()+'<div class="chips"><button class="chip" data-era="current" aria-pressed="'+(S.spriteEra==='current')+'">'+esc(d.season||'Current season')+'</button><button class="chip" data-era="archive" aria-pressed="'+(S.spriteEra==='archive')+'">Past collection</button></div>'+
     '<div class="chips">'+chipDefs.map(function(cd){ return '<button class="chip" data-sgroup="'+cd[0]+'" aria-pressed="'+(S.spriteGroup===cd[0])+'">'+esc(cd[1])+'<span class="n">'+cd[2]+'</span></button>'; }).join('')+'</div>'+
     (list.length ? '<div class="sgrid">'+list.map(function(s, i){
       var g = !!S.got[s.id];
@@ -1109,14 +1143,20 @@ function syncJarSouls(){
 }
 function updateSpriteCount(deferJar){
   var c = spriteCounts(), x;
+  if((x=$('.orb-interior'))) x.innerHTML=gardenOrbs(c.got,c.all.length);
+  if((x=$('.orb-counter b'))) x.textContent=String(c.got);
+  if((x=$('.orb-jar'))) x.setAttribute('aria-label','Open sprite collection, '+c.got+' of '+c.all.length+' collected');
+  if((x=$('.mini[data-go="sprites"] b'))) x.innerHTML=c.got+'<small> / '+c.all.length+'</small>';
+  if((x=$('.mini[data-go="sprites"] .s'))) x.textContent=c.left+' not marked in your collection';
+  if((x=$('.mini[data-go="sprites"] .bar i'))) x.style.width=c.pct.toFixed(1)+'%';
   if((x=$('#spCount'))) x.innerHTML = c.got+'<small> / '+c.all.length+'</small>';
-  if((x=$('#spLeft'))) x.textContent = c.left ? c.left+' still out there' : 'Every last one.';
+  if((x=$('#spLeft'))) x.textContent = c.left ? c.left+' not marked in your collection' : 'Every last one.';
   if((x=$('#jarFill'))){ var h = 74*c.pct/100; x.setAttribute('y', (104-h).toFixed(1)); x.setAttribute('height', (h+20).toFixed(1)); }
   if(!deferJar) syncJarSouls();
   $$('.chip[data-sgroup]').forEach(function(b){
     var k=b.dataset.sgroup, n=$('.n',b);
-    if(n && k==='got') n.textContent=String(c.got);
-    if(n && k==='todo') n.textContent=String(c.left);
+    if(n && k==='got') n.textContent=String(scopedSprites().filter(function(s){return S.got[s.id];}).length);
+    if(n && k==='todo') n.textContent=String(scopedSprites().filter(function(s){return !S.got[s.id];}).length);
   });
 }
 function rememberCatch(id){
@@ -1369,11 +1409,12 @@ function bindView(){
   }; });
   $$('[data-entry]').forEach(function(t){ t.onclick = function(){ openEntry(t.dataset.entry); }; });
   $$('[data-filter]').forEach(function(b){ b.onclick = function(){ S.shopFilter=b.dataset.filter; render(); }; });
+  $$('[data-era]').forEach(function(b){b.onclick=function(){S.spriteEra=b.dataset.era;S.spriteGroup='all';render();};});
   $$('[data-sgroup]').forEach(function(b){ b.onclick = function(){ S.spriteGroup=b.dataset.sgroup; render(); }; });
   var jb = $('#jarBtn'); if(jb) jb.onclick = function(){ S.spriteGroup = S.spriteGroup==='got' ? 'all' : 'got'; render(); };
   bindSpriteGrid();
   var dr = $('.drop-row'); if(dr) bindSpriteGrid(dr);
-  $$('[data-dropgroup]').forEach(function(b){ b.onclick = function(){ S.spriteGroup = b.dataset.dropgroup; go('sprites'); }; });
+  $$('[data-dropgroup]').forEach(function(b){ b.onclick = function(){ S.spriteEra='current'; S.spriteGroup = b.dataset.dropgroup; go('sprites'); }; });
   $$('[data-win]').forEach(function(b){ b.onclick = function(){ S.statWin=b.dataset.win; render(); fetchStats(S.statWin); }; });
   $$('[data-news]').forEach(function(b){ b.onclick = function(){ openNews(+b.dataset.news); }; });
   var x;
@@ -1385,7 +1426,7 @@ function bindView(){
   if((x=$('#openSetup2'))) x.onclick = function(){ openSetup(false); };
   if((x=$('#refreshAll'))) x.onclick = function(){
     x.style.transition='transform .6s'; x.style.transform='rotate(360deg)';
-    Promise.all([loadLocalData(), fetchShop(true), fetchNews(true)]).then(function(){ render(); toast('Up to date'); });
+    Promise.all([loadLocalData(), fetchShop(true), fetchNews(true)]).then(function(){ render(); toast(S.spritesData && S.spritesData.lastChecked && Date.now()-Date.parse(S.spritesData.lastChecked)<86400000 ? 'Refreshed' : 'Refreshed · sprite updates delayed'); });
   };
   if((x=$('#openLetter'))) x.onclick = openNote;
   if((x=$('#hello'))) bindLongPress(x);
