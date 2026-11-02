@@ -8,6 +8,7 @@ on:
     paths:
       - scripts/sync_sprites.py
       - scripts/test_sync_sprites.py
+      - island/data/sprite-details.json
       - .github/workflows/sprite-catalog.yml
 permissions:
   contents: write

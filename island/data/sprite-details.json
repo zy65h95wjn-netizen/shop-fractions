@@ -1,0 +1,32 @@
+{
+  "reviewed": "2026-11-02",
+  "seasons": {
+    "5": {
+      "sources": [
+        "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+        "https://www.fnsprites.info/sprite-info.js",
+        "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+      ],
+      "finding": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+      "variants": {
+        "Fortune": {"bonus": "Highlights chests close to you, in addition to the base ability."},
+        "Cursed": {"bonus": "Improves rare-variant odds. Being in water deals damage while this Sprite is equipped."},
+        "Gold": {"bonus": "Adds elimination XP for your Sprite."}
+      },
+      "families": {
+        "halfpeeld": {"does": "Shows elimination locations on your map.", "levels": "Each level expands its detection radius."},
+        "repete": {"does": "Speeds up reloading; some reloads return ammunition."},
+        "barryofish": {"does": "Lowers stamina use when sprinting through water.", "levels": "At maximum level, also provides Slap."},
+        "wayfinder": {"does": "Detects nearby Sprites and improves buried-chest loot."},
+        "kelper": {"does": "Heals you gradually while you are in water.", "levels": "Higher levels restore more health."},
+        "exmarks": {"does": "Locates Wanted Posters and Treasure Maps.", "levels": "At maximum level, produces a Treasure Map."},
+        "plundarrgh": {"does": "Chest openings boost movement and pickaxe speed."},
+        "lilsquibbly": {"does": "Leaping into a fishing hole catches fish and extra loot."},
+        "lilflacko": {"does": "Landing sends out a shockwave that pushes enemies away.", "findingExtra": "Another route: defeat A$AP Rocky on The $.$. Rocky for a chance at his Lil' Flacko drop."},
+        "chester": {"does": "Prevents fall damage and can add loot to chests."},
+        "sweetdreams": {"does": "Level-ups give random loot; the maximum level releases Mythic items."},
+        "transpondersnail": {"does": "Item pickups yield extra resources. Teammates carrying this Sprite also receive a share.", "levels": "The resource bonus grows as it levels up."}
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-01",
+ "updated": "2026-11-02",
  "season": "Treasure Hunters",
  "groups": [
   {
@@ -42,12 +42,14 @@
   {
    "id": "fn-s5-fortune",
    "name": "Fortune",
-   "sourceSeason": 5
+   "sourceSeason": 5,
+   "bonus": "Highlights chests close to you, in addition to the base ability."
   },
   {
    "id": "fn-s5-cursed",
    "name": "Cursed",
-   "sourceSeason": 5
+   "sourceSeason": 5,
+   "bonus": "Improves rare-variant odds. Being in water deals damage while this Sprite is equipped."
   }
  ],
  "sprites": [
@@ -2236,9 +2238,17 @@
    "sourceId": "halfpeeld_basic",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/halfpeeld_basic.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Shows elimination locations on your map.",
+   "levels": "Each level expands its detection radius.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-halfpeeld_fortune",
@@ -2249,9 +2259,17 @@
    "sourceId": "halfpeeld_fortune",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/halfpeeld_fortune.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Shows elimination locations on your map.",
+   "levels": "Each level expands its detection radius.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-halfpeeld_cursed",
@@ -2262,9 +2280,17 @@
    "sourceId": "halfpeeld_cursed",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/halfpeeld_cursed.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Shows elimination locations on your map.",
+   "levels": "Each level expands its detection radius.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-repete_basic",
@@ -2275,9 +2301,16 @@
    "sourceId": "repete_basic",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/repete_basic.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Speeds up reloading; some reloads return ammunition.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-repete_fortune",
@@ -2288,9 +2321,16 @@
    "sourceId": "repete_fortune",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/repete_fortune.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Speeds up reloading; some reloads return ammunition.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-repete_cursed",
@@ -2301,9 +2341,16 @@
    "sourceId": "repete_cursed",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/repete_cursed.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Speeds up reloading; some reloads return ammunition.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-barryofish_basic",
@@ -2314,9 +2361,17 @@
    "sourceId": "barryofish_basic",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/barryofish_basic.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Lowers stamina use when sprinting through water.",
+   "levels": "At maximum level, also provides Slap.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-barryofish_fortune",
@@ -2327,9 +2382,17 @@
    "sourceId": "barryofish_fortune",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/barryofish_fortune.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Lowers stamina use when sprinting through water.",
+   "levels": "At maximum level, also provides Slap.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-barryofish_cursed",
@@ -2340,9 +2403,17 @@
    "sourceId": "barryofish_cursed",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/barryofish_cursed.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Lowers stamina use when sprinting through water.",
+   "levels": "At maximum level, also provides Slap.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-wayfinder_basic",
@@ -2353,9 +2424,16 @@
    "sourceId": "wayfinder_basic",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/wayfinder_basic.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Detects nearby Sprites and improves buried-chest loot.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-wayfinder_fortune",
@@ -2366,9 +2444,16 @@
    "sourceId": "wayfinder_fortune",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/wayfinder_fortune.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Detects nearby Sprites and improves buried-chest loot.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-wayfinder_cursed",
@@ -2379,9 +2464,16 @@
    "sourceId": "wayfinder_cursed",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/wayfinder_cursed.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Detects nearby Sprites and improves buried-chest loot.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-kelper_basic",
@@ -2392,9 +2484,17 @@
    "sourceId": "kelper_basic",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/kelper_basic.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Heals you gradually while you are in water.",
+   "levels": "Higher levels restore more health.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-kelper_fortune",
@@ -2405,9 +2505,17 @@
    "sourceId": "kelper_fortune",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/kelper_fortune.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Heals you gradually while you are in water.",
+   "levels": "Higher levels restore more health.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-kelper_cursed",
@@ -2418,9 +2526,17 @@
    "sourceId": "kelper_cursed",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/kelper_cursed.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Heals you gradually while you are in water.",
+   "levels": "Higher levels restore more health.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-exmarks_basic",
@@ -2431,9 +2547,17 @@
    "sourceId": "exmarks_basic",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/exmarks_basic.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Locates Wanted Posters and Treasure Maps.",
+   "levels": "At maximum level, produces a Treasure Map.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-exmarks_fortune",
@@ -2444,9 +2568,17 @@
    "sourceId": "exmarks_fortune",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/exmarks_fortune.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Locates Wanted Posters and Treasure Maps.",
+   "levels": "At maximum level, produces a Treasure Map.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-exmarks_cursed",
@@ -2457,9 +2589,17 @@
    "sourceId": "exmarks_cursed",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/exmarks_cursed.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Locates Wanted Posters and Treasure Maps.",
+   "levels": "At maximum level, produces a Treasure Map.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-plundarrgh_basic",
@@ -2470,9 +2610,16 @@
    "sourceId": "plundarrgh_basic",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/plundarrgh_basic.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Chest openings boost movement and pickaxe speed.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-plundarrgh_fortune",
@@ -2483,9 +2630,16 @@
    "sourceId": "plundarrgh_fortune",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/plundarrgh_fortune.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Chest openings boost movement and pickaxe speed.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-plundarrgh_cursed",
@@ -2496,9 +2650,16 @@
    "sourceId": "plundarrgh_cursed",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/plundarrgh_cursed.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Chest openings boost movement and pickaxe speed.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-lilsquibbly_basic",
@@ -2509,9 +2670,16 @@
    "sourceId": "lilsquibbly_basic",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/lilsquibbly_basic.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Leaping into a fishing hole catches fish and extra loot.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-lilsquibbly_fortune",
@@ -2522,9 +2690,16 @@
    "sourceId": "lilsquibbly_fortune",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/lilsquibbly_fortune.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Leaping into a fishing hole catches fish and extra loot.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-lilsquibbly_cursed",
@@ -2535,9 +2710,16 @@
    "sourceId": "lilsquibbly_cursed",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/lilsquibbly_cursed.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Leaping into a fishing hole catches fish and extra loot.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-lilflacko_basic",
@@ -2548,9 +2730,16 @@
    "sourceId": "lilflacko_basic",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/lilflacko_basic.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random. Another route: defeat A$AP Rocky on The $.$. Rocky for a chance at his Lil' Flacko drop.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Landing sends out a shockwave that pushes enemies away.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-lilflacko_fortune",
@@ -2561,9 +2750,16 @@
    "sourceId": "lilflacko_fortune",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/lilflacko_fortune.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random. Another route: defeat A$AP Rocky on The $.$. Rocky for a chance at his Lil' Flacko drop.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Landing sends out a shockwave that pushes enemies away.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-lilflacko_cursed",
@@ -2574,9 +2770,16 @@
    "sourceId": "lilflacko_cursed",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/lilflacko_cursed.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random. Another route: defeat A$AP Rocky on The $.$. Rocky for a chance at his Lil' Flacko drop.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Landing sends out a shockwave that pushes enemies away.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-chester_basic",
@@ -2587,9 +2790,16 @@
    "sourceId": "chester_basic",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/chester_basic.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Prevents fall damage and can add loot to chests.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-chester_fortune",
@@ -2600,9 +2810,16 @@
    "sourceId": "chester_fortune",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/chester_fortune.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Prevents fall damage and can add loot to chests.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-chester_cursed",
@@ -2613,9 +2830,16 @@
    "sourceId": "chester_cursed",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/chester_cursed.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Prevents fall damage and can add loot to chests.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-sweetdreams_basic",
@@ -2626,9 +2850,16 @@
    "sourceId": "sweetdreams_basic",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/sweetdreams_basic.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Level-ups give random loot; the maximum level releases Mythic items.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-transpondersnail_basic",
@@ -2639,13 +2870,21 @@
    "sourceId": "transpondersnail_basic",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/transpondersnail_basic.png",
-   "how": "See the current in-game collection for locations and unlock requirements.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Item pickups yield extra resources. Teammates carrying this Sprite also receive a share.",
+   "levels": "The resource bonus grows as it levels up.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   }
  ],
  "currentSeason": 5,
- "lastChecked": "2026-11-02T06:25:21+00:00",
+ "lastChecked": "2026-11-02T18:21:12+00:00",
  "source": "https://www.fnsprites.info/",
  "schemaVersion": 2
 }

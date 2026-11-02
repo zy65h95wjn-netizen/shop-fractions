@@ -31,3 +31,11 @@ with a new lastChecked timestamp after reviewing a rollback. Never reset saves.
 The event calendar is separately curated from Epic's announcement. Dates are
 release windows, not promises of a particular sprite. The old Thursday rule
 has been removed. Future event calendars still require verified updates.
+
+Card abilities and finding instructions are reviewed separately in
+`sprite-details.json`. The updater applies these family facts to every finish
+on every run, including entries already present in the catalog. Variant bonuses
+are applied to the matching groups. New families require factual review before
+this file is extended; the release feed alone does not verify their abilities.
+The review date and source URLs are included with the resulting card metadata.
+Do not replace reviewed abilities with feed placeholders during a release sync.

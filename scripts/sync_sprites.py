@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://www.fnsprites.info/'
 CATALOG = ROOT / 'island/data/sprites.json'
+DETAILS = ROOT / 'island/data/sprite-details.json'
 
 def fetch(path):
     req = urllib.request.Request(BASE + path, headers={'User-Agent': 'MoonlitDrop-CatalogSync/1.0'})
@@ -38,7 +39,42 @@ def parse_catalog(text, season):
         raise ValueError('Unexpected catalog size')
     return rows
 
-def merge(old, rows, releases, now, season=5, title='Treasure Hunters'):
+def apply_details(out, details):
+    """Apply reviewed family facts to every finish, including existing entries."""
+    if not isinstance(details, dict) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', details.get('reviewed','')):
+        raise ValueError('Missing detail review date')
+    seasons = details.get('seasons')
+    if not isinstance(seasons,dict):
+        raise ValueError('Invalid reviewed details')
+    for group in out['groups']:
+        season = seasons.get(str(group.get('sourceSeason')), {})
+        variant = season.get('variants',{}).get(group['name'])
+        if variant:
+            if not isinstance(variant.get('bonus'),str) or not variant['bonus']:
+                raise ValueError('Missing variant bonus')
+            group['bonus'] = variant['bonus']
+    for sprite in out['sprites']:
+        season = seasons.get(str(sprite.get('sourceSeason')), {})
+        family = sprite.get('sourceId','').rsplit('_',1)[0]
+        facts = season.get('families',{}).get(family)
+        if not facts:
+            continue
+        for key in ('does',):
+            if not isinstance(facts.get(key),str) or not 1<=len(facts[key])<=600:
+                raise ValueError('Invalid reviewed ability')
+        finding = season.get('finding')
+        if not isinstance(finding,str) or not finding:
+            raise ValueError('Missing finding instructions')
+        sprite['does'] = facts['does']
+        if facts.get('levels'):
+            sprite['levels'] = facts['levels']
+        else:
+            sprite.pop('levels',None)
+        sprite['how'] = finding + (' '+facts['findingExtra'] if facts.get('findingExtra') else '')
+        sprite['infoReviewed'] = details['reviewed']
+        sprite['infoSources'] = season['sources']
+
+def merge(old, rows, releases, now, season=5, title='Treasure Hunters', details=None):
     if not isinstance(releases.get('releasedIds'),list) or not isinstance(releases.get('unreleasedIds'),list):
         raise ValueError('Invalid release override payload')
     released, hidden = set(releases['releasedIds']), set(releases['unreleasedIds'])
@@ -73,9 +109,11 @@ def merge(old, rows, releases, now, season=5, title='Treasure Hunters'):
             s = {'id':ident,'name':r['name']+' Sprite','group':group,'rarity':r['rarity'].lower(),
                  'added':now[:10], 'sourceId':r['id'],'sourceSeason':season,
                  'img':BASE+'spriteimg/'+r['id']+'.png',
-                 'how':'See the current in-game collection for locations and unlock requirements.'}
+                 'how':'Finding instructions are awaiting verification.'}
             out['sprites'].append(s); existing[ident]=s
         existing[ident].update(archived=False,available=True)
+    if details is not None:
+        apply_details(out, details)
     if not set(s['id'] for s in old['sprites']).issubset(existing):
         raise ValueError('Collection IDs lost')
     out.update(season=title,currentSeason=season,lastChecked=now,
@@ -96,7 +134,7 @@ def main():
     rows = parse_catalog(fetch('sprites-data-s'+str(season)+'.js'),season)
     releases = json.loads(fetch('api/releases.php'))
     old = json.loads(CATALOG.read_text())
-    out = merge(old,rows,releases,datetime.now(timezone.utc).isoformat(timespec='seconds'),season,name[1])
+    out = merge(old,rows,releases,datetime.now(timezone.utc).isoformat(timespec='seconds'),season,name[1],details=json.loads(DETAILS.read_text()))
     tmp = CATALOG.with_suffix('.tmp')
     tmp.write_text(json.dumps(out,ensure_ascii=False,indent=1)+'\n')
     tmp.replace(CATALOG)
