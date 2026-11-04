@@ -203,7 +203,7 @@ body{
 <script>
 (function(){
 "use strict";
-const VERSION = "v10";
+const VERSION = "v11";
 
 /* iPhone home-screen apps lay the page out shorter than the screen (by about the status bar height),
    which leaves dead space at the bottom. Measure the shortfall and stretch the page to cover it. */
@@ -322,33 +322,51 @@ const S = { t: [], done: false, res: null, ex: null, pk: null, expr: "", ans: nu
 try { if (localStorage.getItem("sf-angle") === "rad") S.deg = false; } catch (e) {}
 S.basic = false;
 try { if (localStorage.getItem("sf-sci-pad") === "basic") S.basic = true; } catch (e) {}
-const SYN = "Check the expression";
+// Results and errors follow a TI-83 Plus: 14-digit internal rounding, 10 digits shown,
+// no leading zero, E notation at 1E10+ or below .001, powers left to right, ERR: messages.
+const SYN = "ERR:SYNTAX", DIV0 = "ERR:DIVIDE BY 0", DOMAIN = "ERR:DOMAIN", NONREAL = "ERR:NONREAL ANS", OVER = "ERR:OVERFLOW";
 const FN_LABEL = { sin: "sin", cos: "cos", tan: "tan", asin: "sin⁻¹", acos: "cos⁻¹", atan: "tan⁻¹",
   ln: "ln", log: "log", sqrt: "√", cbrt: "∛", exp: "e^", p10: "10^" };
 const sLast = () => S.t[S.t.length - 1];
 function sWantsOperand(){ const l = sLast(); return !l || l.k === "op" || l.k === "(" || l.k === "fn"; }
 function sEndsOperand(){ const l = sLast(); return !!l && (l.k === "num" || l.k === "c" || l.k === ")" || l.k === "post"); }
 function sOpen(t){ let n = 0; t.forEach(x => { if (x.k === "(") n++; else if (x.k === ")") n--; }); return n; }
+function r14(v){
+  if (!Number.isFinite(v)) throw Number.isNaN(v) ? DOMAIN : OVER;
+  if (v === 0 || Math.abs(v) < 1e-99) return 0;
+  if (Math.abs(v) >= 1e100) throw OVER;
+  return Number(v.toPrecision(14));
+}
+function trig(v){ v = r14(v); return Math.abs(v) < 1e-13 ? 0 : v; }
 function sFn(name, x){
   const R = S.deg ? Math.PI / 180 : 1;
   switch (name) {
-    case "sin": return S.deg && x % 180 === 0 ? 0 : Math.sin(x * R);
-    case "cos": return S.deg && (x - 90) % 180 === 0 ? 0 : Math.cos(x * R);
+    case "sin": return S.deg && x % 180 === 0 ? 0 : trig(Math.sin(x * R));
+    case "cos": return S.deg && (x - 90) % 180 === 0 ? 0 : trig(Math.cos(x * R));
     case "tan":
       if (S.deg && x % 180 === 0) return 0;
-      if (S.deg && (x - 90) % 180 === 0) throw "tan of " + x + "° is undefined";
-      return Math.tan(x * R);
-    case "asin": if (Math.abs(x) > 1) throw "sin⁻¹ needs −1 to 1"; return Math.asin(x) / R;
-    case "acos": if (Math.abs(x) > 1) throw "cos⁻¹ needs −1 to 1"; return Math.acos(x) / R;
-    case "atan": return Math.atan(x) / R;
-    case "ln": if (x <= 0) throw "ln needs a number above 0"; return Math.log(x);
-    case "log": if (x <= 0) throw "log needs a number above 0"; return Math.log10(x);
-    case "sqrt": if (x < 0) throw "Can't take √ of a negative"; return Math.sqrt(x);
-    case "cbrt": return Math.cbrt(x);
-    case "exp": return Math.exp(x);
-    case "p10": return Math.pow(10, x);
+      if (S.deg && (x - 90) % 180 === 0) throw DOMAIN;
+      return trig(Math.tan(x * R));
+    case "asin": if (Math.abs(x) > 1) throw DOMAIN; return r14(Math.asin(x) / R);
+    case "acos": if (Math.abs(x) > 1) throw DOMAIN; return r14(Math.acos(x) / R);
+    case "atan": return r14(Math.atan(x) / R);
+    case "ln": if (x === 0) throw DOMAIN; if (x < 0) throw NONREAL; return r14(Math.log(x));
+    case "log": if (x === 0) throw DOMAIN; if (x < 0) throw NONREAL; return r14(Math.log10(x));
+    case "sqrt": if (x < 0) throw NONREAL; return r14(Math.sqrt(x));
+    case "cbrt": return r14(Math.cbrt(x));
+    case "exp": return r14(Math.exp(x));
+    case "p10": return r14(Math.pow(10, x));
   }
   throw SYN;
+}
+function sPow(b, e){
+  if (b === 0) { if (e === 0) throw DOMAIN; if (e < 0) throw DIV0; return 0; }
+  if (b < 0 && !Number.isInteger(e)) {
+    const q = Math.round(1 / e); // odd roots of negatives are real on a TI: (−8)^(1/3) = −2
+    if (Math.abs(1 / e - q) < 1e-9 && q % 2 !== 0) return r14(-Math.pow(-b, e));
+    throw NONREAL;
+  }
+  return r14(Math.pow(b, e));
 }
 function sEval(t){
   let i = 0;
@@ -356,7 +374,7 @@ function sEval(t){
   const isOp = (p, s) => p && p.k === "op" && s.includes(p.s);
   function expr(){
     let v = term();
-    while (isOp(peek(), "+−")) { const o = t[i++].s, r = term(); v = o === "+" ? v + r : v - r; }
+    while (isOp(peek(), "+−")) { const o = t[i++].s, r = term(); v = r14(o === "+" ? v + r : v - r); }
     return v;
   }
   function term(){
@@ -365,8 +383,8 @@ function sEval(t){
       const p = peek();
       if (isOp(p, "×÷")) {
         i++; const r = unary();
-        if (p.s === "÷") { if (r === 0) throw "Can't divide by zero"; v /= r; } else v *= r;
-      } else if (p && (p.k === "num" || p.k === "c" || p.k === "fn" || p.k === "(")) v *= unary(); // 2π, 3(4), 2√(9)
+        if (p.s === "÷") { if (r === 0) throw DIV0; v = r14(v / r); } else v = r14(v * r);
+      } else if (p && (p.k === "num" || p.k === "c" || p.k === "fn" || p.k === "(")) v = r14(v * unary()); // 2π, 3(4), 2√(9)
       else break;
     }
     return v;
@@ -377,30 +395,33 @@ function sEval(t){
     if (isOp(p, "+")) { i++; return unary(); }
     return power();
   }
-  function power(){
-    const b = post();
-    if (isOp(peek(), "^")) { i++; const e = unary(), r = Math.pow(b, e); if (Number.isNaN(r)) throw "Can't raise a negative to that power"; return r; }
+  function powArg(){ // exponent: a value, optionally negated (2^−3)
+    if (isOp(peek(), "−")) { i++; return -powArg(); }
+    return post();
+  }
+  function power(){ // left to right like the TI: 2^3^2 = 64
+    let b = post();
+    while (isOp(peek(), "^")) { i++; b = sPow(b, powArg()); }
     return b;
   }
   function post(){
     let v = prim();
     while (peek() && peek().k === "post") {
       const s = t[i++].s;
-      if (s === "²") v = v * v;
-      else if (s === "³") v = v * v * v;
-      else { if (v === 0) throw "Can't divide by zero"; v = 1 / v; }
+      if (s === "²") v = r14(v * v);
+      else if (s === "³") v = r14(v * v * v);
+      else { if (v === 0) throw DIV0; v = r14(1 / v); }
     }
     return v;
   }
   function prim(){
     const p = t[i++];
     if (!p) throw SYN;
-    if (p.k === "num") return parseFloat(p.s);
+    if (p.k === "num") return r14(parseFloat(p.s));
     if (p.k === "c") {
       if (p.s === "π") return Math.PI;
       if (p.s === "e") return Math.E;
-      if (S.ans === null) throw "No answer yet for Ans";
-      return S.ans;
+      return S.ans === null ? 0 : S.ans; // Ans starts at 0 on a TI
     }
     if (p.k === "(") { const v = expr(); if (!peek() || peek().k !== ")") throw SYN; i++; return v; }
     if (p.k === "fn") return sFn(p.s, prim());
@@ -408,15 +429,18 @@ function sEval(t){
   }
   const v = expr();
   if (i < t.length) throw SYN;
-  if (Number.isNaN(v)) throw "Math error";
-  if (!Number.isFinite(v)) throw "Too big";
-  return v;
+  return r14(v);
 }
-function sClean(v){ v = Number(v.toPrecision(12)); return Math.abs(v) < 1e-12 ? 0 : v; }
+function sClean(v){ return r14(v); }
 function sFmt(v){
-  if (v === 0) return "0";
-  const a = Math.abs(v);
-  const s = a >= 1e12 || a < 1e-9 ? v.toExponential(8).replace(/\.?0+e/, "e").replace("e+", "e") : String(v);
+  const r = Number(v.toPrecision(10));
+  if (r === 0) return "0";
+  const a = Math.abs(r);
+  let s;
+  if (a >= 1e10 || a < 0.001) {
+    const parts = r.toExponential(9).split("e");
+    s = parts[0].replace(/\.?0+$/, "") + "E" + Number(parts[1]);
+  } else s = String(r).replace(/^(-?)0\./, "$1.");
   return s.replace(/-/g, "−");
 }
 function sToF(v){ return Math.abs(v) < 1e12 ? F(BigInt(Math.round(v * 1e6)), 1000000n) : null; }
@@ -517,7 +541,7 @@ function sciKey(a){
   else if (a === "back") sBack();
   else if (a === "pi") { sFresh(); S.t.push({ k: "c", s: "π" }); }
   else if (a === "e") { sFresh(); S.t.push({ k: "c", s: "e" }); }
-  else if (a === "ans") { if (S.ans === null) throw "No answer yet for Ans"; sFresh(); S.t.push({ k: "c", s: "Ans" }); }
+  else if (a === "ans") { sFresh(); S.t.push({ k: "c", s: "Ans" }); }
   else if (a === "(") { sFresh(); S.t.push({ k: "(" }); }
   else if (a === ")") { if (!S.done && sOpen(S.t) > 0 && sEndsOperand()) S.t.push({ k: ")" }); }
   else if (a === "neg") sNeg();
