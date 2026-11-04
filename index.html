@@ -140,6 +140,14 @@ body{
 .sgrid .k.mod.on{background:var(--tape);border-color:var(--tape);color:var(--tape-ink)}
 .sgrid .k.ang{font-size:13px;font-weight:700;letter-spacing:.05em;color:var(--tape)}
 .main .ghost{color:var(--muted);opacity:.55}
+.readout{position:relative}
+.padtog{position:absolute;left:8px;top:7px;display:flex;gap:2px;padding:2px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
+.padtog button{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:none;border:0;border-radius:6px;padding:4px 9px;cursor:pointer;touch-action:manipulation}
+.padtog button[aria-pressed="true"]{background:var(--key-hi);color:var(--fg)}
+.readout.sci-mode .expr{padding-left:112px}
+.sgrid.basic{grid-template-columns:repeat(3,1fr)}
+.sgrid.basic .k{font-size:22px}
+.sgrid.basic .k.n{font-size:30px}
 @media (max-height:660px){
   .main{font-size:42px;line-height:46px;height:46px}
   .k{font-size:23px}.pad .k{font-size:20px}.ops{height:48px}
@@ -155,7 +163,8 @@ body{
     <button class="tab" id="tab-sci" type="button" data-mode="sci" aria-selected="false">Scientific</button>
     <span class="ver" id="ver"></span>
   </nav>
-  <section class="readout" aria-label="Readout">
+  <section class="readout" id="readout" aria-label="Readout">
+    <div class="padtog" id="padtog" role="group" aria-label="Keypad" hidden><button type="button" data-sci-pad="sci" aria-pressed="true">Sci</button><button type="button" data-sci-pad="basic" aria-pressed="false">Basic</button></div>
     <div class="expr" id="expr" aria-live="polite"></div>
     <div class="main" id="main" aria-live="polite">0</div>
     <div class="sub" id="sub">Rounds to the nearest 1/16 after =</div>
@@ -180,6 +189,7 @@ body{
   </div>
   <section class="panel sci" id="sci" hidden>
     <div class="sgrid" id="sci-pad"></div>
+    <div class="sgrid basic" id="sci-basic" hidden></div>
   </section>
   <section class="panel list" id="xr-list" hidden>
     <h2 class="plab blue">Stamp · inches from the end · tap to jump</h2>
@@ -193,7 +203,7 @@ body{
 <script>
 (function(){
 "use strict";
-const VERSION = "v9";
+const VERSION = "v10";
 
 /* iPhone home-screen apps lay the page out shorter than the screen (by about the status bar height),
    which leaves dead space at the bottom. Measure the shortfall and stretch the page to cover it. */
@@ -310,6 +320,8 @@ const cur = () => picked ? roundTo(exact, picked) : exact;
    (to the millionth) so the Down/Up chips and the tape can round it to a 16th like the main calculator. */
 const S = { t: [], done: false, res: null, ex: null, pk: null, expr: "", ans: null, deg: true, sh: false };
 try { if (localStorage.getItem("sf-angle") === "rad") S.deg = false; } catch (e) {}
+S.basic = false;
+try { if (localStorage.getItem("sf-sci-pad") === "basic") S.basic = true; } catch (e) {}
 const SYN = "Check the expression";
 const FN_LABEL = { sin: "sin", cos: "cos", tan: "tan", asin: "sin⁻¹", acos: "cos⁻¹", atan: "tan⁻¹",
   ln: "ln", log: "log", sqrt: "√", cbrt: "∛", exp: "e^", p10: "10^" };
@@ -581,7 +593,7 @@ const $ = id => document.getElementById(id);
 const exprEl = $("expr"), mainEl = $("main"), subEl = $("sub"), tapeEl = $("tape");
 const chips = { down: $("chip-down"), up: $("chip-up") };
 const roundEl = $("round"), padsEl = $("pads"), listEl = $("xr-list"), rowsEl = $("xr-rows");
-const opsEl = $("ops"), xopsEl = $("xr-ops"), xops2El = $("xr-ops2"), sciEl = $("sci");
+const opsEl = $("ops"), xopsEl = $("xr-ops"), xops2El = $("xr-ops2"), sciEl = $("sci"), padTogEl = $("padtog");
 // keys whose label changes with 2nd: [id, normal, 2nd]
 const SHIFT_KEYS = [["sin", "sin", "sin⁻¹"], ["cos", "cos", "cos⁻¹"], ["tan", "tan", "tan⁻¹"],
   ["ln", "ln", "eˣ"], ["log", "log", "10ˣ"], ["sq", "x²", "x³"], ["sqrt", "√", "∛"]];
@@ -712,7 +724,7 @@ function setWake(on){
   } catch (e) {}
 }
 function renderSci(){
-  exprEl.textContent = msg || (S.done ? S.expr : (S.deg ? "Degrees" : "Radians"));
+  exprEl.textContent = msg || (S.done ? S.expr : S.basic ? " " : (S.deg ? "Degrees" : "Radians"));
   exprEl.classList.toggle("err", !!msg);
   if (S.done) {
     mainEl.textContent = sFmt(S.res);
@@ -724,7 +736,7 @@ function renderSci(){
     if (S.t.some(x => x.k !== "num")) {
       try { const t = sClosed(); if (t.length) prev = "= " + sFmt(sClean(sEval(t))); } catch (e) {}
     }
-    subEl.textContent = prev || (S.t.length ? " " : "2nd gives sin⁻¹ cos⁻¹ tan⁻¹ eˣ 10ˣ x³ ∛");
+    subEl.textContent = prev || (S.t.length || S.basic ? " " : "2nd gives sin⁻¹ cos⁻¹ tan⁻¹ eˣ 10ˣ x³ ∛");
   }
   for (const dir of ["down", "up"]) {
     const f = S.done ? S.ex : null;
@@ -732,6 +744,8 @@ function renderSci(){
     chips[dir].disabled = !f || onGrid(f);
     chips[dir].setAttribute("aria-pressed", String(!!f && S.pk === dir));
   }
+  $("sci-pad").hidden = S.basic; $("sci-basic").hidden = !S.basic;
+  padTogEl.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String((b.dataset.sciPad === "basic") === S.basic)));
   $("s-2nd").classList.toggle("on", S.sh);
   $("s-2nd").setAttribute("aria-pressed", String(S.sh));
   $("s-angle").textContent = S.deg ? "DEG" : "RAD";
@@ -752,7 +766,7 @@ function render(){
   tapeEl.classList.toggle("tube", x);
   if (!x) { mainEl.classList.remove("walk"); exprEl.classList.remove("warn"); }
   setWake(x && !!xRes);
-  padsEl.hidden = sc || (x && !!xRes); listEl.hidden = !(x && !!xRes); sciEl.hidden = !sc; tapeEl.toggleAttribute("hidden", sc);
+  padsEl.hidden = sc || (x && !!xRes); listEl.hidden = !(x && !!xRes); sciEl.hidden = !sc; tapeEl.toggleAttribute("hidden", sc); padTogEl.hidden = !sc; $("readout").classList.toggle("sci-mode", sc);
   $("k-sign").disabled = x;
   if (x) { renderXray(); return; }
   if (sc) { renderSci(); return; }
@@ -821,6 +835,17 @@ $("sci-pad").innerHTML = [
   return key(id, k[2].replace(/\bw\b/, "wide"), k[1], 'data-sci="' + k[0] + '"', k[3] || k[0]);
 }).join("");
 
+// Basic pad, 3 columns: a regular calculator (ops row below is shared).
+$("sci-basic").innerHTML = [
+  ["clear", "C", "clear", "Clear"], ["neg", "+/−", "sign", "Change sign"], ["back", BACK, "", "Delete"],
+  ["7", "7", "n"], ["8", "8", "n"], ["9", "9", "n"],
+  ["4", "4", "n"], ["5", "5", "n"], ["6", "6", "n"],
+  ["1", "1", "n"], ["2", "2", "n"], ["3", "3", "n"],
+  ["0", "0", "n wide"], [".", ".", "n", "Decimal point"]
+].map(function(k){
+  return key("b-" + ({ ".": "dot" }[k[0]] || k[0]), k[2], k[1], 'data-sci="' + k[0] + '"', k[3] || k[0]);
+}).join("");
+
 xopsEl.innerHTML =
   key("k-xr-go", "go", "Lay out stamps", 'data-act="xr-go"') +
   key("k-xr-back", "txt", "Back", 'data-act="xr-back"') +
@@ -856,6 +881,7 @@ $("app").addEventListener("click", function(ev){
     else if (b.dataset.act === "xr-back") { if (xRes && xSel > 0) xSel--; }
     else if (b.dataset.act === "xr-next") { if (xRes && xSel < xRes.shots) xSel++; }
     else if (b.dataset.act === "xr-new") { xRes = null; xEntry = blank(); }
+    else if (b.dataset.sciPad) { S.basic = b.dataset.sciPad === "basic"; S.sh = false; try { localStorage.setItem("sf-sci-pad", S.basic ? "basic" : "sci"); } catch (e) {} }
     else if (b.dataset.sci) sciKey(b.dataset.sci);
     else if (b.dataset.pad) digit(b.dataset.pad, b.dataset.key);
     else if (b.dataset.op) { if (mode === "sci") { S.sh = false; sOp(b.dataset.op); } else op(b.dataset.op); }
