@@ -41,7 +41,7 @@ body{
 .app{width:100%;max-width:440px;height:100%;min-height:600px;display:flex;flex-direction:column;gap:8px}
 
 /* mode tabs */
-.tabs{display:grid;grid-template-columns:1fr 1fr auto;align-items:center;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:3px;flex:none}
+.tabs{display:grid;grid-template-columns:1fr 1fr 1fr auto;align-items:center;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:3px;flex:none}
 .tab{font-family:var(--ui);font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--muted);background:none;border:0;border-radius:7px;height:30px;padding:0;cursor:pointer;touch-action:manipulation}
 .tab[aria-selected="true"]{background:var(--key-hi);color:var(--fg);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
 .tab:focus-visible{outline:2px solid var(--op);outline-offset:1px}
@@ -128,6 +128,18 @@ body{
 .pos .in{color:var(--muted);font-weight:400;margin-left:1px}
 .gap{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 .k:focus-visible,.chip:focus-visible{outline:2px solid var(--op);outline-offset:2px}
+
+/* scientific pad */
+.sci{flex:1;min-height:0}
+.sgrid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(5,1fr);grid-auto-rows:1fr;gap:6px}
+.sgrid .k{font-size:17px;font-weight:500}
+.sgrid .k.n{font-size:23px}
+.sgrid .k.fn{color:var(--op)}
+.sgrid .k.fn.alt{color:var(--tape)}
+.sgrid .k.mod{font-size:13px;font-weight:700;letter-spacing:.05em;color:var(--muted)}
+.sgrid .k.mod.on{background:var(--tape);border-color:var(--tape);color:var(--tape-ink)}
+.sgrid .k.ang{font-size:13px;font-weight:700;letter-spacing:.05em;color:var(--tape)}
+.main .ghost{color:var(--muted);opacity:.55}
 @media (max-height:660px){
   .main{font-size:42px;line-height:46px;height:46px}
   .k{font-size:23px}.pad .k{font-size:20px}.ops{height:48px}
@@ -140,6 +152,7 @@ body{
   <nav class="tabs" aria-label="Mode">
     <button class="tab" id="tab-calc" type="button" data-mode="calc" aria-selected="true">Calculator</button>
     <button class="tab" id="tab-xray" type="button" data-mode="xray" aria-selected="false">X-ray layout</button>
+    <button class="tab" id="tab-sci" type="button" data-mode="sci" aria-selected="false">Scientific</button>
     <span class="ver" id="ver"></span>
   </nav>
   <section class="readout" aria-label="Readout">
@@ -165,6 +178,9 @@ body{
       <div class="pad" id="pad-d"></div>
     </section>
   </div>
+  <section class="panel sci" id="sci" hidden>
+    <div class="sgrid" id="sci-pad"></div>
+  </section>
   <section class="panel list" id="xr-list" hidden>
     <h2 class="plab blue">Stamp · inches from the end · tap to jump</h2>
     <ol class="rows" id="xr-rows"></ol>
@@ -177,7 +193,7 @@ body{
 <script>
 (function(){
 "use strict";
-const VERSION = "v6";
+const VERSION = "v7";
 
 /* iPhone home-screen apps lay the page out shorter than the screen (by about the status bar height),
    which leaves dead space at the bottom. Measure the shortfall and stretch the page to cover it. */
@@ -285,8 +301,223 @@ const blank = () => ({ w: "", n: "", d: "", neg: false });
 const has = e => !!(e.w || e.n || e.d);
 let entry = blank(), tokens = [], exact = null, picked = null, lastExpr = "", msg = "";
 let mode = "calc", xEntry = blank(), xRes = null, xSel = 0, tubeXs = [], xHint = "";
-try { if (localStorage.getItem("sf-mode") === "xray") mode = "xray"; } catch (e) {}
+try { const m = localStorage.getItem("sf-mode"); if (m === "xray" || m === "sci") mode = m; } catch (e) {}
 const cur = () => picked ? roundTo(exact, picked) : exact;
+
+/* ---------- scientific ----------
+   Expression is a token list: num, c (π e Ans), fn (always followed by "("), "(", ")", op (+ − × ÷ ^), post (² ³ ⁻¹).
+   Math is floating point; the result is cleaned to 12 significant digits, then turned into a fraction
+   (to the millionth) so the Down/Up chips and the tape can round it to a 16th like the main calculator. */
+const S = { t: [], done: false, res: null, ex: null, pk: null, expr: "", ans: null, deg: true, sh: false };
+try { if (localStorage.getItem("sf-angle") === "rad") S.deg = false; } catch (e) {}
+const SYN = "Check the expression";
+const FN_LABEL = { sin: "sin", cos: "cos", tan: "tan", asin: "sin⁻¹", acos: "cos⁻¹", atan: "tan⁻¹",
+  ln: "ln", log: "log", sqrt: "√", cbrt: "∛", exp: "e^", p10: "10^" };
+const sLast = () => S.t[S.t.length - 1];
+function sWantsOperand(){ const l = sLast(); return !l || l.k === "op" || l.k === "(" || l.k === "fn"; }
+function sEndsOperand(){ const l = sLast(); return !!l && (l.k === "num" || l.k === "c" || l.k === ")" || l.k === "post"); }
+function sOpen(t){ let n = 0; t.forEach(x => { if (x.k === "(") n++; else if (x.k === ")") n--; }); return n; }
+function sFn(name, x){
+  const R = S.deg ? Math.PI / 180 : 1;
+  switch (name) {
+    case "sin": return S.deg && x % 180 === 0 ? 0 : Math.sin(x * R);
+    case "cos": return S.deg && (x - 90) % 180 === 0 ? 0 : Math.cos(x * R);
+    case "tan":
+      if (S.deg && x % 180 === 0) return 0;
+      if (S.deg && (x - 90) % 180 === 0) throw "tan of " + x + "° is undefined";
+      return Math.tan(x * R);
+    case "asin": if (Math.abs(x) > 1) throw "sin⁻¹ needs −1 to 1"; return Math.asin(x) / R;
+    case "acos": if (Math.abs(x) > 1) throw "cos⁻¹ needs −1 to 1"; return Math.acos(x) / R;
+    case "atan": return Math.atan(x) / R;
+    case "ln": if (x <= 0) throw "ln needs a number above 0"; return Math.log(x);
+    case "log": if (x <= 0) throw "log needs a number above 0"; return Math.log10(x);
+    case "sqrt": if (x < 0) throw "Can't take √ of a negative"; return Math.sqrt(x);
+    case "cbrt": return Math.cbrt(x);
+    case "exp": return Math.exp(x);
+    case "p10": return Math.pow(10, x);
+  }
+  throw SYN;
+}
+function sEval(t){
+  let i = 0;
+  const peek = () => t[i];
+  const isOp = (p, s) => p && p.k === "op" && s.includes(p.s);
+  function expr(){
+    let v = term();
+    while (isOp(peek(), "+−")) { const o = t[i++].s, r = term(); v = o === "+" ? v + r : v - r; }
+    return v;
+  }
+  function term(){
+    let v = unary();
+    for (;;) {
+      const p = peek();
+      if (isOp(p, "×÷")) {
+        i++; const r = unary();
+        if (p.s === "÷") { if (r === 0) throw "Can't divide by zero"; v /= r; } else v *= r;
+      } else if (p && (p.k === "num" || p.k === "c" || p.k === "fn" || p.k === "(")) v *= unary(); // 2π, 3(4), 2√(9)
+      else break;
+    }
+    return v;
+  }
+  function unary(){
+    const p = peek();
+    if (isOp(p, "−")) { i++; return -unary(); }
+    if (isOp(p, "+")) { i++; return unary(); }
+    return power();
+  }
+  function power(){
+    const b = post();
+    if (isOp(peek(), "^")) { i++; const e = unary(), r = Math.pow(b, e); if (Number.isNaN(r)) throw "Can't raise a negative to that power"; return r; }
+    return b;
+  }
+  function post(){
+    let v = prim();
+    while (peek() && peek().k === "post") {
+      const s = t[i++].s;
+      if (s === "²") v = v * v;
+      else if (s === "³") v = v * v * v;
+      else { if (v === 0) throw "Can't divide by zero"; v = 1 / v; }
+    }
+    return v;
+  }
+  function prim(){
+    const p = t[i++];
+    if (!p) throw SYN;
+    if (p.k === "num") return parseFloat(p.s);
+    if (p.k === "c") {
+      if (p.s === "π") return Math.PI;
+      if (p.s === "e") return Math.E;
+      if (S.ans === null) throw "No answer yet for Ans";
+      return S.ans;
+    }
+    if (p.k === "(") { const v = expr(); if (!peek() || peek().k !== ")") throw SYN; i++; return v; }
+    if (p.k === "fn") return sFn(p.s, prim());
+    throw SYN;
+  }
+  const v = expr();
+  if (i < t.length) throw SYN;
+  if (Number.isNaN(v)) throw "Math error";
+  if (!Number.isFinite(v)) throw "Too big";
+  return v;
+}
+function sClean(v){ v = Number(v.toPrecision(12)); return Math.abs(v) < 1e-12 ? 0 : v; }
+function sFmt(v){
+  if (v === 0) return "0";
+  const a = Math.abs(v);
+  const s = a >= 1e12 || a < 1e-9 ? v.toExponential(8).replace(/\.?0+e/, "e").replace("e+", "e") : String(v);
+  return s.replace(/-/g, "−");
+}
+function sToF(v){ return Math.abs(v) < 1e12 ? F(BigInt(Math.round(v * 1e6)), 1000000n) : null; }
+const fNum = f => Number(f.n) / Number(f.d);
+function sText(t){
+  return t.map(function(x, j){
+    if (x.k === "num" || x.k === "c" || x.k === "post") return x.s;
+    if (x.k === "fn") return FN_LABEL[x.s];
+    if (x.k === "(" || x.k === ")") return x.k;
+    if (x.s === "^") return "^";
+    const prev = t[j - 1];
+    if (x.s === "−" && (!prev || prev.k === "op" || prev.k === "(" || prev.k === "fn")) return "−";
+    return " " + x.s + " ";
+  }).join("");
+}
+function sClosed(){
+  const t = S.t.slice();
+  while (t.length && (t[t.length - 1].k === "op" || t[t.length - 1].k === "(" || t[t.length - 1].k === "fn")) {
+    t.pop();
+    if (t.length && t[t.length - 1].k === "fn") t.pop();
+  }
+  for (let n = sOpen(t); n > 0; n--) t.push({ k: ")" });
+  return t;
+}
+function sFresh(){ if (S.done) { S.t = []; S.done = false; S.expr = ""; } }
+function sFromAns(){ if (S.done) { S.t = [{ k: "c", s: "Ans" }]; S.done = false; S.expr = ""; } }
+function sDigit(d){
+  sFresh();
+  const l = sLast();
+  if (l && l.k === "num") {
+    if (d === "." && l.s.includes(".")) return;
+    if (l.s.replace(".", "").length >= 12) return;
+    l.s = l.s === "0" && d !== "." ? d : l.s + d;
+  } else S.t.push({ k: "num", s: d === "." ? "0." : d });
+}
+function sOp(o){
+  sFromAns();
+  if (sWantsOperand()) {
+    const l = sLast();
+    if (o === "−") { if (!(l && l.k === "op" && l.s === "−")) S.t.push({ k: "op", s: o }); return; }
+    if (!(l && l.k === "op")) return;
+    while (sLast() && sLast().k === "op") S.t.pop();
+    if (!sEndsOperand()) return;
+  }
+  S.t.push({ k: "op", s: o });
+}
+function sPost(p){ sFromAns(); if (sEndsOperand()) S.t.push({ k: "post", s: p }); }
+function sNeg(){
+  if (S.done) {
+    const v = -S.ans;
+    S.expr = "−(" + sFmt(S.ans) + ") ="; S.res = v; S.ex = sToF(v); S.pk = null; S.ans = v;
+    S.t = [{ k: "op", s: "−" }, { k: "num", s: String(Math.abs(v)) }];
+    return;
+  }
+  if (sWantsOperand()) {
+    const l = sLast();
+    if (l && l.k === "op" && l.s === "−" && S.t.length >= 1) {
+      const p2 = S.t[S.t.length - 2];
+      if (!p2 || p2.k === "op" || p2.k === "(" || p2.k === "fn") { S.t.pop(); return; }
+    }
+    S.t.push({ k: "op", s: "−" });
+    return;
+  }
+  const i = S.t.length - 1;
+  if (S.t[i].k !== "num") return;
+  const prev = S.t[i - 1], p2 = S.t[i - 2];
+  if (prev && prev.k === "op" && prev.s === "−" && (!p2 || p2.k === "op" || p2.k === "(" || p2.k === "fn")) S.t.splice(i - 1, 1);
+  else if (!prev || prev.k === "op" || prev.k === "(" || prev.k === "fn") S.t.splice(i, 0, { k: "op", s: "−" });
+}
+function sBack(){
+  if (S.done) { S.done = false; S.expr = ""; return; } // back into the expression to edit it
+  const l = sLast();
+  if (!l) return;
+  if (l.k === "num" && l.s.length > 1) { l.s = l.s.slice(0, -1); return; }
+  S.t.pop();
+  if (l.k === "(" && sLast() && sLast().k === "fn") S.t.pop();
+}
+function sEq(){
+  if (S.done || !S.t.length) return;
+  const t = sClosed();
+  if (!t.length) return;
+  const v = sClean(sEval(t)); // throws before anything changes
+  S.t = t; S.done = true; S.expr = sText(t) + " =";
+  S.res = v; S.ex = sToF(v); S.pk = null; S.ans = v;
+}
+function sPick(dir){
+  if (!S.done || !S.ex) return;
+  S.pk = S.pk === dir ? null : dir;
+  S.ans = S.pk ? fNum(roundTo(S.ex, S.pk)) : S.res;
+}
+function sciKey(a){
+  const second = S.sh;
+  if (a !== "2nd") S.sh = false;
+  if (/^[0-9.]$/.test(a)) sDigit(a);
+  else if (a === "2nd") S.sh = !S.sh;
+  else if (a === "angle") { S.deg = !S.deg; try { localStorage.setItem("sf-angle", S.deg ? "deg" : "rad"); } catch (e) {} }
+  else if (a === "clear") { S.t = []; S.done = false; S.expr = ""; S.res = null; S.ex = null; S.pk = null; }
+  else if (a === "back") sBack();
+  else if (a === "pi") { sFresh(); S.t.push({ k: "c", s: "π" }); }
+  else if (a === "e") { sFresh(); S.t.push({ k: "c", s: "e" }); }
+  else if (a === "ans") { if (S.ans === null) throw "No answer yet for Ans"; sFresh(); S.t.push({ k: "c", s: "Ans" }); }
+  else if (a === "(") { sFresh(); S.t.push({ k: "(" }); }
+  else if (a === ")") { if (!S.done && sOpen(S.t) > 0 && sEndsOperand()) S.t.push({ k: ")" }); }
+  else if (a === "neg") sNeg();
+  else if (a === "pow") sOp("^");
+  else if (a === "sq") sPost(second ? "³" : "²");
+  else if (a === "recip") sPost("⁻¹");
+  else {
+    const alt = { sin: "asin", cos: "acos", tan: "atan", ln: "exp", log: "p10", sqrt: "cbrt" };
+    sFresh();
+    S.t.push({ k: "fn", s: second && alt[a] ? alt[a] : a }, { k: "(" });
+  }
+}
 
 function entryValue(e){
   if (e.n && !e.d) throw "Add the bottom number";
@@ -350,7 +581,10 @@ const $ = id => document.getElementById(id);
 const exprEl = $("expr"), mainEl = $("main"), subEl = $("sub"), tapeEl = $("tape");
 const chips = { down: $("chip-down"), up: $("chip-up") };
 const roundEl = $("round"), padsEl = $("pads"), listEl = $("xr-list"), rowsEl = $("xr-rows");
-const opsEl = $("ops"), xopsEl = $("xr-ops"), xops2El = $("xr-ops2");
+const opsEl = $("ops"), xopsEl = $("xr-ops"), xops2El = $("xr-ops2"), sciEl = $("sci");
+// keys whose label changes with 2nd: [id, normal, 2nd]
+const SHIFT_KEYS = [["sin", "sin", "sin⁻¹"], ["cos", "cos", "cos⁻¹"], ["tan", "tan", "tan⁻¹"],
+  ["ln", "ln", "eˣ"], ["log", "log", "10ˣ"], ["sq", "x²", "x³"], ["sqrt", "√", "∛"]];
 $("ver").textContent = VERSION;
 
 function entryHTML(e){
@@ -359,7 +593,8 @@ function entryHTML(e){
     "</span><span" + (e.d ? "" : ' class="ph"') + ">" + (e.d || "0") + "</span></span>";
   return s || "0";
 }
-function drawTape(f){
+function drawTape(f, pk){
+  if (pk === undefined) pk = picked;
   const x0 = 16, step = 18;
   tapeEl.setAttribute("viewBox", "0 0 320 46");
   let fl = 0n, pos = null, lo = -1, hi = -1;
@@ -376,8 +611,8 @@ function drawTape(f){
     const x = x0 + i * step, hot = i === lo || i === hi;
     s += '<rect x="' + (x - (hot ? 1.5 : 0.6)) + '" y="0" width="' + (hot ? 3 : 1.2) + '" height="' + (hot ? h + 4 : h) + '" fill="var(--tape-ink)"/>';
   }
-  if (picked && f) {
-    const px = x0 + (picked === "down" ? lo : hi) * step;
+  if (pk && f) {
+    const px = x0 + (pk === "down" ? lo : hi) * step;
     s += '<path d="M' + (px - 5) + " 46L" + px + " 38L" + (px + 5) + ' 46Z" fill="var(--tape-ink)"/>';
   }
   if (pos !== null) {
@@ -476,17 +711,56 @@ function setWake(on){
     } else if (!on && wake) { wake.release().catch(function(){}); wake = null; }
   } catch (e) {}
 }
+function renderSci(){
+  exprEl.textContent = msg || (S.done ? S.expr : (S.deg ? "Degrees" : "Radians"));
+  exprEl.classList.toggle("err", !!msg);
+  if (S.done) {
+    mainEl.innerHTML = S.pk && S.ex ? html(roundTo(S.ex, S.pk)) : sFmt(S.res);
+    subEl.textContent = S.pk
+      ? "Rounded " + S.pk + " to 1/16 · exact " + sFmt(S.res)
+      : !S.ex ? " "
+      : onGrid(S.ex) ? (S.ex.d === 1n ? "Whole number" : "= " + txt(S.ex) + " exactly")
+      : "Down / Up rounds it to a 16th";
+  } else {
+    const open = sOpen(S.t);
+    mainEl.innerHTML = (sText(S.t) || "0") + (open > 0 ? '<span class="ghost">' + ")".repeat(open) + "</span>" : "");
+    let prev = "";
+    if (S.t.some(x => x.k !== "num")) {
+      try { const t = sClosed(); if (t.length) prev = "= " + sFmt(sClean(sEval(t))); } catch (e) {}
+    }
+    subEl.textContent = prev || (S.t.length ? " " : "2nd gives sin⁻¹ cos⁻¹ tan⁻¹ eˣ 10ˣ x³ ∛");
+  }
+  for (const dir of ["down", "up"]) {
+    const f = S.done ? S.ex : null;
+    chips[dir].innerHTML = chipHTML(dir, f);
+    chips[dir].disabled = !f || onGrid(f);
+    chips[dir].setAttribute("aria-pressed", String(!!f && S.pk === dir));
+  }
+  drawTape(S.done ? S.ex : null, S.pk);
+  $("s-2nd").classList.toggle("on", S.sh);
+  $("s-2nd").setAttribute("aria-pressed", String(S.sh));
+  $("s-angle").textContent = S.deg ? "DEG" : "RAD";
+  SHIFT_KEYS.forEach(function(k){
+    const b = $("s-" + k[0]);
+    b.textContent = S.sh ? k[2] : k[1];
+    b.classList.toggle("alt", S.sh);
+  });
+  fit();
+  mainEl.scrollLeft = mainEl.scrollWidth;
+}
 function render(){
-  const x = mode === "xray";
-  $("tab-calc").setAttribute("aria-selected", String(!x));
+  const x = mode === "xray", sc = mode === "sci";
+  $("tab-calc").setAttribute("aria-selected", String(mode === "calc"));
   $("tab-xray").setAttribute("aria-selected", String(x));
+  $("tab-sci").setAttribute("aria-selected", String(sc));
   roundEl.hidden = x; opsEl.hidden = x; xopsEl.hidden = !x; xops2El.hidden = !(x && !!xRes);
   tapeEl.classList.toggle("tube", x);
   if (!x) { mainEl.classList.remove("walk"); exprEl.classList.remove("warn"); }
   setWake(x && !!xRes);
-  padsEl.hidden = x && !!xRes; listEl.hidden = !(x && !!xRes);
+  padsEl.hidden = sc || (x && !!xRes); listEl.hidden = !(x && !!xRes); sciEl.hidden = !sc;
   $("k-sign").disabled = x;
   if (x) { renderXray(); return; }
+  if (sc) { renderSci(); return; }
   exprEl.textContent = msg || (exact ? lastExpr : tokens.map(t => t.t || t).join(" "));
   exprEl.classList.toggle("err", !!msg);
   if (exact) {
@@ -538,6 +812,20 @@ $("ops").innerHTML =
     .map(o => key("k-op-" + o[1], "op", o[0], 'data-op="' + o[0] + '"', o[2])).join("") +
   key("k-eq", "eq", "=", 'data-act="eq"', "Equals");
 
+// Scientific pad, 5 columns. [action, label, class, aria] — "w" in class = spans 2 columns.
+$("sci-pad").innerHTML = [
+  ["2nd", "2nd", "mod", "Second functions"], ["angle", "DEG", "ang", "Degrees or radians"], ["pi", "π", "fn", "Pi"], ["clear", "C", "clear w", "Clear"],
+  ["sin", "sin", "fn", "Sine"], ["cos", "cos", "fn", "Cosine"], ["tan", "tan", "fn", "Tangent"], ["ln", "ln", "fn", "Natural log"], ["log", "log", "fn", "Log base 10"],
+  ["sq", "x²", "fn", "Square"], ["sqrt", "√", "fn", "Square root"], ["pow", "xʸ", "fn", "Power"], ["recip", "1/x", "fn", "Reciprocal"], ["e", "e", "fn", "e"],
+  ["7", "7", "n"], ["8", "8", "n"], ["9", "9", "n"], ["(", "(", "fn", "Open bracket"], [")", ")", "fn", "Close bracket"],
+  ["4", "4", "n"], ["5", "5", "n"], ["6", "6", "n"], ["back", BACK, "w", "Delete"],
+  ["1", "1", "n"], ["2", "2", "n"], ["3", "3", "n"], ["neg", "+/−", "sign w", "Change sign"],
+  ["0", "0", "n w"], [".", ".", "n", "Decimal point"], ["ans", "Ans", "fn w", "Last answer"]
+].map(function(k){
+  const id = "s-" + ({ "(": "lp", ")": "rp", ".": "dot" }[k[0]] || k[0]);
+  return key(id, k[2].replace(/\bw\b/, "wide"), k[1], 'data-sci="' + k[0] + '"', k[3] || k[0]);
+}).join("");
+
 xopsEl.innerHTML =
   key("k-xr-go", "go", "Lay out stamps", 'data-act="xr-go"') +
   key("k-xr-back", "txt", "Back", 'data-act="xr-back"') +
@@ -573,18 +861,19 @@ $("app").addEventListener("click", function(ev){
     else if (b.dataset.act === "xr-back") { if (xRes && xSel > 0) xSel--; }
     else if (b.dataset.act === "xr-next") { if (xRes && xSel < xRes.shots) xSel++; }
     else if (b.dataset.act === "xr-new") { xRes = null; xEntry = blank(); }
+    else if (b.dataset.sci) sciKey(b.dataset.sci);
     else if (b.dataset.pad) digit(b.dataset.pad, b.dataset.key);
-    else if (b.dataset.op) op(b.dataset.op);
-    else if (b.dataset.round) picked = picked === b.dataset.round ? null : b.dataset.round;
+    else if (b.dataset.op) { if (mode === "sci") { S.sh = false; sOp(b.dataset.op); } else op(b.dataset.op); }
+    else if (b.dataset.round) { if (mode === "sci") sPick(b.dataset.round); else picked = picked === b.dataset.round ? null : b.dataset.round; }
     else if (b.dataset.act === "clear") clearAll();
     else if (b.dataset.act === "sign") { if (mode === "calc") sign(); }
-    else if (b.dataset.act === "eq") equals();
+    else if (b.dataset.act === "eq") { if (mode === "sci") { S.sh = false; sEq(); } else equals(); }
   } catch (e) {
     if (typeof e === "string") { const parts = e.split("|"); msg = parts[0]; xHint = parts[1] || ""; } else throw e;
   }
   render();
 });
-window.shopFractions = { layout: layout, F: F, version: VERSION };
+window.shopFractions = { layout: layout, F: F, version: VERSION, sci: S, sEval: sEval };
 render();
 })();
 </script>
