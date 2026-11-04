@@ -140,6 +140,10 @@ body{
 .sgrid .k.mod.on{background:var(--tape);border-color:var(--tape);color:var(--tape-ink)}
 .sgrid .k.ang{font-size:13px;font-weight:700;letter-spacing:.05em;color:var(--tape)}
 .main .ghost{color:var(--muted);opacity:.55}
+.readout.sci-mode .main{overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;cursor:text;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.main .cur{display:inline-block;width:3px;height:.85em;margin:0 1px;vertical-align:-.06em;border-radius:2px;background:var(--tape);animation:blink 1.06s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.readout.sci-mode .main::-webkit-scrollbar{display:none}
 .readout{position:relative}
 .padtog{position:absolute;left:8px;top:7px;display:flex;gap:2px;padding:2px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
 .padtog button{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:none;border:0;border-radius:6px;padding:4px 9px;cursor:pointer;touch-action:manipulation}
@@ -203,7 +207,7 @@ body{
 <script>
 (function(){
 "use strict";
-const VERSION = "v11";
+const VERSION = "v12";
 
 /* iPhone home-screen apps lay the page out shorter than the screen (by about the status bar height),
    which leaves dead space at the bottom. Measure the shortfall and stretch the page to cover it. */
@@ -327,10 +331,32 @@ try { if (localStorage.getItem("sf-sci-pad") === "basic") S.basic = true; } catc
 const SYN = "ERR:SYNTAX", DIV0 = "ERR:DIVIDE BY 0", DOMAIN = "ERR:DOMAIN", NONREAL = "ERR:NONREAL ANS", OVER = "ERR:OVERFLOW";
 const FN_LABEL = { sin: "sin", cos: "cos", tan: "tan", asin: "sin⁻¹", acos: "cos⁻¹", atan: "tan⁻¹",
   ln: "ln", log: "log", sqrt: "√", cbrt: "∛", exp: "e^", p10: "10^" };
-const sLast = () => S.t[S.t.length - 1];
-function sWantsOperand(){ const l = sLast(); return !l || l.k === "op" || l.k === "(" || l.k === "fn"; }
-function sEndsOperand(){ const l = sLast(); return !!l && (l.k === "num" || l.k === "c" || l.k === ")" || l.k === "post"); }
-function sOpen(t){ let n = 0; t.forEach(x => { if (x.k === "(") n++; else if (x.k === ")") n--; }); return n; }
+// The expression is edited as "units" with a cursor S.c: d (one digit or "."), c (π e Ans),
+// fn (sin etc., includes its "("), "(", ")", op (+ − × ÷ ^), post (² ³ ⁻¹). sTok() merges digits into numbers.
+S.c = 0;
+const sBefore = () => S.t[S.c - 1];
+const sUnaryCtx = u => !u || u.k === "op" || u.k === "(" || u.k === "fn";
+function sWantsOperand(){ return sUnaryCtx(sBefore()); }
+function sEndsOperand(){ const l = sBefore(); return !!l && (l.k === "d" || l.k === "c" || l.k === ")" || l.k === "post"); }
+function sOpen(t){ let n = 0; t.forEach(x => { if (x.k === "(" || x.k === "fn") n++; else if (x.k === ")") n--; }); return n; }
+function sIns(u){ S.t.splice(S.c, 0, u); S.c++; }
+function sTok(units){
+  const out = [];
+  units.forEach(function(u, j){
+    if (u.k === "d") { const l = out[out.length - 1]; if (l && l.k === "num" && units[j - 1].k === "d") l.s += u.s; else out.push({ k: "num", s: u.s }); }
+    else if (u.k === "fn") out.push({ k: "fn", s: u.s }, { k: "(" });
+    else out.push(Object.assign({}, u));
+  });
+  return out;
+}
+function sUnitText(u, i){
+  if (u.k === "d" || u.k === "c" || u.k === "post") return u.s;
+  if (u.k === "fn") return FN_LABEL[u.s] + "(";
+  if (u.k === "(" || u.k === ")") return u.k;
+  if (u.s === "^") return "^";
+  if (u.s === "−" && sUnaryCtx(S.t[i - 1])) return "−";
+  return " " + u.s + " ";
+}
 function r14(v){
   if (!Number.isFinite(v)) throw Number.isNaN(v) ? DOMAIN : OVER;
   if (v === 0 || Math.abs(v) < 1e-99) return 0;
@@ -417,7 +443,7 @@ function sEval(t){
   function prim(){
     const p = t[i++];
     if (!p) throw SYN;
-    if (p.k === "num") return r14(parseFloat(p.s));
+    if (p.k === "num") { const n = parseFloat(p.s); if (Number.isNaN(n)) throw SYN; return r14(n); }
     if (p.k === "c") {
       if (p.s === "π") return Math.PI;
       if (p.s === "e") return Math.E;
@@ -456,74 +482,69 @@ function sText(t){
     return " " + x.s + " ";
   }).join("");
 }
-function sClosed(){
+function sClosed(){ // units, with trailing operators dropped and brackets closed
   const t = S.t.slice();
-  while (t.length && (t[t.length - 1].k === "op" || t[t.length - 1].k === "(" || t[t.length - 1].k === "fn")) {
-    t.pop();
-    if (t.length && t[t.length - 1].k === "fn") t.pop();
-  }
+  while (t.length && sUnaryCtx(t[t.length - 1])) t.pop();
   for (let n = sOpen(t); n > 0; n--) t.push({ k: ")" });
   return t;
 }
-function sFresh(){ if (S.done) { S.t = []; S.done = false; S.expr = ""; } }
-function sFromAns(){ if (S.done) { S.t = [{ k: "c", s: "Ans" }]; S.done = false; S.expr = ""; } }
+function sEdit(c){ S.done = false; S.expr = ""; S.c = c === undefined ? S.t.length : c; }
+function sFresh(){ if (S.done) { S.t = []; S.c = 0; S.done = false; S.expr = ""; } }
+function sFromAns(){ if (S.done) { S.t = [{ k: "c", s: "Ans" }]; S.c = 1; S.done = false; S.expr = ""; } }
+function sRun(){ // the digit run touching the cursor: [start, end)
+  let i = S.c, j = S.c;
+  while (i > 0 && S.t[i - 1].k === "d") i--;
+  while (j < S.t.length && S.t[j].k === "d") j++;
+  return [i, j];
+}
 function sDigit(d){
   sFresh();
-  const l = sLast();
-  if (l && l.k === "num") {
-    if (d === "." && l.s.includes(".")) return;
-    if (l.s.replace(".", "").length >= 12) return;
-    l.s = l.s === "0" && d !== "." ? d : l.s + d;
-  } else S.t.push({ k: "num", s: d === "." ? "0." : d });
+  const [i, j] = sRun(), run = S.t.slice(i, j);
+  if (d === "." && run.some(u => u.s === ".")) return;
+  if (run.filter(u => u.s !== ".").length >= 12 && d !== ".") return;
+  sIns({ k: "d", s: d });
 }
 function sOp(o){
   sFromAns();
   if (sWantsOperand()) {
-    const l = sLast();
-    if (o === "−") { if (!(l && l.k === "op" && l.s === "−")) S.t.push({ k: "op", s: o }); return; }
-    if (!(l && l.k === "op")) return;
-    while (sLast() && sLast().k === "op") S.t.pop();
+    const b = sBefore();
+    if (o === "−") { if (!(b && b.k === "op" && b.s === "−")) sIns({ k: "op", s: o }); return; }
+    if (!(b && b.k === "op")) return;
+    while (sBefore() && sBefore().k === "op") { S.t.splice(S.c - 1, 1); S.c--; }
     if (!sEndsOperand()) return;
   }
-  S.t.push({ k: "op", s: o });
+  sIns({ k: "op", s: o });
 }
-function sPost(p){ sFromAns(); if (sEndsOperand()) S.t.push({ k: "post", s: p }); }
+function sPost(p){ sFromAns(); if (sEndsOperand()) sIns({ k: "post", s: p }); }
 function sNeg(){
   if (S.done) {
+    S.t = [{ k: "op", s: "−" }, { k: "(" }].concat(S.t, [{ k: ")" }]); S.c = S.t.length;
     const v = -S.ans;
-    S.expr = "−(" + sFmt(S.ans) + ") ="; S.res = v; S.ex = sToF(v); S.pk = null; S.ans = v;
-    S.t = [{ k: "op", s: "−" }, { k: "num", s: String(Math.abs(v)) }];
+    S.expr = sText(sTok(S.t)) + " ="; S.res = v; S.ex = sToF(v); S.pk = null; S.ans = v;
     return;
   }
-  if (sWantsOperand()) {
-    const l = sLast();
-    if (l && l.k === "op" && l.s === "−" && S.t.length >= 1) {
-      const p2 = S.t[S.t.length - 2];
-      if (!p2 || p2.k === "op" || p2.k === "(" || p2.k === "fn") { S.t.pop(); return; }
-    }
-    S.t.push({ k: "op", s: "−" });
+  const [i, j] = sRun();
+  if (i === j) { // not on a number: toggle a minus at the cursor
+    const b = sBefore();
+    if (b && b.k === "op" && b.s === "−" && sUnaryCtx(S.t[S.c - 2])) { S.t.splice(S.c - 1, 1); S.c--; }
+    else if (sWantsOperand()) sIns({ k: "op", s: "−" });
     return;
   }
-  const i = S.t.length - 1;
-  if (S.t[i].k !== "num") return;
-  const prev = S.t[i - 1], p2 = S.t[i - 2];
-  if (prev && prev.k === "op" && prev.s === "−" && (!p2 || p2.k === "op" || p2.k === "(" || p2.k === "fn")) S.t.splice(i - 1, 1);
-  else if (!prev || prev.k === "op" || prev.k === "(" || prev.k === "fn") S.t.splice(i, 0, { k: "op", s: "−" });
+  const prev = S.t[i - 1];
+  if (prev && prev.k === "op" && prev.s === "−" && sUnaryCtx(S.t[i - 2])) { S.t.splice(i - 1, 1); S.c--; }
+  else if (sUnaryCtx(prev)) { S.t.splice(i, 0, { k: "op", s: "−" }); S.c++; }
 }
 function sBack(){
-  if (S.done) { S.done = false; S.expr = ""; return; } // back into the expression to edit it
-  const l = sLast();
-  if (!l) return;
-  if (l.k === "num" && l.s.length > 1) { l.s = l.s.slice(0, -1); return; }
-  S.t.pop();
-  if (l.k === "(" && sLast() && sLast().k === "fn") S.t.pop();
+  if (S.done) { sEdit(); return; } // back into the expression to edit it
+  if (S.c === 0) return;
+  S.t.splice(S.c - 1, 1); S.c--;
 }
 function sEq(){
   if (S.done || !S.t.length) return;
   const t = sClosed();
   if (!t.length) return;
-  const v = sClean(sEval(t)); // throws before anything changes
-  S.t = t; S.done = true; S.expr = sText(t) + " =";
+  const v = sClean(sEval(sTok(t))); // throws before anything changes
+  S.t = t; S.c = t.length; S.done = true; S.expr = sText(sTok(t)) + " =";
   S.res = v; S.ex = sToF(v); S.pk = null; S.ans = v;
 }
 function sPick(dir){
@@ -537,13 +558,13 @@ function sciKey(a){
   if (/^[0-9.]$/.test(a)) sDigit(a);
   else if (a === "2nd") S.sh = !S.sh;
   else if (a === "angle") { S.deg = !S.deg; try { localStorage.setItem("sf-angle", S.deg ? "deg" : "rad"); } catch (e) {} }
-  else if (a === "clear") { S.t = []; S.done = false; S.expr = ""; S.res = null; S.ex = null; S.pk = null; }
+  else if (a === "clear") { S.t = []; S.c = 0; S.done = false; S.expr = ""; S.res = null; S.ex = null; S.pk = null; }
   else if (a === "back") sBack();
-  else if (a === "pi") { sFresh(); S.t.push({ k: "c", s: "π" }); }
-  else if (a === "e") { sFresh(); S.t.push({ k: "c", s: "e" }); }
-  else if (a === "ans") { sFresh(); S.t.push({ k: "c", s: "Ans" }); }
-  else if (a === "(") { sFresh(); S.t.push({ k: "(" }); }
-  else if (a === ")") { if (!S.done && sOpen(S.t) > 0 && sEndsOperand()) S.t.push({ k: ")" }); }
+  else if (a === "pi") { sFresh(); sIns({ k: "c", s: "π" }); }
+  else if (a === "e") { sFresh(); sIns({ k: "c", s: "e" }); }
+  else if (a === "ans") { sFresh(); sIns({ k: "c", s: "Ans" }); }
+  else if (a === "(") { sFresh(); sIns({ k: "(" }); }
+  else if (a === ")") { if (!S.done && sOpen(S.t) > 0 && sEndsOperand()) sIns({ k: ")" }); }
   else if (a === "neg") sNeg();
   else if (a === "pow") sOp("^");
   else if (a === "sq") sPost(second ? "³" : "²");
@@ -551,7 +572,7 @@ function sciKey(a){
   else {
     const alt = { sin: "asin", cos: "acos", tan: "atan", ln: "exp", log: "p10", sqrt: "cbrt" };
     sFresh();
-    S.t.push({ k: "fn", s: second && alt[a] ? alt[a] : a }, { k: "(" });
+    sIns({ k: "fn", s: second && alt[a] ? alt[a] : a });
   }
 }
 
@@ -755,10 +776,15 @@ function renderSci(){
     subEl.textContent = " ";
   } else {
     const open = sOpen(S.t);
-    mainEl.innerHTML = (sText(S.t) || "0") + (open > 0 ? '<span class="ghost">' + ")".repeat(open) + "</span>" : "");
+    if (!S.t.length) mainEl.textContent = "0";
+    else {
+      const parts = S.t.map((u, i) => '<span data-i="' + i + '">' + sUnitText(u, i) + "</span>");
+      parts.splice(S.c, 0, '<span class="cur" id="cur"></span>');
+      mainEl.innerHTML = parts.join("") + (open > 0 ? '<span class="ghost">' + ")".repeat(open) + "</span>" : "");
+    }
     let prev = "";
-    if (S.t.some(x => x.k !== "num")) {
-      try { const t = sClosed(); if (t.length) prev = "= " + sFmt(sClean(sEval(t))); } catch (e) {}
+    if (S.t.some(x => x.k !== "d")) {
+      try { const t = sClosed(); if (t.length) prev = "= " + sFmt(sClean(sEval(sTok(t)))); } catch (e) {}
     }
     subEl.textContent = prev || (S.t.length || S.basic ? " " : "2nd gives sin⁻¹ cos⁻¹ tan⁻¹ eˣ 10ˣ x³ ∛");
   }
@@ -780,6 +806,11 @@ function renderSci(){
   });
   fit();
   mainEl.scrollLeft = mainEl.scrollWidth;
+  const cur = $("cur");
+  if (cur) { // keep the cursor in view on long expressions
+    const x = cur.offsetLeft - mainEl.offsetLeft;
+    if (x < mainEl.scrollLeft + 12) mainEl.scrollLeft = Math.max(0, x - 24);
+  }
 }
 function render(){
   const x = mode === "xray", sc = mode === "sci";
@@ -894,6 +925,22 @@ document.addEventListener("visibilitychange", function(){
   if (document.visibilityState === "visible") setWake(mode === "xray" && !!xRes);
 });
 
+mainEl.addEventListener("click", function(ev){
+  if (mode !== "sci") return;
+  msg = "";
+  if (S.done) { if (S.t.length) sEdit(); render(); return; }
+  const spans = Array.from(mainEl.querySelectorAll("[data-i]"));
+  if (!spans.length) return;
+  let best = spans[0], bd = Infinity;
+  spans.forEach(function(sp){
+    const r = sp.getBoundingClientRect();
+    const d = ev.clientX < r.left ? r.left - ev.clientX : ev.clientX > r.right ? ev.clientX - r.right : 0;
+    if (d < bd) { bd = d; best = sp; }
+  });
+  const r = best.getBoundingClientRect(), i = Number(best.dataset.i);
+  S.c = ev.clientX < r.left + r.width / 2 ? i : i + 1;
+  render();
+});
 $("app").addEventListener("click", function(ev){
   const b = ev.target.closest("button");
   if (!b || b.disabled) return;
