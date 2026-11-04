@@ -193,7 +193,7 @@ body{
 <script>
 (function(){
 "use strict";
-const VERSION = "v7";
+const VERSION = "v8";
 
 /* iPhone home-screen apps lay the page out shorter than the screen (by about the status bar height),
    which leaves dead space at the bottom. Measure the shortfall and stretch the page to cover it. */
@@ -736,7 +736,6 @@ function renderSci(){
     chips[dir].disabled = !f || onGrid(f);
     chips[dir].setAttribute("aria-pressed", String(!!f && S.pk === dir));
   }
-  drawTape(S.done ? S.ex : null, S.pk);
   $("s-2nd").classList.toggle("on", S.sh);
   $("s-2nd").setAttribute("aria-pressed", String(S.sh));
   $("s-angle").textContent = S.deg ? "DEG" : "RAD";
@@ -757,7 +756,7 @@ function render(){
   tapeEl.classList.toggle("tube", x);
   if (!x) { mainEl.classList.remove("walk"); exprEl.classList.remove("warn"); }
   setWake(x && !!xRes);
-  padsEl.hidden = sc || (x && !!xRes); listEl.hidden = !(x && !!xRes); sciEl.hidden = !sc;
+  padsEl.hidden = sc || (x && !!xRes); listEl.hidden = !(x && !!xRes); sciEl.hidden = !sc; tapeEl.toggleAttribute("hidden", sc);
   $("k-sign").disabled = x;
   if (x) { renderXray(); return; }
   if (sc) { renderSci(); return; }
