@@ -193,7 +193,7 @@ body{
 <script>
 (function(){
 "use strict";
-const VERSION = "v8";
+const VERSION = "v9";
 
 /* iPhone home-screen apps lay the page out shorter than the screen (by about the status bar height),
    which leaves dead space at the bottom. Measure the shortfall and stretch the page to cover it. */
@@ -715,12 +715,8 @@ function renderSci(){
   exprEl.textContent = msg || (S.done ? S.expr : (S.deg ? "Degrees" : "Radians"));
   exprEl.classList.toggle("err", !!msg);
   if (S.done) {
-    mainEl.innerHTML = S.pk && S.ex ? html(roundTo(S.ex, S.pk)) : sFmt(S.res);
-    subEl.textContent = S.pk
-      ? "Rounded " + S.pk + " to 1/16 · exact " + sFmt(S.res)
-      : !S.ex ? " "
-      : onGrid(S.ex) ? (S.ex.d === 1n ? "Whole number" : "= " + txt(S.ex) + " exactly")
-      : "Down / Up rounds it to a 16th";
+    mainEl.textContent = sFmt(S.res);
+    subEl.textContent = " ";
   } else {
     const open = sOpen(S.t);
     mainEl.innerHTML = (sText(S.t) || "0") + (open > 0 ? '<span class="ghost">' + ")".repeat(open) + "</span>" : "");
@@ -752,7 +748,7 @@ function render(){
   $("tab-calc").setAttribute("aria-selected", String(mode === "calc"));
   $("tab-xray").setAttribute("aria-selected", String(x));
   $("tab-sci").setAttribute("aria-selected", String(sc));
-  roundEl.hidden = x; opsEl.hidden = x; xopsEl.hidden = !x; xops2El.hidden = !(x && !!xRes);
+  roundEl.hidden = x || sc; opsEl.hidden = x; xopsEl.hidden = !x; xops2El.hidden = !(x && !!xRes);
   tapeEl.classList.toggle("tube", x);
   if (!x) { mainEl.classList.remove("walk"); exprEl.classList.remove("warn"); }
   setWake(x && !!xRes);
