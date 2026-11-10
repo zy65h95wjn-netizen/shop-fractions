@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-02",
+ "updated": "2026-11-10",
  "season": "Treasure Hunters",
  "groups": [
   {
@@ -2881,10 +2881,49 @@
     "https://www.fnsprites.info/sprite-info.js",
     "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
    ]
+  },
+  {
+   "id": "fn-s5-liluzivertjr_basic",
+   "name": "Lil' Uzi Vert Jr. Sprite",
+   "group": "fn-s5-basic",
+   "rarity": "epic",
+   "added": "2026-11-10",
+   "sourceId": "liluzivertjr_basic",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/liluzivertjr_basic.png",
+   "how": "Finding instructions are awaiting verification.",
+   "archived": false,
+   "available": true
+  },
+  {
+   "id": "fn-s5-liluzivertjr_fortune",
+   "name": "Fortune Lil' Uzi Vert Jr. Sprite",
+   "group": "fn-s5-fortune",
+   "rarity": "special",
+   "added": "2026-11-10",
+   "sourceId": "liluzivertjr_fortune",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/liluzivertjr_fortune.png",
+   "how": "Finding instructions are awaiting verification.",
+   "archived": false,
+   "available": true
+  },
+  {
+   "id": "fn-s5-liluzivertjr_cursed",
+   "name": "Cursed Lil' Uzi Vert Jr. Sprite",
+   "group": "fn-s5-cursed",
+   "rarity": "special",
+   "added": "2026-11-10",
+   "sourceId": "liluzivertjr_cursed",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/liluzivertjr_cursed.png",
+   "how": "Finding instructions are awaiting verification.",
+   "archived": false,
+   "available": true
   }
  ],
  "currentSeason": 5,
- "lastChecked": "2026-11-09T06:51:30+00:00",
+ "lastChecked": "2026-11-10T07:29:34+00:00",
  "source": "https://www.fnsprites.info/",
  "schemaVersion": 2
 }
