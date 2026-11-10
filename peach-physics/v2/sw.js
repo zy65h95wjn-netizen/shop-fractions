@@ -1,5 +1,5 @@
 // One-version scope isolates v0.0.2 from the existing working Peach Physics v0.0.1.
-const CACHE = 'peach-physics-v0-0-2-20261110';
+const CACHE = 'peach-physics-v0-0-2-20261110-r2';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', '../apple-touch-icon.png'];
 self.addEventListener('install', event => {
  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
