@@ -10,7 +10,7 @@
 <meta name="description" content="Peach Physics: a playful interactive Christmas elf experiment with adjustable impact waves and linked motion.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Peach Physics — Elf Lab 0.0.8 r4</title>
+<title>Peach Physics — Elf Lab 0.0.8 r5</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -87,7 +87,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r4</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r5</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/4</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
@@ -344,8 +344,8 @@ const HOLLY_MOTION_CONTOURS=[
  [[300,402],[350,402],[383,421],[400,454],[407,494],[406,536],[399,563],
   [381,587],[356,616],[323,635],[277,633],[245,615],[227,578],[218,533],
   [219,487],[245,447],[275,418]],
- [[450,408],[490,415],[531,438],[563,470],[588,500],[600,539],[590,574],
-  [566,605],[527,632],[480,639],[445,623],[428,594],[420,563],[418,522],
+ [[450,408],[490,415],[531,433],[568,450],[590,474],[608,500],[616,530],
+  [609,559],[592,589],[565,616],[527,639],[480,644],[445,623],[428,594],[420,563],[418,522],
   [421,475],[430,437]]
 ];
 const hollyMotionPlanes=HOLLY_MOTION_CONTOURS.map(points=>points.map(([x,y],i)=>{
@@ -354,7 +354,11 @@ const hollyMotionPlanes=HOLLY_MOTION_CONTOURS.map(points=>points.map(([x,y],i)=>
 }));
 function hollyMotionWeight(side,x,y){
  const smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
- const edge=smooth(Math.min(...hollyMotionPlanes[side].map(([nx,ny,c])=>(nx*x+ny*y+c)/32)));
+ // The marked screen-right outer cup needs its feather beyond the visible
+ // edge. Only its outer arc uses the narrower falloff; the left and center
+ // support weights retain their accepted calibration.
+ const edge=smooth(Math.min(...hollyMotionPlanes[side].map(([nx,ny,c],i)=>
+  (nx*x+ny*y+c)/(side===1&&i>=2&&i<=9?20:32))));
  const low=smooth((y-560)/30);
  const lace=side===0?smooth((374-x)/20):smooth((x-440)/24);
  const hair=side===0?smooth((x-226)/20):1;
@@ -388,7 +392,7 @@ function touchAnchor(side,p){
  const [x,y]=currentCharacter().impactCenters[side];
  return {p:{...p,x,y},offsetX:x-p.x,offsetY:y-p.y};
 }
-const HOLLY_CROP=[208,384,408,272];
+const HOLLY_CROP=[208,384,424,288];
 let hollyMaskLoc,hollyMaskPixels=null,hollySource=null,hollyLayer=null;
 function buildHollyMask(){
  if(hollyMaskPixels)return;
@@ -650,7 +654,7 @@ function initGL(){
   if(uHolly>0.5){
    vec2 sampleUV=vRawUV;
    for(int k=0;k<6;k++){
-    vec2 weights=texture2D(uHollyShape,(sampleUV*vec2(720.0,1280.0)-vec2(208.0,384.0))/vec2(408.0,272.0)).rg;
+    vec2 weights=texture2D(uHollyShape,(sampleUV*vec2(720.0,1280.0)-vec2(208.0,384.0))/vec2(424.0,288.0)).rg;
     sampleUV-=(vAureliaLeft*weights.r+vAureliaRight*weights.g)/6.0;
    }
    photoUV=sampleUV;

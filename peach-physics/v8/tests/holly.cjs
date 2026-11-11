@@ -47,7 +47,7 @@ const sizes=[{width:375,height:667},{width:390,height:844},{width:430,height:932
     const sx=Math.round((f.x+x/720*f.width)*dpr),sy=Math.round((f.y+y/1280*f.height)*dpr);if(sx<0||sx>=c.width||sy<0||sy>=c.height)continue;
     const at=((c.height-1-sy)*c.width+sx)*4;for(let k=0;k<3;k++)if(pixels[at+k]!==rest[at+k]){changed++;break;}
    }return changed;};
-   const boxes={head:[250,80,500,320],upperTorso:[310,335,450,400],lacing:[374,590,440,800],corset:[240,660,550,710],center:[409,455,417,570],leftHair:[160,350,220,580],rightHair:[570,360,610,460],leftArm:[100,620,190,720],rightArm:[590,620,635,720],background:[640,250,700,650],leftFur:[280,530,330,550],rightFur:[505,545,550,560],leftSkin:[300,445,380,500],rightSkin:[445,455,520,510]};
+   const boxes={head:[250,80,500,320],upperTorso:[310,335,450,400],lacing:[374,590,440,800],corset:[240,660,550,710],center:[409,455,417,570],leftHair:[160,350,220,580],rightHair:[570,360,610,450],leftArm:[100,620,190,720],rightArm:[590,620,635,720],background:[640,250,700,650],leftFur:[280,530,330,550],rightFur:[505,545,550,560],leftSkin:[300,445,380,500],rightSkin:[445,455,520,510]};
    const rows=[];for(const side of [0,1])for(const [dx,dy] of [[26,30],[-26,-30],[26,-30],[-26,30]]){
     __test.forcePose(dx,dy,side);const pixels=__test.pixels();rows.push({side,dx,dy,boxes:Object.fromEntries(Object.entries(boxes).map(([k,b])=>[k,count(pixels,b)]))});
    }return rows;
@@ -124,7 +124,7 @@ const sizes=[{width:375,height:667},{width:390,height:844},{width:430,height:932
  // Uninstrumented production app: offline caching and all four character cycle.
  const live=await browser.newContext({viewport:sizes[1],isMobile:true,hasTouch:true}),lp=await live.newPage(),errors=[];lp.on('pageerror',e=>errors.push(e.message));
  await lp.goto(`${base}/peach-physics/v8/`);await lp.evaluate(async()=>{await navigator.serviceWorker.register('./sw.js',{scope:'./'});await navigator.serviceWorker.ready;});await lp.waitForFunction(()=>navigator.serviceWorker.controller);
- ok(await lp.evaluate(async()=>!!await (await caches.open('peach-physics-v008-r4')).match('./assets/holly-heartbreaker.jpg')),'Holly precached');
+ ok(await lp.evaluate(async()=>!!await (await caches.open('peach-physics-v008-r5')).match('./assets/holly-heartbreaker.jpg')),'Holly precached');
  await live.setOffline(true);await lp.reload();await lp.waitForFunction(()=>window.__peachPhysicsDebug?.snapshot().frames>1);
  for(const id of ['midnight','aurelia','holly','ember']){await lp.locator('#character').click();await lp.waitForFunction(id=>__peachPhysicsDebug.snapshot().character===id,id);ok(true,`offline ${id}`);}
  ok(errors.length===0&&fresh.errors.length===0,'no uncaught errors');
