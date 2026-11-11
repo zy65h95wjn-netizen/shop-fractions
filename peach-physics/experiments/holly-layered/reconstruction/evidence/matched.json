@@ -1,0 +1,359 @@
+{
+  "baseline": "55fdcd55bd74b33345c4b2fb6e2a1f1379041319",
+  "poses": [
+    {
+      "backend": "webgl",
+      "side": 0,
+      "phase": "peak",
+      "variant": "before",
+      "fieldHash": "813da30dda26299d819f08993b7ffb3f51f12efe60bb8eafd24d614af766d17f",
+      "metrics": {
+        "minDet": 0.64059640693144,
+        "maxTravel": 19.46515754028271,
+        "minStretch": 0.594121404672389,
+        "maxStretch": 1.6063115840910898,
+        "backend": "webgl",
+        "frameMs": 45,
+        "missingBacking": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "webgl",
+        "error": null
+      }
+    },
+    {
+      "backend": "webgl",
+      "side": 0,
+      "phase": "peak",
+      "variant": "after",
+      "fieldHash": "813da30dda26299d819f08993b7ffb3f51f12efe60bb8eafd24d614af766d17f",
+      "metrics": {
+        "minDet": 0.64059640693144,
+        "maxTravel": 19.46515754028271,
+        "minStretch": 0.594121404672389,
+        "maxStretch": 1.6063115840910898,
+        "backend": "webgl",
+        "frameMs": 49,
+        "missingBacking": false,
+        "backingIsInferred": true,
+        "sourceRepair": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "webgl",
+        "error": null
+      }
+    },
+    {
+      "backend": "webgl",
+      "side": 0,
+      "phase": "rebound",
+      "variant": "before",
+      "fieldHash": "96ee8ed21b081619b3dab926e6e2a0b58c4749c7ea67c3ad612247764d0b6a00",
+      "metrics": {
+        "minDet": 0.7788938194281627,
+        "maxTravel": 7.569648333814796,
+        "minStretch": 0.7781770764035034,
+        "maxStretch": 1.2292728015841625,
+        "backend": "webgl",
+        "frameMs": 26,
+        "missingBacking": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "webgl",
+        "error": null
+      }
+    },
+    {
+      "backend": "webgl",
+      "side": 0,
+      "phase": "rebound",
+      "variant": "after",
+      "fieldHash": "96ee8ed21b081619b3dab926e6e2a0b58c4749c7ea67c3ad612247764d0b6a00",
+      "metrics": {
+        "minDet": 0.7788938194281627,
+        "maxTravel": 7.569648333814796,
+        "minStretch": 0.7781770764035034,
+        "maxStretch": 1.2292728015841625,
+        "backend": "webgl",
+        "frameMs": 26,
+        "missingBacking": false,
+        "backingIsInferred": true,
+        "sourceRepair": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "webgl",
+        "error": null
+      }
+    },
+    {
+      "backend": "webgl",
+      "side": 1,
+      "phase": "peak",
+      "variant": "before",
+      "fieldHash": "f8054f96c693a531124789bc3c15c754296579c25cbccd70db4c11e153df9dd5",
+      "metrics": {
+        "minDet": 0.6216611607833169,
+        "maxTravel": 19.140708695256144,
+        "minStretch": 0.594587464342587,
+        "maxStretch": 1.6040270360452125,
+        "backend": "webgl",
+        "frameMs": 25,
+        "missingBacking": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "webgl",
+        "error": null
+      }
+    },
+    {
+      "backend": "webgl",
+      "side": 1,
+      "phase": "peak",
+      "variant": "after",
+      "fieldHash": "f8054f96c693a531124789bc3c15c754296579c25cbccd70db4c11e153df9dd5",
+      "metrics": {
+        "minDet": 0.6216611607833169,
+        "maxTravel": 19.140708695256144,
+        "minStretch": 0.594587464342587,
+        "maxStretch": 1.6040270360452125,
+        "backend": "webgl",
+        "frameMs": 26,
+        "missingBacking": false,
+        "backingIsInferred": true,
+        "sourceRepair": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "webgl",
+        "error": null
+      }
+    },
+    {
+      "backend": "webgl",
+      "side": 1,
+      "phase": "rebound",
+      "variant": "before",
+      "fieldHash": "cfe3725a8f46242836db0dcfb8989cff0772c438c95701a9774bd591832b01ff",
+      "metrics": {
+        "minDet": 0.770459522720154,
+        "maxTravel": 7.800262323940075,
+        "minStretch": 0.7694756680741036,
+        "maxStretch": 1.2363098934967318,
+        "backend": "webgl",
+        "frameMs": 19,
+        "missingBacking": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "webgl",
+        "error": null
+      }
+    },
+    {
+      "backend": "webgl",
+      "side": 1,
+      "phase": "rebound",
+      "variant": "after",
+      "fieldHash": "cfe3725a8f46242836db0dcfb8989cff0772c438c95701a9774bd591832b01ff",
+      "metrics": {
+        "minDet": 0.770459522720154,
+        "maxTravel": 7.800262323940075,
+        "minStretch": 0.7694756680741036,
+        "maxStretch": 1.2363098934967318,
+        "backend": "webgl",
+        "frameMs": 21,
+        "missingBacking": false,
+        "backingIsInferred": true,
+        "sourceRepair": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "webgl",
+        "error": null
+      }
+    },
+    {
+      "backend": "canvas",
+      "side": 0,
+      "phase": "peak",
+      "variant": "before",
+      "fieldHash": "813da30dda26299d819f08993b7ffb3f51f12efe60bb8eafd24d614af766d17f",
+      "metrics": {
+        "minDet": 0.64059640693144,
+        "maxTravel": 19.46515754028271,
+        "minStretch": 0.594121404672389,
+        "maxStretch": 1.6063115840910898,
+        "backend": "canvas",
+        "frameMs": 145,
+        "missingBacking": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "canvas",
+        "error": null
+      }
+    },
+    {
+      "backend": "canvas",
+      "side": 0,
+      "phase": "peak",
+      "variant": "after",
+      "fieldHash": "813da30dda26299d819f08993b7ffb3f51f12efe60bb8eafd24d614af766d17f",
+      "metrics": {
+        "minDet": 0.64059640693144,
+        "maxTravel": 19.46515754028271,
+        "minStretch": 0.594121404672389,
+        "maxStretch": 1.6063115840910898,
+        "backend": "canvas",
+        "frameMs": 125,
+        "missingBacking": false,
+        "backingIsInferred": true,
+        "sourceRepair": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "canvas",
+        "error": null
+      }
+    },
+    {
+      "backend": "canvas",
+      "side": 0,
+      "phase": "rebound",
+      "variant": "before",
+      "fieldHash": "96ee8ed21b081619b3dab926e6e2a0b58c4749c7ea67c3ad612247764d0b6a00",
+      "metrics": {
+        "minDet": 0.7788938194281627,
+        "maxTravel": 7.569648333814796,
+        "minStretch": 0.7781770764035034,
+        "maxStretch": 1.2292728015841625,
+        "backend": "canvas",
+        "frameMs": 135,
+        "missingBacking": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "canvas",
+        "error": null
+      }
+    },
+    {
+      "backend": "canvas",
+      "side": 0,
+      "phase": "rebound",
+      "variant": "after",
+      "fieldHash": "96ee8ed21b081619b3dab926e6e2a0b58c4749c7ea67c3ad612247764d0b6a00",
+      "metrics": {
+        "minDet": 0.7788938194281627,
+        "maxTravel": 7.569648333814796,
+        "minStretch": 0.7781770764035034,
+        "maxStretch": 1.2292728015841625,
+        "backend": "canvas",
+        "frameMs": 103,
+        "missingBacking": false,
+        "backingIsInferred": true,
+        "sourceRepair": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "canvas",
+        "error": null
+      }
+    },
+    {
+      "backend": "canvas",
+      "side": 1,
+      "phase": "peak",
+      "variant": "before",
+      "fieldHash": "f8054f96c693a531124789bc3c15c754296579c25cbccd70db4c11e153df9dd5",
+      "metrics": {
+        "minDet": 0.6216611607833169,
+        "maxTravel": 19.140708695256144,
+        "minStretch": 0.594587464342587,
+        "maxStretch": 1.6040270360452125,
+        "backend": "canvas",
+        "frameMs": 121,
+        "missingBacking": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "canvas",
+        "error": null
+      }
+    },
+    {
+      "backend": "canvas",
+      "side": 1,
+      "phase": "peak",
+      "variant": "after",
+      "fieldHash": "f8054f96c693a531124789bc3c15c754296579c25cbccd70db4c11e153df9dd5",
+      "metrics": {
+        "minDet": 0.6216611607833169,
+        "maxTravel": 19.140708695256144,
+        "minStretch": 0.594587464342587,
+        "maxStretch": 1.6040270360452125,
+        "backend": "canvas",
+        "frameMs": 106,
+        "missingBacking": false,
+        "backingIsInferred": true,
+        "sourceRepair": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "canvas",
+        "error": null
+      }
+    },
+    {
+      "backend": "canvas",
+      "side": 1,
+      "phase": "rebound",
+      "variant": "before",
+      "fieldHash": "cfe3725a8f46242836db0dcfb8989cff0772c438c95701a9774bd591832b01ff",
+      "metrics": {
+        "minDet": 0.770459522720154,
+        "maxTravel": 7.800262323940075,
+        "minStretch": 0.7694756680741036,
+        "maxStretch": 1.2363098934967318,
+        "backend": "canvas",
+        "frameMs": 121,
+        "missingBacking": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "canvas",
+        "error": null
+      }
+    },
+    {
+      "backend": "canvas",
+      "side": 1,
+      "phase": "rebound",
+      "variant": "after",
+      "fieldHash": "cfe3725a8f46242836db0dcfb8989cff0772c438c95701a9774bd591832b01ff",
+      "metrics": {
+        "minDet": 0.770459522720154,
+        "maxTravel": 7.800262323940075,
+        "minStretch": 0.7694756680741036,
+        "maxStretch": 1.2363098934967318,
+        "backend": "canvas",
+        "frameMs": 104,
+        "missingBacking": false,
+        "backingIsInferred": true,
+        "sourceRepair": true
+      },
+      "info": {
+        "layered": true,
+        "backend": "canvas",
+        "error": null
+      }
+    }
+  ],
+  "errors": [],
+  "fieldPairsIdentical": 8
+}

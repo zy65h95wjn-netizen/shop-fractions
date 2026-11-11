@@ -1,0 +1,181 @@
+{
+  "baseline": "55fdcd55bd74b33345c4b2fb6e2a1f1379041319",
+  "noCropResampling": true,
+  "allReviewImagesUnderBytes": 716800,
+  "files": [
+    {
+      "file": "webgl-left-peak-before.png",
+      "bytes": 154369,
+      "sha256": "3130d56230bf508383348650c7c5914abaafdecda40c7ee030da65d36b344c61",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "webgl-left-peak-after.png",
+      "bytes": 154842,
+      "sha256": "42ea9cf3a3dd6a467147ea12d4cb6ed0ee1d23fcd3f3629fa805b1e12597e269",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "webgl-left-peak-pair.png",
+      "bytes": 170578,
+      "sha256": "a33f1a364d6c82eab38c517735da09a001d247583db3cddaa9459866e55ac9c7",
+      "kind": "lossless-native-pair"
+    },
+    {
+      "file": "webgl-left-rebound-before.png",
+      "bytes": 156920,
+      "sha256": "326d8c5d0869b558e7a89d7e5cc35add2969f2caf4a43edba2e340714df65499",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "webgl-left-rebound-after.png",
+      "bytes": 156591,
+      "sha256": "be2cf5c8232590865deed825dfeac863b8757980dcca9c69179bbecee74366e4",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "webgl-left-rebound-pair.png",
+      "bytes": 168565,
+      "sha256": "ceaa30498ab272e13d9d9175707c2fcc861b85be5ec485e0d9c21078e3ec14a5",
+      "kind": "lossless-native-pair"
+    },
+    {
+      "file": "webgl-left-temporal.jpg",
+      "bytes": 464530,
+      "sha256": "eb8cae90b702fe1cc12b0603120daf34494f4961b279fe337271ddd2f9b8f893",
+      "kind": "native-crop-jpeg-q93-444"
+    },
+    {
+      "file": "webgl-right-peak-before.png",
+      "bytes": 141575,
+      "sha256": "a1069ffdfc01479bf1174a00625d27fe76e3509f7323ebf771c47a6d92027e3e",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "webgl-right-peak-after.png",
+      "bytes": 141565,
+      "sha256": "5f46b0c8ade7ca4babbf4a2046ce77c337edfa972bc9c542c11a8499480729f9",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "webgl-right-peak-pair.png",
+      "bytes": 154154,
+      "sha256": "520eb936f1add4d30e2224bf1673d373deeb85e68b15dec02c6fba8b1db6f550",
+      "kind": "lossless-native-pair"
+    },
+    {
+      "file": "webgl-right-rebound-before.png",
+      "bytes": 144525,
+      "sha256": "254913da7347f1d08ed6889ecfdeb987e7cb41fab8d074ec24097e2f0ba3d920",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "webgl-right-rebound-after.png",
+      "bytes": 144147,
+      "sha256": "6705044648a88053ea940b0895b97ac73c4baca599ae3643f05f339c4fc70d16",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "webgl-right-rebound-pair.png",
+      "bytes": 154098,
+      "sha256": "eb221568a3b04144030c85411e6bc96f1d52a7c37dc8a302228fd51f11232e12",
+      "kind": "lossless-native-pair"
+    },
+    {
+      "file": "webgl-right-temporal.jpg",
+      "bytes": 430673,
+      "sha256": "62a7fe134120150e64318f5456b05d2736ef6c6523cf564382975d140ec80bb0",
+      "kind": "native-crop-jpeg-q93-444"
+    },
+    {
+      "file": "canvas-left-peak-before.png",
+      "bytes": 162714,
+      "sha256": "953b0dc969fa4f5ae874d8857aab8ddc99f7d53fae1d43fd622d6f84471abba0",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "canvas-left-peak-after.png",
+      "bytes": 161925,
+      "sha256": "cce02db097cb045c5654554234b0c148af1748f5cb2047e22f18be98a96b3f19",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "canvas-left-peak-pair.png",
+      "bytes": 175282,
+      "sha256": "77e98aa3536f0881b661f7b903b6cd3e86ecb38d643f11897dbd8ae6b0c3d07f",
+      "kind": "lossless-native-pair"
+    },
+    {
+      "file": "canvas-left-rebound-before.png",
+      "bytes": 163518,
+      "sha256": "e1677b5d02638111fcaf1104e652d7efdac221776c8b165453f505935752a559",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "canvas-left-rebound-after.png",
+      "bytes": 162869,
+      "sha256": "33d295a17da542fb7937b1ebd160d3fc816cca3759fb40185e9746d240430351",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "canvas-left-rebound-pair.png",
+      "bytes": 171700,
+      "sha256": "0a73b4c5eae0f55ce8b199e1ccc4afb85d1ca7400eeea3aec37713cf5cf60c67",
+      "kind": "lossless-native-pair"
+    },
+    {
+      "file": "canvas-left-temporal.jpg",
+      "bytes": 469051,
+      "sha256": "da3bfe231df8fc479f4ac98b0dcad5eb62fb28566f681e807d99856bcd816d9c",
+      "kind": "native-crop-jpeg-q93-444"
+    },
+    {
+      "file": "canvas-right-peak-before.png",
+      "bytes": 149365,
+      "sha256": "962fec4a161539d46bc4a48fd0888fcb8662e94e5ff706d240d5b3402342066e",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "canvas-right-peak-after.png",
+      "bytes": 148892,
+      "sha256": "2e37a3679dde117a9e910b25078fbcdf7fb466aa326fffcd0717a28d15183645",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "canvas-right-peak-pair.png",
+      "bytes": 158817,
+      "sha256": "f4464f234ec3bf81e0bf23a57e20af8d6c8d65206f206a98ca5fc1a4e0b9c17b",
+      "kind": "lossless-native-pair"
+    },
+    {
+      "file": "canvas-right-rebound-before.png",
+      "bytes": 150948,
+      "sha256": "e262ceab3ceeed73836befd7c8c1055ef237e640232edd20487d017802fa78c5",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "canvas-right-rebound-after.png",
+      "bytes": 150378,
+      "sha256": "bd3f036851fe21d156ead9885039d06c95e62c2ca1cf91d00c12b5ddfc6a050f",
+      "kind": "lossless-native-crop"
+    },
+    {
+      "file": "canvas-right-rebound-pair.png",
+      "bytes": 157368,
+      "sha256": "7e36dbe522b93af735c2f9cc42103b38844f8aa6deb6ca017e6ba53061caafe6",
+      "kind": "lossless-native-pair"
+    },
+    {
+      "file": "canvas-right-temporal.jpg",
+      "bytes": 434603,
+      "sha256": "74da1247b372da86117c2466625fe6caef4ef96c627cea61009ac6710b116a79",
+      "kind": "native-crop-jpeg-q93-444"
+    },
+    {
+      "file": "source-layer-atlas.jpg",
+      "bytes": 215519,
+      "sha256": "388bdf58c7023af890b855a5ba539a7236921eac41aa80e01d53449cb91f0b23",
+      "kind": "native-source-layer-atlas"
+    }
+  ]
+}
