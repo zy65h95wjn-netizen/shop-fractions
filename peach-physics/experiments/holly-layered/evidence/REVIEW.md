@@ -23,3 +23,23 @@ The two whole-frame PNGs are byte-for-byte copies of the existing captures. [The
 - [Motion states and phase timings](states.json) · [validation and performance measurements](metrics.json) · [backend parity](backend-parity.json) · [original-artwork provenance](provenance.json).
 
 The existing measured right-side peak exposes roughly 920 source pixels, with a maximum horizontal uncovered run of 21 source pixels in that pose. Those are diagnostics of missing information, not visual acceptance. The existing 108 trajectory comparisons and exact resting-pixel comparisons remain unchanged; no new motion experiment was run for this transfer.
+
+## Connector-sized supplemental stills
+
+These additional assets preserve commit `051dcb7ab1ccc87073e09e7762e60629151141e9` and all existing evidence. They reuse its original captured frames; no implementation, animation, physics, or source portrait was changed. Every file below is smaller than **700 KiB (716,800 bytes)**.
+
+The four JPEG sheets have labeled r5/r6/layered columns and six temporal rows: impact (0 s), loading (0.067 s), peak (0.100 s), return (0.200 s), rebound (left 0.308 s / right 0.292 s), and settled (8 s). Intermediate rows come from existing movie captures 002 and 006. Each 266×337 source crop is pasted at native **1:1**, with no resizing; sheets are 798×2278 pixels. JPEG quality is **93, 4:4:4** (no chroma subsampling). JPEG encoding is lossy; use the PNG close-ups for exact edge colors.
+
+Crop rectangles in the original 780×1688 DPR-2 captures are left `(195, 535)–(461, 872)` and right `(431, 535)–(697, 872)`. Identical crops are applied to all three renderer columns. The separate 266×337 RGBA PNG close-ups preserve the original crop pixels **exactly**, including pink gap diagnostics; no palette reduction or retouching is used.
+
+| Backend | Left contact sheet | Right contact sheet |
+| --- | --- | --- |
+| WebGL | [JPEG](compact/webgl-left-contact-sheet.jpg) — 692,942 bytes | [JPEG](compact/webgl-right-contact-sheet.jpg) — 642,550 bytes |
+| Canvas | [JPEG](compact/canvas-left-contact-sheet.jpg) — 690,858 bytes | [JPEG](compact/canvas-right-contact-sheet.jpg) — 639,372 bytes |
+
+| Backend / side | Layered peak (lossless) | Layered rebound (lossless) |
+| --- | --- | --- |
+| WebGL / left | [PNG](compact/webgl-layered-left-peak.png) — 154,369 bytes | [PNG](compact/webgl-layered-left-rebound.png) — 156,920 bytes |
+| WebGL / right | [PNG](compact/webgl-layered-right-peak.png) — 141,575 bytes | [PNG](compact/webgl-layered-right-rebound.png) — 144,525 bytes |
+| Canvas / left | [PNG](compact/canvas-layered-left-peak.png) — 162,714 bytes | [PNG](compact/canvas-layered-left-rebound.png) — 163,518 bytes |
+| Canvas / right | [PNG](compact/canvas-layered-right-peak.png) — 149,365 bytes | [PNG](compact/canvas-layered-right-rebound.png) — 150,948 bytes |
