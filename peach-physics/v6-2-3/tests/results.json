@@ -1,0 +1,1196 @@
+{
+  "checks": 216,
+  "metrics": {
+    "375x667": {
+      "old": {
+        "results": [
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14592,
+              "max": 62
+            },
+            "crease": {
+              "count": 3240,
+              "max": 106
+            },
+            "belowCheek": {
+              "count": 4304,
+              "max": 29
+            },
+            "innerThigh": {
+              "count": 570,
+              "max": 20
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14622,
+              "max": 40
+            },
+            "crease": {
+              "count": 3227,
+              "max": 143
+            },
+            "belowCheek": {
+              "count": 4088,
+              "max": 26
+            },
+            "innerThigh": {
+              "count": 576,
+              "max": 21
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14447,
+              "max": 36
+            },
+            "crease": {
+              "count": 3232,
+              "max": 126
+            },
+            "belowCheek": {
+              "count": 4230,
+              "max": 31
+            },
+            "innerThigh": {
+              "count": 693,
+              "max": 30
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14524,
+              "max": 33
+            },
+            "crease": {
+              "count": 3240,
+              "max": 135
+            },
+            "belowCheek": {
+              "count": 4479,
+              "max": 31
+            },
+            "innerThigh": {
+              "count": 687,
+              "max": 41
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          }
+        ],
+        "error": 0,
+        "framing": {
+          "x": 8.06239377618192,
+          "y": 54,
+          "width": 358.87521244763616,
+          "height": 637.28
+        }
+      },
+      "new": {
+        "results": [
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 15063,
+              "max": 100
+            },
+            "crease": {
+              "count": 3213,
+              "max": 134
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 15150,
+              "max": 46
+            },
+            "crease": {
+              "count": 3063,
+              "max": 78
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14892,
+              "max": 64
+            },
+            "crease": {
+              "count": 3037,
+              "max": 95
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14929,
+              "max": 36
+            },
+            "crease": {
+              "count": 3233,
+              "max": 138
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          }
+        ],
+        "error": 0,
+        "framing": {
+          "x": 8.06239377618192,
+          "y": 54,
+          "width": 358.87521244763616,
+          "height": 637.28
+        }
+      }
+    },
+    "390x844": {
+      "old": {
+        "results": [
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14610,
+              "max": 64
+            },
+            "crease": {
+              "count": 3239,
+              "max": 102
+            },
+            "belowCheek": {
+              "count": 4340,
+              "max": 27
+            },
+            "innerThigh": {
+              "count": 608,
+              "max": 20
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14587,
+              "max": 38
+            },
+            "crease": {
+              "count": 3226,
+              "max": 145
+            },
+            "belowCheek": {
+              "count": 4164,
+              "max": 25
+            },
+            "innerThigh": {
+              "count": 590,
+              "max": 22
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14352,
+              "max": 37
+            },
+            "crease": {
+              "count": 3236,
+              "max": 125
+            },
+            "belowCheek": {
+              "count": 4251,
+              "max": 29
+            },
+            "innerThigh": {
+              "count": 713,
+              "max": 31
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14530,
+              "max": 35
+            },
+            "crease": {
+              "count": 3242,
+              "max": 132
+            },
+            "belowCheek": {
+              "count": 4533,
+              "max": 29
+            },
+            "innerThigh": {
+              "count": 683,
+              "max": 40
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          }
+        ],
+        "error": 0,
+        "framing": {
+          "x": -35.412000000000006,
+          "y": 55.704,
+          "width": 460.824,
+          "height": 818.3176450584484
+        }
+      },
+      "new": {
+        "results": [
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 15057,
+              "max": 103
+            },
+            "crease": {
+              "count": 3218,
+              "max": 135
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 15137,
+              "max": 44
+            },
+            "crease": {
+              "count": 3054,
+              "max": 78
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14908,
+              "max": 65
+            },
+            "crease": {
+              "count": 3053,
+              "max": 96
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14993,
+              "max": 35
+            },
+            "crease": {
+              "count": 3225,
+              "max": 136
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          }
+        ],
+        "error": 0,
+        "framing": {
+          "x": -35.412000000000006,
+          "y": 55.704,
+          "width": 460.824,
+          "height": 818.3176450584484
+        }
+      }
+    },
+    "430x932": {
+      "old": {
+        "results": [
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14670,
+              "max": 64
+            },
+            "crease": {
+              "count": 3233,
+              "max": 99
+            },
+            "belowCheek": {
+              "count": 4342,
+              "max": 25
+            },
+            "innerThigh": {
+              "count": 619,
+              "max": 20
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14575,
+              "max": 36
+            },
+            "crease": {
+              "count": 3229,
+              "max": 144
+            },
+            "belowCheek": {
+              "count": 4184,
+              "max": 26
+            },
+            "innerThigh": {
+              "count": 582,
+              "max": 22
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14423,
+              "max": 37
+            },
+            "crease": {
+              "count": 3231,
+              "max": 127
+            },
+            "belowCheek": {
+              "count": 4231,
+              "max": 31
+            },
+            "innerThigh": {
+              "count": 709,
+              "max": 31
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14577,
+              "max": 34
+            },
+            "crease": {
+              "count": 3242,
+              "max": 122
+            },
+            "belowCheek": {
+              "count": 4482,
+              "max": 27
+            },
+            "innerThigh": {
+              "count": 681,
+              "max": 40
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          }
+        ],
+        "error": 0,
+        "framing": {
+          "x": -39.04400000000001,
+          "y": 61.512,
+          "width": 508.088,
+          "height": 902.247659936238
+        }
+      },
+      "new": {
+        "results": [
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 15119,
+              "max": 103
+            },
+            "crease": {
+              "count": 3227,
+              "max": 139
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 15126,
+              "max": 43
+            },
+            "crease": {
+              "count": 3074,
+              "max": 77
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14940,
+              "max": 63
+            },
+            "crease": {
+              "count": 3053,
+              "max": 96
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14983,
+              "max": 37
+            },
+            "crease": {
+              "count": 3235,
+              "max": 139
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          }
+        ],
+        "error": 0,
+        "framing": {
+          "x": -39.04400000000001,
+          "y": 61.512,
+          "width": 508.088,
+          "height": 902.247659936238
+        }
+      }
+    },
+    "440x956": {
+      "old": {
+        "results": [
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14639,
+              "max": 64
+            },
+            "crease": {
+              "count": 3231,
+              "max": 99
+            },
+            "belowCheek": {
+              "count": 4343,
+              "max": 27
+            },
+            "innerThigh": {
+              "count": 631,
+              "max": 19
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14565,
+              "max": 37
+            },
+            "crease": {
+              "count": 3227,
+              "max": 145
+            },
+            "belowCheek": {
+              "count": 4214,
+              "max": 26
+            },
+            "innerThigh": {
+              "count": 595,
+              "max": 22
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14397,
+              "max": 36
+            },
+            "crease": {
+              "count": 3232,
+              "max": 128
+            },
+            "belowCheek": {
+              "count": 4241,
+              "max": 32
+            },
+            "innerThigh": {
+              "count": 724,
+              "max": 29
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14596,
+              "max": 34
+            },
+            "crease": {
+              "count": 3244,
+              "max": 124
+            },
+            "belowCheek": {
+              "count": 4547,
+              "max": 29
+            },
+            "innerThigh": {
+              "count": 698,
+              "max": 40
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          }
+        ],
+        "error": 0,
+        "framing": {
+          "x": -39.952,
+          "y": 63.096000000000004,
+          "width": 519.904,
+          "height": 923.2301636556855
+        }
+      },
+      "new": {
+        "results": [
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 15107,
+              "max": 105
+            },
+            "crease": {
+              "count": 3222,
+              "max": 140
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 15163,
+              "max": 43
+            },
+            "crease": {
+              "count": 3099,
+              "max": 77
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14947,
+              "max": 62
+            },
+            "crease": {
+              "count": 3075,
+              "max": 94
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          },
+          {
+            "background": {
+              "count": 0,
+              "max": 0
+            },
+            "garment": {
+              "count": 0,
+              "max": 0
+            },
+            "skin": {
+              "count": 14974,
+              "max": 38
+            },
+            "crease": {
+              "count": 3234,
+              "max": 136
+            },
+            "belowCheek": {
+              "count": 0,
+              "max": 0
+            },
+            "innerThigh": {
+              "count": 0,
+              "max": 0
+            },
+            "stocking": {
+              "count": 0,
+              "max": 0
+            },
+            "right": {
+              "count": 0,
+              "max": 0
+            }
+          }
+        ],
+        "error": 0,
+        "framing": {
+          "x": -39.952,
+          "y": 63.096000000000004,
+          "width": 519.904,
+          "height": 923.2301636556855
+        }
+      }
+    },
+    "transfer": {
+      "0": 0,
+      "25": 0.5743883968732295,
+      "50": 1.1402548775766022,
+      "75": 1.6974840526786703,
+      "100": 2.2461732089136044
+    }
+  }
+}
