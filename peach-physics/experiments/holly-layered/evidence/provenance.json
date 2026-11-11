@@ -1,0 +1,20 @@
+{
+  "baseline": "ddf3456cc937c7f84f0b022f76f6824e59c2d079",
+  "r4": "f582612",
+  "r5": "8eb02d3",
+  "sourcePortraits": {
+    "peach-physics/v8/assets/holly-heartbreaker.jpg": {
+      "bytes": 253083,
+      "sha256": "0ad0a1cad2273d038b1953587ecfd43857897f7627c91d8f2a02a989ffe2ba97"
+    },
+    "peach-physics/v8/assets/aurelia-frost.jpg": {
+      "bytes": 255380,
+      "sha256": "710fa8ce7eadf38de4167ae3937859aed528ae01159ed5d9ea25fa6be08eee10"
+    }
+  },
+  "originalFilesChanged": [],
+  "branch": "experiment/holly-layered-renderer",
+  "deployed": false,
+  "artworkGeneration": "No generated artwork returned; missing-source diagnostic only.",
+  "reviewChecks": "tests/review.cjs passed: source blocks, preference isolation, legacy dispatch, GL context restore and review links."
+}

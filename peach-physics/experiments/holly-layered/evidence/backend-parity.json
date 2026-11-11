@@ -1,0 +1,62 @@
+{
+  "exactFieldPairs": 56,
+  "note": "Identical coordinate fields; pixels include baseline GL/Canvas resampling. Large maximum differences occur on high-contrast diagnostic stripe thresholds. 390 CSS px phase crop, 8-bit channel units.",
+  "pixels": [
+    {
+      "side": 0,
+      "phase": "impact",
+      "meanChannelDifference": 0.42616870165880233,
+      "p99ChannelDifference": 3,
+      "maxChannelDifference": 169
+    },
+    {
+      "side": 0,
+      "phase": "peak",
+      "meanChannelDifference": 0.4254248350115938,
+      "p99ChannelDifference": 3,
+      "maxChannelDifference": 17
+    },
+    {
+      "side": 0,
+      "phase": "rebound",
+      "meanChannelDifference": 0.4293326685151854,
+      "p99ChannelDifference": 3,
+      "maxChannelDifference": 178
+    },
+    {
+      "side": 0,
+      "phase": "settled",
+      "meanChannelDifference": 0.39913411490003403,
+      "p99ChannelDifference": 3,
+      "maxChannelDifference": 17
+    },
+    {
+      "side": 1,
+      "phase": "impact",
+      "meanChannelDifference": 0.42600249712182386,
+      "p99ChannelDifference": 3,
+      "maxChannelDifference": 179
+    },
+    {
+      "side": 1,
+      "phase": "peak",
+      "meanChannelDifference": 0.4218777869663213,
+      "p99ChannelDifference": 3,
+      "maxChannelDifference": 17
+    },
+    {
+      "side": 1,
+      "phase": "rebound",
+      "meanChannelDifference": 0.42984141654910735,
+      "p99ChannelDifference": 3,
+      "maxChannelDifference": 180
+    },
+    {
+      "side": 1,
+      "phase": "settled",
+      "meanChannelDifference": 0.39913411490003403,
+      "p99ChannelDifference": 3,
+      "maxChannelDifference": 17
+    }
+  ]
+}

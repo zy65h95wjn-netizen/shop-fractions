@@ -1,0 +1,4260 @@
+{
+  "baseline": "ddf3456cc937c7f84f0b022f76f6824e59c2d079",
+  "checks": 421,
+  "trajectory": [
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "tap",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "tap",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "drag",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "drag",
+      "green": true,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "flick",
+      "green": false,
+      "exact": true
+    },
+    {
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "flick",
+      "green": true,
+      "exact": true
+    }
+  ],
+  "frames": [
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r5",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r5",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r5",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r5",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r5",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r5",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r5",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r5",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r6",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r6",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r6",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r6",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r6",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r6",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r6",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "r6",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "layered",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "layered",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "layered",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "layered",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "layered",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "layered",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "layered",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "label": "layered",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r5",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r5",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r5",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r5",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r5",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r5",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r5",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r5",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r6",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r6",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r6",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r6",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r6",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r6",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r6",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "r6",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "layered",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "layered",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "layered",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "layered",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "layered",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "layered",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "layered",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "label": "layered",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r5",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r5",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r5",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r5",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r5",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r5",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r5",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r5",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r6",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r6",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r6",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r6",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r6",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r6",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r6",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "r6",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "layered",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "layered",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "layered",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "layered",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "layered",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "layered",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "layered",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "label": "layered",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r5",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r5",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r5",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r5",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r5",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r5",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r5",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r5",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r6",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r6",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r6",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r6",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r6",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r6",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r6",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "r6",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "layered",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "layered",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "layered",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "layered",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "layered",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "layered",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "layered",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "label": "layered",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r5",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r5",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r5",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r5",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r5",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r5",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r5",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r5",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r6",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r6",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r6",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r6",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r6",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r6",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r6",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "r6",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "layered",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "layered",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "layered",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "layered",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "layered",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "layered",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "layered",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "label": "layered",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r5",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r5",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r5",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r5",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r5",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r5",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r5",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r5",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r6",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r6",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r6",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r6",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r6",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r6",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r6",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "r6",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "layered",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "layered",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "layered",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "layered",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "layered",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "layered",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "layered",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "label": "layered",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r5",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r5",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r5",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r5",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r5",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r5",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r5",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r5",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r6",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r6",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r6",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r6",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r6",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r6",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r6",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "r6",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "layered",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "layered",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "layered",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "layered",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "layered",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "layered",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "layered",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "label": "layered",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r5",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r5",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r5",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r5",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r5",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r5",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r5",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r5",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r6",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r6",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r6",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r6",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r6",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r6",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r6",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "r6",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "layered",
+      "side": 0,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "layered",
+      "side": 0,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "layered",
+      "side": 0,
+      "phase": "rebound",
+      "step": 37,
+      "time": 0.30833333333333335
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "layered",
+      "side": 0,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "layered",
+      "side": 1,
+      "phase": "impact",
+      "step": 0,
+      "time": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "layered",
+      "side": 1,
+      "phase": "peak",
+      "step": 12,
+      "time": 0.1
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "layered",
+      "side": 1,
+      "phase": "rebound",
+      "step": 35,
+      "time": 0.2916666666666667
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "label": "layered",
+      "side": 1,
+      "phase": "settled",
+      "step": 960,
+      "time": 8
+    }
+  ],
+  "fields": [
+    {
+      "backend": "webgl",
+      "width": 375,
+      "side": 0,
+      "phase": "impact",
+      "minDet": 0.8112606836126646,
+      "maxTravel": 7.322010596898184,
+      "minStretch": 0.8090465107565239,
+      "maxStretch": 1.1870438531321759,
+      "frameMs": 42,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "side": 0,
+      "phase": "peak",
+      "minDet": 0.64059640693144,
+      "maxTravel": 19.46515754028271,
+      "minStretch": 0.594121404672389,
+      "maxStretch": 1.6063115840910898,
+      "frameMs": 41,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "side": 0,
+      "phase": "rebound",
+      "minDet": 0.7788938194281627,
+      "maxTravel": 7.569648333814796,
+      "minStretch": 0.7781770764035034,
+      "maxStretch": 1.2292728015841625,
+      "frameMs": 29,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "side": 1,
+      "phase": "impact",
+      "minDet": 0.8126869335542528,
+      "maxTravel": 7.315454806729345,
+      "minStretch": 0.8085309073950696,
+      "maxStretch": 1.2224055638563653,
+      "frameMs": 23,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "side": 1,
+      "phase": "peak",
+      "minDet": 0.6216611607833169,
+      "maxTravel": 19.140708695256144,
+      "minStretch": 0.594587464342587,
+      "maxStretch": 1.6040270360452125,
+      "frameMs": 19,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "side": 1,
+      "phase": "rebound",
+      "minDet": 0.770459522720154,
+      "maxTravel": 7.800262323940075,
+      "minStretch": 0.7694756680741036,
+      "maxStretch": 1.2363098934967318,
+      "frameMs": 24,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "side": 0,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.6143948037960136,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5796894060293197,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 22,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "side": 0,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7111908376662266,
+      "frameMs": 19,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "side": 0,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.7070541105835275,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733112287006706,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 19,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "side": 0,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4781923484416948,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "side": 1,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4782021861991217,
+      "frameMs": 19,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "side": 1,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.7059126927808279,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733753453587429,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "side": 1,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7205347420838446,
+      "frameMs": 21,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 375,
+      "side": 1,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.6117631642622285,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5763731635918301,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "side": 0,
+      "phase": "impact",
+      "minDet": 0.8112606836126646,
+      "maxTravel": 7.322010596898184,
+      "minStretch": 0.8090465107565239,
+      "maxStretch": 1.1870438531321759,
+      "frameMs": 37,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "side": 0,
+      "phase": "peak",
+      "minDet": 0.64059640693144,
+      "maxTravel": 19.46515754028271,
+      "minStretch": 0.594121404672389,
+      "maxStretch": 1.6063115840910898,
+      "frameMs": 32,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "side": 0,
+      "phase": "rebound",
+      "minDet": 0.7788938194281627,
+      "maxTravel": 7.569648333814796,
+      "minStretch": 0.7781770764035034,
+      "maxStretch": 1.2292728015841625,
+      "frameMs": 31,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "side": 1,
+      "phase": "impact",
+      "minDet": 0.8126869335542528,
+      "maxTravel": 7.315454806729345,
+      "minStretch": 0.8085309073950696,
+      "maxStretch": 1.2224055638563653,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "side": 1,
+      "phase": "peak",
+      "minDet": 0.6216611607833169,
+      "maxTravel": 19.140708695256144,
+      "minStretch": 0.594587464342587,
+      "maxStretch": 1.6040270360452125,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "side": 1,
+      "phase": "rebound",
+      "minDet": 0.770459522720154,
+      "maxTravel": 7.800262323940075,
+      "minStretch": 0.7694756680741036,
+      "maxStretch": 1.2363098934967318,
+      "frameMs": 20,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "side": 0,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.6143948037960136,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5796894060293197,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 22,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "side": 0,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7111908376662266,
+      "frameMs": 21,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "side": 0,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.7070541105835275,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733112287006706,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "side": 0,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4781923484416948,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "side": 1,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4782021861991217,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "side": 1,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.7059126927808279,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733753453587429,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 19,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "side": 1,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7205347420838446,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "side": 1,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.6117631642622285,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5763731635918301,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 19,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "side": 0,
+      "phase": "impact",
+      "minDet": 0.8112606836126646,
+      "maxTravel": 7.322010596898184,
+      "minStretch": 0.8090465107565239,
+      "maxStretch": 1.1870438531321759,
+      "frameMs": 35,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "side": 0,
+      "phase": "peak",
+      "minDet": 0.64059640693144,
+      "maxTravel": 19.46515754028271,
+      "minStretch": 0.594121404672389,
+      "maxStretch": 1.6063115840910898,
+      "frameMs": 35,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "side": 0,
+      "phase": "rebound",
+      "minDet": 0.7788938194281627,
+      "maxTravel": 7.569648333814796,
+      "minStretch": 0.7781770764035034,
+      "maxStretch": 1.2292728015841625,
+      "frameMs": 31,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "side": 1,
+      "phase": "impact",
+      "minDet": 0.8126869335542528,
+      "maxTravel": 7.315454806729345,
+      "minStretch": 0.8085309073950696,
+      "maxStretch": 1.2224055638563653,
+      "frameMs": 21,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "side": 1,
+      "phase": "peak",
+      "minDet": 0.6216611607833169,
+      "maxTravel": 19.140708695256144,
+      "minStretch": 0.594587464342587,
+      "maxStretch": 1.6040270360452125,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "side": 1,
+      "phase": "rebound",
+      "minDet": 0.770459522720154,
+      "maxTravel": 7.800262323940075,
+      "minStretch": 0.7694756680741036,
+      "maxStretch": 1.2363098934967318,
+      "frameMs": 23,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "side": 0,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.6143948037960136,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5796894060293197,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 24,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "side": 0,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7111908376662266,
+      "frameMs": 26,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "side": 0,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.7070541105835275,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733112287006706,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 20,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "side": 0,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4781923484416948,
+      "frameMs": 19,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "side": 1,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4782021861991217,
+      "frameMs": 19,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "side": 1,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.7059126927808279,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733753453587429,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "side": 1,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7205347420838446,
+      "frameMs": 22,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "side": 1,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.6117631642622285,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5763731635918301,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 19,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "side": 0,
+      "phase": "impact",
+      "minDet": 0.8112606836126646,
+      "maxTravel": 7.322010596898184,
+      "minStretch": 0.8090465107565239,
+      "maxStretch": 1.1870438531321759,
+      "frameMs": 39,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "side": 0,
+      "phase": "peak",
+      "minDet": 0.64059640693144,
+      "maxTravel": 19.46515754028271,
+      "minStretch": 0.594121404672389,
+      "maxStretch": 1.6063115840910898,
+      "frameMs": 37,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "side": 0,
+      "phase": "rebound",
+      "minDet": 0.7788938194281627,
+      "maxTravel": 7.569648333814796,
+      "minStretch": 0.7781770764035034,
+      "maxStretch": 1.2292728015841625,
+      "frameMs": 24,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "side": 1,
+      "phase": "impact",
+      "minDet": 0.8126869335542528,
+      "maxTravel": 7.315454806729345,
+      "minStretch": 0.8085309073950696,
+      "maxStretch": 1.2224055638563653,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "side": 1,
+      "phase": "peak",
+      "minDet": 0.6216611607833169,
+      "maxTravel": 19.140708695256144,
+      "minStretch": 0.594587464342587,
+      "maxStretch": 1.6040270360452125,
+      "frameMs": 20,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "side": 1,
+      "phase": "rebound",
+      "minDet": 0.770459522720154,
+      "maxTravel": 7.800262323940075,
+      "minStretch": 0.7694756680741036,
+      "maxStretch": 1.2363098934967318,
+      "frameMs": 27,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "side": 0,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.6143948037960136,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5796894060293197,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 27,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "side": 0,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7111908376662266,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "side": 0,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.7070541105835275,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733112287006706,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "side": 0,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4781923484416948,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "side": 1,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4782021861991217,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "side": 1,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.7059126927808279,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733753453587429,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "side": 1,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7205347420838446,
+      "frameMs": 18,
+      "missingBacking": true
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "side": 1,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.6117631642622285,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5763731635918301,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 20,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "side": 0,
+      "phase": "impact",
+      "minDet": 0.8112606836126646,
+      "maxTravel": 7.322010596898184,
+      "minStretch": 0.8090465107565239,
+      "maxStretch": 1.1870438531321759,
+      "frameMs": 125,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "side": 0,
+      "phase": "peak",
+      "minDet": 0.64059640693144,
+      "maxTravel": 19.46515754028271,
+      "minStretch": 0.594121404672389,
+      "maxStretch": 1.6063115840910898,
+      "frameMs": 120,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "side": 0,
+      "phase": "rebound",
+      "minDet": 0.7788938194281627,
+      "maxTravel": 7.569648333814796,
+      "minStretch": 0.7781770764035034,
+      "maxStretch": 1.2292728015841625,
+      "frameMs": 104,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "side": 1,
+      "phase": "impact",
+      "minDet": 0.8126869335542528,
+      "maxTravel": 7.315454806729345,
+      "minStretch": 0.8085309073950696,
+      "maxStretch": 1.2224055638563653,
+      "frameMs": 124,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "side": 1,
+      "phase": "peak",
+      "minDet": 0.6216611607833169,
+      "maxTravel": 19.140708695256144,
+      "minStretch": 0.594587464342587,
+      "maxStretch": 1.6040270360452125,
+      "frameMs": 118,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "side": 1,
+      "phase": "rebound",
+      "minDet": 0.770459522720154,
+      "maxTravel": 7.800262323940075,
+      "minStretch": 0.7694756680741036,
+      "maxStretch": 1.2363098934967318,
+      "frameMs": 120,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "side": 0,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.6143948037960136,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5796894060293197,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 88,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "side": 0,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7111908376662266,
+      "frameMs": 92,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "side": 0,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.7070541105835275,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733112287006706,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 94,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "side": 0,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4781923484416948,
+      "frameMs": 85,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "side": 1,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4782021861991217,
+      "frameMs": 89,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "side": 1,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.7059126927808279,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733753453587429,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 86,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "side": 1,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7205347420838446,
+      "frameMs": 85,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "side": 1,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.6117631642622285,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5763731635918301,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 84,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "side": 0,
+      "phase": "impact",
+      "minDet": 0.8112606836126646,
+      "maxTravel": 7.322010596898184,
+      "minStretch": 0.8090465107565239,
+      "maxStretch": 1.1870438531321759,
+      "frameMs": 131,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "side": 0,
+      "phase": "peak",
+      "minDet": 0.64059640693144,
+      "maxTravel": 19.46515754028271,
+      "minStretch": 0.594121404672389,
+      "maxStretch": 1.6063115840910898,
+      "frameMs": 113,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "side": 0,
+      "phase": "rebound",
+      "minDet": 0.7788938194281627,
+      "maxTravel": 7.569648333814796,
+      "minStretch": 0.7781770764035034,
+      "maxStretch": 1.2292728015841625,
+      "frameMs": 105,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "side": 1,
+      "phase": "impact",
+      "minDet": 0.8126869335542528,
+      "maxTravel": 7.315454806729345,
+      "minStretch": 0.8085309073950696,
+      "maxStretch": 1.2224055638563653,
+      "frameMs": 96,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "side": 1,
+      "phase": "peak",
+      "minDet": 0.6216611607833169,
+      "maxTravel": 19.140708695256144,
+      "minStretch": 0.594587464342587,
+      "maxStretch": 1.6040270360452125,
+      "frameMs": 91,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "side": 1,
+      "phase": "rebound",
+      "minDet": 0.770459522720154,
+      "maxTravel": 7.800262323940075,
+      "minStretch": 0.7694756680741036,
+      "maxStretch": 1.2363098934967318,
+      "frameMs": 92,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "side": 0,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.6143948037960136,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5796894060293197,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 85,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "side": 0,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7111908376662266,
+      "frameMs": 95,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "side": 0,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.7070541105835275,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733112287006706,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 86,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "side": 0,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4781923484416948,
+      "frameMs": 85,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "side": 1,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4782021861991217,
+      "frameMs": 89,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "side": 1,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.7059126927808279,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733753453587429,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 84,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "side": 1,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7205347420838446,
+      "frameMs": 87,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "side": 1,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.6117631642622285,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5763731635918301,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 85,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "side": 0,
+      "phase": "impact",
+      "minDet": 0.8112606836126646,
+      "maxTravel": 7.322010596898184,
+      "minStretch": 0.8090465107565239,
+      "maxStretch": 1.1870438531321759,
+      "frameMs": 167,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "side": 0,
+      "phase": "peak",
+      "minDet": 0.64059640693144,
+      "maxTravel": 19.46515754028271,
+      "minStretch": 0.594121404672389,
+      "maxStretch": 1.6063115840910898,
+      "frameMs": 136,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "side": 0,
+      "phase": "rebound",
+      "minDet": 0.7788938194281627,
+      "maxTravel": 7.569648333814796,
+      "minStretch": 0.7781770764035034,
+      "maxStretch": 1.2292728015841625,
+      "frameMs": 126,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "side": 1,
+      "phase": "impact",
+      "minDet": 0.8126869335542528,
+      "maxTravel": 7.315454806729345,
+      "minStretch": 0.8085309073950696,
+      "maxStretch": 1.2224055638563653,
+      "frameMs": 142,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "side": 1,
+      "phase": "peak",
+      "minDet": 0.6216611607833169,
+      "maxTravel": 19.140708695256144,
+      "minStretch": 0.594587464342587,
+      "maxStretch": 1.6040270360452125,
+      "frameMs": 124,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "side": 1,
+      "phase": "rebound",
+      "minDet": 0.770459522720154,
+      "maxTravel": 7.800262323940075,
+      "minStretch": 0.7694756680741036,
+      "maxStretch": 1.2363098934967318,
+      "frameMs": 123,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "side": 0,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.6143948037960136,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5796894060293197,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 110,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "side": 0,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7111908376662266,
+      "frameMs": 113,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "side": 0,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.7070541105835275,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733112287006706,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 109,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "side": 0,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4781923484416948,
+      "frameMs": 111,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "side": 1,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4782021861991217,
+      "frameMs": 108,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "side": 1,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.7059126927808279,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733753453587429,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 108,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "side": 1,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7205347420838446,
+      "frameMs": 121,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "side": 1,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.6117631642622285,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5763731635918301,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 108,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "side": 0,
+      "phase": "impact",
+      "minDet": 0.8112606836126646,
+      "maxTravel": 7.322010596898184,
+      "minStretch": 0.8090465107565239,
+      "maxStretch": 1.1870438531321759,
+      "frameMs": 159,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "side": 0,
+      "phase": "peak",
+      "minDet": 0.64059640693144,
+      "maxTravel": 19.46515754028271,
+      "minStretch": 0.594121404672389,
+      "maxStretch": 1.6063115840910898,
+      "frameMs": 151,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "side": 0,
+      "phase": "rebound",
+      "minDet": 0.7788938194281627,
+      "maxTravel": 7.569648333814796,
+      "minStretch": 0.7781770764035034,
+      "maxStretch": 1.2292728015841625,
+      "frameMs": 143,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "side": 1,
+      "phase": "impact",
+      "minDet": 0.8126869335542528,
+      "maxTravel": 7.315454806729345,
+      "minStretch": 0.8085309073950696,
+      "maxStretch": 1.2224055638563653,
+      "frameMs": 124,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "side": 1,
+      "phase": "peak",
+      "minDet": 0.6216611607833169,
+      "maxTravel": 19.140708695256144,
+      "minStretch": 0.594587464342587,
+      "maxStretch": 1.6040270360452125,
+      "frameMs": 120,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "side": 1,
+      "phase": "rebound",
+      "minDet": 0.770459522720154,
+      "maxTravel": 7.800262323940075,
+      "minStretch": 0.7694756680741036,
+      "maxStretch": 1.2363098934967318,
+      "frameMs": 111,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "side": 0,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.6143948037960136,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5796894060293197,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 110,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "side": 0,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7111908376662266,
+      "frameMs": 110,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "side": 0,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.7070541105835275,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733112287006706,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 107,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "side": 0,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4781923484416948,
+      "frameMs": 111,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "side": 1,
+      "pose": [
+        26,
+        30
+      ],
+      "minDet": 0.4876551119369097,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.43901880654043407,
+      "maxStretch": 1.4782021861991217,
+      "frameMs": 108,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "side": 1,
+      "pose": [
+        -26,
+        -30
+      ],
+      "minDet": 0.7059126927808279,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.6733753453587429,
+      "maxStretch": 2.221861927410691,
+      "frameMs": 111,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "side": 1,
+      "pose": [
+        26,
+        -30
+      ],
+      "minDet": 0.5067341271144983,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.44105461825347125,
+      "maxStretch": 1.7205347420838446,
+      "frameMs": 111,
+      "missingBacking": true
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "side": 1,
+      "pose": [
+        -26,
+        30
+      ],
+      "minDet": 0.6117631642622285,
+      "maxTravel": 23.58642429988312,
+      "minStretch": 0.5763731635918301,
+      "maxStretch": 2.20914502825503,
+      "frameMs": 141,
+      "missingBacking": true
+    }
+  ],
+  "rest": [
+    {
+      "backend": "webgl",
+      "width": 375,
+      "changedChannels": 0,
+      "maxChannelDifference": 0,
+      "meanChannelDifference": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 390,
+      "changedChannels": 0,
+      "maxChannelDifference": 0,
+      "meanChannelDifference": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 430,
+      "changedChannels": 0,
+      "maxChannelDifference": 0,
+      "meanChannelDifference": 0
+    },
+    {
+      "backend": "webgl",
+      "width": 440,
+      "changedChannels": 0,
+      "maxChannelDifference": 0,
+      "meanChannelDifference": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 375,
+      "changedChannels": 0,
+      "maxChannelDifference": 0,
+      "meanChannelDifference": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 390,
+      "changedChannels": 0,
+      "maxChannelDifference": 0,
+      "meanChannelDifference": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 430,
+      "changedChannels": 0,
+      "maxChannelDifference": 0,
+      "meanChannelDifference": 0
+    },
+    {
+      "backend": "canvas",
+      "width": 440,
+      "changedChannels": 0,
+      "maxChannelDifference": 0,
+      "meanChannelDifference": 0
+    }
+  ],
+  "performance": [
+    {
+      "backend": "webgl",
+      "label": "r5",
+      "width": 390,
+      "frames": 92,
+      "medianMs": 0,
+      "p95Ms": 1,
+      "maxMs": 3
+    },
+    {
+      "backend": "webgl",
+      "label": "r6",
+      "width": 390,
+      "frames": 92,
+      "medianMs": 0,
+      "p95Ms": 1,
+      "maxMs": 1
+    },
+    {
+      "backend": "webgl",
+      "label": "layered",
+      "width": 390,
+      "frames": 92,
+      "medianMs": 19,
+      "p95Ms": 24,
+      "maxMs": 27
+    },
+    {
+      "backend": "canvas",
+      "label": "r5",
+      "width": 390,
+      "frames": 92,
+      "medianMs": 14,
+      "p95Ms": 20,
+      "maxMs": 24
+    },
+    {
+      "backend": "canvas",
+      "label": "r6",
+      "width": 390,
+      "frames": 92,
+      "medianMs": 14,
+      "p95Ms": 20,
+      "maxMs": 34
+    },
+    {
+      "backend": "canvas",
+      "label": "layered",
+      "width": 390,
+      "frames": 92,
+      "medianMs": 90,
+      "p95Ms": 103,
+      "maxMs": 120
+    }
+  ],
+  "errors": [],
+  "limitations": [
+    "Missing backing pixels are pink; this is NOT visual acceptance.",
+    "Hand-traced alpha is provisional; hair/fur tips need authored mattes.",
+    "Desktop Chromium/SwiftShader is not physical-iPhone validation."
+  ],
+  "browser": "156.0.8078.79",
+  "reusedWebGLValidation": "Completed WebGL matrix retained; only Canvas sampling was changed. checks counts the final Canvas run and shared checks."
+}
