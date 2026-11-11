@@ -124,7 +124,7 @@ const sizes=[{width:375,height:667},{width:390,height:844},{width:430,height:932
  // Uninstrumented production app: offline caching and all four character cycle.
  const live=await browser.newContext({viewport:sizes[1],isMobile:true,hasTouch:true}),lp=await live.newPage(),errors=[];lp.on('pageerror',e=>errors.push(e.message));
  await lp.goto(`${base}/peach-physics/v8/`);await lp.evaluate(async()=>{await navigator.serviceWorker.register('./sw.js',{scope:'./'});await navigator.serviceWorker.ready;});await lp.waitForFunction(()=>navigator.serviceWorker.controller);
- ok(await lp.evaluate(async()=>!!await (await caches.open('peach-physics-v008-r2')).match('./assets/holly-heartbreaker.jpg')),'Holly precached');
+ ok(await lp.evaluate(async()=>!!await (await caches.open('peach-physics-v008-r3')).match('./assets/holly-heartbreaker.jpg')),'Holly precached');
  await live.setOffline(true);await lp.reload();await lp.waitForFunction(()=>window.__peachPhysicsDebug?.snapshot().frames>1);
  for(const id of ['midnight','aurelia','holly','ember']){await lp.locator('#character').click();await lp.waitForFunction(id=>__peachPhysicsDebug.snapshot().character===id,id);ok(true,`offline ${id}`);}
  ok(errors.length===0&&fresh.errors.length===0,'no uncaught errors');

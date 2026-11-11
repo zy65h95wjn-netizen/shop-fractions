@@ -10,7 +10,7 @@
 <meta name="description" content="Peach Physics: a playful interactive Christmas elf experiment with adjustable impact waves and linked motion.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Peach Physics — Elf Lab 0.0.8 r2</title>
+<title>Peach Physics — Elf Lab 0.0.8 r3</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -87,7 +87,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r2</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r3</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/4</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
@@ -257,7 +257,11 @@ function resize(){
 }
 function readPoint(e){const r=canvas.getBoundingClientRect();const sx=e.clientX-r.left,sy=e.clientY-r.top;return {sx,sy,x:(sx-ox)/drawW*W,y:(sy-oy)/drawH*H};}
 function pickSide(x,y){
- if(isHolly()){const a=hollySkinWeight(0,x,y),b=hollySkinWeight(1,x,y);return Math.max(a,b)>.08?(a>b?0:1):-1;}
+ if(isHolly()){
+  const a=hollySkinWeight(0,x,y),b=hollySkinWeight(1,x,y);
+  if(Math.max(a,b)>.08)return a>b?0:1;
+  return HOLLY_TOUCH_CONTOURS.findIndex(points=>insideTouchContour(points,x,y));
+ }
  let best=Infinity,index=-1;
  regions.forEach((z,i)=>{const d=((x-z.x)/z.rx)**2+((y-z.y)/z.ry)**2;
    const mid=currentCharacter().sideMid*W;if(i===0&&x>mid+32||i===1&&x<mid-32)return;
@@ -331,6 +335,34 @@ const hollyPlanes=HOLLY_CONTOURS.map(points=>points.map(([x,y],i)=>{
 function hollySkinWeight(side,x,y){
  const d=Math.min(...hollyPlanes[side].map(([nx,ny,c])=>(nx*x+ny*y+c)/24));
  const t=clamp(d,0,1);return t*t*(3-2*t);
+}
+// Extra touch targets traced from the user's green outline, in source pixels.
+// Screenshot alignment: marked=(source*1.78)-[596,472]. The left outline is
+// cropped; mirror the visible right area around the corset axis x=400.
+// Input contours are deliberately separate from the fixed rendering envelopes.
+const HOLLY_RIGHT_TOUCH=[[658,468],[676,485],[680,503],[692,528],[695,549],[690,575],
+ [675,607],[656,643],[643,672],[635,702],[621,726],[602,749],[579,761],[550,765],
+ [516,762],[483,753],[457,739],[444,723],[442,699],[443,672],[446,650],[456,625],
+ [473,614],[503,604],[531,590],[557,570],[589,547],[614,522],[639,493]];
+const HOLLY_TOUCH_CONTOURS=[HOLLY_RIGHT_TOUCH.map(([x,y])=>[800-x,y]),HOLLY_RIGHT_TOUCH];
+function insideTouchContour(points,x,y){
+ let inside=false;
+ for(let i=0,j=points.length-1;i<points.length;j=i++){
+  const [ax,ay]=points[j],[bx,by]=points[i],dx=bx-ax,dy=by-ay;
+  // Include the traced boundary itself without enlarging it into the center.
+  const t=clamp(((x-ax)*dx+(y-ay)*dy)/(dx*dx+dy*dy),0,1);
+  if(Math.hypot(x-ax-t*dx,y-ay-t*dy)<.5)return true;
+  if((ay>y)!==(by>y)&&x<(bx-ax)*(y-ay)/(by-ay)+ax)inside=!inside;
+ }
+ return inside;
+}
+function touchAnchor(side,p){
+ if(!isHolly()||hollySkinWeight(side,p.x,p.y)>.08)return {p,offsetX:0,offsetY:0};
+ // A touch on the marked control area drives the chest center. Retain the
+ // physical screen coordinates for contact feedback and use a constant offset
+ // throughout the gesture so drag direction, speed and pointer capture agree.
+ const [x,y]=currentCharacter().impactCenters[side];
+ return {p:{...p,x,y},offsetX:x-p.x,offsetY:y-p.y};
 }
 const HOLLY_CROP=[232,400,344,176];
 let hollyMaskLoc,hollyMaskPixels=null,hollySource=null,hollyLayer=null;
@@ -909,12 +941,13 @@ function slap(side,x,y,pt,strength=1){
 function wake(){hint.classList.add('fade');}
 canvas.addEventListener('pointerdown',e=>{
  if(e.pointerType==='mouse'&&e.button!==0)return;
- const p=readPoint(e),side=pickSide(p.x,p.y);
+ const raw=readPoint(e),side=pickSide(raw.x,raw.y);
  if(side<0)return;
+ const {p,offsetX,offsetY}=touchAnchor(side,raw);
  e.preventDefault();
  try{canvas.setPointerCapture?.(e.pointerId);}catch(err){/* Pointer still works without capture. */}
  wake();
- pointers.set(e.pointerId,{id:e.pointerId,side,last:p,lastTime:performance.now(),startTime:performance.now(),travel:0,vx:0,vy:0,pressure:e.pressure||.5});
+ pointers.set(e.pointerId,{id:e.pointerId,side,last:p,lastTime:performance.now(),startTime:performance.now(),travel:0,vx:0,vy:0,pressure:e.pressure||.5,offsetX,offsetY});
  updatePress(side,p.x,p.y);
  // Light contact on press. A true tap receives its sharp slap impulse on release.
  impulse(side,p.x,p.y,.15);
@@ -922,7 +955,7 @@ canvas.addEventListener('pointerdown',e=>{
 canvas.addEventListener('pointermove',e=>{
  const finger=pointers.get(e.pointerId);
  if(!finger)return;
- e.preventDefault();const p=readPoint(e),now=performance.now();
+ e.preventDefault();const raw=readPoint(e),p={...raw,x:raw.x+finger.offsetX,y:raw.y+finger.offsetY},now=performance.now();
  const dt=clamp((now-finger.lastTime)/1000,.012,.065),dx=p.x-finger.last.x,dy=p.y-finger.last.y;
  finger.pressure=Math.max(finger.pressure,e.pressure||0);
  finger.travel+=Math.abs(dx)+Math.abs(dy);

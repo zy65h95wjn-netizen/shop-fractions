@@ -1,4 +1,4 @@
-# Peach Physics v0.0.8 r2 — Holly Heartbreaker
+# Peach Physics v0.0.8 r3 — Holly Heartbreaker
 
 Release: https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/v8/
 
@@ -6,11 +6,19 @@ Rollback: https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/v7-1
 
 Holly is the fourth selectable adult elf and the first front-facing calibration. The existing selector, name notification, touch capture, fixed-step spring solver, sound option, controls and offline delivery are retained. Only `peach-physics/v8/` is added; prior releases and unrelated applications are unchanged.
 
+## r3: green-marked touch zones
+
+The user's annotated crop now defines additional touch targets independently of the deformation masks. The photograph texture aligns with the original source by approximately `marked = source × 1.78 − [596,472]`. The screen-right outline is traced in `HOLLY_RIGHT_TOUCH` (source x=442–695, y=468–765). Because the left outline is cropped, its matching target mirrors the right around the corset axis x=400 (x=105–358). Existing exposed-skin targets remain active. The marked clothing/arm/outer areas accept input; their pixels do not deform.
+
+A touch starting in an added target maps to that side's calibrated chest center. A constant source-coordinate offset is retained for the full pointer gesture, preserving direction, velocity, capture, independent simultaneous input, and full-strength response. Contact rings stay under the actual finger. The center lacing, skirt and unmarked background remain outside the added targets. No artwork, rendering mask, spring calibration, preset or other character changes in r3.
+
+Run `node peach-physics/v8/tests/touch-zones.cjs` for r3-specific validation: **419 assertions passed**, with no uncaught page or WebGL errors. All four original artwork hashes and script syntax checks also pass. It compares all four characters' established trajectories and extreme rendered frames directly with r2, then checks points across the new zones, off-target rejection, equivalent center-tap/drag/flick responses, real two-finger input, preferences and offline use in WebGL and Canvas. Gesture-coordinate equivalence uses a 1e-9 numeric tolerance for floating-point conversion; legacy trajectories and rendered frames are compared exactly. The r2 evidence below remains archived unchanged.
+
 ## Artwork and support boundaries
 
 The supplied 720×1280 JPEG is copied byte-for-byte into `assets/holly-heartbreaker.jpg`. The attached file has no visible upper-left arrow to remove. No regeneration, retouching, anatomical changes, or image stretching was performed. Its SHA-256 is `0ad0a1cad2273d038b1953587ecfd43857897f7627c91d8f2a02a989ffe2ba97`. All three existing portraits retain their original hashes.
 
-Coordinates below are original-image pixels; left/right mean screen left/right. Independent supports are defined by `HOLLY_CONTOURS`. The left support lies within x=243–404, y=406–557; the right within x=421–567, y=418–560. The irregular lower boundaries follow the diagonal fur neckline from inside the skin. The center gap, upper torso, shoulders, hair, arms, corset, lacing and background have zero support weight. Each polygon uses an 24-pixel smooth feather. Touch picking uses the same skin support instead of accepting clothing or background touches in a rear-facing ellipse.
+Coordinates below are original-image pixels; left/right mean screen left/right. Independent supports are defined by `HOLLY_CONTOURS`. The left support lies within x=243–404, y=406–557; the right within x=421–567, y=418–560. The irregular lower boundaries follow the diagonal fur neckline from inside the skin. The center gap, upper torso, shoulders, hair, arms, corset, lacing and background have zero support weight. Each polygon uses an 24-pixel smooth feather. Direct skin picking uses this skin support. The separate r3 input contours add the green-marked control areas without expanding either deformation envelope.
 
 The six spring centers are (332,436), (337,478), (371,529) and (476,444), (481,484), (451,531). Weighted spring displacements form a spatial field; the lower centers follow the neckline geometry instead of mirroring the upper centers. The shader transports texture coordinates through the fixed envelope in six short steps. Small motion is preserved without attenuation. Above 12 source pixels, a smooth limiter approaches a 18-source-pixel ceiling. This r2 change fixes the barely visible response reported at maximum settings. Supported garment edges stay fixed instead of traveling with a rectangular patch.
 
@@ -36,7 +44,7 @@ Linked movement defaults to 50 and is preserved across preset changes. Existing 
 
 Holly is fitted without horizontal cropping or stretching and anchored below the portrait top-safe area. On shorter screens, the bottom of the stockings can extend below the viewport; her complete source face and hat remain in frame. The source portrait itself already reaches the top of the hat.
 
-The `peach-physics-v008-*` settings import v7-1 first and retain the earlier migration chain. Each character has a separate saved profile. No earlier profile is written. `peach-physics-v008-r2` precaches the page, both external original portraits, manifest and local icon. The obsolete v8 r1 cache is replaced; earlier-version caches are not removed. All runtime assets are inside v8; there are no services or paid dependencies.
+The `peach-physics-v008-*` settings import v7-1 first and retain the earlier migration chain. Each character has a separate saved profile. No earlier profile is written. `peach-physics-v008-r3` precaches the page, both external original portraits, manifest and local icon. The obsolete v8 r1/r2 caches are replaced; earlier-version caches are not removed. All runtime assets are inside v8; there are no services or paid dependencies.
 
 ## Reproducing validation
 
@@ -51,6 +59,7 @@ node peach-physics/v8/tests/fold.cjs
 node peach-physics/v8/tests/holly.cjs
 node peach-physics/v8/tests/holly-stress.cjs
 node peach-physics/v8/tests/holly-amplitude.cjs
+node peach-physics/v8/tests/touch-zones.cjs
 ```
 
 Tests require Playwright and Chromium (`CHROMIUM` overrides `/usr/bin/chromium`). Hooks and texture-coordinate encoding are injected only into test responses, never shipped in the app. Metrics and screenshots are generated in `/tmp/peach-v8-tests`; `PEACH_TEST_OUTPUT` overrides that path. The legacy deformation script expects port 8000; the other browser suites also accept `PEACH_TEST_URL`.
