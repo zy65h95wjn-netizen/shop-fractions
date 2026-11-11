@@ -1,0 +1,19 @@
+{
+  "name": "Peach Physics — Christmas Elf",
+  "short_name": "Peach Physics",
+  "description": "A playful Christmas elf physics experiment with contact springs, a subtle traveling wave, and adjustable linked movement.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#09100e",
+  "theme_color": "#09100e",
+  "icons": [
+    {
+      "src": "../apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
