@@ -4,8 +4,10 @@ let checks=0;const ok=(v,s)=>{assert.ok(v,s);checks++};
  const b=await chromium.launch({executablePath:process.env.CHROMIUM||'/usr/bin/chromium',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
  const app=await setup(b,'v8');await character(app.page,'holly');
  const stress=await app.page.evaluate(()=>{
-  let rows=[];for(const preset of ['natural','playful','chaos'])for(const link of [0,50,100]){
-   __test.reset();document.querySelector(`[data-preset="${preset}"]`).click();__test.model.transfer=link;
+  let rows=[];for(const preset of ['natural','playful','chaos','allMax','maxMotion'])for(const link of [0,50,100]){
+   __test.reset();document.querySelector(`[data-preset="${['allMax','maxMotion'].includes(preset)?'chaos':preset}"]`).click();
+   if(preset==='allMax'||preset==='maxMotion')Object.assign(__test.model,{bounce:100,softness:100,settle:preset==='allMax'?100:0});
+   __test.model.transfer=link;
    let bounded=true,secondary=false;for(let n=0;n<80;n++){__test.gesture(n%3?'slap':'kick',n%2);for(let i=0;i<6;i++)__test.step(1/120);bounded&&=__test.nodes.every(n=>Number.isFinite(n.dx)&&Math.abs(n.dx)<=26&&Math.abs(n.dy)<=30);secondary||=__test.followers.some(f=>Math.abs(f.dy)>.05);}
    for(let i=0;i<2400;i++)__test.step(1/120);
    rows.push({preset,link,bounded,secondary,rest:__test.nodes.every(n=>!n.dx&&!n.dy)&&__test.followers.every(f=>!f.dx&&!f.dy)});

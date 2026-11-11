@@ -1,4 +1,4 @@
-# Peach Physics v0.0.8 — Holly Heartbreaker
+# Peach Physics v0.0.8 r2 — Holly Heartbreaker
 
 Release: https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/v8/
 
@@ -10,15 +10,15 @@ Holly is the fourth selectable adult elf and the first front-facing calibration.
 
 The supplied 720×1280 JPEG is copied byte-for-byte into `assets/holly-heartbreaker.jpg`. The attached file has no visible upper-left arrow to remove. No regeneration, retouching, anatomical changes, or image stretching was performed. Its SHA-256 is `0ad0a1cad2273d038b1953587ecfd43857897f7627c91d8f2a02a989ffe2ba97`. All three existing portraits retain their original hashes.
 
-Coordinates below are original-image pixels; left/right mean screen left/right. Independent supports are defined by `HOLLY_CONTOURS`. The left support lies within x=243–404, y=406–557; the right within x=421–567, y=418–560. The irregular lower boundaries follow the diagonal fur neckline from inside the skin. The center gap, upper torso, shoulders, hair, arms, corset, lacing and background have zero support weight. Each polygon uses an 18-pixel smooth feather. Touch picking uses the same skin support instead of accepting clothing or background touches in a rear-facing ellipse.
+Coordinates below are original-image pixels; left/right mean screen left/right. Independent supports are defined by `HOLLY_CONTOURS`. The left support lies within x=243–404, y=406–557; the right within x=421–567, y=418–560. The irregular lower boundaries follow the diagonal fur neckline from inside the skin. The center gap, upper torso, shoulders, hair, arms, corset, lacing and background have zero support weight. Each polygon uses an 24-pixel smooth feather. Touch picking uses the same skin support instead of accepting clothing or background touches in a rear-facing ellipse.
 
-The six spring centers are (332,436), (337,478), (371,529) and (476,444), (481,484), (451,531). Weighted spring displacements form a spatial field; the lower centers follow the neckline geometry instead of mirroring the upper centers. The shader transports texture coordinates through the fixed envelope in six short steps. Its smooth displacement limiter stays below 10 source pixels even at extreme simulation poses. Supported garment edges stay fixed instead of traveling with a rectangular patch.
+The six spring centers are (332,436), (337,478), (371,529) and (476,444), (481,484), (451,531). Weighted spring displacements form a spatial field; the lower centers follow the neckline geometry instead of mirroring the upper centers. The shader transports texture coordinates through the fixed envelope in six short steps. Small motion is preserved without attenuation. Above 12 source pixels, a smooth limiter approaches a 18-source-pixel ceiling. This r2 change fixes the barely visible response reported at maximum settings. Supported garment edges stay fixed instead of traveling with a rectangular patch.
 
 Holly's Canvas fallback uses bilinear texture remapping through the same envelope and spatial field. It preserves the source photo and bounded movement without changing the three existing fallback paths. WebGL remains the preferred mobile renderer.
 
 ## Independent physics
 
-The original integrator, gesture handling and spring topology are reused. Holly alone uses a nominal frequency of `3.8 − .014 × softness` Hz, damping ratio `.22 + .0032 × settling`, and left/right stiffness multipliers .94/1.06. Her tap/flick impulse gain is .46 of the shared base, drag gain .52, and secondary horizontal/vertical rendering gains .22/.30. Contact compression is local to the touch point; release gives restrained spring rebound and damped follow-through.
+The original integrator, gesture handling and spring topology are reused. Holly alone uses a nominal frequency of `3.8 − .014 × softness` Hz, damping ratio `.22 + .0032 × settling`, and left/right stiffness multipliers .94/1.06. Her tap/flick impulse gain is `.65 + .009 × bounce` (1.55 at maximum), drag gain .95, and secondary horizontal/vertical rendering gains .45/.65. This replaces r1’s .46 tap/flick gain, .52 drag gain and .22/.30 secondary gains. Her support boundaries, spring solver, linked calibration and preset values are unchanged. The feather widens from 18 to 24 source pixels to blend the stronger movement into fixed clothing without sharp texture compression. Contact compression is local to the touch point; release gives restrained spring rebound and damped follow-through.
 
 Tap strength uses available pointer pressure plus a small contact-duration contribution. iPhone Safari may report a fixed touch pressure: this is not a claim of force sensing. Flick strength uses measured pointer velocity. Separate pointer captures allow both sides to respond simultaneously.
 
@@ -36,7 +36,7 @@ Linked movement defaults to 50 and is preserved across preset changes. Existing 
 
 Holly is fitted without horizontal cropping or stretching and anchored below the portrait top-safe area. On shorter screens, the bottom of the stockings can extend below the viewport; her complete source face and hat remain in frame. The source portrait itself already reaches the top of the hat.
 
-The `peach-physics-v008-*` settings import v7-1 first and retain the earlier migration chain. Each character has a separate saved profile. No earlier profile is written. `peach-physics-v008-r1` precaches the page, both external original portraits, manifest and local icon. Earlier releases' caches are not removed. All runtime assets are inside v8; there are no services or paid dependencies.
+The `peach-physics-v008-*` settings import v7-1 first and retain the earlier migration chain. Each character has a separate saved profile. No earlier profile is written. `peach-physics-v008-r2` precaches the page, both external original portraits, manifest and local icon. The obsolete v8 r1 cache is replaced; earlier-version caches are not removed. All runtime assets are inside v8; there are no services or paid dependencies.
 
 ## Reproducing validation
 
@@ -50,23 +50,25 @@ node peach-physics/v8/tests/aurelia.cjs
 node peach-physics/v8/tests/fold.cjs
 node peach-physics/v8/tests/holly.cjs
 node peach-physics/v8/tests/holly-stress.cjs
+node peach-physics/v8/tests/holly-amplitude.cjs
 ```
 
 Tests require Playwright and Chromium (`CHROMIUM` overrides `/usr/bin/chromium`). Hooks and texture-coordinate encoding are injected only into test responses, never shipped in the app. Metrics and screenshots are generated in `/tmp/peach-v8-tests`; `PEACH_TEST_OUTPUT` overrides that path. The legacy deformation script expects port 8000; the other browser suites also accept `PEACH_TEST_URL`.
 
-Validation used Chromium 156.0.8078.79, Playwright 1.62.1 and SwiftShader, at device scale factor 2. Viewports: 375×667, 390×844, 430×932 and 440×956. The original v7-1 suite was run successfully before validating v8.
+Validation used Chromium 156.0.8078.79, Playwright 1.62.1 and SwiftShader, at device scale factor 2. Viewports: 375×667, 390×844, 430×932 and 440×956. The original v7-1 suite was run successfully before validating v8 r1. The browser (218), Aurelia (606), fold (454) and Midnight deformation results below are retained from r1. For r2, Holly’s complete regression suite, repeated-input/Canvas stress suite, original-artwork hashes and syntax checks were rerun; the new amplitude test compares actual rendered displacement with the published r1 commit. The Holly suite independently rechecks all three existing characters against v7-1 at all four sizes. The r2 suites total 1,037 assertions (962 + 50 + 25).
 
 - `browser.cjs`: **218 assertions passed**.
 - `aurelia.cjs`: **606 assertions passed**, including the extended four-character cycle/offline checks.
 - `fold.cjs`: **454 assertions passed**; Aurelia's calibrated directional fold is preserved.
 - `holly.cjs`: **962 assertions passed**. This includes exact v7-1 trajectories for all three existing characters, both sides, four input types and links 0/50/100, plus pixel-identical resting and matched slap/flick frames at all four sizes.
-- `holly-stress.cjs`: **32 assertions passed**. Eighty repeated alternating inputs per preset/link combination remain bounded and fully settle. Both Canvas sides preserve all sampled outside-support pixels exactly.
+- `holly-stress.cjs`: **50 assertions passed**. Eighty repeated alternating inputs per preset/link combination, plus all sliders at 100 and bounce/softness at 100 with settling at 0, remain bounded and fully settle. Both Canvas sides preserve all sampled outside-support pixels exactly.
+- `holly-amplitude.cjs`: **25 assertions passed**. Both sides show a substantially stronger rendered tap at Natural, Chaos, all sliders at 100, and maximum bounce/softness with settling at 0. This test reads the actual texture-coordinate field and compares it with the first published v8 commit (`48d063b`).
 - `deformation.cjs`: Midnight's full measured fields and traveling ripple match v6-2-3 exactly.
 - `artwork.cjs`: all four original hashes match; HTML scripts and service worker pass JavaScript syntax checks.
 
-Holly's 32 extreme WebGL fields have minimum sampled texture-map determinant **0.5111** (positive: no sampled folds), maximum sampled travel **8.03 source pixels**, and outside-support displacement below **0.01 source pixels** (encoding precision). Sampled fur, lacing, corset, hair, arms, upper torso, centerline, scenery and the inactive side remain pixel-identical. These finite samples do not prove every possible input.
+Holly's 32 extreme WebGL fields have minimum sampled texture-map determinant **0.1554** (positive: no sampled folds), maximum sampled travel **17.98 source pixels**, and outside-support displacement below **0.01 source pixels** (encoding precision). Sampled fur, lacing, corset, hair, arms, upper torso, centerline, scenery and the inactive side remain pixel-identical. These finite samples do not prove every possible input.
 
-Both sides were captured at rest, contact, measured peak, rebound, secondary motion and fully settled, plus extreme poses. All settled frames equal the resting canvas exactly. The six-phase comparison for both sides was visually inspected, along with full portrait framing and extreme WebGL/Canvas frames. `tests/captures/holly-phases.png` records the inspected close-up comparison. Raw metrics accompany the test scripts. All four characters load and switch offline; independent profiles and v7-1 migration pass; no uncaught page or WebGL errors occurred in the tested cases.
+Both sides were captured at rest, contact, measured peak, rebound, secondary motion and fully settled, plus extreme poses. All settled frames equal the resting canvas exactly. The six-phase comparison for both sides was visually inspected, along with full portrait framing and extreme WebGL/Canvas frames. `tests/captures/holly-phases.png` records the inspected close-up comparison. `tests/captures/holly-max-comparison.png` compares r1 and r2 at all sliders set to 100. Peak rendered-displacement measurements are in `tests/holly-amplitude.json`. Higher Settling means faster damping; Chaos or lower Settling gives a longer rebound. Raw metrics accompany the test scripts. All four characters load and switch offline; independent profiles and v7-1 migration pass; no uncaught page or WebGL errors occurred in the tested cases.
 
 Canvas measurement warms readback before comparing images because Chromium can switch from GPU to CPU resampling after repeated `getImageData` calls. Its motion overlay is transparent outside the active skin support, preserving the base image. Desktop fallback timing is not an iPhone performance measurement.
 

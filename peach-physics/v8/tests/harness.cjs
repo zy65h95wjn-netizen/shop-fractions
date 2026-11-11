@@ -22,13 +22,13 @@ window.__test={reset,render,step,model,nodes,followers,impacts,waves,resize,choo
  forcePose:(dx,dy,side=0)=>{reset();for(let i=side*3;i<side*3+3;i++){nodes[i].dx=dx;nodes[i].dy=dy;}followers[side].dx=10;followers[side].dy=11;impacts[side].v=1.2;waves[side]={age:.08,strength:1};render();}
 };
 `;
-async function setup(browser,version,size={width:390,height:844},controlled=true,fallback=false,field=false){
+async function setup(browser,version,size={width:390,height:844},controlled=true,fallback=false,field=false,sourcePath=null){
  const context=await browser.newContext({viewport:size,deviceScaleFactor:2,isMobile:true,hasTouch:true});
  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  if(controlled){await page.addInitScript(()=>{window.requestAnimationFrame=()=>0;window.testClock=1000;performance.now=()=>window.testClock;});}
  if(fallback)await page.addInitScript(()=>{const original=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(type,...args){return type.includes('webgl')?null:original.call(this,type,...args)};});
  await page.route(`**/peach-physics/${version}/`,route=>{
-  let html=fs.readFileSync(path.join(root,'peach-physics',version,'index.html'),'utf8');
+  let html=fs.readFileSync(sourcePath||path.join(root,'peach-physics',version,'index.html'),'utf8');
   if(field)html=html.replace('void main(){\n  if(vRawUV', 'vec2 encode(float x){vec2 e=fract(x*vec2(1.0,255.0));e.x-=e.y/255.0;return e;}\n void main(){\n  if(vRawUV').replace('gl_FragColor=texture2D(uPhoto,photoUV);','vec2 d=(vRawUV-photoUV)*vec2(756.0,1280.0);gl_FragColor=vec4(encode(.5+d.x/128.0),encode(.5+d.y/128.0));');
   if(field==='holly')html=html.replace('vec2(756.0,1280.0);gl_FragColor=vec4(encode', 'vec2(720.0,1280.0);gl_FragColor=vec4(encode');
   html=html.replace('presentCharacter();\ngetPhoto',hook+'\npresentCharacter();\ngetPhoto');

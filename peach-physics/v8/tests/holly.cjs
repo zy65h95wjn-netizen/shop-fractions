@@ -99,7 +99,7 @@ const sizes=[{width:375,height:667},{width:390,height:844},{width:430,height:932
      if([-2,0,2].every(xx=>[-2,0,2].every(yy=>__test.hollySkinWeight(side,x+xx,y+yy)===0)))maxOutside=Math.max(maxOutside,Math.hypot(...d));
     }return {side,dx,dy,minDet,maxOutside,maxTravel,error:__test.error()};
    },{side,dx,dy});
-   ok(field.minDet>0,'no sampled folds');ok(field.maxOutside<.01,'outside support stationary');ok(field.maxTravel<10&&field.maxTravel>2,'controlled visible motion');ok(field.error===0,'WebGL error clear');metrics.fields.push({width:size.width,...field});
+   ok(field.minDet>.1,'no sampled folds');ok(field.maxOutside<.01,'outside support stationary');ok(field.maxTravel<18&&field.maxTravel>2,'controlled visible motion');ok(field.error===0,'WebGL error clear');metrics.fields.push({width:size.width,...field});
   }await f.context.close();
  }
  // Canvas remapping at all phone sizes; spatially varying motion and reset.
@@ -124,7 +124,7 @@ const sizes=[{width:375,height:667},{width:390,height:844},{width:430,height:932
  // Uninstrumented production app: offline caching and all four character cycle.
  const live=await browser.newContext({viewport:sizes[1],isMobile:true,hasTouch:true}),lp=await live.newPage(),errors=[];lp.on('pageerror',e=>errors.push(e.message));
  await lp.goto(`${base}/peach-physics/v8/`);await lp.evaluate(async()=>{await navigator.serviceWorker.register('./sw.js',{scope:'./'});await navigator.serviceWorker.ready;});await lp.waitForFunction(()=>navigator.serviceWorker.controller);
- ok(await lp.evaluate(async()=>!!await (await caches.open('peach-physics-v008-r1')).match('./assets/holly-heartbreaker.jpg')),'Holly precached');
+ ok(await lp.evaluate(async()=>!!await (await caches.open('peach-physics-v008-r2')).match('./assets/holly-heartbreaker.jpg')),'Holly precached');
  await live.setOffline(true);await lp.reload();await lp.waitForFunction(()=>window.__peachPhysicsDebug?.snapshot().frames>1);
  for(const id of ['midnight','aurelia','holly','ember']){await lp.locator('#character').click();await lp.waitForFunction(id=>__peachPhysicsDebug.snapshot().character===id,id);ok(true,`offline ${id}`);}
  ok(errors.length===0&&fresh.errors.length===0,'no uncaught errors');

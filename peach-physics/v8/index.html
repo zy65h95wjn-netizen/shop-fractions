@@ -10,7 +10,7 @@
 <meta name="description" content="Peach Physics: a playful interactive Christmas elf experiment with adjustable impact waves and linked motion.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Peach Physics — Elf Lab 0.0.8</title>
+<title>Peach Physics — Elf Lab 0.0.8 r2</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -87,7 +87,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r2</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/4</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
@@ -329,7 +329,7 @@ const hollyPlanes=HOLLY_CONTOURS.map(points=>points.map(([x,y],i)=>{
  return [nx,ny,-nx*x-ny*y];
 }));
 function hollySkinWeight(side,x,y){
- const d=Math.min(...hollyPlanes[side].map(([nx,ny,c])=>(nx*x+ny*y+c)/18));
+ const d=Math.min(...hollyPlanes[side].map(([nx,ny,c])=>(nx*x+ny*y+c)/24));
  const t=clamp(d,0,1);return t*t*(3-2*t);
 }
 const HOLLY_CROP=[232,400,344,176];
@@ -350,17 +350,18 @@ function createHollyShapeTexture(){
  gl.uniform1i(gl.getUniformLocation(program,'uHollyShape'),3);
  gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
 }
+// Preserve small motion; soften only excursions above 12 source pixels.
 function hollyVelocity(x,y,side){
  let dx=0,dy=0;
  for(let j=0;j<3;j++){
   const n=nodes[side*3+j],w=Math.exp(-1.75*(((x-n.x)/n.rx)**2+((y-n.y)/n.ry)**2))*.66;
   dx+=n.dx*w;dy+=n.dy*w;
  }
- dx+=followers[side].dx*.22;dy+=followers[side].dy*.30;
+ dx+=followers[side].dx*.45;dy+=followers[side].dy*.65;
  const p=impacts[side],hx=x-p.x*W,hy=y-p.y*H,fall=Math.exp(-2.6*((hx/64)**2+(hy/56)**2));
  const pressure=fall*(p.v*.08-p.contact*.09);
  dx+=hx*pressure;dy+=hy*pressure;
- const length=Math.hypot(dx,dy),gain=10/(10+length);
+ const length=Math.hypot(dx,dy),gain=length>12?(12+6*(1-Math.exp(-(length-12)/6)))/length:1;
  return [dx*gain,dy*gain];
 }
 // Bilinear CPU texture remapping: spatial deformation, never a translated patch.
@@ -485,12 +486,13 @@ function initGL(){
    int id=side*3+j;vec4 p=uPoints[id];vec2 n=(uv-p.xy)/p.zw;
    motion+=uOffsets[id]*exp(-1.75*dot(n,n))*.66;
   }
-  motion+=uSecondary[side]*vec2(.22,.30);
+  motion+=uSecondary[side]*vec2(.45,.65);
   vec4 h=uImpacts[side];vec2 delta=(uv-h.xy)*vec2(720.0,1280.0);
   vec2 hi=delta/vec2(64.0,56.0);
   motion+=(uv-h.xy)*exp(-2.6*dot(hi,hi))*(h.z*.08-h.w*.09);
   float travel=length(motion*vec2(720.0,1280.0));
-  return motion*(10.0/(10.0+travel));
+  if(travel>12.0)motion*=(12.0+6.0*(1.0-exp(-(travel-12.0)/6.0)))/travel;
+  return motion;
  }
  void main(){
   vAureliaLeft=vec2(0.0);vAureliaRight=vec2(0.0);
@@ -831,7 +833,7 @@ function updatePress(side,x,y){
 }
 function impulse(side,x,y,amplitude=1,vx=0,vy=0,flick=false){
  if(side<0)return;
- const leftTune=isHolly()?.46:currentCharacter().id==='midnight' && side===0?.90:1;
+ const leftTune=isHolly()?(.65+model.bounce*.009):currentCharacter().id==='midnight' && side===0?.90:1;
  const power=(.43+model.bounce*.011)*amplitude*1.06*leftTune; // Keep the brunette's right-side response unchanged.
  // Tap: gentle downward/outward kick. Flick: use both directions of measured finger velocity.
  const pushX=flick?clamp(vx*.35,-320,320):(side?48:-48);
@@ -882,7 +884,7 @@ function slapSound(){
 function slap(side,x,y,pt,strength=1){
  // Quick contact compression followed by a stronger, localized spring rebound.
  // Keep the source photograph, seam, and the opposite side anchored.
- const leftTune=isHolly()?.46:currentCharacter().id==='midnight' && side===0?.90:1;
+ const leftTune=isHolly()?(.65+model.bounce*.009):currentCharacter().id==='midnight' && side===0?.90:1;
  const power=(.62+model.bounce*.008)*1.06*leftTune*(isHolly()?strength:1); // Keep the brunette's right-side slap unchanged.
  const z=regions[side];
  const vBias=clamp((y-z.y)/z.ry,-.85,.85);
@@ -930,7 +932,7 @@ canvas.addEventListener('pointermove',e=>{
  // Simultaneous fingers contribute only to their own side's nodes.
  for(let i=finger.side*3;i<finger.side*3+3;i++){
   const n=nodes[i],q=((p.x-n.x)/n.rx)**2+((p.y-n.y)/n.ry)**2,weight=.20+.8*Math.exp(-q*1.4);
-  const leftTune=isHolly()?.52:currentCharacter().id==='midnight' && finger.side===0?.90:1;
+  const leftTune=isHolly()?.95:currentCharacter().id==='midnight' && finger.side===0?.90:1;
   n.dx=clamp(n.dx+dx*.17*weight*leftTune,-26,26);n.dy=clamp(n.dy+dy*.17*weight*leftTune,-30,30);
   n.vx=clamp(n.vx+(dx/dt)*.055*weight*leftTune,-600,600);n.vy=clamp(n.vy+(dy/dt)*.055*weight*leftTune,-600,600);
  }
