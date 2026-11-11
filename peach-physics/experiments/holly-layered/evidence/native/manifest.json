@@ -1,0 +1,135 @@
+{
+  "prototypeCommit": "14a46799cf901e7f205d531de824d86d1cfbfb79",
+  "captureViewportCss": [
+    390,
+    844
+  ],
+  "deviceScaleFactor": 2,
+  "contactSheetCropCapturePixels": [
+    195,
+    535,
+    683,
+    872
+  ],
+  "contactSheetResampling": "none; original pixel values pasted at 1:1",
+  "files": [
+    {
+      "path": "native/webgl-left-contact-sheet.png",
+      "dimensions": [
+        1464,
+        1540
+      ],
+      "bytes": 1313259,
+      "sha256": "602b8dadc7dc2cd3ece6eff4feb2e27cb2c945c4de5f614bf302cc87c0dee32e",
+      "sourceCaptures": [
+        "webgl-390-r5-0-impact.png",
+        "webgl-390-r6-0-impact.png",
+        "webgl-390-layered-0-impact.png",
+        "webgl-390-r5-0-peak.png",
+        "webgl-390-r6-0-peak.png",
+        "webgl-390-layered-0-peak.png",
+        "webgl-390-r5-0-rebound.png",
+        "webgl-390-r6-0-rebound.png",
+        "webgl-390-layered-0-rebound.png",
+        "webgl-390-r5-0-settled.png",
+        "webgl-390-r6-0-settled.png",
+        "webgl-390-layered-0-settled.png"
+      ]
+    },
+    {
+      "path": "native/webgl-right-contact-sheet.png",
+      "dimensions": [
+        1464,
+        1540
+      ],
+      "bytes": 1284259,
+      "sha256": "13c35764c6e8138ef885ffb653c5fcb30cb16fe2b510ea528b87424afd12e271",
+      "sourceCaptures": [
+        "webgl-390-r5-1-impact.png",
+        "webgl-390-r6-1-impact.png",
+        "webgl-390-layered-1-impact.png",
+        "webgl-390-r5-1-peak.png",
+        "webgl-390-r6-1-peak.png",
+        "webgl-390-layered-1-peak.png",
+        "webgl-390-r5-1-rebound.png",
+        "webgl-390-r6-1-rebound.png",
+        "webgl-390-layered-1-rebound.png",
+        "webgl-390-r5-1-settled.png",
+        "webgl-390-r6-1-settled.png",
+        "webgl-390-layered-1-settled.png"
+      ]
+    },
+    {
+      "path": "native/webgl-right-peak-full.png",
+      "dimensions": [
+        780,
+        1688
+      ],
+      "bytes": 2222701,
+      "sha256": "90f281b728c668390f65b6b531f4f8ec12a3d96512456b17ca867136d15a5c14",
+      "sourceCaptures": [
+        "webgl-390-layered-1-peak.png"
+      ],
+      "byteForByteCopy": true
+    },
+    {
+      "path": "native/canvas-left-contact-sheet.png",
+      "dimensions": [
+        1464,
+        1540
+      ],
+      "bytes": 1398899,
+      "sha256": "96701eb438e7315d827f7c875745e2e758bd39df604881400f83bda965c4569c",
+      "sourceCaptures": [
+        "canvas-390-r5-0-impact.png",
+        "canvas-390-r6-0-impact.png",
+        "canvas-390-layered-0-impact.png",
+        "canvas-390-r5-0-peak.png",
+        "canvas-390-r6-0-peak.png",
+        "canvas-390-layered-0-peak.png",
+        "canvas-390-r5-0-rebound.png",
+        "canvas-390-r6-0-rebound.png",
+        "canvas-390-layered-0-rebound.png",
+        "canvas-390-r5-0-settled.png",
+        "canvas-390-r6-0-settled.png",
+        "canvas-390-layered-0-settled.png"
+      ]
+    },
+    {
+      "path": "native/canvas-right-contact-sheet.png",
+      "dimensions": [
+        1464,
+        1540
+      ],
+      "bytes": 1344197,
+      "sha256": "ebcd3cda95606d41181d224a9134368846af13876e4a87ee8d22aa97e8f49070",
+      "sourceCaptures": [
+        "canvas-390-r5-1-impact.png",
+        "canvas-390-r6-1-impact.png",
+        "canvas-390-layered-1-impact.png",
+        "canvas-390-r5-1-peak.png",
+        "canvas-390-r6-1-peak.png",
+        "canvas-390-layered-1-peak.png",
+        "canvas-390-r5-1-rebound.png",
+        "canvas-390-r6-1-rebound.png",
+        "canvas-390-layered-1-rebound.png",
+        "canvas-390-r5-1-settled.png",
+        "canvas-390-r6-1-settled.png",
+        "canvas-390-layered-1-settled.png"
+      ]
+    },
+    {
+      "path": "native/canvas-right-peak-full.png",
+      "dimensions": [
+        780,
+        1688
+      ],
+      "bytes": 2257976,
+      "sha256": "74102bf4d45e56c8e9a1d0c03f736995ea6eaa017ca989786b0ff8505d356ee1",
+      "sourceCaptures": [
+        "canvas-390-layered-1-peak.png"
+      ],
+      "byteForByteCopy": true
+    }
+  ]
+}
