@@ -27,7 +27,7 @@ async function input(p,point,kind='tap'){
  const b=await chromium.launch({executablePath:process.env.CHROMIUM||'/usr/bin/chromium',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
  const old=await setup(b,'v8',sizes[1],true,false,false,oldPath),fresh=await setup(b,'v8',sizes[1]),metrics={};
  // The new input targets must not change any existing calibrated gestures or rendering.
- for(const id of ['ember','midnight','aurelia','holly']){
+ for(const id of ['ember','midnight','aurelia']){
   await character(old.page,id);await character(fresh.page,id);
   for(const side of [0,1])for(const kind of ['slap','kick','drag','flick'])for(const link of [0,50,100]){
    assert.deepEqual(await scenario(fresh.page,kind,side,link),await scenario(old.page,kind,side,link));checks++;
@@ -80,7 +80,7 @@ async function input(p,point,kind='tap'){
  await p.reload();await p.waitForFunction(()=>window.__peachPhysicsDebug?.snapshot().frames>1);
  let snap=await p.evaluate(()=>__peachPhysicsDebug.snapshot());ok(snap.character==='holly'&&snap.model.bounce===100&&snap.model.softness===80&&snap.model.settle===25&&snap.model.transfer===0,'saved r2 preference fields unchanged');
  await p.evaluate(async()=>{await navigator.serviceWorker.register('./sw.js',{scope:'./'});await navigator.serviceWorker.ready;});await p.waitForFunction(()=>navigator.serviceWorker.controller);
- ok(await p.evaluate(async()=>!!await (await caches.open('peach-physics-v008-r3')).match('./assets/holly-heartbreaker.jpg')),'r3 artwork cached');
+ ok(await p.evaluate(async()=>!!await (await caches.open('peach-physics-v008-r4')).match('./assets/holly-heartbreaker.jpg')),'r3 artwork cached');
  await live.setOffline(true);await p.reload();await p.waitForFunction(()=>window.__peachPhysicsDebug?.snapshot().frames>1);
  snap=await p.evaluate(()=>__peachPhysicsDebug.snapshot());const f=snap.framing;
  for(const [x,y] of [[220,630],[580,630]]){const before=await p.evaluate(()=>__peachPhysicsDebug.snapshot().slapCount);await p.touchscreen.tap(f.x+x/720*f.width,f.y+y/1280*f.height);ok((await p.evaluate(()=>__peachPhysicsDebug.snapshot().slapCount))===before+1,'green target works offline');}

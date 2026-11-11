@@ -23,7 +23,7 @@ let checks=0;const ok=(v,s)=>{assert.ok(v,s);checks++};
   __test.render();const rest=ctx.getImageData(0,0,c.width,c.height).data,f=__peachPhysicsDebug.snapshot().framing,dpr=c.width/innerWidth;
   let rows=[];for(const side of [0,1]){
    __test.forcePose(26,30,side);const moved=ctx.getImageData(0,0,c.width,c.height).data;
-   let outside=0,max=0,inside=0;for(let y=380;y<610;y+=2)for(let x=210;x<620;x+=2){
+   let outside=0,max=0,inside=0;for(let y=380;y<670;y+=2)for(let x=200;x<630;x+=2){
     const sx=Math.round((f.x+x/720*f.width)*dpr),sy=Math.round((f.y+y/1280*f.height)*dpr),at=(sy*c.width+sx)*4;
     const d=Math.max(...[0,1,2].map(k=>Math.abs(rest[at+k]-moved[at+k])));
     if([-3,0,3].every(xx=>[-3,0,3].every(yy=>__test.hollySkinWeight(side,x+xx,y+yy)===0))){if(d>0)outside++;max=Math.max(max,d);}else if(d>0)inside++;

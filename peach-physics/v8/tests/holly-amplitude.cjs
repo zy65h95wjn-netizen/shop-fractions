@@ -28,7 +28,7 @@ let checks=0;const ok=(v,s)=>{assert.ok(v,s);checks++};
    },{side,model});
   }
   row.ratio=row.after.peakSourcePixels/row.before.peakSourcePixels;
-  ok(row.ratio>2.1,`${name} ${side} visibly stronger: ${row.ratio}`);ok(row.after.peakSourcePixels<18,'bounded');ok(row.after.error===0&&row.before.error===0,'GL clear');rows.push(row);
+  ok(row.ratio>2.1,`${name} ${side} visibly stronger: ${row.ratio}`);ok(row.after.peakSourcePixels<24,'bounded');ok(row.after.error===0&&row.before.error===0,'GL clear');rows.push(row);
  }
  // Record the actual two poses for visual comparison, using normal photo rendering.
  for(const [label,source] of [['before',baselinePath],['after',null]]){

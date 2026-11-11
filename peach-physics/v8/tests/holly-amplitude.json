@@ -11,12 +11,12 @@
         "error": 0
       },
       "after": {
-        "peakSourcePixels": 7.258299878731053,
-        "peakCssPixels": 3.9315791009793206,
+        "peakSourcePixels": 18.465973564036215,
+        "peakCssPixels": 10.002402347186283,
         "peakFrame": 10,
         "error": 0
       },
-      "ratio": 3.08551337547463
+      "ratio": 7.849911050100589
     },
     {
       "side": 0,
@@ -28,12 +28,12 @@
         "error": 0
       },
       "after": {
-        "peakSourcePixels": 10.702008663899324,
-        "peakCssPixels": 5.796921359612133,
-        "peakFrame": 10,
+        "peakSourcePixels": 22.62194467629711,
+        "peakCssPixels": 12.253553366327603,
+        "peakFrame": 15,
         "error": 0
       },
-      "ratio": 3.797543658341579
+      "ratio": 8.027261539659905
     },
     {
       "side": 0,
@@ -45,12 +45,12 @@
         "error": 0
       },
       "after": {
-        "peakSourcePixels": 14.078621421295756,
-        "peakCssPixels": 7.625919936535201,
-        "peakFrame": 10,
+        "peakSourcePixels": 23.10718218024607,
+        "peakCssPixels": 12.516390347633289,
+        "peakFrame": 15,
         "error": 0
       },
-      "ratio": 4.16337130488656
+      "ratio": 6.833323828176938
     },
     {
       "side": 0,
@@ -62,12 +62,12 @@
         "error": 0
       },
       "after": {
-        "peakSourcePixels": 16.011407780864058,
-        "peakCssPixels": 8.672845881301365,
-        "peakFrame": 10,
+        "peakSourcePixels": 23.2231354809904,
+        "peakCssPixels": 12.579198385536468,
+        "peakFrame": 15,
         "error": 0
       },
-      "ratio": 4.019418982531472
+      "ratio": 5.8298128973863195
     },
     {
       "side": 1,
@@ -79,12 +79,12 @@
         "error": 0
       },
       "after": {
-        "peakSourcePixels": 6.878603709691091,
-        "peakCssPixels": 3.7259103427493407,
+        "peakSourcePixels": 18.260301089905855,
+        "peakCssPixels": 9.890996423699004,
         "peakFrame": 10,
         "error": 0
       },
-      "ratio": 3.017031147057537
+      "ratio": 8.009168643525296
     },
     {
       "side": 1,
@@ -96,12 +96,12 @@
         "error": 0
       },
       "after": {
-        "peakSourcePixels": 10.291047495147463,
-        "peakCssPixels": 5.574317393204876,
-        "peakFrame": 10,
+        "peakSourcePixels": 22.477420984852905,
+        "peakCssPixels": 12.175269700128657,
+        "peakFrame": 15,
         "error": 0
       },
-      "ratio": 3.7611098368578118
+      "ratio": 8.214911962381635
     },
     {
       "side": 1,
@@ -113,12 +113,12 @@
         "error": 0
       },
       "after": {
-        "peakSourcePixels": 13.629672771671016,
-        "peakCssPixels": 7.382739417988468,
-        "peakFrame": 10,
+        "peakSourcePixels": 23.117283580322187,
+        "peakCssPixels": 12.521861939341186,
+        "peakFrame": 15,
         "error": 0
       },
-      "ratio": 4.148392868916862
+      "ratio": 7.036087803418337
     },
     {
       "side": 1,
@@ -130,12 +130,12 @@
         "error": 0
       },
       "after": {
-        "peakSourcePixels": 15.773498307017235,
-        "peakCssPixels": 8.543978249634335,
+        "peakSourcePixels": 23.188255348839515,
+        "peakCssPixels": 12.560304980621403,
         "peakFrame": 10,
         "error": 0
       },
-      "ratio": 4.069044773022186
+      "ratio": 5.9818086886105295
     }
   ]
 }

@@ -7,7 +7,7 @@ const base=process.env.PEACH_TEST_URL||'http://127.0.0.1:8000';let checks=0;
 function ok(value,label){assert.ok(value,label);checks++;}
 const hook=`
 window.__test={reset,render,step,model,nodes,followers,impacts,waves,resize,chooseCharacter,currentCharacter,slap,impulse,skinWeight:typeof aureliaSkinWeight==='function'?aureliaSkinWeight:null,
- hollySkinWeight:typeof hollySkinWeight==='function'?hollySkinWeight:null,slap,
+ hollySkinWeight:typeof hollyMotionWeight==='function'?hollyMotionWeight:typeof hollySkinWeight==='function'?hollySkinWeight:null,slap,
  raw:()=>JSON.parse(JSON.stringify({nodes,followers,impacts,waves})),
  pixels:()=>{render();const p=new Uint8Array(canvas.width*canvas.height*4);gl.readPixels(0,0,canvas.width,canvas.height,gl.RGBA,gl.UNSIGNED_BYTE,p);return p;},
  error:()=>gl.getError(),

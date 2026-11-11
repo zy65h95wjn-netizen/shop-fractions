@@ -47,12 +47,12 @@ const sizes=[{width:375,height:667},{width:390,height:844},{width:430,height:932
     const sx=Math.round((f.x+x/720*f.width)*dpr),sy=Math.round((f.y+y/1280*f.height)*dpr);if(sx<0||sx>=c.width||sy<0||sy>=c.height)continue;
     const at=((c.height-1-sy)*c.width+sx)*4;for(let k=0;k<3;k++)if(pixels[at+k]!==rest[at+k]){changed++;break;}
    }return changed;};
-   const boxes={head:[250,80,500,320],upperTorso:[310,335,450,400],lacing:[365,590,447,800],corset:[240,605,550,710],center:[409,455,417,570],leftHair:[160,350,220,580],rightHair:[570,360,610,460],leftArm:[100,620,190,720],rightArm:[590,620,635,720],background:[640,250,700,650],leftFur:[237,500,270,530],rightFur:[545,510,580,540],leftSkin:[300,445,380,500],rightSkin:[445,455,520,510]};
+   const boxes={head:[250,80,500,320],upperTorso:[310,335,450,400],lacing:[374,590,440,800],corset:[240,660,550,710],center:[409,455,417,570],leftHair:[160,350,220,580],rightHair:[570,360,610,460],leftArm:[100,620,190,720],rightArm:[590,620,635,720],background:[640,250,700,650],leftFur:[280,530,330,550],rightFur:[505,545,550,560],leftSkin:[300,445,380,500],rightSkin:[445,455,520,510]};
    const rows=[];for(const side of [0,1])for(const [dx,dy] of [[26,30],[-26,-30],[26,-30],[-26,30]]){
     __test.forcePose(dx,dy,side);const pixels=__test.pixels();rows.push({side,dx,dy,boxes:Object.fromEntries(Object.entries(boxes).map(([k,b])=>[k,count(pixels,b)]))});
    }return rows;
   });
-  for(const row of boundaries)for(const [name,changed] of Object.entries(row.boxes))ok(name===(row.side?'rightSkin':'leftSkin')?changed>300:changed===0,`${size.width} ${row.side} ${name} changed=${changed}`);
+  for(const row of boundaries)for(const [name,changed] of Object.entries(row.boxes))ok([row.side?'rightSkin':'leftSkin',row.side?'rightFur':'leftFur'].includes(name)?changed>100:changed===0,`${size.width} ${row.side} ${name} changed=${changed}`);
   metrics[size.width]={boundaries};
   await p.addStyleTag({content:'#loader,#hint,#characterToast,.slap-burst,#pulse{display:none!important}'});
   for(const side of [0,1]){
@@ -93,13 +93,13 @@ const sizes=[{width:375,height:667},{width:390,height:844},{width:430,height:932
     __test.forcePose(dx,dy,side);const a=__test.pixels(),c=document.querySelector('#game'),f=__peachPhysicsDebug.snapshot().framing,dpr=c.width/innerWidth,scale=f.width/720*dpr;
     const disp=(x,y)=>{const i=((c.height-1-y)*c.width+x)*4;return [(a[i]/255+a[i+1]/65025-.5)*128,(a[i+2]/255+a[i+3]/65025-.5)*128]};
     let minDet=Infinity,maxOutside=0,maxTravel=0;
-    for(let y=390;y<590;y+=2)for(let x=220;x<600;x+=2){
+    for(let y=380;y<670;y+=2)for(let x=200;x<630;x+=2){
      const sx=Math.round((f.x+x/720*f.width)*dpr),sy=Math.round((f.y+y/1280*f.height)*dpr),d=disp(sx,sy),l=disp(sx-1,sy),r=disp(sx+1,sy),t=disp(sx,sy-1),b=disp(sx,sy+1);
      minDet=Math.min(minDet,(1-(r[0]-l[0])*scale/2)*(1-(b[1]-t[1])*scale/2)-(b[0]-t[0])*(r[1]-l[1])*scale*scale/4);maxTravel=Math.max(maxTravel,Math.hypot(...d));
      if([-2,0,2].every(xx=>[-2,0,2].every(yy=>__test.hollySkinWeight(side,x+xx,y+yy)===0)))maxOutside=Math.max(maxOutside,Math.hypot(...d));
     }return {side,dx,dy,minDet,maxOutside,maxTravel,error:__test.error()};
    },{side,dx,dy});
-   ok(field.minDet>.1,'no sampled folds');ok(field.maxOutside<.01,'outside support stationary');ok(field.maxTravel<18&&field.maxTravel>2,'controlled visible motion');ok(field.error===0,'WebGL error clear');metrics.fields.push({width:size.width,...field});
+   ok(field.minDet>.1,'no sampled folds');ok(field.maxOutside<.01,'outside support stationary');ok(field.maxTravel<24&&field.maxTravel>2,'controlled visible motion');ok(field.error===0,'WebGL error clear');metrics.fields.push({width:size.width,...field});
   }await f.context.close();
  }
  // Canvas remapping at all phone sizes; spatially varying motion and reset.
@@ -124,7 +124,7 @@ const sizes=[{width:375,height:667},{width:390,height:844},{width:430,height:932
  // Uninstrumented production app: offline caching and all four character cycle.
  const live=await browser.newContext({viewport:sizes[1],isMobile:true,hasTouch:true}),lp=await live.newPage(),errors=[];lp.on('pageerror',e=>errors.push(e.message));
  await lp.goto(`${base}/peach-physics/v8/`);await lp.evaluate(async()=>{await navigator.serviceWorker.register('./sw.js',{scope:'./'});await navigator.serviceWorker.ready;});await lp.waitForFunction(()=>navigator.serviceWorker.controller);
- ok(await lp.evaluate(async()=>!!await (await caches.open('peach-physics-v008-r3')).match('./assets/holly-heartbreaker.jpg')),'Holly precached');
+ ok(await lp.evaluate(async()=>!!await (await caches.open('peach-physics-v008-r4')).match('./assets/holly-heartbreaker.jpg')),'Holly precached');
  await live.setOffline(true);await lp.reload();await lp.waitForFunction(()=>window.__peachPhysicsDebug?.snapshot().frames>1);
  for(const id of ['midnight','aurelia','holly','ember']){await lp.locator('#character').click();await lp.waitForFunction(id=>__peachPhysicsDebug.snapshot().character===id,id);ok(true,`offline ${id}`);}
  ok(errors.length===0&&fresh.errors.length===0,'no uncaught errors');
