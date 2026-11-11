@@ -109,7 +109,7 @@ let checks=0;const ok=(v,label)=>{assert.ok(v,label);checks++};
  // The same production service worker precaches the exact original artwork.
  const offline=await browser.newContext({viewport:sizes[1]});const op=await offline.newPage();await op.goto(`${base}/peach-physics/v8/`);
  await op.evaluate(async()=>{await navigator.serviceWorker.register('./sw.js',{scope:'./'});await navigator.serviceWorker.ready;});await op.waitForFunction(()=>navigator.serviceWorker.controller);
- const cached=await op.evaluate(async()=>{const c=await caches.open('peach-physics-v008-r5');return (await c.keys()).map(r=>r.url);});ok(cached.some(u=>u.endsWith('/assets/aurelia-frost.jpg')),'artwork precached');
+ const cached=await op.evaluate(async()=>{const c=await caches.open('peach-physics-v008-r6');return (await c.keys()).map(r=>r.url);});ok(cached.some(u=>u.endsWith('/assets/aurelia-frost.jpg')),'artwork precached');
  await offline.setOffline(true);await op.reload();await op.waitForFunction(()=>window.__peachPhysicsDebug?.snapshot().frames>1);
  for(const id of ['midnight','aurelia','holly','ember']){await op.locator('#character').click();await op.waitForFunction(id=>__peachPhysicsDebug.snapshot().character===id,id);ok(true,`offline ${id}`);}
  ok(fresh.errors.length===0&&old.errors.length===0&&field.errors.length===0,'no uncaught errors');

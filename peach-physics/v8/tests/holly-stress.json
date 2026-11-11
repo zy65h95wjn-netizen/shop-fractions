@@ -113,15 +113,15 @@
         "side": 0,
         "outside": 0,
         "max": 0,
-        "inside": 8405
+        "inside": 8550
       },
       {
         "side": 1,
         "outside": 0,
         "max": 0,
-        "inside": 8501
+        "inside": 7610
       }
     ],
-    "averageRenderMs": 20.533333333333335
+    "averageRenderMs": 10.633333333333333
   }
 }

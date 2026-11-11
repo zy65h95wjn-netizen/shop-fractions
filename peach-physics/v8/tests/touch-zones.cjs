@@ -80,7 +80,7 @@ async function input(p,point,kind='tap'){
  await p.reload();await p.waitForFunction(()=>window.__peachPhysicsDebug?.snapshot().frames>1);
  let snap=await p.evaluate(()=>__peachPhysicsDebug.snapshot());ok(snap.character==='holly'&&snap.model.bounce===100&&snap.model.softness===80&&snap.model.settle===25&&snap.model.transfer===0,'saved r2 preference fields unchanged');
  await p.evaluate(async()=>{await navigator.serviceWorker.register('./sw.js',{scope:'./'});await navigator.serviceWorker.ready;});await p.waitForFunction(()=>navigator.serviceWorker.controller);
- ok(await p.evaluate(async()=>!!await (await caches.open('peach-physics-v008-r5')).match('./assets/holly-heartbreaker.jpg')),'r3 artwork cached');
+ ok(await p.evaluate(async()=>!!await (await caches.open('peach-physics-v008-r6')).match('./assets/holly-heartbreaker.jpg')),'r3 artwork cached');
  await live.setOffline(true);await p.reload();await p.waitForFunction(()=>window.__peachPhysicsDebug?.snapshot().frames>1);
  snap=await p.evaluate(()=>__peachPhysicsDebug.snapshot());const f=snap.framing;
  for(const [x,y] of [[220,630],[580,630]]){const before=await p.evaluate(()=>__peachPhysicsDebug.snapshot().slapCount);await p.touchscreen.tap(f.x+x/720*f.width,f.y+y/1280*f.height);ok((await p.evaluate(()=>__peachPhysicsDebug.snapshot().slapCount))===before+1,'green target works offline');}

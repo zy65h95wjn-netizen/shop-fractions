@@ -10,7 +10,7 @@
 <meta name="description" content="Peach Physics: a playful interactive Christmas elf experiment with adjustable impact waves and linked motion.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Peach Physics — Elf Lab 0.0.8 r5</title>
+<title>Peach Physics — Elf Lab 0.0.8 r6</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -87,7 +87,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r5</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r6</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/4</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
@@ -232,6 +232,7 @@ function resize(){
  const rect=stage.getBoundingClientRect();cssW=Math.max(1,rect.width);cssH=Math.max(1,rect.height);
  const dpr=Math.min(window.devicePixelRatio||1,2.1);
  canvas.width=Math.max(2,Math.round(cssW*dpr));canvas.height=Math.max(2,Math.round(cssH*dpr));
+ if(hollyBackground)hollyBackground.width=0;
  // Portrait: keep the entire head clear of the Dynamic Island, with soft photo-derived fill in the margins.
  // Give the artwork nearly the full screen width. Physics coordinates stay in original image space.
  const portrait=cssH>cssW;
@@ -342,8 +343,8 @@ function hollySkinWeight(side,x,y){
 // lacing, hair and central seam remain fixed. These are NOT input polygons.
 const HOLLY_MOTION_CONTOURS=[
  [[300,402],[350,402],[383,421],[400,454],[407,494],[406,536],[399,563],
-  [381,587],[356,616],[323,635],[277,633],[245,615],[227,578],[218,533],
-  [219,487],[245,447],[275,418]],
+  [381,587],[356,616],[323,641],[277,636],[243,616],[225,586],[213,550],
+  [204,518],[204,489],[221,460],[254,433],[275,418]],
  [[450,408],[490,415],[531,433],[568,450],[590,474],[608,500],[616,530],
   [609,559],[592,589],[565,616],[527,639],[480,644],[445,623],[428,594],[420,563],[418,522],
   [421,475],[430,437]]
@@ -352,17 +353,42 @@ const hollyMotionPlanes=HOLLY_MOTION_CONTOURS.map(points=>points.map(([x,y],i)=>
  const [bx,by]=points[(i+1)%points.length],len=Math.hypot(bx-x,by-y),nx=-(by-y)/len,ny=(bx-x)/len;
  return [nx,ny,-nx*x-ny*y];
 }));
+// Photo-traced outer boundaries [y,x]. Keep a two-pixel stationary border
+// inside the visible object, then soften inward. These guards exclude nearby
+// arm, loose hair and scenery, including the narrow strips missed by box tests.
+const HOLLY_OUTER_EDGES=[
+ [[380,326],[400,304],[420,277],[440,252],[456,236],[470,216],[488,208],
+  [506,210],[526,219],[546,223],[566,229],[586,236],[606,250],[622,261],
+  [638,281],[656,298]],
+ [[380,500],[400,515],[420,530],[440,549],[460,565],[476,577],[488,599],
+  [505,605],[520,607],[535,603],[550,592],[570,584],[590,573],[610,551],
+  [628,519],[650,477]]
+];
+function hollyOuterWeight(side,x,y){
+ const points=HOLLY_OUTER_EDGES[side];let i=0;
+ while(i<points.length-2&&y>points[i+1][0])i++;
+ const [ay,ax]=points[i],[by,bx]=points[i+1];
+ const border=ax+clamp((y-ay)/(by-ay),0,1)*(bx-ax);
+ if(side===0?x<=border:x>=border)return 0;
+ // Actual distance to the traced polyline stays continuous at its corners.
+ // Dividing by the slope of only the current segment would create seams.
+ let distance=Infinity;
+ for(let j=0;j<points.length-1;j++){
+  const [py,px]=points[j],[qy,qx]=points[j+1],dx=qx-px,dy=qy-py;
+  const t=clamp(((x-px)*dx+(y-py)*dy)/(dx*dx+dy*dy),0,1);
+  distance=Math.min(distance,Math.hypot(x-px-t*dx,y-py-t*dy));
+ }
+ // The right outer band is intentionally firmer than the left.
+ const t=clamp((distance-2)/(side===0?20:32),0,1);
+ return t*t*(3-2*t);
+}
 function hollyMotionWeight(side,x,y){
  const smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
- // The marked screen-right outer cup needs its feather beyond the visible
- // edge. Only its outer arc uses the narrower falloff; the left and center
- // support weights retain their accepted calibration.
  const edge=smooth(Math.min(...hollyMotionPlanes[side].map(([nx,ny,c],i)=>
-  (nx*x+ny*y+c)/(side===1&&i>=2&&i<=9?20:32))));
+  (nx*x+ny*y+c)/((side===0&&i>=9&&i<=17)||(side===1&&i>=2&&i<=9)?20:32))));
  const low=smooth((y-560)/30);
  const lace=side===0?smooth((374-x)/20):smooth((x-440)/24);
- const hair=side===0?smooth((x-226)/20):1;
- return edge*(1-low*(1-lace))*hair;
+ return Math.min(edge,hollyOuterWeight(side,x,y))*(1-low*(1-lace));
 }
 // Extra touch targets traced from the user's green outline, in source pixels.
 // Screenshot alignment: marked=(source*1.78)-[596,472]. The left outline is
@@ -392,8 +418,8 @@ function touchAnchor(side,p){
  const [x,y]=currentCharacter().impactCenters[side];
  return {p:{...p,x,y},offsetX:x-p.x,offsetY:y-p.y};
 }
-const HOLLY_CROP=[208,384,424,288];
-let hollyMaskLoc,hollyMaskPixels=null,hollySource=null,hollyLayer=null;
+const HOLLY_CROP=[192,384,440,288];
+let hollyMaskLoc,hollyMaskPixels=null,hollySource=null,hollyLayer=null,hollyBackground=null;
 function buildHollyMask(){
  if(hollyMaskPixels)return;
  const [ox,oy,w,h]=HOLLY_CROP;hollyMaskPixels=new Uint8Array(w*h*4);
@@ -431,6 +457,7 @@ function hollyVelocity(x,y,side){
 // Bilinear CPU texture remapping: spatial deformation, never a translated patch.
 // Only Holly uses this path; the accepted three Canvas renderers are untouched.
 function initHollyFallback(){
+ hollyBackground=document.createElement('canvas');hollyBackground.width=0;
  buildHollyMask();const source=document.createElement('canvas');source.width=W;source.height=H;
  const c=source.getContext('2d');c.drawImage(img,0,0);hollySource=c.getImageData(0,0,W,H).data;
  hollyLayer=document.createElement('canvas');hollyLayer.width=HOLLY_CROP[2];hollyLayer.height=HOLLY_CROP[3];
@@ -654,7 +681,7 @@ function initGL(){
   if(uHolly>0.5){
    vec2 sampleUV=vRawUV;
    for(int k=0;k<6;k++){
-    vec2 weights=texture2D(uHollyShape,(sampleUV*vec2(720.0,1280.0)-vec2(208.0,384.0))/vec2(424.0,288.0)).rg;
+    vec2 weights=texture2D(uHollyShape,(sampleUV*vec2(720.0,1280.0)-vec2(192.0,384.0))/vec2(440.0,288.0)).rg;
     sampleUV-=(vAureliaLeft*weights.r+vAureliaRight*weights.g)/6.0;
    }
    photoUV=sampleUV;
@@ -775,8 +802,17 @@ function render(){
  if(needSize)resize();
  if(fallback){
   ctx2.clearRect(0,0,canvas.width,canvas.height);
-  const sc=canvas.width/cssW;ctx2.drawImage(img,ox*sc,oy*sc,drawW*sc,drawH*sc);
-  if(isHolly()){renderHollyFallback(sc);return;}
+  const sc=canvas.width/cssW;
+  if(isHolly()){
+   // Cache the resampled photo once per viewport. Drawing it 1:1 keeps the
+   // scenery pixel-identical when the moving overlay is added or removed.
+   if(hollyBackground.width!==canvas.width||hollyBackground.height!==canvas.height){
+    hollyBackground.width=canvas.width;hollyBackground.height=canvas.height;
+    hollyBackground.getContext('2d').drawImage(img,ox*sc,oy*sc,drawW*sc,drawH*sc);
+   }
+   ctx2.drawImage(hollyBackground,0,0);renderHollyFallback(sc);return;
+  }
+  ctx2.drawImage(img,ox*sc,oy*sc,drawW*sc,drawH*sc);
   // Fallback is photo-first: show a gentle localized crop motion rather than fabric seams.
   for(let side=0;side<2;side++){
    const n=nodes[side*3+1];if(Math.abs(n.dx)+Math.abs(n.dy)<.25 && impacts[side].contact<.02 && waves[side].strength<.02)continue;
