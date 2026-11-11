@@ -1,0 +1,17 @@
+{
+  "reference": "b7b5a2ba1c3784a8d9b5f9423405e6de8d954f2b",
+  "runners": {
+    "r5.html": {
+      "sourceRef": "8eb02d3",
+      "sourceSha256": "3afec65e001dce6552d993bbc03bd6d632ea92f6688b2b0c4b703f634c3b4813"
+    },
+    "index.html": {
+      "sourceRef": "ddf3456cc937c7f84f0b022f76f6824e59c2d079",
+      "sourceSha256": "ee5f43b623634917a0a2944c8f991b61053168b54e84e8e8fab0182f081437d4"
+    }
+  },
+  "originalAssets": {
+    "reference-ember.webp": "37abbe30132c88c9fa6950e96dd639eeb86d547fdd316a311c02cb11653dce07",
+    "reference-midnight.webp": "5585e5751573c20873a2ff4abd189d79cc30302b0bea89bd1501bc25f5223d15"
+  }
+}

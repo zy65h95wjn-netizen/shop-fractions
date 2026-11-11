@@ -1,0 +1,15 @@
+{
+  "status": "no_candidate_produced",
+  "tool": "image_gen.imagegen",
+  "source": "peach-physics/v8/assets/holly-heartbreaker.jpg",
+  "requestedChanges": [
+    "Preserve front-facing pose, identity, body proportions, outfit identity, framing and lighting",
+    "Sweep lower hair behind both shoulders, clear of upper garment boundaries",
+    "Provide plain green velvet side-panel clearance around fur and upper cups",
+    "Clarify continuous lower cup attachment without altering central lacing"
+  ],
+  "result": "Tool rejected the output with moderation_blocked, category sexual; no image was returned.",
+  "attemptCountThisMission": 1,
+  "revisedArtworkTested": false,
+  "limitation": "The specified artwork revision remains a hypothesis, not a demonstrated visual fix."
+}

@@ -1,0 +1,1791 @@
+{
+  "rest": [
+    {
+      "backend": "webgl",
+      "changedChannels": 0
+    },
+    {
+      "backend": "canvas",
+      "changedChannels": 0
+    }
+  ],
+  "adjacentPhotoBoxes": [
+    {
+      "backend": "webgl",
+      "variant": "r5",
+      "side": 0,
+      "phase": "peak",
+      "boxes": [
+        {
+          "sourceBox": [
+            201,
+            480,
+            207,
+            510
+          ],
+          "samples": 180,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            210,
+            520,
+            217,
+            532
+          ],
+          "samples": 84,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            218,
+            548,
+            223,
+            560
+          ],
+          "samples": 60,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            225,
+            576,
+            231,
+            585
+          ],
+          "samples": 54,
+          "changed": 2,
+          "maximumChannelDifference": 1
+        },
+        {
+          "sourceBox": [
+            239,
+            607,
+            249,
+            618
+          ],
+          "samples": 110,
+          "changed": 39,
+          "maximumChannelDifference": 44
+        }
+      ]
+    },
+    {
+      "backend": "webgl",
+      "variant": "r5",
+      "side": 0,
+      "phase": "rebound",
+      "boxes": [
+        {
+          "sourceBox": [
+            201,
+            480,
+            207,
+            510
+          ],
+          "samples": 180,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            210,
+            520,
+            217,
+            532
+          ],
+          "samples": 84,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            218,
+            548,
+            223,
+            560
+          ],
+          "samples": 60,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            225,
+            576,
+            231,
+            585
+          ],
+          "samples": 54,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            239,
+            607,
+            249,
+            618
+          ],
+          "samples": 110,
+          "changed": 27,
+          "maximumChannelDifference": 16
+        }
+      ]
+    },
+    {
+      "backend": "webgl",
+      "variant": "r5",
+      "side": 1,
+      "phase": "peak",
+      "boxes": [
+        {
+          "sourceBox": [
+            608,
+            498,
+            614,
+            503
+          ],
+          "samples": 30,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            610,
+            510,
+            617,
+            531
+          ],
+          "samples": 147,
+          "changed": 65,
+          "maximumChannelDifference": 134
+        },
+        {
+          "sourceBox": [
+            608,
+            535,
+            615,
+            542
+          ],
+          "samples": 49,
+          "changed": 41,
+          "maximumChannelDifference": 126
+        },
+        {
+          "sourceBox": [
+            597,
+            552,
+            608,
+            562
+          ],
+          "samples": 110,
+          "changed": 109,
+          "maximumChannelDifference": 157
+        },
+        {
+          "sourceBox": [
+            586,
+            575,
+            597,
+            584
+          ],
+          "samples": 99,
+          "changed": 92,
+          "maximumChannelDifference": 64
+        },
+        {
+          "sourceBox": [
+            563,
+            607,
+            574,
+            617
+          ],
+          "samples": 110,
+          "changed": 47,
+          "maximumChannelDifference": 71
+        },
+        {
+          "sourceBox": [
+            575,
+            454,
+            584,
+            467
+          ],
+          "samples": 117,
+          "changed": 34,
+          "maximumChannelDifference": 14
+        }
+      ]
+    },
+    {
+      "backend": "webgl",
+      "variant": "r5",
+      "side": 1,
+      "phase": "rebound",
+      "boxes": [
+        {
+          "sourceBox": [
+            608,
+            498,
+            614,
+            503
+          ],
+          "samples": 30,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            610,
+            510,
+            617,
+            531
+          ],
+          "samples": 147,
+          "changed": 57,
+          "maximumChannelDifference": 58
+        },
+        {
+          "sourceBox": [
+            608,
+            535,
+            615,
+            542
+          ],
+          "samples": 49,
+          "changed": 31,
+          "maximumChannelDifference": 41
+        },
+        {
+          "sourceBox": [
+            597,
+            552,
+            608,
+            562
+          ],
+          "samples": 110,
+          "changed": 105,
+          "maximumChannelDifference": 37
+        },
+        {
+          "sourceBox": [
+            586,
+            575,
+            597,
+            584
+          ],
+          "samples": 99,
+          "changed": 84,
+          "maximumChannelDifference": 12
+        },
+        {
+          "sourceBox": [
+            563,
+            607,
+            574,
+            617
+          ],
+          "samples": 110,
+          "changed": 39,
+          "maximumChannelDifference": 4
+        },
+        {
+          "sourceBox": [
+            575,
+            454,
+            584,
+            467
+          ],
+          "samples": 117,
+          "changed": 30,
+          "maximumChannelDifference": 11
+        }
+      ]
+    },
+    {
+      "backend": "webgl",
+      "variant": "r6",
+      "side": 0,
+      "phase": "peak",
+      "boxes": [
+        {
+          "sourceBox": [
+            201,
+            480,
+            207,
+            510
+          ],
+          "samples": 180,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            210,
+            520,
+            217,
+            532
+          ],
+          "samples": 84,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            218,
+            548,
+            223,
+            560
+          ],
+          "samples": 60,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            225,
+            576,
+            231,
+            585
+          ],
+          "samples": 54,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            239,
+            607,
+            249,
+            618
+          ],
+          "samples": 110,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        }
+      ]
+    },
+    {
+      "backend": "webgl",
+      "variant": "r6",
+      "side": 0,
+      "phase": "rebound",
+      "boxes": [
+        {
+          "sourceBox": [
+            201,
+            480,
+            207,
+            510
+          ],
+          "samples": 180,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            210,
+            520,
+            217,
+            532
+          ],
+          "samples": 84,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            218,
+            548,
+            223,
+            560
+          ],
+          "samples": 60,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            225,
+            576,
+            231,
+            585
+          ],
+          "samples": 54,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            239,
+            607,
+            249,
+            618
+          ],
+          "samples": 110,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        }
+      ]
+    },
+    {
+      "backend": "webgl",
+      "variant": "r6",
+      "side": 1,
+      "phase": "peak",
+      "boxes": [
+        {
+          "sourceBox": [
+            608,
+            498,
+            614,
+            503
+          ],
+          "samples": 30,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            610,
+            510,
+            617,
+            531
+          ],
+          "samples": 147,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            608,
+            535,
+            615,
+            542
+          ],
+          "samples": 49,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            597,
+            552,
+            608,
+            562
+          ],
+          "samples": 110,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            586,
+            575,
+            597,
+            584
+          ],
+          "samples": 99,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            563,
+            607,
+            574,
+            617
+          ],
+          "samples": 110,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            575,
+            454,
+            584,
+            467
+          ],
+          "samples": 117,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        }
+      ]
+    },
+    {
+      "backend": "webgl",
+      "variant": "r6",
+      "side": 1,
+      "phase": "rebound",
+      "boxes": [
+        {
+          "sourceBox": [
+            608,
+            498,
+            614,
+            503
+          ],
+          "samples": 30,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            610,
+            510,
+            617,
+            531
+          ],
+          "samples": 147,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            608,
+            535,
+            615,
+            542
+          ],
+          "samples": 49,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            597,
+            552,
+            608,
+            562
+          ],
+          "samples": 110,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            586,
+            575,
+            597,
+            584
+          ],
+          "samples": 99,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            563,
+            607,
+            574,
+            617
+          ],
+          "samples": 110,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            575,
+            454,
+            584,
+            467
+          ],
+          "samples": 117,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        }
+      ]
+    },
+    {
+      "backend": "webgl",
+      "variant": "simple",
+      "side": 0,
+      "phase": "peak",
+      "boxes": [
+        {
+          "sourceBox": [
+            201,
+            480,
+            207,
+            510
+          ],
+          "samples": 180,
+          "changed": 180,
+          "maximumChannelDifference": 121
+        },
+        {
+          "sourceBox": [
+            210,
+            520,
+            217,
+            532
+          ],
+          "samples": 84,
+          "changed": 84,
+          "maximumChannelDifference": 211
+        },
+        {
+          "sourceBox": [
+            218,
+            548,
+            223,
+            560
+          ],
+          "samples": 60,
+          "changed": 60,
+          "maximumChannelDifference": 101
+        },
+        {
+          "sourceBox": [
+            225,
+            576,
+            231,
+            585
+          ],
+          "samples": 54,
+          "changed": 54,
+          "maximumChannelDifference": 91
+        },
+        {
+          "sourceBox": [
+            239,
+            607,
+            249,
+            618
+          ],
+          "samples": 110,
+          "changed": 110,
+          "maximumChannelDifference": 144
+        }
+      ]
+    },
+    {
+      "backend": "webgl",
+      "variant": "simple",
+      "side": 0,
+      "phase": "rebound",
+      "boxes": [
+        {
+          "sourceBox": [
+            201,
+            480,
+            207,
+            510
+          ],
+          "samples": 180,
+          "changed": 180,
+          "maximumChannelDifference": 43
+        },
+        {
+          "sourceBox": [
+            210,
+            520,
+            217,
+            532
+          ],
+          "samples": 84,
+          "changed": 84,
+          "maximumChannelDifference": 158
+        },
+        {
+          "sourceBox": [
+            218,
+            548,
+            223,
+            560
+          ],
+          "samples": 60,
+          "changed": 60,
+          "maximumChannelDifference": 52
+        },
+        {
+          "sourceBox": [
+            225,
+            576,
+            231,
+            585
+          ],
+          "samples": 54,
+          "changed": 54,
+          "maximumChannelDifference": 102
+        },
+        {
+          "sourceBox": [
+            239,
+            607,
+            249,
+            618
+          ],
+          "samples": 110,
+          "changed": 109,
+          "maximumChannelDifference": 128
+        }
+      ]
+    },
+    {
+      "backend": "webgl",
+      "variant": "simple",
+      "side": 1,
+      "phase": "peak",
+      "boxes": [
+        {
+          "sourceBox": [
+            608,
+            498,
+            614,
+            503
+          ],
+          "samples": 30,
+          "changed": 30,
+          "maximumChannelDifference": 78
+        },
+        {
+          "sourceBox": [
+            610,
+            510,
+            617,
+            531
+          ],
+          "samples": 147,
+          "changed": 147,
+          "maximumChannelDifference": 189
+        },
+        {
+          "sourceBox": [
+            608,
+            535,
+            615,
+            542
+          ],
+          "samples": 49,
+          "changed": 49,
+          "maximumChannelDifference": 206
+        },
+        {
+          "sourceBox": [
+            597,
+            552,
+            608,
+            562
+          ],
+          "samples": 110,
+          "changed": 110,
+          "maximumChannelDifference": 159
+        },
+        {
+          "sourceBox": [
+            586,
+            575,
+            597,
+            584
+          ],
+          "samples": 99,
+          "changed": 99,
+          "maximumChannelDifference": 89
+        },
+        {
+          "sourceBox": [
+            563,
+            607,
+            574,
+            617
+          ],
+          "samples": 110,
+          "changed": 110,
+          "maximumChannelDifference": 94
+        },
+        {
+          "sourceBox": [
+            575,
+            454,
+            584,
+            467
+          ],
+          "samples": 117,
+          "changed": 103,
+          "maximumChannelDifference": 19
+        }
+      ]
+    },
+    {
+      "backend": "webgl",
+      "variant": "simple",
+      "side": 1,
+      "phase": "rebound",
+      "boxes": [
+        {
+          "sourceBox": [
+            608,
+            498,
+            614,
+            503
+          ],
+          "samples": 30,
+          "changed": 30,
+          "maximumChannelDifference": 84
+        },
+        {
+          "sourceBox": [
+            610,
+            510,
+            617,
+            531
+          ],
+          "samples": 147,
+          "changed": 147,
+          "maximumChannelDifference": 133
+        },
+        {
+          "sourceBox": [
+            608,
+            535,
+            615,
+            542
+          ],
+          "samples": 49,
+          "changed": 49,
+          "maximumChannelDifference": 42
+        },
+        {
+          "sourceBox": [
+            597,
+            552,
+            608,
+            562
+          ],
+          "samples": 110,
+          "changed": 110,
+          "maximumChannelDifference": 79
+        },
+        {
+          "sourceBox": [
+            586,
+            575,
+            597,
+            584
+          ],
+          "samples": 99,
+          "changed": 99,
+          "maximumChannelDifference": 25
+        },
+        {
+          "sourceBox": [
+            563,
+            607,
+            574,
+            617
+          ],
+          "samples": 110,
+          "changed": 110,
+          "maximumChannelDifference": 24
+        },
+        {
+          "sourceBox": [
+            575,
+            454,
+            584,
+            467
+          ],
+          "samples": 117,
+          "changed": 96,
+          "maximumChannelDifference": 20
+        }
+      ]
+    },
+    {
+      "backend": "canvas",
+      "variant": "r5",
+      "side": 0,
+      "phase": "peak",
+      "boxes": [
+        {
+          "sourceBox": [
+            201,
+            480,
+            207,
+            510
+          ],
+          "samples": 180,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            210,
+            520,
+            217,
+            532
+          ],
+          "samples": 84,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            218,
+            548,
+            223,
+            560
+          ],
+          "samples": 60,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            225,
+            576,
+            231,
+            585
+          ],
+          "samples": 54,
+          "changed": 5,
+          "maximumChannelDifference": 9
+        },
+        {
+          "sourceBox": [
+            239,
+            607,
+            249,
+            618
+          ],
+          "samples": 110,
+          "changed": 47,
+          "maximumChannelDifference": 47
+        }
+      ]
+    },
+    {
+      "backend": "canvas",
+      "variant": "r5",
+      "side": 0,
+      "phase": "rebound",
+      "boxes": [
+        {
+          "sourceBox": [
+            201,
+            480,
+            207,
+            510
+          ],
+          "samples": 180,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            210,
+            520,
+            217,
+            532
+          ],
+          "samples": 84,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            218,
+            548,
+            223,
+            560
+          ],
+          "samples": 60,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            225,
+            576,
+            231,
+            585
+          ],
+          "samples": 54,
+          "changed": 5,
+          "maximumChannelDifference": 9
+        },
+        {
+          "sourceBox": [
+            239,
+            607,
+            249,
+            618
+          ],
+          "samples": 110,
+          "changed": 47,
+          "maximumChannelDifference": 11
+        }
+      ]
+    },
+    {
+      "backend": "canvas",
+      "variant": "r5",
+      "side": 1,
+      "phase": "peak",
+      "boxes": [
+        {
+          "sourceBox": [
+            608,
+            498,
+            614,
+            503
+          ],
+          "samples": 30,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            610,
+            510,
+            617,
+            531
+          ],
+          "samples": 147,
+          "changed": 78,
+          "maximumChannelDifference": 127
+        },
+        {
+          "sourceBox": [
+            608,
+            535,
+            615,
+            542
+          ],
+          "samples": 49,
+          "changed": 44,
+          "maximumChannelDifference": 125
+        },
+        {
+          "sourceBox": [
+            597,
+            552,
+            608,
+            562
+          ],
+          "samples": 110,
+          "changed": 109,
+          "maximumChannelDifference": 149
+        },
+        {
+          "sourceBox": [
+            586,
+            575,
+            597,
+            584
+          ],
+          "samples": 99,
+          "changed": 95,
+          "maximumChannelDifference": 61
+        },
+        {
+          "sourceBox": [
+            563,
+            607,
+            574,
+            617
+          ],
+          "samples": 110,
+          "changed": 58,
+          "maximumChannelDifference": 66
+        },
+        {
+          "sourceBox": [
+            575,
+            454,
+            584,
+            467
+          ],
+          "samples": 117,
+          "changed": 44,
+          "maximumChannelDifference": 14
+        }
+      ]
+    },
+    {
+      "backend": "canvas",
+      "variant": "r5",
+      "side": 1,
+      "phase": "rebound",
+      "boxes": [
+        {
+          "sourceBox": [
+            608,
+            498,
+            614,
+            503
+          ],
+          "samples": 30,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            610,
+            510,
+            617,
+            531
+          ],
+          "samples": 147,
+          "changed": 77,
+          "maximumChannelDifference": 52
+        },
+        {
+          "sourceBox": [
+            608,
+            535,
+            615,
+            542
+          ],
+          "samples": 49,
+          "changed": 44,
+          "maximumChannelDifference": 40
+        },
+        {
+          "sourceBox": [
+            597,
+            552,
+            608,
+            562
+          ],
+          "samples": 110,
+          "changed": 107,
+          "maximumChannelDifference": 36
+        },
+        {
+          "sourceBox": [
+            586,
+            575,
+            597,
+            584
+          ],
+          "samples": 99,
+          "changed": 91,
+          "maximumChannelDifference": 12
+        },
+        {
+          "sourceBox": [
+            563,
+            607,
+            574,
+            617
+          ],
+          "samples": 110,
+          "changed": 55,
+          "maximumChannelDifference": 4
+        },
+        {
+          "sourceBox": [
+            575,
+            454,
+            584,
+            467
+          ],
+          "samples": 117,
+          "changed": 42,
+          "maximumChannelDifference": 11
+        }
+      ]
+    },
+    {
+      "backend": "canvas",
+      "variant": "r6",
+      "side": 0,
+      "phase": "peak",
+      "boxes": [
+        {
+          "sourceBox": [
+            201,
+            480,
+            207,
+            510
+          ],
+          "samples": 180,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            210,
+            520,
+            217,
+            532
+          ],
+          "samples": 84,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            218,
+            548,
+            223,
+            560
+          ],
+          "samples": 60,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            225,
+            576,
+            231,
+            585
+          ],
+          "samples": 54,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            239,
+            607,
+            249,
+            618
+          ],
+          "samples": 110,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        }
+      ]
+    },
+    {
+      "backend": "canvas",
+      "variant": "r6",
+      "side": 0,
+      "phase": "rebound",
+      "boxes": [
+        {
+          "sourceBox": [
+            201,
+            480,
+            207,
+            510
+          ],
+          "samples": 180,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            210,
+            520,
+            217,
+            532
+          ],
+          "samples": 84,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            218,
+            548,
+            223,
+            560
+          ],
+          "samples": 60,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            225,
+            576,
+            231,
+            585
+          ],
+          "samples": 54,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            239,
+            607,
+            249,
+            618
+          ],
+          "samples": 110,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        }
+      ]
+    },
+    {
+      "backend": "canvas",
+      "variant": "r6",
+      "side": 1,
+      "phase": "peak",
+      "boxes": [
+        {
+          "sourceBox": [
+            608,
+            498,
+            614,
+            503
+          ],
+          "samples": 30,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            610,
+            510,
+            617,
+            531
+          ],
+          "samples": 147,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            608,
+            535,
+            615,
+            542
+          ],
+          "samples": 49,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            597,
+            552,
+            608,
+            562
+          ],
+          "samples": 110,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            586,
+            575,
+            597,
+            584
+          ],
+          "samples": 99,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            563,
+            607,
+            574,
+            617
+          ],
+          "samples": 110,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            575,
+            454,
+            584,
+            467
+          ],
+          "samples": 117,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        }
+      ]
+    },
+    {
+      "backend": "canvas",
+      "variant": "r6",
+      "side": 1,
+      "phase": "rebound",
+      "boxes": [
+        {
+          "sourceBox": [
+            608,
+            498,
+            614,
+            503
+          ],
+          "samples": 30,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            610,
+            510,
+            617,
+            531
+          ],
+          "samples": 147,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            608,
+            535,
+            615,
+            542
+          ],
+          "samples": 49,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            597,
+            552,
+            608,
+            562
+          ],
+          "samples": 110,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            586,
+            575,
+            597,
+            584
+          ],
+          "samples": 99,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            563,
+            607,
+            574,
+            617
+          ],
+          "samples": 110,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        },
+        {
+          "sourceBox": [
+            575,
+            454,
+            584,
+            467
+          ],
+          "samples": 117,
+          "changed": 0,
+          "maximumChannelDifference": 0
+        }
+      ]
+    },
+    {
+      "backend": "canvas",
+      "variant": "simple",
+      "side": 0,
+      "phase": "peak",
+      "boxes": [
+        {
+          "sourceBox": [
+            201,
+            480,
+            207,
+            510
+          ],
+          "samples": 180,
+          "changed": 180,
+          "maximumChannelDifference": 116
+        },
+        {
+          "sourceBox": [
+            210,
+            520,
+            217,
+            532
+          ],
+          "samples": 84,
+          "changed": 84,
+          "maximumChannelDifference": 211
+        },
+        {
+          "sourceBox": [
+            218,
+            548,
+            223,
+            560
+          ],
+          "samples": 60,
+          "changed": 60,
+          "maximumChannelDifference": 111
+        },
+        {
+          "sourceBox": [
+            225,
+            576,
+            231,
+            585
+          ],
+          "samples": 54,
+          "changed": 54,
+          "maximumChannelDifference": 88
+        },
+        {
+          "sourceBox": [
+            239,
+            607,
+            249,
+            618
+          ],
+          "samples": 110,
+          "changed": 110,
+          "maximumChannelDifference": 150
+        }
+      ]
+    },
+    {
+      "backend": "canvas",
+      "variant": "simple",
+      "side": 0,
+      "phase": "rebound",
+      "boxes": [
+        {
+          "sourceBox": [
+            201,
+            480,
+            207,
+            510
+          ],
+          "samples": 180,
+          "changed": 180,
+          "maximumChannelDifference": 42
+        },
+        {
+          "sourceBox": [
+            210,
+            520,
+            217,
+            532
+          ],
+          "samples": 84,
+          "changed": 84,
+          "maximumChannelDifference": 157
+        },
+        {
+          "sourceBox": [
+            218,
+            548,
+            223,
+            560
+          ],
+          "samples": 60,
+          "changed": 60,
+          "maximumChannelDifference": 51
+        },
+        {
+          "sourceBox": [
+            225,
+            576,
+            231,
+            585
+          ],
+          "samples": 54,
+          "changed": 54,
+          "maximumChannelDifference": 94
+        },
+        {
+          "sourceBox": [
+            239,
+            607,
+            249,
+            618
+          ],
+          "samples": 110,
+          "changed": 110,
+          "maximumChannelDifference": 114
+        }
+      ]
+    },
+    {
+      "backend": "canvas",
+      "variant": "simple",
+      "side": 1,
+      "phase": "peak",
+      "boxes": [
+        {
+          "sourceBox": [
+            608,
+            498,
+            614,
+            503
+          ],
+          "samples": 30,
+          "changed": 30,
+          "maximumChannelDifference": 78
+        },
+        {
+          "sourceBox": [
+            610,
+            510,
+            617,
+            531
+          ],
+          "samples": 147,
+          "changed": 147,
+          "maximumChannelDifference": 189
+        },
+        {
+          "sourceBox": [
+            608,
+            535,
+            615,
+            542
+          ],
+          "samples": 49,
+          "changed": 49,
+          "maximumChannelDifference": 200
+        },
+        {
+          "sourceBox": [
+            597,
+            552,
+            608,
+            562
+          ],
+          "samples": 110,
+          "changed": 110,
+          "maximumChannelDifference": 153
+        },
+        {
+          "sourceBox": [
+            586,
+            575,
+            597,
+            584
+          ],
+          "samples": 99,
+          "changed": 99,
+          "maximumChannelDifference": 86
+        },
+        {
+          "sourceBox": [
+            563,
+            607,
+            574,
+            617
+          ],
+          "samples": 110,
+          "changed": 110,
+          "maximumChannelDifference": 92
+        },
+        {
+          "sourceBox": [
+            575,
+            454,
+            584,
+            467
+          ],
+          "samples": 117,
+          "changed": 107,
+          "maximumChannelDifference": 19
+        }
+      ]
+    },
+    {
+      "backend": "canvas",
+      "variant": "simple",
+      "side": 1,
+      "phase": "rebound",
+      "boxes": [
+        {
+          "sourceBox": [
+            608,
+            498,
+            614,
+            503
+          ],
+          "samples": 30,
+          "changed": 30,
+          "maximumChannelDifference": 84
+        },
+        {
+          "sourceBox": [
+            610,
+            510,
+            617,
+            531
+          ],
+          "samples": 147,
+          "changed": 147,
+          "maximumChannelDifference": 133
+        },
+        {
+          "sourceBox": [
+            608,
+            535,
+            615,
+            542
+          ],
+          "samples": 49,
+          "changed": 49,
+          "maximumChannelDifference": 43
+        },
+        {
+          "sourceBox": [
+            597,
+            552,
+            608,
+            562
+          ],
+          "samples": 110,
+          "changed": 110,
+          "maximumChannelDifference": 76
+        },
+        {
+          "sourceBox": [
+            586,
+            575,
+            597,
+            584
+          ],
+          "samples": 99,
+          "changed": 99,
+          "maximumChannelDifference": 26
+        },
+        {
+          "sourceBox": [
+            563,
+            607,
+            574,
+            617
+          ],
+          "samples": 110,
+          "changed": 110,
+          "maximumChannelDifference": 24
+        },
+        {
+          "sourceBox": [
+            575,
+            454,
+            584,
+            467
+          ],
+          "samples": 117,
+          "changed": 105,
+          "maximumChannelDifference": 17
+        }
+      ]
+    }
+  ],
+  "warning": "Changed pixels and stationary samples are diagnostics, not natural-motion acceptance."
+}

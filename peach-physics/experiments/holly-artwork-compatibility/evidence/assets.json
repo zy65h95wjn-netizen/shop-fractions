@@ -1,0 +1,198 @@
+{
+  "limitBytes": 716800,
+  "noMotionCropResampling": true,
+  "files": [
+    {
+      "file": "webgl-left-peak.png",
+      "bytes": 193951,
+      "sha256": "5dc5bec78deabf5239cbdc6595ee7a6541f916433a2992066040be07604c685b",
+      "kind": "lossless-native-comparison",
+      "side": "left",
+      "phase": "peak"
+    },
+    {
+      "file": "webgl-left-rebound.png",
+      "bytes": 193152,
+      "sha256": "8e8f11747a567e7746a618b9609e07a5620637c1696b30ea0a481784e8d01ddb",
+      "kind": "lossless-native-comparison",
+      "side": "left",
+      "phase": "rebound"
+    },
+    {
+      "file": "webgl-left-temporal.jpg",
+      "bytes": 677960,
+      "sha256": "c5c7c77eef56dbbe59e4d5d4dada118664f7c808a53c020b32bc79bd1436e423",
+      "kind": "native-temporal-comparison",
+      "quality": 93,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "webgl-right-peak.png",
+      "bytes": 174632,
+      "sha256": "68f35f6d3f6e13a1c587c4d5aa0f7645ad5adbb8b4010084dfb7d9e48125a27e",
+      "kind": "lossless-native-comparison",
+      "side": "right",
+      "phase": "peak"
+    },
+    {
+      "file": "webgl-right-rebound.png",
+      "bytes": 173410,
+      "sha256": "9c997c84c9420a5a043a8516443d4db4d53f7ddc26bd07078f31f304ac216c93",
+      "kind": "lossless-native-comparison",
+      "side": "right",
+      "phase": "rebound"
+    },
+    {
+      "file": "webgl-right-temporal.jpg",
+      "bytes": 682028,
+      "sha256": "9693816f3e82930fb5dd594842f1b59c93ed99155140af3ad93a349f7d7c1783",
+      "kind": "native-temporal-comparison",
+      "quality": 94,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "canvas-left-peak.png",
+      "bytes": 225812,
+      "sha256": "bb123a1f4c51d48a13d2a15b2dbd41808e3623ee74eec903dbe9b97a33d47dc4",
+      "kind": "lossless-native-comparison",
+      "side": "left",
+      "phase": "peak"
+    },
+    {
+      "file": "canvas-left-rebound.png",
+      "bytes": 229096,
+      "sha256": "b1e486e039d5f54fcbbd2ec753b7d9fe19cb123491b47d5f8007be76f9be20c6",
+      "kind": "lossless-native-comparison",
+      "side": "left",
+      "phase": "rebound"
+    },
+    {
+      "file": "canvas-left-temporal.jpg",
+      "bytes": 669561,
+      "sha256": "d70fe94d9fde8bc40cf1b78092857a28c585c7c7b24b704afe82b114bd413fba",
+      "kind": "native-temporal-comparison",
+      "quality": 93,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "canvas-right-peak.png",
+      "bytes": 198605,
+      "sha256": "0a4767c2288c5b74207853a1aa4ed0fe83a656f140492943a9105a0442fd09de",
+      "kind": "lossless-native-comparison",
+      "side": "right",
+      "phase": "peak"
+    },
+    {
+      "file": "canvas-right-rebound.png",
+      "bytes": 200502,
+      "sha256": "301b951f8a6ea0a2142d2273ec43687b9b4553b5d10791e21b6aa7eba9c7dff5",
+      "kind": "lossless-native-comparison",
+      "side": "right",
+      "phase": "rebound"
+    },
+    {
+      "file": "canvas-right-temporal.jpg",
+      "bytes": 672740,
+      "sha256": "c63527c63ab026063b521958cd270e9978c6b0dff14f9a2cb20cb391af487a80",
+      "kind": "native-temporal-comparison",
+      "quality": 94,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "study-webgl-ember.jpg",
+      "bytes": 430148,
+      "sha256": "4360d81245b93ba220f9725aebc9fdd18d3cb2b33de55b21d2df16cdc508ef45",
+      "kind": "native-established-character-comparison",
+      "quality": 94,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "study-webgl-midnight.jpg",
+      "bytes": 392209,
+      "sha256": "c897ec01345431a67109a41ed96ebcac799be3ee6ef7b7157e87fae9b4dd897c",
+      "kind": "native-established-character-comparison",
+      "quality": 94,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "study-webgl-aurelia.jpg",
+      "bytes": 284028,
+      "sha256": "6b21c3691e8060ceba08fbcf489bc8a41f87d24e55dd55ad0c2cf1573dc84aa2",
+      "kind": "native-established-character-comparison",
+      "quality": 94,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "study-canvas-ember.jpg",
+      "bytes": 425969,
+      "sha256": "6b0130b6c0f62a338d468ab2916c17ccba769d288ba94b710bcdefcf1db1033d",
+      "kind": "native-established-character-comparison",
+      "quality": 94,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "study-canvas-midnight.jpg",
+      "bytes": 386110,
+      "sha256": "260b007b3f1950f2e40ccc6dafcc8eed1ef14644828892c9eede3897911cc3b4",
+      "kind": "native-established-character-comparison",
+      "quality": 94,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "study-canvas-aurelia.jpg",
+      "bytes": 282022,
+      "sha256": "1ea6edef4dcd80f0361003b707e50b59484e18e8be8b59cb7a34edfd45d4c8ec",
+      "kind": "native-established-character-comparison",
+      "quality": 94,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "geometry-ember.jpg",
+      "bytes": 323910,
+      "sha256": "499fe0b499efe8567924d042407f2e2dd789671405325ad71fc04336e2086ae4",
+      "kind": "native-source-support-overlay",
+      "quality": 94,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "geometry-midnight.jpg",
+      "bytes": 253365,
+      "sha256": "23e2633d00baeaebc96579ecd82d4f71b6b9d0b78404ea33c2ad4a8a0f9759ba",
+      "kind": "native-source-support-overlay",
+      "quality": 94,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "geometry-aurelia.jpg",
+      "bytes": 128704,
+      "sha256": "a1959b16f0f12f709b2996725c66b9ef509aac8726bb3f3ee1f71812f68d9c7c",
+      "kind": "native-source-support-overlay",
+      "quality": 94,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "geometry-holly.jpg",
+      "bytes": 164628,
+      "sha256": "7bee3217003f81d2aa23bd54b76e8bf131f55f0dafc2ebb40876d6dfc1c424cc",
+      "kind": "native-source-support-overlay",
+      "quality": 94,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "geometry-holly-trial.jpg",
+      "bytes": 163178,
+      "sha256": "87833985295e217381ebf02955e0ad8ad24b9cc70d417fa609e76164e8c240a1",
+      "kind": "native-source-support-overlay",
+      "quality": 94,
+      "chroma": "4:4:4"
+    },
+    {
+      "file": "portrait-context.jpg",
+      "bytes": 383747,
+      "sha256": "589ff75151f7e01ca5b310c8ab8e2cfc1891b89bfdec423b666d25570f3710c6",
+      "kind": "resized-composition-overview",
+      "quality": 94,
+      "chroma": "4:4:4"
+    }
+  ]
+}

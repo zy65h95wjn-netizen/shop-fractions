@@ -1,0 +1,22 @@
+[
+  {
+    "block": "solver and loop",
+    "sha256": "907e076db5fe356f68a24a3850708981501b445131ef7f2929a9929c721555a0"
+  },
+  {
+    "block": "Holly velocity",
+    "sha256": "282f605b34c13df8b5c31038a5babb5ee250e4de912381ca77f6eb781c3e8fa9"
+  },
+  {
+    "block": "Canvas remap",
+    "sha256": "59768e13ecae1d973cffa9de9d3ce6193d4ea1ea813444b1665f517ea458f516"
+  },
+  {
+    "block": "gesture handlers, impulses and linked transfer",
+    "sha256": "2ed7bc6a9f8c26097992fd24aece9e7954795c2a493f1fb811d971a87fa4891f"
+  },
+  {
+    "block": "preset values",
+    "sha256": "c1b2a46d9d2a92c7059765c4435f6c70a139940632da25beb392ad03a8db6337"
+  }
+]

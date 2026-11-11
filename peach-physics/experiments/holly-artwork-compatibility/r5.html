@@ -1,0 +1,1173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#09100e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Peach Physics">
+<meta name="description" content="Peach Physics: a playful interactive Christmas elf experiment with adjustable impact waves and linked motion.">
+
+<link rel="apple-touch-icon" href="../../v8/apple-touch-icon.png">
+<title>Peach Physics — Elf Lab 0.0.8 r5</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#0b100e;color:var(--cream)}
+body{-webkit-user-select:none;user-select:none;overscroll-behavior:none}
+#stage{position:fixed;inset:0;width:100%;height:100%;height:100dvh;overflow:hidden;background:#141815}
+#backdrop{position:absolute;inset:-36px;pointer-events:none;background-position:center;background-repeat:no-repeat;background-size:cover;filter:blur(25px) brightness(.52) saturate(.82);transform:scale(1.045);z-index:0}
+#game{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab;z-index:1}
+#game:active{cursor:grabbing}
+#loader{position:absolute;inset:0;display:grid;place-content:center;gap:10px;text-align:center;background:#151b17;font-size:13px;z-index:2;transition:opacity .45s ease;pointer-events:none}
+#loader b{letter-spacing:.12em;font-size:19px}
+#loader.hiding{opacity:0}
+#gear{position:absolute;right:max(12px,env(safe-area-inset-right));top:max(76px,calc(env(safe-area-inset-top) + 14px));z-index:8;width:44px;height:44px;padding:0;display:grid;place-items:center;border:1px solid #f9eadf77;border-radius:50%;color:#fff7eb;background:#07110fc9;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 3px 16px #0005;cursor:pointer;touch-action:manipulation}
+#gear svg{height:21px;width:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+#gear:active{transform:scale(.95)}
+#gear:focus-visible{outline:3px solid #ffcb91;outline-offset:3px}
+#character{position:absolute;left:max(12px,env(safe-area-inset-left));top:max(76px,calc(env(safe-area-inset-top) + 14px));z-index:8;width:44px;height:44px;padding:0;display:grid;place-items:center;border:1px solid #f9eadf77;border-radius:50%;color:#fff7eb;background:#07110fc9;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 3px 16px #0005;cursor:pointer;touch-action:manipulation}
+#character svg{height:23px;width:23px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+#character:active{transform:scale(.95)}
+#character:focus-visible{outline:3px solid #ffcb91;outline-offset:3px}
+#characterToast{position:absolute;top:max(130px,calc(env(safe-area-inset-top) + 68px));left:50%;transform:translateX(-50%);padding:8px 13px;border-radius:30px;z-index:9;pointer-events:none;color:#f5eadb;background:#0a1713e3;box-shadow:0 4px 15px #0007;white-space:nowrap;font-weight:650;font-size:12px;opacity:0;transition:opacity .25s}
+#characterToast.show{opacity:1}
+
+#hint{position:absolute;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%);padding:8px 16px;border:1px solid #fff4d82f;border-radius:40px;color:#f1e2ce;background:#08120dcc;white-space:nowrap;text-align:center;font-size:12px;letter-spacing:.035em;pointer-events:none;z-index:2;opacity:1;transition:opacity .8s}
+#hint.fade{opacity:0}
+#pulse{position:absolute;z-index:3;border:1px solid rgba(254,234,191,.68);width:45px;height:45px;border-radius:50%;transform:translate(-50%,-50%) scale(.6);box-shadow:0 0 17px #ffd09344;opacity:0;pointer-events:none}
+#pulse.active{animation:pulse .45s ease-out both}
+@keyframes pulse{from{opacity:.8;transform:translate(-50%,-50%) scale(.35)}to{opacity:0;transform:translate(-50%,-50%) scale(1.6)}}
+#scrim{position:absolute;inset:0;z-index:6;background:#0007;opacity:0;pointer-events:none;transition:opacity .18s ease}
+#scrim.show{opacity:1;pointer-events:auto}
+#panel{position:absolute;left:0;right:0;bottom:0;z-index:7;padding:18px 20px max(22px,env(safe-area-inset-bottom));color:#f6efe6;background:linear-gradient(155deg,#1b342d,#11201c 58%,#1c1918);border-radius:24px 24px 0 0;box-shadow:0 -12px 55px #000a;transform:translateY(105%);visibility:hidden;pointer-events:none;transition:transform .27s ease,visibility .27s;max-height:89dvh;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+#panel.open{visibility:visible;transform:translateY(0);pointer-events:auto}
+#panelHead{display:flex;align-items:start;justify-content:space-between;gap:8px;margin-bottom:12px}
+.kicker{font-weight:800;font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:#e7bb7a}
+#panel h1{font-size:23px;letter-spacing:-.045em;margin:4px 0 0}
+#close{border:1px solid #ffffff3a;background:#fff2;color:white;border-radius:50%;width:40px;height:40px;font-size:22px;cursor:pointer;touch-action:manipulation}
+.control{margin-bottom:13px}
+.control label{display:flex;justify-content:space-between;gap:12px;font-size:13px;font-weight:650;margin-bottom:6px}
+.control output{font-variant-numeric:tabular-nums;color:#ffcd94}
+.range-hint{font-size:10px;color:#adbfac;margin-top:2px}
+input[type=range]{appearance:none;width:100%;height:28px;background:transparent;accent-color:#edbd8c;touch-action:pan-x}
+input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:4px;background:#759282}
+input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:23px;width:23px;border:3px solid #203c30;border-radius:50%;background:#ffd2a0;box-shadow:0 2px 7px #0008}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.actions button{border-radius:13px;min-height:46px;font-size:13px;font-weight:750;color:#171612;border:0;background:linear-gradient(145deg,#f7d1a0,#cb9775);touch-action:manipulation;cursor:pointer}
+.actions button.subtle{background:#ffffff14;color:#f1e4d4;border:1px solid #ffffff23}
+.note{margin:13px 0 0;color:#b9c8bf;font-size:11px;line-height:1.5}
+.preset-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12px;font-weight:700;color:#e9dbc8}
+#presetName{font-weight:600;color:#ffcd94}
+.presets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:7px}
+.presets button{min-height:43px;border-radius:12px;color:#e9e8df;border:1px solid #edf0e338;background:#f4f0e910;font-size:12px;font-weight:750;touch-action:manipulation;cursor:pointer}
+.presets button[aria-pressed="true"]{background:#f5c895;color:#252018;border-color:#f5d5ac}
+.preset-desc{min-height:29px;margin:0 0 13px;color:#b9c8bf;font-size:11px;line-height:1.4}
+.slap-audio{width:100%;min-height:41px;margin:0 0 12px;border:1px solid #f8dbac4a;background:#fff8ef13;border-radius:12px;color:#f5e5ca;font-size:12px;font-weight:650;touch-action:manipulation;cursor:pointer}
+.slap-audio[aria-pressed="true"]{background:#c69a6940;border-color:#f0be8c;color:#fff1d9}
+.slap-burst{position:absolute;z-index:4;pointer-events:none;width:55px;height:39px;border:2px solid rgba(255,224,178,.7);border-radius:50%;box-shadow:0 0 12px #e9a7783b;animation:slap-burst .27s ease-out forwards;transform:translate(-50%,-50%)}
+@keyframes slap-burst{0%{opacity:.83;transform:translate(-50%,-50%) scale(.48)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.9)}}
+@media(max-height:700px){#panel{padding-top:12px}.control{margin-bottom:8px}.preset-desc{margin-bottom:7px}}
+#status{position:absolute;left:10px;top:max(11px,env(safe-area-inset-top));z-index:4;max-width:calc(100% - 80px);font-size:11px;color:#fff2c4;text-shadow:0 1px 6px #0009;pointer-events:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (orientation:landscape){#panel{max-width:500px;left:auto}#hint{bottom:12px}}
+</style>
+</head>
+<body>
+<main id="stage" aria-label="Peach Physics interactive Christmas elf portrait">
+ <div id="backdrop" aria-hidden="true"></div>
+ <canvas id="game" aria-label="Touch the elf portrait to create independent soft spring movement. Drag and flick to interact."></canvas>
+ <div id="loader" role="status"><b>PEACH PHYSICS</b><span>Calibrating the springs…</span></div>
+ <span id="status" role="status"></span>
+ <div id="pulse"></div>
+ <div id="hint">Tap · two fingers · switch characters</div>
+ <button id="character" type="button" aria-label="Switch elf character" title="Switch elf character"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h13l-3-3m3 3-3 3M19 17H6l3-3m-3 3 3 3" /></svg></button>
+ <div id="characterToast" role="status" aria-live="polite"></div>
+ <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
+ <div id="scrim" aria-hidden="true"></div>
+ <section id="panel" aria-label="Physics controls" aria-hidden="true">
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r5</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+   <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/4</span></div>
+   <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
+   <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
+   <p id="presetDesc" class="preset-desc">Realistic motion with gentle secondary response.</p>
+   <button id="slapAudio" class="slap-audio" type="button" aria-pressed="false">Slap sound: Off</button>
+   <div class="control"><label for="bounce">Bounce strength <output id="bounceN">65</output></label><input id="bounce" type="range" min="0" max="100" value="65"></div>
+  <div class="control"><label for="softness">Softness <output id="softnessN">65</output></label><input id="softness" type="range" min="0" max="100" value="65"></div>
+  <div class="control"><label for="settle">Settling <output id="settleN">48</output></label><input id="settle" type="range" min="0" max="100" value="48"></div>
+  <div class="control"><label for="transfer">Linked movement <output id="transferN">50</output></label><input id="transfer" type="range" min="0" max="100" value="50" aria-describedby="linkHint"><div id="linkHint" class="range-hint">0 = independent · 50 = original · 100 = extra linked</div></div>
+  <div class="actions"><button id="both">Bounce both</button><button id="reset" class="subtle">Reset motion</button><button id="share" class="subtle">Share with friends</button><button id="fullscreen">Hide controls</button></div>
+  <p class="note">Tap the two-arrow button to switch elves. Each character has individually tuned deformation areas and remembers her own physics settings. Linked motion, taps, two-finger gestures, and optional sound are all preserved. No ads or tracking.</p>
+ </section>
+</main>
+<script src="../holly-layered/bootstrap.js"></script>
+<script>
+(() => {
+'use strict';
+let W=941,H=1671;
+const IMAGE='./assets/reference-ember.webp';
+const OTHER_IMAGE='./assets/reference-midnight.webp';
+const CHARACTERS=[
+ {id:'ember',name:'Winter Ember',src:IMAGE,
+  regions:[{x:271,y:1094,rx:222,ry:271},{x:589,y:1090,rx:263,ry:273}],
+  nodes:[
+   {side:0,x:269,y:984,rx:145,ry:146},{side:0,x:245,y:1078,rx:173,ry:180},{side:0,x:295,y:1181,rx:154,ry:147},
+   {side:1,x:563,y:977,rx:171,ry:152},{side:1,x:597,y:1075,rx:193,ry:194},{side:1,x:586,y:1189,rx:163,ry:151}
+  ],impactCenters:[[265,1085],[585,1095]],bounceCenters:[[255,1080],[587,1100]],
+  split:[.370,.454],sideMid:.41,bounds:[.505,.555,.775,.832],taper:[.22,.14],
+  intensity:1},
+ {id:'midnight',name:'Midnight Yule',src:OTHER_IMAGE,
+  regions:[{x:285,y:1153,rx:192,ry:247},{x:605,y:1150,rx:205,ry:267}],
+  nodes:[
+   {side:0,x:282,y:1038,rx:146,ry:150},{side:0,x:272,y:1145,rx:169,ry:173},{side:0,x:289,y:1234,rx:150,ry:139},
+   {side:1,x:602,y:1029,rx:153,ry:150},{side:1,x:600,y:1139,rx:181,ry:177},{side:1,x:610,y:1252,rx:165,ry:150}
+  ],impactCenters:[[283,1147],[601,1146]],bounceCenters:[[285,1140],[605,1138]],
+  split:[.452,.530],sideMid:.49,bounds:[.555,.602,.781,.835],taper:[.16,.1],
+  intensity:.97},
+ {id:'aurelia',name:'Aurelia Frost',src:'../../v8/assets/aurelia-frost.jpg',width:756,height:1280,
+  regions:[{x:270,y:902,rx:151,ry:137},{x:511,y:906,rx:118,ry:128}],
+  nodes:[
+   {side:0,x:269,y:835,rx:104,ry:79},{side:0,x:260,y:902,rx:119,ry:101},{side:0,x:278,y:967,rx:105,ry:66},
+   {side:1,x:510,y:842,rx:88,ry:73},{side:1,x:516,y:908,rx:101,ry:96},{side:1,x:510,y:970,rx:91,ry:63}
+  ],impactCenters:[[270,903],[513,909]],bounceCenters:[[266,901],[511,906]],
+  split:[.522,.540],sideMid:.531,bounds:[.60,.65,.77,.80],taper:[0,0],intensity:1},
+ {id:'holly',name:'Holly Heartbreaker',src:'../../v8/assets/holly-heartbreaker.jpg',width:720,height:1280,
+  regions:[{x:335,y:477,rx:85,ry:71},{x:484,y:484,rx:76,ry:73}],
+  nodes:[
+   {side:0,x:332,y:436,rx:62,ry:42},{side:0,x:337,y:478,rx:66,ry:54},{side:0,x:371,y:529,rx:40,ry:35},
+   {side:1,x:476,y:444,rx:56,ry:39},{side:1,x:481,y:484,rx:62,ry:53},{side:1,x:451,y:531,rx:39,ry:33}
+  ],impactCenters:[[337,477],[481,484]],bounceCenters:[[337,477],[481,484]],
+  split:[.562,.585],sideMid:.574,bounds:[.31,.33,.42,.45],taper:[0,0],intensity:.46}
+];
+const CHARACTER_KEY='holly-art-review-v008-active';
+const V71_CHARACTER_KEY='holly-art-review-v0071-active';
+const V7_CHARACTER_KEY='holly-art-review-v007-active';
+const BASELINE_CHARACTER_KEY='holly-art-review-v00623-active';
+const IMPORT_CHARACTER_KEY='holly-art-review-v00622-active';
+const V621_CHARACTER_KEY='holly-art-review-v00621-active';
+const V62_CHARACTER_KEY='holly-art-review-v0062-active';
+const OLDER_CHARACTER_KEY='holly-art-review-v006-active';
+const CHARACTER_PREFS_PREFIX='holly-art-review-v008-profile-';
+const V71_PREFS_PREFIX='holly-art-review-v0071-profile-';
+const V7_PREFS_PREFIX='holly-art-review-v007-profile-';
+const BASELINE_PREFS_PREFIX='holly-art-review-v00623-profile-';
+const IMPORT_PREFS_PREFIX='holly-art-review-v00622-profile-';
+const V621_PREFS_PREFIX='holly-art-review-v00621-profile-';
+const V62_PREFS_PREFIX='holly-art-review-v0062-profile-';
+const OLDER_PREFS_PREFIX='holly-art-review-v006-profile-';
+let activeCharacterIndex=3;
+try{const saved=localStorage.getItem(CHARACTER_KEY)||localStorage.getItem(V71_CHARACTER_KEY)||localStorage.getItem(V7_CHARACTER_KEY)||localStorage.getItem(BASELINE_CHARACTER_KEY)||localStorage.getItem(IMPORT_CHARACTER_KEY)||localStorage.getItem(V621_CHARACTER_KEY)||localStorage.getItem(V62_CHARACTER_KEY)||localStorage.getItem(OLDER_CHARACTER_KEY);if(saved)activeCharacterIndex=Math.max(0,CHARACTERS.findIndex(c=>c.id===saved));}catch(e){}
+const currentCharacter=()=>CHARACTERS[activeCharacterIndex];
+const isHolly=()=>currentCharacter().id==='holly';
+const loadedPhotos=CHARACTERS.map(()=>null);
+let characterSwitchPending=false,characterToastTimer=null;
+const stage=document.getElementById('stage'),canvas=document.getElementById('game'),backdrop=document.getElementById('backdrop'),status=document.getElementById('status');
+const loader=document.getElementById('loader'),pulse=document.getElementById('pulse');
+const gear=document.getElementById('gear'),panel=document.getElementById('panel'),scrim=document.getElementById('scrim');
+const characterButton=document.getElementById('character'),characterToast=document.getElementById('characterToast'),characterName=document.getElementById('characterName');
+const hint=document.getElementById('hint');
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+// Fixed support boundary in source pixels. The user's green-marked moving region
+// is INSIDE this boundary, not the zero-displacement line. In particular the
+// lower crease has a short transition; the lower and inner thigh are excluded.
+const MIDNIGHT_LEFT_CONTOUR=[[272,1000],[320,994],[374,1010],[417,1042],
+ [445,1089],[458,1145],[458,1230],[446,1268],[412,1298],
+ [330,1318],[240,1320],[188,1292],[165,1260],[161,1180],[180,1115],[220,1050]];
+const LEFT_FEATHER=24;
+const leftPlanes=MIDNIGHT_LEFT_CONTOUR.map(([x,y],i)=>{
+ const [bx,by]=MIDNIGHT_LEFT_CONTOUR[(i+1)%MIDNIGHT_LEFT_CONTOUR.length];
+ const len=Math.hypot(bx-x,by-y),nx=-(by-y)/len,ny=(bx-x)/len;
+ return [nx,ny,-nx*x-ny*y,i>=8 && i<=10?28:LEFT_FEATHER];
+});
+function leftSkinWeight(x,y){
+ const d=Math.min(...leftPlanes.map(([nx,ny,c,width])=>(nx*x+ny*y+c)/width));
+ const t=clamp(d,0,1);return t*t*(3-2*t);
+}
+// Every Midnight cross-side pathway uses this same scale; Ember is unchanged.
+function linkedTransfer(){return model.transfer*(isHolly()?.28:1)*(currentCharacter().id==='midnight'?.5:currentCharacter().id==='aurelia'?.45:1);}
+
+const model={bounce:65,softness:65,settle:48,transfer:50};
+const PRESETS=Object.freeze({
+ natural:{bounce:65,softness:65,settle:48},
+ playful:{bounce:80,softness:79,settle:35},
+ chaos:{bounce:96,softness:91,settle:19}
+});
+const HOLLY_PRESETS=Object.freeze({natural:{bounce:55,softness:58,settle:60},playful:{bounce:74,softness:72,settle:46},chaos:{bounce:92,softness:84,settle:32}});
+const currentPresets=()=>isHolly()?HOLLY_PRESETS:PRESETS;
+// Profiles are separate so tuning one elf cannot change the other's feel.
+const STORAGE_KEY=CHARACTER_PREFS_PREFIX;
+const PRIOR_STORAGE_KEY='holly-art-review-v005-settings';
+const LEGACY_STORAGE_KEY='holly-art-review-v004-settings';
+const descriptions={natural:'Realistic motion with gentle secondary response.',playful:'Softer springs and a longer, livelier bounce.',chaos:'Exaggerated reactions — still constrained to the photograph.',custom:'Your own physics mix, saved on this device.'};
+let activePreset='natural';
+let slapAudioEnabled=false, audioContext=null, slapCount=0, flickCount=0;
+let lastGesture='none';
+// Character-specific elliptical masks, spring locations, and impulse origins.
+// Mutated in place on character switch; the original redhead configuration is preserved exactly.
+const regions=[];
+const nodes=[];
+const impacts=[];
+// Gentle outward pulse after a slap, attenuated by the existing clothing/edge masks.
+const waves=[{age:1,strength:0},{age:1,strength:0}];
+function setCharacterCalibration(){
+ const c=currentCharacter();W=c.width||941;H=c.height||1671;
+ regions.splice(0,regions.length,...c.regions.map(z=>({...z})));
+ nodes.splice(0,nodes.length,...c.nodes.map(n=>({...n,dx:0,dy:0,vx:0,vy:0})));
+ impacts.splice(0,impacts.length,...c.impactCenters.map(([x,y])=>({x:x/W,y:y/H,v:0,contact:0,target:0})));
+ for(const w of waves){w.age=1;w.strength=0;}
+}
+setCharacterCalibration();
+const connections=[[0,1],[1,2],[0,2],[3,4],[4,5],[3,5]];
+// Gently lagging viscoelastic followers, independent per side; zero in the resting pose.
+const followers=[{dx:0,dy:0,vx:0,vy:0},{dx:0,dy:0,vx:0,vy:0}];
+let img,gl,program,texture,meshCount=0,ctx2=null,fallback=false,needSize=true,backups=[];
+let uvCover=[1,1,0,0],cssW=0,cssH=0,drawW=0,drawH=0,ox=0,oy=0;
+let previous=0,accumulator=0,webglLost=false,frames=0;
+const pointers=new Map(); // Each finger keeps its own captured pointer and target.
+let posLoc,coverLoc,regionLoc,pointLoc,offsetLoc,impactLoc,secondaryLoc,waveLoc,splitLoc,boundLoc,taperLoc,leftMaskLoc;
+let hintTimer=null,diagnostic='';
+function say(msg){diagnostic=msg;status.textContent=msg;}
+function showReady(){loader.classList.add('hiding');setTimeout(()=>{loader.style.display='none';},500);setTimeout(()=>hint.classList.add('fade'),3000);}
+function resize(){
+ const rect=stage.getBoundingClientRect();cssW=Math.max(1,rect.width);cssH=Math.max(1,rect.height);
+ const dpr=Math.min(window.devicePixelRatio||1,2.1);
+ canvas.width=Math.max(2,Math.round(cssW*dpr));canvas.height=Math.max(2,Math.round(cssH*dpr));
+ // Portrait: keep the entire head clear of the Dynamic Island, with soft photo-derived fill in the margins.
+ // Give the artwork nearly the full screen width. Physics coordinates stay in original image space.
+ const portrait=cssH>cssW;
+ const topClear=portrait?Math.max(70,cssH*.078):0;
+ const bottomClear=portrait?Math.max(28,cssH*.036):0;
+ const baseScale=portrait?Math.min(cssW/W*1.055,(cssH-topClear-bottomClear)/H):Math.max(cssW/W,cssH/H);
+ // Midnight Yule is framed farther back in the source: enlarge only her portrait.
+ // A top-safe anchor keeps her face and hat clear of the iPhone status area.
+ const midnightZoom=portrait && (currentCharacter().id==='midnight'||currentCharacter().id==='aurelia');
+ const scale=isHolly()&&portrait?Math.min(cssW/W,(cssH-topClear)/H*1.14):baseScale*(midnightZoom?1.12:1);
+ drawW=W*scale;drawH=H*scale;
+ ox=(cssW-drawW)/2;
+ oy=isHolly()&&portrait?topClear:midnightZoom?Math.max(54,cssH*.066):(portrait?topClear+(cssH-topClear-bottomClear-drawH)/2:(cssH-drawH)/2);
+ uvCover=[cssW/drawW,cssH/drawH,-ox/drawW,-oy/drawH];
+ // Feather the photo's top and bottom edges into the blurred continuation.
+ if(portrait){
+  const top=Math.max(0,oy),bottom=Math.min(cssH,oy+drawH);
+  const fade=`linear-gradient(to bottom, transparent ${top}px, black ${top+15}px, black ${bottom-17}px, transparent ${bottom}px)`;
+  canvas.style.webkitMaskImage=fade;canvas.style.maskImage=fade;
+ }else{canvas.style.webkitMaskImage='none';canvas.style.maskImage='none';}
+ if(gl)gl.viewport(0,0,canvas.width,canvas.height);
+ needSize=false;
+}
+function readPoint(e){const r=canvas.getBoundingClientRect();const sx=e.clientX-r.left,sy=e.clientY-r.top;return {sx,sy,x:(sx-ox)/drawW*W,y:(sy-oy)/drawH*H};}
+function pickSide(x,y){
+ if(isHolly()){
+  const a=hollySkinWeight(0,x,y),b=hollySkinWeight(1,x,y);
+  if(Math.max(a,b)>.08)return a>b?0:1;
+  const l=artInputWeight(0,x,y),r=artInputWeight(1,x,y);
+  if(Math.max(l,r)>.08)return l>r?0:1;
+  return HOLLY_TOUCH_CONTOURS.findIndex(points=>insideTouchContour(points,x,y));
+ }
+ let best=Infinity,index=-1;
+ regions.forEach((z,i)=>{const d=((x-z.x)/z.rx)**2+((y-z.y)/z.ry)**2;
+   const mid=currentCharacter().sideMid*W;if(i===0&&x>mid+32||i===1&&x<mid-32)return;
+   if(d<best){best=d;index=i;}
+ });return best<1.10?index:-1;
+}
+function compiler(kind,source){const sh=gl.createShader(kind);gl.shaderSource(sh,source);gl.compileShader(sh);if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(sh));return sh;}
+let leftShapePixels=null;
+function createLeftShapeTexture(){
+ // Only the deformation mask is rasterized; the approved photo stays full resolution.
+ // The support sits inside this small crop, whose zero border makes CLAMP safe.
+ const w=320,h=416;
+ if(!leftShapePixels){
+  leftShapePixels=new Uint8Array(w*h);
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+   let margin=1;const px=148+x+.5,py=984+y+.5;
+   for(const [nx,ny,c,width] of leftPlanes)margin=Math.min(margin,(nx*px+ny*py+c)/width);
+   const t=clamp(margin,0,1);leftShapePixels[y*w+x]=Math.round(255*t*t*(3-2*t));
+  }
+ }
+ const mask=gl.createTexture();gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,mask);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+ gl.texImage2D(gl.TEXTURE_2D,0,gl.LUMINANCE,w,h,0,gl.LUMINANCE,gl.UNSIGNED_BYTE,leftShapePixels);
+ gl.uniform1i(gl.getUniformLocation(program,'uLeftShape'),1);
+ gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
+}
+
+// Aurelia: native source pixels, clockwise support contours INSIDE skin boundaries.
+// Upper fur, center seam, crease/thigh and background remain outside both supports.
+const AURELIA_CONTOURS=[
+ [[265,777],[303,785],[345,808],[375,846],[393,888],[394,940],[382,976],[360,993],[315,1006],[258,1015],[203,1012],[159,994],[127,965],[123,923],[141,870],[174,817],[216,786]],
+ [[498,789],[536,789],[568,814],[596,853],[615,899],[626,948],[623,982],[600,1006],[553,1016],[502,1015],[456,1005],[417,985],[404,960],[405,908],[421,858],[451,815]]
+];
+const aureliaPlanes=AURELIA_CONTOURS.map(points=>points.map(([x,y],i)=>{
+ const [bx,by]=points[(i+1)%points.length],len=Math.hypot(bx-x,by-y),nx=-(by-y)/len,ny=(bx-x)/len;
+ return [nx,ny,-nx*x-ny*y];
+}));
+function aureliaSkinWeight(side,x,y){
+ const d=Math.min(...aureliaPlanes[side].map(([nx,ny,c])=>(nx*x+ny*y+c)/25));
+ const t=clamp(d,0,1);return t*t*(3-2*t);
+}
+let aureliaMaskLoc;
+function createAureliaShapeTexture(){
+ const w=528,h=256,pixels=new Uint8Array(w*h*4);
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  const at=(y*w+x)*4;pixels[at]=Math.round(255*aureliaSkinWeight(0,112+x+.5,768+y+.5));
+  pixels[at+1]=Math.round(255*aureliaSkinWeight(1,112+x+.5,768+y+.5));pixels[at+3]=255;
+ }
+ const mask=gl.createTexture();gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,mask);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+ gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,w,h,0,gl.RGBA,gl.UNSIGNED_BYTE,pixels);
+ gl.uniform1i(gl.getUniformLocation(program,'uAureliaShape'),2);
+ gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
+}
+
+
+// Holly: clockwise convex supports in the ORIGINAL 720 x 1280 portrait.
+// The zero envelope is inside the exposed skin, leaving fur, hair and center fixed.
+const HOLLY_CONTOURS=[
+ [[300,412],[344,406],[377,421],[396,450],[404,487],[404,531],[397,557],[380,548],[343,524],[301,502],[267,479],[243,459],[260,432]],
+ [[450,418],[483,418],[520,434],[548,455],[567,477],[561,490],[529,514],[493,538],[451,560],[433,554],[424,530],[421,488],[427,448]]
+];
+const hollyPlanes=HOLLY_CONTOURS.map(points=>points.map(([x,y],i)=>{
+ const [bx,by]=points[(i+1)%points.length],len=Math.hypot(bx-x,by-y),nx=-(by-y)/len,ny=(bx-x)/len;
+ return [nx,ny,-nx*x-ny*y];
+}));
+function hollySkinWeight(side,x,y){
+ const d=Math.min(...hollyPlanes[side].map(([nx,ny,c])=>(nx*x+ny*y+c)/24));
+ const t=clamp(d,0,1);return t*t*(3-2*t);
+}
+// The soft upper cup and attached fur travel with the chest. The lower corset,
+// lacing, hair and central seam remain fixed. These are NOT input polygons.
+const HOLLY_MOTION_CONTOURS=[
+ [[300,402],[350,402],[383,421],[400,454],[407,494],[406,536],[399,563],
+  [381,587],[356,616],[323,635],[277,633],[245,615],[227,578],[218,533],
+  [219,487],[245,447],[275,418]],
+ [[450,408],[490,415],[531,433],[568,450],[590,474],[608,500],[616,530],
+  [609,559],[592,589],[565,616],[527,639],[480,644],[445,623],[428,594],[420,563],[418,522],
+  [421,475],[430,437]]
+];
+const hollyMotionPlanes=HOLLY_MOTION_CONTOURS.map(points=>points.map(([x,y],i)=>{
+ const [bx,by]=points[(i+1)%points.length],len=Math.hypot(bx-x,by-y),nx=-(by-y)/len,ny=(bx-x)/len;
+ return [nx,ny,-nx*x-ny*y];
+}));
+function hollyMotionWeight(side,x,y){
+ const smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
+ // The marked screen-right outer cup needs its feather beyond the visible
+ // edge. Only its outer arc uses the narrower falloff; the left and center
+ // support weights retain their accepted calibration.
+ const edge=smooth(Math.min(...hollyMotionPlanes[side].map(([nx,ny,c],i)=>
+  (nx*x+ny*y+c)/(side===1&&i>=2&&i<=9?20:32))));
+ const low=smooth((y-560)/30);
+ const lace=side===0?smooth((374-x)/20):smooth((x-440)/24);
+ const hair=side===0?smooth((x-226)/20):1;
+ return edge*(1-low*(1-lace))*hair;
+}
+// Extra touch targets traced from the user's green outline, in source pixels.
+// Screenshot alignment: marked=(source*1.78)-[596,472]. The left outline is
+// cropped; mirror the visible right area around the corset axis x=400.
+// Input contours are deliberately separate from the fixed rendering envelopes.
+const HOLLY_RIGHT_TOUCH=[[658,468],[676,485],[680,503],[692,528],[695,549],[690,575],
+ [675,607],[656,643],[643,672],[635,702],[621,726],[602,749],[579,761],[550,765],
+ [516,762],[483,753],[457,739],[444,723],[442,699],[443,672],[446,650],[456,625],
+ [473,614],[503,604],[531,590],[557,570],[589,547],[614,522],[639,493]];
+const HOLLY_TOUCH_CONTOURS=[HOLLY_RIGHT_TOUCH.map(([x,y])=>[800-x,y]),HOLLY_RIGHT_TOUCH];
+function insideTouchContour(points,x,y){
+ let inside=false;
+ for(let i=0,j=points.length-1;i<points.length;j=i++){
+  const [ax,ay]=points[j],[bx,by]=points[i],dx=bx-ax,dy=by-ay;
+  // Include the traced boundary itself without enlarging it into the center.
+  const t=clamp(((x-ax)*dx+(y-ay)*dy)/(dx*dx+dy*dy),0,1);
+  if(Math.hypot(x-ax-t*dx,y-ay-t*dy)<.5)return true;
+  if((ay>y)!==(by>y)&&x<(bx-ax)*(y-ay)/(by-ay)+ax)inside=!inside;
+ }
+ return inside;
+}
+function touchAnchor(side,p){
+ if(!isHolly()||hollySkinWeight(side,p.x,p.y)>.08)return {p,offsetX:0,offsetY:0};
+ // A touch on the marked control area drives the chest center. Retain the
+ // physical screen coordinates for contact feedback and use a constant offset
+ // throughout the gesture so drag direction, speed and pointer capture agree.
+ const [x,y]=currentCharacter().impactCenters[side];
+ return {p:{...p,x,y},offsetX:x-p.x,offsetY:y-p.y};
+}
+const HOLLY_CROP=[208,384,424,288];
+let hollyMaskLoc,hollyMaskPixels=null,hollySource=null,hollyLayer=null;
+function buildHollyMask(){
+ if(hollyMaskPixels)return;
+ const [ox,oy,w,h]=HOLLY_CROP;hollyMaskPixels=new Uint8Array(w*h*4);
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  const i=(y*w+x)*4;hollyMaskPixels[i]=Math.round(255*hollyMotionWeight(0,ox+x+.5,oy+y+.5));
+  hollyMaskPixels[i+1]=Math.round(255*hollyMotionWeight(1,ox+x+.5,oy+y+.5));hollyMaskPixels[i+3]=255;
+ }
+}
+function createHollyShapeTexture(){
+ buildHollyMask();const mask=gl.createTexture();gl.activeTexture(gl.TEXTURE3);gl.bindTexture(gl.TEXTURE_2D,mask);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+ gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,HOLLY_CROP[2],HOLLY_CROP[3],0,gl.RGBA,gl.UNSIGNED_BYTE,hollyMaskPixels);
+ gl.uniform1i(gl.getUniformLocation(program,'uHollyShape'),3);
+ gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
+}
+// A shared central carrier keeps the visible neckline attached to the volume.
+// Local spring weighting and the fixed smooth envelope retain spatial deformation.
+function hollyVelocity(x,y,side){
+ let dx=0,dy=0,sum=0;
+ for(let j=0;j<3;j++){
+  const n=nodes[side*3+j],w=Math.exp(-1.75*(((x-n.x)/n.rx)**2+((y-n.y)/n.ry)**2));
+  dx+=n.dx*w;dy+=n.dy*w;sum+=w;
+ }
+ const center=nodes[side*3+1];
+ dx=center.dx*.65+dx*.35/Math.max(sum,.0001);
+ dy=center.dy*.65+dy*.35/Math.max(sum,.0001);
+ dx+=followers[side].dx*.50;dy+=followers[side].dy*.80;
+ const p=impacts[side],hx=x-p.x*W,hy=y-p.y*H,fall=Math.exp(-2.6*((hx/64)**2+(hy/56)**2));
+ const pressure=fall*(p.v*.08-p.contact*.09);
+ dx+=hx*pressure;dy+=hy*pressure;
+ const length=Math.hypot(dx,dy),gain=length>16?(16+8*(1-Math.exp(-(length-16)/8)))/length:1;
+ return [dx*gain,dy*gain];
+}
+// Bilinear CPU texture remapping: spatial deformation, never a translated patch.
+// Only Holly uses this path; the accepted three Canvas renderers are untouched.
+function initHollyFallback(){
+ buildHollyMask();const source=document.createElement('canvas');source.width=W;source.height=H;
+ const c=source.getContext('2d');c.drawImage(img,0,0);hollySource=c.getImageData(0,0,W,H).data;
+ hollyLayer=document.createElement('canvas');hollyLayer.width=HOLLY_CROP[2];hollyLayer.height=HOLLY_CROP[3];
+}
+function renderHollyFallback(sc){
+ if(!nodes.some(n=>n.dx||n.dy)||!hollySource){
+  if(!impacts.some(p=>p.contact>.0002||p.v>.0002)&&!followers.some(f=>f.dx||f.dy))return;
+ }
+ const active=[0,1].map(side=>nodes.slice(side*3,side*3+3).some(n=>n.dx||n.dy)||followers[side].dx||followers[side].dy||impacts[side].contact||impacts[side].v);
+ const [cx,cy,w,h]=HOLLY_CROP,c=hollyLayer.getContext('2d'),frame=c.createImageData(w,h);
+ const weight=(x,y,side)=>{
+  x=clamp(x-cx-.5,0,w-1.001);y=clamp(y-cy-.5,0,h-1.001);
+  const ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy,i=(iy*w+ix)*4+side;
+  return ((hollyMaskPixels[i]*(1-fx)+hollyMaskPixels[i+4]*fx)*(1-fy)+(hollyMaskPixels[i+w*4]*(1-fx)+hollyMaskPixels[i+w*4+4]*fx)*fy)/255;
+ };
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  const at=(y*w+x)*4,side=active[0]&&hollyMaskPixels[at]>0?0:active[1]&&hollyMaskPixels[at+1]>0?1:-1;
+  if(side<0)continue; // Transparent outside active skin: preserve base-image sampling exactly.
+  let sx=cx+x,sy=cy+y;
+  if(side>=0){
+   const v=hollyVelocity(sx+.5,sy+.5,side);sx+=.5;sy+=.5;
+   for(let k=0;k<6;k++){const a=weight(sx,sy,side)/6;sx-=v[0]*a;sy-=v[1]*a;}
+   sx-=.5;sy-=.5;
+  }
+  const ix=Math.floor(sx),iy=Math.floor(sy),fx=sx-ix,fy=sy-iy,i=(iy*W+ix)*4;
+  for(let k=0;k<3;k++)frame.data[at+k]=(hollySource[i+k]*(1-fx)+hollySource[i+4+k]*fx)*(1-fy)+(hollySource[i+W*4+k]*(1-fx)+hollySource[i+W*4+4+k]*fx)*fy;
+  frame.data[at+3]=255;
+ }
+ c.putImageData(frame,0,0);ctx2.drawImage(hollyLayer,(ox+cx*drawW/W)*sc,(oy+cy*drawH/H)*sc,w*drawW/W*sc,h*drawH/H*sc);
+}
+
+function initGL(){
+ gl=canvas.getContext('webgl',{alpha:true,antialias:false,preserveDrawingBuffer:false,depth:false,stencil:false,powerPreference:'default'})||canvas.getContext('experimental-webgl');
+ if(!gl)throw Error('WebGL unavailable');
+ const vertex=`precision highp float;
+ attribute vec2 aPosition;
+ uniform vec4 uCover;
+ uniform vec4 uRegions[2];
+ uniform vec2 uSplit;
+ uniform vec4 uBounds;
+ uniform vec2 uRightTaper;
+ uniform float uLeftMask;
+ uniform vec4 uPoints[6];
+ uniform vec2 uOffsets[6];
+ uniform vec2 uSecondary[2];
+ uniform vec4 uImpacts[2];
+ uniform vec2 uWaves[2];
+ varying vec2 vUV;
+ varying vec2 vRawUV;
+ varying vec2 vLeftVelocity;
+ varying vec2 vAureliaLeft;
+ varying vec2 vAureliaRight;
+ uniform float uAurelia;
+ uniform float uHolly;
+ vec2 leftVelocity(vec2 uv){
+  vec2 motion=vec2(0.0);float sum=0.0;
+  for(int j=0;j<3;j++){
+   vec4 p=uPoints[j];vec2 n=(uv-p.xy)/p.zw;
+   float w=exp(-1.75*dot(n,n));motion+=uOffsets[j]*w;sum+=w;
+  }
+  // Keep a broad carrier, but restore most of the right-side Gaussian weighting.
+  // The three spring zones can deform the center instead of translating it flat.
+  motion*=.35*1.15/max(sum,.0001)+.65*.68;
+  motion+=uSecondary[0]*.35;
+  vec4 h=uImpacts[0];vec2 hi=(uv-h.xy)/vec2(.12,.14);
+  motion+=(uv-h.xy)*exp(-2.6*dot(hi,hi))*(h.z*.22-h.w*.16);
+  float radius=.12+uWaves[0].x*2.55;
+  float ring=exp(-56.0*pow(length(hi)-radius,2.0))*uWaves[0].y;
+  vec2 wave=(uv-h.xy)*ring*.032;
+  // Preserve ordinary motion; compress only unusually large visual excursions.
+  // The full green region still participates, and simulation energy is untouched.
+  vec2 pixelMotion=motion*vec2(941.0,1671.0);float travel=length(pixelMotion);
+  if(travel>24.0)motion*=(24.0+8.0*(1.0-exp(-(travel-24.0)/8.0)))/travel;
+  // Preserve the traveling ripple even when the main displacement reaches its limit.
+  return motion+wave;
+ }
+
+ vec2 aureliaVelocity(vec2 uv,int side){
+  vec2 motion=vec2(0.0);float sum=0.0;
+  for(int j=0;j<3;j++){
+   int id=side*3+j;vec4 p=uPoints[id];vec2 n=(uv-p.xy)/p.zw;
+   float w=exp(-1.75*dot(n,n));motion+=uOffsets[id]*w;sum+=w;
+  }
+  motion*=.35*1.15/max(sum,.0001)+.65*.68;
+  motion+=uSecondary[side]*.35;
+  vec4 h=uImpacts[side];vec2 hi=(uv-h.xy)/vec2(.15,.11);
+  motion+=(uv-h.xy)*exp(-2.6*dot(hi,hi))*(h.z*.22-h.w*.16);
+  float travel=length(motion*vec2(756.0,1280.0));
+  if(travel>18.0)motion*=(18.0+6.0*(1.0-exp(-(travel-18.0)/6.0)))/travel;
+  float radius=.12+uWaves[side].x*2.55;
+  float ring=exp(-56.0*pow(length(hi)-radius,2.0))*uWaves[side].y;
+  vec2 velocity=motion+(uv-h.xy)*ring*.032;
+  if(side==1){
+   // Aurelia's lower right fold: slide along the curved crease, resist pulling
+   // across it, and let existing viscoelastic follow-through settle the fold.
+   // Source-pixel geometry only; the mask still excludes the thigh below.
+   vec2 pixel=uv*vec2(756.0,1280.0);
+   float crease=1014.0-.0014*pow(pixel.x-520.0,2.0);
+   float fold=smoothstep(crease-72.0,crease-12.0,pixel.y);
+   vec2 tangent=normalize(vec2(1.0,-.0028*(pixel.x-520.0)));
+   vec2 normal=vec2(-tangent.y,tangent.x);
+   vec2 displacement=velocity*vec2(756.0,1280.0);
+   vec2 delayed=uSecondary[1]*vec2(756.0,1280.0);
+   float across=dot(displacement,normal);
+   // Downward motion closes the fold; upward motion has more room to open it.
+   float normalGain=mix(.55,.25,smoothstep(-3.0,3.0,across));
+   vec2 folded=tangent*(dot(displacement,tangent)*.80+dot(delayed,tangent)*.35)
+              +normal*(across*normalGain+dot(delayed,normal)*.65);
+   velocity=mix(displacement,folded,fold)/vec2(756.0,1280.0);
+  }
+  return velocity;
+ }
+
+ vec2 hollyVelocity(vec2 uv,int side){
+  vec2 motion=vec2(0.0);float sum=0.0;
+  for(int j=0;j<3;j++){
+   int id=side*3+j;vec4 p=uPoints[id];vec2 n=(uv-p.xy)/p.zw;
+   float w=exp(-1.75*dot(n,n));motion+=uOffsets[id]*w;sum+=w;
+  }
+  motion=uOffsets[side*3+1]*.65+motion*.35/max(sum,.0001);
+  motion+=uSecondary[side]*vec2(.50,.80);
+  vec4 h=uImpacts[side];vec2 delta=(uv-h.xy)*vec2(720.0,1280.0);
+  vec2 hi=delta/vec2(64.0,56.0);
+  motion+=(uv-h.xy)*exp(-2.6*dot(hi,hi))*(h.z*.08-h.w*.09);
+  float travel=length(motion*vec2(720.0,1280.0));
+  if(travel>16.0)motion*=(16.0+8.0*(1.0-exp(-(travel-16.0)/8.0)))/travel;
+  return motion;
+ }
+ void main(){
+  vAureliaLeft=vec2(0.0);vAureliaRight=vec2(0.0);
+  vLeftVelocity=vec2(0.0);
+  vec2 uv=aPosition*uCover.xy+uCover.zw;
+  vRawUV=uv;
+  if(uHolly>0.5){
+   vAureliaLeft=hollyVelocity(uv,0);vAureliaRight=hollyVelocity(uv,1);vUV=uv;
+   gl_Position=vec4(aPosition.x*2.0-1.0,1.0-aPosition.y*2.0,0.0,1.0);return;
+  }
+  if(uAurelia>0.5){
+   vAureliaLeft=aureliaVelocity(uv,0);vAureliaRight=aureliaVelocity(uv,1);vUV=uv;
+   gl_Position=vec4(aPosition.x*2.0-1.0,1.0-aPosition.y*2.0,0.0,1.0);return;
+  }
+  float rightMix=smoothstep(uSplit.x,uSplit.y,uv.x);
+  vec2 drift=vec2(0.0);
+  for(int s=0;s<2;s++){
+   vec4 z=uRegions[s];vec2 q=(uv-z.xy)/z.zw;
+   float edge=1.0-smoothstep(.48,.98,length(q));
+   // Keep the shorts seam and stocking tops stable with a feathered safety band.
+   float seam=smoothstep(uBounds.x,uBounds.y,uv.y);
+   float thigh=1.0-smoothstep(uBounds.z,uBounds.w,uv.y);
+   // Screen-right only: tighter feather at the outer edge and into the upper thigh.
+   float rightTaper=s==1?(1.0-uRightTaper.x*smoothstep(.69,.81,uv.y))*(1.0-uRightTaper.y*smoothstep(.55,.97,q.x)):1.0;
+   edge*=seam*thigh*rightTaper*(s==0?1.0-rightMix:rightMix);
+   vec2 local=vec2(0.0);
+   float weightSum=0.0;
+   for(int j=0;j<3;j++){
+     int id=s*3+j;vec4 p=uPoints[id];
+     vec2 n=(uv-p.xy)/p.zw;
+     float weight=exp(-1.75*dot(n,n));
+     local+=uOffsets[id]*weight*.68;
+     weightSum+=weight;
+   }
+   // Partition-of-unity blending: all three springs carry the interior together.
+   // Retain their different phases, without a Gaussian amplitude peak in the center.
+   if(s==0 && uLeftMask>0.5)local*=1.15/max(.68*weightSum,.0001);
+   local+=uSecondary[s]*.35; // Restore expressive secondary motion inside the clothing-safe mask.
+   vec4 h=uImpacts[s];vec2 hi=(uv-h.xy)/vec2(.12,.14);
+   float contactFalloff=exp(-2.6*dot(hi,hi));
+   // A finger pressing in contracts the visible area briefly; release rebounds outward.
+   vec2 press=(uv-h.xy)*contactFalloff*(h.z*.22-h.w*.16);
+   // Thin expanding wave; bounded to the active cheek by the same garment/edge masks.
+   float radial=length(hi);
+   float radius=.12+uWaves[s].x*2.55;
+   float ring=exp(-56.0*pow(radial-radius,2.0))*uWaves[s].y;
+   vec2 wave=(uv-h.xy)*ring*.032;
+   if(s==0 && uLeftMask>0.5){
+    // Pass the smooth spring field to the pixel shader. Applying the boundary
+    // there avoids both triangle leakage and folds at the expanded skin rim.
+    vLeftVelocity=leftVelocity(uv);
+   }else{
+    drift+=edge*(local+press+wave);
+   }
+  }
+  vUV=clamp(uv-drift,.001,.999);
+  gl_Position=vec4(aPosition.x*2.0-1.0,1.0-aPosition.y*2.0,0.0,1.0);
+ }`;
+ const fragment=`precision highp float;
+ uniform sampler2D uPhoto;
+ varying vec2 vUV;
+ varying vec2 vRawUV;
+ varying vec2 vLeftVelocity;
+ varying vec2 vAureliaLeft;
+ varying vec2 vAureliaRight;
+ uniform float uAurelia;
+ uniform float uHolly;
+ uniform sampler2D uLeftShape;
+ uniform sampler2D uAureliaShape;
+ uniform sampler2D uHollyShape;
+ float leftEnvelope(vec2 uv){
+  // A cached source-pixel mask replaces repeated polygon arithmetic per fragment.
+  return texture2D(uLeftShape,(uv*vec2(941.0,1671.0)-vec2(148.0,984.0))/vec2(320.0,416.0)).r;
+ }
+ void main(){
+  if(vRawUV.x<0.0 || vRawUV.x>1.0 || vRawUV.y<0.0 || vRawUV.y>1.0) discard;
+  vec2 photoUV=vUV;
+  if(dot(vLeftVelocity,vLeftVelocity)>0.0 && vRawUV.x>.15 && vRawUV.x<.50 && vRawUV.y>.58 && vRawUV.y<.84){
+   // Flow through a fixed skin envelope in four short increments. The moving
+   // region does not shrink as the gesture gets stronger. Clothing stays fixed.
+   vec2 sampleUV=vRawUV;
+   for(int k=0;k<4;k++)sampleUV-=vLeftVelocity*leftEnvelope(sampleUV)/4.0;
+   photoUV+=sampleUV-vRawUV;
+  }
+  if(uAurelia>0.5){
+   // Integrate within fixed masks, so zero-weight pixels remain exactly anchored.
+   vec2 sampleUV=vRawUV;
+   for(int k=0;k<6;k++){
+    vec2 weights=texture2D(uAureliaShape,(sampleUV*vec2(756.0,1280.0)-vec2(112.0,768.0))/vec2(528.0,256.0)).rg;
+    sampleUV-=(vAureliaLeft*weights.r+vAureliaRight*weights.g)/6.0;
+   }
+   photoUV=sampleUV;
+  }
+  if(uHolly>0.5){
+   vec2 sampleUV=vRawUV;
+   for(int k=0;k<6;k++){
+    vec2 weights=texture2D(uHollyShape,(sampleUV*vec2(720.0,1280.0)-vec2(208.0,384.0))/vec2(424.0,288.0)).rg;
+    sampleUV-=(vAureliaLeft*weights.r+vAureliaRight*weights.g)/6.0;
+   }
+   photoUV=sampleUV;
+  }
+  gl_FragColor=texture2D(uPhoto,photoUV);
+ }`;
+ const p=gl.createProgram();gl.attachShader(p,compiler(gl.VERTEX_SHADER,vertex));gl.attachShader(p,compiler(gl.FRAGMENT_SHADER,fragment));gl.linkProgram(p);
+ if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));gl.useProgram(p);program=p;
+ posLoc=gl.getAttribLocation(p,'aPosition');coverLoc=gl.getUniformLocation(p,'uCover');regionLoc=gl.getUniformLocation(p,'uRegions[0]');pointLoc=gl.getUniformLocation(p,'uPoints[0]');offsetLoc=gl.getUniformLocation(p,'uOffsets[0]');secondaryLoc=gl.getUniformLocation(p,'uSecondary[0]');impactLoc=gl.getUniformLocation(p,'uImpacts[0]');waveLoc=gl.getUniformLocation(p,'uWaves[0]');splitLoc=gl.getUniformLocation(p,'uSplit');boundLoc=gl.getUniformLocation(p,'uBounds');taperLoc=gl.getUniformLocation(p,'uRightTaper');
+ leftMaskLoc=gl.getUniformLocation(p,'uLeftMask');
+ const nx=62,ny=112,verts=new Float32Array((nx+1)*(ny+1)*2),indices=new Uint16Array(nx*ny*6);
+ let v=0,k=0;
+ for(let y=0;y<=ny;y++)for(let x=0;x<=nx;x++){verts[v++]=x/nx;verts[v++]=y/ny;}
+ for(let y=0;y<ny;y++)for(let x=0;x<nx;x++){
+  const a=y*(nx+1)+x,b=a+1,c=a+nx+1,d=c+1;
+  indices[k++]=a;indices[k++]=b;indices[k++]=c;indices[k++]=b;indices[k++]=d;indices[k++]=c;
+ }
+ meshCount=indices.length;
+ const vb=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,vb);gl.bufferData(gl.ARRAY_BUFFER,verts,gl.STATIC_DRAW);
+ gl.enableVertexAttribArray(posLoc);gl.vertexAttribPointer(posLoc,2,gl.FLOAT,false,0,0);
+ const ib=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ib);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,indices,gl.STATIC_DRAW);
+ texture=gl.createTexture();gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+ gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,0);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
+ gl.uniform1i(gl.getUniformLocation(p,'uPhoto'),0);
+ createLeftShapeTexture();createAureliaShapeTexture();createHollyShapeTexture();
+ hollyMaskLoc=gl.getUniformLocation(program,'uHolly');
+ aureliaMaskLoc=gl.getUniformLocation(program,'uAurelia');
+ uploadCharacterCalibration();
+}
+function uploadCharacterCalibration(){
+ if(!gl||!program)return;
+ const c=currentCharacter();gl.useProgram(program);
+ gl.uniform4fv(regionLoc,new Float32Array(regions.flatMap(z=>[z.x/W,z.y/H,z.rx/W,z.ry/H])));
+ gl.uniform4fv(pointLoc,new Float32Array(nodes.flatMap(n=>[n.x/W,n.y/H,n.rx/W,n.ry/H])));
+ gl.uniform2fv(splitLoc,new Float32Array(c.split));
+ gl.uniform4fv(boundLoc,new Float32Array(c.bounds));
+ gl.uniform2fv(taperLoc,new Float32Array(c.taper));
+ gl.uniform1f(leftMaskLoc,c.id==='midnight'?1:0);
+ gl.uniform1f(aureliaMaskLoc,c.id==='aurelia'?1:0);
+ gl.uniform1f(hollyMaskLoc,isHolly()?1:0);
+}
+function presentCharacter(){
+ const c=currentCharacter();characterName.textContent=c.name+' · '+(activeCharacterIndex+1)+'/'+CHARACTERS.length;
+ characterButton.setAttribute('aria-label','Switch character: currently '+c.name);
+ characterButton.title='Switch character from '+c.name;
+ document.getElementById('linkHint').textContent=isHolly()?'0 = independent · 50 = moderate · 100 = controlled':c.id==='midnight'?'0 = independent · 50 = moderate · 100 = previous 50':'0 = independent · 50 = original · 100 = extra linked';
+}
+function showCharacterToast(){
+ characterToast.textContent=currentCharacter().name+' · '+(activeCharacterIndex+1)+'/'+CHARACTERS.length;
+ characterToast.classList.add('show');clearTimeout(characterToastTimer);
+ characterToastTimer=setTimeout(()=>characterToast.classList.remove('show'),1350);
+}
+function getPhoto(index,callback){
+ if(loadedPhotos[index]?.complete&&loadedPhotos[index].naturalWidth){callback(loadedPhotos[index]);return;}
+ const next=new Image();loadedPhotos[index]=next;
+ next.onload=()=>callback(next);
+ next.onerror=()=>{characterSwitchPending=false;say('Unable to load character artwork');};
+ next.src=CHARACTERS[index].src;
+}
+function chooseCharacter(index){
+ if(!Number.isInteger(index)||!CHARACTERS[index]||index===activeCharacterIndex||characterSwitchPending)return;
+ characterSwitchPending=true;
+ getPhoto(index,next=>{
+  savePrefs();reset();activeCharacterIndex=index;
+  img=next;setCharacterCalibration();restorePrefs();
+  try{localStorage.setItem(CHARACTER_KEY,currentCharacter().id);}catch(e){}
+  if(gl&&!fallback&&!webglLost){
+   gl.useProgram(program);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
+   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,0);
+   gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
+   uploadCharacterCalibration();
+  }
+  if(fallback)initFallback();
+  backdrop.style.backgroundImage='url("'+currentCharacter().src+'")';
+  previous=0;accumulator=0;needSize=true;characterSwitchPending=false;
+  presentCharacter();showCharacterToast();wake();say('');
+ });
+}
+characterButton.addEventListener('click',()=>chooseCharacter((activeCharacterIndex+1)%CHARACTERS.length));
+
+function fallbackRect(side){
+ if(currentCharacter().id==='aurelia')return side===0?[112,768,288,256]:[400,768,240,256];
+ if(currentCharacter().id==='midnight' && side===0)return [155,985,310,405];
+ const z=regions[side];return [z.x-z.rx*.62,z.y-z.ry*.65,z.rx*1.24,z.ry*1.3];
+}
+function initFallback(){
+ fallback=true;ctx2=canvas.getContext('2d',{alpha:true});if(!ctx2)throw Error('No rendering context');
+ if(isHolly()){initHollyFallback();say('Reduced graphics mode');return;}
+ backups=regions.map((z,side)=>{
+  const w=420,h=480,layer=document.createElement('canvas'),mask=document.createElement('canvas');
+  layer.width=mask.width=w;layer.height=mask.height=h;
+  const m=mask.getContext('2d');
+  m.save();m.translate(w/2,h/2);m.scale(w/2,h/2);
+  const grad=m.createRadialGradient(0,0,.05,0,0,1);
+  grad.addColorStop(0,'rgba(0,0,0,1)');grad.addColorStop(.55,'rgba(0,0,0,1)');
+  grad.addColorStop(.82,'rgba(0,0,0,.78)');grad.addColorStop(1,'rgba(0,0,0,0)');
+  m.fillStyle=grad;m.fillRect(-1,-1,2,2);m.restore();
+  if(currentCharacter().id==='aurelia'||(currentCharacter().id==='midnight' && side===0)){
+   const pixels=m.getImageData(0,0,w,h),[srcX,srcY,sw,sh]=fallbackRect(side);
+   for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+    const px=srcX+(x+.5)/w*sw;
+    const py=srcY+(y+.5)/h*sh;
+    pixels.data[(y*w+x)*4+3]=255*(currentCharacter().id==='aurelia'?aureliaSkinWeight(side,px,py):leftSkinWeight(px,py));
+    if(currentCharacter().id==='aurelia' && side===1){
+     const crease=1014-.0014*(px-520)**2,t=clamp((py-(crease-72))/60,0,1);
+     pixels.data[(y*w+x)*4+3]*=1-.6*t*t*(3-2*t);
+    }
+   }
+   m.putImageData(pixels,0,0);
+  }
+  return {layer,mask,ctx:layer.getContext('2d')};
+ });
+ say('Reduced graphics mode');
+}
+function render(){
+ if(needSize)resize();
+ if(fallback){
+  ctx2.clearRect(0,0,canvas.width,canvas.height);
+  const sc=canvas.width/cssW;ctx2.drawImage(img,ox*sc,oy*sc,drawW*sc,drawH*sc);
+  if(isHolly()){renderHollyFallback(sc);return;}
+  // Fallback is photo-first: show a gentle localized crop motion rather than fabric seams.
+  for(let side=0;side<2;side++){
+   const n=nodes[side*3+1];if(Math.abs(n.dx)+Math.abs(n.dy)<.25 && impacts[side].contact<.02 && waves[side].strength<.02)continue;
+   const [srcX,srcY,sw,sh]=fallbackRect(side);
+   const dstX=(ox+srcX*drawW/W)*sc,dstY=(oy+srcY*drawH/H)*sc,dstW=sw*drawW/W*sc,dstH=sh*drawH/H*sc;
+   const {layer,mask,ctx}=backups[side];
+   ctx.clearRect(0,0,layer.width,layer.height);
+   ctx.globalCompositeOperation='source-over';
+   // Preserve source sampling on the left; gently reduce the screen-right displacement.
+   const gain=side===1?.97:1,followGain=side===1?.35:.35;
+   ctx.drawImage(img,srcX-(n.dx+followers[side].dx*followGain)*.8*gain,srcY-(n.dy+followers[side].dy*followGain)*.8*gain,sw,sh,0,0,layer.width,layer.height);
+   ctx.globalCompositeOperation='destination-in';ctx.drawImage(mask,0,0);
+   ctx.globalCompositeOperation='source-over';
+   // A slight scale contraction illustrates contact in reduced-graphics mode without shifting the garment boundary.
+   const press=impacts[side].contact;
+   const squeeze=currentCharacter().id==='aurelia'?0:.014*press;
+   ctx2.drawImage(layer,dstX+dstW*squeeze/2,dstY+dstH*squeeze/2,dstW*(1-squeeze),dstH*(1-squeeze));
+  }
+  return;
+ }
+ gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);
+ gl.useProgram(program);
+ gl.uniform4fv(coverLoc,new Float32Array(uvCover));
+  gl.uniform2fv(offsetLoc,new Float32Array(nodes.flatMap(n=>[n.dx/W,n.dy/H])));
+  gl.uniform2fv(secondaryLoc,new Float32Array(followers.flatMap(f=>[f.dx/W,f.dy/H])));
+ gl.uniform4fv(impactLoc,new Float32Array(impacts.flatMap(n=>[n.x,n.y,n.v,n.contact])));
+ gl.uniform2fv(waveLoc,new Float32Array(waves.flatMap(w=>[w.age,w.strength])));
+ gl.drawElements(gl.TRIANGLES,meshCount,gl.UNSIGNED_SHORT,0);
+}
+function step(dt){
+ const hz=isHolly()?3.0-model.softness*.012:4.3-model.softness*.018,omega=2*Math.PI*hz,k=omega*omega;
+ const dampingRatio=isHolly()?.12+model.settle*.0022:.13+model.settle*.0032,damping=2*omega*dampingRatio*.97,couple=k*.145; // Small lift in decay time.
+ const forces=nodes.map(n=>{
+  const sideFrequency=isHolly()?(n.side===0?.94:1.06):n.side===0?.986:1.014; // small natural asymmetry
+  const localDamping=currentCharacter().id==='midnight' && n.side===0?1.06:1; // Smooth only brunette's screen-left spring.
+  return {fx:-k*sideFrequency*n.dx-damping*localDamping*n.vx,fy:-k*sideFrequency*n.dy-damping*localDamping*n.vy};
+ });
+ for(const [a,b] of connections){
+  const x=(nodes[b].dx-nodes[a].dx)*couple,y=(nodes[b].dy-nodes[a].dy)*couple;
+  forces[a].fx+=x;forces[b].fx-=x;forces[a].fy+=y;forces[b].fy-=y;
+ }
+ // The earlier linked effect only fired on taps and was too small to see.
+ // This gentle cross-center spring now transfers displacement DURING DRAGS as well.
+ // Redhead mechanics remain untouched; 0 on the slider still means fully independent.
+ if((currentCharacter().id==='midnight'||currentCharacter().id==='aurelia') && model.transfer>0){
+  const cross=k*.24*(linkedTransfer()/100);
+  const dx=nodes[1].dx-nodes[4].dx,dy=nodes[1].dy-nodes[4].dy;
+  forces[1].fx-=cross*dx;forces[4].fx+=cross*dx;
+  forces[1].fy-=cross*dy;forces[4].fy+=cross*dy;
+ }
+ // Passive cross spring: the other side responds after displacement develops.
+ // No injected cross-side impulse or feedback from a delayed follower, which
+ // could sustain energy at the newly softer, less damped Holly settings.
+ if(isHolly()&&model.transfer>0){
+  const cross=k*1.25*(linkedTransfer()/100);
+  const dx=nodes[1].dx-nodes[4].dx,dy=nodes[1].dy-nodes[4].dy;
+  forces[1].fx-=cross*dx;forces[4].fx+=cross*dx;
+  forces[1].fy-=cross*dy;forces[4].fy+=cross*dy;
+ }
+ for(let i=0;i<nodes.length;i++){
+  const n=nodes[i],f=forces[i],inertia=i%3===2?.86:1;
+  n.vx+=f.fx*dt*inertia;n.vy+=f.fy*dt*inertia;
+  n.dx=clamp(n.dx+n.vx*dt,-26,26);n.dy=clamp(n.dy+n.vy*dt,-30,30);
+  if(Math.abs(n.dx)>=26)n.vx*=.55;if(Math.abs(n.dy)>=30)n.vy*=.55;
+  if(Math.abs(n.dx)<.012&&Math.abs(n.vx)<.06){n.dx=0;n.vx=0;}
+  if(Math.abs(n.dy)<.012&&Math.abs(n.vy)<.06){n.dy=0;n.vy=0;}
+ }
+ // A slower damped follow-through adds delayed secondary movement without moving clothing edges.
+ for(let side=0;side<2;side++){
+  const f=followers[side],center=nodes[side*3+1],lower=nodes[side*3+2];
+  const followGain=1; // Restore secondary follow-through without changing garment boundaries.
+  const tx=(center.dx*.57+lower.dx*.43)*.28*followGain,ty=(center.dy*.57+lower.dy*.43)*.28*followGain;
+  const w=2*Math.PI*(side===0?2.38:2.46),k2=w*w,d2=2*w*(.32+model.settle*.003);
+  f.vx+=(k2*(tx-f.dx)-d2*f.vx)*dt;
+  f.vy+=(k2*(ty-f.dy)-d2*f.vy)*dt;
+  f.dx=clamp(f.dx+f.vx*dt,-10,10);f.dy=clamp(f.dy+f.vy*dt,-11,11);
+  if(Math.abs(f.dx)<.008&&Math.abs(f.vx)<.04){f.dx=0;f.vx=0;}
+  if(Math.abs(f.dy)<.008&&Math.abs(f.vy)<.04){f.dy=0;f.vy=0;}
+ }
+ for(const p of impacts){
+  p.v*=Math.exp(-dt*15);
+  p.contact+=(p.target-p.contact)*Math.min(1,dt*(p.target>p.contact?38:22));
+  if(p.contact<.0002 && p.target===0)p.contact=0;
+ }
+ for(const wave of waves){
+  wave.age=Math.min(2,wave.age+dt);
+  wave.strength*=Math.exp(-dt*7);
+  if(wave.strength<.005||wave.age>.65)wave.strength=0;
+ }
+}
+function loop(now){
+ if(!previous)previous=now;
+ const elapsed=Math.min(.065,Math.max(0,(now-previous)/1000));previous=now;
+ if(!document.hidden&&!webglLost){
+  accumulator=Math.min(.065,accumulator+elapsed);
+  let count=0;while(accumulator>=1/120&&count++<8){step(1/120);accumulator-=1/120;}
+  render();frames++;
+ }
+ requestAnimationFrame(loop);
+}
+function linkedImpulse(side,amount){
+ if(isHolly())return;
+ // The original v0.0.6 transfer was numerically present but almost invisible.
+ // Midnight's calibrated follower gets a modest visible impulse; redhead is unchanged.
+ const gain=linkedTransfer()/50*(currentCharacter().id==='midnight'?7.5:currentCharacter().id==='aurelia'?6.5:1);
+ if(gain<=0)return;
+ const other=nodes[(1-side)*3+1];
+ other.vy=clamp(other.vy-amount*gain,-560,560);
+}
+function startWave(side,power=.6){
+ waves[side].age=0;
+ waves[side].strength=clamp(power,0,1);
+}
+function updatePress(side,x,y){
+ const p=impacts[side];p.x=x/W;p.y=y/H;
+ const active=[...pointers.values()].filter(f=>f.side===side).length;
+ p.target=active?clamp(.77+.16*(active-1),0,1):0;
+}
+function impulse(side,x,y,amplitude=1,vx=0,vy=0,flick=false){
+ if(side<0)return;
+ const leftTune=isHolly()?(.65+model.bounce*.009):currentCharacter().id==='midnight' && side===0?.90:1;
+ const power=(.43+model.bounce*.011)*amplitude*1.06*leftTune; // Keep the brunette's right-side response unchanged.
+ // Tap: gentle downward/outward kick. Flick: use both directions of measured finger velocity.
+ const pushX=flick?clamp(vx*.35,-320,320):(side?48:-48);
+ const pushY=flick?clamp(vy*.35,-350,350):185;
+ for(let i=side*3;i<side*3+3;i++){
+  const n=nodes[i],distance=((x-n.x)/n.rx)**2+((y-n.y)/n.ry)**2;
+  const weight=.22+.78*Math.exp(-distance*1.1),layer=i%3===2?.88:1;
+  n.vx=clamp(n.vx+pushX*power*weight*layer,-560,560);
+  n.vy=clamp(n.vy+pushY*power*weight*layer,-600,600);
+ }
+ // Small energy transfer across the center only; never a mirrored response.
+ linkedImpulse(side,power*12);
+ impacts[side].x=x/W;impacts[side].y=y/H;impacts[side].v=clamp(impacts[side].v+power*(flick?.30:.62),0,1.2);
+ if(flick)startWave(side,Math.min(.38,power*.20));
+}
+function rippleAt(pt){pulse.style.left=pt.sx+'px';pulse.style.top=pt.sy+'px';pulse.classList.remove('active');void pulse.offsetWidth;pulse.classList.add('active');}
+function slapVisual(pt){
+ // Each finger owns its own fleeting contact ring, allowing simultaneous taps.
+ const ring=document.createElement('span');ring.className='slap-burst';
+ ring.style.left=pt.sx+'px';ring.style.top=pt.sy+'px';stage.appendChild(ring);
+ ring.addEventListener('animationend',()=>ring.remove(),{once:true});
+ setTimeout(()=>ring.remove(),500);
+}
+function slapSound(){
+ if(!slapAudioEnabled)return;
+ try{
+  const Context=window.AudioContext||window.webkitAudioContext;
+  if(!Context)return;
+  if(!audioContext)audioContext=new Context();
+  if(audioContext.state==='suspended')void audioContext.resume();
+  const ac=audioContext,t=ac.currentTime,samples=Math.round(ac.sampleRate*.10);
+  const buffer=ac.createBuffer(1,samples,ac.sampleRate),data=buffer.getChannelData(0);
+  for(let i=0;i<samples;i++){
+   const sec=i/ac.sampleRate;
+   const env=Math.exp(-sec*43);
+   data[i]=(Math.random()*2-1)*env;
+  }
+  const noise=ac.createBufferSource();noise.buffer=buffer;
+  const filter=ac.createBiquadFilter();filter.type='bandpass';filter.frequency.value=1200;filter.Q.value=.58;
+  const gain=ac.createGain();gain.gain.setValueAtTime(.16,t);gain.gain.exponentialRampToValueAtTime(.0001,t+.11);
+  noise.connect(filter);filter.connect(gain);gain.connect(ac.destination);noise.start(t);noise.stop(t+.11);
+  const tone=ac.createOscillator(),low=ac.createGain();tone.type='sine';
+  tone.frequency.setValueAtTime(145,t);tone.frequency.exponentialRampToValueAtTime(75,t+.075);
+  low.gain.setValueAtTime(.085,t);low.gain.exponentialRampToValueAtTime(.0001,t+.085);
+  tone.connect(low);low.connect(ac.destination);tone.start(t);tone.stop(t+.09);
+ }catch(e){console.warn('Slap audio unavailable',e);}
+}
+function slap(side,x,y,pt,strength=1){
+ // Quick contact compression followed by a stronger, localized spring rebound.
+ // Keep the source photograph, seam, and the opposite side anchored.
+ const leftTune=isHolly()?(.65+model.bounce*.009):currentCharacter().id==='midnight' && side===0?.90:1;
+ const power=(.62+model.bounce*.008)*1.06*leftTune*(isHolly()?strength:1); // Keep the brunette's right-side slap unchanged.
+ const z=regions[side];
+ const vBias=clamp((y-z.y)/z.ry,-.85,.85);
+ const hBias=clamp((x-z.x)/z.rx,-.85,.85);
+ const verticalGain=1+.11*vBias; // Lower, middle, and upper taps move differently.
+ const outwardGain=1+.08*Math.abs(hBias);
+ for(let i=side*3;i<side*3+3;i++){
+  const n=nodes[i],d=((x-n.x)/n.rx)**2+((y-n.y)/n.ry)**2;
+  const near=.20+.80*Math.exp(-d*1.40),layer=i%3===2?.88:1;
+  n.dy=clamp(n.dy-5.2*power*near*layer,-30,30);
+  n.vy=clamp(n.vy+345*power*near*layer*verticalGain,-600,600);
+  n.vx=clamp(n.vx+(side?1:-1)*105*power*near*layer*outwardGain,-560,560);
+ }
+ // Momentary indentation gives the "thwack" a faster attack than a plain bounce.
+ impacts[side].x=x/W;impacts[side].y=y/H;
+ impacts[side].v=clamp(impacts[side].v+1.12,0,1.2);
+ // Minimal delayed coupling, not a mirrored second slap.
+ linkedImpulse(side,power*9);
+ startWave(side,power*.56);
+ slapVisual(pt);slapSound();slapCount++;lastGesture='slap';
+}
+function wake(){hint.classList.add('fade');}
+canvas.addEventListener('pointerdown',e=>{
+ if(e.pointerType==='mouse'&&e.button!==0)return;
+ const raw=readPoint(e),side=pickSide(raw.x,raw.y);
+ if(side<0)return;
+ const {p,offsetX,offsetY}=touchAnchor(side,raw);
+ e.preventDefault();
+ try{canvas.setPointerCapture?.(e.pointerId);}catch(err){/* Pointer still works without capture. */}
+ wake();
+ pointers.set(e.pointerId,{id:e.pointerId,side,last:p,lastTime:performance.now(),startTime:performance.now(),travel:0,vx:0,vy:0,pressure:e.pressure||.5,offsetX,offsetY});
+ updatePress(side,p.x,p.y);
+ // Light contact on press. A true tap receives its sharp slap impulse on release.
+ impulse(side,p.x,p.y,.15);
+},{passive:false});
+canvas.addEventListener('pointermove',e=>{
+ const finger=pointers.get(e.pointerId);
+ if(!finger)return;
+ e.preventDefault();const raw=readPoint(e),p={...raw,x:raw.x+finger.offsetX,y:raw.y+finger.offsetY},now=performance.now();
+ const dt=clamp((now-finger.lastTime)/1000,.012,.065),dx=p.x-finger.last.x,dy=p.y-finger.last.y;
+ finger.pressure=Math.max(finger.pressure,e.pressure||0);
+ finger.travel+=Math.abs(dx)+Math.abs(dy);
+ // Low-pass filtered velocity produces a directional impulse when the finger is released.
+ finger.vx=clamp(finger.vx*.55+(dx/dt)*.45,-1100,1100);
+ finger.vy=clamp(finger.vy*.55+(dy/dt)*.45,-1100,1100);
+ // Simultaneous fingers contribute only to their own side's nodes.
+ for(let i=finger.side*3;i<finger.side*3+3;i++){
+  const n=nodes[i],q=((p.x-n.x)/n.rx)**2+((p.y-n.y)/n.ry)**2,weight=.20+.8*Math.exp(-q*1.4);
+  const leftTune=isHolly()?.95:currentCharacter().id==='midnight' && finger.side===0?.90:1;
+  n.dx=clamp(n.dx+dx*.17*weight*leftTune,-26,26);n.dy=clamp(n.dy+dy*.17*weight*leftTune,-30,30);
+  n.vx=clamp(n.vx+(dx/dt)*.055*weight*leftTune,-600,600);n.vy=clamp(n.vy+(dy/dt)*.055*weight*leftTune,-600,600);
+ }
+ // A moving finger pulls the opposite cheek slightly with it: taps alone are not enough.
+ // Restrict to Midnight and honor the exact 0 = independent slider setting.
+ if((currentCharacter().id==='midnight'||currentCharacter().id==='aurelia') && model.transfer>0){
+  const other=nodes[(1-finger.side)*3+1],follow=(linkedTransfer()/50)*.020;
+  other.vx=clamp(other.vx+(dx/dt)*follow,-280,280);
+  other.vy=clamp(other.vy+(dy/dt)*follow,-280,280);
+ }
+ impacts[finger.side].x=p.x/W;impacts[finger.side].y=p.y/H;impacts[finger.side].v=Math.min(.32,impacts[finger.side].v+.012);
+ updatePress(finger.side,p.x,p.y);
+ finger.last=p;finger.lastTime=now;
+},{passive:false});
+function release(e){
+ const f=pointers.get(e.pointerId);
+ if(!f)return;
+ if(e.type==='pointerup'){
+  const now=performance.now(),speed=Math.hypot(f.vx,f.vy),age=now-f.lastTime;
+  const held=now-f.startTime;
+  if(f.travel<27&&held<400){
+   slap(f.side,f.last.x,f.last.y,f.last,isHolly()?clamp(.55+f.pressure*.7+Math.min(held,250)/1000,.6,1.5):1);
+  }else if(f.travel>34&&speed>175&&age<135){
+   impulse(f.side,f.last.x,f.last.y,clamp(speed/900,.32,.9),f.vx,f.vy,true);
+   flickCount++;lastGesture='flick';
+  }else{lastGesture='drag/hold';}
+ }
+ pointers.delete(e.pointerId);
+ updatePress(f.side,f.last.x,f.last.y);
+}
+canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('lostpointercapture',release);
+window.addEventListener('blur',()=>{pointers.clear();for(const p of impacts)p.target=0;});
+function bounceBoth(){const c=currentCharacter();impulse(0,...c.bounceCenters[0],1.05);impulse(1,...c.bounceCenters[1],.93);wake();}
+function reset(){for(const n of nodes){n.dx=0;n.dy=0;n.vx=0;n.vy=0;}for(const f of followers){f.dx=f.dy=f.vx=f.vy=0;}for(const p of impacts){p.v=p.contact=p.target=0;}for(const w of waves){w.age=1;w.strength=0;}pointers.clear();}
+function openPanel(flag){const shown=typeof flag==='boolean'?flag:!panel.classList.contains('open');panel.classList.toggle('open',shown);scrim.classList.toggle('show',shown);panel.setAttribute('aria-hidden',String(!shown));gear.setAttribute('aria-expanded',String(shown));gear.setAttribute('aria-label',shown?'Close physics controls':'Show physics controls');/* Gear stays a single icon whether the panel is open or closed. */}
+gear.addEventListener('click',()=>openPanel());document.getElementById('close').addEventListener('click',()=>openPanel(false));scrim.addEventListener('click',()=>openPanel(false));document.getElementById('fullscreen').addEventListener('click',()=>openPanel(false));
+document.getElementById('both').addEventListener('click',()=>{bounceBoth();openPanel(false);});
+document.getElementById('reset').addEventListener('click',()=>{reset();openPanel(false);});
+const presetButtons=[...document.querySelectorAll('[data-preset]')];
+function savePrefs(){
+ try{localStorage.setItem(STORAGE_KEY+currentCharacter().id,JSON.stringify({version:2,preset:activePreset,slapAudioEnabled,...model}));}
+ catch(e){/* Private browsing or storage limits must not disable the app. */}
+}
+function refreshPrefs(){
+ for(const [key,out] of [['bounce','bounceN'],['softness','softnessN'],['settle','settleN'],['transfer','transferN']]){
+  document.getElementById(key).value=String(model[key]);
+  document.getElementById(out).textContent=String(model[key]);
+ }
+ for(const b of presetButtons)b.setAttribute('aria-pressed',String(b.dataset.preset===activePreset));
+ document.getElementById('presetName').textContent=activePreset==='custom'?'Custom':activePreset[0].toUpperCase()+activePreset.slice(1);
+ document.getElementById('presetDesc').textContent=descriptions[activePreset];
+  const audioButton=document.getElementById('slapAudio');
+  audioButton.setAttribute('aria-pressed',String(slapAudioEnabled));
+  audioButton.textContent='Slap sound: '+(slapAudioEnabled?'On':'Off');
+}
+function restorePrefs(){
+ // Start a new character with the familiar Natural values; restore a saved profile when present.
+ Object.assign(model,{...currentPresets().natural,transfer:50});activePreset='natural';slapAudioEnabled=false;
+ try{
+  const profile=localStorage.getItem(STORAGE_KEY+currentCharacter().id)||localStorage.getItem(V71_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(V7_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(BASELINE_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(IMPORT_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(V621_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(V62_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(OLDER_PREFS_PREFIX+currentCharacter().id);
+  const prior=currentCharacter().id==='ember'?(localStorage.getItem(PRIOR_STORAGE_KEY)||localStorage.getItem(LEGACY_STORAGE_KEY)):null;
+  const stored=JSON.parse(profile||prior||'null');
+  if(stored&&(stored.version===1||stored.version===2)){
+   for(const key of ['bounce','softness','settle','transfer'])if(Number.isFinite(stored[key]))model[key]=Math.round(clamp(stored[key],0,100));
+   if(['natural','playful','chaos','custom'].includes(stored.preset))activePreset=stored.preset;
+   slapAudioEnabled=stored.slapAudioEnabled===true;
+   if(activePreset!=='custom'&&['bounce','softness','settle'].some(key=>model[key]!==currentPresets()[activePreset][key]))activePreset='custom';
+  }
+ }catch(e){/* Defaults remain in effect. */}
+ refreshPrefs();
+}
+for(const b of presetButtons)b.addEventListener('click',()=>{
+ activePreset=b.dataset.preset;Object.assign(model,currentPresets()[activePreset]);refreshPrefs();savePrefs();
+});
+for(const [key,out] of [['bounce','bounceN'],['softness','softnessN'],['settle','settleN'],['transfer','transferN']]){
+ const el=document.getElementById(key);
+ el.addEventListener('input',()=>{model[key]=Math.round(clamp(Number(el.value)||0,0,100));if(key!=='transfer')activePreset='custom';refreshPrefs();savePrefs();});
+}
+restorePrefs();
+document.getElementById('slapAudio').addEventListener('click',()=>{slapAudioEnabled=!slapAudioEnabled;refreshPrefs();savePrefs();});
+document.getElementById('share').addEventListener('click',async()=>{
+ const url=location.origin+location.pathname;
+ try{
+  if(navigator.share){await navigator.share({title:'Peach Physics — Elf Lab',text:'Our very serious Christmas physics experiment',url});return;}
+  if(navigator.clipboard){await navigator.clipboard.writeText(url);say('Link copied');return;}
+  window.prompt('Share this link',url);
+ }catch(e){if(e.name!=='AbortError')say('Use Safari Share to copy the link');}
+});
+window.addEventListener('resize',()=>needSize=true);
+document.addEventListener('visibilitychange',()=>{previous=0;accumulator=0;if(document.hidden){pointers.clear();for(const p of impacts)p.target=0;}});
+canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();webglLost=true;say('Graphics paused');});
+canvas.addEventListener('webglcontextrestored',()=>{try{initGL();needSize=true;webglLost=false;say('');}catch(e){say('Reload to restore graphics');}});
+window.addEventListener('keydown',e=>{if(e.key==='Escape')openPanel(false);if(e.code==='Space'&&e.target.tagName!=='INPUT'){e.preventDefault();bounceBoth();}});
+// Read-only diagnostics for automated tests. Not a remote control or telemetry endpoint.
+window.__peachPhysicsDebug={snapshot:()=>({character:currentCharacter().id,characterName:currentCharacter().name,characters:CHARACTERS.map(c=>c.id),regions:regions.map(z=>({...z})),nodes:nodes.map(n=>({side:n.side,dx:+n.dx.toFixed(2),dy:+n.dy.toFixed(2)})),followers:followers.map(f=>({dx:+f.dx.toFixed(2),dy:+f.dy.toFixed(2)})),impacts:impacts.map(p=>({v:+p.v.toFixed(3),contact:+p.contact.toFixed(3),target:p.target})),waves:waves.map(w=>({age:+w.age.toFixed(3),strength:+w.strength.toFixed(3)})),frames,activePointers:[...pointers.values()].map(p=>({id:p.id,side:p.side,vx:p.vx,vy:p.vy})),panelOpen:panel.classList.contains('open'),renderer:fallback?'canvas':'webgl',size:[cssW,cssH],image:[W,H],framing:{x:ox,y:oy,width:drawW,height:drawH},model:{...model},preset:activePreset,slapAudioEnabled,slapCount,flickCount,lastGesture,status:diagnostic}),kick:(side=0)=>{const c=currentCharacter();impulse(side,...c.bounceCenters[side],1);},switchCharacter:(id)=>chooseCharacter(typeof id==='number'?id:CHARACTERS.findIndex(c=>c.id===id))};
+// Inserted only in isolated review runners. No new rendering architecture.
+const artParams=new URLSearchParams(location.search);
+const artVariant='r5'==='r5'?'r5':(artParams.get('variant')==='simple'?'simple':'r6');
+const artInputWeight=hollyMotionWeight;
+if(artVariant==='simple'){
+ // One bounded calibration trial: release the r6 outer guard and put the
+ // feather 18 source pixels beyond its existing outer support planes.
+ // Interior gain, velocity, six-step remap, lower lacing and springs stay intact.
+ hollyMotionWeight=function(side,x,y){
+  const smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
+  const edge=smooth(Math.min(...hollyMotionPlanes[side].map(([nx,ny,c],i)=>{
+   const outer=(side===0&&i>=9&&i<=17)||(side===1&&i>=2&&i<=9);
+   return (nx*x+ny*y+c+(outer?18:0))/(outer?20:32);
+  })));
+  const low=smooth((y-560)/30);
+  const lace=side===0?smooth((374-x)/20):smooth((x-440)/24);
+  return edge*(1-low*(1-lace));
+ };
+}
+window.__artLab={
+ reset,step,render,model,nodes,followers,impacts,waves,chooseCharacter,
+ raw:()=>JSON.parse(JSON.stringify({nodes,followers,impacts,waves})),
+ setState:s=>{for(const key of ['nodes','followers','impacts','waves'])s[key].forEach((v,i)=>Object.assign({nodes,followers,impacts,waves}[key][i],v));render();},
+ tap:(side=0)=>{const [x,y]=currentCharacter().impactCenters[side];slap(side,x,y,{sx:ox+x/W*drawW,sy:oy+y/H*drawH});},
+ capture:()=>{render();return canvas.toDataURL();},
+ ready:()=>!!img&&!characterSwitchPending,
+ info:()=>({variant:artVariant,backend:fallback?'canvas':'webgl',character:currentCharacter().id,width:W,height:H,framing:{x:ox,y:oy,width:drawW,height:drawH},calibration:currentCharacter(),crop:HOLLY_CROP}),
+ inputSide:(x,y)=>pickSide(x,y),
+ mask:()=>{
+  const c=currentCharacter();
+  const box=c.id==='holly'?[160,352,496,336]:c.id==='aurelia'?[100,750,556,300]:c.id==='midnight'?[80,930,760,500]:[45,850,840,570];
+  const smooth=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);};
+  const weight=(side,x,y)=>{
+   if(c.id==='holly')return hollyMotionWeight(side,x,y);
+   if(c.id==='aurelia')return aureliaSkinWeight(side,x,y);
+   if(c.id==='midnight'&&side===0)return leftSkinWeight(x,y);
+   const z=regions[side],qx=(x-z.x)/z.rx,qy=(y-z.y)/z.ry;
+   const mix=smooth(c.split[0],c.split[1],x/W);
+   const taper=side===1?(1-c.taper[0]*smooth(.69,.81,y/H))*(1-c.taper[1]*smooth(.55,.97,qx)):1;
+   return (1-smooth(.48,.98,Math.hypot(qx,qy)))*smooth(c.bounds[0],c.bounds[1],y/H)*(1-smooth(c.bounds[2],c.bounds[3],y/H))*taper*(side===0?1-mix:mix);
+  };
+  const pixels=[];
+  for(let y=0;y<box[3];y++)for(let x=0;x<box[2];x++)pixels.push(Math.round(255*Math.max(weight(0,x+box[0]+.5,y+box[1]+.5),weight(1,x+box[0]+.5,y+box[1]+.5))));
+  return {box,pixels};
+ },
+ // Diagnostic sampling of the existing six-step Canvas map; not a new renderer.
+ points:points=>points.map(([x,y,side])=>{
+  const [cx,cy,w,h]=HOLLY_CROP;
+  const weight=(x,y)=>{
+   x=clamp(x-cx-.5,0,w-1.001);y=clamp(y-cy-.5,0,h-1.001);
+   const ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy,i=(iy*w+ix)*4+side;
+   return ((hollyMaskPixels[i]*(1-fx)+hollyMaskPixels[i+4]*fx)*(1-fy)+(hollyMaskPixels[i+w*4]*(1-fx)+hollyMaskPixels[i+w*4+4]*fx)*fy)/255;
+  };
+  let sx=x,sy=y;const v=hollyVelocity(x,y,side);
+  for(let k=0;k<6;k++){const a=weight(sx,sy)/6;sx-=v[0]*a;sy-=v[1]*a;}
+  return {x,y,side,dx:x-sx,dy:y-sy,weight:hollyMotionWeight(side,x,y)};
+ })
+};
+
+presentCharacter();
+getPhoto(activeCharacterIndex,photo=>{
+ img=photo;
+ backdrop.style.backgroundImage='url("'+currentCharacter().src+'")';
+ try{initGL();}catch(e){console.warn('WebGL not available',e);try{initFallback();}catch(err){say('Unable to start graphics');return;}}
+ needSize=true;showReady();say('');requestAnimationFrame(loop);
+ // Preload other character to make the first switch responsive without blocking play.
+ CHARACTERS.forEach((c,index)=>{if(index===activeCharacterIndex)return;const prefetch=new Image();prefetch.onload=()=>{loadedPhotos[index]=prefetch;};prefetch.src=c.src;});
+});
+})();
+</script>
+<script>
+if(false){
+ window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(err=>console.warn('Offline cache unavailable',err)));
+}
+</script>
+</body>
+</html>
