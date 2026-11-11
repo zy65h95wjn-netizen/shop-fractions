@@ -1,0 +1,85 @@
+{
+  "checks": 32,
+  "stress": [
+    {
+      "preset": "natural",
+      "link": 0,
+      "bounded": true,
+      "secondary": true,
+      "rest": true
+    },
+    {
+      "preset": "natural",
+      "link": 50,
+      "bounded": true,
+      "secondary": true,
+      "rest": true
+    },
+    {
+      "preset": "natural",
+      "link": 100,
+      "bounded": true,
+      "secondary": true,
+      "rest": true
+    },
+    {
+      "preset": "playful",
+      "link": 0,
+      "bounded": true,
+      "secondary": true,
+      "rest": true
+    },
+    {
+      "preset": "playful",
+      "link": 50,
+      "bounded": true,
+      "secondary": true,
+      "rest": true
+    },
+    {
+      "preset": "playful",
+      "link": 100,
+      "bounded": true,
+      "secondary": true,
+      "rest": true
+    },
+    {
+      "preset": "chaos",
+      "link": 0,
+      "bounded": true,
+      "secondary": true,
+      "rest": true
+    },
+    {
+      "preset": "chaos",
+      "link": 50,
+      "bounded": true,
+      "secondary": true,
+      "rest": true
+    },
+    {
+      "preset": "chaos",
+      "link": 100,
+      "bounded": true,
+      "secondary": true,
+      "rest": true
+    }
+  ],
+  "canvas": {
+    "rows": [
+      {
+        "side": 0,
+        "outside": 0,
+        "max": 0,
+        "inside": 3367
+      },
+      {
+        "side": 1,
+        "outside": 0,
+        "max": 0,
+        "inside": 3290
+      }
+    ],
+    "averageRenderMs": 4.566666666666666
+  }
+}

@@ -1,0 +1,1763 @@
+{
+  "checks": 606,
+  "metrics": {
+    "375x667": {
+      "boundaries": [
+        {
+          "side": 0,
+          "dx": 26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16236,
+              "max": 83
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 0,
+          "dx": -26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16230,
+              "max": 42
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 0,
+          "dx": 26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16209,
+              "max": 50
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 0,
+          "dx": -26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16234,
+              "max": 36
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": 26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12997,
+              "max": 38
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": -26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12980,
+              "max": 40
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": 26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12981,
+              "max": 44
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": -26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12980,
+              "max": 78
+            }
+          }
+        }
+      ]
+    },
+    "390x844": {
+      "boundaries": [
+        {
+          "side": 0,
+          "dx": 26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16230,
+              "max": 88
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 0,
+          "dx": -26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16229,
+              "max": 46
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 0,
+          "dx": 26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16215,
+              "max": 52
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 0,
+          "dx": -26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16237,
+              "max": 37
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": 26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12993,
+              "max": 38
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": -26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12971,
+              "max": 41
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": 26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12980,
+              "max": 44
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": -26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12979,
+              "max": 85
+            }
+          }
+        }
+      ]
+    },
+    "430x932": {
+      "boundaries": [
+        {
+          "side": 0,
+          "dx": 26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16232,
+              "max": 81
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 0,
+          "dx": -26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16232,
+              "max": 44
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 0,
+          "dx": 26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16218,
+              "max": 52
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 0,
+          "dx": -26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16239,
+              "max": 37
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": 26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12997,
+              "max": 38
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": -26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12973,
+              "max": 41
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": 26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12980,
+              "max": 44
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": -26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12981,
+              "max": 76
+            }
+          }
+        }
+      ]
+    },
+    "440x956": {
+      "boundaries": [
+        {
+          "side": 0,
+          "dx": 26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16232,
+              "max": 85
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 0,
+          "dx": -26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16231,
+              "max": 46
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 0,
+          "dx": 26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16220,
+              "max": 50
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 0,
+          "dx": -26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 16234,
+              "max": 36
+            },
+            "rightSkin": {
+              "changed": 0,
+              "max": 0
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": 26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12992,
+              "max": 39
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": -26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12972,
+              "max": 40
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": 26,
+          "dy": -30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12982,
+              "max": 45
+            }
+          }
+        },
+        {
+          "side": 1,
+          "dx": -26,
+          "dy": 30,
+          "boxes": {
+            "corset": {
+              "changed": 0,
+              "max": 0
+            },
+            "fur": {
+              "changed": 0,
+              "max": 0
+            },
+            "center": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightThigh": {
+              "changed": 0,
+              "max": 0
+            },
+            "background": {
+              "changed": 0,
+              "max": 0
+            },
+            "stockings": {
+              "changed": 0,
+              "max": 0
+            },
+            "head": {
+              "changed": 0,
+              "max": 0
+            },
+            "leftSkin": {
+              "changed": 0,
+              "max": 0
+            },
+            "rightSkin": {
+              "changed": 12976,
+              "max": 80
+            }
+          }
+        }
+      ]
+    },
+    "transfer": {
+      "slap-0-0": 0,
+      "slap-0-50": 0.9165174055764059,
+      "slap-0-100": 1.8051689355555385,
+      "slap-1-0": 0,
+      "slap-1-50": 0.9228261999039099,
+      "slap-1-100": 1.8176789525175145,
+      "kick-0-0": 0,
+      "kick-0-50": 1.1590139728273108,
+      "kick-0-100": 2.2848156293944846,
+      "kick-1-0": 0,
+      "kick-1-50": 1.1676662464635785,
+      "kick-1-100": 2.301995099501408,
+      "drag-0-0": 0,
+      "drag-0-50": 0.8131253689255207,
+      "drag-0-100": 1.6044021457315762,
+      "drag-1-0": 0,
+      "drag-1-50": 0.8288035005647966,
+      "drag-1-100": 1.6354523848505185,
+      "flick-0-0": 0,
+      "flick-0-50": 0.8459908142304244,
+      "flick-0-100": 1.668772877312285,
+      "flick-1-0": 0,
+      "flick-1-50": 0.8585372912487464,
+      "flick-1-100": 1.693702082494688
+    },
+    "fields": [
+      {
+        "side": 0,
+        "dx": 0,
+        "dy": 10,
+        "minDet": 0.5447157667530905,
+        "minAt": [
+          272,
+          906
+        ],
+        "maxOutside": 0.0013919210763765595,
+        "moving": 11614,
+        "center": [
+          2.3670895809304113,
+          14.94169934640523
+        ],
+        "offset": [
+          12.055916955017295,
+          12.64252210688197
+        ],
+        "error": 0
+      },
+      {
+        "side": 0,
+        "dx": 26,
+        "dy": 30,
+        "minDet": 0.22541489671597986,
+        "minAt": [
+          212,
+          810
+        ],
+        "maxOutside": 0.0013919210763765595,
+        "moving": 11950,
+        "center": [
+          15.23500192233756,
+          18.46526720492119
+        ],
+        "offset": [
+          18.622745098039218,
+          15.908219915417149
+        ],
+        "error": 0
+      },
+      {
+        "side": 0,
+        "dx": -26,
+        "dy": -30,
+        "minDet": 0.28236851271101177,
+        "minAt": [
+          316,
+          988
+        ],
+        "maxOutside": 0.0013919210763765595,
+        "moving": 11843,
+        "center": [
+          -16.08931949250288,
+          -17.4160707420223
+        ],
+        "offset": [
+          -8.7843137254902,
+          -19.077462514417533
+        ],
+        "error": 0
+      },
+      {
+        "side": 0,
+        "dx": 26,
+        "dy": -30,
+        "minDet": 0.2969284142032905,
+        "minAt": [
+          166,
+          976
+        ],
+        "maxOutside": 0.0013919210763765595,
+        "moving": 11922,
+        "center": [
+          17.628665897731636,
+          -16.03026528258362
+        ],
+        "offset": [
+          20.894363706266816,
+          -12.579530949634751
+        ],
+        "error": 0
+      },
+      {
+        "side": 0,
+        "dx": -26,
+        "dy": 30,
+        "minDet": 0.22763321522880897,
+        "minAt": [
+          304,
+          804
+        ],
+        "maxOutside": 0.0013919210763765595,
+        "moving": 11924,
+        "center": [
+          -13.620853517877741,
+          19.656193771626306
+        ],
+        "offset": [
+          -6.983160322952713,
+          22.01442522106882
+        ],
+        "error": 0
+      },
+      {
+        "side": 1,
+        "dx": 0,
+        "dy": 10,
+        "minDet": 0.543636926491778,
+        "minAt": [
+          504,
+          920
+        ],
+        "maxOutside": 0.0013919210763765595,
+        "moving": 8960,
+        "center": [
+          4.032418300653589,
+          13.225190311418686
+        ],
+        "offset": [
+          12.286228373702428,
+          11.766551326412923
+        ],
+        "error": 0
+      },
+      {
+        "side": 1,
+        "dx": 26,
+        "dy": 30,
+        "minDet": 0.23033700333595072,
+        "minAt": [
+          462,
+          830
+        ],
+        "maxOutside": 0.0013919210763765595,
+        "moving": 9267,
+        "center": [
+          16.120815071126486,
+          17.677877739331024
+        ],
+        "offset": [
+          19.209350249903892,
+          15.56767397154941
+        ],
+        "error": 0
+      },
+      {
+        "side": 1,
+        "dx": -26,
+        "dy": -30,
+        "minDet": 0.44189176117899814,
+        "minAt": [
+          568,
+          968
+        ],
+        "maxOutside": 0.0013919210763765595,
+        "moving": 8997,
+        "center": [
+          -14.94169934640523,
+          -18.368811995386388
+        ],
+        "offset": [
+          -8.762660515186461,
+          -19.95343329488658
+        ],
+        "error": 0
+      },
+      {
+        "side": 1,
+        "dx": 26,
+        "dy": -30,
+        "minDet": 0.29880627572320173,
+        "minAt": [
+          424,
+          956
+        ],
+        "maxOutside": 0.0013919210763765595,
+        "moving": 9245,
+        "center": [
+          17.681814686658967,
+          -16.047981545559402
+        ],
+        "offset": [
+          20.896332179930795,
+          -13.422037677816228
+        ],
+        "error": 0
+      },
+      {
+        "side": 1,
+        "dx": -26,
+        "dy": 30,
+        "minDet": 0.22671895185508215,
+        "minAt": [
+          536,
+          812
+        ],
+        "maxOutside": 0.0013919210763765595,
+        "moving": 9201,
+        "center": [
+          -13.30983467896963,
+          19.78611303344867
+        ],
+        "offset": [
+          -7.302053056516726,
+          21.65222606689734
+        ],
+        "error": 0
+      }
+    ]
+  }
+}
