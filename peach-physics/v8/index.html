@@ -7,10 +7,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Peach Physics">
-<meta name="description" content="Peach Physics: a playful interactive Christmas elf experiment with adjustable impact waves and linked motion.">
+<meta name="description" content="Peach Physics: a playful interactive Christmas character experiment with adjustable impact waves and linked motion.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Peach Physics — Elf Lab 0.0.8 r10</title>
+<title>Peach Physics — Santa Belly Experiment</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -72,33 +72,37 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
 #status{position:absolute;left:10px;top:max(11px,env(safe-area-inset-top));z-index:4;max-width:calc(100% - 80px);font-size:11px;color:#fff2c4;text-shadow:0 1px 6px #0009;pointer-events:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (orientation:landscape){#panel{max-width:500px;left:auto}#hint{bottom:12px}}
+#santaReaction{position:absolute;top:max(80px,12%);left:0;right:0;text-align:center;pointer-events:none;font-size:24px;font-weight:850;color:#ffe2ac;text-shadow:0 2px 8px #000;letter-spacing:.08em}
+[hidden]{display:none!important}
 </style>
 </head>
 <body>
-<main id="stage" aria-label="Peach Physics interactive Christmas elf portrait">
+<main id="stage" aria-label="Peach Physics interactive Christmas portrait">
  <div id="backdrop" aria-hidden="true"></div>
- <canvas id="game" aria-label="Touch the elf portrait to create independent soft spring movement. Drag and flick to interact."></canvas>
+ <canvas id="game" aria-label="Touch the character portrait to create independent soft spring movement. Drag and flick to interact."></canvas>
  <div id="loader" role="status"><b>PEACH PHYSICS</b><span>Calibrating the springs…</span></div>
  <span id="status" role="status"></span>
  <div id="pulse"></div>
+ <div id="santaReaction" role="status" aria-live="polite"></div>
  <div id="hint">Tap · two fingers · switch characters</div>
- <button id="character" type="button" aria-label="Switch elf character" title="Switch elf character"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h13l-3-3m3 3-3 3M19 17H6l3-3m-3 3 3 3" /></svg></button>
+ <button id="character" type="button" aria-label="Switch character" title="Switch character"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h13l-3-3m3 3-3 3M19 17H6l3-3m-3 3 3 3" /></svg></button>
  <div id="characterToast" role="status" aria-live="polite"></div>
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r10</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
-   <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/4</span></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · Santa experiment</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+   <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/5</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
    <p id="presetDesc" class="preset-desc">Realistic motion with gentle secondary response.</p>
    <button id="slapAudio" class="slap-audio" type="button" aria-pressed="false">Slap sound: Off</button>
+   <button id="santaLaugh" class="slap-audio" type="button" aria-pressed="false" hidden>Belly laugh: Off</button>
    <div class="control"><label for="bounce">Bounce strength <output id="bounceN">65</output></label><input id="bounce" type="range" min="0" max="100" value="65"></div>
   <div class="control"><label for="softness">Softness <output id="softnessN">65</output></label><input id="softness" type="range" min="0" max="100" value="65"></div>
   <div class="control"><label for="settle">Settling <output id="settleN">48</output></label><input id="settle" type="range" min="0" max="100" value="48"></div>
   <div class="control"><label for="transfer">Linked movement <output id="transferN">50</output></label><input id="transfer" type="range" min="0" max="100" value="50" aria-describedby="linkHint"><div id="linkHint" class="range-hint">0 = independent · 50 = original · 100 = extra linked</div></div>
   <div class="actions"><button id="both">Bounce both</button><button id="reset" class="subtle">Reset motion</button><button id="share" class="subtle">Share with friends</button><button id="fullscreen">Hide controls</button></div>
-  <p class="note">Tap the two-arrow button to switch elves. Each character has individually tuned deformation areas and remembers her own physics settings. Linked motion, taps, two-finger gestures, and optional sound are all preserved. No ads or tracking.</p>
+  <p class="note">Tap the two-arrow button to switch characters. Each character has individually tuned deformation areas and remembers their own physics settings. Linked motion, taps, two-finger gestures, and optional sound are all preserved. No ads or tracking.</p>
  </section>
 </main>
 <script>
@@ -137,7 +141,14 @@ const CHARACTERS=[
    {side:0,x:319,y:300,rx:43,ry:27},{side:0,x:325,y:332,rx:44,ry:35},{side:0,x:347,y:365,rx:28,ry:23},
    {side:1,x:432,y:301,rx:41,ry:27},{side:1,x:433,y:334,rx:43,ry:35},{side:1,x:411,y:365,rx:28,ry:23}
   ],impactCenters:[[325,332],[433,334]],bounceCenters:[[325,332],[433,334]],
-  split:[.517,.539],sideMid:.528,bounds:[.215,.235,.31,.335],taper:[0,0],intensity:.46}
+  split:[.517,.539],sideMid:.528,bounds:[.215,.235,.31,.335],taper:[0,0],intensity:.46},
+ {id:'santa',name:'Santa Claus',src:'./assets/santa-claus.jpg',width:1024,height:1280,
+  regions:[{x:350,y:780,rx:180,ry:235},{x:578,y:782,rx:174,ry:220}],
+  nodes:[
+   {side:0,x:345,y:657,rx:210,ry:180},{side:0,x:356,y:800,rx:240,ry:245},{side:0,x:373,y:931,rx:210,ry:175},
+   {side:1,x:578,y:666,rx:210,ry:180},{side:1,x:578,y:799,rx:240,ry:245},{side:1,x:549,y:926,rx:210,ry:175}
+  ],impactCenters:[[355,790],[572,790]],bounceCenters:[[355,790],[572,790]],
+  split:[.44,.48],sideMid:.46,bounds:[.40,.45,.76,.81],taper:[0,0],intensity:1}
 ];
 const CHARACTER_KEY='peach-physics-v008-active';
 const V71_CHARACTER_KEY='peach-physics-v0071-active';
@@ -157,8 +168,10 @@ const V62_PREFS_PREFIX='peach-physics-v0062-profile-';
 const OLDER_PREFS_PREFIX='peach-physics-v006-profile-';
 let activeCharacterIndex=0;
 try{const saved=localStorage.getItem(CHARACTER_KEY)||localStorage.getItem(V71_CHARACTER_KEY)||localStorage.getItem(V7_CHARACTER_KEY)||localStorage.getItem(BASELINE_CHARACTER_KEY)||localStorage.getItem(IMPORT_CHARACTER_KEY)||localStorage.getItem(V621_CHARACTER_KEY)||localStorage.getItem(V62_CHARACTER_KEY)||localStorage.getItem(OLDER_CHARACTER_KEY);activeCharacterIndex=Math.max(0,CHARACTERS.findIndex(c=>c.id===saved));}catch(e){}
+if(new URLSearchParams(location.search).get('character')==='santa')activeCharacterIndex=4;
 const currentCharacter=()=>CHARACTERS[activeCharacterIndex];
 const isHolly=()=>currentCharacter().id==='holly';
+const isSanta=()=>currentCharacter().id==='santa';
 const loadedPhotos=CHARACTERS.map(()=>null);
 let characterSwitchPending=false,characterToastTimer=null;
 const stage=document.getElementById('stage'),canvas=document.getElementById('game'),backdrop=document.getElementById('backdrop'),status=document.getElementById('status');
@@ -193,7 +206,8 @@ const PRESETS=Object.freeze({
  chaos:{bounce:96,softness:91,settle:19}
 });
 const HOLLY_PRESETS=Object.freeze({natural:{bounce:55,softness:58,settle:60},playful:{bounce:74,softness:72,settle:46},chaos:{bounce:92,softness:84,settle:32}});
-const currentPresets=()=>isHolly()?HOLLY_PRESETS:PRESETS;
+const SANTA_PRESETS=Object.freeze({natural:{bounce:60,softness:62,settle:62},playful:{bounce:80,softness:76,settle:44},chaos:{bounce:98,softness:90,settle:28}});
+const currentPresets=()=>isSanta()?SANTA_PRESETS:isHolly()?HOLLY_PRESETS:PRESETS;
 // Profiles are separate so tuning one elf cannot change the other's feel.
 const STORAGE_KEY=CHARACTER_PREFS_PREFIX;
 const PRIOR_STORAGE_KEY='peach-physics-v005-settings';
@@ -233,6 +247,7 @@ function resize(){
  const dpr=Math.min(window.devicePixelRatio||1,2.1);
  canvas.width=Math.max(2,Math.round(cssW*dpr));canvas.height=Math.max(2,Math.round(cssH*dpr));
  if(hollyBackground)hollyBackground.width=0;
+ if(santaBackground)santaBackground.width=0;
  // Portrait: keep the entire head clear of the Dynamic Island, with soft photo-derived fill in the margins.
  // Give the artwork nearly the full screen width. Physics coordinates stay in original image space.
  const portrait=cssH>cssW;
@@ -248,7 +263,8 @@ function resize(){
  // Preserve source-space physics, gestures and aspect ratio without retuning.
  const hollyClose=isHolly()&&portrait;
  const hollySideMargin=Math.max(22,cssW*.065);
- const scale=hollyClose?Math.min((cssW-2*hollySideMargin)/245,.27*(cssH-topClear)/146):baseScale*(midnightZoom?1.12:1);
+ // Santa: fit the full face and belly, with a closer portrait view of the mass.
+ const scale=isSanta()?Math.min(portrait?(cssW-32)/700:cssW/W,(cssH-topClear-bottomClear)/H):hollyClose?Math.min((cssW-2*hollySideMargin)/245,.27*(cssH-topClear)/146):baseScale*(midnightZoom?1.12:1);
  drawW=W*scale;drawH=H*scale;
  ox=hollyClose?cssW*.5-380*scale:(cssW-drawW)/2;
  oy=hollyClose?cssH*.55-350*scale:midnightZoom?Math.max(54,cssH*.066):(portrait?topClear+(cssH-topClear-bottomClear-drawH)/2:(cssH-drawH)/2);
@@ -264,6 +280,7 @@ function resize(){
 }
 function readPoint(e){const r=canvas.getBoundingClientRect();const sx=e.clientX-r.left,sy=e.clientY-r.top;return {sx,sy,x:(sx-ox)/drawW*W,y:(sy-oy)/drawH*H};}
 function pickSide(x,y){
+ if(isSanta())return santaWeight(x,y)>.025?(x<470?0:1):-1;
  if(isHolly()){
   const a=hollySkinWeight(0,x,y),b=hollySkinWeight(1,x,y);
   if(Math.max(a,b)>.08)return a>b?0:1;
@@ -598,6 +615,133 @@ function renderHollyFallback(sc){
  c.putImageData(frame,0,0);ctx2.drawImage(hollyLayer,(ox+cx*drawW/W)*sc,(oy+cy*drawH/H)*sc,w*drawW/W*sc,h*drawH/H*sc);
 }
 
+// Santa uses the existing six springs and six-step masked photo flow. The
+// center carriers form one belly; only a small local component ripples.
+const SANTA_CROP=[160,512,624,528];
+// Source-pixel trace INSIDE the skin: excludes beard, hands, fur and belt.
+const SANTA_CONTOUR=[[184,822],[194,738],[224,653],[279,586],[344,548],
+ [425,531],[520,541],[624,571],[692,614],[729,675],[753,744],[760,789],
+ [713,808],[681,839],[672,882],[646,928],[589,966],[514,995],
+ [422,1014],[332,1006],[255,986],[204,947],[181,884]];
+let santaMaskPixels=null,santaMaskLoc,santaSource=null,santaLayer=null,santaBackground=null;
+function santaWeight(x,y){
+ if(!insideTouchContour(SANTA_CONTOUR,x,y))return 0;
+ let d=Infinity;
+ for(let i=0;i<SANTA_CONTOUR.length;i++){
+  const [ax,ay]=SANTA_CONTOUR[i],[bx,by]=SANTA_CONTOUR[(i+1)%SANTA_CONTOUR.length];
+  const dx=bx-ax,dy=by-ay,t=clamp(((x-ax)*dx+(y-ay)*dy)/(dx*dx+dy*dy),0,1);
+  d=Math.min(d,Math.hypot(x-ax-dx*t,y-ay-dy*t));
+ }
+ const t=clamp(d/78,0,1);return t*t*(3-2*t);
+}
+function buildSantaMask(){
+ if(santaMaskPixels)return;
+ const [cx,cy,w,h]=SANTA_CROP;santaMaskPixels=new Uint8Array(w*h*4);
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  const i=(y*w+x)*4;santaMaskPixels[i]=Math.round(255*santaWeight(cx+x+.5,cy+y+.5));santaMaskPixels[i+3]=255;
+ }
+}
+function createSantaShapeTexture(){
+ buildSantaMask();gl.activeTexture(gl.TEXTURE4);const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+ gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,SANTA_CROP[2],SANTA_CROP[3],0,gl.RGBA,gl.UNSIGNED_BYTE,santaMaskPixels);
+ gl.uniform1i(gl.getUniformLocation(program,'uSantaShape'),4);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
+}
+function santaVelocity(x,y){
+ let dx=0,dy=0,sum=0;
+ for(const n of nodes){const w=Math.exp(-1.4*(((x-n.x)/n.rx)**2+((y-n.y)/n.ry)**2));dx+=n.dx*w;dy+=n.dy*w;sum+=w;}
+ dx=.78*(nodes[1].dx+nodes[4].dx)/2+.22*dx/Math.max(sum,.0001)+.32*(followers[0].dx+followers[1].dx);
+ dy=.78*(nodes[1].dy+nodes[4].dy)/2+.22*dy/Math.max(sum,.0001)+.45*(followers[0].dy+followers[1].dy);
+ for(let s=0;s<2;s++){
+  const p=impacts[s],hx=x-p.x*W,hy=y-p.y*H,r=Math.hypot(hx/170,hy/160),wave=waves[s];
+  const pressure=Math.exp(-2.6*r*r)*(p.v*.035-p.contact*.04);
+  const ring=Math.exp(-32*(r-(.12+wave.age*1.65))**2)*wave.strength*.012;
+  dx+=hx*(pressure+ring);dy+=hy*(pressure+ring);
+ }
+ const len=Math.hypot(dx,dy),gain=len>30?(30+18*(1-Math.exp(-(len-30)/18)))/len:1;
+ return [dx*gain,dy*gain];
+}
+function initSantaFallback(){
+ buildSantaMask();santaBackground=document.createElement('canvas');
+ const source=document.createElement('canvas');source.width=W;source.height=H;const c=source.getContext('2d');c.drawImage(img,0,0);
+ santaSource=c.getImageData(0,0,W,H).data;santaLayer=document.createElement('canvas');santaLayer.width=SANTA_CROP[2];santaLayer.height=SANTA_CROP[3];
+}
+function renderSantaFallback(sc){
+ if(santaBackground.width!==canvas.width||santaBackground.height!==canvas.height){
+  santaBackground.width=canvas.width;santaBackground.height=canvas.height;
+  santaBackground.getContext('2d').drawImage(img,ox*sc,oy*sc,drawW*sc,drawH*sc);
+ }
+ ctx2.drawImage(santaBackground,0,0);
+ if(!nodes.some(n=>n.dx||n.dy)&&!impacts.some(p=>p.contact||p.v>.0001)&&!waves.some(w=>w.strength))return;
+ const [cx,cy,w,h]=SANTA_CROP,c=santaLayer.getContext('2d'),frame=c.createImageData(w,h);
+ // As in the WebGL mesh, interpolate the smooth carrier field. Keep native
+ // source-pixel texture sampling and the six boundary-flow steps unchanged.
+ const stride=8,cols=Math.ceil(w/stride)+1,rows=Math.ceil(h/stride)+1;
+ const field=new Float32Array(cols*rows*2);
+ for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){
+  const v=santaVelocity(cx+x*stride+.5,cy+y*stride+.5),i=(y*cols+x)*2;field[i]=v[0];field[i+1]=v[1];
+ }
+ const weight=(x,y)=>{
+  x=clamp(x-cx-.5,0,w-1.001);y=clamp(y-cy-.5,0,h-1.001);
+  const ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy,i=(iy*w+ix)*4;
+  return ((santaMaskPixels[i]*(1-fx)+santaMaskPixels[i+4]*fx)*(1-fy)+(santaMaskPixels[i+w*4]*(1-fx)+santaMaskPixels[i+w*4+4]*fx)*fy)/255;
+ };
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  const at=(y*w+x)*4;if(!santaMaskPixels[at])continue;
+  let sx=cx+x+.5,sy=cy+y+.5;
+  const gx=Math.floor(x/stride),gy=Math.floor(y/stride),fxg=x/stride-gx,fyg=y/stride-gy,i0=(gy*cols+gx)*2;
+  const vx=(field[i0]*(1-fxg)+field[i0+2]*fxg)*(1-fyg)+(field[i0+cols*2]*(1-fxg)+field[i0+cols*2+2]*fxg)*fyg;
+  const vy=(field[i0+1]*(1-fxg)+field[i0+3]*fxg)*(1-fyg)+(field[i0+cols*2+1]*(1-fxg)+field[i0+cols*2+3]*fxg)*fyg;
+  for(let k=0;k<6;k++){const m=weight(sx,sy);sx-=vx*m/6;sy-=vy*m/6;}
+  sx-=.5;sy-=.5;const ix=Math.floor(sx),iy=Math.floor(sy),fx=sx-ix,fy=sy-iy,i=(iy*W+ix)*4;
+  for(let k=0;k<3;k++)frame.data[at+k]=(santaSource[i+k]*(1-fx)+santaSource[i+4+k]*fx)*(1-fy)+(santaSource[i+W*4+k]*(1-fx)+santaSource[i+W*4+4+k]*fx)*fy;
+  frame.data[at+3]=255;
+ }
+ c.putImageData(frame,0,0);ctx2.drawImage(santaLayer,(ox+cx*drawW/W)*sc,(oy+cy*drawH/H)*sc,w*drawW/W*sc,h*drawH/H*sc);
+}
+function santaImpulse(side,x,y,amplitude=1,vx=0,vy=0,flick=false,tap=false){
+ const power=(.75+model.bounce*.009)*amplitude;
+ const pushX=flick?clamp(vx*.23,-230,230):(x-470)*.15;
+ const pushY=flick?clamp(vy*.26,-270,270):tap?235:165;
+ for(const n of nodes){
+  const d=((x-n.x)/n.rx)**2+((y-n.y)/n.ry)**2,weight=.58+.42*Math.exp(-d*1.2);
+  n.vx=clamp(n.vx+pushX*power*weight,-420,420);n.vy=clamp(n.vy+pushY*power*weight,-460,460);
+  if(tap)n.dy=clamp(n.dy-3*power*weight,-66,66);
+ }
+ const p=impacts[side];p.x=x/W;p.y=y/H;p.v=clamp(p.v+(tap?.9:.3)*power,0,1.2);
+ startWave(side,power*(tap?.55:.2));
+}
+// Original synthesized three-pulse chuckle, no recording, network or speech
+// service. Visual pulses use the same simulation clock; sound is opt-in.
+let santaLaughEnabled=false,santaLaughTime=-1,santaLaughBeat=0,santaLaughSound=false;
+function stopSantaLaugh(){santaLaughTime=-1;santaLaughBeat=0;document.getElementById('santaReaction').textContent='';}
+function santaChuckle(){
+ if(!slapAudioEnabled)return;
+ try{
+  const Context=window.AudioContext||window.webkitAudioContext;if(!Context)throw Error('Web Audio unavailable');
+  if(!audioContext)audioContext=new Context();if(audioContext.state==='suspended')void audioContext.resume();
+  const ac=audioContext,t=ac.currentTime,voice=ac.createOscillator(),formant=ac.createBiquadFilter(),gain=ac.createGain();
+  voice.type='sawtooth';voice.frequency.setValueAtTime(108,t);voice.frequency.exponentialRampToValueAtTime(72,t+.22);
+  formant.type='bandpass';formant.frequency.value=480;formant.Q.value=2.6;
+  gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.13,t+.025);gain.gain.exponentialRampToValueAtTime(.0001,t+.24);
+  voice.connect(formant);formant.connect(gain);gain.connect(ac.destination);voice.start(t);voice.stop(t+.25);
+  santaLaughSound=true;
+ }catch(e){santaLaughSound=false;say('Laugh sound unavailable · visual laugh is ready');}
+}
+function startSantaLaugh(){
+ if(!isSanta()||!santaLaughEnabled||santaLaughTime>=0)return;
+ santaLaughTime=0;santaLaughBeat=0;advanceSantaLaugh(0);
+}
+function advanceSantaLaugh(dt){
+ if(santaLaughTime<0)return;santaLaughTime+=dt;
+ if(santaLaughBeat<3&&santaLaughTime>=santaLaughBeat*.36){
+  santaImpulse(santaLaughBeat%2,470,790,.55,0,-600,true);
+  santaLaughBeat++;document.getElementById('santaReaction').textContent=Array(santaLaughBeat).fill('HO').join(' ')+'!';santaChuckle();
+ }
+ if(santaLaughTime>1.6)stopSantaLaugh();
+}
+
 function initGL(){
  gl=canvas.getContext('webgl',{alpha:true,antialias:false,preserveDrawingBuffer:false,depth:false,stencil:false,powerPreference:'default'})||canvas.getContext('experimental-webgl');
  if(!gl)throw Error('WebGL unavailable');
@@ -622,6 +766,7 @@ function initGL(){
  ${HOLLY_FABRIC?'varying vec2 vGarmentLeft;varying vec2 vGarmentRight;':''}
  uniform float uAurelia;
  uniform float uHolly;
+ uniform float uSanta;
  vec2 leftVelocity(vec2 uv){
   vec2 motion=vec2(0.0);float sum=0.0;
   for(int j=0;j<3;j++){
@@ -681,6 +826,23 @@ function initGL(){
   return velocity;
  }
 
+ vec2 santaVelocity(vec2 uv){
+  vec2 motion=vec2(0.0);float sum=0.0;
+  for(int j=0;j<6;j++){
+   vec4 p=uPoints[j];vec2 n=(uv-p.xy)/p.zw;float w=exp(-1.4*dot(n,n));motion+=uOffsets[j]*w;sum+=w;
+  }
+  motion=.78*(uOffsets[1]+uOffsets[4])*.5+.22*motion/max(sum,.0001)+(uSecondary[0]+uSecondary[1])*vec2(.32,.45);
+  for(int s=0;s<2;s++){
+   vec4 p=uImpacts[s];vec2 delta=(uv-p.xy)*vec2(1024.0,1280.0);float r=length(delta/vec2(170.0,160.0));
+   float pressure=exp(-2.6*r*r)*(p.z*.035-p.w*.04);
+   float ring=exp(-32.0*pow(r-(.12+uWaves[s].x*1.65),2.0))*uWaves[s].y*.012;
+   motion+=(uv-p.xy)*(pressure+ring);
+  }
+  float travel=length(motion*vec2(1024.0,1280.0));
+  if(travel>30.0)motion*=(30.0+18.0*(1.0-exp(-(travel-30.0)/18.0)))/travel;
+  return motion;
+ }
+
  vec2 hollyVelocity(vec2 uv,int side){
   vec2 motion=vec2(0.0);float sum=0.0;
   for(int j=0;j<3;j++){
@@ -701,6 +863,10 @@ function initGL(){
   vLeftVelocity=vec2(0.0);
   vec2 uv=aPosition*uCover.xy+uCover.zw;
   vRawUV=uv;
+  if(uSanta>0.5){
+   vAureliaLeft=santaVelocity(uv);vUV=uv;
+   gl_Position=vec4(aPosition.x*2.0-1.0,1.0-aPosition.y*2.0,0.0,1.0);return;
+  }
   if(uHolly>0.5){
    vAureliaLeft=hollyVelocity(uv,0);vAureliaRight=hollyVelocity(uv,1);vUV=uv;${HOLLY_FABRIC?'vGarmentLeft=hollyVelocity(vec2(318.0/720.0,368.0/1280.0),0);vGarmentRight=hollyVelocity(vec2(440.0/720.0,372.0/1280.0),1);':''}
    gl_Position=vec4(aPosition.x*2.0-1.0,1.0-aPosition.y*2.0,0.0,1.0);return;
@@ -763,9 +929,11 @@ function initGL(){
  ${HOLLY_FABRIC?'varying vec2 vGarmentLeft;varying vec2 vGarmentRight;':''}
  uniform float uAurelia;
  uniform float uHolly;
+ uniform float uSanta;
  uniform sampler2D uLeftShape;
  uniform sampler2D uAureliaShape;
  uniform sampler2D uHollyShape;
+ uniform sampler2D uSantaShape;
  float leftEnvelope(vec2 uv){
   // A cached source-pixel mask replaces repeated polygon arithmetic per fragment.
   return texture2D(uLeftShape,(uv*vec2(941.0,1671.0)-vec2(148.0,984.0))/vec2(320.0,416.0)).r;
@@ -798,6 +966,14 @@ function initGL(){
    }
    photoUV=sampleUV;
   }
+  if(uSanta>0.5){
+   vec2 sampleUV=vRawUV;
+   for(int k=0;k<6;k++){
+    float weight=texture2D(uSantaShape,(sampleUV*vec2(1024.0,1280.0)-vec2(160.0,512.0))/vec2(624.0,528.0)).r;
+    sampleUV-=vAureliaLeft*weight/6.0;
+   }
+   photoUV=sampleUV;
+  }
   gl_FragColor=texture2D(uPhoto,photoUV);
  }`;
  const p=gl.createProgram();gl.attachShader(p,compiler(gl.VERTEX_SHADER,vertex));gl.attachShader(p,compiler(gl.FRAGMENT_SHADER,fragment));gl.linkProgram(p);
@@ -820,7 +996,8 @@ function initGL(){
  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,0);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
  gl.uniform1i(gl.getUniformLocation(p,'uPhoto'),0);
- createLeftShapeTexture();createAureliaShapeTexture();createHollyShapeTexture();
+ createLeftShapeTexture();createAureliaShapeTexture();createHollyShapeTexture();createSantaShapeTexture();
+ santaMaskLoc=gl.getUniformLocation(program,'uSanta');
  hollyMaskLoc=gl.getUniformLocation(program,'uHolly');
  aureliaMaskLoc=gl.getUniformLocation(program,'uAurelia');
  uploadCharacterCalibration();
@@ -836,12 +1013,14 @@ function uploadCharacterCalibration(){
  gl.uniform1f(leftMaskLoc,c.id==='midnight'?1:0);
  gl.uniform1f(aureliaMaskLoc,c.id==='aurelia'?1:0);
  gl.uniform1f(hollyMaskLoc,isHolly()?1:0);
+ gl.uniform1f(santaMaskLoc,isSanta()?1:0);
 }
 function presentCharacter(){
  const c=currentCharacter();characterName.textContent=c.name+' · '+(activeCharacterIndex+1)+'/'+CHARACTERS.length;
  characterButton.setAttribute('aria-label','Switch character: currently '+c.name);
  characterButton.title='Switch character from '+c.name;
- document.getElementById('linkHint').textContent=isHolly()?'0 = independent · 50 = moderate · 100 = controlled':c.id==='midnight'?'0 = independent · 50 = moderate · 100 = previous 50':'0 = independent · 50 = original · 100 = extra linked';
+ document.getElementById('both').textContent=isSanta()?'Bounce belly':'Bounce both';
+ document.getElementById('linkHint').textContent=isSanta()?'One belly · increase linked secondary wobble':isHolly()?'0 = independent · 50 = moderate · 100 = controlled':c.id==='midnight'?'0 = independent · 50 = moderate · 100 = previous 50':'0 = independent · 50 = original · 100 = extra linked';
 }
 function showCharacterToast(){
  characterToast.textContent=currentCharacter().name+' · '+(activeCharacterIndex+1)+'/'+CHARACTERS.length;
@@ -884,6 +1063,7 @@ function fallbackRect(side){
 function initFallback(){
  fallback=true;ctx2=canvas.getContext('2d',{alpha:true});if(!ctx2)throw Error('No rendering context');
  if(isHolly()){initHollyFallback();say('Reduced graphics mode');return;}
+ if(isSanta()){initSantaFallback();say('Reduced graphics mode');return;}
  backups=regions.map((z,side)=>{
   const w=420,h=480,layer=document.createElement('canvas'),mask=document.createElement('canvas');
   layer.width=mask.width=w;layer.height=mask.height=h;
@@ -915,6 +1095,7 @@ function render(){
  if(fallback){
   ctx2.clearRect(0,0,canvas.width,canvas.height);
   const sc=canvas.width/cssW;
+  if(isSanta()){renderSantaFallback(sc);return;}
   if(isHolly()){
    // Cache the resampled photo once per viewport. Drawing it 1:1 keeps the
    // scenery pixel-identical when the moving overlay is added or removed.
@@ -955,10 +1136,11 @@ function render(){
  gl.drawElements(gl.TRIANGLES,meshCount,gl.UNSIGNED_SHORT,0);
 }
 function step(dt){
- const hz=isHolly()?3.0-model.softness*.012:4.3-model.softness*.018,omega=2*Math.PI*hz,k=omega*omega;
- const dampingRatio=isHolly()?.12+model.settle*.0022:.13+model.settle*.0032,damping=2*omega*dampingRatio*.97,couple=k*.145; // Small lift in decay time.
+ if(isSanta())advanceSantaLaugh(dt);
+ const hz=isSanta()?1.65-model.softness*.007:isHolly()?3.0-model.softness*.012:4.3-model.softness*.018,omega=2*Math.PI*hz,k=omega*omega;
+ const dampingRatio=isSanta()?.12+model.settle*.0025:isHolly()?.12+model.settle*.0022:.13+model.settle*.0032,damping=2*omega*dampingRatio*.97,couple=k*.145; // Small lift in decay time.
  const forces=nodes.map(n=>{
-  const sideFrequency=isHolly()?(n.side===0?.94:1.06):n.side===0?.986:1.014; // small natural asymmetry
+  const sideFrequency=isSanta()?(n.side===0?.98:1.02):isHolly()?(n.side===0?.94:1.06):n.side===0?.986:1.014; // small natural asymmetry
   const localDamping=currentCharacter().id==='midnight' && n.side===0?1.06:1; // Smooth only brunette's screen-left spring.
   return {fx:-k*sideFrequency*n.dx-damping*localDamping*n.vx,fy:-k*sideFrequency*n.dy-damping*localDamping*n.vy};
  });
@@ -984,11 +1166,20 @@ function step(dt){
   forces[1].fx-=cross*dx;forces[4].fx+=cross*dx;
   forces[1].fy-=cross*dy;forces[4].fy+=cross*dy;
  }
+ if(isSanta()){
+  // Passive coupling keeps the volume coherent; the slider adds secondary transfer.
+  const cross=k*(.65+model.transfer*.012);
+  for(const [a,b] of [[0,3],[1,4],[2,5]]){
+   const dx=(nodes[b].dx-nodes[a].dx)*cross,dy=(nodes[b].dy-nodes[a].dy)*cross;
+   forces[a].fx+=dx;forces[b].fx-=dx;forces[a].fy+=dy;forces[b].fy-=dy;
+  }
+ }
  for(let i=0;i<nodes.length;i++){
   const n=nodes[i],f=forces[i],inertia=i%3===2?.86:1;
   n.vx+=f.fx*dt*inertia;n.vy+=f.fy*dt*inertia;
-  n.dx=clamp(n.dx+n.vx*dt,-26,26);n.dy=clamp(n.dy+n.vy*dt,-30,30);
-  if(Math.abs(n.dx)>=26)n.vx*=.55;if(Math.abs(n.dy)>=30)n.vy*=.55;
+  const bx=isSanta()?58:26,by=isSanta()?66:30;
+  n.dx=clamp(n.dx+n.vx*dt,-bx,bx);n.dy=clamp(n.dy+n.vy*dt,-by,by);
+  if(Math.abs(n.dx)>=bx)n.vx*=.55;if(Math.abs(n.dy)>=by)n.vy*=.55;
   if(Math.abs(n.dx)<.012&&Math.abs(n.vx)<.06){n.dx=0;n.vx=0;}
   if(Math.abs(n.dy)<.012&&Math.abs(n.vy)<.06){n.dy=0;n.vy=0;}
  }
@@ -997,7 +1188,7 @@ function step(dt){
   const f=followers[side],center=nodes[side*3+1],lower=nodes[side*3+2];
   const followGain=1; // Restore secondary follow-through without changing garment boundaries.
   const tx=(center.dx*.57+lower.dx*.43)*.28*followGain,ty=(center.dy*.57+lower.dy*.43)*.28*followGain;
-  const w=2*Math.PI*(side===0?2.38:2.46),k2=w*w,d2=2*w*(.32+model.settle*.003);
+  const w=2*Math.PI*(isSanta()?(side===0?1.10:1.14):(side===0?2.38:2.46)),k2=w*w,d2=2*w*(.32+model.settle*.003);
   f.vx+=(k2*(tx-f.dx)-d2*f.vx)*dt;
   f.vy+=(k2*(ty-f.dy)-d2*f.vy)*dt;
   f.dx=clamp(f.dx+f.vx*dt,-10,10);f.dy=clamp(f.dy+f.vy*dt,-11,11);
@@ -1011,8 +1202,8 @@ function step(dt){
  }
  for(const wave of waves){
   wave.age=Math.min(2,wave.age+dt);
-  wave.strength*=Math.exp(-dt*7);
-  if(wave.strength<.005||wave.age>.65)wave.strength=0;
+  wave.strength*=Math.exp(-dt*(isSanta()?3.8:7));
+  if(wave.strength<.005||wave.age>(isSanta()?1.15:.65))wave.strength=0;
  }
 }
 function loop(now){
@@ -1045,6 +1236,7 @@ function updatePress(side,x,y){
 }
 function impulse(side,x,y,amplitude=1,vx=0,vy=0,flick=false){
  if(side<0)return;
+ if(isSanta()){santaImpulse(side,x,y,amplitude,vx,vy,flick);return;}
  const leftTune=isHolly()?(.65+model.bounce*.009):currentCharacter().id==='midnight' && side===0?.90:1;
  const power=(.43+model.bounce*.011)*amplitude*1.06*leftTune; // Keep the brunette's right-side response unchanged.
  // Tap: gentle downward/outward kick. Flick: use both directions of measured finger velocity.
@@ -1094,6 +1286,7 @@ function slapSound(){
  }catch(e){console.warn('Slap audio unavailable',e);}
 }
 function slap(side,x,y,pt,strength=1){
+ if(isSanta()){santaImpulse(side,x,y,strength,0,0,false,true);slapVisual(pt);slapSound();slapCount++;lastGesture='slap';return;}
  // Quick contact compression followed by a stronger, localized spring rebound.
  // Keep the source photograph, seam, and the opposite side anchored.
  const leftTune=isHolly()?(.65+model.bounce*.009):currentCharacter().id==='midnight' && side===0?.90:1;
@@ -1145,8 +1338,9 @@ canvas.addEventListener('pointermove',e=>{
  // Simultaneous fingers contribute only to their own side's nodes.
  for(let i=finger.side*3;i<finger.side*3+3;i++){
   const n=nodes[i],q=((p.x-n.x)/n.rx)**2+((p.y-n.y)/n.ry)**2,weight=.20+.8*Math.exp(-q*1.4);
-  const leftTune=isHolly()?.95:currentCharacter().id==='midnight' && finger.side===0?.90:1;
-  n.dx=clamp(n.dx+dx*.17*weight*leftTune,-26,26);n.dy=clamp(n.dy+dy*.17*weight*leftTune,-30,30);
+  const leftTune=isSanta()?1.55:isHolly()?.95:currentCharacter().id==='midnight' && finger.side===0?.90:1;
+  const bx=isSanta()?58:26,by=isSanta()?66:30;
+  n.dx=clamp(n.dx+dx*.17*weight*leftTune,-bx,bx);n.dy=clamp(n.dy+dy*.17*weight*leftTune,-by,by);
   n.vx=clamp(n.vx+(dx/dt)*.055*weight*leftTune,-600,600);n.vy=clamp(n.vy+(dy/dt)*.055*weight*leftTune,-600,600);
  }
  // A moving finger pulls the opposite cheek slightly with it: taps alone are not enough.
@@ -1167,7 +1361,7 @@ function release(e){
   const now=performance.now(),speed=Math.hypot(f.vx,f.vy),age=now-f.lastTime;
   const held=now-f.startTime;
   if(f.travel<27&&held<400){
-   slap(f.side,f.last.x,f.last.y,f.last,isHolly()?clamp(.55+f.pressure*.7+Math.min(held,250)/1000,.6,1.5):1);
+   slap(f.side,f.last.x,f.last.y,f.last,(isHolly()||isSanta())?clamp(.55+f.pressure*.7+Math.min(held,250)/1000,.6,1.5):1);
   }else if(f.travel>34&&speed>175&&age<135){
    impulse(f.side,f.last.x,f.last.y,clamp(speed/900,.32,.9),f.vx,f.vy,true);
    flickCount++;lastGesture='flick';
@@ -1178,15 +1372,15 @@ function release(e){
 }
 canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('lostpointercapture',release);
 window.addEventListener('blur',()=>{pointers.clear();for(const p of impacts)p.target=0;});
-function bounceBoth(){const c=currentCharacter();impulse(0,...c.bounceCenters[0],1.05);impulse(1,...c.bounceCenters[1],.93);wake();}
-function reset(){for(const n of nodes){n.dx=0;n.dy=0;n.vx=0;n.vy=0;}for(const f of followers){f.dx=f.dy=f.vx=f.vy=0;}for(const p of impacts){p.v=p.contact=p.target=0;}for(const w of waves){w.age=1;w.strength=0;}pointers.clear();}
+function bounceBoth(){if(isSanta()){santaImpulse(0,470,790,1.25);startSantaLaugh();wake();return;}const c=currentCharacter();impulse(0,...c.bounceCenters[0],1.05);impulse(1,...c.bounceCenters[1],.93);wake();}
+function reset(){stopSantaLaugh();for(const n of nodes){n.dx=0;n.dy=0;n.vx=0;n.vy=0;}for(const f of followers){f.dx=f.dy=f.vx=f.vy=0;}for(const p of impacts){p.v=p.contact=p.target=0;}for(const w of waves){w.age=1;w.strength=0;}pointers.clear();}
 function openPanel(flag){const shown=typeof flag==='boolean'?flag:!panel.classList.contains('open');panel.classList.toggle('open',shown);scrim.classList.toggle('show',shown);panel.setAttribute('aria-hidden',String(!shown));gear.setAttribute('aria-expanded',String(shown));gear.setAttribute('aria-label',shown?'Close physics controls':'Show physics controls');/* Gear stays a single icon whether the panel is open or closed. */}
 gear.addEventListener('click',()=>openPanel());document.getElementById('close').addEventListener('click',()=>openPanel(false));scrim.addEventListener('click',()=>openPanel(false));document.getElementById('fullscreen').addEventListener('click',()=>openPanel(false));
 document.getElementById('both').addEventListener('click',()=>{bounceBoth();openPanel(false);});
 document.getElementById('reset').addEventListener('click',()=>{reset();openPanel(false);});
 const presetButtons=[...document.querySelectorAll('[data-preset]')];
 function savePrefs(){
- try{localStorage.setItem(STORAGE_KEY+currentCharacter().id,JSON.stringify({version:2,preset:activePreset,slapAudioEnabled,...model}));}
+ try{localStorage.setItem(STORAGE_KEY+currentCharacter().id,JSON.stringify({version:2,preset:activePreset,slapAudioEnabled,...(isSanta()?{santaLaughEnabled}:{}),...model}));}
  catch(e){/* Private browsing or storage limits must not disable the app. */}
 }
 function refreshPrefs(){
@@ -1199,11 +1393,12 @@ function refreshPrefs(){
  document.getElementById('presetDesc').textContent=descriptions[activePreset];
   const audioButton=document.getElementById('slapAudio');
   audioButton.setAttribute('aria-pressed',String(slapAudioEnabled));
-  audioButton.textContent='Slap sound: '+(slapAudioEnabled?'On':'Off');
+  audioButton.textContent=(isSanta()?'Sound: ':'Slap sound: ')+(slapAudioEnabled?'On':'Off');
+  const laugh=document.getElementById('santaLaugh');laugh.hidden=!isSanta();laugh.setAttribute('aria-pressed',String(santaLaughEnabled));laugh.textContent='Belly laugh: '+(santaLaughEnabled?'On':'Off');
 }
 function restorePrefs(){
  // Start a new character with the familiar Natural values; restore a saved profile when present.
- Object.assign(model,{...currentPresets().natural,transfer:50});activePreset='natural';slapAudioEnabled=false;
+ Object.assign(model,{...currentPresets().natural,transfer:50});activePreset='natural';slapAudioEnabled=false;santaLaughEnabled=false;
  try{
   const profile=localStorage.getItem(STORAGE_KEY+currentCharacter().id)||localStorage.getItem(V71_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(V7_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(BASELINE_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(IMPORT_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(V621_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(V62_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(OLDER_PREFS_PREFIX+currentCharacter().id);
   const prior=currentCharacter().id==='ember'?(localStorage.getItem(PRIOR_STORAGE_KEY)||localStorage.getItem(LEGACY_STORAGE_KEY)):null;
@@ -1212,6 +1407,7 @@ function restorePrefs(){
    for(const key of ['bounce','softness','settle','transfer'])if(Number.isFinite(stored[key]))model[key]=Math.round(clamp(stored[key],0,100));
    if(['natural','playful','chaos','custom'].includes(stored.preset))activePreset=stored.preset;
    slapAudioEnabled=stored.slapAudioEnabled===true;
+   if(isSanta())santaLaughEnabled=stored.santaLaughEnabled===true;
    if(activePreset!=='custom'&&['bounce','softness','settle'].some(key=>model[key]!==currentPresets()[activePreset][key]))activePreset='custom';
   }
  }catch(e){/* Defaults remain in effect. */}
@@ -1225,6 +1421,7 @@ for(const [key,out] of [['bounce','bounceN'],['softness','softnessN'],['settle',
  el.addEventListener('input',()=>{model[key]=Math.round(clamp(Number(el.value)||0,0,100));if(key!=='transfer')activePreset='custom';refreshPrefs();savePrefs();});
 }
 restorePrefs();
+document.getElementById('santaLaugh').addEventListener('click',()=>{santaLaughEnabled=!santaLaughEnabled;if(santaLaughEnabled)startSantaLaugh();else stopSantaLaugh();refreshPrefs();savePrefs();});
 document.getElementById('slapAudio').addEventListener('click',()=>{slapAudioEnabled=!slapAudioEnabled;refreshPrefs();savePrefs();});
 document.getElementById('share').addEventListener('click',async()=>{
  const url=location.origin+location.pathname;
@@ -1240,7 +1437,7 @@ canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();webglLost=true
 canvas.addEventListener('webglcontextrestored',()=>{try{initGL();needSize=true;webglLost=false;say('');}catch(e){say('Reload to restore graphics');}});
 window.addEventListener('keydown',e=>{if(e.key==='Escape')openPanel(false);if(e.code==='Space'&&e.target.tagName!=='INPUT'){e.preventDefault();bounceBoth();}});
 // Read-only diagnostics for automated tests. Not a remote control or telemetry endpoint.
-window.__peachPhysicsDebug={snapshot:()=>({character:currentCharacter().id,characterName:currentCharacter().name,characters:CHARACTERS.map(c=>c.id),regions:regions.map(z=>({...z})),nodes:nodes.map(n=>({side:n.side,dx:+n.dx.toFixed(2),dy:+n.dy.toFixed(2)})),followers:followers.map(f=>({dx:+f.dx.toFixed(2),dy:+f.dy.toFixed(2)})),impacts:impacts.map(p=>({v:+p.v.toFixed(3),contact:+p.contact.toFixed(3),target:p.target})),waves:waves.map(w=>({age:+w.age.toFixed(3),strength:+w.strength.toFixed(3)})),frames,activePointers:[...pointers.values()].map(p=>({id:p.id,side:p.side,vx:p.vx,vy:p.vy})),panelOpen:panel.classList.contains('open'),renderer:fallback?'canvas':'webgl',size:[cssW,cssH],image:[W,H],framing:{x:ox,y:oy,width:drawW,height:drawH},model:{...model},preset:activePreset,slapAudioEnabled,slapCount,flickCount,lastGesture,status:diagnostic}),kick:(side=0)=>{const c=currentCharacter();impulse(side,...c.bounceCenters[side],1);},switchCharacter:(id)=>chooseCharacter(typeof id==='number'?id:CHARACTERS.findIndex(c=>c.id===id))};
+window.__peachPhysicsDebug={snapshot:()=>({character:currentCharacter().id,characterName:currentCharacter().name,characters:CHARACTERS.map(c=>c.id),regions:regions.map(z=>({...z})),nodes:nodes.map(n=>({side:n.side,dx:+n.dx.toFixed(2),dy:+n.dy.toFixed(2)})),followers:followers.map(f=>({dx:+f.dx.toFixed(2),dy:+f.dy.toFixed(2)})),impacts:impacts.map(p=>({v:+p.v.toFixed(3),contact:+p.contact.toFixed(3),target:p.target})),waves:waves.map(w=>({age:+w.age.toFixed(3),strength:+w.strength.toFixed(3)})),frames,activePointers:[...pointers.values()].map(p=>({id:p.id,side:p.side,vx:p.vx,vy:p.vy})),panelOpen:panel.classList.contains('open'),renderer:fallback?'canvas':'webgl',size:[cssW,cssH],image:[W,H],framing:{x:ox,y:oy,width:drawW,height:drawH},model:{...model},preset:activePreset,slapAudioEnabled,santaLaughEnabled,santaLaughSound,santaLaughTime,slapCount,flickCount,lastGesture,status:diagnostic}),kick:(side=0)=>{const c=currentCharacter();impulse(side,...c.bounceCenters[side],1);},switchCharacter:(id)=>chooseCharacter(typeof id==='number'?id:CHARACTERS.findIndex(c=>c.id===id))};
 presentCharacter();
 getPhoto(activeCharacterIndex,photo=>{
  img=photo;

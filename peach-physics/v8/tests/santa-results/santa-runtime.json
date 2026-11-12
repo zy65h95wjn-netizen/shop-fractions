@@ -1,0 +1,38 @@
+{
+  "checks": 29,
+  "renderers": [
+    {
+      "renderer": "webgl",
+      "softwareDesktopFPS": 4.2,
+      "offline": true,
+      "audioScheduled": true,
+      "audio": {
+        "starts": [
+          0,
+          0.6907936507936508,
+          1.2625850340136053
+        ],
+        "states": [
+          "running"
+        ]
+      }
+    },
+    {
+      "renderer": "canvas",
+      "softwareDesktopFPS": 22.3,
+      "offline": true,
+      "audioScheduled": true,
+      "audio": {
+        "starts": [
+          0,
+          0.3512018140589569,
+          0.7024036281179138
+        ],
+        "states": [
+          "running"
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

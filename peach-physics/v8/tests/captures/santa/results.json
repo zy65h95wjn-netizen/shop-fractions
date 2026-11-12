@@ -1,0 +1,275 @@
+{
+  "checks": 167,
+  "phases": [
+    {
+      "backend": "webgl",
+      "preset": "natural",
+      "peak": {
+        "seconds": 0.2,
+        "sourcePixels": 23.511299097142988
+      },
+      "rebound": {
+        "seconds": 0.6583333333333333,
+        "sourcePixels": -7.900767722579779
+      }
+    },
+    {
+      "backend": "webgl",
+      "preset": "playful",
+      "peak": {
+        "seconds": 0.225,
+        "sourcePixels": 31.51971074835273
+      },
+      "rebound": {
+        "seconds": 0.7166666666666667,
+        "sourcePixels": -13.441194668393132
+      }
+    },
+    {
+      "backend": "webgl",
+      "preset": "chaos",
+      "peak": {
+        "seconds": 0.25,
+        "sourcePixels": 38.47783713301822
+      },
+      "rebound": {
+        "seconds": 0.7833333333333333,
+        "sourcePixels": -21.693824433652697
+      }
+    },
+    {
+      "backend": "canvas",
+      "preset": "natural",
+      "peak": {
+        "seconds": 0.2,
+        "sourcePixels": 23.511299097142988
+      },
+      "rebound": {
+        "seconds": 0.6583333333333333,
+        "sourcePixels": -7.900767722579779
+      }
+    },
+    {
+      "backend": "canvas",
+      "preset": "playful",
+      "peak": {
+        "seconds": 0.225,
+        "sourcePixels": 31.51971074835273
+      },
+      "rebound": {
+        "seconds": 0.7166666666666667,
+        "sourcePixels": -13.441194668393132
+      }
+    },
+    {
+      "backend": "canvas",
+      "preset": "chaos",
+      "peak": {
+        "seconds": 0.25,
+        "sourcePixels": 38.47783713301822
+      },
+      "rebound": {
+        "seconds": 0.7833333333333333,
+        "sourcePixels": -21.693824433652697
+      }
+    }
+  ],
+  "framing": [
+    {
+      "backend": "webgl",
+      "size": {
+        "width": 375,
+        "height": 667
+      },
+      "framing": {
+        "x": -40.099999999999994,
+        "y": 70,
+        "width": 455.2,
+        "height": 569
+      }
+    },
+    {
+      "backend": "webgl",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "framing": {
+        "x": -66.85142857142858,
+        "y": 114.49371428571425,
+        "width": 523.7028571428572,
+        "height": 654.6285714285715
+      }
+    },
+    {
+      "backend": "webgl",
+      "size": {
+        "width": 430,
+        "height": 932
+      },
+      "framing": {
+        "x": -76.10857142857145,
+        "y": 121.68628571428567,
+        "width": 582.2171428571429,
+        "height": 727.7714285714286
+      }
+    },
+    {
+      "backend": "webgl",
+      "size": {
+        "width": 440,
+        "height": 956
+      },
+      "framing": {
+        "x": -78.42285714285714,
+        "y": 125.04742857142863,
+        "width": 596.8457142857143,
+        "height": 746.0571428571428
+      }
+    },
+    {
+      "backend": "webgl",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "framing": {
+        "x": 266,
+        "y": 0,
+        "width": 312,
+        "height": 390
+      }
+    },
+    {
+      "backend": "canvas",
+      "size": {
+        "width": 375,
+        "height": 667
+      },
+      "framing": {
+        "x": -40.099999999999994,
+        "y": 70,
+        "width": 455.2,
+        "height": 569
+      }
+    },
+    {
+      "backend": "canvas",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "framing": {
+        "x": -66.85142857142858,
+        "y": 114.49371428571425,
+        "width": 523.7028571428572,
+        "height": 654.6285714285715
+      }
+    },
+    {
+      "backend": "canvas",
+      "size": {
+        "width": 430,
+        "height": 932
+      },
+      "framing": {
+        "x": -76.10857142857145,
+        "y": 121.68628571428567,
+        "width": 582.2171428571429,
+        "height": 727.7714285714286
+      }
+    },
+    {
+      "backend": "canvas",
+      "size": {
+        "width": 440,
+        "height": 956
+      },
+      "framing": {
+        "x": -78.42285714285714,
+        "y": 125.04742857142863,
+        "width": 596.8457142857143,
+        "height": 746.0571428571428
+      }
+    },
+    {
+      "backend": "canvas",
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "framing": {
+        "x": 266,
+        "y": 0,
+        "width": 312,
+        "height": 390
+      }
+    }
+  ],
+  "multitouch": [
+    {
+      "backend": "webgl",
+      "nativeContacts": 2,
+      "flicks": 2
+    },
+    {
+      "backend": "canvas",
+      "nativeContacts": 2,
+      "flicks": 2
+    }
+  ],
+  "errors": [],
+  "performance": [],
+  "webglStress": [
+    {
+      "dx": 58,
+      "dy": 66,
+      "minDet": 0.3909369188939707,
+      "maxTravel": 47.27694416139776
+    },
+    {
+      "dx": -58,
+      "dy": 66,
+      "minDet": 0.3907700983782055,
+      "maxTravel": 47.27694416139776
+    },
+    {
+      "dx": 58,
+      "dy": -66,
+      "minDet": 0.3869119894536892,
+      "maxTravel": 47.27694416139776
+    },
+    {
+      "dx": -58,
+      "dy": -66,
+      "minDet": 0.3867035402806871,
+      "maxTravel": 47.27694416139776
+    }
+  ],
+  "canvasStress": [
+    {
+      "dx": 58,
+      "dy": 66,
+      "minDet": 0.3909369188939707,
+      "maxTravel": 47.27694416139776
+    },
+    {
+      "dx": -58,
+      "dy": 66,
+      "minDet": 0.3907700983782055,
+      "maxTravel": 47.27694416139776
+    },
+    {
+      "dx": 58,
+      "dy": -66,
+      "minDet": 0.3869119894536892,
+      "maxTravel": 47.27694416139776
+    },
+    {
+      "dx": -58,
+      "dy": -66,
+      "minDet": 0.3867035402806871,
+      "maxTravel": 47.27694416139776
+    }
+  ]
+}

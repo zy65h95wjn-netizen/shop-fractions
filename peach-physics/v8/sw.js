@@ -1,11 +1,11 @@
 // The v0.0.8 cache is independent of all earlier Peach Physics releases.
-const CACHE = 'peach-physics-v008-r10';
-const FILES = ['./', './index.html', './assets/aurelia-frost.jpg', './assets/holly-heartbreaker.jpg?v=r7', './manifest.webmanifest', './apple-touch-icon.png'];
+const CACHE = 'peach-physics-santa-experiment-r1';
+const FILES = ['./', './index.html', './assets/aurelia-frost.jpg', './assets/holly-heartbreaker.jpg?v=r7', './assets/santa-claus.jpg', './manifest.webmanifest', './apple-touch-icon.png'];
 self.addEventListener('install', event => {
  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', event => {
- event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('peach-physics-v008-') && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
+ event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('peach-physics-santa-experiment-') && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
 self.addEventListener('fetch', event => {
  const req=event.request, u=new URL(req.url);
