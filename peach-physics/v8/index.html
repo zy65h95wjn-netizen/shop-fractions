@@ -10,7 +10,7 @@
 <meta name="description" content="Peach Physics: a playful interactive Christmas elf experiment with adjustable impact waves and linked motion.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Peach Physics — Elf Lab 0.0.8 r9</title>
+<title>Peach Physics — Elf Lab 0.0.8 r9.1</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -87,7 +87,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r9</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r9.1</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/4</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
@@ -418,22 +418,83 @@ function touchAnchor(side,p){
 }
 const HOLLY_CROP=[240,264,272,176];
 let hollyMaskLoc,hollyMaskPixels=null,hollySource=null,hollyLayer=null,hollyBackground=null;
+// Photo-traced white fur trim [x, top y, bottom y] in source pixels: left from
+// its outer tip to the lacing, right from the lacing to its outer tip.
+const HOLLY_FUR=[
+ [[262,333,351],[270,330,353],[282,338,358],[294,346,370],[306,352,375],[318,358,378],[330,364,383],[342,369,386],[354,375,388],[362,381,388]],
+ [[398,382,388],[408,374,389],[420,369,386],[432,365,383],[444,361,381],[456,355,376],[468,348,371],[480,333,363],[490,331,354]]
+];
+// Smoothed trim centerline [x, y, vertical half-thickness, support level].
+// The trim moves as one piece. Its level is the r8 support at 40% depth, but
+// at most .12 above r8's support at its lower edge, so the cup below never
+// has to absorb a larger step than in r8. That keeps the trim firmer where
+// the cup has little room: beside the lacing and the right perimeter.
+function hollyTrimLine(points,side,base){
+ let line=points.map(([x,top,bottom])=>[x,(top+bottom)/2,(bottom-top)/2]);
+ for(let k=0;k<2;k++){
+  const next=[line[0]];
+  for(let i=0;i<line.length-1;i++){const a=line[i],b=line[i+1];next.push(a.map((v,j)=>.75*v+.25*b[j]),a.map((v,j)=>.25*v+.75*b[j]));}
+  next.push(line[line.length-1]);line=next;
+ }
+ return line.map((v,j)=>{
+  const a=line[Math.max(j-1,0)],b=line[Math.min(j+1,line.length-1)],length=Math.hypot(b[0]-a[0],b[1]-a[1]);
+  const nx=(a[1]-b[1])/length,ny=(b[0]-a[0])/length,half=v[2]*ny,at=d=>base(side,v[0]+nx*d,v[1]+ny*d);
+  return [v[0],v[1],v[2],Math.min(at(-.2*half),at(half)+.12)];
+ });
+}
+// Closest point on the trim centerline: signed normal distance (positive
+// toward the cup), normal half-thickness, support level and arc position.
+function hollyTrimPoint(line,x,y){
+ let best=null,arc=0;
+ for(let j=0;j<line.length-1;j++){
+  const [ax,ay,ah,as]=line[j],[bx,by,bh,bs]=line[j+1],dx=bx-ax,dy=by-ay,length=Math.hypot(dx,dy);
+  const t=clamp(((x-ax)*dx+(y-ay)*dy)/(length*length),0,1),cx=ax+t*dx,cy=ay+t*dy,distance=Math.hypot(x-cx,y-cy);
+  if(!best||distance<best.distance)best={distance,d:((x-cx)*-dy+(y-cy)*dx)/length,half:(ah+(bh-ah)*t)*dx/length,level:as+(bs-as)*t,u:arc+t*length};
+  arc+=length;
+ }
+ best.ends=Math.min(best.u,arc-best.u);return best;
+}
 function buildHollyMask(){
  if(hollyMaskPixels)return;
  const [ox,oy,w,h]=HOLLY_CROP;hollyMaskPixels=new Uint8Array(w*h*4);
  const smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
+ // r8 field weight, unchanged: ease from free skin into supported fur/cups
+ // across 44 source pixels below an approximate neckline.
+ const base=(side,px,py)=>{
+  const neckline=379-.004*(px-380)**2,t=clamp((py-neckline+26)/44,0,1);
+  return hollyMotionWeight(side,px,py)*(1-.45*t*t*(3-2*t));
+ };
+ const trims=HOLLY_FUR.map((points,side)=>hollyTrimLine(points,side,base));
+ const weights=[0,1].map(side=>{const a=new Float64Array(w*h);for(let y=0;y<h;y++)for(let x=0;x<w;x++)a[y*w+x]=base(side,ox+x+.5,oy+y+.5);return a;});
+ // Two-pass chamfer distance (source px) to r8's stationary pixels. Raised
+ // weights are capped at distance/22, about r8's own slope at the hair guards,
+ // so the cup cannot be pinched against the stationary edge.
+ const room=weights.map(weight=>{
+  const d=new Float32Array(w*h),r=Math.SQRT2,at=(x,y)=>x<0||y<0||x>=w||y>=h?1e9:d[y*w+x];
+  for(let k=0;k<w*h;k++)d[k]=Math.round(255*weight[k])===0?0:1e9;
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++)d[y*w+x]=Math.min(d[y*w+x],at(x-1,y)+1,at(x,y-1)+1,at(x-1,y-1)+r,at(x+1,y-1)+r);
+  for(let y=h-1;y>=0;y--)for(let x=w-1;x>=0;x--)d[y*w+x]=Math.min(d[y*w+x],at(x+1,y)+1,at(x,y+1)+1,at(x+1,y+1)+r,at(x-1,y+1)+r);
+  return d;
+ });
  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
-  const px=ox+x+.5,py=oy+y+.5,neckline=379-.004*(px-380)**2;
-  // Ease from free skin into supported fur/cups across 44 source pixels.
-  // Nonzero support preserves attachment; input weights and springs stay intact.
-  const t=clamp((py-neckline+26)/44,0,1),below=py-neckline;
-  // Extra support only in the fur/upper-cup band, fading toward the lacing
-  // and back to r8 below the band. Nothing is added above the neckline.
-  const band=smooth(below/12)*(1-smooth((below-24)/24));
-  const outer=smooth((Math.abs(px-380)-18)/46);
-  const support=(1-.45*t*t*(3-2*t))*(1-.35*band*outer);
-  const i=(y*w+x)*4;hollyMaskPixels[i]=Math.round(255*hollyMotionWeight(0,px,py)*support);
-  hollyMaskPixels[i+1]=Math.round(255*hollyMotionWeight(1,px,py)*support);hollyMaskPixels[i+3]=255;
+  const px=ox+x+.5,py=oy+y+.5,i=(y*w+x)*4;
+  for(let side=0;side<2;side++){
+   const weight=weights[side][y*w+x];
+   // Stationary r8 pixels stay exactly stationary: hair, arm, lacing, corset.
+   if(Math.round(255*weight)===0){hollyMaskPixels[i+side]=0;continue;}
+   // A flat support plateau covers the trim and 2/6 source pixels around it.
+   // The transition moves into skin above (16 px, short enough that exposed
+   // skin keeps its r8 response) and green cup below (26 px), fades out over
+   // the last 10 px of each trim end, and leaves pixels near r8's stationary
+   // boundary on r8's own weights.
+   const p=hollyTrimPoint(trims[side],px,py);
+   const band=smooth((p.d+p.half+18)/16)*(1-smooth((p.d-p.half-6)/26));
+   const blend=band*smooth(p.ends/10)*smooth(weight/.15);
+   let value=weight+(p.level-weight)*blend;
+   if(value>weight)value=Math.min(value,Math.max(weight,room[side][y*w+x]/22));
+   hollyMaskPixels[i+side]=Math.round(255*value);
+  }
+  hollyMaskPixels[i+3]=255;
  }
 }
 function createHollyShapeTexture(){

@@ -75,14 +75,14 @@ async function save(p,name){fs.writeFileSync(path.join(out,name+'.png'),Buffer.f
  // Existing service-worker lifecycle updates the shell and preserves portrait bytes.
  const context=await browser.newContext(),p=await context.newPage();await p.goto((process.env.PEACH_TEST_URL||'http://127.0.0.1:8000')+'/peach-physics/v8/');
  const offline=await p.evaluate(async()=>{
-  await caches.open('peach-physics-v008-r8');await caches.open('peach-physics-v0071-preservation-test');
+  await caches.open('peach-physics-v008-r9');await caches.open('peach-physics-v0071-preservation-test');
   await navigator.serviceWorker.register('./sw.js');await navigator.serviceWorker.ready;
   if(!navigator.serviceWorker.controller)await new Promise(r=>navigator.serviceWorker.addEventListener('controllerchange',r,{once:true}));
-  const keys=await caches.keys(),cache=await caches.open('peach-physics-v008-r9'),response=await cache.match('./assets/holly-heartbreaker.jpg?v=r7');
+  const keys=await caches.keys(),cache=await caches.open('peach-physics-v008-r9-1'),response=await cache.match('./assets/holly-heartbreaker.jpg?v=r7');
   const bytes=await response.arrayBuffer(),hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
   return {keys,hash};
  });
- ok(offline.keys.includes('peach-physics-v008-r9')&&!offline.keys.includes('peach-physics-v008-r8'),'r9 cache replaces r8');
+ ok(offline.keys.includes('peach-physics-v008-r9-1')&&!offline.keys.includes('peach-physics-v008-r9'),'r9.1 cache replaces r9');
  ok(offline.keys.includes('peach-physics-v0071-preservation-test'),'earlier caches preserved');ok(offline.hash===report.artworkSha256,'offline cache has exact approved asset');
  await context.setOffline(true);await p.reload();await p.waitForFunction(()=>window.__peachPhysicsDebug&&document.querySelector('#loader').classList.contains('hiding'));
  for(const id of ['midnight','aurelia','holly']){

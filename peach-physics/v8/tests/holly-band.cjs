@@ -3,7 +3,8 @@ const {chromium,fs,path,assert,root,out,setup,character,scenario,canvas}=require
 const {execFileSync}=require('node:child_process');
 const baseline='eea60679ddad1a5cb39701e1f73fe8872ccb7e60';
 const r8=execFileSync('git',['show',baseline+':peach-physics/v8/index.html'],{cwd:root,maxBuffer:3e6}).toString();
-const current=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
+// Historical r9 evidence: r9 is read from its own commit, so this stays reproducible after r9.1.
+const current=execFileSync('git',['show','8e4fcbb30b24decb8af7c03c6e39aa009541386c:peach-physics/v8/index.html'],{cwd:root,maxBuffer:3e6}).toString();
 const sources={};
 for(const [label,html] of [['r8',r8],['r9',current]]){
  const marker='presentCharacter();\ngetPhoto';assert.ok(html.includes(marker));sources[label]=path.join(out,`band-${label}.html`);

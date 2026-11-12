@@ -1,6 +1,114 @@
-# Peach Physics v0.0.8 r9 — Holly upper cup/fur support
+# Peach Physics v0.0.8 r9.1 — Holly fur trim keeps its shape (experimental)
 
-This branch adds localized support to Holly's upper outer green cup and attached white fur band, based on r8 (`eea6067`). The approved photograph remains in the fourth slot, and r8 framing is unchanged. Winter Ember, Midnight Yule and Aurelia Frost are unchanged. This branch has not been deployed.
+Experimental branch from r9 (`8e4fcbb`). **Not deployed**: main and the live app stay on r9. Spring solver, timing, damping, presets, gestures, linked movement, input targets, framing and zoom are unchanged. Only Holly's mask builder changed. The approved portrait is byte-identical. Winter Ember, Midnight Yule and Aurelia Frost render exactly as in r9.
+
+## What was wrong
+
+Holly's renderer warps the photo: each pixel moves by the spring field × a fixed mask weight, so the mask is the only "material stiffness" there is. A band keeps its shape only if every point across its width gets the same displacement.
+
+- **r8:** the white trim sat where the support weight was falling fastest. The neckline ramp ends inside the trim. Below it, the cup's falloff toward the stationary corset, lacing and outer hair guards cuts through the trim's lower half. At x=340 the weight drops from .74 to .38 across the trim's 17 px. The trim's top edge travelled about twice as far as its bottom edge, so it stretched and squashed: up to ±40% at mid-cup in r8.
+- **r9:** added a band attenuation keyed to the approximate curve `379 − .004(x − 380)²`, which runs partly inside the trim. It lowered travel but put a new, steeper gradient inside the trim, so the distortion got worse (up to ±63% at mid-cup).
+
+## The change
+
+`buildHollyMask` now starts from r8's weights (r9's band term is removed) and adds one localized adjustment:
+
+1. **`HOLLY_FUR`** traces the photographed trim edges as `[x, top, bottom]`, 10 points left and 9 right. The traced edges were checked against a colour segmentation of the photo.
+2. **Flat plateau.** Across the trim (plus 2 px above and 6 px below) the weight is constant along the trim's normal. The trim therefore moves as one piece, and only its length along the band can change. The plateau level varies smoothly along the trim. It is r8's support at 40% depth, capped at r8's support at the lower edge **+ .12**. That bound keeps the cup below from absorbing a much larger step than in r8, which makes the trim firmer where the cup has little room: beside the lacing and the right perimeter.
+3. **Transitions move out of the trim:** into the skin above (16 px, kept short so exposed skin keeps its r8 response) and the green cup below (26 px). They fade out over the last 10 px of each trim tip.
+4. **Guards stay exact.** Every pixel that r8 holds stationary (hair, arm, scenery, lacing, lower corset) stays exactly 0. Near that boundary, raised weights are capped at distance/22 px, about r8's own slope at the hair guards, so the cup is not pinched against the stationary edge.
+
+Both renderers use the same mask. The extra mask build is one-time per character load: about 240 ms vs r8's 150 ms in desktop Node; iPhone timing not measured.
+
+**Right perimeter (r6's 32 px feather)** was investigated. Reducing it to 24 or 20 px gives the right outer trim more support. It also pushes more strain into the narrow cup strip beside the hair (minimum Jacobian 0.06–0.10, versus 0.17 in r8) without improving the trim. The r6 value is kept, and the plateau rule handles the right side.
+
+## Results — fur shape (`tests/holly-fur.cjs`)
+
+A fur label is traced from the photograph inside the page, independently of the runtime mask. It replaces the photo texture and is drawn by the **actual WebGL shader and the actual Canvas remap**. Trim width is then measured normal to the trim at 16 fixed material positions. The test covers 27 states (Natural/Playful/Chaos taps, flick, drag, link 100, both sides tapped, and all four node-bound corners per side) and 45-frame trajectories of Natural and Chaos taps per side. Values are the worst absolute width change from rest, in %. Mid-cup = L296–336 and R426–446, at least ~24 px from both tips and inside the right guard's plateau.
+
+| Worst change (WebGL / Canvas) | r8 | r9 (live) | **r9.1** |
+| --- | ---: | ---: | ---: |
+| Mid-cup, Natural (stills + 0.75 s trajectories) | 34 / 35 | 35 / 36 | **8 / 10** |
+| Mid-cup, Playful | 41 / 40 | 39 / 39 | **9 / 12** |
+| Mid-cup, Chaos (stills + trajectories) | 41 / 43 | 47 / 49 | **14 / 15** |
+| Mid-cup, flick / drag | 19 / 21 | 22 / 24 | **8 / 9** |
+| Mid-cup, link 100 passive side | 9 / 10 | 13 / 14 | **3 / 7** |
+| Mid-cup, node-bound extremes | 47 / 49 | 63 / 62 | **15 / 16** |
+| All 16 positions, mean of worst | 50 / 51 | 62 / 63 | **18 / 19** |
+| All 16 positions, max | 94 / 96 | 175 / 177 | **35 / 36** |
+
+Against the ±10% evaluation target:
+
+- **Met:** Natural at mid-cup.
+- **Near:** Playful and the flick/drag/linked cases.
+- **Not met:**
+  - Chaos and the node-bound corners reach 14–16% at mid-cup.
+  - Positions near the attached tips reach 20–36% (L286 outer tip, L346/352 and R408/416 at the lacing, R466/474 at the pinned right perimeter). A tip fixed to stationary lacing or to the outer edge must shear when the cup moves 20+ px, and the shear thins the band locally.
+
+All 16 positions improve on both r8 and r9 in both renderers. WebGL and Canvas agree within 0.058 (width ratio). Per-position and per-category values are in [`measurements.json`](tests/captures/holly-r9-1/measurements.json).
+
+## Results — travel, skin, folds (GPU field)
+
+| Natural tap peak, source px | r8 | r9 | r9.1 |
+| --- | ---: | ---: | ---: |
+| Skin center L / R | 19.13 / 18.83 | 19.13 / 18.83 | 19.13 / 18.83 |
+| Skin at y=345, just above trim, L / R | 19.12 / 18.80 | same | 18.98 / 18.80 |
+| Mean trim travel L / R | 10.8 / 7.2 | 9.7 / 6.3 | 9.5 / 5.4 |
+
+- **Skin:** exposed-skin upper and center travel is identical to r8 in every tap, Chaos, flick and drag state. At the forced upward node-bound corners it is up to 6% lower (skin center 20.7 vs 22.0 px at right large-up), because the backward warp's sample path crosses the new skin transition. The skin just above the outer trim moves less than in r8, by design: the transition now lives there. At the right outer point it is 12.6 vs 13.5 px at Natural peak, and 7.3 vs 12.9 at the right large-up corner.
+- **Trim travel:** about 12% lower on the left and 25% lower on the right than r8's trim average. r8's average included a top edge that over-travelled. The right loss sits mostly at the pinned outer end; the trim still moves 5–12 px at Natural peak and is not frozen.
+- **Folds:** minimum Jacobian of the moving field is 0.149 or more in every tested state, so nothing folds. At the four upward node-bound corners it is 0.15–0.23, versus r8's 0.34–0.41: the cup below the trim stretches more there. Every other state matches r8's value.
+
+## Visual evidence (all < 700 KiB)
+
+Identical spring states and r9 framing, 390×844 @2x, columns r8 | r9 | r9.1. Crops are native rendered pixels (1:1) unless marked.
+
+- [WebGL left](tests/captures/holly-r9-1/webgl-left.jpg) · [WebGL right](tests/captures/holly-r9-1/webgl-right.jpg) · [Canvas left](tests/captures/holly-r9-1/canvas-left.jpg) · [Canvas right](tests/captures/holly-r9-1/canvas-right.jpg): rest, Natural peak and rebound, Chaos peak, and three node-bound corners.
+- [2x close-ups of the trim](tests/captures/holly-r9-1/closeups-2x.jpg) (nearest-neighbour).
+- [Temporal strip, Natural tap, 0–0.6 s](tests/captures/holly-r9-1/temporal-natural.jpg).
+- Continuous motion, animated WebP at 0.5× speed (60 fps captures, all frames): [Natural](tests/captures/holly-r9-1/motion-natural.webp) · [Chaos](tests/captures/holly-r9-1/motion-chaos.webp).
+
+What the images show:
+
+- **Improved:** at peak and in Chaos, r9.1's trim keeps an even width where r8/r9 thin it mid-cup. At the right large-up corner r8/r9 bloat the trim into a thick lump; r9.1 keeps a band. Trim and cups stay connected, with no seams, holes or background motion.
+
+**Known remaining defects:**
+
+1. Left inward-up node-bound corner (`large-up-plus-x`): faint diagonal streaking where the cup's outer rim meets the hair. r8 stretches that area smoothly. Capping at distance/28 instead of /22 removes it, but costs left mid-cup shape (L296 to about 24%), so it was not done.
+2. Right large-up: the outer end of the trim still widens next to the pinned perimeter.
+3. Trim tips by the lacing still shear at large travel.
+
+## Checks
+
+Serve the repository root on port 8000, then run:
+
+```sh
+node peach-physics/v8/tests/artwork.cjs          # 4 portrait hashes
+node peach-physics/v8/tests/holly-approved.cjs   # 138 checks: slots, framing, gestures, links, offline (r9.1 cache)
+node peach-physics/v8/tests/holly-fur.cjs        # 169 checks: trim shape, skin, travel, folds, r9 equality
+node peach-physics/v8/tests/holly-band.cjs       # 83 checks: historical r9-vs-r8 evidence (reads r9 from git)
+node peach-physics/v8/tests/holly-fur-captures.cjs && python3 peach-physics/v8/tests/holly-fur-sheets.py <PEACH_TEST_OUTPUT>/fur-captures <dest>
+```
+
+`holly-fur.cjs` also asserts the following:
+
+- Only the mask builder differs from r9, apart from the release labels.
+- No pixel that is stationary in r8 moves. Corset and lacing weights equal r8's exactly.
+- Holly's slap/drag/flick trajectories at link 0/50/100 are exact to r9 in both renderers.
+- Rest and settled renders and framing are exact to r9 at 375×667, 390×844 and 430×932.
+- The other three characters render exactly as in r9, at rest and moving.
+- There are no browser or WebGL errors.
+
+All suites pass with Chromium + SwiftShader; requirements are as below. The cache is `peach-physics-v008-r9-1`.
+
+**Not verified:** physical-iPhone touch feel, frame rate, Safari rendering and the mask build time on device. This is still a 2-D warp of one photograph, not a cloth simulation.
+
+<details>
+<summary>Previous r9 documentation</summary>
+
+# Peach Physics v0.0.8 r9 — Holly upper cup/fur support (superseded by r9.1)
+
+This branch adds localized support to Holly's upper outer green cup and attached white fur band, based on r8 (`eea6067`). The approved photograph remains in the fourth slot, and r8 framing is unchanged. Winter Ember, Midnight Yule and Aurelia Frost are unchanged. r9 was deployed to main (`8e4fcbb`).
 
 The supplied JPEG is copied exactly: **720×1280, 296,910 bytes**, SHA-256 `b5af2ccfa267b2ea8b4a6fa4b98aa2935e7f2b4e869d279f93d99fb9e5964349`. No retouching, regeneration, cropping or recompression was performed. The previous fourth portrait remains recoverable from Git history.
 
@@ -47,6 +155,8 @@ At the sampled Natural peak, left/right skin-center travel stays at 19.13/18.83 
 Visual inspection of both renderers shows a modest firmness improvement, most apparent at large downward poses, without new holes, detached trim, seams or a sharp compression crease in these captures. Skin shape remains visibly mobile. Large upward poses still stretch fur fibers, particularly on the right, and retain a tight inner bend near the lacing. This remains the existing two-dimensional photo deformation; static comparisons do not establish fully natural motion. Physical-iPhone touch feel, frame rate and offline Home Screen behavior remain unverified.
 
 The [r8 comparisons](tests/captures/holly-r8/) and `holly-support.cjs` remain historical evidence for r8. The older Holly tests and captures below use the previous portrait's coordinates. Use `holly-approved.cjs` and `holly-band.cjs` for this branch.
+
+</details>
 
 <details>
 <summary>Historical r6 documentation — previous portrait and calibration</summary>

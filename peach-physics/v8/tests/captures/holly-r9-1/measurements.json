@@ -1,0 +1,1038 @@
+{
+ "description": "Holly r9.1 fur-trim measurements from holly-fur.cjs (390x844, device scale 2). Thickness = trim width normal to the trim at fixed material positions (source x), as a % change from rest; worst absolute change over every state and every trajectory frame. \"current\" = r9.1.",
+ "revisions": {
+  "r8": "eea60679ddad1a5cb39701e1f73fe8872ccb7e60",
+  "r9": "8e4fcbb30b24decb8af7c03c6e39aa009541386c"
+ },
+ "checks": 169,
+ "materialPositions": {
+  "all": [
+   [
+    286,
+    296,
+    306,
+    316,
+    326,
+    336,
+    346,
+    352
+   ],
+   [
+    408,
+    416,
+    426,
+    436,
+    446,
+    456,
+    466,
+    474
+   ]
+  ],
+  "midCup": [
+   [
+    296,
+    306,
+    316,
+    326,
+    336
+   ],
+   [
+    426,
+    436,
+    446
+   ]
+  ]
+ },
+ "worstChangePercent": {
+  "webgl": {
+   "r8": {
+    "meanOfPositions": 49.7,
+    "max": 93.7,
+    "midCupMax": 47.2,
+    "byPosition": {
+     "L286": 93.7,
+     "L296": 38,
+     "L306": 40.8,
+     "L316": 29.1,
+     "L326": 27.6,
+     "L336": 47.2,
+     "L346": 38.6,
+     "L352": 39.9,
+     "R408": 50,
+     "R416": 46.3,
+     "R426": 41,
+     "R436": 35.4,
+     "R446": 41.2,
+     "R456": 66.3,
+     "R466": 78.6,
+     "R474": 81.5
+    },
+    "unmeasurableSamples": 2
+   },
+   "r9": {
+    "meanOfPositions": 61.9,
+    "max": 174.9,
+    "midCupMax": 63.4,
+    "byPosition": {
+     "L286": 174.9,
+     "L296": 47.5,
+     "L306": 57.2,
+     "L316": 42.5,
+     "L326": 39.7,
+     "L336": 54.2,
+     "L346": 39.3,
+     "L352": 39.8,
+     "R408": 49.6,
+     "R416": 45.7,
+     "R426": 42.8,
+     "R436": 47.5,
+     "R446": 63.4,
+     "R456": 83.5,
+     "R466": 79.9,
+     "R474": 83.6
+    },
+    "unmeasurableSamples": 2
+   },
+   "current": {
+    "meanOfPositions": 17.5,
+    "max": 35,
+    "midCupMax": 15.5,
+    "byPosition": {
+     "L286": 35,
+     "L296": 15.5,
+     "L306": 13.2,
+     "L316": 10.5,
+     "L326": 8.6,
+     "L336": 15.1,
+     "L346": 21.3,
+     "L352": 20.4,
+     "R408": 23.1,
+     "R416": 24.8,
+     "R426": 11.4,
+     "R436": 7.7,
+     "R446": 10.5,
+     "R456": 14.3,
+     "R466": 17.7,
+     "R474": 31.7
+    },
+    "unmeasurableSamples": 1
+   }
+  },
+  "canvas": {
+   "r8": {
+    "meanOfPositions": 50.7,
+    "max": 96.4,
+    "midCupMax": 49,
+    "byPosition": {
+     "L286": 96.4,
+     "L296": 39.8,
+     "L306": 42.8,
+     "L316": 28,
+     "L326": 29.8,
+     "L336": 49,
+     "L346": 39.7,
+     "L352": 41.2,
+     "R408": 52.2,
+     "R416": 46.5,
+     "R426": 42.7,
+     "R436": 35.3,
+     "R446": 41.3,
+     "R456": 64.9,
+     "R466": 80.6,
+     "R474": 81.5
+    },
+    "unmeasurableSamples": 2
+   },
+   "r9": {
+    "meanOfPositions": 62.7,
+    "max": 177.3,
+    "midCupMax": 62.2,
+    "byPosition": {
+     "L286": 177.3,
+     "L296": 45.8,
+     "L306": 59,
+     "L316": 41.5,
+     "L326": 41.6,
+     "L336": 55.4,
+     "L346": 40.5,
+     "L352": 40.5,
+     "R408": 50,
+     "R416": 46.7,
+     "R426": 44.6,
+     "R436": 49.3,
+     "R446": 62.2,
+     "R456": 81.4,
+     "R466": 81.3,
+     "R474": 86
+    },
+    "unmeasurableSamples": 2
+   },
+   "current": {
+    "meanOfPositions": 19.2,
+    "max": 36,
+    "midCupMax": 16.2,
+    "byPosition": {
+     "L286": 35.9,
+     "L296": 16.2,
+     "L306": 15.1,
+     "L316": 9.5,
+     "L326": 9.3,
+     "L336": 15.8,
+     "L346": 21.3,
+     "L352": 36,
+     "R408": 23.5,
+     "R416": 24.3,
+     "R426": 13.9,
+     "R436": 8.5,
+     "R446": 11.6,
+     "R456": 16.1,
+     "R466": 17.3,
+     "R474": 33.5
+    },
+    "unmeasurableSamples": 0
+   }
+  }
+ },
+ "worstChangePercentByCategory": {
+  "natural": {
+   "webgl": {
+    "r8": {
+     "midCup": 34.1,
+     "allPositions": 37.3
+    },
+    "r9": {
+     "midCup": 34.9,
+     "allPositions": 35
+    },
+    "current": {
+     "midCup": 7.5,
+     "allPositions": 11.3
+    }
+   },
+   "canvas": {
+    "r8": {
+     "midCup": 35,
+     "allPositions": 37.5
+    },
+    "r9": {
+     "midCup": 35.4,
+     "allPositions": 35.9
+    },
+    "current": {
+     "midCup": 8.7,
+     "allPositions": 11.2
+    }
+   }
+  },
+  "playful": {
+   "webgl": {
+    "r8": {
+     "midCup": 40.8,
+     "allPositions": 42.3
+    },
+    "r9": {
+     "midCup": 38.7,
+     "allPositions": 41.3
+    },
+    "current": {
+     "midCup": 9.3,
+     "allPositions": 19.9
+    }
+   },
+   "canvas": {
+    "r8": {
+     "midCup": 40.3,
+     "allPositions": 42.9
+    },
+    "r9": {
+     "midCup": 39.2,
+     "allPositions": 41.5
+    },
+    "current": {
+     "midCup": 12.4,
+     "allPositions": 20.4
+    }
+   }
+  },
+  "chaos": {
+   "webgl": {
+    "r8": {
+     "midCup": 41,
+     "allPositions": 47.8
+    },
+    "r9": {
+     "midCup": 38.5,
+     "allPositions": 52.8
+    },
+    "current": {
+     "midCup": 14.4,
+     "allPositions": 25.1
+    }
+   },
+   "canvas": {
+    "r8": {
+     "midCup": 42.4,
+     "allPositions": 49
+    },
+    "r9": {
+     "midCup": 39.6,
+     "allPositions": 54.2
+    },
+    "current": {
+     "midCup": 15.1,
+     "allPositions": 27.2
+    }
+   }
+  },
+  "flick / drag": {
+   "webgl": {
+    "r8": {
+     "midCup": 18.6,
+     "allPositions": 27.1
+    },
+    "r9": {
+     "midCup": 22.5,
+     "allPositions": 28.1
+    },
+    "current": {
+     "midCup": 8.2,
+     "allPositions": 10.7
+    }
+   },
+   "canvas": {
+    "r8": {
+     "midCup": 21,
+     "allPositions": 28
+    },
+    "r9": {
+     "midCup": 24.1,
+     "allPositions": 29
+    },
+    "current": {
+     "midCup": 9.3,
+     "allPositions": 11.7
+    }
+   }
+  },
+  "linked, passive side (link 100)": {
+   "webgl": {
+    "r8": {
+     "midCup": 9,
+     "allPositions": 16.6
+    },
+    "r9": {
+     "midCup": 12.8,
+     "allPositions": 22.1
+    },
+    "current": {
+     "midCup": 3.3,
+     "allPositions": 6.4
+    }
+   },
+   "canvas": {
+    "r8": {
+     "midCup": 10.4,
+     "allPositions": 17.4
+    },
+    "r9": {
+     "midCup": 14.1,
+     "allPositions": 23
+    },
+    "current": {
+     "midCup": 7.1,
+     "allPositions": 7.1
+    }
+   }
+  },
+  "node-bound extremes": {
+   "webgl": {
+    "r8": {
+     "midCup": 47.2,
+     "allPositions": 93.7
+    },
+    "r9": {
+     "midCup": 63.4,
+     "allPositions": 174.9
+    },
+    "current": {
+     "midCup": 15.5,
+     "allPositions": 35
+    }
+   },
+   "canvas": {
+    "r8": {
+     "midCup": 49,
+     "allPositions": 96.4
+    },
+    "r9": {
+     "midCup": 62.2,
+     "allPositions": 177.3
+    },
+    "current": {
+     "midCup": 16.2,
+     "allPositions": 36
+    }
+   }
+  },
+  "both sides, chaos, link 50": {
+   "webgl": {
+    "r8": {
+     "midCup": 41.2,
+     "allPositions": 45.6
+    },
+    "r9": {
+     "midCup": 38.5,
+     "allPositions": 43.2
+    },
+    "current": {
+     "midCup": 13.7,
+     "allPositions": 22.3
+    }
+   },
+   "canvas": {
+    "r8": {
+     "midCup": 42.5,
+     "allPositions": 44
+    },
+    "r9": {
+     "midCup": 40.1,
+     "allPositions": 43.2
+    },
+    "current": {
+     "midCup": 14.1,
+     "allPositions": 23.2
+    }
+   }
+  },
+  "natural trajectory (0.75 s)": {
+   "webgl": {
+    "r8": {
+     "midCup": 33.6,
+     "allPositions": 36.3
+    },
+    "r9": {
+     "midCup": 34.6,
+     "allPositions": 34.6
+    },
+    "current": {
+     "midCup": 8.4,
+     "allPositions": 13.1
+    }
+   },
+   "canvas": {
+    "r8": {
+     "midCup": 34.1,
+     "allPositions": 37.3
+    },
+    "r9": {
+     "midCup": 36.1,
+     "allPositions": 36.1
+    },
+    "current": {
+     "midCup": 9.6,
+     "allPositions": 12.9
+    }
+   }
+  },
+  "chaos trajectory (0.75 s)": {
+   "webgl": {
+    "r8": {
+     "midCup": 41.2,
+     "allPositions": 54.7
+    },
+    "r9": {
+     "midCup": 47.2,
+     "allPositions": 77.4
+    },
+    "current": {
+     "midCup": 14.1,
+     "allPositions": 27.5
+    }
+   },
+   "canvas": {
+    "r8": {
+     "midCup": 42.7,
+     "allPositions": 55.7
+    },
+    "r9": {
+     "midCup": 49.3,
+     "allPositions": 80.3
+    },
+    "current": {
+     "midCup": 14.3,
+     "allPositions": 29.4
+    }
+   }
+  }
+ },
+ "webglCanvasMaxRatioDifference": 0.058,
+ "maskBytesChangedFromR8": 10493,
+ "gpuFieldTravelSourcePx": {
+  "L natural slap 12": {
+   "r8": {
+    "skin": {
+     "upper": 17.05,
+     "center": 19.13,
+     "nearFur": 19.12,
+     "outer": 19.15
+    },
+    "furMean": 10.84,
+    "minJacobian": 0.488,
+    "minJacobianAt": [
+     355,
+     320
+    ]
+   },
+   "r9": {
+    "skin": {
+     "upper": 17.05,
+     "center": 19.13,
+     "nearFur": 19.12,
+     "outer": 19.15
+    },
+    "furMean": 9.73,
+    "minJacobian": 0.488,
+    "minJacobianAt": [
+     355,
+     320
+    ]
+   },
+   "current": {
+    "skin": {
+     "upper": 17.05,
+     "center": 19.13,
+     "nearFur": 18.98,
+     "outer": 18.84
+    },
+    "furMean": 9.52,
+    "minJacobian": 0.488,
+    "minJacobianAt": [
+     355,
+     320
+    ]
+   }
+  },
+  "L chaos slap 12": {
+   "r8": {
+    "skin": {
+     "upper": 20.77,
+     "center": 23.08,
+     "nearFur": 23.03,
+     "outer": 22.96
+    },
+    "furMean": 13.99,
+    "minJacobian": 0.402,
+    "minJacobianAt": [
+     355,
+     320
+    ]
+   },
+   "r9": {
+    "skin": {
+     "upper": 20.77,
+     "center": 23.08,
+     "nearFur": 23.03,
+     "outer": 22.96
+    },
+    "furMean": 12.69,
+    "minJacobian": 0.402,
+    "minJacobianAt": [
+     355,
+     320
+    ]
+   },
+   "current": {
+    "skin": {
+     "upper": 20.77,
+     "center": 23.08,
+     "nearFur": 22.87,
+     "outer": 22.62
+    },
+    "furMean": 12.07,
+    "minJacobian": 0.402,
+    "minJacobianAt": [
+     355,
+     320
+    ]
+   }
+  },
+  "L large-down": {
+   "r8": {
+    "skin": {
+     "upper": 22.42,
+     "center": 23.88,
+     "nearFur": 23.84,
+     "outer": 23
+    },
+    "furMean": 13.43,
+    "minJacobian": 0.176,
+    "minJacobianAt": [
+     285,
+     320
+    ]
+   },
+   "r9": {
+    "skin": {
+     "upper": 22.42,
+     "center": 23.88,
+     "nearFur": 23.84,
+     "outer": 23
+    },
+    "furMean": 11.89,
+    "minJacobian": 0.176,
+    "minJacobianAt": [
+     285,
+     320
+    ]
+   },
+   "current": {
+    "skin": {
+     "upper": 22.42,
+     "center": 23.88,
+     "nearFur": 23.63,
+     "outer": 22.33
+    },
+    "furMean": 12.39,
+    "minJacobian": 0.182,
+    "minJacobianAt": [
+     287,
+     320
+    ]
+   }
+  },
+  "L large-up": {
+   "r8": {
+    "skin": {
+     "upper": 22.77,
+     "center": 22.57,
+     "nearFur": 21.54,
+     "outer": 21.41
+    },
+    "furMean": 11.49,
+    "minJacobian": 0.35,
+    "minJacobianAt": [
+     356,
+     359
+    ]
+   },
+   "r9": {
+    "skin": {
+     "upper": 22.77,
+     "center": 22.57,
+     "nearFur": 21.54,
+     "outer": 21.41
+    },
+    "furMean": 9.62,
+    "minJacobian": 0.35,
+    "minJacobianAt": [
+     356,
+     359
+    ]
+   },
+   "current": {
+    "skin": {
+     "upper": 22.77,
+     "center": 22.57,
+     "nearFur": 19.59,
+     "outer": 18.41
+    },
+    "furMean": 11.74,
+    "minJacobian": 0.232,
+    "minJacobianAt": [
+     344,
+     395
+    ]
+   }
+  },
+  "L large-down -x": {
+   "r8": {
+    "skin": {
+     "upper": 21.78,
+     "center": 23.76,
+     "nearFur": 23.75,
+     "outer": 23.62
+    },
+    "furMean": 14.77,
+    "minJacobian": 0.369,
+    "minJacobianAt": [
+     355,
+     320
+    ]
+   },
+   "r9": {
+    "skin": {
+     "upper": 21.78,
+     "center": 23.76,
+     "nearFur": 23.75,
+     "outer": 23.62
+    },
+    "furMean": 13.42,
+    "minJacobian": 0.369,
+    "minJacobianAt": [
+     355,
+     320
+    ]
+   },
+   "current": {
+    "skin": {
+     "upper": 21.78,
+     "center": 23.76,
+     "nearFur": 23.59,
+     "outer": 23.27
+    },
+    "furMean": 12.69,
+    "minJacobian": 0.369,
+    "minJacobianAt": [
+     355,
+     320
+    ]
+   }
+  },
+  "L large-up +x": {
+   "r8": {
+    "skin": {
+     "upper": 23.49,
+     "center": 23.07,
+     "nearFur": 21,
+     "outer": 19.52
+    },
+    "furMean": 11.22,
+    "minJacobian": 0.347,
+    "minJacobianAt": [
+     274,
+     342
+    ]
+   },
+   "r9": {
+    "skin": {
+     "upper": 23.49,
+     "center": 23.07,
+     "nearFur": 21,
+     "outer": 19.5
+    },
+    "furMean": 8.83,
+    "minJacobian": 0.283,
+    "minJacobianAt": [
+     278,
+     338
+    ]
+   },
+   "current": {
+    "skin": {
+     "upper": 23.49,
+     "center": 21.99,
+     "nearFur": 17.97,
+     "outer": 16.04
+    },
+    "furMean": 12.2,
+    "minJacobian": 0.153,
+    "minJacobianAt": [
+     268,
+     353
+    ]
+   }
+  },
+  "R natural slap 12": {
+   "r8": {
+    "skin": {
+     "upper": 15.67,
+     "center": 18.83,
+     "nearFur": 18.8,
+     "outer": 13.48
+    },
+    "furMean": 7.16,
+    "minJacobian": 0.608,
+    "minJacobianAt": [
+     403,
+     324
+    ]
+   },
+   "r9": {
+    "skin": {
+     "upper": 15.67,
+     "center": 18.83,
+     "nearFur": 18.8,
+     "outer": 13.48
+    },
+    "furMean": 6.29,
+    "minJacobian": 0.608,
+    "minJacobianAt": [
+     403,
+     324
+    ]
+   },
+   "current": {
+    "skin": {
+     "upper": 15.67,
+     "center": 18.83,
+     "nearFur": 18.8,
+     "outer": 12.64
+    },
+    "furMean": 5.44,
+    "minJacobian": 0.608,
+    "minJacobianAt": [
+     403,
+     324
+    ]
+   }
+  },
+  "R chaos slap 12": {
+   "r8": {
+    "skin": {
+     "upper": 20.07,
+     "center": 23.08,
+     "nearFur": 23.03,
+     "outer": 16.6
+    },
+    "furMean": 9.71,
+    "minJacobian": 0.516,
+    "minJacobianAt": [
+     405,
+     320
+    ]
+   },
+   "r9": {
+    "skin": {
+     "upper": 20.07,
+     "center": 23.08,
+     "nearFur": 23.03,
+     "outer": 16.6
+    },
+    "furMean": 8.61,
+    "minJacobian": 0.516,
+    "minJacobianAt": [
+     405,
+     320
+    ]
+   },
+   "current": {
+    "skin": {
+     "upper": 20.07,
+     "center": 23.08,
+     "nearFur": 23.03,
+     "outer": 15.72
+    },
+    "furMean": 7.22,
+    "minJacobian": 0.516,
+    "minJacobianAt": [
+     405,
+     320
+    ]
+   }
+  },
+  "R large-down": {
+   "r8": {
+    "skin": {
+     "upper": 22.22,
+     "center": 23.88,
+     "nearFur": 23.85,
+     "outer": 19.27
+    },
+    "furMean": 10.3,
+    "minJacobian": 0.401,
+    "minJacobianAt": [
+     405,
+     320
+    ]
+   },
+   "r9": {
+    "skin": {
+     "upper": 22.22,
+     "center": 23.88,
+     "nearFur": 23.85,
+     "outer": 19.27
+    },
+    "furMean": 9.14,
+    "minJacobian": 0.401,
+    "minJacobianAt": [
+     405,
+     320
+    ]
+   },
+   "current": {
+    "skin": {
+     "upper": 22.22,
+     "center": 23.88,
+     "nearFur": 23.85,
+     "outer": 18.23
+    },
+    "furMean": 7.71,
+    "minJacobian": 0.401,
+    "minJacobianAt": [
+     405,
+     320
+    ]
+   }
+  },
+  "R large-up": {
+   "r8": {
+    "skin": {
+     "upper": 22.3,
+     "center": 21.99,
+     "nearFur": 20.15,
+     "outer": 12.87
+    },
+    "furMean": 6.75,
+    "minJacobian": 0.411,
+    "minJacobianAt": [
+     458,
+     348
+    ]
+   },
+   "r9": {
+    "skin": {
+     "upper": 22.3,
+     "center": 21.99,
+     "nearFur": 20.15,
+     "outer": 12.87
+    },
+    "furMean": 5.53,
+    "minJacobian": 0.316,
+    "minJacobianAt": [
+     458,
+     353
+    ]
+   },
+   "current": {
+    "skin": {
+     "upper": 22.3,
+     "center": 20.73,
+     "nearFur": 15.89,
+     "outer": 7.34
+    },
+    "furMean": 7.02,
+    "minJacobian": 0.178,
+    "minJacobianAt": [
+     436,
+     398
+    ]
+   }
+  },
+  "R large-down -x": {
+   "r8": {
+    "skin": {
+     "upper": 16.93,
+     "center": 23.31,
+     "nearFur": 23.74,
+     "outer": 12.67
+    },
+    "furMean": 9.58,
+    "minJacobian": 0.326,
+    "minJacobianAt": [
+     450,
+     320
+    ]
+   },
+   "r9": {
+    "skin": {
+     "upper": 16.93,
+     "center": 23.31,
+     "nearFur": 23.74,
+     "outer": 12.67
+    },
+    "furMean": 8.48,
+    "minJacobian": 0.326,
+    "minJacobianAt": [
+     450,
+     320
+    ]
+   },
+   "current": {
+    "skin": {
+     "upper": 16.93,
+     "center": 23.31,
+     "nearFur": 23.74,
+     "outer": 11.48
+    },
+    "furMean": 7.44,
+    "minJacobian": 0.326,
+    "minJacobianAt": [
+     450,
+     320
+    ]
+   }
+  },
+  "R large-up +x": {
+   "r8": {
+    "skin": {
+     "upper": 23.44,
+     "center": 23.46,
+     "nearFur": 22.89,
+     "outer": 20.85
+    },
+    "furMean": 8.11,
+    "minJacobian": 0.338,
+    "minJacobianAt": [
+     419,
+     392
+    ]
+   },
+   "r9": {
+    "skin": {
+     "upper": 23.44,
+     "center": 23.46,
+     "nearFur": 22.89,
+     "outer": 20.85
+    },
+    "furMean": 6.86,
+    "minJacobian": 0.346,
+    "minJacobianAt": [
+     402,
+     357
+    ]
+   },
+   "current": {
+    "skin": {
+     "upper": 23.44,
+     "center": 23.46,
+     "nearFur": 22.28,
+     "outer": 17.68
+    },
+    "furMean": 7.41,
+    "minJacobian": 0.149,
+    "minJacobianAt": [
+     417,
+     396
+    ]
+   }
+  }
+ },
+ "skinSamplePoints": {
+  "L": {
+   "upper": [
+    320,
+    315
+   ],
+   "center": [
+    325,
+    332
+   ],
+   "nearFur": [
+    325,
+    345
+   ],
+   "outer": [
+    300,
+    335
+   ]
+  },
+  "R": {
+   "upper": [
+    436,
+    315
+   ],
+   "center": [
+    433,
+    334
+   ],
+   "nearFur": [
+    433,
+    345
+   ],
+   "outer": [
+    460,
+    335
+   ]
+  }
+ }
+}
