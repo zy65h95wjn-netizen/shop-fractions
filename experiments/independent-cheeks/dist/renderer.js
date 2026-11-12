@@ -1,4 +1,4 @@
-import {WIDTH,HEIGHT,createMesh} from './physics.js';
+import {WIDTH,HEIGHT,createMesh} from './physics.js?v=6';
 
 const vertexSource=`
 attribute vec2 aPosition;

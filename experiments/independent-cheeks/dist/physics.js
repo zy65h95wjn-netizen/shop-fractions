@@ -1,7 +1,7 @@
 // Coordinates always use the unmodified 756 × 1280 source photograph.
 export const WIDTH = 756;
 export const HEIGHT = 1280;
-export const DEFAULTS = Object.freeze({ bounce: 55, softness: 55, settling: 60, linked: 0 });
+export const DEFAULTS = Object.freeze({ bounce: 55, softness: 55, settling: 60 });
 export const REGIONS = [
   {
     name: 'left', center: [220, 889], radius: [78, 101], limit: 16, feather: 45,
@@ -12,8 +12,8 @@ export const REGIONS = [
       [149,858],[165,831]]
   },
   {
-    // Broader response toward the annotated inner/lower curve, plus the
-    // continuous crease bridge below. The outer silhouette remains anchored.
+    // Independent right-side support: motion tapers before the center crease.
+    // The neighboring cheek and outer silhouette remain anchored.
     name: 'right', center: [375, 890], radius: [148, 120], limit: 22, feather: 76,
     // Red leads along the inner mass and wraps under it. Yellow follows;
     // the outer green area has the weakest response. These overlapping smooth
@@ -43,16 +43,6 @@ export function signedDistance(x, y, polygon) {
   return inside ? distance : -distance;
 }
 
-// The latest guide explicitly permits motion into the neighboring cheek.
-// Carry the existing crease as one surface instead of pinning or separating it.
-// Compact support keeps the skirt, outer contours, and thigh fixed.
-export function creaseBridge(x, y) {
-  const center = 302 + 0.004*(y-880)**2;
-  const horizontal = smooth(1-((x-center)/80)**2);
-  const vertical = smooth((y-805)/60)*smooth((1008-y)/65);
-  return 0.34*horizontal*vertical;
-}
-
 export function weightsAt(x, y, side) {
   const r = REGIONS[side];
   let w = smooth(signedDistance(x, y, r.outline)/r.feather);
@@ -63,9 +53,6 @@ export function weightsAt(x, y, side) {
     const weighted = w*(f.base+f.innerGain*inner+f.lowerGain*lower);
     w = f.cap*Math.tanh(weighted/f.cap);
   }
-  const bridge = creaseBridge(x,y);
-  // Partition the shared strip: do not add two full-strength deformations.
-  w = w*(1-bridge) + (side===1 ? bridge : 0);
   return [w, w*clamp((y-r.center[1])/r.radius[1], -1, 1),
     w*clamp((x-r.center[0])/r.radius[0], -1, 1)];
 }
@@ -93,7 +80,8 @@ function makeBody() {
 
 export class Physics {
   constructor(settings = {}) {
-    this.settings = { ...DEFAULTS, ...settings };
+    this.settings = { ...DEFAULTS };
+    for (const [key,value] of Object.entries(settings)) this.set(key,value);
     this.bodies = [makeBody(), makeBody()];
     this.pointers = new Map();
     this.accumulator = 0;
@@ -104,7 +92,7 @@ export class Physics {
     this.accumulator = 0;
   }
   set(name, value) {
-    if (name in DEFAULTS && Number.isFinite(value)) this.settings[name] = clamp(value, 0, name === 'linked' ? 60 : 100);
+    if (Object.hasOwn(DEFAULTS,name) && Number.isFinite(value)) this.settings[name] = clamp(value, 0, 100);
   }
   down(id, x, y, time) {
     const side = hitTest(x, y);
@@ -160,21 +148,17 @@ export class Physics {
     while (this.accumulator >= step) { this.step(step); this.accumulator -= step; }
   }
   step(dt) {
-    const {bounce,softness,settling,linked}=this.settings;
+    const {bounce,softness,settling}=this.settings;
     const omega=19-softness*0.085;
     const damping=clamp(0.50+settling*0.006-bounce*0.0045, 0.18, 1.15);
     const stiffness=omega*omega;
-    // The coupling coefficient is exactly zero at the default setting.
-    const coupling=stiffness*(linked/100)*0.65;
-    const before=this.bodies.map(b=>({x:b.x,y:b.y}));
     this.bodies.forEach((b,i)=>{
       const held=b.pointer !== null;
       const k=held ? 1500 : stiffness;
       const drag=held ? 62 : 2*damping*omega;
       const targetX=held ? b.tx : 0, targetY=held ? b.ty : 0;
-      const other=before[1-i], self=before[i];
-      b.vx += (k*(targetX-b.x)-drag*b.vx+coupling*(other.x-self.x))*dt;
-      b.vy += (k*(targetY-b.y)-drag*b.vy+coupling*(other.y-self.y))*dt;
+      b.vx += (k*(targetX-b.x)-drag*b.vx)*dt;
+      b.vy += (k*(targetY-b.y)-drag*b.vy)*dt;
       b.x += b.vx*dt; b.y += b.vy*dt;
       const limit=REGIONS[i].limit;
       const [lx,ly]=limitVector(b.x,b.y,limit);
@@ -192,7 +176,7 @@ export class Physics {
       [b.sx,b.sy]=limitVector(b.sx,b.sy,limit);
       const quiet=Math.max(Math.abs(b.x),Math.abs(b.y),Math.abs(b.sx),Math.abs(b.sy))<0.008 &&
         Math.max(Math.abs(b.vx),Math.abs(b.vy),Math.abs(b.svx),Math.abs(b.svy))<0.035;
-      if (!held && quiet && (coupling===0 || Math.hypot(other.x,other.y)<0.008)) {
+      if (!held && quiet) {
         Object.assign(b,makeBody());
       } else b.sleeping=false;
     });

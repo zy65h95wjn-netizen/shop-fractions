@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
-import {Physics,REGIONS,weightsAt,displace,createMesh,hitTest} from '../dist/physics.js';
+import {Physics,REGIONS,weightsAt,displace,createMesh,hitTest,signedDistance} from '../dist/physics.js';
 
 const advance=(physics,seconds,hz=60)=>{for(let i=0;i<seconds*hz;i++)physics.advance(1/hz);};
 const rest=b=>{for(const k of ['x','y','vx','vy','sx','sy','svx','svy'])assert.equal(b[k],0,k);};
@@ -11,10 +11,10 @@ test('original JPEG is byte-for-byte identical to the supplied attachment',()=>{
   const hash=createHash('sha256').update(readFileSync(new URL('../dist/assets/portrait-original.jpg',import.meta.url))).digest('hex');
   assert.equal(hash,'0ce4ef21d3cb04a83d86ba6ba426fcf909c2a092ff69348e8e22f6b8aaa19017');
 });
-test('tap, drag, and flick leave the opposite spring state at rest with zero link',()=>{
+test('tap, drag, and flick leave the opposite spring state exactly at rest',()=>{
   for(const side of [0,1]) {
     const p=new Physics(),[x,y]=REGIONS[side].center;
-    assert.equal(p.settings.linked,0);
+    assert.equal(p.settings.linked,undefined);
     assert.equal(p.down(7,x,y,0),side);p.up(7,80);
     for(let f=0;f<150;f++){p.advance(1/60);rest(p.bodies[1-side]);}
     assert.equal(p.down(8,x,y,3000),side);
@@ -38,13 +38,13 @@ test('cancellation, reset, and a long background gap cannot leave a held region'
   p.up(4,30,true);advance(p,10);rest(p.bodies[0]);
   p.down(5,433,890,400);p.reset();assert.equal(p.pointers.size,0);assert.equal(p.active,false);
 });
-test('linking is opt-in and can produce measurable opposite-side response',()=>{
-  const p=new Physics({linked:40});p.impulse(0);advance(p,0.3);
-  assert.ok(Math.hypot(p.bodies[1].x,p.bodies[1].y)>0.05);
+test('obsolete linking settings cannot re-enable cross-side physics',()=>{
+  const p=new Physics({linked:60});p.set('linked',60);p.impulse(0);advance(p,0.3);
+  rest(p.bodies[1]);assert.equal(p.settings.linked,undefined);
 });
 test('all slider extremes remain finite and bounded under repeated strong swipes, then settle',()=>{
-  for(const bounce of [0,100])for(const softness of [0,100])for(const settling of [0,100])for(const linked of [0,60]) {
-    const p=new Physics({bounce,softness,settling,linked});
+  for(const bounce of [0,100])for(const softness of [0,100])for(const settling of [0,100]) {
+    const p=new Physics({bounce,softness,settling});
     p.down(1,220,889,0);p.down(2,433,890,0);
     for(let f=1;f<=180;f++) {
       p.move(1,220+2000*Math.sin(f),889+2000*Math.cos(f),f*16);
@@ -68,21 +68,35 @@ test('clothing, thighs, stockings, hair, and background stay fixed',()=>{
   const p=new Physics();Object.assign(p.bodies[0],{x:8,y:-12,sx:-8,sy:12});Object.assign(p.bodies[1],{x:-12,y:16,sx:12,sy:-16});
   const fixed=[[320,540],[400,750],[215,770],[530,780],[220,1030],[420,1050],
     [220,1150],[420,1190],[90,880],[630,910],[220,600],[450,300],
-    [306,805]];
+    [306,805],[294,837],[285,873],[286,900],[294,932],[310,958]];
   for(const [x,y] of fixed)assert.deepEqual(displace(x,y,p.bodies),[x,y],`${x},${y}`);
   assert.equal(hitTest(30,500),-1);
 });
-test('right motion carries the crease continuously with limited neighboring response',()=>{
-  const p=new Physics();Object.assign(p.bodies[1],{x:6,y:10,sx:6,sy:10});
-  for(const [x,y] of [[294,837],[285,873],[286,900],[294,932],[310,958]]) {
-    const displacement=([a,b])=>{const q=displace(a,b,p.bodies);return [q[0]-a,q[1]-b];};
-    const q=displacement([x,y]);assert.ok(Math.hypot(...q)>1,'crease must no longer be pinned');
-    const left=displacement([x-.1,y]),right=displacement([x+.1,y]);
-    assert.ok(Math.hypot(left[0]-right[0],left[1]-right[1])<.15,'continuous crease transition');
+test('each side has zero deformation influence throughout the opposite region',()=>{
+  const p=new Physics();
+  for(const driven of [0,1]) {
+    p.reset();Object.assign(p.bodies[driven],{x:8,y:14,sx:-8,sy:-14});
+    for(let y=780;y<=1008;y+=2)for(let x=140;x<=590;x+=2) {
+      if(signedDistance(x,y,REGIONS[1-driven].outline)>=0) {
+        assert.ok(weightsAt(x,y,driven).every(value=>value===0));
+        assert.deepEqual(displace(x,y,p.bodies),[x,y]);
+      }
+    }
   }
-  const neighbor=displace(260,900,p.bodies);
-  assert.ok(Math.hypot(neighbor[0]-260,neighbor[1]-900)>1);
-  assert.deepEqual(displace(220,889,p.bodies),[220,889],'opposite core remains independent');
+});
+test('GPU triangles cannot interpolate one side into the other side',()=>{
+  const {vertices,indices}=createMesh();
+  for(let t=0;t<indices.length;t+=3) {
+    const corners=[indices[t],indices[t+1],indices[t+2]];
+    const left=corners.some(v=>vertices[v*8+2]>0);
+    const right=corners.some(v=>vertices[v*8+5]>0);
+    assert.ok(!(left&&right),'a triangle must not share both deformation supports');
+    if(left||right) {
+      const opposite=left?1:0;
+      for(const v of corners) assert.ok(signedDistance(vertices[v*8],vertices[v*8+1],REGIONS[opposite].outline)<0,
+        'deformed triangles must stay outside the opposite source region');
+    }
+  }
 });
 test('annotated red inner/lower area leads yellow, and green has the least motion',()=>{
   const samples={

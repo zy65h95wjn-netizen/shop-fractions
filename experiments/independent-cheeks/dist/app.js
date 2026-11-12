@@ -1,5 +1,5 @@
-import {Physics,DEFAULTS,REGIONS,WIDTH,HEIGHT} from './physics.js';
-import {Renderer} from './renderer.js';
+import {Physics,DEFAULTS,REGIONS,WIDTH,HEIGHT} from './physics.js?v=6';
+import {Renderer} from './renderer.js?v=6';
 
 const $=id=>document.getElementById(id);
 const engine=new Physics();
@@ -20,7 +20,7 @@ REGIONS.forEach((r,i)=>{
 
 function status() {
   $('mode-status').textContent=!ready?'Original artwork':original?'Viewing original':
-    engine.settings.linked===0?'Soft crease · unlinked':`Linked · ${engine.settings.linked}%`;
+    'Strictly independent · v6';
   engine.bodies.forEach((b,i)=>{
     $(i===0?'left-state':'right-state').textContent=b.pointer!==null?'Held':b.sleeping?'Resting':'Settling';
     $(i===0?'left-meter':'right-meter').style.width=`${Math.min(100,Math.hypot(b.x,b.y)/REGIONS[i].limit*100)}%`;
@@ -77,9 +77,9 @@ for(const key of Object.keys(DEFAULTS)) {
   const input=$(key);
   const update=()=>{
     engine.set(key,Number(input.value));
-    $(key+'-value').textContent=key==='linked'?(input.value==='0'?'Off · 0%':input.value+'%'):input.value;
+    $(key+'-value').textContent=input.value;
     input.style.setProperty('--fill',`${Number(input.value)/Number(input.max)*100}%`);
-    input.setAttribute('aria-valuetext',key==='linked'?`${input.value} percent spring coupling`:input.value+' out of 100');
+    input.setAttribute('aria-valuetext',input.value+' out of 100');
     status();wake();
   };
   input.addEventListener('input',update);update();
