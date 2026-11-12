@@ -226,6 +226,19 @@ function resize(){
  canvas.width=Math.max(2,Math.round(cssW*dpr));canvas.height=Math.max(2,Math.round(cssH*dpr));
  if(hollyBackground)hollyBackground.width=0;
  if(santaBackground)santaBackground.width=0;
+ // Test-view crop only: waist through stocking tops, matching the reference.
+ // Original source coordinates still drive picking, masks and physics.
+ if(new URLSearchParams(location.search).get('framing')==='detail'){
+  const crop={x:0,y:780,w:941,h:780};
+  const scale=Math.min(cssW/crop.w,cssH/crop.h);
+  drawW=W*scale;drawH=H*scale;
+  ox=(cssW-crop.w*scale)/2-crop.x*scale;
+  oy=(cssH-crop.h*scale)/2-crop.y*scale;
+  uvCover=[cssW/drawW,cssH/drawH,-ox/drawW,-oy/drawH];
+  canvas.style.webkitMaskImage='none';canvas.style.maskImage='none';
+  if(gl)gl.viewport(0,0,canvas.width,canvas.height);
+  needSize=false;return;
+ }
  // Portrait: keep the entire head clear of the Dynamic Island, with soft photo-derived fill in the margins.
  // Give the artwork nearly the full screen width. Physics coordinates stay in original image space.
  const portrait=cssH>cssW;

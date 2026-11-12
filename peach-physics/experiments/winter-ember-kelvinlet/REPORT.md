@@ -1,5 +1,9 @@
 # Winter Ember: Kelvinlet comparison — acceptance failed
 
+## Test-view framing update
+
+The comparison page now opens a shared close-up crop: source rectangle x=0–941, y=780–1560 (waist through stocking tops), matching the supplied reference. All modes and blind trials share the same camera. Pointer conversion still uses the original image coordinates; physics and artwork are unchanged. The direct engine.html URL retains the original framing for existing evidence scripts. Earlier recordings and measurements retain their original viewport.
+
 ## Follow-up: cheek separation during pulls
 
 The standalone preview now defaults to **Separate cheeks during drags**. This is an explicitly isolated boundary revision requested after the original comparison. Turn the checkbox off to restore the earlier comparison renderer. The original results below describe the checkbox-off renderer, not the revised drag mask.
