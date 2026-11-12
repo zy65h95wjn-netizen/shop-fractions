@@ -6,6 +6,7 @@ Run: node tests/export-fields.mjs && python3 tests/offscreen.py
 """
 import ctypes as C
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -98,7 +99,9 @@ for p in [base_program,layer_program]:
 def set_program(p):
     use(p);a=attribute(p,b'aPosition');enable_attribute(a);vertex_pointer(a,2,0x1406,0,0,None)
 def render(name,left,right):
-    viewport(0,0,756,1280);disable(0x0BE2);set_program(base_program);draw(4,0,6)
+    viewport(0,0,756,1280);disable(0x0BE2);set_program(base_program)
+    fade=min(1,max(math.hypot(*left[:2]),math.hypot(*right[:2]))/2)
+    uniform1f(uniform_location(base_program,b"uMotion"),fade*fade*(3-2*fade));draw(4,0,6)
     enable(0x0BE2);blend(0x0302,0x0303);set_program(layer_program)
     for side,body in enumerate([left,right]):
         uniform1f(uniform_location(layer_program,b'uSide'),side)

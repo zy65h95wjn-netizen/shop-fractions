@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import {Physics,REGIONS,hitTest} from '../dist/physics.js';
-import {W,H,OUTLINES,matte,coefficients,forward,inverse,makeField} from '../dist/layers.js';
+import {W,H,OUTLINES,matte,coefficients,forward,inverse,makeField,crease,smooth} from '../dist/layers.js';
 
 const advance=(p,t)=>{for(let i=0;i<t*60;i++)p.advance(1/60);};
 const rest=b=>{for(const key of ['x','y','sx','sy','vx','vy','svx','svy'])assert.equal(b[key],0);};
@@ -55,6 +55,14 @@ test('sideways separation has conservative asymmetric travel bounds',()=>{
     assert.ok(Math.abs(p.bodies[side].x)<=REGIONS[side].limit*(side===1?.30:.35)+1e-8);
   }
 });
+test('each contact edge slides along the crease without separating from it',()=>{
+  for(const side of [0,1])for(const y of [840,870,900,930,960])for(const dy of [-18,18]){
+    const x=crease(y),b={x:side===1?6:-5,y:dy,sx:0,sy:0};
+    const q=forward(x,y,side,b),normal=q[0]-crease(q[1]);
+    assert.ok(side===1?normal<=1e-8:normal>=-1e-8);
+    assert.ok(Math.abs(q[1]-y)>2,'tangential motion stays available');
+  }
+});
 test('all control extremes stay bounded and eventually return to exact rest',()=>{
   for(const bounce of [0,100])for(const softness of [0,100])for(const settling of [0,100]) {
     const p=new Physics({bounce,softness,settling});
@@ -91,7 +99,11 @@ function sample(x,y,side) {
 }
 function gpuOffset(x,y,side,b) {
   const [w,g,blue]=sample(x,y,side),wy=w*(g*2-1),wx=w*(blue*2-1);
-  return [w*b.x+.08*wy*(b.sx-b.x)+.04*wx*b.y,w*b.y+.08*wy*(b.sy-b.y)-.03*wx*b.x];
+  const d=[w*b.x+.08*wy*(b.sx-b.x)+.04*wx*b.y,w*b.y+.08*wy*(b.sy-b.y)-.03*wx*b.x];
+  const contact=1-smooth((Math.abs(x-crease(y))-8)/40);
+  const normal=d[0]-(crease(y+d[1])-crease(y));
+  d[0]-=contact*(side===1?Math.max(normal,0):Math.min(normal,0));
+  return d;
 }
 test('quantized layer fields invert without folds or material sampling drift',()=>{
   let minimum=Infinity,maxResidual=0;
@@ -104,7 +116,7 @@ test('quantized layer fields invert without folds or material sampling drift',()
       const jac=(1+(ox[0]-o[0])*2)*(1+(oy[1]-o[1])*2)-(oy[0]-o[0])*2*(ox[1]-o[1])*2;
       minimum=Math.min(minimum,jac);
       const dest=[x+o[0],y+o[1]];let sx=dest[0],sy=dest[1];
-      for(let i=0;i<12;i++){const d=gpuOffset(sx,sy,side,b);sx=dest[0]-d[0];sy=dest[1]-d[1];}
+      for(let i=0;i<16;i++){const d=gpuOffset(sx,sy,side,b);sx=dest[0]-d[0];sy=dest[1]-d[1];}
       maxResidual=Math.max(maxResidual,Math.hypot(sx-x,sy-y));
     }
   }

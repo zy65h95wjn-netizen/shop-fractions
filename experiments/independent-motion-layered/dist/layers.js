@@ -44,15 +44,20 @@ export function coefficients(x,y,side) {
 }
 export function offset(x,y,side,body) {
   const [w,wy,wx]=coefficients(x,y,side);
-  return [w*body.x+.08*wy*(body.sx-body.x)+.04*wx*body.y,
+  const d=[w*body.x+.08*wy*(body.sx-body.x)+.04*wx*body.y,
     w*body.y+.08*wy*(body.sy-body.y)-.03*wx*body.x];
+  const contact=1-smooth((Math.abs(x-crease(y))-8)/40);
+  const tangent=crease(y+d[1])-crease(y);
+  const normal=d[0]-tangent;
+  d[0]-=contact*(side===1?Math.max(normal,0):Math.min(normal,0));
+  return d;
 }
 export function forward(x,y,side,body) {
   const [dx,dy]=offset(x,y,side,body);return [x+dx,y+dy];
 }
 export function inverse(x,y,side,body) {
   let sx=x,sy=y;
-  for(let i=0;i<12;i++) {
+  for(let i=0;i<16;i++) {
     const [dx,dy]=offset(sx,sy,side,body);sx=x-dx;sy=y-dy;
   }
   return [sx,sy];

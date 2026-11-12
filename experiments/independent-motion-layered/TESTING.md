@@ -2,7 +2,7 @@
 
 ## Completed
 
-`node tests/layers.test.mjs`: **11 passed**.
+`node tests/layers.test.mjs`: **12 passed**.
 
 - JPEG checksum matches the supplied unmarked portrait exactly.
 - The previously anchored right inner edge has substantial displacement.
@@ -12,7 +12,7 @@
 - All eight slider extremes remain bounded and settle to exact rest.
 - Mattes exclude representative clothing, hair, stocking, and background locations.
 - The inner response exceeds the outer response.
-- The actual byte-quantized, bilinearly sampled shader fields preserve positive local area in the sampled extremes: minimum Jacobian **0.499639**. Maximum inverse-map sampling error was **0.002747 source pixels** after twelve iterations.
+- The actual byte-quantized, bilinearly sampled shader fields preserve positive local area in the sampled extremes: minimum Jacobian **0.499639**. Maximum inverse-map sampling error was **0.022392 source pixels** after sixteen iterations.
 - Idle layer mappings leave source coordinates exactly unchanged.
 
 `node tests/export-fields.mjs && python3 tests/offscreen.py`: **passed**.
@@ -38,3 +38,5 @@ Open the layered preview on an actual iPhone and check:
 5. Compare the moving inner edge with revision 6 using the page's comparison link.
 
 Judge the backing and overlap visually before treating this as a polished result for sharing.
+
+Revision 2: contact-edge regression verifies sliding with no separating normal displacement on each independent layer. EGL frames and unchanged-region pixel checks pass after the correction. The outward endpoint was inspected at 3× magnification; the central doubled edge is reduced. Physical iPhone review and lower-fold edge refinement remain open.

@@ -1,4 +1,4 @@
-import {W,H,makeField} from './layers.js';
+import {W,H,makeField} from './layers.js?v=2';
 
 const vertex=`
 attribute vec2 aPosition;
@@ -46,13 +46,21 @@ uniform float uSide;
 vec2 movement(vec2 p){
   vec4 f=field(p,uSide);
   float wy=f.r*(f.g*2.-1.),wx=f.r*(f.b*2.-1.);
-  return vec2(f.r*uBody.x+.08*wy*(uBody.z-uBody.x)+.04*wx*uBody.y,
+  vec2 d=vec2(f.r*uBody.x+.08*wy*(uBody.z-uBody.x)+.04*wx*uBody.y,
               f.r*uBody.y+.08*wy*(uBody.w-uBody.y)-.03*wx*uBody.x);
+  // A unilateral contact boundary allows sliding and inward overlap but
+  // prevents either independent layer from opening a slit at the join.
+  float contact=1.-smoothstep(8.,48.,abs(p.x-curve(p.y)));
+  float tangent=curve(p.y+d.y)-curve(p.y);
+  float normal=d.x-tangent;
+  float separating=uSide>.5?max(normal,0.):min(normal,0.);
+  d.x-=contact*separating;
+  return d;
 }
 void main(){
   vec2 destination=vUV*SIZE,source=destination;
   // Independent inverse maps. One side never samples the other side's body.
-  for(int i=0;i<12;i++){source=destination-movement(source);}
+  for(int i=0;i<16;i++){source=destination-movement(source);}
   float alpha=field(source,uSide).a;
   if(alpha<.002)discard;
   gl_FragColor=vec4(texture2D(uImage,source/SIZE).rgb,alpha);
