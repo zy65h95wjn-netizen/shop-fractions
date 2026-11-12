@@ -129,14 +129,14 @@ for frame in poses['frames']:
     pixels=(B*(756*1280*4))();read(0,0,756,1280,0x1908,0x1401,pixels)
     result=Image.frombytes('RGBA',(756,1280),bytes(pixels)).transpose(Image.Transpose.FLIP_TOP_BOTTOM).convert('RGB')
     result.save(dir/f'{name}.png')
-    if name in ['idle','right-inward','right-outward','opposed']:results[name]=result
+    if name in ['idle','right-inward','right-outward','right-down','right-up','opposed']:results[name]=result
 
 def difference(a,b,box=None):
     d=ImageChops.difference(a.convert('RGB'),b.convert('RGB'))
     if box:d=d.crop(box)
     return {'maximum':max(v[1] for v in d.getextrema()),'mean':sum(ImageStat.Stat(d).mean)/3}
 metrics={'idle_vs_source':difference(results['idle'],image)}
-for pose in ['right-inward','right-outward']:
+for pose in ['right-inward','right-outward','right-down','right-up']:
     for label,box in [('left_core',(165,825,235,945)),('background',(0,0,756,750)),('stockings',(0,1060,756,1280))]:
         metrics[pose+'_'+label]=difference(results[pose],results['idle'],box)
 (dir/'graphics-results.json').write_text(json.dumps(metrics,indent=2));print(json.dumps(metrics,indent=2))

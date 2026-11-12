@@ -23,6 +23,8 @@ for(let frame=0;frame<36;frame++){
 }
 p.reset();Object.assign(p.bodies[1],{x:-14,y:10,sx:-7,sy:5,z:8});save('right-inward',p.bodies);
 p.reset();Object.assign(p.bodies[1],{x:5,y:-14,sx:3,sy:-7,z:6});save('right-outward',p.bodies);
+p.reset();Object.assign(p.bodies[1],{x:0,y:22,sx:0,sy:22,z:3.3});save('right-down',p.bodies);
+p.reset();Object.assign(p.bodies[1],{x:0,y:-22,sx:0,sy:-22,z:3.3});save('right-up',p.bodies);
 p.reset();Object.assign(p.bodies[0],{x:8,y:-12,sx:4,sy:-6,z:4});
 Object.assign(p.bodies[1],{x:-10,y:14,sx:-5,sy:7,z:-4});save('opposed',p.bodies);
 writeFileSync(`${dir}/frames.json`,JSON.stringify({frames,counts:surfaces.map(s=>s.indices.length)},null,2));

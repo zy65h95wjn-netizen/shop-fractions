@@ -1,6 +1,6 @@
-import {Physics,DEFAULTS,REGIONS,WIDTH,HEIGHT} from './physics.js';
-import {Renderer} from './renderer.js';
-import {forward} from './surface.js';
+import {Physics,DEFAULTS,REGIONS,WIDTH,HEIGHT} from './physics.js?v=2';
+import {Renderer} from './renderer.js?v=2';
+import {forward} from './surface.js?v=2';
 
 const $=id=>document.getElementById(id);
 const engine=new Physics();
@@ -21,7 +21,7 @@ REGIONS.forEach((r,i)=>{
 
 function status() {
   $('mode-status').textContent=!ready?'Original artwork':original?'Viewing original':
-    '3D surface proof · 01';
+    '3D surface proof · 02';
   engine.bodies.forEach((b,i)=>{
     $(i===0?'left-state':'right-state').textContent=b.pointer!==null?'Held':b.sleeping?'Resting':'Settling';
     $(i===0?'left-meter':'right-meter').style.width=`${Math.min(100,Math.hypot(b.x,b.y)/REGIONS[i].limit*100)}%`;

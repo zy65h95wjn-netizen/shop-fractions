@@ -1,5 +1,5 @@
 import {W,H,makeField} from './layers.js';
-import {createSurface,updateSurface} from './surface.js';
+import {createSurface,updateSurface} from './surface.js?v=2';
 const baseVertex=`attribute vec2 aPosition; varying vec2 vUV; void main(){vUV=vec2((aPosition.x+1.)*.5,(1.-aPosition.y)*.5);gl_Position=vec4(aPosition,.999,1.);}`;
 const common=`
 precision highp float;

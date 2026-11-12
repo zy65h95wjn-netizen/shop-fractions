@@ -57,12 +57,29 @@ test('sideways separation has conservative asymmetric travel bounds',()=>{
     assert.ok(Math.abs(p.bodies[side].x)<=REGIONS[side].limit*(side===1?.30:.35)+1e-8);
   }
 });
-test('each contact edge slides along the crease without separating from it',()=>{
+test('contact band restrains outward horizontal input without curved-path steering',()=>{
   for(const side of [0,1])for(const y of [840,870,900,930,960])for(const dy of [-18,18]){
     const x=crease(y),b={x:side===1?6:-5,y:dy,sx:0,sy:0};
-    const q=forward(x,y,side,b),normal=q[0]-crease(q[1]);
+    const q=forward(x,y,side,b),normal=q[0]-x;
     assert.ok(side===1?normal<=1e-8:normal>=-1e-8);
     if(y<=900)assert.ok(Math.abs(q[1]-y)>2,'upper contact sliding stays available');
+  }
+});
+test('vertical drags and depth rebound do not move vertices sideways',()=>{
+  for(const side of [0,1])for(const dy of [-22,22])for(const z of [-12,12]){
+    const s=createSurface(side),body={x:0,y:dy,sx:0,sy:-dy,z};
+    updateSurface(s,body);
+    for(let i=0;i<s.sources.length/2;i++){
+      const p=project(s.positions.subarray(i*3,i*3+3));
+      assert.ok(Math.abs(p[0]-s.sources[i*2])<.0001,'vertical motion must preserve screen x');
+    }
+  }
+  const p=new Physics(),[x,y]=REGIONS[1].center;
+  p.down(1,x,y,0);p.move(1,x,y+200,50);advance(p,.3);p.up(1,350);
+  for(let n=0;n<240;n++){
+    p.advance(1/60);rest(p.bodies[0]);
+    for(const q of [[300,840],[286,860],[300,890],[340,900],[400,910]])
+      assert.ok(Math.abs(forward(...q,1,p.bodies[1])[0]-q[0])<1e-8);
   }
 });
 test('all control extremes stay bounded and eventually return to exact rest',()=>{

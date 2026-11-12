@@ -1,5 +1,5 @@
 import {W,H,OUTLINES,CENTERS,matte,clamp} from './layers.js';
-import {inverse} from './surface.js';
+import {inverse} from './surface.js?v=2';
 export const WIDTH=W,HEIGHT=H;
 export const DEFAULTS=Object.freeze({bounce:55,softness:55,settling:60});
 export const REGIONS=OUTLINES.map((outline,i)=>({name:i===0?'left':'right',

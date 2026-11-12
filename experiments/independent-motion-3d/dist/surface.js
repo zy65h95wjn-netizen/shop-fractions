@@ -15,15 +15,18 @@ export function project(p){
 }
 export function deformPoint(x,y,side,b,rest=restPoint(x,y,side),weights=coefficients(x,y,side)){
   const [w,wy,wx]=weights,f=(CAMERA-rest[2])/CAMERA;
-  const dx=w*b.x+.08*wy*(b.sx-b.x)-.055*wx*b.y;
+  const dx=w*b.x+.08*wy*(b.sx-b.x);
   const dy=w*b.y+.08*wy*(b.sy-b.y)-.03*wx*b.x;
   // Separate depth spring plus delayed redistribution supplies real surface
   // curvature changes; perspective and normals are computed from these XYZs.
   const dz=w*((b.z||0)+.15*(b.sy-b.y));
   const p=[rest[0]+dx*f,rest[1]+dy*f,rest[2]+dz];
   const screen=project(p),contact=1-smooth((Math.abs(x-crease(y))-8)/40);
-  const normal=screen[0]-x-(crease(screen[1])-crease(y));
-  screen[0]-=contact*(side===1?Math.max(normal,0):Math.min(normal,0));
+  // Keep horizontal input in screen coordinates: neither vertical travel nor
+  // depth changes should steer a downward drag sideways. Restrain outward
+  // horizontal travel at the original contact band, without following the
+  // curved crease at the displaced height (which introduced lateral drift).
+  screen[0]=x+dx-contact*(side===1?Math.max(dx,0):Math.min(dx,0));
   p[0]=(screen[0]-CX)*(CAMERA-p[2])/CAMERA;
   return p;
 }
