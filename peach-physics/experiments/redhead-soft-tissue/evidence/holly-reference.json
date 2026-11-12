@@ -1,0 +1,122 @@
+{
+  "errors": [],
+  "state": {
+    "character": "holly",
+    "characterName": "Holly Heartbreaker",
+    "characters": [
+      "ember",
+      "midnight",
+      "aurelia",
+      "holly"
+    ],
+    "regions": [
+      {
+        "x": 325,
+        "y": 332,
+        "rx": 53,
+        "ry": 45
+      },
+      {
+        "x": 433,
+        "y": 334,
+        "rx": 51,
+        "ry": 45
+      }
+    ],
+    "nodes": [
+      {
+        "side": 0,
+        "dx": 0,
+        "dy": 0
+      },
+      {
+        "side": 0,
+        "dx": 0,
+        "dy": 0
+      },
+      {
+        "side": 0,
+        "dx": 0,
+        "dy": 0
+      },
+      {
+        "side": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      {
+        "side": 1,
+        "dx": 0,
+        "dy": 0
+      },
+      {
+        "side": 1,
+        "dx": 0,
+        "dy": 0
+      }
+    ],
+    "followers": [
+      {
+        "dx": 0,
+        "dy": 0
+      },
+      {
+        "dx": 0,
+        "dy": 0
+      }
+    ],
+    "impacts": [
+      {
+        "v": 0,
+        "contact": 0,
+        "target": 0
+      },
+      {
+        "v": 0,
+        "contact": 0,
+        "target": 0
+      }
+    ],
+    "waves": [
+      {
+        "age": 2,
+        "strength": 0
+      },
+      {
+        "age": 2,
+        "strength": 0
+      }
+    ],
+    "frames": 0,
+    "activePointers": [],
+    "panelOpen": false,
+    "renderer": "webgl",
+    "size": [
+      600,
+      950
+    ],
+    "image": [
+      720,
+      1280
+    ],
+    "framing": {
+      "x": -315.5297260273974,
+      "y": -44.43527397260277,
+      "width": 1166.2668493150686,
+      "height": 2073.363287671233
+    },
+    "model": {
+      "bounce": 55,
+      "softness": 58,
+      "settle": 60,
+      "transfer": 0
+    },
+    "preset": "natural",
+    "slapAudioEnabled": false,
+    "slapCount": 0,
+    "flickCount": 0,
+    "lastGesture": "none",
+    "status": ""
+  },
+  "note": "Unmodified live r10 reference, transfer=0 and tap amplitude=.7. Portrait calibration differs; not a controlled character swap."
+}

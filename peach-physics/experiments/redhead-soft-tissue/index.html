@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#171614">
+<title>Redhead · Soft tissue study</title>
+<link rel="stylesheet" href="style.css">
+<main>
+  <header><div><p class="eyebrow">Peach Physics / isolated experiment 01</p><h1>A study in soft motion.</h1></div><span class="badge">Experimental · not live r10</span></header>
+  <p class="intro">One original portrait. Two deformation fields. The same gesture drives both.</p>
+  <section class="toolbar" aria-label="Comparison controls">
+    <div class="segmented" aria-label="View"><button data-view="A" aria-pressed="false">A · Baseline</button><button data-view="B" aria-pressed="false">B · Localized</button><button data-view="split" aria-pressed="true">Side by side</button></div>
+    <label>Renderer <select id="renderer"><option value="webgl">WebGL</option><option value="canvas">Canvas 2D</option></select></label>
+    <label>Framing <select id="framing"><option value="study">Upper body</option><option value="full">Full portrait</option></select></label>
+  </section>
+  <section id="portraits" class="split" aria-label="Interactive comparison">
+    <article data-mode="A"><div class="caption"><strong>A <span>Baseline</span></strong><small>r10-style spring blend</small></div><div class="surface"><canvas id="canvasA" aria-label="Baseline portrait. Touch, drag, or flick either skin region."></canvas><canvas class="guide" aria-hidden="true"></canvas></div></article>
+    <article data-mode="B"><div class="caption"><strong>B <span>Localized</span></strong><small>contact compression + delayed bulge</small></div><div class="surface"><canvas id="canvasB" aria-label="Experimental portrait. Touch, drag, or flick either skin region."></canvas><canvas class="guide" aria-hidden="true"></canvas></div></article>
+  </section>
+  <section class="lab">
+    <div><p class="eyebrow">Try the response</p><p>Tap lightly, drag inward or outward, then release. Two fingers can move the left and right regions independently.</p><p class="muted">Hair, fur and corset are fixed supports. The original image is unchanged.</p></div>
+    <div class="actions"><button id="demo" class="primary">Run comparison sequence</button><button id="reset">Reset</button><label><input type="checkbox" id="guides"> Show motion boundary</label></div>
+  </section>
+  <p id="status" role="status">Loading original portrait…</p>
+  <footer><span>Fixed artwork · local browser simulation · no saved preferences</span><a href="REPORT.md">Method &amp; findings ↗</a><a href="evidence.html">Motion evidence ↗</a></footer>
+</main>
+<script type="module" src="app.js"></script>
+</html>

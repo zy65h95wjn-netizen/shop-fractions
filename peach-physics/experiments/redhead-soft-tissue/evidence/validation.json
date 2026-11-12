@@ -1,0 +1,25 @@
+{
+  "webgl": {
+    "pixels": {
+      "protectedChanged": 0,
+      "skinChanged": 3742,
+      "maxDiff": 20,
+      "settledChanged": 0
+    },
+    "errors": [],
+    "trustedMultitouch": true,
+    "contextLossFallback": true
+  },
+  "canvas": {
+    "pixels": {
+      "protectedChanged": 0,
+      "skinChanged": 3643,
+      "maxDiff": 19,
+      "settledChanged": 0
+    },
+    "errors": [],
+    "trustedMultitouch": true,
+    "contextLossFallback": false
+  },
+  "noWebGLFallback": true
+}
