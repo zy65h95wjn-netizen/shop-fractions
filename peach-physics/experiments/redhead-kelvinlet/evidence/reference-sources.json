@@ -1,0 +1,12 @@
+{
+  "paper": {
+    "sha256": "1af808992b7881931ffc3e39ce589b7e8b5b02287dd63876550afd546c45380c",
+    "bytes": 14606014,
+    "url": "https://research.pixar.com/docs/2017.SiggraphPapers.GJ.pdf"
+  },
+  "supplement": {
+    "sha256": "1ec5d763d41508f6145782c1c47d932f4b74a0f47ac6667b6e7f06c7d9b76cd7",
+    "bytes": 571276,
+    "url": "https://research.pixar.com/docs/2017.SiggraphPapers.GJ_suppl.a.pdf"
+  }
+}

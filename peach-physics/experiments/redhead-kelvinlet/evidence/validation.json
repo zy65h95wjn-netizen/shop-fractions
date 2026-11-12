@@ -1,0 +1,58 @@
+{
+  "webgl": {
+    "modes": {
+      "A": {
+        "protectedChanged": 0,
+        "boundaryChanged": 0,
+        "maxProtectedDelta": 1,
+        "skinChanged": 9050,
+        "restoredDiff": 0
+      },
+      "A+": {
+        "protectedChanged": 0,
+        "boundaryChanged": 0,
+        "maxProtectedDelta": 1,
+        "skinChanged": 11607,
+        "restoredDiff": 0
+      },
+      "B": {
+        "protectedChanged": 0,
+        "boundaryChanged": 0,
+        "maxProtectedDelta": 1,
+        "skinChanged": 7885,
+        "restoredDiff": 0
+      }
+    },
+    "errors": [],
+    "trustedMultitouch": true,
+    "blindUI": "labels hidden, voting locked until playback; no votes submitted"
+  },
+  "canvas": {
+    "modes": {
+      "A": {
+        "protectedChanged": 0,
+        "boundaryChanged": 0,
+        "maxProtectedDelta": 0,
+        "skinChanged": 8610,
+        "restoredDiff": 0
+      },
+      "A+": {
+        "protectedChanged": 0,
+        "boundaryChanged": 0,
+        "maxProtectedDelta": 0,
+        "skinChanged": 11329,
+        "restoredDiff": 0
+      },
+      "B": {
+        "protectedChanged": 0,
+        "boundaryChanged": 0,
+        "maxProtectedDelta": 0,
+        "skinChanged": 7537,
+        "restoredDiff": 0
+      }
+    },
+    "errors": [],
+    "trustedMultitouch": true,
+    "blindUI": "labels hidden, voting locked until playback; no votes submitted"
+  }
+}

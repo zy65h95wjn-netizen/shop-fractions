@@ -1,0 +1,62 @@
+{
+  "webgl": {
+    "boxes": [
+      {
+        "x": 148,
+        "y": 226.59375,
+        "width": 369.328125,
+        "height": 475.796875
+      },
+      {
+        "x": 535.328125,
+        "y": 226.59375,
+        "width": 369.328125,
+        "height": 475.796875
+      },
+      {
+        "x": 922.65625,
+        "y": 226.59375,
+        "width": 369.34375,
+        "height": 475.8125
+      }
+    ],
+    "errors": [],
+    "fallbacks": [],
+    "restored": true,
+    "renderTimeMs": {
+      "median": 25.100000000093132,
+      "p95": 49.799999999813735
+    },
+    "note": "CPU field generation + draw submission at 1440x1080, 3 panels, Chromium SwiftShader. Screenshot encode time excluded; not GPU-completion or iPhone timings."
+  },
+  "canvas": {
+    "boxes": [
+      {
+        "x": 148,
+        "y": 226.59375,
+        "width": 369.328125,
+        "height": 475.796875
+      },
+      {
+        "x": 535.328125,
+        "y": 226.59375,
+        "width": 369.328125,
+        "height": 475.796875
+      },
+      {
+        "x": 922.65625,
+        "y": 226.59375,
+        "width": 369.34375,
+        "height": 475.8125
+      }
+    ],
+    "errors": [],
+    "fallbacks": [],
+    "restored": true,
+    "renderTimeMs": {
+      "median": 36.60000000009313,
+      "p95": 67.3000000002794
+    },
+    "note": "CPU field generation + draw submission at 1440x1080, 3 panels, Chromium SwiftShader. Screenshot encode time excluded; not GPU-completion or iPhone timings."
+  }
+}

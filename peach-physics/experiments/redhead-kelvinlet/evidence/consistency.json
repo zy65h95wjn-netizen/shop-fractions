@@ -1,0 +1,269 @@
+{
+  "note": "Aligned actual browser portrait pixels, RGB 0..255. Canvas performs source-resolution interpolation before viewport resampling; GL samples the original directly. These renderers are not pixel-identical. Motion residual subtracts each renderer's resting frame.",
+  "samples": [
+    {
+      "phase": "rest",
+      "mode": "A",
+      "rgbMAE": 0.19098604290514345,
+      "rgbRMSE": 0.4370194994564241,
+      "maxChannelDifference": 1.0,
+      "motionResidualRMSE": 0.0
+    },
+    {
+      "phase": "rest",
+      "mode": "A+",
+      "rgbMAE": 0.18125053846816577,
+      "rgbRMSE": 0.4257352915464794,
+      "maxChannelDifference": 1.0,
+      "motionResidualRMSE": 0.0
+    },
+    {
+      "phase": "rest",
+      "mode": "B",
+      "rgbMAE": 0.19098604290514345,
+      "rgbRMSE": 0.4370194994564241,
+      "maxChannelDifference": 1.0,
+      "motionResidualRMSE": 0.0
+    },
+    {
+      "phase": "light-tap",
+      "mode": "A",
+      "rgbMAE": 0.20814594641164813,
+      "rgbRMSE": 0.4657429719229054,
+      "maxChannelDifference": 9.0,
+      "motionResidualRMSE": 0.1610829102410966
+    },
+    {
+      "phase": "light-tap",
+      "mode": "A+",
+      "rgbMAE": 0.19654949599379684,
+      "rgbRMSE": 0.44880492834074126,
+      "maxChannelDifference": 7.0,
+      "motionResidualRMSE": 0.14208535628540475
+    },
+    {
+      "phase": "light-tap",
+      "mode": "B",
+      "rgbMAE": 0.20822133195485482,
+      "rgbRMSE": 0.46581002372513264,
+      "maxChannelDifference": 9.0,
+      "motionResidualRMSE": 0.16126332048436648
+    },
+    {
+      "phase": "strong-tap",
+      "mode": "A",
+      "rgbMAE": 0.20709485655208065,
+      "rgbRMSE": 0.4649144324305377,
+      "maxChannelDifference": 9.0,
+      "motionResidualRMSE": 0.15864426263725315
+    },
+    {
+      "phase": "strong-tap",
+      "mode": "A+",
+      "rgbMAE": 0.1947057809942276,
+      "rgbRMSE": 0.44602723532288957,
+      "maxChannelDifference": 5.0,
+      "motionResidualRMSE": 0.13301903595704126
+    },
+    {
+      "phase": "strong-tap",
+      "mode": "B",
+      "rgbMAE": 0.20739855259757042,
+      "rgbRMSE": 0.4657730308210211,
+      "maxChannelDifference": 10.0,
+      "motionResidualRMSE": 0.16114306943120024
+    },
+    {
+      "phase": "hold",
+      "mode": "A",
+      "rgbMAE": 0.20566468510381666,
+      "rgbRMSE": 0.4598041244480973,
+      "maxChannelDifference": 6.0,
+      "motionResidualRMSE": 0.14303718546690744
+    },
+    {
+      "phase": "hold",
+      "mode": "A+",
+      "rgbMAE": 0.1957547169811321,
+      "rgbRMSE": 0.44840402202501356,
+      "maxChannelDifference": 9.0,
+      "motionResidualRMSE": 0.1408138904228605
+    },
+    {
+      "phase": "hold",
+      "mode": "B",
+      "rgbMAE": 0.20302403721891962,
+      "rgbRMSE": 0.4545605705640736,
+      "maxChannelDifference": 6.0,
+      "motionResidualRMSE": 0.12514315056375708
+    },
+    {
+      "phase": "release",
+      "mode": "A",
+      "rgbMAE": 0.19134789351253553,
+      "rgbRMSE": 0.43743330178729595,
+      "maxChannelDifference": 1.0,
+      "motionResidualRMSE": 0.019247495890226438
+    },
+    {
+      "phase": "release",
+      "mode": "A+",
+      "rgbMAE": 0.1821917808219178,
+      "rgbRMSE": 0.42683929156289935,
+      "maxChannelDifference": 1.0,
+      "motionResidualRMSE": 0.03067967329930432
+    },
+    {
+      "phase": "release",
+      "mode": "B",
+      "rgbMAE": 0.19122081502541569,
+      "rgbRMSE": 0.43728802296131514,
+      "maxChannelDifference": 1.0,
+      "motionResidualRMSE": 0.015600884940427006
+    },
+    {
+      "phase": "inward",
+      "mode": "A",
+      "rgbMAE": 0.20709485655208065,
+      "rgbRMSE": 0.4626248059026272,
+      "maxChannelDifference": 7.0,
+      "motionResidualRMSE": 0.1518034374510415
+    },
+    {
+      "phase": "inward",
+      "mode": "A+",
+      "rgbMAE": 0.19634057034548116,
+      "rgbRMSE": 0.4484520536484026,
+      "maxChannelDifference": 6.0,
+      "motionResidualRMSE": 0.14096676625815863
+    },
+    {
+      "phase": "inward",
+      "mode": "B",
+      "rgbMAE": 0.20419359007495477,
+      "rgbRMSE": 0.45543868859543213,
+      "maxChannelDifference": 6.0,
+      "motionResidualRMSE": 0.12831290907909515
+    },
+    {
+      "phase": "outward",
+      "mode": "A",
+      "rgbMAE": 0.20360773671060567,
+      "rgbRMSE": 0.4554197712970119,
+      "maxChannelDifference": 7.0,
+      "motionResidualRMSE": 0.12816174518320697
+    },
+    {
+      "phase": "outward",
+      "mode": "A+",
+      "rgbMAE": 0.19368699922460583,
+      "rgbRMSE": 0.44343375720354866,
+      "maxChannelDifference": 4.0,
+      "motionResidualRMSE": 0.1240454203298778
+    },
+    {
+      "phase": "outward",
+      "mode": "B",
+      "rgbMAE": 0.20368312225381235,
+      "rgbRMSE": 0.4574135880016009,
+      "maxChannelDifference": 11.0,
+      "motionResidualRMSE": 0.13507573923055527
+    },
+    {
+      "phase": "upward",
+      "mode": "A",
+      "rgbMAE": 0.20796717498061515,
+      "rgbRMSE": 0.47175544581358814,
+      "maxChannelDifference": 12.0,
+      "motionResidualRMSE": 0.17773209185812316
+    },
+    {
+      "phase": "upward",
+      "mode": "A+",
+      "rgbMAE": 0.19728396657189626,
+      "rgbRMSE": 0.4550175927758227,
+      "maxChannelDifference": 10.0,
+      "motionResidualRMSE": 0.16063435032183174
+    },
+    {
+      "phase": "upward",
+      "mode": "B",
+      "rgbMAE": 0.2085508744723012,
+      "rgbRMSE": 0.47243295909123717,
+      "maxChannelDifference": 12.0,
+      "motionResidualRMSE": 0.17953468857720983
+    },
+    {
+      "phase": "downward",
+      "mode": "A",
+      "rgbMAE": 0.2051606789006634,
+      "rgbRMSE": 0.4590821713803124,
+      "maxChannelDifference": 7.0,
+      "motionResidualRMSE": 0.14063787777398826
+    },
+    {
+      "phase": "downward",
+      "mode": "A+",
+      "rgbMAE": 0.1944947014732489,
+      "rgbRMSE": 0.4465195232831842,
+      "maxChannelDifference": 9.0,
+      "motionResidualRMSE": 0.13470848965889548
+    },
+    {
+      "phase": "downward",
+      "mode": "B",
+      "rgbMAE": 0.20568622383044716,
+      "rgbRMSE": 0.4620517918603213,
+      "maxChannelDifference": 10.0,
+      "motionResidualRMSE": 0.15004809544556846
+    },
+    {
+      "phase": "both",
+      "mode": "A",
+      "rgbMAE": 0.21945593176531403,
+      "rgbRMSE": 0.48374766482350434,
+      "maxChannelDifference": 9.0,
+      "motionResidualRMSE": 0.20748881123811624
+    },
+    {
+      "phase": "both",
+      "mode": "A+",
+      "rgbMAE": 0.20862410614284482,
+      "rgbRMSE": 0.4668700094835261,
+      "maxChannelDifference": 8.0,
+      "motionResidualRMSE": 0.19165069924985997
+    },
+    {
+      "phase": "both",
+      "mode": "B",
+      "rgbMAE": 0.21937623847678125,
+      "rgbRMSE": 0.4845506694387635,
+      "maxChannelDifference": 11.0,
+      "motionResidualRMSE": 0.20936442526296847
+    },
+    {
+      "phase": "restored",
+      "mode": "A",
+      "rgbMAE": 0.19098604290514345,
+      "rgbRMSE": 0.4370194994564241,
+      "maxChannelDifference": 1.0,
+      "motionResidualRMSE": 0.0
+    },
+    {
+      "phase": "restored",
+      "mode": "A+",
+      "rgbMAE": 0.18125053846816577,
+      "rgbRMSE": 0.4257352915464794,
+      "maxChannelDifference": 1.0,
+      "motionResidualRMSE": 0.0
+    },
+    {
+      "phase": "restored",
+      "mode": "B",
+      "rgbMAE": 0.19098604290514345,
+      "rgbRMSE": 0.4370194994564241,
+      "maxChannelDifference": 1.0,
+      "motionResidualRMSE": 0.0
+    }
+  ]
+}

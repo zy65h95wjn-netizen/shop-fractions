@@ -1,0 +1,1539 @@
+{
+  "sampling": "Every 1/120s around the worst stronger-tap interval, 1 source-pixel spatial spacing, encoded WebGL map + exact guard, centered .5px finite differences.",
+  "frames": [
+    {
+      "time": 2.0333333333333288,
+      "modes": {
+        "A": {
+          "minDet": 0.8661873936653137,
+          "maxDet": 1.1072192192077637,
+          "minStretch": 0.9088754390920226,
+          "maxStretch": 1.1649948455411616,
+          "maxShear": 0.07885874105902473,
+          "maxDisplacement": 1.8531225298130107
+        },
+        "A+": {
+          "minDet": 0.789701521396637,
+          "maxDet": 1.282017469406128,
+          "minStretch": 0.8818884365478789,
+          "maxStretch": 1.2977597772901222,
+          "maxShear": 0.14567108876170312,
+          "maxDisplacement": 3.0805414512930747
+        },
+        "B": {
+          "minDet": 0.8874548673629761,
+          "maxDet": 1.148122251033783,
+          "minStretch": 0.8303220043850803,
+          "maxStretch": 1.258564761432015,
+          "maxShear": 0.06648169824687365,
+          "maxDisplacement": 2.606079054390263
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.8677918017772297,
+          "maxDet": 1.1072081607899844,
+          "minStretch": 0.9094242502130373,
+          "maxStretch": 1.16467966149792,
+          "maxShear": 0.07317346637984289,
+          "maxDisplacement": 1.8530936118924575
+        }
+      }
+    },
+    {
+      "time": 2.041666666666662,
+      "modes": {
+        "A": {
+          "minDet": 0.8524751663208008,
+          "maxDet": 1.1151977181434631,
+          "minStretch": 0.8977632652992392,
+          "maxStretch": 1.184113478489265,
+          "maxShear": 0.08764026913019594,
+          "maxDisplacement": 2.049201852152152
+        },
+        "A+": {
+          "minDet": 0.7717305421829224,
+          "maxDet": 1.3040881752967834,
+          "minStretch": 0.874503425992897,
+          "maxStretch": 1.3303322830825017,
+          "maxShear": 0.1593746584842141,
+          "maxDisplacement": 3.362023313273367
+        },
+        "B": {
+          "minDet": 0.8757016062736511,
+          "maxDet": 1.165501892566681,
+          "minStretch": 0.8204277005808617,
+          "maxStretch": 1.2822115848487738,
+          "maxShear": 0.07245146317994,
+          "maxDisplacement": 2.8576607131745866
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.8541875629395794,
+          "maxDet": 1.1149252316151457,
+          "minStretch": 0.8983515968774711,
+          "maxStretch": 1.1838134332163401,
+          "maxShear": 0.0818425554559183,
+          "maxDisplacement": 2.049243639239605
+        }
+      }
+    },
+    {
+      "time": 2.0499999999999954,
+      "modes": {
+        "A": {
+          "minDet": 0.8416300415992737,
+          "maxDet": 1.1206164360046387,
+          "minStretch": 0.8891353515569077,
+          "maxStretch": 1.200019142082869,
+          "maxShear": 0.0949301081266945,
+          "maxDisplacement": 2.202572410015101
+        },
+        "A+": {
+          "minDet": 0.7583287358283997,
+          "maxDet": 1.3189043998718262,
+          "minStretch": 0.8691695832141753,
+          "maxStretch": 1.356220130976749,
+          "maxShear": 0.16948999944014995,
+          "maxDisplacement": 3.5753898562465203
+        },
+        "B": {
+          "minDet": 0.8657963871955872,
+          "maxDet": 1.1793934106826782,
+          "minStretch": 0.8135827981179944,
+          "maxStretch": 1.2995027576566582,
+          "maxShear": 0.07660235489111991,
+          "maxDisplacement": 3.050713929130798
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.8436026621387376,
+          "maxDet": 1.1204412913310335,
+          "minStretch": 0.8895462038546672,
+          "maxStretch": 1.1990481731319858,
+          "maxShear": 0.08874796568395424,
+          "maxDisplacement": 2.2026257267124176
+        }
+      }
+    },
+    {
+      "time": 2.0583333333333287,
+      "modes": {
+        "A": {
+          "minDet": 0.8337320685386658,
+          "maxDet": 1.1247553825378418,
+          "minStretch": 0.8826538023790454,
+          "maxStretch": 1.2113545791910059,
+          "maxShear": 0.10036731840089642,
+          "maxDisplacement": 2.3183442455141945
+        },
+        "A+": {
+          "minDet": 0.7486698627471924,
+          "maxDet": 1.3301434516906738,
+          "minStretch": 0.8654964233089287,
+          "maxStretch": 1.3754956738661812,
+          "maxShear": 0.1775680347739071,
+          "maxDisplacement": 3.7345629593899634
+        },
+        "B": {
+          "minDet": 0.8591277599334717,
+          "maxDet": 1.1900725364685059,
+          "minStretch": 0.8088425557867667,
+          "maxStretch": 1.311989728714138,
+          "maxShear": 0.07988909000763056,
+          "maxDisplacement": 3.1946104299687166
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.8356767057729613,
+          "maxDet": 1.1244509452904339,
+          "minStretch": 0.8829609839216768,
+          "maxStretch": 1.2106953040923663,
+          "maxShear": 0.09399778467845034,
+          "maxDisplacement": 2.317990163736629
+        }
+      }
+    },
+    {
+      "time": 2.066666666666662,
+      "modes": {
+        "A": {
+          "minDet": 0.8280394673347473,
+          "maxDet": 1.1277351379394531,
+          "minStretch": 0.8784870440431687,
+          "maxStretch": 1.219770095225357,
+          "maxShear": 0.1043802202825487,
+          "maxDisplacement": 2.398930528458631
+        },
+        "A+": {
+          "minDet": 0.741834282875061,
+          "maxDet": 1.3378981351852417,
+          "minStretch": 0.8628472110879827,
+          "maxStretch": 1.389401501059058,
+          "maxShear": 0.18411591931403978,
+          "maxDisplacement": 3.8475168319074324
+        },
+        "B": {
+          "minDet": 0.8540952205657959,
+          "maxDet": 1.1969953775405884,
+          "minStretch": 0.8051046399047729,
+          "maxStretch": 1.3219287145470833,
+          "maxShear": 0.08204704325990485,
+          "maxDisplacement": 3.295516304186491
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.8301386100118275,
+          "maxDet": 1.1274333888930839,
+          "minStretch": 0.8785327175402803,
+          "maxStretch": 1.2190053915432473,
+          "maxShear": 0.0976853387330582,
+          "maxDisplacement": 2.3989474596989937
+        }
+      }
+    },
+    {
+      "time": 2.0749999999999953,
+      "modes": {
+        "A": {
+          "minDet": 0.8248291015625,
+          "maxDet": 1.1299397945404053,
+          "minStretch": 0.8759319265656719,
+          "maxStretch": 1.225080184580322,
+          "maxShear": 0.10659612201557853,
+          "maxDisplacement": 2.4487710943683867
+        },
+        "A+": {
+          "minDet": 0.7370798587799072,
+          "maxDet": 1.344683587551117,
+          "minStretch": 0.8604554081119715,
+          "maxStretch": 1.3992391729796803,
+          "maxShear": 0.18784502207307077,
+          "maxDisplacement": 3.9207969832922744
+        },
+        "B": {
+          "minDet": 0.8508613109588623,
+          "maxDet": 1.2012271881103516,
+          "minStretch": 0.8025038539394852,
+          "maxStretch": 1.3290171963341957,
+          "maxShear": 0.08341232878490223,
+          "maxDisplacement": 3.359905148968634
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.8267720681693851,
+          "maxDet": 1.1297182938316292,
+          "minStretch": 0.8761799191149128,
+          "maxStretch": 1.2242026853024914,
+          "maxShear": 0.09990039268187778,
+          "maxDisplacement": 2.448446575114091
+        }
+      }
+    },
+    {
+      "time": 2.0833333333333286,
+      "modes": {
+        "A": {
+          "minDet": 0.7405552268028259,
+          "maxDet": 1.4337230920791626,
+          "minStretch": 0.6898608652882479,
+          "maxStretch": 1.3603238111168856,
+          "maxShear": 0.1950865581574372,
+          "maxDisplacement": 4.456011519681734
+        },
+        "A+": {
+          "minDet": 0.7625446915626526,
+          "maxDet": 1.479087471961975,
+          "minStretch": 0.6646395063111658,
+          "maxStretch": 1.3258135656675214,
+          "maxShear": 0.19374392247992756,
+          "maxDisplacement": 4.90024570769267
+        },
+        "B": {
+          "minDet": 0.7218070030212402,
+          "maxDet": 1.4226748943328857,
+          "minStretch": 0.6919363158543319,
+          "maxStretch": 1.3970319728972969,
+          "maxShear": 0.19740465350398523,
+          "maxDisplacement": 4.741989820168581
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.744362006037669,
+          "maxDet": 1.4298930420691178,
+          "minStretch": 0.6935183364818825,
+          "maxStretch": 1.351137005338389,
+          "maxShear": 0.19032246643304782,
+          "maxDisplacement": 4.452365689747701
+        }
+      }
+    },
+    {
+      "time": 2.091666666666662,
+      "modes": {
+        "A": {
+          "minDet": 0.6170454025268555,
+          "maxDet": 1.7114599347114563,
+          "minStretch": 0.5778549548625351,
+          "maxStretch": 1.6363879108128927,
+          "maxShear": 0.32104651434995835,
+          "maxDisplacement": 6.7889170332031075
+        },
+        "A+": {
+          "minDet": 0.6373845338821411,
+          "maxDet": 1.7625194787979126,
+          "minStretch": 0.5566873277678763,
+          "maxStretch": 1.5889644714675082,
+          "maxShear": 0.31548193382373213,
+          "maxDisplacement": 7.255699565662682
+        },
+        "B": {
+          "minDet": 0.5993239283561707,
+          "maxDet": 1.690316915512085,
+          "minStretch": 0.5801814291700201,
+          "maxStretch": 1.687007039702204,
+          "maxShear": 0.32646620132128557,
+          "maxDisplacement": 7.085168866735075
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.6204427325368584,
+          "maxDet": 1.7048294030741715,
+          "minStretch": 0.5806137835220191,
+          "maxStretch": 1.6259860139760527,
+          "maxShear": 0.313996154904064,
+          "maxDisplacement": 6.7832720961232535
+        }
+      }
+    },
+    {
+      "time": 2.099999999999995,
+      "modes": {
+        "A": {
+          "minDet": 0.5230119228363037,
+          "maxDet": 1.9942246675491333,
+          "minStretch": 0.49534211586221094,
+          "maxStretch": 1.9357992715721433,
+          "maxShear": 0.44520821236163066,
+          "maxDisplacement": 8.875010635015334
+        },
+        "A+": {
+          "minDet": 0.5401053428649902,
+          "maxDet": 2.0526371002197266,
+          "minStretch": 0.4783205253988228,
+          "maxStretch": 1.8794298235155689,
+          "maxShear": 0.43780868505368703,
+          "maxDisplacement": 9.348865780088893
+        },
+        "B": {
+          "minDet": 0.506730318069458,
+          "maxDet": 1.9652243852615356,
+          "minStretch": 0.5003099166059577,
+          "maxStretch": 2.001087456940725,
+          "maxShear": 0.4525674118811076,
+          "maxDisplacement": 9.171781194400523
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.526212716691635,
+          "maxDet": 1.9906118214857944,
+          "minStretch": 0.4961171543077311,
+          "maxStretch": 1.922402800366594,
+          "maxShear": 0.43888010297624375,
+          "maxDisplacement": 8.867835795660534
+        }
+      }
+    },
+    {
+      "time": 2.1083333333333285,
+      "modes": {
+        "A": {
+          "minDet": 0.45192450284957886,
+          "maxDet": 2.2788296937942505,
+          "minStretch": 0.43647880737655387,
+          "maxStretch": 2.245918881829109,
+          "maxShear": 0.5650969311796914,
+          "maxDisplacement": 10.697372823411062
+        },
+        "A+": {
+          "minDet": 0.46734917163848877,
+          "maxDet": 2.322052776813507,
+          "minStretch": 0.4215335653789971,
+          "maxStretch": 2.1757323863759015,
+          "maxShear": 0.5560170600787083,
+          "maxDisplacement": 11.166004722380373
+        },
+        "B": {
+          "minDet": 0.4378061294555664,
+          "maxDet": 2.2468403577804565,
+          "minStretch": 0.44157918083032927,
+          "maxStretch": 2.3215226051831332,
+          "maxShear": 0.5793419723139835,
+          "maxDisplacement": 10.986972295737562
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": true,
+        "baseline": {
+          "minDet": 0.45583098075519857,
+          "maxDet": 2.2588179843650664,
+          "minStretch": 0.43651730201960454,
+          "maxStretch": 2.2243795329185683,
+          "maxShear": 0.5591280559196989,
+          "maxDisplacement": 10.688878514994048
+        }
+      }
+    },
+    {
+      "time": 2.116666666666662,
+      "modes": {
+        "A": {
+          "minDet": 0.39737069606781006,
+          "maxDet": 2.5355310440063477,
+          "minStretch": 0.39287654018024704,
+          "maxStretch": 2.558171629403513,
+          "maxShear": 0.6744126792229193,
+          "maxDisplacement": 12.24297712478025
+        },
+        "A+": {
+          "minDet": 0.4112052321434021,
+          "maxDet": 2.5699942111968994,
+          "minStretch": 0.3804892650620564,
+          "maxStretch": 2.4778957477196424,
+          "maxShear": 0.6633490885594768,
+          "maxDisplacement": 12.698046382417393
+        },
+        "B": {
+          "minDet": 0.3851720094680786,
+          "maxDet": 2.502011299133301,
+          "minStretch": 0.3984873496475292,
+          "maxStretch": 2.6440098285446045,
+          "maxShear": 0.705511371692909,
+          "maxDisplacement": 12.521005469901358
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": true,
+        "baseline": {
+          "minDet": 0.40338377029638295,
+          "maxDet": 2.5001030968270683,
+          "minStretch": 0.3941118942584296,
+          "maxStretch": 2.517995742666362,
+          "maxShear": 0.670016357996924,
+          "maxDisplacement": 12.233545813146767
+        }
+      }
+    },
+    {
+      "time": 2.124999999999995,
+      "modes": {
+        "A": {
+          "minDet": 0.35630369186401367,
+          "maxDet": 2.7489304542541504,
+          "minStretch": 0.3624275678282884,
+          "maxStretch": 2.8564965740738515,
+          "maxShear": 0.770043009341509,
+          "maxDisplacement": 13.503187405540915
+        },
+        "A+": {
+          "minDet": 0.36857151985168457,
+          "maxDet": 2.784856617450714,
+          "minStretch": 0.35194408868047394,
+          "maxStretch": 2.766568804393484,
+          "maxShear": 0.7584557248042386,
+          "maxDisplacement": 13.938858320056541
+        },
+        "B": {
+          "minDet": 0.34577518701553345,
+          "maxDet": 2.7169048190116882,
+          "minStretch": 0.36707791841607473,
+          "maxStretch": 2.948264603528634,
+          "maxShear": 0.8155608142400284,
+          "maxDisplacement": 13.766692746911657
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": true,
+        "baseline": {
+          "minDet": 0.36397509081126245,
+          "maxDet": 2.7053183725117407,
+          "minStretch": 0.3648202494004185,
+          "maxStretch": 2.7944064044836434,
+          "maxShear": 0.7669355089884049,
+          "maxDisplacement": 13.493519074713555
+        }
+      }
+    },
+    {
+      "time": 2.1333333333333284,
+      "modes": {
+        "A": {
+          "minDet": 0.32852745056152344,
+          "maxDet": 2.918835163116455,
+          "minStretch": 0.34144097338771695,
+          "maxStretch": 3.101850941367172,
+          "maxShear": 0.8585157437616454,
+          "maxDisplacement": 14.475916532586073
+        },
+        "A+": {
+          "minDet": 0.3389052748680115,
+          "maxDet": 2.9549002647399902,
+          "minStretch": 0.3327086167820159,
+          "maxStretch": 3.0121754968128256,
+          "maxShear": 0.8361064007800715,
+          "maxDisplacement": 14.887312699953581
+        },
+        "B": {
+          "minDet": 0.31957024335861206,
+          "maxDet": 2.8910597562789917,
+          "minStretch": 0.34562553150400105,
+          "maxStretch": 3.196799625063897,
+          "maxShear": 0.9181675790098701,
+          "maxDisplacement": 14.722987538535152
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": true,
+        "baseline": {
+          "minDet": 0.3354193286065055,
+          "maxDet": 2.867093896279325,
+          "minStretch": 0.344890817972376,
+          "maxStretch": 3.036157934512807,
+          "maxShear": 0.8461877802623078,
+          "maxDisplacement": 14.465499591180818
+        }
+      }
+    },
+    {
+      "time": 2.1416666666666617,
+      "modes": {
+        "A": {
+          "minDet": 0.3103562593460083,
+          "maxDet": 3.0468637347221375,
+          "minStretch": 0.32811779881943826,
+          "maxStretch": 3.29609518257374,
+          "maxShear": 0.9378855011924978,
+          "maxDisplacement": 15.16143927272104
+        },
+        "A+": {
+          "minDet": 0.31951355934143066,
+          "maxDet": 3.0762187838554382,
+          "minStretch": 0.32072082670700924,
+          "maxStretch": 3.2055476743436757,
+          "maxShear": 0.8934917088531475,
+          "maxDisplacement": 15.546535546823794
+        },
+        "B": {
+          "minDet": 0.30115026235580444,
+          "maxDet": 3.0207032561302185,
+          "minStretch": 0.33085056279970243,
+          "maxStretch": 3.399863028284062,
+          "maxShear": 0.9853878073453209,
+          "maxDisplacement": 15.39143751391113
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": true,
+        "baseline": {
+          "minDet": 0.3156509087869992,
+          "maxDet": 2.9836165121321194,
+          "minStretch": 0.3313102637444284,
+          "maxStretch": 3.2291710291821207,
+          "maxShear": 0.9047311625895023,
+          "maxDisplacement": 15.150783828085105
+        }
+      }
+    },
+    {
+      "time": 2.149999999999995,
+      "modes": {
+        "A": {
+          "minDet": 0.2985273599624634,
+          "maxDet": 3.1075721979141235,
+          "minStretch": 0.3205548069416247,
+          "maxStretch": 3.4298610366862823,
+          "maxShear": 0.994521886295133,
+          "maxDisplacement": 15.565756022945912
+        },
+        "A+": {
+          "minDet": 0.3072516918182373,
+          "maxDet": 3.1389894485473633,
+          "minStretch": 0.3136881511053422,
+          "maxStretch": 3.3402455117461636,
+          "maxShear": 0.9486724343079164,
+          "maxDisplacement": 15.923472214048846
+        },
+        "B": {
+          "minDet": 0.29015249013900757,
+          "maxDet": 3.083648920059204,
+          "minStretch": 0.3239906621447716,
+          "maxStretch": 3.5305195604055144,
+          "maxShear": 1.0387284317757108,
+          "maxDisplacement": 15.778713698694244
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": true,
+        "baseline": {
+          "minDet": 0.30375636546068563,
+          "maxDet": 3.052949211427837,
+          "minStretch": 0.3236974966167947,
+          "maxStretch": 3.3576034171183538,
+          "maxShear": 0.9410297062398972,
+          "maxDisplacement": 15.55510072352566
+        }
+      }
+    },
+    {
+      "time": 2.1583333333333283,
+      "modes": {
+        "A": {
+          "minDet": 0.293612539768219,
+          "maxDet": 3.1297882199287415,
+          "minStretch": 0.3181059278968441,
+          "maxStretch": 3.488300451072735,
+          "maxShear": 1.0212425875435935,
+          "maxDisplacement": 15.698491315748482
+        },
+        "A+": {
+          "minDet": 0.30120760202407837,
+          "maxDet": 3.157978653907776,
+          "minStretch": 0.31178093603114787,
+          "maxStretch": 3.407909471314474,
+          "maxShear": 0.9770991036768071,
+          "maxDisplacement": 16.028679788660938
+        },
+        "B": {
+          "minDet": 0.2862784266471863,
+          "maxDet": 3.106705069541931,
+          "minStretch": 0.3216178793448156,
+          "maxStretch": 3.5783623600408045,
+          "maxShear": 1.063522848474665,
+          "maxDisplacement": 15.894319922077573
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": true,
+        "baseline": {
+          "minDet": 0.2986644694981102,
+          "maxDet": 3.0772832655735947,
+          "minStretch": 0.32118762520846517,
+          "maxStretch": 3.4159604047237195,
+          "maxShear": 0.954604305675147,
+          "maxDisplacement": 15.688401295416575
+        }
+      }
+    },
+    {
+      "time": 2.1666666666666616,
+      "modes": {
+        "A": {
+          "minDet": 0.29453909397125244,
+          "maxDet": 3.112481653690338,
+          "minStretch": 0.32046989983492674,
+          "maxStretch": 3.476468311162951,
+          "maxShear": 1.0129410602910023,
+          "maxDisplacement": 15.57466109982096
+        },
+        "A+": {
+          "minDet": 0.30235767364501953,
+          "maxDet": 3.1378475427627563,
+          "minStretch": 0.3146746223872267,
+          "maxStretch": 3.395029643470537,
+          "maxShear": 0.9732891097206277,
+          "maxDisplacement": 15.87803245957891
+        },
+        "B": {
+          "minDet": 0.28765201568603516,
+          "maxDet": 3.091780126094818,
+          "minStretch": 0.32324013929083695,
+          "maxStretch": 3.560694543473039,
+          "maxShear": 1.0545705144828594,
+          "maxDisplacement": 15.753831060888917
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": true,
+        "baseline": {
+          "minDet": 0.2996909378221275,
+          "maxDet": 3.055539171130839,
+          "minStretch": 0.3233528843476662,
+          "maxStretch": 3.4045551958896025,
+          "maxShear": 0.9461445074330428,
+          "maxDisplacement": 15.56452107261626
+        }
+      }
+    },
+    {
+      "time": 2.174999999999995,
+      "modes": {
+        "A": {
+          "minDet": 0.30206143856048584,
+          "maxDet": 3.059695601463318,
+          "minStretch": 0.3274020216745604,
+          "maxStretch": 3.389659391260002,
+          "maxShear": 0.9774431330785464,
+          "maxDisplacement": 15.209873283709232
+        },
+        "A+": {
+          "minDet": 0.3086748719215393,
+          "maxDet": 3.0803874135017395,
+          "minStretch": 0.32202833441991796,
+          "maxStretch": 3.3235163603846054,
+          "maxShear": 0.942916382707302,
+          "maxDisplacement": 15.48747889808444
+        },
+        "B": {
+          "minDet": 0.29537051916122437,
+          "maxDet": 3.0404457449913025,
+          "minStretch": 0.32869008001872624,
+          "maxStretch": 3.467950985273178,
+          "maxShear": 1.0117905855825349,
+          "maxDisplacement": 15.373929082031742
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": true,
+        "baseline": {
+          "minDet": 0.3065205202458863,
+          "maxDet": 2.9924348741269426,
+          "minStretch": 0.3300190611474483,
+          "maxStretch": 3.3282324084507855,
+          "maxShear": 0.9173701463440618,
+          "maxDisplacement": 15.200776530085108
+        }
+      }
+    },
+    {
+      "time": 2.1833333333333282,
+      "modes": {
+        "A": {
+          "minDet": 0.31438469886779785,
+          "maxDet": 2.9578070044517517,
+          "minStretch": 0.33862034035842653,
+          "maxStretch": 3.245258659909816,
+          "maxShear": 0.9175857253797883,
+          "maxDisplacement": 14.625792321547909
+        },
+        "A+": {
+          "minDet": 0.3200029134750366,
+          "maxDet": 2.9786977767944336,
+          "minStretch": 0.33349852058197804,
+          "maxStretch": 3.1910796704026185,
+          "maxShear": 0.8884860381865366,
+          "maxDisplacement": 14.878311504000502
+        },
+        "B": {
+          "minDet": 0.3090507984161377,
+          "maxDet": 2.9407028555870056,
+          "minStretch": 0.3398890404979967,
+          "maxStretch": 3.311313156070936,
+          "maxShear": 0.9467637920265437,
+          "maxDisplacement": 14.775595053035772
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": true,
+        "baseline": {
+          "minDet": 0.31916841276093777,
+          "maxDet": 2.8929387749707907,
+          "minStretch": 0.3413143084444139,
+          "maxStretch": 3.195167625133601,
+          "maxShear": 0.8708235415530987,
+          "maxDisplacement": 14.617506066694611
+        }
+      }
+    },
+    {
+      "time": 2.1916666666666615,
+      "modes": {
+        "A": {
+          "minDet": 0.33203744888305664,
+          "maxDet": 2.8220300674438477,
+          "minStretch": 0.3548892479228396,
+          "maxStretch": 3.071236944943219,
+          "maxShear": 0.8428228222048111,
+          "maxDisplacement": 13.845293898096946
+        },
+        "A+": {
+          "minDet": 0.33768194913864136,
+          "maxDet": 2.8392751216888428,
+          "minStretch": 0.3499915980661965,
+          "maxStretch": 3.022190134565243,
+          "maxShear": 0.8190221636275911,
+          "maxDisplacement": 14.074143811724372
+        },
+        "B": {
+          "minDet": 0.32680368423461914,
+          "maxDet": 2.805512249469757,
+          "minStretch": 0.35616670467164796,
+          "maxStretch": 3.12330491458377,
+          "maxShear": 0.8750066873519771,
+          "maxDisplacement": 13.981058165592419
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": true,
+        "baseline": {
+          "minDet": 0.3377635955623859,
+          "maxDet": 2.7623393523477624,
+          "minStretch": 0.3574269563143333,
+          "maxStretch": 3.017480356828445,
+          "maxShear": 0.8095557871554826,
+          "maxDisplacement": 13.837576225154566
+        }
+      }
+    },
+    {
+      "time": 2.199999999999995,
+      "modes": {
+        "A": {
+          "minDet": 0.3559095859527588,
+          "maxDet": 2.660396099090576,
+          "minStretch": 0.37577414180481167,
+          "maxStretch": 2.8629956946557793,
+          "maxShear": 0.7667809888410577,
+          "maxDisplacement": 12.892146988808417
+        },
+        "A+": {
+          "minDet": 0.3617391586303711,
+          "maxDet": 2.676643967628479,
+          "minStretch": 0.37217387758985254,
+          "maxStretch": 2.819288835690367,
+          "maxShear": 0.7450378989515277,
+          "maxDisplacement": 13.099883331470215
+        },
+        "B": {
+          "minDet": 0.3505328893661499,
+          "maxDet": 2.6450010538101196,
+          "minStretch": 0.37710480190308854,
+          "maxStretch": 2.909185749290589,
+          "maxShear": 0.7867130385407055,
+          "maxDisplacement": 13.016256407526699
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": true,
+        "baseline": {
+          "minDet": 0.362155537356621,
+          "maxDet": 2.6051161233098536,
+          "minStretch": 0.3786878315585558,
+          "maxStretch": 2.811858257774349,
+          "maxShear": 0.7369511764032294,
+          "maxDisplacement": 12.885859401062962
+        }
+      }
+    },
+    {
+      "time": 2.208333333333328,
+      "modes": {
+        "A": {
+          "minDet": 0.388224720954895,
+          "maxDet": 2.476790428161621,
+          "minStretch": 0.40360869590430437,
+          "maxStretch": 2.622014013092859,
+          "maxShear": 0.687114392054815,
+          "maxDisplacement": 11.793789557511671
+        },
+        "A+": {
+          "minDet": 0.39335179328918457,
+          "maxDet": 2.491065740585327,
+          "minStretch": 0.40050673883859406,
+          "maxStretch": 2.589002183465753,
+          "maxShear": 0.6687552479747069,
+          "maxDisplacement": 11.981882990414627
+        },
+        "B": {
+          "minDet": 0.38272273540496826,
+          "maxDet": 2.462358295917511,
+          "minStretch": 0.4050286902161287,
+          "maxStretch": 2.6621994496003696,
+          "maxShear": 0.7034540554878541,
+          "maxDisplacement": 11.906897924126175
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": true,
+        "baseline": {
+          "minDet": 0.3926222952329361,
+          "maxDet": 2.4264818730185755,
+          "minStretch": 0.4063349502938352,
+          "maxStretch": 2.5912867841715848,
+          "maxShear": 0.6566285173246138,
+          "maxDisplacement": 11.788580449912429
+        }
+      }
+    },
+    {
+      "time": 2.2166666666666615,
+      "modes": {
+        "A": {
+          "minDet": 0.4263748526573181,
+          "maxDet": 2.2778729796409607,
+          "minStretch": 0.43885605049686877,
+          "maxStretch": 2.38374471536585,
+          "maxShear": 0.59758072622632,
+          "maxDisplacement": 10.576750198642443
+        },
+        "A+": {
+          "minDet": 0.4315948486328125,
+          "maxDet": 2.2895023226737976,
+          "minStretch": 0.4358568591401087,
+          "maxStretch": 2.3568445427190263,
+          "maxShear": 0.5821916402105298,
+          "maxDisplacement": 10.74664417307636
+        },
+        "B": {
+          "minDet": 0.42110300064086914,
+          "maxDet": 2.2656837105751038,
+          "minStretch": 0.44032156393249966,
+          "maxStretch": 2.4153202544644534,
+          "maxShear": 0.6112347388821909,
+          "maxDisplacement": 10.680378101996073
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": true,
+        "baseline": {
+          "minDet": 0.4299012831222946,
+          "maxDet": 2.2371541978294562,
+          "minStretch": 0.4411310757579644,
+          "maxStretch": 2.3643420402445208,
+          "maxShear": 0.5717754899326529,
+          "maxDisplacement": 10.573085413133215
+        }
+      }
+    },
+    {
+      "time": 2.2249999999999948,
+      "modes": {
+        "A": {
+          "minDet": 0.4719562530517578,
+          "maxDet": 2.073326587677002,
+          "minStretch": 0.4818472838543312,
+          "maxStretch": 2.152179305431578,
+          "maxShear": 0.5053064640546931,
+          "maxDisplacement": 9.270208395319234
+        },
+        "A+": {
+          "minDet": 0.4773736596107483,
+          "maxDet": 2.0827125906944275,
+          "minStretch": 0.47769704581654787,
+          "maxStretch": 2.127864458210355,
+          "maxShear": 0.4934962292409002,
+          "maxDisplacement": 9.422719279066502
+        },
+        "B": {
+          "minDet": 0.46734464168548584,
+          "maxDet": 2.063528895378113,
+          "minStretch": 0.48349352134682005,
+          "maxStretch": 2.173600852448507,
+          "maxShear": 0.5160557637296402,
+          "maxDisplacement": 9.364564143712103
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.4735266432929919,
+          "maxDet": 2.0438093396245947,
+          "minStretch": 0.48330324668114094,
+          "maxStretch": 2.143651632637485,
+          "maxShear": 0.4854895947557329,
+          "maxDisplacement": 9.267126256922088
+        }
+      }
+    },
+    {
+      "time": 2.233333333333328,
+      "modes": {
+        "A": {
+          "minDet": 0.5238215923309326,
+          "maxDet": 1.8775036334991455,
+          "minStretch": 0.5313656292274377,
+          "maxStretch": 1.935150346174333,
+          "maxShear": 0.42207787850652373,
+          "maxDisplacement": 7.900484998820698
+        },
+        "A+": {
+          "minDet": 0.5293228030204773,
+          "maxDet": 1.8847275972366333,
+          "minStretch": 0.5275480761890449,
+          "maxStretch": 1.9166881594693594,
+          "maxShear": 0.41298960562739645,
+          "maxDisplacement": 8.03699860988969
+        },
+        "B": {
+          "minDet": 0.5193778276443481,
+          "maxDet": 1.8707665801048279,
+          "minStretch": 0.5333225140820154,
+          "maxStretch": 1.9529228877574945,
+          "maxShear": 0.42987838466257455,
+          "maxDisplacement": 7.987319144531928
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.5251962636794598,
+          "maxDet": 1.852327915936601,
+          "minStretch": 0.5352218408964564,
+          "maxStretch": 1.9298404583047575,
+          "maxShear": 0.40027330006161593,
+          "maxDisplacement": 7.8983013854400825
+        }
+      }
+    },
+    {
+      "time": 2.2416666666666614,
+      "modes": {
+        "A": {
+          "minDet": 0.5843806266784668,
+          "maxDet": 1.6942840218544006,
+          "minStretch": 0.5908698956764461,
+          "maxStretch": 1.732009826761649,
+          "maxShear": 0.3398059795077008,
+          "maxDisplacement": 6.495330205970768
+        },
+        "A+": {
+          "minDet": 0.5893210172653198,
+          "maxDet": 1.7002796530723572,
+          "minStretch": 0.5869902299141976,
+          "maxStretch": 1.7183408101520972,
+          "maxShear": 0.33250176284061755,
+          "maxDisplacement": 6.619267873027741
+        },
+        "B": {
+          "minDet": 0.5800044536590576,
+          "maxDet": 1.688893437385559,
+          "minStretch": 0.5917193643560099,
+          "maxStretch": 1.7454301012691409,
+          "maxShear": 0.34662598544265727,
+          "maxDisplacement": 6.575077054121595
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.5852321981320721,
+          "maxDet": 1.685741940757545,
+          "minStretch": 0.5939361728759087,
+          "maxStretch": 1.729035126448908,
+          "maxShear": 0.3189539745223924,
+          "maxDisplacement": 6.493641864786996
+        }
+      }
+    },
+    {
+      "time": 2.2499999999999947,
+      "modes": {
+        "A": {
+          "minDet": 0.6532866358757019,
+          "maxDet": 1.5199600458145142,
+          "minStretch": 0.654345833180561,
+          "maxStretch": 1.5463300714209356,
+          "maxShear": 0.2625858623206653,
+          "maxDisplacement": 5.225273623443068
+        },
+        "A+": {
+          "minDet": 0.6584681272506714,
+          "maxDet": 1.5250078439712524,
+          "minStretch": 0.6538522121998226,
+          "maxStretch": 1.5352166026432994,
+          "maxShear": 0.25624947734300174,
+          "maxDisplacement": 5.260815118737696
+        },
+        "B": {
+          "minDet": 0.6488103270530701,
+          "maxDet": 1.5162379741668701,
+          "minStretch": 0.6546627437889623,
+          "maxStretch": 1.5575610268747238,
+          "maxShear": 0.2680197794726447,
+          "maxDisplacement": 5.204976159934607
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.6535348273147896,
+          "maxDet": 1.518006373136667,
+          "minStretch": 0.654259074974281,
+          "maxStretch": 1.545046273076246,
+          "maxShear": 0.24277890347804298,
+          "maxDisplacement": 5.22341872786553
+        }
+      }
+    },
+    {
+      "time": 2.258333333333328,
+      "modes": {
+        "A": {
+          "minDet": 0.7261980772018433,
+          "maxDet": 1.3934552073478699,
+          "minStretch": 0.7084944910672546,
+          "maxStretch": 1.387255189263948,
+          "maxShear": 0.18605406101487135,
+          "maxDisplacement": 4.190627087433257
+        },
+        "A+": {
+          "minDet": 0.7310866117477417,
+          "maxDet": 1.3937708139419556,
+          "minStretch": 0.7082608455316046,
+          "maxStretch": 1.3767770521839988,
+          "maxShear": 0.18640666955759214,
+          "maxDisplacement": 4.207675513485806
+        },
+        "B": {
+          "minDet": 0.7235830426216125,
+          "maxDet": 1.3928278088569641,
+          "minStretch": 0.7087907707602157,
+          "maxStretch": 1.3939528903152185,
+          "maxShear": 0.19061412014024406,
+          "maxDisplacement": 4.174085049984198
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.7261587892179064,
+          "maxDet": 1.3899615935031733,
+          "minStretch": 0.7084417087498828,
+          "maxStretch": 1.3876166104649421,
+          "maxShear": 0.18097856360060235,
+          "maxDisplacement": 4.186004529620973
+        }
+      }
+    },
+    {
+      "time": 2.2666666666666613,
+      "modes": {
+        "A": {
+          "minDet": 0.8038813471794128,
+          "maxDet": 1.2859858274459839,
+          "minStretch": 0.7687766890016469,
+          "maxStretch": 1.251371988555989,
+          "maxShear": 0.1394247748508614,
+          "maxDisplacement": 3.164196341238721
+        },
+        "A+": {
+          "minDet": 0.8086316585540771,
+          "maxDet": 1.28653484582901,
+          "minStretch": 0.7685096181185218,
+          "maxStretch": 1.2433748502496724,
+          "maxShear": 0.14025726841564626,
+          "maxDisplacement": 3.177145848935947
+        },
+        "B": {
+          "minDet": 0.8017351031303406,
+          "maxDet": 1.2853769659996033,
+          "minStretch": 0.7691180359011481,
+          "maxStretch": 1.2550190678696314,
+          "maxShear": 0.1387095201773667,
+          "maxDisplacement": 3.151408562567401
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.8044492712985658,
+          "maxDet": 1.2848833205616517,
+          "minStretch": 0.7687259588440871,
+          "maxStretch": 1.25042286882063,
+          "maxShear": 0.13545535100483974,
+          "maxDisplacement": 3.1598741699342687
+        }
+      }
+    },
+    {
+      "time": 2.2749999999999946,
+      "modes": {
+        "A": {
+          "minDet": 0.8857822418212891,
+          "maxDet": 1.1910837888717651,
+          "minStretch": 0.8340380409404046,
+          "maxStretch": 1.1339019735965288,
+          "maxShear": 0.09475110832298789,
+          "maxDisplacement": 2.160808424256386
+        },
+        "A+": {
+          "minDet": 0.8898918032646179,
+          "maxDet": 1.1914915442466736,
+          "minStretch": 0.834082308652228,
+          "maxStretch": 1.1278505807665107,
+          "maxShear": 0.0954988743688649,
+          "maxDisplacement": 2.1716258503007504
+        },
+        "B": {
+          "minDet": 0.8838269114494324,
+          "maxDet": 1.190466821193695,
+          "minStretch": 0.8345763715556774,
+          "maxStretch": 1.1366385589451073,
+          "maxShear": 0.09444284140584792,
+          "maxDisplacement": 2.1491734804650275
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.8868239696447983,
+          "maxDet": 1.187642751468783,
+          "minStretch": 0.8341553894876086,
+          "maxStretch": 1.1322609919643236,
+          "maxShear": 0.09203382703416202,
+          "maxDisplacement": 2.157856890528627
+        }
+      }
+    },
+    {
+      "time": 2.283333333333328,
+      "modes": {
+        "A": {
+          "minDet": 0.9359745979309082,
+          "maxDet": 1.1022067070007324,
+          "minStretch": 0.9041342839666479,
+          "maxStretch": 1.0736567101186498,
+          "maxShear": 0.05248683834035701,
+          "maxDisplacement": 1.1934245289998902
+        },
+        "A+": {
+          "minDet": 0.9374509453773499,
+          "maxDet": 1.1026926040649414,
+          "minStretch": 0.9036529766021254,
+          "maxStretch": 1.0742365117557737,
+          "maxShear": 0.05310942252755514,
+          "maxDisplacement": 1.2037824252674383
+        },
+        "B": {
+          "minDet": 0.9356328248977661,
+          "maxDet": 1.101675808429718,
+          "minStretch": 0.9042327513719287,
+          "maxStretch": 1.0732294791453316,
+          "maxShear": 0.05215649770275245,
+          "maxDisplacement": 1.182742079952801
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.9367406000495824,
+          "maxDet": 1.098774452566324,
+          "minStretch": 0.9041501193058454,
+          "maxStretch": 1.0723690204785112,
+          "maxShear": 0.050866275506811866,
+          "maxDisplacement": 1.1924714966184853
+        }
+      }
+    },
+    {
+      "time": 2.291666666666661,
+      "modes": {
+        "A": {
+          "minDet": 0.8859449028968811,
+          "maxDet": 1.0761356353759766,
+          "minStretch": 0.9115009421722415,
+          "maxStretch": 1.1295992372762054,
+          "maxShear": 0.054717082685789974,
+          "maxDisplacement": 1.3757854651148798
+        },
+        "A+": {
+          "minDet": 0.8887719511985779,
+          "maxDet": 1.0809209942817688,
+          "minStretch": 0.9086488717056193,
+          "maxStretch": 1.1273528955025895,
+          "maxShear": 0.054744333658371926,
+          "maxDisplacement": 1.3607258073092716
+        },
+        "B": {
+          "minDet": 0.882045328617096,
+          "maxDet": 1.0714716911315918,
+          "minStretch": 0.9134218781365248,
+          "maxStretch": 1.1347201871841737,
+          "maxShear": 0.055010152850608056,
+          "maxDisplacement": 1.4106023312730216
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.8871239397851727,
+          "maxDet": 1.0743339132644378,
+          "minStretch": 0.9143898636429818,
+          "maxStretch": 1.1275482483374215,
+          "maxShear": 0.05387013017561938,
+          "maxDisplacement": 1.3753156744283732
+        }
+      }
+    },
+    {
+      "time": 2.2999999999999945,
+      "modes": {
+        "A": {
+          "minDet": 0.8090387582778931,
+          "maxDet": 1.1577285528182983,
+          "minStretch": 0.8558544136713887,
+          "maxStretch": 1.2377889015084684,
+          "maxShear": 0.09521320412280827,
+          "maxDisplacement": 2.403507584208568
+        },
+        "A+": {
+          "minDet": 0.8109702467918396,
+          "maxDet": 1.1615206599235535,
+          "minStretch": 0.8539265009527298,
+          "maxStretch": 1.236190117607415,
+          "maxShear": 0.09474127302602761,
+          "maxDisplacement": 2.369686364185313
+        },
+        "B": {
+          "minDet": 0.8074120283126831,
+          "maxDet": 1.1545533537864685,
+          "minStretch": 0.857458807599239,
+          "maxStretch": 1.2409855727542867,
+          "maxShear": 0.09529112773188446,
+          "maxDisplacement": 2.422445789878166
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.8122873020368894,
+          "maxDet": 1.1566314990058926,
+          "minStretch": 0.8586648260907259,
+          "maxStretch": 1.2326820757388341,
+          "maxShear": 0.09435190096990116,
+          "maxDisplacement": 2.402970570911229
+        }
+      }
+    },
+    {
+      "time": 2.308333333333328,
+      "modes": {
+        "A": {
+          "minDet": 0.7460002303123474,
+          "maxDet": 1.240460455417633,
+          "minStretch": 0.8049426328375704,
+          "maxStretch": 1.3436492816061247,
+          "maxShear": 0.13167787556119556,
+          "maxDisplacement": 3.317388175755641
+        },
+        "A+": {
+          "minDet": 0.7474103569984436,
+          "maxDet": 1.2438255548477173,
+          "minStretch": 0.8027074485579044,
+          "maxStretch": 1.3418628835859292,
+          "maxShear": 0.12932873501230238,
+          "maxDisplacement": 3.277984439438274
+        },
+        "B": {
+          "minDet": 0.7442060708999634,
+          "maxDet": 1.2368566393852234,
+          "minStretch": 0.8070771538009498,
+          "maxStretch": 1.3457747468161214,
+          "maxShear": 0.1327038439918189,
+          "maxDisplacement": 3.3229855116849545
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.7503753434273512,
+          "maxDet": 1.239472837453063,
+          "minStretch": 0.8053436479654997,
+          "maxStretch": 1.3356037729358616,
+          "maxShear": 0.13118219184602686,
+          "maxDisplacement": 3.3172855661744274
+        }
+      }
+    },
+    {
+      "time": 2.316666666666661,
+      "modes": {
+        "A": {
+          "minDet": 0.6953431963920593,
+          "maxDet": 1.3166353106498718,
+          "minStretch": 0.7573273304071937,
+          "maxStretch": 1.442536357398789,
+          "maxShear": 0.16857842741228637,
+          "maxDisplacement": 4.109770054647572
+        },
+        "A+": {
+          "minDet": 0.6963629722595215,
+          "maxDet": 1.3197073936462402,
+          "minStretch": 0.7555347414152672,
+          "maxStretch": 1.4411892222166403,
+          "maxShear": 0.16528555030927825,
+          "maxDisplacement": 4.07207247461253
+        },
+        "B": {
+          "minDet": 0.6939569115638733,
+          "maxDet": 1.3133493661880493,
+          "minStretch": 0.7592148175293234,
+          "maxStretch": 1.4446857610755097,
+          "maxShear": 0.16902008021783677,
+          "maxDisplacement": 4.104260431064154
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.6996084825092108,
+          "maxDet": 1.316153440133112,
+          "minStretch": 0.7575299452605683,
+          "maxStretch": 1.4346097134733815,
+          "maxShear": 0.16816276808186456,
+          "maxDisplacement": 4.108167515159878
+        }
+      }
+    },
+    {
+      "time": 2.3249999999999944,
+      "modes": {
+        "A": {
+          "minDet": 0.6550676822662354,
+          "maxDet": 1.3844008445739746,
+          "minStretch": 0.719396044702438,
+          "maxStretch": 1.532092434672321,
+          "maxShear": 0.20147142068942542,
+          "maxDisplacement": 4.77406700879737
+        },
+        "A+": {
+          "minDet": 0.6559553742408752,
+          "maxDet": 1.387706995010376,
+          "minStretch": 0.7178738632602393,
+          "maxStretch": 1.5289582220145095,
+          "maxShear": 0.1986164564703283,
+          "maxDisplacement": 4.741265033605814
+        },
+        "B": {
+          "minDet": 0.6543091535568237,
+          "maxDet": 1.382077932357788,
+          "minStretch": 0.7207864042556835,
+          "maxStretch": 1.5335312124624538,
+          "maxShear": 0.20136261736189306,
+          "maxDisplacement": 4.76121845112789
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.659101365538838,
+          "maxDet": 1.3846694524827985,
+          "minStretch": 0.7192883791634798,
+          "maxStretch": 1.524332275086709,
+          "maxShear": 0.20131116772823207,
+          "maxDisplacement": 4.770667266635349
+        }
+      }
+    },
+    {
+      "time": 2.3333333333333277,
+      "modes": {
+        "A": {
+          "minDet": 0.6235138773918152,
+          "maxDet": 1.4428367614746094,
+          "minStretch": 0.6896184769652485,
+          "maxStretch": 1.6081405117674032,
+          "maxShear": 0.229117396491471,
+          "maxDisplacement": 5.307492452101521
+        },
+        "A+": {
+          "minDet": 0.6235847473144531,
+          "maxDet": 1.4457111954689026,
+          "minStretch": 0.6882365639990174,
+          "maxStretch": 1.606015940478792,
+          "maxShear": 0.2269693590953546,
+          "maxDisplacement": 5.279098984399685
+        },
+        "B": {
+          "minDet": 0.6232161521911621,
+          "maxDet": 1.4404792189598083,
+          "minStretch": 0.6908059334913709,
+          "maxStretch": 1.6094224428115007,
+          "maxShear": 0.22910878777282953,
+          "maxDisplacement": 5.289564700844739
+        }
+      },
+      "safety": {
+        "fallback": false,
+        "baselineStrain": false,
+        "baseline": {
+          "minDet": 0.6282503537129269,
+          "maxDet": 1.44300579347013,
+          "minStretch": 0.6895879861243264,
+          "maxStretch": 1.6005589621944365,
+          "maxShear": 0.22927988111196135,
+          "maxDisplacement": 5.305155284909334
+        }
+      }
+    }
+  ],
+  "extrema": {
+    "A": {
+      "minDet": 0.293612539768219,
+      "maxStretch": 3.488300451072735,
+      "minStretch": 0.3181059278968441
+    },
+    "A+": {
+      "minDet": 0.30120760202407837,
+      "maxStretch": 3.407909471314474,
+      "minStretch": 0.31178093603114787
+    },
+    "B": {
+      "minDet": 0.2862784266471863,
+      "maxStretch": 3.5783623600408045,
+      "minStretch": 0.3216178793448156
+    }
+  }
+}
