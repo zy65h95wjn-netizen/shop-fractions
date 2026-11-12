@@ -6,7 +6,8 @@ let checks=0;const ok=(v,label)=>{assert.ok(v,label);checks++;};
 const report={checks:0,backend:[],legacyComparisons:0,errors:[],artworkSha256:'b5af2ccfa267b2ea8b4a6fa4b98aa2935e7f2b4e869d279f93d99fb9e5964349'};
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 const original=execFileSync('git',['show','ddf3456cc937c7f84f0b022f76f6824e59c2d079:peach-physics/v8/index.html'],{cwd:root,maxBuffer:3e6}).toString();
-const current=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
+// The fabric A/B branch adds B-only lines (guarded by HOLLY_FABRIC); A's code path must equal r6.
+const current=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8').split('\n').filter(line=>!/^\s*if\(HOLLY_FABRIC\)/.test(line)).join('\n');
 for(const [start,end] of [['function step(dt){','function linkedImpulse('],['function linkedImpulse(','function savePrefs(){'],['function hollyVelocity(x,y,side){','// Bilinear CPU texture remapping'],['function renderHollyFallback(sc){','function initGL(){'],['const PRESETS=Object.freeze','const currentPresets=']]){
  assert.equal(current.slice(current.indexOf(start),current.indexOf(end)),original.slice(original.indexOf(start),original.indexOf(end)));checks++;
 }
@@ -75,14 +76,14 @@ async function save(p,name){fs.writeFileSync(path.join(out,name+'.png'),Buffer.f
  // Existing service-worker lifecycle updates the shell and preserves portrait bytes.
  const context=await browser.newContext(),p=await context.newPage();await p.goto((process.env.PEACH_TEST_URL||'http://127.0.0.1:8000')+'/peach-physics/v8/');
  const offline=await p.evaluate(async()=>{
-  await caches.open('peach-physics-v008-r8');await caches.open('peach-physics-v0071-preservation-test');
+  await caches.open('peach-physics-v008-r9');await caches.open('peach-physics-v0071-preservation-test');
   await navigator.serviceWorker.register('./sw.js');await navigator.serviceWorker.ready;
   if(!navigator.serviceWorker.controller)await new Promise(r=>navigator.serviceWorker.addEventListener('controllerchange',r,{once:true}));
-  const keys=await caches.keys(),cache=await caches.open('peach-physics-v008-r9'),response=await cache.match('./assets/holly-heartbreaker.jpg?v=r7');
+  const keys=await caches.keys(),cache=await caches.open('peach-physics-v008-r9-2'),response=await cache.match('./assets/holly-heartbreaker.jpg?v=r7');
   const bytes=await response.arrayBuffer(),hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
   return {keys,hash};
  });
- ok(offline.keys.includes('peach-physics-v008-r9')&&!offline.keys.includes('peach-physics-v008-r8'),'r9 cache replaces r8');
+ ok(offline.keys.includes('peach-physics-v008-r9-1-fabric-ab')&&!offline.keys.includes('peach-physics-v008-r9'),'A/B cache replaces r9');
  ok(offline.keys.includes('peach-physics-v0071-preservation-test'),'earlier caches preserved');ok(offline.hash===report.artworkSha256,'offline cache has exact approved asset');
  await context.setOffline(true);await p.reload();await p.waitForFunction(()=>window.__peachPhysicsDebug&&document.querySelector('#loader').classList.contains('hiding'));
  for(const id of ['midnight','aurelia','holly']){
