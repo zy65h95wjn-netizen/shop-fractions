@@ -1,0 +1,213 @@
+{
+  "cases": [
+    {
+      "mode": "A",
+      "preset": "natural",
+      "side": 0,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 16.910642747858887,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "A",
+      "preset": "natural",
+      "side": 1,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 17.058071559371832,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "A",
+      "preset": "playful",
+      "side": 0,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 16.910642747858887,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "A",
+      "preset": "playful",
+      "side": 1,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 17.058071559371832,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "A",
+      "preset": "chaos",
+      "side": 0,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 16.910642747858887,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "A",
+      "preset": "chaos",
+      "side": 1,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 17.058071559371832,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "A+",
+      "preset": "natural",
+      "side": 0,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 16.910642747858887,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "A+",
+      "preset": "natural",
+      "side": 1,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 17.058071559371832,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "A+",
+      "preset": "playful",
+      "side": 0,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 16.910642747858887,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "A+",
+      "preset": "playful",
+      "side": 1,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 17.058071559371832,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "A+",
+      "preset": "chaos",
+      "side": 0,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 16.910642747858887,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "A+",
+      "preset": "chaos",
+      "side": 1,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 17.058071559371832,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "B",
+      "preset": "natural",
+      "side": 0,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 16.910642747858887,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "B",
+      "preset": "natural",
+      "side": 1,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 17.058071559371832,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "B",
+      "preset": "playful",
+      "side": 0,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 16.910642747858887,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "B",
+      "preset": "playful",
+      "side": 1,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 17.058071559371832,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "B",
+      "preset": "chaos",
+      "side": 0,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 16.910642747858887,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    },
+    {
+      "mode": "B",
+      "preset": "chaos",
+      "side": 1,
+      "heldDrift": 0,
+      "otherSideDisplacement": 0,
+      "heldDisplacement": 17.058071559371832,
+      "returnExact": true,
+      "grabsAfterCancel": 0
+    }
+  ],
+  "two": {
+    "enabled": true,
+    "grabbed": [
+      0,
+      1
+    ]
+  },
+  "remaining": {
+    "enabled": true,
+    "grabbed": [
+      1
+    ]
+  },
+  "held": 13.265799593650582,
+  "released": 12.87607085080781,
+  "bounce": [
+    {
+      "mode": "A",
+      "identical": true
+    },
+    {
+      "mode": "A+",
+      "identical": true
+    },
+    {
+      "mode": "B",
+      "identical": true
+    }
+  ]
+}

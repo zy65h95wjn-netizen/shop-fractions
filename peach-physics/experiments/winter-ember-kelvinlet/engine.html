@@ -84,7 +84,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <span id="status" role="status"></span>
  <div id="pulse"></div>
  <div id="santaReaction" role="status" aria-live="polite"></div>
- <div id="hint">Tap · drag · two fingers</div>
+ <div id="hint">Pull slowly · hold · release</div>
  <button id="character" type="button" aria-label="Switch character" title="Switch character"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h13l-3-3m3 3-3 3M19 17H6l3-3m-3 3 3 3" /></svg></button>
  <div id="characterToast" role="status" aria-live="polite"></div>
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
@@ -112,6 +112,7 @@ import {field,matching,quality} from "./field.js";
 'use strict';
 const experimentStorage={getItem:()=>null,setItem:()=>{}};
 let labMode='A',labGains=[1,1],manual=false;
+let holdEnabled=new URLSearchParams(location.search).get('framing')==='detail';
 let dragIsolation=true;const dragEnvelope=[0,0];
 function advanceDragEnvelope(dt){for(let side=0;side<2;side++){const dragging=[...pointers.values()].some(p=>p.side===side&&p.travel>8);dragEnvelope[side]=dragging?Math.min(1,dragEnvelope[side]+dt*18):Math.max(0,dragEnvelope[side]-dt*4);}}
 
@@ -1207,6 +1208,13 @@ function step(dt){
  }
  for(let i=0;i<nodes.length;i++){
   const n=nodes[i],f=forces[i],inertia=i%3===2?.86:1;
+  const held=holdEnabled&&[...pointers.values()].find(p=>p.side===n.side&&p.grabbed);
+  if(held){
+   // Kinematic pointer constraint: same target in every method and independent
+   // of pointer speed. Restore the original spring integration on release.
+   const target=held.grabTargets[i%3];
+   n.dx=target.dx;n.dy=target.dy;n.vx=0;n.vy=0;continue;
+  }
   n.vx+=f.fx*dt*inertia;n.vy+=f.fy*dt*inertia;
   const bx=isSanta()?58:26,by=isSanta()?66:30;
   n.dx=clamp(n.dx+n.vx*dt,-bx,bx);n.dy=clamp(n.dy+n.vy*dt,-by,by);
@@ -1347,11 +1355,14 @@ canvas.addEventListener('pointerdown',e=>{
  if(e.pointerType==='mouse'&&e.button!==0)return;
  const raw=readPoint(e),side=pickSide(raw.x,raw.y);
  if(side<0)return;
+ if(holdEnabled&&[...pointers.values()].some(f=>f.side===side))return;
  const {p,offsetX,offsetY}=touchAnchor(side,raw);
  e.preventDefault();
  try{canvas.setPointerCapture?.(e.pointerId);}catch(err){/* Pointer still works without capture. */}
  wake();
- pointers.set(e.pointerId,{id:e.pointerId,side,last:p,lastTime:performance.now(),startTime:performance.now(),travel:0,vx:0,vy:0,pressure:e.pressure||.5,offsetX,offsetY});
+ pointers.set(e.pointerId,{id:e.pointerId,side,last:p,lastTime:performance.now(),startTime:performance.now(),travel:0,vx:0,vy:0,pressure:e.pressure||.5,offsetX,offsetY,
+  grabOrigin:{x:p.x,y:p.y},grabbed:false,
+  grabBase:nodes.slice(side*3,side*3+3).map(n=>({dx:n.dx,dy:n.dy,weight:.20+.8*Math.exp(-1.4*(((p.x-n.x)/n.rx)**2+((p.y-n.y)/n.ry)**2))})),grabTargets:[]});
  updatePress(side,p.x,p.y);
  // Light contact on press. A true tap receives its sharp slap impulse on release.
  impulse(side,p.x,p.y,.15);
@@ -1366,8 +1377,14 @@ canvas.addEventListener('pointermove',e=>{
  // Low-pass filtered velocity produces a directional impulse when the finger is released.
  finger.vx=clamp(finger.vx*.55+(dx/dt)*.45,-1100,1100);
  finger.vy=clamp(finger.vy*.55+(dy/dt)*.45,-1100,1100);
+ if(holdEnabled){
+  finger.grabbed=finger.grabbed||finger.travel>8;
+  const totalX=p.x-finger.grabOrigin.x,totalY=p.y-finger.grabOrigin.y;
+  finger.grabTargets=finger.grabBase.map(n=>({dx:clamp(n.dx+totalX*.17*n.weight,-26,26),dy:clamp(n.dy+totalY*.17*n.weight,-30,30)}));
+ }
  // Simultaneous fingers contribute only to their own side's nodes.
  for(let i=finger.side*3;i<finger.side*3+3;i++){
+  if(holdEnabled&&finger.grabbed){const n=nodes[i],target=finger.grabTargets[i%3];n.dx=target.dx;n.dy=target.dy;n.vx=n.vy=0;continue;}
   const n=nodes[i],q=((p.x-n.x)/n.rx)**2+((p.y-n.y)/n.ry)**2,weight=.20+.8*Math.exp(-q*1.4);
   const leftTune=isSanta()?1.55:isHolly()?.95:currentCharacter().id==='midnight' && finger.side===0?.90:1;
   const bx=isSanta()?58:26,by=isSanta()?66:30;
@@ -1391,7 +1408,7 @@ function release(e){
  if(e.type==='pointerup'){
   const now=performance.now(),speed=Math.hypot(f.vx,f.vy),age=now-f.lastTime;
   const held=now-f.startTime;
-  if(f.travel<27&&held<400){
+  if(!(holdEnabled&&f.grabbed)&&f.travel<27&&held<400){
    slap(f.side,f.last.x,f.last.y,f.last,(isHolly()||isSanta())?clamp(.55+f.pressure*.7+Math.min(held,250)/1000,.6,1.5):1);
   }else if(f.travel>34&&speed>175&&age<135){
    impulse(f.side,f.last.x,f.last.y,clamp(speed/900,.32,.9),f.vx,f.vy,true);
@@ -1470,6 +1487,8 @@ window.addEventListener('keydown',e=>{if(e.key==='Escape')openPanel(false);if(e.
 // Read-only diagnostics for automated tests. Not a remote control or telemetry endpoint.
 window.__peachPhysicsDebug={snapshot:()=>({character:currentCharacter().id,characterName:currentCharacter().name,characters:CHARACTERS.map(c=>c.id),regions:regions.map(z=>({...z})),nodes:nodes.map(n=>({side:n.side,dx:+n.dx.toFixed(2),dy:+n.dy.toFixed(2)})),followers:followers.map(f=>({dx:+f.dx.toFixed(2),dy:+f.dy.toFixed(2)})),impacts:impacts.map(p=>({v:+p.v.toFixed(3),contact:+p.contact.toFixed(3),target:p.target})),waves:waves.map(w=>({age:+w.age.toFixed(3),strength:+w.strength.toFixed(3)})),frames,activePointers:[...pointers.values()].map(p=>({id:p.id,side:p.side,vx:p.vx,vy:p.vy})),panelOpen:panel.classList.contains('open'),renderer:fallback?'canvas':'webgl',size:[cssW,cssH],image:[W,H],framing:{x:ox,y:oy,width:drawW,height:drawH},model:{...model},preset:activePreset,slapAudioEnabled,santaLaughEnabled,santaLaughSound,santaLaughTime,slapCount,flickCount,lastGesture,status:diagnostic}),kick:(side=0)=>{const c=currentCharacter();impulse(side,...c.bounceCenters[side],1);},switchCharacter:(id)=>chooseCharacter(typeof id==='number'?id:CHARACTERS.findIndex(c=>c.id===id))};
 window.emberLab={
+ hold:v=>{holdEnabled=v;for(const f of pointers.values())f.grabbed=false;},
+ holdState:()=>({enabled:holdEnabled,grabbed:[...pointers.values()].filter(f=>f.grabbed).map(f=>f.side)}),
  isolation:v=>{dragIsolation=v;render();}, isolationState:()=>({enabled:dragIsolation,envelope:[...dragEnvelope]}),
  ready:()=>!!img, mode:m=>{labMode=m;render();return !fallback;},
  state:()=>structuredClone({nodes,followers,impacts,waves,model}),
