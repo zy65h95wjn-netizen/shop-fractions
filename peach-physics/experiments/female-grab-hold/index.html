@@ -108,6 +108,52 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
 <script>
 (() => {
 'use strict';
+// Rendering-only constraints. Springs and pointer targets are not modified.
+const dragBoundaryEnabled=new URLSearchParams(location.search).get('boundaries')!=='off';
+const dragBoundary=[0,0];
+function advanceDragBoundary(dt){
+ for(let side=0;side<2;side++){
+  const active=dragBoundaryEnabled&&[...pointers.values()].some(p=>p.side===side&&p.travel>8);
+  dragBoundary[side]=active?Math.min(1,dragBoundary[side]+dt*18):Math.max(0,dragBoundary[side]-dt*4);
+ }
+}
+function boundarySmooth(a,b,x){const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);}
+function emberCrease(y){const t=clamp((y-1060)/170,0,1);return 365+67*t*t+7*(1-boundarySmooth(1005,1060,y));}
+function emberSupport(side,x,y){return boundarySmooth(5,70,side?x-emberCrease(y):emberCrease(y)-x);}
+function midnightSupport(x,y){const crease=1300-.0012*(x-285)**2;return 1-boundarySmooth(crease-65,crease,y);}
+function aureliaDragWeight(side,x,y){
+ const distance=Math.min(...aureliaPlanes[side].map(([nx,ny,c])=>nx*x+ny*y+c));
+ const feather=boundarySmooth(0,60,distance);
+ return feather*(side===0?boundarySmooth(835,915,y):1);
+}
+function makeDragMasks(mask,side){
+ const [sx,sy,sw,sh]=fallbackRect(side),w=mask.width,h=mask.height;
+ const dragMask=document.createElement('canvas'),supportMask=document.createElement('canvas'),mixedMask=document.createElement('canvas'),workMask=document.createElement('canvas');
+ for(const c of [dragMask,supportMask,mixedMask,workMask]){c.width=w;c.height=h;}
+ const pixels=mask.getContext('2d').getImageData(0,0,w,h),support=supportMask.getContext('2d').createImageData(w,h),id=currentCharacter().id;
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  const px=sx+(x+.5)*sw/w,py=sy+(y+.5)*sh/h,at=(y*w+x)*4;let factor=1;
+  if(id==='ember')factor=emberSupport(side,px,py);
+  else if(id==='midnight'&&side===0)factor=midnightSupport(px,py);
+  else if(id==='aurelia'){const original=aureliaSkinWeight(side,px,py);factor=original?Math.min(1,aureliaDragWeight(side,px,py)/original):0;}
+  pixels.data[at+3]*=factor;support.data[at+3]=Math.round(255*factor);
+ }
+ dragMask.getContext('2d').putImageData(pixels,0,0);supportMask.getContext('2d').putImageData(support,0,0);
+ return {dragMask,supportMask,mixedMask,workMask};
+}
+function fallbackDragMask(backup,side,shiftX,shiftY){
+ const amount=dragBoundary[side];if(!amount)return backup.mask;
+ const {mask,dragMask,supportMask,mixedMask,workMask}=backup;
+ const work=workMask.getContext('2d');work.globalCompositeOperation='copy';work.drawImage(dragMask,0,0);
+ if(currentCharacter().id==='ember'){
+  const [, ,sw,sh]=fallbackRect(side);work.globalCompositeOperation='destination-in';
+  work.drawImage(supportMask,shiftX*mask.width/sw,shiftY*mask.height/sh);
+ }
+ const mix=mixedMask.getContext('2d');mix.globalCompositeOperation='copy';mix.globalAlpha=1-amount;mix.drawImage(mask,0,0);
+ mix.globalCompositeOperation='lighter';mix.globalAlpha=amount;mix.drawImage(workMask,0,0);mix.globalAlpha=1;
+ return mixedMask;
+}
+
 // Preview preferences cannot overwrite production profiles on the same origin.
 const previewStorage={getItem:k=>localStorage.getItem('female-grab-preview:'+k),setItem:(k,v)=>localStorage.setItem('female-grab-preview:'+k,v)};
 let grabHoldEnabled=new URLSearchParams(location.search).get('hold')!=='off';
@@ -342,7 +388,9 @@ function createAureliaShapeTexture(){
  const w=528,h=256,pixels=new Uint8Array(w*h*4);
  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
   const at=(y*w+x)*4;pixels[at]=Math.round(255*aureliaSkinWeight(0,112+x+.5,768+y+.5));
-  pixels[at+1]=Math.round(255*aureliaSkinWeight(1,112+x+.5,768+y+.5));pixels[at+3]=255;
+  pixels[at+1]=Math.round(255*aureliaSkinWeight(1,112+x+.5,768+y+.5));
+  pixels[at+2]=Math.round(255*aureliaDragWeight(0,112+x+.5,768+y+.5));
+  pixels[at+3]=Math.round(255*aureliaDragWeight(1,112+x+.5,768+y+.5));
  }
  const mask=gl.createTexture();gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,mask);
  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
@@ -765,6 +813,8 @@ function initGL(){
  uniform vec2 uWaves[2];
  varying vec2 vUV;
  varying vec2 vRawUV;
+ varying vec2 vEmberLeft;
+ varying vec2 vEmberRight;
  varying vec2 vLeftVelocity;
  varying vec2 vAureliaLeft;
  varying vec2 vAureliaRight;
@@ -867,7 +917,7 @@ function initGL(){
   vAureliaLeft=vec2(0.0);vAureliaRight=vec2(0.0);
   vLeftVelocity=vec2(0.0);
   vec2 uv=aPosition*uCover.xy+uCover.zw;
-  vRawUV=uv;
+  vRawUV=uv;vEmberLeft=vec2(0.0);vEmberRight=vec2(0.0);
   if(uSanta>0.5){
    vAureliaLeft=santaVelocity(uv);vUV=uv;
    gl_Position=vec4(aPosition.x*2.0-1.0,1.0-aPosition.y*2.0,0.0,1.0);return;
@@ -918,7 +968,9 @@ function initGL(){
     // there avoids both triangle leakage and folds at the expanded skin rim.
     vLeftVelocity=leftVelocity(uv);
    }else{
-    drift+=edge*(local+press+wave);
+    vec2 contribution=edge*(local+press+wave);
+    if(s==0)vEmberLeft=contribution;else vEmberRight=contribution;
+    drift+=contribution;
    }
   }
   vUV=clamp(uv-drift,.001,.999);
@@ -926,8 +978,16 @@ function initGL(){
  }`;
  const fragment=`precision highp float;
  uniform sampler2D uPhoto;
+ uniform vec2 uDragBoundary;
+ uniform float uEmberBoundary;
+ float emberCrease(float y){float t=clamp((y-1060.0)/170.0,0.0,1.0);return 365.0+67.0*t*t+7.0*(1.0-smoothstep(1005.0,1060.0,y));}
+ float emberSupport(vec2 uv,float side){vec2 p=uv*vec2(941.0,1671.0);return smoothstep(5.0,70.0,side<.5?emberCrease(p.y)-p.x:p.x-emberCrease(p.y));}
+ float midnightSupport(vec2 uv){vec2 p=uv*vec2(941.0,1671.0);float crease=1300.0-.0012*pow(p.x-285.0,2.0);return 1.0-smoothstep(crease-65.0,crease,p.y);}
+
  varying vec2 vUV;
  varying vec2 vRawUV;
+ varying vec2 vEmberLeft;
+ varying vec2 vEmberRight;
  varying vec2 vLeftVelocity;
  varying vec2 vAureliaLeft;
  varying vec2 vAureliaRight;
@@ -946,18 +1006,24 @@ function initGL(){
  void main(){
   if(vRawUV.x<0.0 || vRawUV.x>1.0 || vRawUV.y<0.0 || vRawUV.y>1.0) discard;
   vec2 photoUV=vUV;
+  if(uEmberBoundary>.5&&(uDragBoundary.x>0.0||uDragBoundary.y>0.0)){
+   float l=min(emberSupport(vRawUV,0.0),emberSupport(vRawUV-vEmberLeft,0.0));
+   float r=min(emberSupport(vRawUV,1.0),emberSupport(vRawUV-vEmberRight,1.0));
+   photoUV=clamp(vRawUV-vEmberLeft*mix(1.0,l,uDragBoundary.x)-vEmberRight*mix(1.0,r,uDragBoundary.y),.001,.999);
+  }
   if(dot(vLeftVelocity,vLeftVelocity)>0.0 && vRawUV.x>.15 && vRawUV.x<.50 && vRawUV.y>.58 && vRawUV.y<.84){
    // Flow through a fixed skin envelope in four short increments. The moving
    // region does not shrink as the gesture gets stronger. Clothing stays fixed.
    vec2 sampleUV=vRawUV;
-   for(int k=0;k<4;k++)sampleUV-=vLeftVelocity*leftEnvelope(sampleUV)/4.0;
+   for(int k=0;k<4;k++)sampleUV-=vLeftVelocity*leftEnvelope(sampleUV)*mix(1.0,midnightSupport(sampleUV),uDragBoundary.x)/4.0;
    photoUV+=sampleUV-vRawUV;
   }
   if(uAurelia>0.5){
    // Integrate within fixed masks, so zero-weight pixels remain exactly anchored.
    vec2 sampleUV=vRawUV;
    for(int k=0;k<6;k++){
-    vec2 weights=texture2D(uAureliaShape,(sampleUV*vec2(756.0,1280.0)-vec2(112.0,768.0))/vec2(528.0,256.0)).rg;
+    vec4 mask=texture2D(uAureliaShape,(sampleUV*vec2(756.0,1280.0)-vec2(112.0,768.0))/vec2(528.0,256.0));
+    vec2 weights=mix(mask.rg,mask.ba,uDragBoundary);
     sampleUV-=(vAureliaLeft*weights.r+vAureliaRight*weights.g)/6.0;
    }
    photoUV=sampleUV;
@@ -1094,7 +1160,7 @@ function initFallback(){
    }
    m.putImageData(pixels,0,0);
   }
-  return {layer,mask,ctx:layer.getContext('2d')};
+  return {layer,mask,ctx:layer.getContext('2d'),...makeDragMasks(mask,side)};
  });
  say('Reduced graphics mode');
 }
@@ -1125,7 +1191,7 @@ function render(){
    // Preserve source sampling on the left; gently reduce the screen-right displacement.
    const gain=side===1?.97:1,followGain=side===1?.35:.35;
    ctx.drawImage(img,srcX-(n.dx+followers[side].dx*followGain)*.8*gain,srcY-(n.dy+followers[side].dy*followGain)*.8*gain,sw,sh,0,0,layer.width,layer.height);
-   ctx.globalCompositeOperation='destination-in';ctx.drawImage(mask,0,0);
+   ctx.globalCompositeOperation='destination-in';ctx.drawImage(fallbackDragMask(backups[side],side,(n.dx+followers[side].dx*followGain)*.8*gain,(n.dy+followers[side].dy*followGain)*.8*gain),0,0);
    ctx.globalCompositeOperation='source-over';
    // A slight scale contraction illustrates contact in reduced-graphics mode without shifting the garment boundary.
    const press=impacts[side].contact;
@@ -1136,6 +1202,8 @@ function render(){
  }
  gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);
  gl.useProgram(program);
+ gl.uniform2fv(gl.getUniformLocation(program,'uDragBoundary'),dragBoundary);
+ gl.uniform1f(gl.getUniformLocation(program,'uEmberBoundary'),currentCharacter().id==='ember'?1:0);
  gl.uniform4fv(coverLoc,new Float32Array(uvCover));
   gl.uniform2fv(offsetLoc,new Float32Array(nodes.flatMap(n=>[n.dx/W,n.dy/H])));
   gl.uniform2fv(secondaryLoc,new Float32Array(followers.flatMap(f=>[f.dx/W,f.dy/H])));
@@ -1144,6 +1212,7 @@ function render(){
  gl.drawElements(gl.TRIANGLES,meshCount,gl.UNSIGNED_SHORT,0);
 }
 function step(dt){
+ advanceDragBoundary(dt);
  if(isSanta())advanceSantaLaugh(dt);
  const hz=isSanta()?1.65-model.softness*.007:isHolly()?3.0-model.softness*.012:4.3-model.softness*.018,omega=2*Math.PI*hz,k=omega*omega;
  const dampingRatio=isSanta()?.12+model.settle*.0025:isHolly()?.12+model.settle*.0022:.13+model.settle*.0032,damping=2*omega*dampingRatio*.97,couple=k*.145; // Small lift in decay time.
@@ -1395,7 +1464,7 @@ function release(e){
 canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('lostpointercapture',release);
 window.addEventListener('blur',()=>{pointers.clear();for(const p of impacts)p.target=0;});
 function bounceBoth(){if(isSanta()){santaImpulse(0,470,790,1.25);startSantaLaugh();wake();return;}const c=currentCharacter();impulse(0,...c.bounceCenters[0],1.05);impulse(1,...c.bounceCenters[1],.93);wake();}
-function reset(){stopSantaLaugh();for(const n of nodes){n.dx=0;n.dy=0;n.vx=0;n.vy=0;}for(const f of followers){f.dx=f.dy=f.vx=f.vy=0;}for(const p of impacts){p.v=p.contact=p.target=0;}for(const w of waves){w.age=1;w.strength=0;}pointers.clear();}
+function reset(){dragBoundary.fill(0);stopSantaLaugh();for(const n of nodes){n.dx=0;n.dy=0;n.vx=0;n.vy=0;}for(const f of followers){f.dx=f.dy=f.vx=f.vy=0;}for(const p of impacts){p.v=p.contact=p.target=0;}for(const w of waves){w.age=1;w.strength=0;}pointers.clear();}
 function openPanel(flag){const shown=typeof flag==='boolean'?flag:!panel.classList.contains('open');panel.classList.toggle('open',shown);scrim.classList.toggle('show',shown);panel.setAttribute('aria-hidden',String(!shown));gear.setAttribute('aria-expanded',String(shown));gear.setAttribute('aria-label',shown?'Close physics controls':'Show physics controls');/* Gear stays a single icon whether the panel is open or closed. */}
 gear.addEventListener('click',()=>openPanel());document.getElementById('close').addEventListener('click',()=>openPanel(false));scrim.addEventListener('click',()=>openPanel(false));document.getElementById('fullscreen').addEventListener('click',()=>openPanel(false));
 document.getElementById('both').addEventListener('click',()=>{bounceBoth();openPanel(false);});

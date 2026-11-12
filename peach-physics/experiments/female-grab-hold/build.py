@@ -1,6 +1,7 @@
 """Derive an isolated all-character preview from the exact production r11 file."""
 from pathlib import Path
-import re,shutil
+import re,shutil,sys
+sys.dont_write_bytecode=True
 here=Path(__file__).resolve().parent
 source=here.parents[1]/'v8'
 s=(source/'index.html').read_text()
@@ -48,6 +49,8 @@ document.getElementById('grabHold').addEventListener('click',()=>{grabHoldEnable
 document.getElementById""",1)
 # Public diagnostic only, full controls injected by tests.
 s=s.replace('frames,activePointers:', 'frames,grabHold:canGrabHold(),activePointers:').replace('side:p.side,vx:p.vx,vy:p.vy}', 'side:p.side,vx:p.vx,vy:p.vy,grabbed:!!p.grabbed}')
+from boundary_patch import patch
+s=patch(s)
 (here/'index.html').write_text(s)
 shutil.copytree(source/'assets',here/'assets',dirs_exist_ok=True)
 print('Built isolated r11 preview with original assets')

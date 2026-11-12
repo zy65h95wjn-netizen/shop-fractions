@@ -1,4 +1,4 @@
-const {chromium,setup,canvas,assert,fs,path,root}=require('../../../v8/tests/harness.cjs');
+const {chromium,setup,canvas,assert,fs,path,root}=require('./fixtures.cjs');
 const dir=path.resolve(__dirname,'../evidence'),version='experiments/female-grab-hold';
 async function select(page,id){await page.evaluate(id=>__test.chooseCharacter(['ember','midnight','aurelia','holly','santa'].indexOf(id)),id);await page.waitForFunction(id=>__peachPhysicsDebug.snapshot().character===id,id);await page.evaluate(()=>{__test.resize();__test.reset();__test.render();});}
 const pose=async(p,kind)=>p.evaluate(kind=>{const a=__test;a.reset();a.model.transfer=50;const c=a.currentCharacter();const [w,h]=__peachPhysicsDebug.snapshot().image;c.impactCenters.forEach(([x,y],i)=>Object.assign(a.impacts[i],{x:x/w,y:y/h}));a.impulse(0,...c.impactCenters[0]);const trace=[];for(let i=0;i<120;i++){a.step(1/120);if(i%12===0)trace.push(a.raw());}return trace;},kind);

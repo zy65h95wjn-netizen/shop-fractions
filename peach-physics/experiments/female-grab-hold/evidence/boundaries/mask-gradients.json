@@ -1,0 +1,14 @@
+[
+  {
+    "side": 0,
+    "originalMaxMaskSlopePerPixel": 0.06093133761283229,
+    "revisedMaxMaskSlopePerPixel": 0.025631269634275984,
+    "supportExpanded": false
+  },
+  {
+    "side": 1,
+    "originalMaxMaskSlopePerPixel": 0.0611190600495591,
+    "revisedMaxMaskSlopePerPixel": 0.025522550304410793,
+    "supportExpanded": false
+  }
+]

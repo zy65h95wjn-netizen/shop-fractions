@@ -1,0 +1,1474 @@
+[
+  {
+    "key": "webgl-ember-0-inward",
+    "id": "ember",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-ember-0-outward",
+    "id": "ember",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-ember-0-up",
+    "id": "ember",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-ember-0-down",
+    "id": "ember",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-ember-1-inward",
+    "id": "ember",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-ember-1-outward",
+    "id": "ember",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-ember-1-up",
+    "id": "ember",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-ember-1-down",
+    "id": "ember",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-midnight-0-inward",
+    "id": "midnight",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-midnight-0-outward",
+    "id": "midnight",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-midnight-0-up",
+    "id": "midnight",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-midnight-0-down",
+    "id": "midnight",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-midnight-1-inward",
+    "id": "midnight",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-midnight-1-outward",
+    "id": "midnight",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-midnight-1-up",
+    "id": "midnight",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-midnight-1-down",
+    "id": "midnight",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-aurelia-0-inward",
+    "id": "aurelia",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-aurelia-0-outward",
+    "id": "aurelia",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-aurelia-0-up",
+    "id": "aurelia",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-aurelia-0-down",
+    "id": "aurelia",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-aurelia-1-inward",
+    "id": "aurelia",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-aurelia-1-outward",
+    "id": "aurelia",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-aurelia-1-up",
+    "id": "aurelia",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-aurelia-1-down",
+    "id": "aurelia",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-holly-0-inward",
+    "id": "holly",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-holly-0-outward",
+    "id": "holly",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-holly-0-up",
+    "id": "holly",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-holly-0-down",
+    "id": "holly",
+    "renderer": "webgl",
+    "side": 0,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-holly-1-inward",
+    "id": "holly",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-holly-1-outward",
+    "id": "holly",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-holly-1-up",
+    "id": "holly",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "webgl-holly-1-down",
+    "id": "holly",
+    "renderer": "webgl",
+    "side": 1,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-ember-0-inward",
+    "id": "ember",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-ember-0-outward",
+    "id": "ember",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-ember-0-up",
+    "id": "ember",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-ember-0-down",
+    "id": "ember",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-ember-1-inward",
+    "id": "ember",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-ember-1-outward",
+    "id": "ember",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-ember-1-up",
+    "id": "ember",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-ember-1-down",
+    "id": "ember",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -10.724999999999966,
+      "y": 76.48762274176414,
+      "width": 411.44999999999993,
+      "height": 730.6407545164717
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-midnight-0-inward",
+    "id": "midnight",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-midnight-0-outward",
+    "id": "midnight",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-midnight-0-up",
+    "id": "midnight",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-midnight-0-down",
+    "id": "midnight",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-midnight-1-inward",
+    "id": "midnight",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-midnight-1-outward",
+    "id": "midnight",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-midnight-1-up",
+    "id": "midnight",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-midnight-1-down",
+    "id": "midnight",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.412000000000006,
+      "y": 55.704,
+      "width": 460.824,
+      "height": 818.3176450584484
+    },
+    "image": [
+      941,
+      1671
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-aurelia-0-inward",
+    "id": "aurelia",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-aurelia-0-outward",
+    "id": "aurelia",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-aurelia-0-up",
+    "id": "aurelia",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-aurelia-0-down",
+    "id": "aurelia",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-aurelia-1-inward",
+    "id": "aurelia",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-aurelia-1-outward",
+    "id": "aurelia",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-aurelia-1-up",
+    "id": "aurelia",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-aurelia-1-down",
+    "id": "aurelia",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -35.41200000000006,
+      "y": 55.704,
+      "width": 460.8240000000001,
+      "height": 780.2311111111113
+    },
+    "image": [
+      756,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-holly-0-inward",
+    "id": "holly",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-holly-0-outward",
+    "id": "holly",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-holly-0-up",
+    "id": "holly",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-holly-0-down",
+    "id": "holly",
+    "renderer": "canvas",
+    "side": 0,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-holly-1-inward",
+    "id": "holly",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "inward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-holly-1-outward",
+    "id": "holly",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "outward",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-holly-1-up",
+    "id": "holly",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "up",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  },
+  {
+    "key": "canvas-holly-1-down",
+    "id": "holly",
+    "renderer": "canvas",
+    "side": 1,
+    "direction": "down",
+    "stateIdentical": true,
+    "returnExact": true,
+    "framing": {
+      "x": -331.26122448979595,
+      "y": -20.514285714285677,
+      "width": 997.1265306122449,
+      "height": 1772.669387755102
+    },
+    "image": [
+      720,
+      1280
+    ],
+    "canvas": [
+      780,
+      1688
+    ]
+  }
+]
