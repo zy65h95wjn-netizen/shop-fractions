@@ -1,6 +1,9 @@
 import {Physics,contours,centers} from './physics.js';
 import {Renderer,views} from './render.js';
 const $=s=>document.querySelector(s),model=new Physics(),img=new Image();
+// Public static hosts may redirect image requests to a different CDN origin.
+// Anonymous CORS keeps both WebGL upload and Canvas pixel sampling available.
+img.crossOrigin='anonymous';
 const query=new URLSearchParams(location.search);let type=query.get('renderer')==='canvas'?'canvas':'webgl',display=query.get('view')|| (innerWidth<700?'B':'split'),view=views.study,renderers=[],demoTime=null,last=0,acc=0,frameCount=0,ready=false,paused=false,events=[],eventIndex=0,actual=type;
 const status=$('#status');
 function bind(canvas){
