@@ -1,3 +1,35 @@
+# Peach Physics v0.0.8 r10 — Holly close-up approved
+
+**Release decision:** Promote the user-approved r10 framing preview to the production /peach-physics/v8/ application.
+
+The framing calculation in `resize()` is byte-identical to the accepted experiment at /peach-physics/previews/holly-r10-zoom/, derived from Strong Fabric B r9.2. Only production release labels and offline cache are updated in addition to Holly-only framing logic.
+
+- Holly remains character #4 with the same approved 720×1280 JPEG and original source coordinates.
+- The active upper-body deformation envelope occupies about 26–27% of usable screen height in checked portrait sizes. Face and both interaction regions remain visible; hat, lower legs and shoes may be cropped.
+- Strong Fabric B remains default; the entire mask, spring field, gestures, presets, linked coupling and renderer are unchanged.
+- The first three characters retain previous portrait/landscape framing and physics.
+- Earlier A/B, r9.1 and r10 preview URLs remain available.
+- New service-worker cache: `peach-physics-v008-r10`; artwork and versioned source-asset URL unchanged.
+
+## Validation
+
+The user approved the r10 framing preview on an iPhone. Framing geometry was checked at 375×667, 390×844, 430×932, and 440×956. This is the same accepted code with no further adjustments.
+
+Applicable browser suites to run when Playwright/Chromium is available:
+
+```sh
+node peach-physics/v8/tests/artwork.cjs
+node peach-physics/v8/tests/holly-approved.cjs
+node peach-physics/v8/tests/holly-fabric.cjs
+```
+
+The updated `holly-approved.cjs` framing assertions now check face and independent motion envelopes rather than requiring the full hat on screen. This is a corrected acceptance expectation, not a physics change.
+
+## Previous release documentation
+
+<details>
+<summary>r9.2 notes (historical)</summary>
+
 # Peach Physics v0.0.8 r9.2 — Holly Strong Fabric (B) approved
 
 This release adopts the **user-approved Strong Fabric B** rendering from Claude's tested A/B experiment, commit `96f5bd55aa4ba7e9b4edb94e74be33df1d7d74f5`. In the production renderer, `HOLLY_FABRIC=true` is the same B configuration the experimental browser suite exercised. No query parameter is required. The r9.1 A/B comparison remains accessible at `/peach-physics/previews/holly-fabric-ab/`; the separately published r9.1 preview also remains accessible.
@@ -407,6 +439,9 @@ Archived validation includes the original v7-1 suite and v8 r1 browser (218 asse
 ## Physical-iPhone verification still required
 
 These are desktop Chromium checks at iPhone-sized viewports. Safari touch feel, perceived rebound and edge firmness, single/two-finger gestures, frame rate, safe areas, sound activation and Home Screen offline reopening still need checking on a physical iPhone. Check Canvas speed if WebGL is unavailable. This is a controlled visual approximation, not a biomechanical simulation.
+
+</details>
+
 
 </details>
 

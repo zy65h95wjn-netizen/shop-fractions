@@ -34,7 +34,15 @@ async function save(p,name){fs.writeFileSync(path.join(out,name+'.png'),Buffer.f
    const app=await setup(browser,'v8',size,true,fallback),p=app.page;await character(p,'holly');
    const snapshot=await p.evaluate(()=>__peachPhysicsDebug.snapshot());assert.deepEqual(snapshot.characters,['ember','midnight','aurelia','holly']);checks++;
    const f=snapshot.framing;
-   ok(f.y>=54&&f.x+220/720*f.width>=0&&f.x+450/720*f.width<=size.width,'full head and hat remain inside closer framing');
+   // Approved r10 close-up intentionally crops the hat and lower body.
+   // The face and both independent Holly interaction targets must stay visible.
+   const eyeY=f.y+145/1280*f.height,faceL=f.x+290/720*f.width,faceR=f.x+470/720*f.width;
+   const activeTop=f.y+278/1280*f.height,activeBottom=f.y+424/1280*f.height;
+   const topSafe=Math.max(70,size.height*.078),usable=size.height-topSafe;
+   ok(eyeY>=topSafe&&faceL>=0&&faceR<=size.width,'r10 keeps face visible below top safe area');
+   ok(activeTop>=topSafe&&activeBottom<size.height&&((activeBottom-activeTop)/usable)>=.245,'r10 focuses active area without clipping it');
+   const cupLeft=f.x+255/720*f.width,cupRight=f.x+496/720*f.width;
+   ok(cupLeft>=12&&cupRight<=size.width-12,'both Holly motion envelopes remain visible');
    ok(snapshot.character==='holly','Holly occupies existing fourth slot');
    const loaded=await p.evaluate(()=>({src:__test.currentCharacter().src,width:__test.currentCharacter().width,height:__test.currentCharacter().height}));
    ok(loaded.src==='./assets/holly-heartbreaker.jpg?v=r7'&&loaded.width===720&&loaded.height===1280,'slot uses approved asset');

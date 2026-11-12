@@ -10,7 +10,7 @@
 <meta name="description" content="Peach Physics: a playful interactive Christmas elf experiment with adjustable impact waves and linked motion.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Peach Physics — Elf Lab 0.0.8 r9.2</title>
+<title>Peach Physics — Elf Lab 0.0.8 r10</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -87,7 +87,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r9.2</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r10</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/4</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
@@ -243,10 +243,15 @@ function resize(){
  // A top-safe anchor keeps her face and hat clear of the iPhone status area.
  const midnightZoom=portrait && (currentCharacter().id==='midnight'||currentCharacter().id==='aurelia');
  // Holly: a closer upper-body view, retaining the same head-safe top anchor.
- const scale=isHolly()&&portrait?Math.min(cssW/W,(cssH-topClear-bottomClear)/H)*1.4:baseScale*(midnightZoom?1.12:1);
+ // Holly r10 framing-only experiment: fit both interactive regions with side
+ // clearance, then place the chest near the screen's visual center.
+ // Preserve source-space physics, gestures and aspect ratio without retuning.
+ const hollyClose=isHolly()&&portrait;
+ const hollySideMargin=Math.max(22,cssW*.065);
+ const scale=hollyClose?Math.min((cssW-2*hollySideMargin)/245,.27*(cssH-topClear)/146):baseScale*(midnightZoom?1.12:1);
  drawW=W*scale;drawH=H*scale;
- ox=(cssW-drawW)/2;
- oy=isHolly()&&portrait?topClear:midnightZoom?Math.max(54,cssH*.066):(portrait?topClear+(cssH-topClear-bottomClear-drawH)/2:(cssH-drawH)/2);
+ ox=hollyClose?cssW*.5-380*scale:(cssW-drawW)/2;
+ oy=hollyClose?cssH*.55-350*scale:midnightZoom?Math.max(54,cssH*.066):(portrait?topClear+(cssH-topClear-bottomClear-drawH)/2:(cssH-drawH)/2);
  uvCover=[cssW/drawW,cssH/drawH,-ox/drawW,-oy/drawH];
  // Feather the photo's top and bottom edges into the blurred continuation.
  if(portrait){
