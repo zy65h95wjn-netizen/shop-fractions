@@ -1,0 +1,169 @@
+{
+  "cases": [
+    {
+      "mode": "A",
+      "side": 0,
+      "direction": -1,
+      "envelope": {
+        "enabled": true,
+        "envelope": [
+          1,
+          0
+        ]
+      },
+      "stateUnchanged": true
+    },
+    {
+      "mode": "A",
+      "side": 0,
+      "direction": 1,
+      "envelope": {
+        "enabled": true,
+        "envelope": [
+          1,
+          0
+        ]
+      },
+      "stateUnchanged": true
+    },
+    {
+      "mode": "A",
+      "side": 1,
+      "direction": -1,
+      "envelope": {
+        "enabled": true,
+        "envelope": [
+          0,
+          1
+        ]
+      },
+      "stateUnchanged": true
+    },
+    {
+      "mode": "A",
+      "side": 1,
+      "direction": 1,
+      "envelope": {
+        "enabled": true,
+        "envelope": [
+          0,
+          1
+        ]
+      },
+      "stateUnchanged": true
+    },
+    {
+      "mode": "A+",
+      "side": 0,
+      "direction": -1,
+      "envelope": {
+        "enabled": true,
+        "envelope": [
+          1,
+          0
+        ]
+      },
+      "stateUnchanged": true
+    },
+    {
+      "mode": "A+",
+      "side": 0,
+      "direction": 1,
+      "envelope": {
+        "enabled": true,
+        "envelope": [
+          1,
+          0
+        ]
+      },
+      "stateUnchanged": true
+    },
+    {
+      "mode": "A+",
+      "side": 1,
+      "direction": -1,
+      "envelope": {
+        "enabled": true,
+        "envelope": [
+          0,
+          1
+        ]
+      },
+      "stateUnchanged": true
+    },
+    {
+      "mode": "A+",
+      "side": 1,
+      "direction": 1,
+      "envelope": {
+        "enabled": true,
+        "envelope": [
+          0,
+          1
+        ]
+      },
+      "stateUnchanged": true
+    },
+    {
+      "mode": "B",
+      "side": 0,
+      "direction": -1,
+      "envelope": {
+        "enabled": true,
+        "envelope": [
+          1,
+          0
+        ]
+      },
+      "stateUnchanged": true
+    },
+    {
+      "mode": "B",
+      "side": 0,
+      "direction": 1,
+      "envelope": {
+        "enabled": true,
+        "envelope": [
+          1,
+          0
+        ]
+      },
+      "stateUnchanged": true
+    },
+    {
+      "mode": "B",
+      "side": 1,
+      "direction": -1,
+      "envelope": {
+        "enabled": true,
+        "envelope": [
+          0,
+          1
+        ]
+      },
+      "stateUnchanged": true
+    },
+    {
+      "mode": "B",
+      "side": 1,
+      "direction": 1,
+      "envelope": {
+        "enabled": true,
+        "envelope": [
+          0,
+          1
+        ]
+      },
+      "stateUnchanged": true
+    }
+  ],
+  "bounceDifferences": [],
+  "framing": {
+    "ox": -10.724999999999966,
+    "oy": 76.48762274176414,
+    "drawW": 411.44999999999993,
+    "drawH": 730.6407545164717,
+    "cssW": 390,
+    "cssH": 844
+  }
+}

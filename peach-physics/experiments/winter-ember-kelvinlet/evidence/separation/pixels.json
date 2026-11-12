@@ -1,0 +1,206 @@
+[
+  {
+    "mode": "A",
+    "side": 0,
+    "direction": -1,
+    "envelope": {
+      "enabled": true,
+      "envelope": [
+        1,
+        0
+      ]
+    },
+    "stateUnchanged": true,
+    "oppositeStripPixels": 1901,
+    "beforeChangedPixels": 721,
+    "afterChangedPixels": 0,
+    "returnChangedPixels": 0
+  },
+  {
+    "mode": "A",
+    "side": 0,
+    "direction": 1,
+    "envelope": {
+      "enabled": true,
+      "envelope": [
+        1,
+        0
+      ]
+    },
+    "stateUnchanged": true,
+    "oppositeStripPixels": 1901,
+    "beforeChangedPixels": 815,
+    "afterChangedPixels": 0,
+    "returnChangedPixels": 0
+  },
+  {
+    "mode": "A",
+    "side": 1,
+    "direction": -1,
+    "envelope": {
+      "enabled": true,
+      "envelope": [
+        0,
+        1
+      ]
+    },
+    "stateUnchanged": true,
+    "oppositeStripPixels": 1898,
+    "beforeChangedPixels": 156,
+    "afterChangedPixels": 0,
+    "returnChangedPixels": 0
+  },
+  {
+    "mode": "A",
+    "side": 1,
+    "direction": 1,
+    "envelope": {
+      "enabled": true,
+      "envelope": [
+        0,
+        1
+      ]
+    },
+    "stateUnchanged": true,
+    "oppositeStripPixels": 1898,
+    "beforeChangedPixels": 31,
+    "afterChangedPixels": 0,
+    "returnChangedPixels": 0
+  },
+  {
+    "mode": "A+",
+    "side": 0,
+    "direction": -1,
+    "envelope": {
+      "enabled": true,
+      "envelope": [
+        1,
+        0
+      ]
+    },
+    "stateUnchanged": true,
+    "oppositeStripPixels": 1901,
+    "beforeChangedPixels": 721,
+    "afterChangedPixels": 0,
+    "returnChangedPixels": 0
+  },
+  {
+    "mode": "A+",
+    "side": 0,
+    "direction": 1,
+    "envelope": {
+      "enabled": true,
+      "envelope": [
+        1,
+        0
+      ]
+    },
+    "stateUnchanged": true,
+    "oppositeStripPixels": 1901,
+    "beforeChangedPixels": 851,
+    "afterChangedPixels": 0,
+    "returnChangedPixels": 0
+  },
+  {
+    "mode": "A+",
+    "side": 1,
+    "direction": -1,
+    "envelope": {
+      "enabled": true,
+      "envelope": [
+        0,
+        1
+      ]
+    },
+    "stateUnchanged": true,
+    "oppositeStripPixels": 1898,
+    "beforeChangedPixels": 180,
+    "afterChangedPixels": 0,
+    "returnChangedPixels": 0
+  },
+  {
+    "mode": "A+",
+    "side": 1,
+    "direction": 1,
+    "envelope": {
+      "enabled": true,
+      "envelope": [
+        0,
+        1
+      ]
+    },
+    "stateUnchanged": true,
+    "oppositeStripPixels": 1898,
+    "beforeChangedPixels": 31,
+    "afterChangedPixels": 0,
+    "returnChangedPixels": 0
+  },
+  {
+    "mode": "B",
+    "side": 0,
+    "direction": -1,
+    "envelope": {
+      "enabled": true,
+      "envelope": [
+        1,
+        0
+      ]
+    },
+    "stateUnchanged": true,
+    "oppositeStripPixels": 1901,
+    "beforeChangedPixels": 722,
+    "afterChangedPixels": 0,
+    "returnChangedPixels": 0
+  },
+  {
+    "mode": "B",
+    "side": 0,
+    "direction": 1,
+    "envelope": {
+      "enabled": true,
+      "envelope": [
+        1,
+        0
+      ]
+    },
+    "stateUnchanged": true,
+    "oppositeStripPixels": 1901,
+    "beforeChangedPixels": 815,
+    "afterChangedPixels": 0,
+    "returnChangedPixels": 0
+  },
+  {
+    "mode": "B",
+    "side": 1,
+    "direction": -1,
+    "envelope": {
+      "enabled": true,
+      "envelope": [
+        0,
+        1
+      ]
+    },
+    "stateUnchanged": true,
+    "oppositeStripPixels": 1898,
+    "beforeChangedPixels": 47,
+    "afterChangedPixels": 0,
+    "returnChangedPixels": 0
+  },
+  {
+    "mode": "B",
+    "side": 1,
+    "direction": 1,
+    "envelope": {
+      "enabled": true,
+      "envelope": [
+        0,
+        1
+      ]
+    },
+    "stateUnchanged": true,
+    "oppositeStripPixels": 1898,
+    "beforeChangedPixels": 31,
+    "afterChangedPixels": 0,
+    "returnChangedPixels": 0
+  }
+]

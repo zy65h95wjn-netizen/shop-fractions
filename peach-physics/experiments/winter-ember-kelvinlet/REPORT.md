@@ -1,5 +1,17 @@
 # Winter Ember: Kelvinlet comparison — acceptance failed
 
+## Follow-up: cheek separation during pulls
+
+The standalone preview now defaults to **Separate cheeks during drags**. This is an explicitly isolated boundary revision requested after the original comparison. Turn the checkbox off to restore the earlier comparison renderer. The original results below describe the checkbox-off renderer, not the revised drag mask.
+
+Cause: r11's straight x-coordinate blend overlaps the curved anatomical crease, allowing one side's deformation to warp inner pixels on the opposite cheek even with linkage at zero. The fix keeps left/right vertex contributions separate and applies a curved, feathered source-space support guard per fragment during dragging. It checks both the destination and proposed source sample. Fragment evaluation prevents mesh interpolation from leaking the guard across the crease. The guard ramps in after 8 source pixels of pointer travel and fades out over 250 ms after release. Ordinary tap/bounce inputs do not activate it. Spring integration, presets, linkage, impulse strength, timing and artwork are unchanged.
+
+Measured in Chromium at 390×844, linkage zero: 12 inward/outward left/right cases across A, A+, B; opposite-crease probe strips changed 31–851 pixels before the fix and **zero afterward**. Every tested released drag returned pixel-exactly to rest. Toggling isolation changed no spring state. All **180 ordinary bounce frames** were pixel-identical with isolation off/on. See `evidence/separation/browser.json`, `pixels.json`, and `comparison.jpg`; reproduce with `tests/separation.cjs` then `tests/separation-pixels.py`.
+
+This guard is shared by A/A+/B and is not evidence for Kelvinlet superiority. Original contact matching and analytic quality figures do not include the new fragment guard. During its short activation/release ramps some original overlap remains by design. Canvas comparison and Canvas drag isolation remain unavailable and the toggle is disabled there. Production remains untouched.
+
+---
+
 **A visibly more convincing effect than strength-matched r11 has not been established. Do not promote this experiment.** The contact close-ups show a localized directional reshape, but do not establish convincing added tissue volume. The unchanged image envelope constrains the outer silhouette. More pressure would amplify texture deformation without resolving that limitation. No human preference result is available.
 
 This is a WebGL research comparison with known incomplete acceptance requirements, not a validated cross-renderer replacement. Canvas A is preserved; Canvas A+/B are not implemented. The preview disables comparison on Canvas. Consequently the full requested validation gate fails, independently of the positive mathematical results. Real iPhone Safari performance and Lance's preference remain untested.
