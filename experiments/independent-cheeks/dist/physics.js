@@ -14,7 +14,10 @@ export const REGIONS = [
   {
     // Broader response toward the annotated inner/lower curve; retain a
     // stationary crease and a smooth transition above the unaffected thigh.
-    name: 'right', center: [433, 890], radius: [148, 120], limit: 22, feather: 58,
+    name: 'right', center: [375, 890], radius: [148, 120], limit: 22, feather: 70,
+    // The latest circle identifies the inner central mass, not the outer hip.
+    // Boost this area smoothly while reducing movement farther to the right.
+    focus: { center: [375, 890], radius: [82, 100], base: 0.76, gain: 0.54 },
     outline: [[316,805],[344,788],[378,786],[407,788],[426,780],[444,788],
       [474,795],[498,801],[523,799],[538,816],[551,842],[570,862],
       [582,882],[588,915],[586,948],[576,975],[550,994],[505,1003],
@@ -40,7 +43,12 @@ export function signedDistance(x, y, polygon) {
 
 export function weightsAt(x, y, side) {
   const r = REGIONS[side];
-  const w = smooth(signedDistance(x, y, r.outline)/r.feather);
+  let w = smooth(signedDistance(x, y, r.outline)/r.feather);
+  if (r.focus) {
+    const f = r.focus;
+    const distance = ((x-f.center[0])/f.radius[0])**2 + ((y-f.center[1])/f.radius[1])**2;
+    w *= f.base + f.gain*Math.exp(-distance);
+  }
   return [w, w*clamp((y-r.center[1])/r.radius[1], -1, 1),
     w*clamp((x-r.center[0])/r.radius[0], -1, 1)];
 }

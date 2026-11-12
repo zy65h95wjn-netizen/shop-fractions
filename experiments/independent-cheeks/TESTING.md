@@ -12,7 +12,7 @@ Command: `node tests/physics.test.mjs` — **9 tests passed**.
 - All 16 extreme combinations of Bounce, Softness, Settling, and Linked movement stay finite and within travel bounds under repeated strong swipes; they settle to exact rest within the tested 20-second window.
 - 30, 60, and 120 Hz updates produce matching trajectories with the fixed-step integrator.
 - Masks do not overlap. Representative crease, background, hair, clothing, thigh, and stocking coordinates have exactly zero displacement.
-- All 53,928 connected mesh triangles maintain positive area in 128 extreme configurations, including secondary followers opposed to their primary springs. Minimum area ratio **0.3022**; maximum **1.7054** relative to rest. This establishes no triangle flips in those samples, not absence of perceptible stretching in every possible state.
+- All 53,928 connected mesh triangles maintain positive area in 128 extreme configurations, including secondary followers opposed to their primary springs. Minimum area ratio **0.3362**; maximum **1.6698** relative to rest. This establishes no triangle flips in those samples, not absence of perceptible stretching in every possible state.
 
 JavaScript syntax checks passed for the app and renderer. These checks do not compile the GLSL shader or validate a real browser's input event routing.
 
