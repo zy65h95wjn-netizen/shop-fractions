@@ -10,7 +10,7 @@
 <meta name="description" content="Peach Physics: a playful interactive Christmas elf experiment with adjustable impact waves and linked motion.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Peach Physics — Elf Lab 0.0.8 r8</title>
+<title>Peach Physics — Elf Lab 0.0.8 r9</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -87,7 +87,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r8</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r9</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/4</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
@@ -421,11 +421,17 @@ let hollyMaskLoc,hollyMaskPixels=null,hollySource=null,hollyLayer=null,hollyBack
 function buildHollyMask(){
  if(hollyMaskPixels)return;
  const [ox,oy,w,h]=HOLLY_CROP;hollyMaskPixels=new Uint8Array(w*h*4);
+ const smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
   const px=ox+x+.5,py=oy+y+.5,neckline=379-.004*(px-380)**2;
   // Ease from free skin into supported fur/cups across 44 source pixels.
   // Nonzero support preserves attachment; input weights and springs stay intact.
-  const t=clamp((py-neckline+26)/44,0,1),support=1-.45*t*t*(3-2*t);
+  const t=clamp((py-neckline+26)/44,0,1),below=py-neckline;
+  // Extra support only in the fur/upper-cup band, fading toward the lacing
+  // and back to r8 below the band. Nothing is added above the neckline.
+  const band=smooth(below/12)*(1-smooth((below-24)/24));
+  const outer=smooth((Math.abs(px-380)-18)/46);
+  const support=(1-.45*t*t*(3-2*t))*(1-.35*band*outer);
   const i=(y*w+x)*4;hollyMaskPixels[i]=Math.round(255*hollyMotionWeight(0,px,py)*support);
   hollyMaskPixels[i+1]=Math.round(255*hollyMotionWeight(1,px,py)*support);hollyMaskPixels[i+3]=255;
  }

@@ -1,12 +1,14 @@
-# Peach Physics v0.0.8 r8 — Closer Holly, firmer cups
+# Peach Physics v0.0.8 r9 — Holly upper cup/fur support
 
-This branch makes two Holly-only adjustments on top of r7 (`953f626`): closer portrait framing and firmer cup/fur deformation. The approved photograph remains in the fourth slot. Winter Ember, Midnight Yule and Aurelia Frost are unchanged. This branch has not been deployed.
+This branch adds localized support to Holly's upper outer green cup and attached white fur band, based on r8 (`eea6067`). The approved photograph remains in the fourth slot, and r8 framing is unchanged. Winter Ember, Midnight Yule and Aurelia Frost are unchanged. This branch has not been deployed.
 
 The supplied JPEG is copied exactly: **720×1280, 296,910 bytes**, SHA-256 `b5af2ccfa267b2ea8b4a6fa4b98aa2935e7f2b4e869d279f93d99fb9e5964349`. No retouching, regeneration, cropping or recompression was performed. The previous fourth portrait remains recoverable from Git history.
 
-Holly's portrait-mode scale is **1.4× r7**, retaining the same top anchor and visible source head/hat. Less of the lower legs is shown. Landscape framing and the other three characters' framing are unchanged.
+Holly's portrait-mode scale remains **1.4× r7**, retaining the same r8 top anchor and visible source head/hat. Portrait and landscape framing code is byte-for-byte unchanged from r8.
 
-The existing shared deformation mask now eases from freely moving skin into supported fur/cups over 44 source pixels around the curved neckline. Fully supported cup pixels retain 55% of their original field weight; they are not pinned. The transition also covers the adjoining skin so the material boundary stays continuous. Both renderers use this one mask. Spring/node locations, trajectories, presets, gains, linked movement, input targets, outer boundaries, lacing support and rendering architecture remain unchanged. The r8 cache updates the app shell; the unchanged portrait keeps its r7 asset URL.
+The existing shared mask retains r8's broad garment support. A small additional multiplier follows the curved fur/upper-cup band: it eases in over the first 12 source pixels below the existing neckline, is strongest 12–24 pixels below it, and fades back to r8 support by 48 pixels. It also tapers inward toward the top lacing. At its strongest it retains 65% of the r8 field weight; the band is not pinned. No extra attenuation is applied above that curve. Skin, lower-cup and central-lacing reference rectangles retain exactly their r8 mask values.
+
+Both renderers consume the same mask. Spring/node locations, trajectories, presets, gains, linked movement, input targets, original outer boundaries and rendering architecture remain unchanged. The r9 cache updates the app shell; the unchanged portrait keeps its r7 asset URL.
 
 ## Preview
 
@@ -25,26 +27,26 @@ With the **repository root** served on port 8000, run:
 ```sh
 node peach-physics/v8/tests/artwork.cjs
 node peach-physics/v8/tests/holly-approved.cjs
-node peach-physics/v8/tests/holly-support.cjs
+node peach-physics/v8/tests/holly-band.cjs
 ```
 
-The browser tests require Playwright, Chromium and the r6 (`ddf3456cc937c7f84f0b022f76f6824e59c2d079`) and r7 (`953f626c5fd4d71ff1fe475570fe3495f1b7c4cc`) baseline commits in local Git history. `CHROMIUM`, `PEACH_TEST_URL` and `PEACH_TEST_OUTPUT` override the browser, server and output paths. Both WebGL and Canvas are checked at 375×667 and 390×844: four-slot selection, head/hat clearance, independent taps and cup touches, drag/flick, linked motion, exact return to rest and offline loading. The first three characters retain exact render output and unrounded trajectories. Holly's trajectory comparisons use matching zoom so the same screen drag travels the same source-image distance. PNG captures and JSON measurements are saved to the test output directory.
+The browser tests require Playwright, Chromium and the r6 (`ddf3456cc937c7f84f0b022f76f6824e59c2d079`) and r8 (`eea60679ddad1a5cb39701e1f73fe8872ccb7e60`) baseline commits in local Git history. `CHROMIUM`, `PEACH_TEST_URL` and `PEACH_TEST_OUTPUT` override the browser, server and output paths. Both WebGL and Canvas are checked at 375×667 and 390×844: four-slot selection, unchanged framing, independent taps and cup touches, drag/flick, linked motion, exact return to rest and offline loading. The first three characters retain exact render output and unrounded trajectories. PNG captures and JSON measurements are saved to the test output directory.
 
-Validation passed all four artwork hashes, **138 installation/regression checks** and **65 r7 comparison checks**, with no browser errors. The comparisons include 12 exact moving renders for the first three characters, 36 exact Holly gesture/link trajectories, and unchanged rest output at matching framing.
+Validation passed all four artwork hashes, **138 installation/regression checks** and **83 localized-band comparison checks**, with no browser errors. The comparisons include 12 exact moving renders for the first three characters, 36 exact Holly gesture/link trajectories, unchanged rest output, and preserved exposed-skin field samples through peak, rebound and both large poses.
 
 ## Visual review
 
-All three review JPEGs are below 700 KiB. Contact-sheet crops preserve native rendered pixels; r7 motion is displayed at the same closer zoom to isolate the garment change.
+Both review JPEGs are below 700 KiB. Crops preserve native rendered pixels at an identical 390×844 viewport and r8 zoom. Columns are r8 before and r9 after. Rows show rest, left/right impact, peak and rebound, followed by large downward/upward poses. Settled output is byte-identical to rest. Large poses use the existing node bounds, not a new gesture gain.
 
-- [Framing before/after](tests/captures/holly-r8/framing.jpg): actual r7 framing versus r8, 390×844 viewport.
-- [WebGL motion comparison](tests/captures/holly-r8/webgl.jpg) and [Canvas motion comparison](tests/captures/holly-r8/canvas.jpg): left/right Natural peak and rebound, then large downward/upward poses. Large poses use the existing node bounds, not a new gesture gain.
-- [Source-pixel motion measurements](tests/captures/holly-r8/measurements.json).
+- [WebGL upper-band comparison](tests/captures/holly-r9/webgl.jpg).
+- [Canvas upper-band comparison](tests/captures/holly-r9/canvas.jpg).
+- [Source-pixel measurements and sample coordinates](tests/captures/holly-r9/measurements.json).
 
-At the sampled Natural peak, left/right skin travel stays at 19.13/18.83 source pixels. Fur travel changes from 17.16/16.72 to 11.20/11.35; cup travel changes from 16.60/8.11 to 9.10/3.87. These are texture-coordinate measurements at individual sample points, not whole-region or physical-stiffness measurements. The 40% closer framing increases apparent travel, so source-coordinate comparisons matter.
+At the sampled Natural peak, left/right skin-center travel stays at 19.13/18.83 source pixels. Mid-fur travel changes from 11.20/11.03 to 9.18/8.92; upper-cup band travel changes from 9.10/3.87 to 6.00/2.42. Outer-fur samples change from 11.45/2.66 to 7.33/1.65. These are individual texture-coordinate samples, not whole-region or physical-stiffness measurements. r8's existing left/right outer-boundary asymmetry is retained; the added support rule is symmetric and produces similar relative reductions.
 
-Visual inspection of both renderers shows less cup distortion and fur-band stretching, with continuous attachment and no new holes or seams in these poses. Exaggerated upward motion still stretches some right-side fur near the central lacing, and large downward motion still elongates the skin. This remains the existing two-dimensional photo deformation. Physical-iPhone touch feel, frame rate and offline Home Screen behavior remain unverified.
+Visual inspection of both renderers shows a modest firmness improvement, most apparent at large downward poses, without new holes, detached trim, seams or a sharp compression crease in these captures. Skin shape remains visibly mobile. Large upward poses still stretch fur fibers, particularly on the right, and retain a tight inner bend near the lacing. This remains the existing two-dimensional photo deformation; static comparisons do not establish fully natural motion. Physical-iPhone touch feel, frame rate and offline Home Screen behavior remain unverified.
 
-The older Holly tests and captures below use the **previous portrait's coordinates**. They remain historical evidence, not acceptance tests for this replacement. Use `holly-approved.cjs` and `holly-support.cjs` for this branch.
+The [r8 comparisons](tests/captures/holly-r8/) and `holly-support.cjs` remain historical evidence for r8. The older Holly tests and captures below use the previous portrait's coordinates. Use `holly-approved.cjs` and `holly-band.cjs` for this branch.
 
 <details>
 <summary>Historical r6 documentation — previous portrait and calibration</summary>

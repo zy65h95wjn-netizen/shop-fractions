@@ -1,0 +1,415 @@
+{
+  "baseline": "eea60679ddad1a5cb39701e1f73fe8872ccb7e60",
+  "checks": 83,
+  "samplePoints": [
+    {
+      "skinUpper": [
+        320,
+        315
+      ],
+      "skinCenter": [
+        325,
+        332
+      ],
+      "skinNearFur": [
+        325,
+        350
+      ],
+      "furOuter": [
+        286,
+        360
+      ],
+      "furMiddle": [
+        320,
+        374
+      ],
+      "cupBand": [
+        319,
+        391
+      ],
+      "innerAttach": [
+        353,
+        386
+      ],
+      "lowerCup": [
+        310,
+        416
+      ]
+    },
+    {
+      "skinUpper": [
+        436,
+        315
+      ],
+      "skinCenter": [
+        433,
+        334
+      ],
+      "skinNearFur": [
+        433,
+        350
+      ],
+      "furOuter": [
+        474,
+        357
+      ],
+      "furMiddle": [
+        440,
+        374
+      ],
+      "cupBand": [
+        440,
+        391
+      ],
+      "innerAttach": [
+        410,
+        386
+      ],
+      "lowerCup": [
+        450,
+        416
+      ]
+    }
+  ],
+  "framing": [
+    {
+      "backend": "webgl",
+      "size": {
+        "width": 375,
+        "height": 667
+      },
+      "framing": {
+        "x": -36.54374999999999,
+        "y": 70,
+        "width": 448.0875,
+        "height": 796.5999999999999
+      }
+    },
+    {
+      "backend": "webgl",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "framing": {
+        "x": -77.99999999999994,
+        "y": 70,
+        "width": 545.9999999999999,
+        "height": 970.6666666666665
+      }
+    },
+    {
+      "backend": "canvas",
+      "size": {
+        "width": 375,
+        "height": 667
+      },
+      "framing": {
+        "x": -36.54374999999999,
+        "y": 70,
+        "width": 448.0875,
+        "height": 796.5999999999999
+      }
+    },
+    {
+      "backend": "canvas",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "framing": {
+        "x": -77.99999999999994,
+        "y": 70,
+        "width": 545.9999999999999,
+        "height": 970.6666666666665
+      }
+    }
+  ],
+  "mask": {
+    "changedPixelsPerSide": [
+      3484,
+      2627
+    ],
+    "changedBounds": [
+      261,
+      329,
+      485,
+      415
+    ],
+    "preservedRectangles": [
+      [
+        300,
+        300,
+        350,
+        340
+      ],
+      [
+        410,
+        300,
+        460,
+        340
+      ],
+      [
+        300,
+        414,
+        315,
+        423
+      ],
+      [
+        448,
+        414,
+        460,
+        423
+      ],
+      [
+        369,
+        380,
+        391,
+        420
+      ]
+    ]
+  },
+  "movement": [
+    {
+      "label": "r8",
+      "side": 0,
+      "phase": "peak",
+      "samples": {
+        "skinUpper": 17.046255727348846,
+        "skinCenter": 19.130059171783234,
+        "skinNearFur": 18.52715538282641,
+        "furOuter": 11.449698517162856,
+        "furMiddle": 11.200077264379013,
+        "cupBand": 9.100052662259598,
+        "innerAttach": 1.9665756324266164,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r8",
+      "side": 0,
+      "phase": "rebound",
+      "samples": {
+        "skinUpper": 6.701411936638542,
+        "skinCenter": 7.427600361327151,
+        "skinNearFur": 6.424328002645925,
+        "furOuter": 4.136438399608377,
+        "furMiddle": 3.5002985003149423,
+        "cupBand": 3.0160578719389792,
+        "innerAttach": 0.5860186101769668,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r8",
+      "side": 0,
+      "phase": "large-down",
+      "samples": {
+        "skinUpper": 22.423396183236058,
+        "skinCenter": 23.880546225605386,
+        "skinNearFur": 23.446823603600045,
+        "furOuter": 13.190733429869116,
+        "furMiddle": 14.97398191209967,
+        "cupBand": 13.052921183666738,
+        "innerAttach": 3.703696930456635,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r8",
+      "side": 0,
+      "phase": "large-up",
+      "samples": {
+        "skinUpper": 22.76882581417306,
+        "skinCenter": 22.567403396646586,
+        "skinNearFur": 20.30192434933572,
+        "furOuter": 12.443575519810757,
+        "furMiddle": 12.975150592173947,
+        "cupBand": 10.365699431324785,
+        "innerAttach": 2.0363824375803694,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r8",
+      "side": 1,
+      "phase": "peak",
+      "samples": {
+        "skinUpper": 15.672656819616297,
+        "skinCenter": 18.8273801500599,
+        "skinNearFur": 18.26510982290897,
+        "furOuter": 2.662584939749162,
+        "furMiddle": 11.033715527864487,
+        "cupBand": 3.8712348102612992,
+        "innerAttach": 5.603433253722821,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r8",
+      "side": 1,
+      "phase": "rebound",
+      "samples": {
+        "skinUpper": 6.745693149738042,
+        "skinCenter": 7.66354240744242,
+        "skinNearFur": 6.677675031584621,
+        "furOuter": 0.9212845807167971,
+        "furMiddle": 3.366860287196057,
+        "cupBand": 1.1474369587562605,
+        "innerAttach": 1.5543894957216513,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r8",
+      "side": 1,
+      "phase": "large-down",
+      "samples": {
+        "skinUpper": 22.220737444547122,
+        "skinCenter": 23.88269398190173,
+        "skinNearFur": 23.64723475746898,
+        "furOuter": 3.6555019699724323,
+        "furMiddle": 15.9082842502628,
+        "cupBand": 5.973147235235082,
+        "innerAttach": 8.431842568865715,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r8",
+      "side": 1,
+      "phase": "large-up",
+      "samples": {
+        "skinUpper": 22.303845596992563,
+        "skinCenter": 21.992575052398514,
+        "skinNearFur": 18.801486299903367,
+        "furOuter": 2.294109322958032,
+        "furMiddle": 9.869761765248228,
+        "cupBand": 3.531313646444537,
+        "innerAttach": 6.1079668101202085,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r9",
+      "side": 0,
+      "phase": "peak",
+      "samples": {
+        "skinUpper": 17.046255727348846,
+        "skinCenter": 19.130059171783234,
+        "skinNearFur": 18.52715538282641,
+        "furOuter": 7.326242872901022,
+        "furMiddle": 9.183667526694217,
+        "cupBand": 6.000519454052794,
+        "innerAttach": 1.8900079259123568,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r9",
+      "side": 0,
+      "phase": "rebound",
+      "samples": {
+        "skinUpper": 6.701411936638542,
+        "skinCenter": 7.427600361327151,
+        "skinNearFur": 6.424328002645925,
+        "furOuter": 2.6991115536913055,
+        "furMiddle": 2.37835489688245,
+        "cupBand": 2.0789640190690863,
+        "innerAttach": 0.5629783057920049,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r9",
+      "side": 0,
+      "phase": "large-down",
+      "samples": {
+        "skinUpper": 22.423396183236058,
+        "skinCenter": 23.880546225605386,
+        "skinNearFur": 23.446823603600045,
+        "furOuter": 8.586527814014039,
+        "furMiddle": 11.408140052271753,
+        "cupBand": 8.561704277920134,
+        "innerAttach": 3.497721524067054,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r9",
+      "side": 0,
+      "phase": "large-up",
+      "samples": {
+        "skinUpper": 22.76882581417306,
+        "skinCenter": 22.567403396646586,
+        "skinNearFur": 20.30192434933572,
+        "furOuter": 8.084083607914634,
+        "furMiddle": 8.985143375018476,
+        "cupBand": 7.60828656783973,
+        "innerAttach": 1.9779218086134693,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r9",
+      "side": 1,
+      "phase": "peak",
+      "samples": {
+        "skinUpper": 15.672656819616297,
+        "skinCenter": 18.8273801500599,
+        "skinNearFur": 18.26510982290897,
+        "furOuter": 1.6478564400476834,
+        "furMiddle": 8.918109159628507,
+        "cupBand": 2.423096332713735,
+        "innerAttach": 5.3064546219776885,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r9",
+      "side": 1,
+      "phase": "rebound",
+      "samples": {
+        "skinUpper": 6.745693149738042,
+        "skinCenter": 7.66354240744242,
+        "skinNearFur": 6.677675031584621,
+        "furOuter": 0.5994592173419016,
+        "furMiddle": 2.314694441460288,
+        "cupBand": 0.7944211969417578,
+        "innerAttach": 1.466602052770875,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r9",
+      "side": 1,
+      "phase": "large-down",
+      "samples": {
+        "skinUpper": 22.220737444547122,
+        "skinCenter": 23.88269398190173,
+        "skinNearFur": 23.64723475746898,
+        "furOuter": 2.1761514193356475,
+        "furMiddle": 13.454613612619106,
+        "cupBand": 3.644388835656733,
+        "innerAttach": 8.11641353785103,
+        "lowerCup": 0.0013919210763765595
+      }
+    },
+    {
+      "label": "r9",
+      "side": 1,
+      "phase": "large-up",
+      "samples": {
+        "skinUpper": 22.303845596992563,
+        "skinCenter": 21.992575052398514,
+        "skinNearFur": 18.800062749225237,
+        "furOuter": 1.577203823158376,
+        "furMiddle": 7.04385356759993,
+        "cupBand": 2.58341489222039,
+        "innerAttach": 5.67505955890486,
+        "lowerCup": 0.0013919210763765595
+      }
+    }
+  ],
+  "errors": []
+}
