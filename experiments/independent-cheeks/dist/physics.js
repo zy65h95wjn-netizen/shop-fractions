@@ -14,10 +14,12 @@ export const REGIONS = [
   {
     // Broader response toward the annotated inner/lower curve; retain a
     // stationary crease and a smooth transition above the unaffected thigh.
-    name: 'right', center: [375, 890], radius: [148, 120], limit: 22, feather: 70,
-    // The latest circle identifies the inner central mass, not the outer hip.
-    // Boost this area smoothly while reducing movement farther to the right.
-    focus: { center: [375, 890], radius: [82, 100], base: 0.76, gain: 0.54 },
+    name: 'right', center: [375, 890], radius: [148, 120], limit: 22, feather: 76,
+    // Red leads along the inner mass and wraps under it. Yellow follows;
+    // the outer green area has the weakest response. These overlapping smooth
+    // fields are weights, not image layers, so there are no color-band seams.
+    response: { innerX: 340, innerWidth: 95, lower: [420, 965],
+      lowerRadius: [105, 55], base: 0.22, innerGain: 1.25, lowerGain: 1.05, cap: 1.55 },
     outline: [[316,805],[344,788],[378,786],[407,788],[426,780],[444,788],
       [474,795],[498,801],[523,799],[538,816],[551,842],[570,862],
       [582,882],[588,915],[586,948],[576,975],[550,994],[505,1003],
@@ -44,10 +46,12 @@ export function signedDistance(x, y, polygon) {
 export function weightsAt(x, y, side) {
   const r = REGIONS[side];
   let w = smooth(signedDistance(x, y, r.outline)/r.feather);
-  if (r.focus) {
-    const f = r.focus;
-    const distance = ((x-f.center[0])/f.radius[0])**2 + ((y-f.center[1])/f.radius[1])**2;
-    w *= f.base + f.gain*Math.exp(-distance);
+  if (r.response) {
+    const f = r.response;
+    const inner = Math.exp(-(((x-f.innerX)/f.innerWidth)**2));
+    const lower = Math.exp(-(((x-f.lower[0])/f.lowerRadius[0])**2 + ((y-f.lower[1])/f.lowerRadius[1])**2));
+    const weighted = w*(f.base+f.innerGain*inner+f.lowerGain*lower);
+    w = f.cap*Math.tanh(weighted/f.cap);
   }
   return [w, w*clamp((y-r.center[1])/r.radius[1], -1, 1),
     w*clamp((x-r.center[0])/r.radius[0], -1, 1)];

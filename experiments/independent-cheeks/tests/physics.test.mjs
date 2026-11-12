@@ -74,6 +74,19 @@ test('masks never overlap; clothing, thighs, stockings, hair, background, and cr
   for(const [x,y] of fixed)assert.deepEqual(displace(x,y,p.bodies),[x,y],`${x},${y}`);
   assert.equal(hitTest(30,500),-1);
 });
+test('annotated red inner/lower area leads yellow, and green has the least motion',()=>{
+  const samples={
+    red:[[350,860],[355,900],[385,940],[410,965]],
+    yellow:[[450,850],[460,890],[470,925]],
+    green:[[545,890],[550,920]]
+  };
+  const means=Object.fromEntries(Object.entries(samples).map(([name,points])=>
+    [name,points.reduce((sum,[x,y])=>sum+weightsAt(x,y,1)[0],0)/points.length]));
+  assert.ok(means.red>1.4*means.yellow);
+  assert.ok(means.yellow>2.5*means.green);
+  assert.ok(weightsAt(410,965,1)[0]>0.75,'the lower red wrap should participate');
+  console.log('Mean sampled response weights:',means);
+});
 test('connected mesh keeps positive triangle areas at extreme opposed deformations',()=>{
   const {vertices,indices}=createMesh(),count=vertices.length/8;
   assert.ok(count<65536);
