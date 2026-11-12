@@ -3,14 +3,14 @@
   "renderers": [
     {
       "renderer": "webgl",
-      "softwareDesktopFPS": 4.2,
+      "softwareDesktopFPS": 9.1,
       "offline": true,
       "audioScheduled": true,
       "audio": {
         "starts": [
           0,
-          0.6907936507936508,
-          1.2625850340136053
+          0.7401360544217687,
+          1.2016326530612245
         ],
         "states": [
           "running"
@@ -19,14 +19,14 @@
     },
     {
       "renderer": "canvas",
-      "softwareDesktopFPS": 22.3,
+      "softwareDesktopFPS": 21,
       "offline": true,
       "audioScheduled": true,
       "audio": {
         "starts": [
           0,
-          0.3512018140589569,
-          0.7024036281179138
+          0.37151927437641724,
+          0.7227210884353742
         ],
         "states": [
           "running"

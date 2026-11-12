@@ -67,7 +67,7 @@ Each silent clip contains 75 consecutive renderer captures at 1/30-second simula
 
 The app precaches the new JPEG along with existing local runtime assets. Its cache is `peach-physics-santa-experiment-r1`; activation removes only older Santa-experiment caches, never live r10's cache. No runtime services are required after initial loading.
 
-The review link uses the pushed commit's immutable public source through GitHack, leaving GitHub Pages and production untouched. GitHack may show **Open the page** on the first visit. Preview-host availability is external to the app. The normal app's offline behavior is tested independently on secure localhost; the exact public preview is checked after push.
+The review link uses the pushed commit's immutable public source through GitHack, leaving GitHub Pages and production untouched. GitHack may show **Open the page** on the first visit. External portrait loads use anonymous CORS requests so CDN redirects remain valid WebGL textures; the bytes and same-origin behavior are unchanged. Preview-host availability is external to the app. The normal app's offline behavior is tested independently on secure localhost; the exact public preview is checked after push.
 
 ## Known limits and approval gate
 

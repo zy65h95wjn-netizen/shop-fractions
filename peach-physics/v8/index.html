@@ -1029,7 +1029,7 @@ function showCharacterToast(){
 }
 function getPhoto(index,callback){
  if(loadedPhotos[index]?.complete&&loadedPhotos[index].naturalWidth){callback(loadedPhotos[index]);return;}
- const next=new Image();loadedPhotos[index]=next;
+ const next=new Image();if(!CHARACTERS[index].src.startsWith('data:'))next.crossOrigin='anonymous';loadedPhotos[index]=next;
  next.onload=()=>callback(next);
  next.onerror=()=>{characterSwitchPending=false;say('Unable to load character artwork');};
  next.src=CHARACTERS[index].src;
@@ -1445,7 +1445,7 @@ getPhoto(activeCharacterIndex,photo=>{
  try{initGL();}catch(e){console.warn('WebGL not available',e);try{initFallback();}catch(err){say('Unable to start graphics');return;}}
  needSize=true;showReady();say('');requestAnimationFrame(loop);
  // Preload other character to make the first switch responsive without blocking play.
- CHARACTERS.forEach((c,index)=>{if(index===activeCharacterIndex)return;const prefetch=new Image();prefetch.onload=()=>{loadedPhotos[index]=prefetch;};prefetch.src=c.src;});
+ CHARACTERS.forEach((c,index)=>{if(index===activeCharacterIndex)return;const prefetch=new Image();if(!c.src.startsWith('data:'))prefetch.crossOrigin='anonymous';prefetch.onload=()=>{loadedPhotos[index]=prefetch;};prefetch.src=c.src;});
 });
 })();
 </script>
