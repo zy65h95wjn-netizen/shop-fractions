@@ -1,6 +1,6 @@
 // The v0.0.8 cache is independent of all earlier Peach Physics releases.
-const CACHE = 'peach-physics-v008-r6';
-const FILES = ['./', './index.html', './assets/aurelia-frost.jpg', './assets/holly-heartbreaker.jpg', './manifest.webmanifest', './apple-touch-icon.png'];
+const CACHE = 'peach-physics-v008-r7';
+const FILES = ['./', './index.html', './assets/aurelia-frost.jpg', './assets/holly-heartbreaker.jpg?v=r7', './manifest.webmanifest', './apple-touch-icon.png'];
 self.addEventListener('install', event => {
  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)).then(() => self.skipWaiting()));
 });

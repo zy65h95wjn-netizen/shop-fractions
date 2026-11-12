@@ -1,3 +1,39 @@
+# Peach Physics v0.0.8 r7 — Approved Holly portrait
+
+This branch installs the newly approved full-body Holly photograph in the existing fourth slot. It replaces `assets/holly-heartbreaker.jpg`; there is no fifth character or alternate renderer. Winter Ember, Midnight Yule and Aurelia Frost are unchanged. This branch has not been deployed.
+
+The supplied JPEG is copied exactly: **720×1280, 296,910 bytes**, SHA-256 `b5af2ccfa267b2ea8b4a6fa4b98aa2935e7f2b4e869d279f93d99fb9e5964349`. No retouching, regeneration, cropping or recompression was performed. The previous fourth portrait remains recoverable from Git history.
+
+Only Holly's source-coordinate registration changes: spring/node locations, skin and upper-cup touch targets, deformation contours, outer-edge traces and CPU/WebGL crop bounds. Her impact centers are now (325,332) and (433,334), and her processing crop is [240,264,272,176]. The existing spring solver, timing, gains, presets, linked movement and deformation algorithm remain intact. Holly's display fit now includes the full portrait and boots on shorter screens. The r7 cache and versioned Holly asset URL prevent the old cached portrait from being paired with the new coordinates.
+
+## Preview
+
+No build step is needed. From the repository root:
+
+```sh
+python -m http.server 8000 --bind 127.0.0.1 --directory peach-physics/v8
+```
+
+Open http://127.0.0.1:8000/ and cycle the character selector to Holly (fourth). Tap or drag either side; the existing Link control still controls coupled movement. Offline installation requires HTTPS, as before.
+
+## Checks and limitations
+
+With the **repository root** served on port 8000, run:
+
+```sh
+node peach-physics/v8/tests/artwork.cjs
+node peach-physics/v8/tests/holly-approved.cjs
+```
+
+The browser test requires Playwright, Chromium and the r6 baseline commit `ddf3456cc937c7f84f0b022f76f6824e59c2d079` in local Git history. `CHROMIUM`, `PEACH_TEST_URL` and `PEACH_TEST_OUTPUT` override the browser, server and output paths. It checks both WebGL and Canvas at 375×667 and 390×844, four-slot selection, full-portrait fit, independent taps and upper-cup touches, drag/flick, linked motion, exact return to rest and offline loading. It also compares the first three characters' render output and unrounded trajectories against r6. Impact, peak, rebound and settled PNGs are saved to the test output directory.
+
+Validation passed all four artwork hashes and **138 browser checks**, including 12 exact moving-render comparisons for the first three characters, with no browser errors. The motion captures were visually inspected for both sides in both renderers. This is still the existing two-dimensional photograph deformation: the supported outer garment moves less than the interior, and large gestures can look elastic. It is not a newly reconstructed garment or a claim of physical cloth accuracy. Touch feel, frame rate and offline Home Screen behavior still need a physical iPhone check.
+
+The older Holly tests and captures below use the **previous portrait's coordinates**. They remain historical evidence, not acceptance tests for this replacement. Use `holly-approved.cjs` for the current installation.
+
+<details>
+<summary>Historical r6 documentation — previous portrait and calibration</summary>
+
 # Peach Physics v0.0.8 r6 — Holly Heartbreaker
 
 Release: https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/v8/
@@ -97,3 +133,5 @@ Archived validation includes the original v7-1 suite and v8 r1 browser (218 asse
 ## Physical-iPhone verification still required
 
 These are desktop Chromium checks at iPhone-sized viewports. Safari touch feel, perceived rebound and edge firmness, single/two-finger gestures, frame rate, safe areas, sound activation and Home Screen offline reopening still need checking on a physical iPhone. Check Canvas speed if WebGL is unavailable. This is a controlled visual approximation, not a biomechanical simulation.
+
+</details>
