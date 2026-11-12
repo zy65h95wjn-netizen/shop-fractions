@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#141a19">
+  <meta name="description" content="A standalone portrait physics experiment. Two independent regions, responsive touch, and adjustable spring motion.">
+  <title>Independent motion — Physics study 01</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="./" aria-label="Independent motion home"><span class="mark" aria-hidden="true"><i></i><i></i></span> MOTION STUDIES <span class="edition">/ 01</span></a>
+    <span class="prototype"><span></span> Standalone experiment</span>
+  </header>
+  <main>
+    <div class="intro">
+      <div><p class="eyebrow">INDEPENDENT CHEEK PHYSICS</p><h1>Two sides. <em>Their own motion.</em></h1></div>
+      <p class="intro-copy">Touch either side. Drag, flick, and release.<br>Try two fingers to feel the difference.</p>
+    </div>
+    <div class="workspace">
+      <section class="study" aria-label="Interactive portrait">
+        <div class="study-top"><span><i class="live-dot"></i> <span id="mode-status">Loading portrait</span></span><button id="zones" class="text-button" type="button" aria-pressed="false">Show touch zones <span aria-hidden="true">⌖</span></button></div>
+        <div class="photo-surround">
+          <div id="surface" class="surface">
+            <img id="portrait" src="./assets/portrait-original.jpg" alt="The original redheaded Christmas elf portrait in a snowy village." width="756" height="1280" draggable="false" fetchpriority="high">
+            <canvas id="canvas" width="756" height="1280" aria-hidden="true"></canvas>
+            <svg id="zones-overlay" viewBox="0 0 756 1280" aria-hidden="true"></svg>
+          </div>
+        </div>
+        <div class="study-bottom">
+          <div class="side-readout left-readout"><span class="side-dot"></span><span>Screen left</span><span id="left-state" class="state">Resting</span><span class="meter"><i id="left-meter"></i></span></div>
+          <span class="readout-divider"></span>
+          <div class="side-readout right-readout"><span class="side-dot"></span><span>Screen right</span><span id="right-state" class="state">Resting</span><span class="meter"><i id="right-meter"></i></span></div>
+        </div>
+      </section>
+      <aside class="controls" aria-label="Motion controls">
+        <div class="panel-header"><div><p class="eyebrow">MAKE IT YOURS</p><h2>Motion tuning</h2></div><button id="defaults" class="text-button" type="button">Reset</button></div>
+        <div class="sliders">
+          <div class="control"><div class="control-label"><label for="bounce">Bounce</label><output for="bounce" id="bounce-value">55</output></div><p>How lively the release feels.</p><input id="bounce" type="range" min="0" max="100" value="55"><div class="range-ends"><span>Subtle</span><span>Springy</span></div></div>
+          <div class="control"><div class="control-label"><label for="softness">Softness</label><output for="softness" id="softness-value">55</output></div><p>From firm response to a softer give.</p><input id="softness" type="range" min="0" max="100" value="55"><div class="range-ends"><span>Firm</span><span>Soft</span></div></div>
+          <div class="control"><div class="control-label"><label for="settling">Settling</label><output for="settling" id="settling-value">60</output></div><p>How quickly movement comes to rest.</p><input id="settling" type="range" min="0" max="100" value="60"><div class="range-ends"><span>Lingering</span><span>Quick</span></div></div>
+        </div>
+        <div class="linked-control control"><div class="control-label"><label for="linked">Linked movement</label><output for="linked" id="linked-value">Off · 0%</output></div><p>At zero, each side responds on its own.</p><input id="linked" type="range" min="0" max="60" value="0"><div class="range-ends"><span>Independent</span><span>Connected</span></div></div>
+        <div class="try-it"><p class="eyebrow">ONE SIDE AT A TIME</p><div class="test-buttons"><button id="test-left" type="button"><span class="side-dot"></span>Test left <span aria-hidden="true">↗</span></button><button id="test-right" type="button"><span class="side-dot"></span>Test right <span aria-hidden="true">↗</span></button></div><p class="tip">Or touch the portrait directly. Left and right always mean the sides of your screen.</p></div>
+        <div class="utility-buttons"><button id="original" type="button" aria-pressed="false">View original</button><button id="stop" type="button">Stop motion</button></div>
+        <p id="notice" class="notice" role="status" hidden></p>
+        <details class="notes"><summary>About this study <span aria-hidden="true">+</span></summary><div><p>Two independent springs deform one continuous image. The center crease and surrounding clothing stay anchored. Linking is optional and starts at zero.</p><p>This is a conservative 2D study. The outer silhouette stays anchored to protect the background; it cannot reveal detail hidden in the photograph. The supplied portrait file is unchanged.</p><p>Boundaries were traced from the portrait because the white-line guide was not attached. Visual and physical iPhone validation are still pending.</p><a href="./assets/portrait-original.jpg" target="_blank" rel="noopener">Open untouched artwork ↗</a></div></details>
+      </aside>
+    </div>
+    <footer><span>PHYSICS STUDY 01</span><p>Independent by default. Designed for touch.</p><span>EXPERIMENTAL</span></footer>
+  </main>
+  <noscript><p class="noscript">Enable JavaScript to interact with the portrait. The original artwork remains visible.</p></noscript>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
