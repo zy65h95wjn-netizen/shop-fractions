@@ -1,0 +1,60 @@
+{
+  "url": "https://rawcdn.githack.com/zy65h95wjn-netizen/shop-fractions/2558a6230213ed124ff41a7f158cac41267ce5c7/peach-physics/experiments/redhead-kelvinlet/index.html",
+  "errors": [],
+  "imageBytes": 1535006,
+  "webglAndCanvasPublic": true,
+  "iphoneViewport": true,
+  "playback": {
+    "metadata": [
+      {
+        "src": "evidence/webgl-three-way.mp4",
+        "duration": 22,
+        "error": null
+      },
+      {
+        "src": "evidence/canvas-three-way.mp4",
+        "duration": 22,
+        "error": null
+      },
+      {
+        "src": "evidence/webgl-A.mp4",
+        "duration": 22,
+        "error": null
+      },
+      {
+        "src": "evidence/webgl-AP.mp4",
+        "duration": 22,
+        "error": null
+      },
+      {
+        "src": "evidence/webgl-B.mp4",
+        "duration": 22,
+        "error": null
+      },
+      {
+        "src": "evidence/canvas-A.mp4",
+        "duration": 22,
+        "error": null
+      },
+      {
+        "src": "evidence/canvas-AP.mp4",
+        "duration": 22,
+        "error": null
+      },
+      {
+        "src": "evidence/canvas-B.mp4",
+        "duration": 22,
+        "error": null
+      }
+    ],
+    "presented": [
+      439,
+      492
+    ],
+    "ended": [
+      true,
+      true
+    ],
+    "note": "Both synchronized comparison videos played through at actual media time. This is playback validation, not a subjective preference vote."
+  }
+}

@@ -76,6 +76,8 @@ Canvas is functional but too slow in this environment for a natural real-time fe
 
 All methods are computed for matching and safeguards even in single view, adding CPU work. This experiment does not optimize that away or introduce a different solver. WebGL unavailable/context-loss fallback was tested. [Detailed performance](evidence/performance.json).
 
+The public immutable-commit preview was verified in both renderers at an iPhone-sized viewport. All eight media files loaded; both full 22-second comparison videos played to completion with no browser errors. The browser presented 439 WebGL-video frames and 492 Canvas-video frames during this playback check (media playback can drop frames). This verifies actual media playback, not subjective preference. [Public verification](evidence/public-verification.json).
+
 ## Evaluation limit and disposition
 
 The page implements balanced randomized left/right assignments, ten matched clips, replay, “No preference,” locked voting during playback and a JSON vote export. No actual preference result is asserted. A real observer must watch the animation to establish the requested 8/10 result; numerical strain, image differences, frame sheets and synthetic UI interaction cannot supply those votes.
