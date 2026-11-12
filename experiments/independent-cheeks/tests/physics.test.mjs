@@ -11,7 +11,7 @@ test('original JPEG is byte-for-byte identical to the supplied attachment',()=>{
   const hash=createHash('sha256').update(readFileSync(new URL('../dist/assets/portrait-original.jpg',import.meta.url))).digest('hex');
   assert.equal(hash,'0ce4ef21d3cb04a83d86ba6ba426fcf909c2a092ff69348e8e22f6b8aaa19017');
 });
-test('tap, drag, and flick on either side never transfer motion at zero link',()=>{
+test('tap, drag, and flick leave the opposite spring state at rest with zero link',()=>{
   for(const side of [0,1]) {
     const p=new Physics(),[x,y]=REGIONS[side].center;
     assert.equal(p.settings.linked,0);
@@ -64,15 +64,25 @@ test('30, 60 and 120 Hz give equivalent spring trajectories',()=>{
   const states=[30,60,120].map(hz=>{const p=new Physics();p.impulse(1);advance(p,0.5,hz);return p.bodies[1];});
   for(const s of states)for(const key of ['x','y','vx','vy','sx','sy'])assert.ok(Math.abs(s[key]-states[0][key])<1e-9);
 });
-test('masks never overlap; clothing, thighs, stockings, hair, background, and crease are fixed',()=>{
-  for(let y=760;y<1010;y+=3)for(let x=130;x<610;x+=3)
-    assert.ok(weightsAt(x,y,0)[0]*weightsAt(x,y,1)[0]===0);
+test('clothing, thighs, stockings, hair, and background stay fixed',()=>{
   const p=new Physics();Object.assign(p.bodies[0],{x:8,y:-12,sx:-8,sy:12});Object.assign(p.bodies[1],{x:-12,y:16,sx:12,sy:-16});
   const fixed=[[320,540],[400,750],[215,770],[530,780],[220,1030],[420,1050],
     [220,1150],[420,1190],[90,880],[630,910],[220,600],[450,300],
-    [306,805],[294,837],[285,873],[286,900],[294,932],[310,958]];
+    [306,805]];
   for(const [x,y] of fixed)assert.deepEqual(displace(x,y,p.bodies),[x,y],`${x},${y}`);
   assert.equal(hitTest(30,500),-1);
+});
+test('right motion carries the crease continuously with limited neighboring response',()=>{
+  const p=new Physics();Object.assign(p.bodies[1],{x:6,y:10,sx:6,sy:10});
+  for(const [x,y] of [[294,837],[285,873],[286,900],[294,932],[310,958]]) {
+    const displacement=([a,b])=>{const q=displace(a,b,p.bodies);return [q[0]-a,q[1]-b];};
+    const q=displacement([x,y]);assert.ok(Math.hypot(...q)>1,'crease must no longer be pinned');
+    const left=displacement([x-.1,y]),right=displacement([x+.1,y]);
+    assert.ok(Math.hypot(left[0]-right[0],left[1]-right[1])<.15,'continuous crease transition');
+  }
+  const neighbor=displace(260,900,p.bodies);
+  assert.ok(Math.hypot(neighbor[0]-260,neighbor[1]-900)>1);
+  assert.deepEqual(displace(220,889,p.bodies),[220,889],'opposite core remains independent');
 });
 test('annotated red inner/lower area leads yellow, and green has the least motion',()=>{
   const samples={

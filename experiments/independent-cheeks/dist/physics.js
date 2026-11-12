@@ -12,8 +12,8 @@ export const REGIONS = [
       [149,858],[165,831]]
   },
   {
-    // Broader response toward the annotated inner/lower curve; retain a
-    // stationary crease and a smooth transition above the unaffected thigh.
+    // Broader response toward the annotated inner/lower curve, plus the
+    // continuous crease bridge below. The outer silhouette remains anchored.
     name: 'right', center: [375, 890], radius: [148, 120], limit: 22, feather: 76,
     // Red leads along the inner mass and wraps under it. Yellow follows;
     // the outer green area has the weakest response. These overlapping smooth
@@ -43,6 +43,16 @@ export function signedDistance(x, y, polygon) {
   return inside ? distance : -distance;
 }
 
+// The latest guide explicitly permits motion into the neighboring cheek.
+// Carry the existing crease as one surface instead of pinning or separating it.
+// Compact support keeps the skirt, outer contours, and thigh fixed.
+export function creaseBridge(x, y) {
+  const center = 302 + 0.004*(y-880)**2;
+  const horizontal = smooth(1-((x-center)/80)**2);
+  const vertical = smooth((y-805)/60)*smooth((1008-y)/65);
+  return 0.34*horizontal*vertical;
+}
+
 export function weightsAt(x, y, side) {
   const r = REGIONS[side];
   let w = smooth(signedDistance(x, y, r.outline)/r.feather);
@@ -53,6 +63,9 @@ export function weightsAt(x, y, side) {
     const weighted = w*(f.base+f.innerGain*inner+f.lowerGain*lower);
     w = f.cap*Math.tanh(weighted/f.cap);
   }
+  const bridge = creaseBridge(x,y);
+  // Partition the shared strip: do not add two full-strength deformations.
+  w = w*(1-bridge) + (side===1 ? bridge : 0);
   return [w, w*clamp((y-r.center[1])/r.radius[1], -1, 1),
     w*clamp((x-r.center[0])/r.radius[0], -1, 1)];
 }
