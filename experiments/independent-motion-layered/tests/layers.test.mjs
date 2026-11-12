@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import {Physics,REGIONS,hitTest} from '../dist/physics.js';
-import {W,H,OUTLINES,matte,coefficients,forward,inverse,makeField,crease,smooth} from '../dist/layers.js';
+import {W,H,OUTLINES,matte,coefficients,forward,inverse,makeField,crease,smooth,lowerJoin} from '../dist/layers.js';
 
 const advance=(p,t)=>{for(let i=0;i<t*60;i++)p.advance(1/60);};
 const rest=b=>{for(const key of ['x','y','sx','sy','vx','vy','svx','svy'])assert.equal(b[key],0);};
@@ -14,7 +14,7 @@ test('the source portrait remains byte-for-byte identical',()=>{
 });
 test('the formerly anchored inner edge now has independent travel',()=>{
   const b={x:7,y:12,sx:7,sy:12};
-  for(const [x,y] of [[288,866],[283,895],[288,919],[300,945]]) {
+  for(const [x,y] of [[288,866],[283,895]]) {
     const p=forward(x,y,1,b);
     assert.ok(Math.hypot(p[0]-x,p[1]-y)>8);
   }
@@ -60,7 +60,7 @@ test('each contact edge slides along the crease without separating from it',()=>
     const x=crease(y),b={x:side===1?6:-5,y:dy,sx:0,sy:0};
     const q=forward(x,y,side,b),normal=q[0]-crease(q[1]);
     assert.ok(side===1?normal<=1e-8:normal>=-1e-8);
-    assert.ok(Math.abs(q[1]-y)>2,'tangential motion stays available');
+    if(y<=900)assert.ok(Math.abs(q[1]-y)>2,'upper contact sliding stays available');
   }
 });
 test('all control extremes stay bounded and eventually return to exact rest',()=>{
@@ -128,5 +128,15 @@ test('idle layer coordinates stay exactly at their source positions',()=>{
   const b={x:0,y:0,sx:0,sy:0};
   for(const side of [0,1])for(let y=780;y<1010;y+=3)for(let x=140;x<600;x+=3) {
     assert.deepEqual(inverse(x,y,side,b),[x,y]);
+  }
+});
+
+test('lower attachments remain closed with the thigh under either spring direction',()=>{
+  for(const side of [0,1])for(let x=side===0?173:337;x<(side===0?300:579);x+=3){
+    const y=lowerJoin(x,side)-1;
+    for(const sign of [-1,1]){
+      const b={x:sign*12,y:sign*22,sx:-sign*12,sy:-sign*22};
+      assert.deepEqual(forward(x,y,side,b),[x,y]);
+    }
   }
 });

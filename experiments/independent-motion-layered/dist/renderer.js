@@ -1,4 +1,4 @@
-import {W,H,makeField} from './layers.js?v=2';
+import {W,H,makeField} from './layers.js?v=3';
 
 const vertex=`
 attribute vec2 aPosition;

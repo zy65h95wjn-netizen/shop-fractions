@@ -1,4 +1,4 @@
-import {W,H,OUTLINES,CENTERS,inverse,matte,clamp} from './layers.js?v=2';
+import {W,H,OUTLINES,CENTERS,inverse,matte,clamp} from './layers.js?v=3';
 export const WIDTH=W,HEIGHT=H;
 export const DEFAULTS=Object.freeze({bounce:55,softness:55,settling:60});
 export const REGIONS=OUTLINES.map((outline,i)=>({name:i===0?'left':'right',

@@ -34,7 +34,7 @@ node tests/export-fields.mjs
 python3 tests/offscreen.py
 ```
 
-The first command runs 12 numerical tests. The offscreen check requires Linux Mesa EGL and Pillow. It compiles and renders the **actual application shader source** without a browser. Results and frames are written under `/tmp/layered-qa/`. See [TESTING.md](TESTING.md).
+The first command runs 13 numerical tests. The offscreen check requires Linux Mesa EGL and Pillow. It compiles and renders the **actual application shader source** without a browser. Results and frames are written under `/tmp/layered-qa/`. See [TESTING.md](TESTING.md).
 
 ## Limits
 
@@ -45,3 +45,5 @@ Safari integration, physical iPhone touch response, frame rate, and natural-look
 The source work is isolated under `experiments/independent-motion-layered/` in the requested repository. The existing preview remains available, and the character is not integrated into Peaches.
 
 Revision 2 adds an independent unilateral contact constraint near the crease. Each edge can slide tangentially or overlap inward; outward normal motion that opens a slit is suppressed. This introduces no opposite-side spring force or deformation. The inverse sampler uses 16 iterations.
+
+Revision 3 attaches each lower fold to its own stationary thigh. A smooth 76-source-pixel transition reduces travel toward the join, with a three-pixel stationary margin. The upper inner edge retains sliding and the two springs remain independent. This trades some lower-fold travel for a closed join.

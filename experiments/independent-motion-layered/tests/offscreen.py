@@ -116,6 +116,10 @@ idle=render('idle',zero,zero)
 right=render('right-inward',zero,[-16,8,-10,5])
 outward=render('right-outward',zero,[6,-8,4,-5])
 both=render('opposed',[-12,8,-8,5],[6,-8,4,-5])
+left_up=render('left-up',[0,-16,0,-10],zero)
+left_down=render('left-down',[0,16,0,10],zero)
+right_up=render('right-up',zero,[0,-22,0,-12])
+right_down=render('right-down',zero,[0,22,0,12])
 def difference(a,b,box=None):
     d=ImageChops.difference(a.convert('RGB'),b.convert('RGB'))
     if box:d=d.crop(box)
@@ -130,3 +134,16 @@ for name,m in metrics.items():
     if name!='idle_vs_source':assert m['maximum']==0,(name,m)
 Path('/tmp/layered-qa/graphics-results.json').write_text(json.dumps(metrics,indent=2))
 print(json.dumps(metrics,indent=2))
+
+# Pixel comparisons on the actual lower join in the new up/down render poses.
+joins=[[(173,968),(200,979),(239,983),(279,980),(315,970)],
+       [(337,979),(369,993),(410,1002),(457,1005),(506,1001),(553,993),(579,975)]]
+for side,frames in enumerate([[left_up,left_down],[right_up,right_down]]):
+    maximum=0
+    for (ax,ay),(bx,by) in zip(joins[side],joins[side][1:]):
+        for x in range(ax,bx):
+            y=round(ay+(by-ay)*(x-ax)/(bx-ax))
+            for frame in frames:
+                maximum=max(maximum,*[abs(a-b) for a,b in zip(frame.getpixel((x,y)),idle.getpixel((x,y)))])
+    assert maximum==0,(side,maximum)
+    print('Lower join maximum channel difference',side,maximum)

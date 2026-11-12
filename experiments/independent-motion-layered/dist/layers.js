@@ -15,6 +15,21 @@ export const OUTLINES=[
    [287,909],[280,884],[286,857],[296,829]]
 ];
 export const CENTERS=[[220,890],[340,895]];
+// The lower folds attach to stationary thighs. Give these cutout edges a
+// continuous elastic attachment instead of letting backing show through.
+export const LOWER_JOINS=[
+  [[153,948],[173,968],[200,979],[239,983],[279,980],[315,970]],
+  [[314,960],[337,979],[369,993],[410,1002],[457,1005],[506,1001],[553,993],[579,975],[589,949]]
+];
+export function lowerJoin(x,side){
+  const points=LOWER_JOINS[side];
+  if(x<=points[0][0])return points[0][1];
+  for(let i=1;i<points.length;i++)if(x<=points[i][0]){
+    const [ax,ay]=points[i-1],[bx,by]=points[i];
+    return ay+(by-ay)*(x-ax)/(bx-ax);
+  }
+  return points.at(-1)[1];
+}
 
 export function distanceToOutline(x,y,points) {
   let inside=false,d=Infinity;
@@ -39,7 +54,8 @@ export function coefficients(x,y,side) {
   const center=side===1?c+30:c-35;
   const spread=side===1?120:87;
   const focus=Math.exp(-(((x-center)/spread)**2));
-  const w=vertical*focus;
+  const attachment=smooth((lowerJoin(x,side)-y-3)/76);
+  const w=vertical*focus*attachment;
   return [w,w*clamp((y-890)/120,-1,1),w*clamp((x-center)/120,-1,1)];
 }
 export function offset(x,y,side,body) {
