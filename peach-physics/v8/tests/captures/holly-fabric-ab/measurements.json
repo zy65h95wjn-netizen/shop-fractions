@@ -1,0 +1,745 @@
+{
+ "description": "Holly fabric A/B (A = r9.1, B = ?fabric=strong) from holly-fabric.cjs at 390x844 @2x. trimWidth: worst absolute width change from rest (%), photo-traced fur label through the real renderers, over all states and trajectory frames. field: WebGL GPU warp at each state; strain = largest principal stretch/squash, mean over the region; skinBandStrainP95 over the 26 px of skin above the trim.",
+ "checks": 193,
+ "materialPositions": {
+  "all": [
+   [
+    286,
+    296,
+    306,
+    316,
+    326,
+    336,
+    346,
+    352
+   ],
+   [
+    408,
+    416,
+    426,
+    436,
+    446,
+    456,
+    466,
+    474
+   ]
+  ],
+  "midCup": [
+   [
+    296,
+    306,
+    316,
+    326,
+    336
+   ],
+   [
+    426,
+    436,
+    446
+   ]
+  ]
+ },
+ "regionPixels": {
+  "trim": 3863,
+  "cup": 4114,
+  "skinBand": 3910
+ },
+ "trimWidth": {
+  "webgl": {
+   "A": {
+    "meanOfPositions": 16.1,
+    "max": 31.6,
+    "midCupMax": 15.9,
+    "byPosition": {
+     "L286": 19.9,
+     "L296": 15.8,
+     "L306": 13.5,
+     "L316": 11.5,
+     "L326": 10.1,
+     "L336": 15.9,
+     "L346": 16,
+     "L352": 20.4,
+     "R408": 22.5,
+     "R416": 17.7,
+     "R426": 11.4,
+     "R436": 9.1,
+     "R446": 10.5,
+     "R456": 14.3,
+     "R466": 17.7,
+     "R474": 31.6
+    }
+   },
+   "B": {
+    "meanOfPositions": 10.3,
+    "max": 33.5,
+    "midCupMax": 9.1,
+    "byPosition": {
+     "L286": 10,
+     "L296": 2.6,
+     "L306": 2.5,
+     "L316": 2.1,
+     "L326": 2.3,
+     "L336": 4,
+     "L346": 7.9,
+     "L352": 14.8,
+     "R408": 18.2,
+     "R416": 5.8,
+     "R426": 9.1,
+     "R436": 1.8,
+     "R446": 5.2,
+     "R456": 15.1,
+     "R466": 29.7,
+     "R474": 33.5
+    }
+   }
+  },
+  "canvas": {
+   "A": {
+    "meanOfPositions": 16.9,
+    "max": 33.5,
+    "midCupMax": 17.1,
+    "byPosition": {
+     "L286": 21,
+     "L296": 16.5,
+     "L306": 15.5,
+     "L316": 10.2,
+     "L326": 11.4,
+     "L336": 17.1,
+     "L346": 16.3,
+     "L352": 19.6,
+     "R408": 23.5,
+     "R416": 17.8,
+     "R426": 13.9,
+     "R436": 10,
+     "R446": 11.4,
+     "R456": 16.1,
+     "R466": 17.2,
+     "R474": 33.5
+    }
+   },
+   "B": {
+    "meanOfPositions": 10.9,
+    "max": 35.9,
+    "midCupMax": 8.5,
+    "byPosition": {
+     "L286": 10.6,
+     "L296": 3.6,
+     "L306": 4.3,
+     "L316": 1.4,
+     "L326": 4.1,
+     "L336": 4.6,
+     "L346": 8.6,
+     "L352": 14.7,
+     "R408": 18.2,
+     "R416": 4.7,
+     "R426": 8.5,
+     "R436": 3,
+     "R446": 8.2,
+     "R456": 15.1,
+     "R466": 28.6,
+     "R474": 35.9
+    }
+   }
+  }
+ },
+ "field": {
+  "L natural tap peak": {
+   "A": {
+    "skinCenter": 19.13,
+    "skinUpper": 17.05,
+    "skinNearTrim": 18.98,
+    "trimTravel": 9.56,
+    "cupTravel": 7.74,
+    "trimStrainMean": 13.9,
+    "cupStrainMean": 27.6,
+    "cupStrainP95": 62.1,
+    "skinBandStrainP95": 50.7,
+    "minJacobian": 0.507
+   },
+   "B": {
+    "skinCenter": 19.13,
+    "skinUpper": 17.05,
+    "skinNearTrim": 16.56,
+    "trimTravel": 4.98,
+    "cupTravel": 3.74,
+    "trimStrainMean": 4.7,
+    "cupStrainMean": 17.6,
+    "cupStrainP95": 39.1,
+    "skinBandStrainP95": 53.1,
+    "minJacobian": 0.507
+   }
+  },
+  "L natural tap rebound": {
+   "A": {
+    "skinCenter": 7.43,
+    "skinUpper": 6.7,
+    "skinNearTrim": 6.36,
+    "trimTravel": 3.53,
+    "cupTravel": 2.46,
+    "trimStrainMean": 5,
+    "cupStrainMean": 23.2,
+    "cupStrainP95": 60.3,
+    "skinBandStrainP95": 32.6,
+    "minJacobian": 0.527
+   },
+   "B": {
+    "skinCenter": 7.05,
+    "skinUpper": 6.7,
+    "skinNearTrim": 4.12,
+    "trimTravel": 1.78,
+    "cupTravel": 1.24,
+    "trimStrainMean": 2,
+    "cupStrainMean": 9.9,
+    "cupStrainP95": 21,
+    "skinBandStrainP95": 43.9,
+    "minJacobian": 0.647
+   }
+  },
+  "L playful tap peak": {
+   "A": {
+    "skinCenter": 22.55,
+    "skinUpper": 20.11,
+    "skinNearTrim": 22.35,
+    "trimTravel": 11.7,
+    "cupTravel": 9.61,
+    "trimStrainMean": 17.3,
+    "cupStrainMean": 31.1,
+    "cupStrainP95": 68.3,
+    "skinBandStrainP95": 66.9,
+    "minJacobian": 0.451
+   },
+   "B": {
+    "skinCenter": 22.54,
+    "skinUpper": 20.11,
+    "skinNearTrim": 19.86,
+    "trimTravel": 6.12,
+    "cupTravel": 4.65,
+    "trimStrainMean": 6,
+    "cupStrainMean": 20.4,
+    "cupStrainP95": 45.4,
+    "skinBandStrainP95": 57.5,
+    "minJacobian": 0.451
+   }
+  },
+  "L chaos tap peak": {
+   "A": {
+    "skinCenter": 23.08,
+    "skinUpper": 20.77,
+    "skinNearTrim": 22.87,
+    "trimTravel": 12.1,
+    "cupTravel": 9.95,
+    "trimStrainMean": 17.9,
+    "cupStrainMean": 32,
+    "cupStrainP95": 70.7,
+    "skinBandStrainP95": 74.9,
+    "minJacobian": 0.418
+   },
+   "B": {
+    "skinCenter": 23.08,
+    "skinUpper": 20.77,
+    "skinNearTrim": 20.4,
+    "trimTravel": 6.33,
+    "cupTravel": 4.81,
+    "trimStrainMean": 6.2,
+    "cupStrainMean": 21.1,
+    "cupStrainP95": 46.8,
+    "skinBandStrainP95": 58.1,
+    "minJacobian": 0.418
+   }
+  },
+  "L chaos tap rebound": {
+   "A": {
+    "skinCenter": 10.21,
+    "skinUpper": 8.78,
+    "skinNearTrim": 8.38,
+    "trimTravel": 4.54,
+    "cupTravel": 3.04,
+    "trimStrainMean": 7.4,
+    "cupStrainMean": 33.8,
+    "cupStrainP95": 99.3,
+    "skinBandStrainP95": 47.6,
+    "minJacobian": 0.402
+   },
+   "B": {
+    "skinCenter": 9.33,
+    "skinUpper": 8.78,
+    "skinNearTrim": 5.22,
+    "trimTravel": 2.22,
+    "cupTravel": 1.53,
+    "trimStrainMean": 2.5,
+    "cupStrainMean": 12.7,
+    "cupStrainP95": 27,
+    "skinBandStrainP95": 67.8,
+    "minJacobian": 0.579
+   }
+  },
+  "L strong flick down": {
+   "A": {
+    "skinCenter": 14.23,
+    "skinUpper": 13.49,
+    "skinNearTrim": 14.15,
+    "trimTravel": 7.49,
+    "cupTravel": 6.06,
+    "trimStrainMean": 11,
+    "cupStrainMean": 24.4,
+    "cupStrainP95": 52.3,
+    "skinBandStrainP95": 43.6,
+    "minJacobian": 0.633
+   },
+   "B": {
+    "skinCenter": 14.23,
+    "skinUpper": 13.49,
+    "skinNearTrim": 11.79,
+    "trimTravel": 3.96,
+    "cupTravel": 2.97,
+    "trimStrainMean": 4.3,
+    "cupStrainMean": 14.8,
+    "cupStrainP95": 31.8,
+    "skinBandStrainP95": 43.4,
+    "minJacobian": 0.678
+   }
+  },
+  "L strong flick up": {
+   "A": {
+    "skinCenter": 11.34,
+    "skinUpper": 11.96,
+    "skinNearTrim": 9.42,
+    "trimTravel": 5.85,
+    "cupTravel": 4.02,
+    "trimStrainMean": 8.7,
+    "cupStrainMean": 42.1,
+    "cupStrainP95": 104,
+    "skinBandStrainP95": 59.8,
+    "minJacobian": 0.421
+   },
+   "B": {
+    "skinCenter": 10.47,
+    "skinUpper": 11.96,
+    "skinNearTrim": 6.2,
+    "trimTravel": 3.06,
+    "cupTravel": 2.11,
+    "trimStrainMean": 3.8,
+    "cupStrainMean": 18.3,
+    "cupStrainP95": 36.6,
+    "skinBandStrainP95": 65.2,
+    "minJacobian": 0.54
+   }
+  },
+  "L chaos flick up": {
+   "A": {
+    "skinCenter": 16.63,
+    "skinUpper": 17.52,
+    "skinNearTrim": 13.47,
+    "trimTravel": 8.85,
+    "cupTravel": 5.77,
+    "trimStrainMean": 13.9,
+    "cupStrainMean": 79,
+    "cupStrainP95": 202.9,
+    "skinBandStrainP95": 92.6,
+    "minJacobian": 0.293
+   },
+   "B": {
+    "skinCenter": 14.55,
+    "skinUpper": 17.52,
+    "skinNearTrim": 8.64,
+    "trimTravel": 4.65,
+    "cupTravel": 3.13,
+    "trimStrainMean": 6.4,
+    "cupStrainMean": 30.8,
+    "cupStrainP95": 61,
+    "skinBandStrainP95": 106.2,
+    "minJacobian": 0.434
+   }
+  },
+  "L drag inward-up from outer cup": {
+   "A": {
+    "skinCenter": 8.06,
+    "skinUpper": 8.33,
+    "skinNearTrim": 6.85,
+    "trimTravel": 4.08,
+    "cupTravel": 2.86,
+    "trimStrainMean": 6.1,
+    "cupStrainMean": 28.2,
+    "cupStrainP95": 75.5,
+    "skinBandStrainP95": 44,
+    "minJacobian": 0.477
+   },
+   "B": {
+    "skinCenter": 7.64,
+    "skinUpper": 8.33,
+    "skinNearTrim": 4.54,
+    "trimTravel": 2.12,
+    "cupTravel": 1.49,
+    "trimStrainMean": 2.7,
+    "cupStrainMean": 12.1,
+    "cupStrainP95": 25.1,
+    "skinBandStrainP95": 46.7,
+    "minJacobian": 0.619
+   }
+  },
+  "L node-bound inward-up": {
+   "A": {
+    "skinCenter": 21.98,
+    "skinUpper": 23.46,
+    "skinNearTrim": 17.98,
+    "trimTravel": 12.27,
+    "cupTravel": 7.52,
+    "trimStrainMean": 29.7,
+    "cupStrainMean": 168.9,
+    "cupStrainP95": 445.9,
+    "skinBandStrainP95": 137.8,
+    "minJacobian": 0.153
+   },
+   "B": {
+    "skinCenter": 18.39,
+    "skinUpper": 23.27,
+    "skinNearTrim": 11.12,
+    "trimTravel": 6.46,
+    "cupTravel": 4.33,
+    "trimStrainMean": 13,
+    "cupStrainMean": 49,
+    "cupStrainP95": 102.1,
+    "skinBandStrainP95": 157.4,
+    "minJacobian": 0.194
+   }
+  },
+  "L node-bound outward-down": {
+   "A": {
+    "skinCenter": 23.76,
+    "skinUpper": 21.74,
+    "skinNearTrim": 23.56,
+    "trimTravel": 12.7,
+    "cupTravel": 10.46,
+    "trimStrainMean": 19.2,
+    "cupStrainMean": 34,
+    "cupStrainP95": 73.9,
+    "skinBandStrainP95": 87.6,
+    "minJacobian": 0.381
+   },
+   "B": {
+    "skinCenter": 23.76,
+    "skinUpper": 21.74,
+    "skinNearTrim": 21.12,
+    "trimTravel": 6.65,
+    "cupTravel": 5.05,
+    "trimStrainMean": 6.7,
+    "cupStrainMean": 22.4,
+    "cupStrainP95": 49.5,
+    "skinBandStrainP95": 59.3,
+    "minJacobian": 0.381
+   }
+  },
+  "R natural tap peak": {
+   "A": {
+    "skinCenter": 18.83,
+    "skinUpper": 15.67,
+    "skinNearTrim": 18.8,
+    "trimTravel": 5.38,
+    "cupTravel": 5.26,
+    "trimStrainMean": 11.3,
+    "cupStrainMean": 28.5,
+    "cupStrainP95": 63,
+    "skinBandStrainP95": 60,
+    "minJacobian": 0.61
+   },
+   "B": {
+    "skinCenter": 18.83,
+    "skinUpper": 15.67,
+    "skinNearTrim": 17.88,
+    "trimTravel": 4.2,
+    "cupTravel": 3.14,
+    "trimStrainMean": 6.3,
+    "cupStrainMean": 23.6,
+    "cupStrainP95": 45.9,
+    "skinBandStrainP95": 52.2,
+    "minJacobian": 0.61
+   }
+  },
+  "R natural tap rebound": {
+   "A": {
+    "skinCenter": 7.66,
+    "skinUpper": 6.75,
+    "skinNearTrim": 6.91,
+    "trimTravel": 2.03,
+    "cupTravel": 1.69,
+    "trimStrainMean": 4.7,
+    "cupStrainMean": 21.8,
+    "cupStrainP95": 62.9,
+    "skinBandStrainP95": 61.7,
+    "minJacobian": 0.571
+   },
+   "B": {
+    "skinCenter": 7.52,
+    "skinUpper": 6.75,
+    "skinNearTrim": 5.27,
+    "trimTravel": 1.55,
+    "cupTravel": 1.06,
+    "trimStrainMean": 3.9,
+    "cupStrainMean": 13.2,
+    "cupStrainP95": 29.6,
+    "skinBandStrainP95": 46,
+    "minJacobian": 0.66
+   }
+  },
+  "R playful tap peak": {
+   "A": {
+    "skinCenter": 22.44,
+    "skinUpper": 19.09,
+    "skinNearTrim": 22.38,
+    "trimTravel": 6.81,
+    "cupTravel": 6.87,
+    "trimStrainMean": 14.7,
+    "cupStrainMean": 34.5,
+    "cupStrainP95": 72.2,
+    "skinBandStrainP95": 72,
+    "minJacobian": 0.566
+   },
+   "B": {
+    "skinCenter": 22.44,
+    "skinUpper": 19.09,
+    "skinNearTrim": 21.42,
+    "trimTravel": 5.25,
+    "cupTravel": 4,
+    "trimStrainMean": 7.5,
+    "cupStrainMean": 28.3,
+    "cupStrainP95": 55.4,
+    "skinBandStrainP95": 57.6,
+    "minJacobian": 0.566
+   }
+  },
+  "R chaos tap peak": {
+   "A": {
+    "skinCenter": 23.08,
+    "skinUpper": 20.07,
+    "skinNearTrim": 23.03,
+    "trimTravel": 7.13,
+    "cupTravel": 7.2,
+    "trimStrainMean": 15.6,
+    "cupStrainMean": 37.1,
+    "cupStrainP95": 74.9,
+    "skinBandStrainP95": 76.9,
+    "minJacobian": 0.528
+   },
+   "B": {
+    "skinCenter": 23.08,
+    "skinUpper": 20.07,
+    "skinNearTrim": 22.06,
+    "trimTravel": 5.48,
+    "cupTravel": 4.16,
+    "trimStrainMean": 7.7,
+    "cupStrainMean": 30,
+    "cupStrainP95": 59.5,
+    "skinBandStrainP95": 58.2,
+    "minJacobian": 0.528
+   }
+  },
+  "R chaos tap rebound": {
+   "A": {
+    "skinCenter": 13.28,
+    "skinUpper": 11.54,
+    "skinNearTrim": 10.83,
+    "trimTravel": 3.36,
+    "cupTravel": 2.65,
+    "trimStrainMean": 8.5,
+    "cupStrainMean": 43.1,
+    "cupStrainP95": 127.7,
+    "skinBandStrainP95": 126.7,
+    "minJacobian": 0.384
+   },
+   "B": {
+    "skinCenter": 12.32,
+    "skinUpper": 11.54,
+    "skinNearTrim": 8.18,
+    "trimTravel": 2.57,
+    "cupTravel": 1.72,
+    "trimStrainMean": 7.6,
+    "cupStrainMean": 23.9,
+    "cupStrainP95": 51.8,
+    "skinBandStrainP95": 93.6,
+    "minJacobian": 0.477
+   }
+  },
+  "R strong flick down": {
+   "A": {
+    "skinCenter": 13.52,
+    "skinUpper": 11.63,
+    "skinNearTrim": 13.54,
+    "trimTravel": 4.23,
+    "cupTravel": 4.24,
+    "trimStrainMean": 10.1,
+    "cupStrainMean": 24.2,
+    "cupStrainP95": 54,
+    "skinBandStrainP95": 49.6,
+    "minJacobian": 0.678
+   },
+   "B": {
+    "skinCenter": 13.52,
+    "skinUpper": 11.63,
+    "skinNearTrim": 12.73,
+    "trimTravel": 3.24,
+    "cupTravel": 2.44,
+    "trimStrainMean": 5.4,
+    "cupStrainMean": 18.6,
+    "cupStrainP95": 36,
+    "skinBandStrainP95": 42.2,
+    "minJacobian": 0.678
+   }
+  },
+  "R strong flick up": {
+   "A": {
+    "skinCenter": 10.86,
+    "skinUpper": 11.51,
+    "skinNearTrim": 9.48,
+    "trimTravel": 3.32,
+    "cupTravel": 2.79,
+    "trimStrainMean": 9.5,
+    "cupStrainMean": 42.2,
+    "cupStrainP95": 111.8,
+    "skinBandStrainP95": 80.6,
+    "minJacobian": 0.451
+   },
+   "B": {
+    "skinCenter": 10.47,
+    "skinUpper": 11.51,
+    "skinNearTrim": 7.28,
+    "trimTravel": 2.51,
+    "cupTravel": 1.69,
+    "trimStrainMean": 6.6,
+    "cupStrainMean": 22.5,
+    "cupStrainP95": 49.7,
+    "skinBandStrainP95": 62.2,
+    "minJacobian": 0.545
+   }
+  },
+  "R chaos flick up": {
+   "A": {
+    "skinCenter": 15.83,
+    "skinUpper": 16.75,
+    "skinNearTrim": 12.96,
+    "trimTravel": 4.96,
+    "cupTravel": 3.94,
+    "trimStrainMean": 15.6,
+    "cupStrainMean": 76.9,
+    "cupStrainP95": 203.5,
+    "skinBandStrainP95": 129.3,
+    "minJacobian": 0.305
+   },
+   "B": {
+    "skinCenter": 14.56,
+    "skinUpper": 16.75,
+    "skinNearTrim": 9.91,
+    "trimTravel": 3.74,
+    "cupTravel": 2.46,
+    "trimStrainMean": 11.4,
+    "cupStrainMean": 36.5,
+    "cupStrainP95": 81.3,
+    "skinBandStrainP95": 98.7,
+    "minJacobian": 0.416
+   }
+  },
+  "R drag inward-up from outer cup": {
+   "A": {
+    "skinCenter": 7.76,
+    "skinUpper": 8.09,
+    "skinNearTrim": 7.02,
+    "trimTravel": 2.28,
+    "cupTravel": 1.99,
+    "trimStrainMean": 6.2,
+    "cupStrainMean": 26.1,
+    "cupStrainP95": 74.1,
+    "skinBandStrainP95": 68.7,
+    "minJacobian": 0.537
+   },
+   "B": {
+    "skinCenter": 7.65,
+    "skinUpper": 8.09,
+    "skinNearTrim": 5.46,
+    "trimTravel": 1.73,
+    "cupTravel": 1.2,
+    "trimStrainMean": 4.7,
+    "cupStrainMean": 15.4,
+    "cupStrainP95": 31.9,
+    "skinBandStrainP95": 43.5,
+    "minJacobian": 0.591
+   }
+  },
+  "R node-bound inward-up": {
+   "A": {
+    "skinCenter": 20.74,
+    "skinUpper": 22.06,
+    "skinNearTrim": 15.93,
+    "trimTravel": 6.96,
+    "cupTravel": 5.33,
+    "trimStrainMean": 24.7,
+    "cupStrainMean": 149.2,
+    "cupStrainP95": 416.4,
+    "skinBandStrainP95": 299.1,
+    "minJacobian": 0.176
+   },
+   "B": {
+    "skinCenter": 18.6,
+    "skinUpper": 22.06,
+    "skinNearTrim": 12.82,
+    "trimTravel": 5.22,
+    "cupTravel": 3.49,
+    "trimStrainMean": 25.1,
+    "cupStrainMean": 59.2,
+    "cupStrainP95": 121.8,
+    "skinBandStrainP95": 153.3,
+    "minJacobian": 0.215
+   }
+  },
+  "R node-bound outward-down": {
+   "A": {
+    "skinCenter": 23.88,
+    "skinUpper": 22.15,
+    "skinNearTrim": 23.84,
+    "trimTravel": 7.61,
+    "cupTravel": 7.57,
+    "trimStrainMean": 19.1,
+    "cupStrainMean": 47.8,
+    "cupStrainP95": 117.9,
+    "skinBandStrainP95": 115.9,
+    "minJacobian": 0.398
+   },
+   "B": {
+    "skinCenter": 23.88,
+    "skinUpper": 22.15,
+    "skinNearTrim": 22.82,
+    "trimTravel": 5.81,
+    "cupTravel": 4.34,
+    "trimStrainMean": 8.8,
+    "cupStrainMean": 35.1,
+    "cupStrainP95": 81.1,
+    "skinBandStrainP95": 77.6,
+    "minJacobian": 0.398
+   }
+  },
+  "both chaos tap peak, link 50": {
+   "A": {
+    "skinCenter": 23.06,
+    "skinUpper": 20.68,
+    "skinNearTrim": 22.85,
+    "trimTravel": 9.6,
+    "cupTravel": 8.95,
+    "trimStrainMean": 16.7,
+    "cupStrainMean": 33.5,
+    "cupStrainP95": 71.9,
+    "skinBandStrainP95": 74.7,
+    "minJacobian": 0.432
+   },
+   "B": {
+    "skinCenter": 23.05,
+    "skinUpper": 20.68,
+    "skinNearTrim": 20.37,
+    "trimTravel": 5.9,
+    "cupTravel": 4.58,
+    "trimStrainMean": 7,
+    "cupStrainMean": 24.1,
+    "cupStrainP95": 53.1,
+    "skinBandStrainP95": 58.2,
+    "minJacobian": 0.432
+   }
+  }
+ }
+}

@@ -1,4 +1,113 @@
-# Peach Physics v0.0.8 r9.1 — Holly fur trim keeps its shape (experimental)
+# Peach Physics v0.0.8 r9.1 — fabric-support A/B experiment (diagnostic, not deployed)
+
+Built on r9.1 (`5c9b9d2`). Main and the live r9 app are unchanged. **A is the default and renders exactly as r9.1**, pixel for pixel. **B is switched on with `?fabric=strong`**: for example `.../peach-physics/v8/?fabric=strong`, which also works offline. The settings panel title then ends in "· fabric B".
+
+Spring solver, presets, timing, damping, impulse gains, gestures, linked movement, framing, the portrait and the other three characters are unchanged in both modes.
+
+## The question
+
+Lance saw almost no difference between r9 and r9.1 on his iPhone. The hypothesis under test: a clearly firmer garment (green upper cups plus fur trim) against freely moving skin is the missing ingredient. B is a deliberate exaggeration to make that testable. It is not a production setting.
+
+## What B changes
+
+In A, every pixel moves by its own local spring displacement × a mask weight. The cups and trim therefore get a smoothly varying displacement, so the clothing stretches like the skin, only less.
+
+B splits the field in two:
+
+1. **Garment block.** The trim and the green cup below it leave the skin channel. They move only by one shared vector per side: the spring field sampled at the middle of the trim (left (318,368), right (440,372)), at level 0.3. One vector for the whole block means no internal stretch or squash: the garment translates as a piece. This is not a scale factor on the old field, whose spatial variation is exactly what deformed the fabric.
+2. **Skin hand-off.** Exposed skin keeps its own field. Over the 24 px of skin just above the trim it hands over to the garment vector, so the skin slides, bulges and lifts against the trim edge.
+3. **Corset seam and hair guards.** Toward pixels that r8 holds stationary (lower corset, lacing, hair, arm, scenery), the garment fades out over 16 px, and never faster than distance/8. Inside the trim that fade is read at the trim centerline, so it cannot squeeze the trim across its width. Nothing that was stationary moves.
+
+Implementation:
+
+- **Mask:** blue channel of the existing mask texture (A leaves it zero).
+- **WebGL:** two varyings and one extra term in the existing 6-step warp.
+- **Canvas:** the same in a separate per-pixel routine.
+- **Isolation:** all of it sits behind `HOLLY_FABRIC`, so A's shaders and Canvas loop are the r9.1 code.
+
+B was tested at garment levels 0.3 and 0.2. At 0.2 the trim barely moved (about 3 px at Natural peak) and began to look stuck, so 0.3 was kept and no further tuning was done.
+
+## Results (`tests/holly-fabric.cjs`, 390x844 @2x)
+
+Inputs are identical in A and B and use the real gesture paths:
+
+- Natural, Playful and Chaos taps and rebounds
+- strong flicks up and down
+- drags inward and upward from the green outer-cup targets
+- node-bound inward-up and outward-down corners
+- both sides at once
+- 0.75 s Natural and Chaos tap trajectories
+
+**Trim width.** The fur label is rendered through the real WebGL and Canvas renderers, and the worst width change from rest is taken over all states and frames.
+
+| WebGL / Canvas | A (r9.1) | B |
+| --- | ---: | ---: |
+| Mid-cup worst | 16 / 17% | **9 / 8%** |
+| Mean of 16 positions | 16 / 17% | **10 / 11%** |
+| Max (right outer tip at the pinned perimeter) | 32 / 34% | 34 / 36% |
+
+Left mid-cup is within 2–4% in B. Positions near the pinned tips are not improved.
+
+**GPU field, source px.** Strain is the largest principal stretch or squash of the warp, averaged over the region.
+
+| State | Skin center A / B | Trim travel A / B | Trim strain A / B | Cup strain A / B |
+| --- | ---: | ---: | ---: | ---: |
+| L Natural tap peak | 19.1 / 19.1 | 9.6 / 5.0 | 14% / 5% | 28% / 18% |
+| L Chaos tap peak | 23.1 / 23.1 | 12.1 / 6.3 | 18% / 6% | 32% / 21% |
+| L strong flick up | 11.3 / 10.5 | 5.8 / 3.1 | 9% / 4% | 42% / 18% |
+| L Chaos flick up | 16.6 / 14.6 | 8.8 / 4.6 | 14% / 6% | 79% / 31% |
+| L node-bound inward-up | 22.0 / 18.4 | 12.3 / 6.5 | 30% / 13% | 169% / 49% |
+| R Natural tap peak | 18.8 / 18.8 | 5.4 / 4.2 | 11% / 6% | 28% / 24% |
+| R Chaos tap peak | 23.1 / 23.1 | 7.1 / 5.5 | 16% / 8% | 37% / 30% |
+| R node-bound inward-up | 20.7 / 18.6 | 7.0 / 5.2 | 25% / 25% | 149% / 59% |
+
+All 23 states are in [`measurements.json`](tests/captures/holly-fabric-ab/measurements.json).
+
+**Costs and new distortion in B:**
+
+- **Garment travel:** about half of A's on the left (5 vs 10 px at Natural peak) and about 25% less on the right, where A's trim already moved less. The garment still moves visibly and coherently; it is not frozen.
+- **Skin on upward motion:** skin-center travel is identical to A on every peak and downward move. On upward motion it is lower: −5% on Natural rebound, −8% to −13% on upward flicks, −16% at the node-bound inward-up corner. The backward warp samples the skin center from 15–20 px lower, inside the new hand-off band. Upper skin (y=315) is unchanged everywhere. Fixing this needs a steeper band, which means more skin strain, so it was not pursued.
+- **Skin just above the trim** now carries the extra strain: 95th-percentile strain 42–106% across gesture states, highest on Chaos upward flicks (A: 33–129%, highest on the right Chaos rebound). It reads as tissue pressing over or lifting off the trim. The minimum Jacobian is equal to or above A in every state, so there are no folds.
+- **Right outer tip and node-bound inward-up:** B does not improve the trim there (25% in both). The block has to fade out next to the pinned perimeter.
+- **Mask build:** one-time, about 160 ms (A about 195 ms, desktop Node).
+
+## Visual evidence (`tests/captures/holly-fabric-ab/`, all < 700 KiB)
+
+- [`webgl-ab.jpg`](tests/captures/holly-fabric-ab/webgl-ab.jpg) and [`canvas-ab.jpg`](tests/captures/holly-fabric-ab/canvas-ab.jpg): native 1:1 crops, both cups, A | B. Rows: rest, Natural peak and rebound, Chaos peak, strong flick down and up, inward-up drag from the outer cup, node-bound inward-up.
+- [`closeups-2x.jpg`](tests/captures/holly-fabric-ab/closeups-2x.jpg): the trim at 2x nearest-neighbour.
+- [`temporal-natural-tap.jpg`](tests/captures/holly-fabric-ab/temporal-natural-tap.jpg): 0–0.6 s strip.
+- Full motion, A | B side by side, every 1/60 s capture played at 0.5x:
+  - [Natural tap](tests/captures/holly-fabric-ab/motion-webgl-natural-tap.webp)
+  - [Chaos tap](tests/captures/holly-fabric-ab/motion-webgl-chaos-tap.webp)
+  - [flick up](tests/captures/holly-fabric-ab/motion-webgl-flick-up.webp)
+  - [inward-up drag](tests/captures/holly-fabric-ab/motion-webgl-drag-inward-up.webp)
+  - [Canvas Natural tap](tests/captures/holly-fabric-ab/motion-canvas-natural-tap.webp)
+
+What the images show:
+
+- **B, Chaos taps and upward flicks.** The trim stays an even band near its line, and the green cup keeps its shape. In A the cup visibly stretches tall or smears like rubber, most clearly on upward flicks and inward-up drags.
+- **B, skin above the trim** visibly rolls over or lifts away from it.
+- **Ordinary Natural taps.** The difference is real but smaller: in B the trim travels about 4 CSS px less on screen, and the skin slides further over it. Whether that is "immediately recognizable" on a phone has to be judged on the device.
+- **No new seams, detached fur, holes or background motion** were seen in either renderer.
+
+## Checks
+
+| Suite | Result |
+| --- | --- |
+| `holly-fabric.cjs` | A/B suite: A = r9.1 pixel-exact in motion; B rest/settle exact; B springs and other characters exact; shape, skin, strain and fold assertions |
+| `holly-fur.cjs` | r9.1 suite, unchanged results in A, 174 checks |
+| `holly-approved.cjs` | 138 checks; the offline cache is now `peach-physics-v008-r9-1-fabric-ab` |
+| `holly-band.cjs` | r9 history, 83 checks |
+| `artwork.cjs` | 4 portrait hashes |
+
+Captures: `holly-fabric-captures.cjs`, then `python3 tests/holly-fabric-sheets.py <PEACH_TEST_OUTPUT>/fabric-captures <dest>`.
+
+**Not verified:** how B feels on a physical iPhone, Safari rendering and frame rate.
+
+<details>
+<summary>r9.1 documentation (fur-shape correction)</summary>
+
+## Peach Physics v0.0.8 r9.1 — Holly fur trim keeps its shape
 
 Experimental branch from r9 (`8e4fcbb`). **Not deployed**: main and the live app stay on r9. Spring solver, timing, damping, presets, gestures, linked movement, input targets, framing and zoom are unchanged. Only Holly's mask builder changed. The approved portrait is byte-identical. Winter Ember, Midnight Yule and Aurelia Frost render exactly as in r9.
 
@@ -102,6 +211,8 @@ node peach-physics/v8/tests/holly-fur-captures.cjs && python3 peach-physics/v8/t
 All suites pass with Chromium + SwiftShader; requirements are as below. The cache is `peach-physics-v008-r9-1`.
 
 **Not verified:** physical-iPhone touch feel, frame rate, Safari rendering and the mask build time on device. This is still a 2-D warp of one photograph, not a cloth simulation.
+
+</details>
 
 <details>
 <summary>Previous r9 documentation</summary>

@@ -10,7 +10,7 @@
 <meta name="description" content="Peach Physics: a playful interactive Christmas elf experiment with adjustable impact waves and linked motion.">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Peach Physics — Elf Lab 0.0.8 r9.1</title>
+<title>Peach Physics — Elf Lab 0.0.8 r9.1 fabric A/B</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -87,7 +87,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r9.1</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r9.1 A/B</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/4</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
@@ -417,6 +417,13 @@ function touchAnchor(side,p){
  return {p:{...p,x,y},offsetX:x-p.x,offsetY:y-p.y};
 }
 const HOLLY_CROP=[240,264,272,176];
+// Diagnostic A/B switch. Default (A) is r9.1. With ?fabric=strong (B) the green
+// upper cup and fur trim move as one rigid block per side: a single spring-field
+// vector sampled at the trim's middle, so the garment holds its shape while
+// exposed skin keeps its own field and slides against the trim.
+const HOLLY_FABRIC=/[?&]fabric=strong(&|$)/.test(location.search);
+const HOLLY_GARMENT_ANCHORS=[[318,368],[440,372]];
+if(HOLLY_FABRIC)document.querySelector('#panelHead .kicker').textContent+=' · fabric B';
 let hollyMaskLoc,hollyMaskPixels=null,hollySource=null,hollyLayer=null,hollyBackground=null;
 // Photo-traced white fur trim [x, top y, bottom y] in source pixels: left from
 // its outer tip to the lacing, right from the lacing to its outer tip.
@@ -449,7 +456,7 @@ function hollyTrimPoint(line,x,y){
  for(let j=0;j<line.length-1;j++){
   const [ax,ay,ah,as]=line[j],[bx,by,bh,bs]=line[j+1],dx=bx-ax,dy=by-ay,length=Math.hypot(dx,dy);
   const t=clamp(((x-ax)*dx+(y-ay)*dy)/(length*length),0,1),cx=ax+t*dx,cy=ay+t*dy,distance=Math.hypot(x-cx,y-cy);
-  if(!best||distance<best.distance)best={distance,d:((x-cx)*-dy+(y-cy)*dx)/length,half:(ah+(bh-ah)*t)*dx/length,level:as+(bs-as)*t,u:arc+t*length};
+  if(!best||distance<best.distance)best={distance,d:((x-cx)*-dy+(y-cy)*dx)/length,half:(ah+(bh-ah)*t)*dx/length,level:as+(bs-as)*t,u:arc+t*length,x:cx,y:cy};
   arc+=length;
  }
  best.ends=Math.min(best.u,arc-best.u);return best;
@@ -488,6 +495,19 @@ function buildHollyMask(){
    // the last 10 px of each trim end, and leaves pixels near r8's stationary
    // boundary on r8's own weights.
    const p=hollyTrimPoint(trims[side],px,py);
+   if(HOLLY_FABRIC){
+    // B: the garment (trim and cup below it) leaves the skin channel and moves
+    // only with the shared garment vector (channel B, level .3). Skin hands over
+    // across 24 px above the trim. Near r8's stationary pixels the garment fades
+    // over 16 px; inside the trim that fade is read at the trim centerline, so it
+    // cannot squeeze the trim across its width, and it stays within distance/8.
+    const cover=smooth((p.d+p.half+26)/24)*smooth(p.ends/10),r=room[side],at=(X,Y)=>r[clamp(Math.round(Y-oy-.5),0,h-1)*w+clamp(Math.round(X-ox-.5),0,w-1)];
+    const own=smooth(r[y*w+x]/16),core=1-smooth((Math.abs(p.d)-p.half)/6);
+    const seam=Math.min(own+(Math.max(own,smooth(at(p.x,p.y)/16))-own)*core,r[y*w+x]/8);
+    hollyMaskPixels[i+side]=Math.round(255*weight*(1-cover));
+    if((px<380)===(side===0))hollyMaskPixels[i+2]=Math.round(255*.3*cover*seam);
+    continue;
+   }
    const band=smooth((p.d+p.half+18)/16)*(1-smooth((p.d-p.half-6)/26));
    const blend=band*smooth(p.ends/10)*smooth(weight/.15);
    let value=weight+(p.level-weight)*blend;
@@ -531,18 +551,33 @@ function initHollyFallback(){
  const c=source.getContext('2d');c.drawImage(img,0,0);hollySource=c.getImageData(0,0,W,H).data;
  hollyLayer=document.createElement('canvas');hollyLayer.width=HOLLY_CROP[2];hollyLayer.height=HOLLY_CROP[3];
 }
+// B only: skin moves with its local field (channel R/G), the garment with one
+// shared vector per side (channel B). The side is fixed by the lacing line.
+let hollyGarment=[[0,0],[0,0]];
+function renderHollyFabricPixel(x,y,active,weight,frame){
+ const [cx,cy,w]=HOLLY_CROP,at=(y*w+x)*4,side=cx+x+.5<380?0:1;
+ if(!active[side]||!(hollyMaskPixels[at+side]>0||hollyMaskPixels[at+2]>0))return;
+ const v=hollyVelocity(cx+x+.5,cy+y+.5,side),g=hollyGarment[side];let sx=cx+x+.5,sy=cy+y+.5;
+ for(let k=0;k<6;k++){const a=weight(sx,sy,side)/6,b=weight(sx,sy,2)/6;sx-=v[0]*a+g[0]*b;sy-=v[1]*a+g[1]*b;}
+ sx-=.5;sy-=.5;
+ const ix=Math.floor(sx),iy=Math.floor(sy),fx=sx-ix,fy=sy-iy,i=(iy*W+ix)*4;
+ for(let k=0;k<3;k++)frame.data[at+k]=(hollySource[i+k]*(1-fx)+hollySource[i+4+k]*fx)*(1-fy)+(hollySource[i+W*4+k]*(1-fx)+hollySource[i+W*4+4+k]*fx)*fy;
+ frame.data[at+3]=255;
+}
 function renderHollyFallback(sc){
  if(!nodes.some(n=>n.dx||n.dy)||!hollySource){
   if(!impacts.some(p=>p.contact>.0002||p.v>.0002)&&!followers.some(f=>f.dx||f.dy))return;
  }
  const active=[0,1].map(side=>nodes.slice(side*3,side*3+3).some(n=>n.dx||n.dy)||followers[side].dx||followers[side].dy||impacts[side].contact||impacts[side].v);
  const [cx,cy,w,h]=HOLLY_CROP,c=hollyLayer.getContext('2d'),frame=c.createImageData(w,h);
+ if(HOLLY_FABRIC)hollyGarment=HOLLY_GARMENT_ANCHORS.map(([x,y],side)=>hollyVelocity(x,y,side));
  const weight=(x,y,side)=>{
   x=clamp(x-cx-.5,0,w-1.001);y=clamp(y-cy-.5,0,h-1.001);
   const ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy,i=(iy*w+ix)*4+side;
   return ((hollyMaskPixels[i]*(1-fx)+hollyMaskPixels[i+4]*fx)*(1-fy)+(hollyMaskPixels[i+w*4]*(1-fx)+hollyMaskPixels[i+w*4+4]*fx)*fy)/255;
  };
  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  if(HOLLY_FABRIC){renderHollyFabricPixel(x,y,active,weight,frame);continue;}
   const at=(y*w+x)*4,side=active[0]&&hollyMaskPixels[at]>0?0:active[1]&&hollyMaskPixels[at+1]>0?1:-1;
   if(side<0)continue; // Transparent outside active skin: preserve base-image sampling exactly.
   let sx=cx+x,sy=cy+y;
@@ -579,6 +614,7 @@ function initGL(){
  varying vec2 vLeftVelocity;
  varying vec2 vAureliaLeft;
  varying vec2 vAureliaRight;
+ ${HOLLY_FABRIC?'varying vec2 vGarmentLeft;varying vec2 vGarmentRight;':''}
  uniform float uAurelia;
  uniform float uHolly;
  vec2 leftVelocity(vec2 uv){
@@ -661,7 +697,7 @@ function initGL(){
   vec2 uv=aPosition*uCover.xy+uCover.zw;
   vRawUV=uv;
   if(uHolly>0.5){
-   vAureliaLeft=hollyVelocity(uv,0);vAureliaRight=hollyVelocity(uv,1);vUV=uv;
+   vAureliaLeft=hollyVelocity(uv,0);vAureliaRight=hollyVelocity(uv,1);vUV=uv;${HOLLY_FABRIC?'vGarmentLeft=hollyVelocity(vec2(318.0/720.0,368.0/1280.0),0);vGarmentRight=hollyVelocity(vec2(440.0/720.0,372.0/1280.0),1);':''}
    gl_Position=vec4(aPosition.x*2.0-1.0,1.0-aPosition.y*2.0,0.0,1.0);return;
   }
   if(uAurelia>0.5){
@@ -719,6 +755,7 @@ function initGL(){
  varying vec2 vLeftVelocity;
  varying vec2 vAureliaLeft;
  varying vec2 vAureliaRight;
+ ${HOLLY_FABRIC?'varying vec2 vGarmentLeft;varying vec2 vGarmentRight;':''}
  uniform float uAurelia;
  uniform float uHolly;
  uniform sampler2D uLeftShape;
@@ -750,8 +787,9 @@ function initGL(){
   if(uHolly>0.5){
    vec2 sampleUV=vRawUV;
    for(int k=0;k<6;k++){
-    vec2 weights=texture2D(uHollyShape,(sampleUV*vec2(720.0,1280.0)-vec2(240.0,264.0))/vec2(272.0,176.0)).rg;
-    sampleUV-=(vAureliaLeft*weights.r+vAureliaRight*weights.g)/6.0;
+    ${HOLLY_FABRIC?`vec3 weights=texture2D(uHollyShape,(sampleUV*vec2(720.0,1280.0)-vec2(240.0,264.0))/vec2(272.0,176.0)).rgb;
+    sampleUV-=(vAureliaLeft*weights.r+vAureliaRight*weights.g+(sampleUV.x<380.0/720.0?vGarmentLeft:vGarmentRight)*weights.b)/6.0;`:`vec2 weights=texture2D(uHollyShape,(sampleUV*vec2(720.0,1280.0)-vec2(240.0,264.0))/vec2(272.0,176.0)).rg;
+    sampleUV-=(vAureliaLeft*weights.r+vAureliaRight*weights.g)/6.0;`}
    }
    photoUV=sampleUV;
   }
