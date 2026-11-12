@@ -1,0 +1,18 @@
+{
+  "IMAGEIdentical": true,
+  "OTHER_IMAGEIdentical": true,
+  "aurelia-frost.jpg": {
+    "identical": true,
+    "sha256": "710fa8ce7eadf38de4167ae3937859aed528ae01159ed5d9ea25fa6be08eee10"
+  },
+  "holly-heartbreaker.jpg": {
+    "identical": true,
+    "sha256": "b5af2ccfa267b2ea8b4a6fa4b98aa2935e7f2b4e869d279f93d99fb9e5964349"
+  },
+  "santa-claus.jpg": {
+    "identical": true,
+    "sha256": "0c081474e67e0f5a94a12fdce68f712884933485a21082d45b9c36188cfea5ed"
+  },
+  "WebGLRendererIdentical": true,
+  "CanvasAndRenderIdentical": true
+}

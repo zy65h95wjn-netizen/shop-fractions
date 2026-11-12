@@ -1,0 +1,811 @@
+{
+  "cases": [
+    {
+      "id": "ember",
+      "preset": "natural",
+      "side": 0,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.574445001233466,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "ember",
+      "preset": "natural",
+      "side": 1,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.578966892352064,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "ember",
+      "preset": "playful",
+      "side": 0,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.574445001233466,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "ember",
+      "preset": "playful",
+      "side": 1,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.578966892352064,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "ember",
+      "preset": "chaos",
+      "side": 0,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.574445001233466,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "ember",
+      "preset": "chaos",
+      "side": 1,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.578966892352064,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "midnight",
+      "preset": "natural",
+      "side": 0,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 9.62935110897822,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "midnight",
+      "preset": "natural",
+      "side": 1,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.732563721785409,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "midnight",
+      "preset": "playful",
+      "side": 0,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 9.62935110897822,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "midnight",
+      "preset": "playful",
+      "side": 1,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.732563721785409,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "midnight",
+      "preset": "chaos",
+      "side": 0,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 9.62935110897822,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "midnight",
+      "preset": "chaos",
+      "side": 1,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.732563721785409,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "aurelia",
+      "preset": "natural",
+      "side": 0,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.665958196299144,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "aurelia",
+      "preset": "natural",
+      "side": 1,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.739821468374126,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "aurelia",
+      "preset": "playful",
+      "side": 0,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.665958196299144,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "aurelia",
+      "preset": "playful",
+      "side": 1,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.739821468374126,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "aurelia",
+      "preset": "chaos",
+      "side": 0,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.665958196299144,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "aurelia",
+      "preset": "chaos",
+      "side": 1,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.739821468374126,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "holly",
+      "preset": "natural",
+      "side": 0,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.214156842343865,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "holly",
+      "preset": "natural",
+      "side": 1,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.214156842343856,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "holly",
+      "preset": "playful",
+      "side": 0,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.214156842343865,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "holly",
+      "preset": "playful",
+      "side": 1,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.214156842343856,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "holly",
+      "preset": "chaos",
+      "side": 0,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.214156842343865,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "holly",
+      "preset": "chaos",
+      "side": 1,
+      "renderer": "webgl",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.214156842343856,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "ember",
+      "preset": "natural",
+      "side": 0,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.574445001233466,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "ember",
+      "preset": "natural",
+      "side": 1,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.578966892352064,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "ember",
+      "preset": "playful",
+      "side": 0,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.574445001233466,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "ember",
+      "preset": "playful",
+      "side": 1,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.578966892352064,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "ember",
+      "preset": "chaos",
+      "side": 0,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.574445001233466,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "ember",
+      "preset": "chaos",
+      "side": 1,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.578966892352064,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "midnight",
+      "preset": "natural",
+      "side": 0,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 9.62935110897822,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "midnight",
+      "preset": "natural",
+      "side": 1,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.732563721785409,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "midnight",
+      "preset": "playful",
+      "side": 0,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 9.62935110897822,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "midnight",
+      "preset": "playful",
+      "side": 1,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.732563721785409,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "midnight",
+      "preset": "chaos",
+      "side": 0,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 9.62935110897822,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "midnight",
+      "preset": "chaos",
+      "side": 1,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.732563721785409,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "aurelia",
+      "preset": "natural",
+      "side": 0,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.665958196299144,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "aurelia",
+      "preset": "natural",
+      "side": 1,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.739821468374126,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "aurelia",
+      "preset": "playful",
+      "side": 0,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.665958196299144,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "aurelia",
+      "preset": "playful",
+      "side": 1,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.739821468374126,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "aurelia",
+      "preset": "chaos",
+      "side": 0,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.665958196299144,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "aurelia",
+      "preset": "chaos",
+      "side": 1,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.739821468374126,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "holly",
+      "preset": "natural",
+      "side": 0,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.214156842343865,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "holly",
+      "preset": "natural",
+      "side": 1,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.214156842343856,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "holly",
+      "preset": "playful",
+      "side": 0,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.214156842343865,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "holly",
+      "preset": "playful",
+      "side": 1,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.214156842343856,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "holly",
+      "preset": "chaos",
+      "side": 0,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.214156842343865,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    },
+    {
+      "id": "holly",
+      "preset": "chaos",
+      "side": 1,
+      "renderer": "canvas",
+      "drift": 0,
+      "other": 0,
+      "displacement": 10.214156842343856,
+      "holdChangesImage": true,
+      "returnExact": true,
+      "active": 0,
+      "gesture": "drag/hold"
+    }
+  ],
+  "regression": [
+    {
+      "id": "ember",
+      "preset": "natural",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "ember",
+      "preset": "playful",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "ember",
+      "preset": "chaos",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "midnight",
+      "preset": "natural",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "midnight",
+      "preset": "playful",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "midnight",
+      "preset": "chaos",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "aurelia",
+      "preset": "natural",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "aurelia",
+      "preset": "playful",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "aurelia",
+      "preset": "chaos",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "holly",
+      "preset": "natural",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "holly",
+      "preset": "playful",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "holly",
+      "preset": "chaos",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "santa",
+      "preset": "natural",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "santa",
+      "preset": "playful",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "santa",
+      "preset": "chaos",
+      "renderer": "webgl",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "ember",
+      "preset": "natural",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "ember",
+      "preset": "playful",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "ember",
+      "preset": "chaos",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "midnight",
+      "preset": "natural",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "midnight",
+      "preset": "playful",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "midnight",
+      "preset": "chaos",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "aurelia",
+      "preset": "natural",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "aurelia",
+      "preset": "playful",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "aurelia",
+      "preset": "chaos",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "holly",
+      "preset": "natural",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "holly",
+      "preset": "playful",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "holly",
+      "preset": "chaos",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "santa",
+      "preset": "natural",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "santa",
+      "preset": "playful",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    },
+    {
+      "id": "santa",
+      "preset": "chaos",
+      "renderer": "canvas",
+      "freeBounceIdentical": true
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,146 @@
+[
+  {
+    "id": "ember",
+    "renderer": "webgl",
+    "two": [
+      true,
+      true
+    ],
+    "duplicateIgnored": true,
+    "remaining": [
+      {
+        "side": 1,
+        "grabbed": true
+      }
+    ],
+    "lostCleared": true,
+    "blurCleared": true,
+    "switchCleared": true
+  },
+  {
+    "id": "midnight",
+    "renderer": "webgl",
+    "two": [
+      true,
+      true
+    ],
+    "duplicateIgnored": true,
+    "remaining": [
+      {
+        "side": 1,
+        "grabbed": true
+      }
+    ],
+    "lostCleared": true,
+    "blurCleared": true,
+    "switchCleared": true
+  },
+  {
+    "id": "aurelia",
+    "renderer": "webgl",
+    "two": [
+      true,
+      true
+    ],
+    "duplicateIgnored": true,
+    "remaining": [
+      {
+        "side": 1,
+        "grabbed": true
+      }
+    ],
+    "lostCleared": true,
+    "blurCleared": true,
+    "switchCleared": true
+  },
+  {
+    "id": "holly",
+    "renderer": "webgl",
+    "two": [
+      true,
+      true
+    ],
+    "duplicateIgnored": true,
+    "remaining": [
+      {
+        "side": 1,
+        "grabbed": true
+      }
+    ],
+    "lostCleared": true,
+    "blurCleared": true,
+    "switchCleared": true
+  },
+  {
+    "id": "ember",
+    "renderer": "canvas",
+    "two": [
+      true,
+      true
+    ],
+    "duplicateIgnored": true,
+    "remaining": [
+      {
+        "side": 1,
+        "grabbed": true
+      }
+    ],
+    "lostCleared": true,
+    "blurCleared": true,
+    "switchCleared": true
+  },
+  {
+    "id": "midnight",
+    "renderer": "canvas",
+    "two": [
+      true,
+      true
+    ],
+    "duplicateIgnored": true,
+    "remaining": [
+      {
+        "side": 1,
+        "grabbed": true
+      }
+    ],
+    "lostCleared": true,
+    "blurCleared": true,
+    "switchCleared": true
+  },
+  {
+    "id": "aurelia",
+    "renderer": "canvas",
+    "two": [
+      true,
+      true
+    ],
+    "duplicateIgnored": true,
+    "remaining": [
+      {
+        "side": 1,
+        "grabbed": true
+      }
+    ],
+    "lostCleared": true,
+    "blurCleared": true,
+    "switchCleared": true
+  },
+  {
+    "id": "holly",
+    "renderer": "canvas",
+    "two": [
+      true,
+      true
+    ],
+    "duplicateIgnored": true,
+    "remaining": [
+      {
+        "side": 1,
+        "grabbed": true
+      }
+    ],
+    "lostCleared": true,
+    "blurCleared": true,
+    "switchCleared": true
+  }
+]
