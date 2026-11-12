@@ -1,0 +1,10 @@
+{
+  "step": true,
+  "impulse": true,
+  "updatePress": true,
+  "linkedImpulse": true,
+  "release": true,
+  "slap": true,
+  "imageIdentical": true,
+  "imageSHA256": "37abbe30132c88c9fa6950e96dd639eeb86d547fdd316a311c02cb11653dce07"
+}

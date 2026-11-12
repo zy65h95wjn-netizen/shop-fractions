@@ -1,0 +1,17 @@
+{
+  "A": {
+    "median": 0.29999999998835847,
+    "p95": 0.40000000002328306,
+    "note": "CPU submission only; SwiftShader desktop, not iPhone GPU"
+  },
+  "A+": {
+    "median": 0.29999999998835847,
+    "p95": 0.40000000002328306,
+    "note": "CPU submission only; SwiftShader desktop, not iPhone GPU"
+  },
+  "B": {
+    "median": 0.29999999998835847,
+    "p95": 0.40000000002328306,
+    "note": "CPU submission only; SwiftShader desktop, not iPhone GPU"
+  }
+}

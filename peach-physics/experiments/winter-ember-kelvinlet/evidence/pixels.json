@@ -1,0 +1,23 @@
+{
+  "A": {
+    "returnChangedPixels": 0,
+    "upperProtectedChangedPixels": 0,
+    "lowerProtectedChangedPixels": 0,
+    "handRegionChangedPixels": 0,
+    "activeChangedPixels": 47360
+  },
+  "AP": {
+    "returnChangedPixels": 0,
+    "upperProtectedChangedPixels": 0,
+    "lowerProtectedChangedPixels": 0,
+    "handRegionChangedPixels": 0,
+    "activeChangedPixels": 48576
+  },
+  "B": {
+    "returnChangedPixels": 0,
+    "upperProtectedChangedPixels": 0,
+    "lowerProtectedChangedPixels": 0,
+    "handRegionChangedPixels": 0,
+    "activeChangedPixels": 37317
+  }
+}
