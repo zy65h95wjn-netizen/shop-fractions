@@ -37,7 +37,7 @@ const ok=(v,label)=>{assert.ok(v,label);report.checks++;};
   // Install the unmodified production worker explicitly on secure localhost.
   await p.evaluate(async()=>{await caches.open('peach-physics-v008-r10');await navigator.serviceWorker.register('./sw.js',{scope:'./'});await navigator.serviceWorker.ready;});
   await p.waitForFunction(()=>navigator.serviceWorker.controller);
-  const keys=await p.evaluate(()=>caches.keys());ok(keys.includes('peach-physics-v008-r10'),'r10 cache preserved');ok(keys.includes('peach-physics-santa-experiment-r1'),'Santa offline cache installed');
+  const keys=await p.evaluate(()=>caches.keys());ok(!keys.includes('peach-physics-v008-r10'),'superseded r10 cache retired after r11 install');ok(keys.includes('peach-physics-v008-r11'),'r11 offline cache installed');
   await context.setOffline(true);await p.reload();await p.waitForFunction(()=>window.__peachPhysicsDebug?.snapshot().frames>3);
   ok((await p.evaluate(()=>__peachPhysicsDebug.snapshot().preset))==='chaos','offline preset restored');
   for(const id of ['ember','midnight','aurelia','holly','santa']){

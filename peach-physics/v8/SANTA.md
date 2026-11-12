@@ -1,6 +1,6 @@
-# Santa's belly — experimental branch
+# Santa's belly — approved production r11
 
-Santa Claus is character **5/5** in `feat/santa-belly-physics`, based on approved live r10 commit `46738952269e3efe7044dfe24df2256d5c240155`. This is a visual experiment, not a production release. Main and live r10 remain unchanged.
+Santa Claus is character **5/5** in production r11. The user visually approved the experiment and explicitly requested promotion. The approved source is `35eead11b205f1d5cf23297a9529ca2992bfc06a` on `feat/santa-belly-physics`, based on r10 `46738952269e3efe7044dfe24df2256d5c240155`. Promotion changes release labels and the production offline-cache lifecycle; artwork, physics, gestures and framing are identical to the approved preview.
 
 Open `index.html?character=santa` to start with Santa. The existing selector cycles through all five characters. Natural, Playful, Chaos, Bounce strength, Softness, Settling and gestures remain available. Santa's Linked movement controls secondary coupling within one coherent belly; it does not divide the belly into independent halves.
 
@@ -48,7 +48,7 @@ python3 peach-physics/v8/tests/santa-evidence.py
 - **945 r10 regression checks:** all four previous characters, both renderers, all three presets, slap/drag/flick, both sides, linked movement 0/50/100. Exact rendered frames, unrounded spring trajectories and framing match r10. Five viewports include landscape.
 - **10,828 numerical checks:** independent presets, peak/rebound/settling, repeated maximum impulses at minimum damping, bounded state and sampled flow Jacobians. Minimum sampled extreme-pose determinant **0.3849**; maximum travel **47.28 source px**. Finite samples are not a proof for every possible interaction.
 - **167 Santa browser checks:** both renderers, all presets and phases; exact stationary samples from beard, both hands, coat, belt, background elf and scenery; original aspect ratio and visible face/belly at 375×667, 390×844, 430×932, 440×956 and 844×390; profile isolation; laugh/reset behavior. Native CDP multi-contact input verifies simultaneous captures, two releases/flicks, same-side contacts and cancellation. This uses browser-native touch, not JavaScript-dispatched pretend touches, but does not replace physical-device testing.
-- **29 live-runtime checks:** real animation loop, served JPEG hash, fifth slot, three audio pulses on a running context, offline reload, offline switching among all five characters, saved options, and preservation of the r10 cache.
+- **29 live-runtime checks:** real animation loop, served JPEG hash, fifth slot, three audio pulses on a running context, offline reload, offline switching among all five characters, saved options, and the production r11 cache lifecycle. The historical experiment runtime result retained r10; the release upgrade test verifies r10 retirement only after r11 has installed.
 - All five source-art hashes, JavaScript syntax and `git diff --check` pass. No browser errors were recorded.
 
 Machine-readable results are in [tests/santa-results](tests/santa-results/) and [capture results](tests/captures/santa/results.json).
@@ -65,12 +65,12 @@ Each silent clip contains 75 consecutive renderer captures at 1/30-second simula
 
 ## Offline and preview
 
-The app precaches the new JPEG along with existing local runtime assets. Its cache is `peach-physics-santa-experiment-r1`; activation removes only older Santa-experiment caches, never live r10's cache. No runtime services are required after initial loading.
+The app precaches the new JPEG along with existing local runtime assets. Its production cache is `peach-physics-v008-r11`; successful activation removes superseded v8 production caches. Earlier-version and experimental caches remain separate. All five characters are precached before activation. No runtime services are required after initial loading.
 
-The review link uses the pushed commit's immutable public source through GitHack, leaving GitHub Pages and production untouched. GitHack may show **Open the page** on the first visit. External portrait loads use anonymous CORS requests so CDN redirects remain valid WebGL textures; the bytes and same-origin behavior are unchanged. Preview-host availability is external to the app. The normal app's offline behavior is tested independently on secure localhost; the exact public preview is checked after push.
+The approved preview remains available through GitHack at commit `35eead11b205f1d5cf23297a9529ca2992bfc06a`. Production is served from `https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/v8/`. GitHack may show **Open the page** on the first visit. External portrait loads use anonymous CORS requests so CDN redirects remain valid WebGL textures; the bytes and same-origin behavior are unchanged. Preview-host availability is external to the app. The approved public preview passed WebGL, touch, original-byte verification and offline reopening. Production promotion includes an r10-to-r11 service-worker upgrade test and a live-site check.
 
-## Known limits and approval gate
+## Known limits
 
 This remains a two-dimensional photo deformation: the silhouette and supported edges are pinned, and no hidden geometry is invented. Canvas can be slower on older phones. In this software-rendered cloud environment, observed WebGL frame rate varied substantially (roughly 4–12 fps under test load); the optimized Canvas path measured roughly 20–22 fps, compared with about 12 before optimization. These are not iPhone measurements and do not establish hardware WebGL speed.
 
-Physical iPhone Safari feel, sustained frame rate, real two-finger gestures, sound and Add-to-Home-Screen offline reopening require the user's review. **Do not merge or deploy to production until visual approval.**
+The user has approved the visual result and authorized production promotion. Automated checks do not establish physical iPhone Safari frame rate, silent-mode behavior or Add-to-Home-Screen behavior; those remain device-specific limitations.

@@ -1,3 +1,21 @@
+# Peach Physics v0.0.8 r11 — Santa approved
+
+The user approved Santa's belly experiment and requested production promotion. This release adopts `35eead11b205f1d5cf23297a9529ca2992bfc06a` without retuning the artwork, physics, controls or framing. Production labels and the offline cache identify r11.
+
+- Santa is character #5 with independent heavy belly calibration, all existing gestures and controls, and an optional original offline synthesized laugh.
+- The approved 1024×1280 JPEG is byte-identical, SHA-256 `0c081474e67e0f5a94a12fdce68f712884933485a21082d45b9c36188cfea5ed`.
+- Holly retains r10 framing and Strong Fabric B. Winter Ember, Midnight Yule and Aurelia Frost remain unchanged.
+- `peach-physics-v008-r11` precaches all five characters before replacing the old v8 production cache. Profiles retain the existing per-character storage keys.
+- The experimental branch and its immutable review link remain available.
+
+[Santa calibration, evidence, tests and limitations](SANTA.md) · [Motion and comparison gallery](tests/captures/santa/index.html)
+
+The approved experiment passed 945 r10 preservation checks, 167 Santa browser checks, 29 runtime checks and 10,828 numerical checks. Promotion passed 35 additional checks for exact runtime identity and the r10-to-r11 offline upgrade in both WebGL and Canvas, preserving saved settings and Holly framing. See `tests/santa-release.cjs` and `tests/santa-results/santa-release.json`.
+
+Live: https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/v8/
+
+## Previous release documentation
+
 # Peach Physics v0.0.8 r10 — Holly close-up approved
 
 **Release decision:** Promote the user-approved r10 framing preview to the production /peach-physics/v8/ application.
