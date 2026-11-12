@@ -1,0 +1,20 @@
+{
+  "name": "Peach Physics — Holly r10 Zoom Preview",
+  "short_name": "Holly r10 Preview",
+  "description": "Four festive elves with individually calibrated touch-responsive spring physics.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#09100e",
+  "theme_color": "#09100e",
+  "icons": [
+    {
+      "src": "./apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "id": "./holly-r10-zoom-preview"
+}
