@@ -1,0 +1,187 @@
+{
+  "previous": "dc2ef640a3c32843a9f03ed2f691c48932ac22ec",
+  "runtimeOnlyFramingChanged": true,
+  "otherCharacterExactComparisons": 8,
+  "rows": [
+    {
+      "mode": "webgl",
+      "size": [
+        375,
+        667
+      ],
+      "zoom": 1.0381558268858802,
+      "framing": {
+        "x": -8.952343750000011,
+        "y": 0,
+        "width": 392.9046875,
+        "height": 667
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "webgl",
+      "size": [
+        390,
+        844
+      ],
+      "zoom": 1.2128433596799375,
+      "framing": {
+        "x": -53.58437500000002,
+        "y": 0,
+        "width": 497.16875000000005,
+        "height": 844
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "webgl",
+      "size": [
+        430,
+        932
+      ],
+      "zoom": 1.2073501275510206,
+      "framing": {
+        "x": -59.50312500000001,
+        "y": 0,
+        "width": 549.00625,
+        "height": 932
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "webgl",
+      "size": [
+        440,
+        956
+      ],
+      "zoom": 1.2086704799107137,
+      "framing": {
+        "x": -61.57187499999998,
+        "y": 0,
+        "width": 563.14375,
+        "height": 956
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "webgl",
+      "size": [
+        390,
+        664
+      ],
+      "zoom": 1.0395184824902723,
+      "framing": {
+        "x": -0.5687500000000227,
+        "y": 0,
+        "width": 391.13750000000005,
+        "height": 664
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "webgl",
+      "size": [
+        844,
+        390
+      ],
+      "zoom": 1,
+      "framing": {
+        "x": 307.1328125,
+        "y": 0,
+        "width": 229.734375,
+        "height": 390
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        375,
+        667
+      ],
+      "zoom": 1.0381558268858802,
+      "framing": {
+        "x": -8.952343750000011,
+        "y": 0,
+        "width": 392.9046875,
+        "height": 667
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        390,
+        844
+      ],
+      "zoom": 1.2128433596799375,
+      "framing": {
+        "x": -53.58437500000002,
+        "y": 0,
+        "width": 497.16875000000005,
+        "height": 844
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        430,
+        932
+      ],
+      "zoom": 1.2073501275510206,
+      "framing": {
+        "x": -59.50312500000001,
+        "y": 0,
+        "width": 549.00625,
+        "height": 932
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        440,
+        956
+      ],
+      "zoom": 1.2086704799107137,
+      "framing": {
+        "x": -61.57187499999998,
+        "y": 0,
+        "width": 563.14375,
+        "height": 956
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        390,
+        664
+      ],
+      "zoom": 1.0395184824902723,
+      "framing": {
+        "x": -0.5687500000000227,
+        "y": 0,
+        "width": 391.13750000000005,
+        "height": 664
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        844,
+        390
+      ],
+      "zoom": 1,
+      "framing": {
+        "x": 307.1328125,
+        "y": 0,
+        "width": 229.734375,
+        "height": 390
+      },
+      "skinTapsAndFlickBothSides": true
+    }
+  ]
+}

@@ -1,14 +1,14 @@
 [
   {
     "mode": "webgl",
-    "changedPixels": 65690,
+    "changedPixels": 96647,
     "outsideSupportChangedPixels": 0,
     "resetExact": true,
     "errors": []
   },
   {
     "mode": "canvas",
-    "changedPixels": 66021,
+    "changedPixels": 97057,
     "outsideSupportChangedPixels": 0,
     "resetExact": true,
     "errors": []
