@@ -1,0 +1,28 @@
+[
+  {
+    "renderer": "webgl",
+    "gatedAssetUpgrade": true,
+    "versionedMotionSurvivesWarmHTTPCache": true,
+    "offlineCharacters": 5,
+    "allProfilesPreserved": true,
+    "existingAutoOnPreserved": true,
+    "autoEnabledFresh": true,
+    "laterOffChoiceRetained": true,
+    "savedShakeRetainedWithoutPrompt": true,
+    "santaAudioAndLaugh": true,
+    "errors": []
+  },
+  {
+    "renderer": "canvas",
+    "gatedAssetUpgrade": true,
+    "versionedMotionSurvivesWarmHTTPCache": true,
+    "offlineCharacters": 5,
+    "allProfilesPreserved": true,
+    "existingAutoOnPreserved": true,
+    "autoEnabledFresh": true,
+    "laterOffChoiceRetained": true,
+    "savedShakeRetainedWithoutPrompt": true,
+    "santaAudioAndLaugh": true,
+    "errors": []
+  }
+]

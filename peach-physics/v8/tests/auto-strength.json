@@ -1,0 +1,206 @@
+{
+  "prior": "817a5649606bc9ec0e11ea2c2d60f66c0b25ec7a",
+  "driveGain": 1.5,
+  "autoComparisons": [
+    {
+      "renderer": "webgl",
+      "id": "midnight",
+      "preset": "natural",
+      "seconds": 30,
+      "beforeRMS": 2.373494091750005,
+      "afterRMS": 3.560241148026205,
+      "gain": 1.5000000043822304,
+      "maxX": 4.461572229906755,
+      "maxY": 5.56731138647797
+    },
+    {
+      "renderer": "webgl",
+      "id": "midnight",
+      "preset": "playful",
+      "seconds": 30,
+      "beforeRMS": 2.9536859724546805,
+      "afterRMS": 4.4305288061422825,
+      "gain": 1.4999999483561424,
+      "maxX": 5.574643994901859,
+      "maxY": 6.957958588829708
+    },
+    {
+      "renderer": "webgl",
+      "id": "midnight",
+      "preset": "chaos",
+      "seconds": 30,
+      "beforeRMS": 3.6561033045492644,
+      "afterRMS": 5.484153981163088,
+      "gain": 1.4999997331418924,
+      "maxX": 6.940726295030469,
+      "maxY": 8.660798369326844
+    },
+    {
+      "renderer": "webgl",
+      "id": "aurelia",
+      "preset": "natural",
+      "seconds": 30,
+      "beforeRMS": 1.9230801543798572,
+      "afterRMS": 2.884620208326371,
+      "gain": 1.4999999879134445,
+      "maxX": 3.6178336004697145,
+      "maxY": 4.5644012461848344
+    },
+    {
+      "renderer": "webgl",
+      "id": "aurelia",
+      "preset": "playful",
+      "seconds": 30,
+      "beforeRMS": 2.3884994312050516,
+      "afterRMS": 3.5827487417459265,
+      "gain": 1.499999830411661,
+      "maxX": 4.510437868232321,
+      "maxY": 5.693989851672041
+    },
+    {
+      "renderer": "webgl",
+      "id": "aurelia",
+      "preset": "chaos",
+      "seconds": 30,
+      "beforeRMS": 2.949141552846523,
+      "afterRMS": 4.423710955310151,
+      "gain": 1.4999995341153998,
+      "maxX": 5.597823610867314,
+      "maxY": 7.076405562910497
+    },
+    {
+      "renderer": "webgl",
+      "id": "holly",
+      "preset": "natural",
+      "seconds": 30,
+      "beforeRMS": 0.74785115386839,
+      "afterRMS": 1.1217754858807238,
+      "gain": 1.4999983353347057,
+      "maxX": 1.4987459042518787,
+      "maxY": 1.9342371512469776
+    },
+    {
+      "renderer": "webgl",
+      "id": "holly",
+      "preset": "playful",
+      "seconds": 30,
+      "beforeRMS": 0.9043233342112786,
+      "afterRMS": 1.3564856626480652,
+      "gain": 1.5000007312994392,
+      "maxX": 1.8166331076878872,
+      "maxY": 2.360309571449436
+    },
+    {
+      "renderer": "webgl",
+      "id": "holly",
+      "preset": "chaos",
+      "seconds": 30,
+      "beforeRMS": 1.0829073091620767,
+      "afterRMS": 1.6243669403005794,
+      "gain": 1.5000055189926356,
+      "maxX": 2.1822002059241195,
+      "maxY": 2.8575211394284734
+    },
+    {
+      "renderer": "canvas",
+      "id": "midnight",
+      "preset": "natural",
+      "seconds": 30,
+      "beforeRMS": 2.373494091750005,
+      "afterRMS": 3.560241148026205,
+      "gain": 1.5000000043822304,
+      "maxX": 4.461572229906755,
+      "maxY": 5.56731138647797
+    },
+    {
+      "renderer": "canvas",
+      "id": "midnight",
+      "preset": "playful",
+      "seconds": 30,
+      "beforeRMS": 2.9536859724546805,
+      "afterRMS": 4.4305288061422825,
+      "gain": 1.4999999483561424,
+      "maxX": 5.574643994901859,
+      "maxY": 6.957958588829708
+    },
+    {
+      "renderer": "canvas",
+      "id": "midnight",
+      "preset": "chaos",
+      "seconds": 30,
+      "beforeRMS": 3.6561033045492644,
+      "afterRMS": 5.484153981163088,
+      "gain": 1.4999997331418924,
+      "maxX": 6.940726295030469,
+      "maxY": 8.660798369326844
+    },
+    {
+      "renderer": "canvas",
+      "id": "aurelia",
+      "preset": "natural",
+      "seconds": 30,
+      "beforeRMS": 1.9230801543798572,
+      "afterRMS": 2.884620208326371,
+      "gain": 1.4999999879134445,
+      "maxX": 3.6178336004697145,
+      "maxY": 4.5644012461848344
+    },
+    {
+      "renderer": "canvas",
+      "id": "aurelia",
+      "preset": "playful",
+      "seconds": 30,
+      "beforeRMS": 2.3884994312050516,
+      "afterRMS": 3.5827487417459265,
+      "gain": 1.499999830411661,
+      "maxX": 4.510437868232321,
+      "maxY": 5.693989851672041
+    },
+    {
+      "renderer": "canvas",
+      "id": "aurelia",
+      "preset": "chaos",
+      "seconds": 30,
+      "beforeRMS": 2.949141552846523,
+      "afterRMS": 4.423710955310151,
+      "gain": 1.4999995341153998,
+      "maxX": 5.597823610867314,
+      "maxY": 7.076405562910497
+    },
+    {
+      "renderer": "canvas",
+      "id": "holly",
+      "preset": "natural",
+      "seconds": 30,
+      "beforeRMS": 0.74785115386839,
+      "afterRMS": 1.1217754858807238,
+      "gain": 1.4999983353347057,
+      "maxX": 1.4987459042518787,
+      "maxY": 1.9342371512469776
+    },
+    {
+      "renderer": "canvas",
+      "id": "holly",
+      "preset": "playful",
+      "seconds": 30,
+      "beforeRMS": 0.9043233342112786,
+      "afterRMS": 1.3564856626480652,
+      "gain": 1.5000007312994392,
+      "maxX": 1.8166331076878872,
+      "maxY": 2.360309571449436
+    },
+    {
+      "renderer": "canvas",
+      "id": "holly",
+      "preset": "chaos",
+      "seconds": 30,
+      "beforeRMS": 1.0829073091620767,
+      "afterRMS": 1.6243669403005794,
+      "gain": 1.5000055189926356,
+      "maxX": 2.1822002059241195,
+      "maxY": 2.8575211394284734
+    }
+  ],
+  "exactComparisons": 52,
+  "errors": []
+}

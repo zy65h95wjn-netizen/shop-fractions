@@ -1,3 +1,7 @@
+## Auto Jiggle strength update
+
+Midnight Yule, Aurelia Frost and Holly Heartbreaker now use 50% stronger Auto Jiggle drive. Tempo, touch/shake strength, saved settings, Winter Ember and Santa are unchanged. [Details and validation](AUTO-STRENGTH.md).
+
 # Peach Physics r14 — full-screen Holly
 
 Promotes the approved Holly replacement, enables Auto Jiggle on fresh installs and once on upgrade, and adds 10% to Holly’s rendered motion in WebGL and Canvas. Other characters, R13 spring behavior, existing audio, Santa and per-character profiles are preserved.

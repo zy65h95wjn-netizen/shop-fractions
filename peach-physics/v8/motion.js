@@ -2,8 +2,8 @@
 (function(root){
 'use strict';
 const calibration=Object.freeze({
- ember:{accel:2200,auto:1375,autoHz:1.15,limit:240},midnight:{accel:2100,auto:1312.5,autoHz:1.12,limit:230},
- aurelia:{accel:1700,auto:1062.5,autoHz:1.10,limit:210},holly:{accel:500,auto:218.75,autoHz:.85,limit:110},
+ ember:{accel:2200,auto:1375,autoHz:1.15,limit:240},midnight:{accel:2100,auto:1968.75,autoHz:1.12,limit:230},
+ aurelia:{accel:1700,auto:1593.75,autoHz:1.10,limit:210},holly:{accel:500,auto:328.125,autoHz:.85,limit:110},
  santa:{accel:500,auto:287.5,autoHz:.65,limit:210}
 });
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
