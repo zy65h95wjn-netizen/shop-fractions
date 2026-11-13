@@ -1,0 +1,802 @@
+{
+  "permissions": [
+    {
+      "permission": "denied",
+      "state": {
+        "shake": false,
+        "auto": false,
+        "visible": true,
+        "counts": {
+          "shakeSteps": 0,
+          "autoPulses": 0
+        },
+        "force": [
+          0,
+          0
+        ],
+        "cooldown": 0,
+        "nextAuto": null,
+        "source": null,
+        "ui": {
+          "saved": {
+            "shake": false,
+            "auto": false
+          },
+          "granted": false,
+          "pending": false,
+          "listening": false,
+          "supported": true
+        }
+      }
+    },
+    {
+      "permission": "error",
+      "state": {
+        "shake": false,
+        "auto": false,
+        "visible": true,
+        "counts": {
+          "shakeSteps": 0,
+          "autoPulses": 0
+        },
+        "force": [
+          0,
+          0
+        ],
+        "cooldown": 0,
+        "nextAuto": null,
+        "source": null,
+        "ui": {
+          "saved": {
+            "shake": false,
+            "auto": false
+          },
+          "granted": false,
+          "pending": false,
+          "listening": false,
+          "supported": true
+        }
+      }
+    },
+    {
+      "supported": false,
+      "state": {
+        "shake": false,
+        "auto": false,
+        "visible": true,
+        "counts": {
+          "shakeSteps": 0,
+          "autoPulses": 0
+        },
+        "force": [
+          0,
+          0
+        ],
+        "cooldown": 0,
+        "nextAuto": null,
+        "source": null,
+        "ui": {
+          "saved": {
+            "shake": false,
+            "auto": false
+          },
+          "granted": false,
+          "pending": false,
+          "listening": false,
+          "supported": false
+        }
+      }
+    },
+    {
+      "renderer": "webgl",
+      "hidden": {
+        "before": 6,
+        "after": 6,
+        "state": {
+          "shake": true,
+          "auto": true,
+          "visible": false,
+          "counts": {
+            "shakeSteps": 411,
+            "autoPulses": 6
+          },
+          "force": [
+            0,
+            0
+          ],
+          "cooldown": 0,
+          "nextAuto": null,
+          "source": null,
+          "ui": {
+            "saved": {
+              "shake": true,
+              "auto": true
+            },
+            "granted": true,
+            "pending": false,
+            "listening": false,
+            "supported": true
+          }
+        }
+      }
+    },
+    {
+      "renderer": "canvas",
+      "hidden": {
+        "before": 5,
+        "after": 5,
+        "state": {
+          "shake": true,
+          "auto": true,
+          "visible": false,
+          "counts": {
+            "shakeSteps": 411,
+            "autoPulses": 5
+          },
+          "force": [
+            0,
+            0
+          ],
+          "cooldown": 0,
+          "nextAuto": null,
+          "source": null,
+          "ui": {
+            "saved": {
+              "shake": true,
+              "auto": true
+            },
+            "granted": true,
+            "pending": false,
+            "listening": false,
+            "supported": true
+          }
+        }
+      }
+    }
+  ],
+  "characters": [
+    {
+      "id": "ember",
+      "renderer": "webgl",
+      "max": 5.711643302037267,
+      "changed": true,
+      "returned": true,
+      "counts": 77,
+      "blocked": true,
+      "audio": 0
+    },
+    {
+      "id": "midnight",
+      "renderer": "webgl",
+      "max": 5.3036687804634495,
+      "changed": true,
+      "returned": true,
+      "counts": 160,
+      "blocked": true,
+      "audio": 0
+    },
+    {
+      "id": "aurelia",
+      "renderer": "webgl",
+      "max": 4.14666843622157,
+      "changed": true,
+      "returned": true,
+      "counts": 243,
+      "blocked": true,
+      "audio": 0
+    },
+    {
+      "id": "holly",
+      "renderer": "webgl",
+      "max": 2.3772086094817304,
+      "changed": true,
+      "returned": true,
+      "counts": 324,
+      "blocked": true,
+      "audio": 0
+    },
+    {
+      "id": "santa",
+      "renderer": "webgl",
+      "max": 13.645378509579931,
+      "changed": true,
+      "returned": true,
+      "counts": 405,
+      "blocked": true,
+      "audio": 0
+    },
+    {
+      "id": "ember",
+      "renderer": "canvas",
+      "max": 5.711643302037267,
+      "changed": true,
+      "returned": true,
+      "counts": 77,
+      "blocked": true,
+      "audio": 0
+    },
+    {
+      "id": "midnight",
+      "renderer": "canvas",
+      "max": 5.3036687804634495,
+      "changed": true,
+      "returned": true,
+      "counts": 160,
+      "blocked": true,
+      "audio": 0
+    },
+    {
+      "id": "aurelia",
+      "renderer": "canvas",
+      "max": 4.14666843622157,
+      "changed": true,
+      "returned": true,
+      "counts": 243,
+      "blocked": true,
+      "audio": 0
+    },
+    {
+      "id": "holly",
+      "renderer": "canvas",
+      "max": 2.3772086094817304,
+      "changed": true,
+      "returned": true,
+      "counts": 324,
+      "blocked": true,
+      "audio": 0
+    },
+    {
+      "id": "santa",
+      "renderer": "canvas",
+      "max": 13.645378509579931,
+      "changed": true,
+      "returned": true,
+      "counts": 405,
+      "blocked": true,
+      "audio": 0
+    }
+  ],
+  "regressions": [
+    {
+      "id": "ember",
+      "preset": "natural",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "ember",
+      "preset": "natural",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "ember",
+      "preset": "natural",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "ember",
+      "preset": "playful",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "ember",
+      "preset": "playful",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "ember",
+      "preset": "playful",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "ember",
+      "preset": "chaos",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "ember",
+      "preset": "chaos",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "ember",
+      "preset": "chaos",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "midnight",
+      "preset": "natural",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "midnight",
+      "preset": "natural",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "midnight",
+      "preset": "natural",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "midnight",
+      "preset": "playful",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "midnight",
+      "preset": "playful",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "midnight",
+      "preset": "playful",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "midnight",
+      "preset": "chaos",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "midnight",
+      "preset": "chaos",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "midnight",
+      "preset": "chaos",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "aurelia",
+      "preset": "natural",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "aurelia",
+      "preset": "natural",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "aurelia",
+      "preset": "natural",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "aurelia",
+      "preset": "playful",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "aurelia",
+      "preset": "playful",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "aurelia",
+      "preset": "playful",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "aurelia",
+      "preset": "chaos",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "aurelia",
+      "preset": "chaos",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "aurelia",
+      "preset": "chaos",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "holly",
+      "preset": "natural",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "holly",
+      "preset": "natural",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "holly",
+      "preset": "natural",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "holly",
+      "preset": "playful",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "holly",
+      "preset": "playful",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "holly",
+      "preset": "playful",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "holly",
+      "preset": "chaos",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "holly",
+      "preset": "chaos",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "holly",
+      "preset": "chaos",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "santa",
+      "preset": "natural",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "santa",
+      "preset": "natural",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "santa",
+      "preset": "natural",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "santa",
+      "preset": "playful",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "santa",
+      "preset": "playful",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "santa",
+      "preset": "playful",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "santa",
+      "preset": "chaos",
+      "kind": "kick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "santa",
+      "preset": "chaos",
+      "kind": "drag",
+      "renderer": "webgl"
+    },
+    {
+      "id": "santa",
+      "preset": "chaos",
+      "kind": "flick",
+      "renderer": "webgl"
+    },
+    {
+      "id": "ember",
+      "preset": "natural",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "ember",
+      "preset": "natural",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "ember",
+      "preset": "natural",
+      "kind": "flick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "ember",
+      "preset": "playful",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "ember",
+      "preset": "playful",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "ember",
+      "preset": "playful",
+      "kind": "flick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "ember",
+      "preset": "chaos",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "ember",
+      "preset": "chaos",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "ember",
+      "preset": "chaos",
+      "kind": "flick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "midnight",
+      "preset": "natural",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "midnight",
+      "preset": "natural",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "midnight",
+      "preset": "natural",
+      "kind": "flick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "midnight",
+      "preset": "playful",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "midnight",
+      "preset": "playful",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "midnight",
+      "preset": "playful",
+      "kind": "flick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "midnight",
+      "preset": "chaos",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "midnight",
+      "preset": "chaos",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "midnight",
+      "preset": "chaos",
+      "kind": "flick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "aurelia",
+      "preset": "natural",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "aurelia",
+      "preset": "natural",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "aurelia",
+      "preset": "natural",
+      "kind": "flick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "aurelia",
+      "preset": "playful",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "aurelia",
+      "preset": "playful",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "aurelia",
+      "preset": "playful",
+      "kind": "flick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "aurelia",
+      "preset": "chaos",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "aurelia",
+      "preset": "chaos",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "aurelia",
+      "preset": "chaos",
+      "kind": "flick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "holly",
+      "preset": "natural",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "holly",
+      "preset": "natural",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "holly",
+      "preset": "natural",
+      "kind": "flick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "holly",
+      "preset": "playful",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "holly",
+      "preset": "playful",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "holly",
+      "preset": "playful",
+      "kind": "flick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "holly",
+      "preset": "chaos",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "holly",
+      "preset": "chaos",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "holly",
+      "preset": "chaos",
+      "kind": "flick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "santa",
+      "preset": "natural",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "santa",
+      "preset": "natural",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "santa",
+      "preset": "natural",
+      "kind": "flick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "santa",
+      "preset": "playful",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "santa",
+      "preset": "playful",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "santa",
+      "preset": "playful",
+      "kind": "flick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "santa",
+      "preset": "chaos",
+      "kind": "kick",
+      "renderer": "canvas"
+    },
+    {
+      "id": "santa",
+      "preset": "chaos",
+      "kind": "drag",
+      "renderer": "canvas"
+    },
+    {
+      "id": "santa",
+      "preset": "chaos",
+      "kind": "flick",
+      "renderer": "canvas"
+    }
+  ],
+  "errors": []
+}

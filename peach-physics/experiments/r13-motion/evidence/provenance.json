@@ -1,0 +1,19 @@
+{
+  "baseline": "76cc6f11cff4cf77bd3d6e1eb34880246b23e9e7",
+  "functions": {
+    "step": true,
+    "render": true,
+    "initGL": true,
+    "resize": true,
+    "impulse": true,
+    "slapSound": true,
+    "santaChuckle": true
+  },
+  "artwork": {
+    "IMAGE": "embedded bytes identical",
+    "OTHER_IMAGE": "embedded bytes identical",
+    "aurelia-frost.jpg": "710fa8ce7eadf38de4167ae3937859aed528ae01159ed5d9ea25fa6be08eee10",
+    "holly-heartbreaker.jpg": "b5af2ccfa267b2ea8b4a6fa4b98aa2935e7f2b4e869d279f93d99fb9e5964349",
+    "santa-claus.jpg": "0c081474e67e0f5a94a12fdce68f712884933485a21082d45b9c36188cfea5ed"
+  }
+}

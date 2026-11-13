@@ -1,0 +1,35 @@
+{
+  "checks": 53,
+  "rows": [
+    {
+      "id": "ember",
+      "autoPulses": 14,
+      "strongShakeVelocity": 210
+    },
+    {
+      "id": "midnight",
+      "autoPulses": 14,
+      "strongShakeVelocity": 200
+    },
+    {
+      "id": "aurelia",
+      "autoPulses": 14,
+      "strongShakeVelocity": 165
+    },
+    {
+      "id": "holly",
+      "autoPulses": 14,
+      "strongShakeVelocity": 49.171408940779294
+    },
+    {
+      "id": "santa",
+      "autoPulses": 14,
+      "strongShakeVelocity": 116.09915999906225
+    }
+  ],
+  "eventRateVelocities": [
+    210,
+    210,
+    210
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "approved": "c4b72cb86d27e1ae9f55577813be7f9cb429b7e4",
+  "priorProduction": "d2a1fa1686aa1dda3cb1553872f0ad126138b873",
+  "checks": 50,
+  "backends": [
+    {
+      "renderer": "webgl",
+      "upgrade": true,
+      "offline": true,
+      "preservedProfile": true,
+      "preservedHollyFraming": true
+    },
+    {
+      "renderer": "canvas",
+      "upgrade": true,
+      "offline": true,
+      "preservedProfile": true,
+      "preservedHollyFraming": true
+    }
+  ],
+  "errors": []
+}

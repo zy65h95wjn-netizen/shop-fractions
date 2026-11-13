@@ -1,0 +1,11 @@
+{
+  "keyboardDoesNotBounce": true,
+  "storageDenied": true,
+  "implicitPermission": true,
+  "listenerRemovedOnDisable": true,
+  "perf": {
+    "ticks": 100000,
+    "elapsedMs": 49,
+    "note": "Desktop JS-only batch, excludes renderer/GPU, not iPhone battery or frame timing"
+  }
+}
