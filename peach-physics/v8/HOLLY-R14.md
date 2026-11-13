@@ -22,7 +22,7 @@ It is byte-identical to the approved preview. The authoritative attached JPEG's 
 
 ## Offline upgrade correction
 
-Cache: `peach-physics-v008-r14-holly`, containing the same eight resource roles with the new Holly PNG.
+Cache: `peach-physics-v008-r14-holly2`, containing the same eight resource roles with the new Holly PNG. The script URL is `motion.js?v=r14-holly` so a warm browser HTTP cache cannot reuse the earlier default-off implementation; the upgrade test holds the old script under a one-hour cache lifetime and verifies the exact new script offline.
 
 The first upgrade test exposed a pre-existing race: a retired worker's in-flight fetch can recreate its old cache after activation deletes it. The global `caches.match` fallback could then select the old HTML during offline reload. R14 keeps network-first behavior but reads offline responses only from its own completed cache. The test explicitly recreates stale old HTML after activation and verifies that the new release still loads offline. Other application/release caches remain untouched.
 

@@ -2,6 +2,7 @@
   {
     "renderer": "webgl",
     "gatedAssetUpgrade": true,
+    "versionedMotionSurvivesWarmHTTPCache": true,
     "offlineCharacters": 5,
     "allProfilesPreserved": true,
     "autoEnabledOnUpgrade": true,
@@ -14,6 +15,7 @@
   {
     "renderer": "canvas",
     "gatedAssetUpgrade": true,
+    "versionedMotionSurvivesWarmHTTPCache": true,
     "offlineCharacters": 5,
     "allProfilesPreserved": true,
     "autoEnabledOnUpgrade": true,
