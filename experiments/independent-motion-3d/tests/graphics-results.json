@@ -1,0 +1,54 @@
+{
+  "idle_vs_source": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right-inward_left_core": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right-inward_background": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right-inward_stockings": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right-outward_left_core": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right-outward_background": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right-outward_stockings": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right-down_left_core": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right-down_background": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right-down_stockings": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right-up_left_core": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right-up_background": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right-up_stockings": {
+    "maximum": 0,
+    "mean": 0.0
+  }
+}
