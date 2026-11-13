@@ -12,7 +12,7 @@
 
 
 
-<title>Peach Physics — Elf Lab 0.0.8 r13 audio fix 2</title>
+<title>Peach Physics — Elf Lab 0.0.8 r14 Holly</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -94,7 +94,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <p id="motionNotice" role="status" hidden style="position:absolute;z-index:5;pointer-events:none;top:max(12px,env(safe-area-inset-top));left:60px;right:60px;margin:0;padding:7px 10px;border-radius:12px;background:#07110fe8;color:#fff7eb;font-size:12px;text-align:center"></p><div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r13 · audio fix 2</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r14 · Holly</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/5</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
@@ -192,13 +192,13 @@ const CHARACTERS=[
    {side:1,x:510,y:842,rx:88,ry:73},{side:1,x:516,y:908,rx:101,ry:96},{side:1,x:510,y:970,rx:91,ry:63}
   ],impactCenters:[[270,903],[513,909]],bounceCenters:[[266,901],[511,906]],
   split:[.522,.540],sideMid:.531,bounds:[.60,.65,.77,.80],taper:[0,0],intensity:1},
- {id:'holly',name:'Holly Heartbreaker',src:'./assets/holly-heartbreaker.jpg?v=r7',width:720,height:1280,
-  regions:[{x:325,y:332,rx:53,ry:45},{x:433,y:334,rx:51,ry:45}],
+ {id:'holly',name:'Holly Heartbreaker',src:'./assets/holly-heartbreaker.png',width:754,height:1280,
+  regions:[{x:323,y:474,rx:85,ry:76},{x:495,y:477,rx:80,ry:77}],
   nodes:[
-   {side:0,x:319,y:300,rx:43,ry:27},{side:0,x:325,y:332,rx:44,ry:35},{side:0,x:347,y:365,rx:28,ry:23},
-   {side:1,x:432,y:301,rx:41,ry:27},{side:1,x:433,y:334,rx:43,ry:35},{side:1,x:411,y:365,rx:28,ry:23}
-  ],impactCenters:[[325,332],[433,334]],bounceCenters:[[325,332],[433,334]],
-  split:[.517,.539],sideMid:.528,bounds:[.215,.235,.31,.335],taper:[0,0],intensity:.46},
+   {side:0,x:315,y:432,rx:65,ry:43},{side:0,x:323,y:474,rx:73,ry:58},{side:0,x:355,y:529,rx:47,ry:36},
+   {side:1,x:488,y:434,rx:62,ry:43},{side:1,x:495,y:477,rx:69,ry:58},{side:1,x:457,y:532,rx:46,ry:36}
+  ],impactCenters:[[323,474],[495,477]],bounceCenters:[[323,474],[495,477]],
+  split:[.534,.553],sideMid:.544,bounds:[.303,.327,.464,.5],taper:[0,0],intensity:.46},
  {id:'santa',name:'Santa Claus',src:'./assets/santa-claus.jpg',width:1024,height:1280,
   regions:[{x:350,y:780,rx:180,ry:235},{x:578,y:782,rx:174,ry:220}],
   nodes:[
@@ -226,6 +226,7 @@ const OLDER_PREFS_PREFIX='peach-physics-v006-profile-';
 let activeCharacterIndex=0;
 try{const saved=localStorage.getItem(CHARACTER_KEY)||localStorage.getItem(V71_CHARACTER_KEY)||localStorage.getItem(V7_CHARACTER_KEY)||localStorage.getItem(BASELINE_CHARACTER_KEY)||localStorage.getItem(IMPORT_CHARACTER_KEY)||localStorage.getItem(V621_CHARACTER_KEY)||localStorage.getItem(V62_CHARACTER_KEY)||localStorage.getItem(OLDER_CHARACTER_KEY);activeCharacterIndex=Math.max(0,CHARACTERS.findIndex(c=>c.id===saved));}catch(e){}
 if(new URLSearchParams(location.search).get('character')==='santa')activeCharacterIndex=4;
+if(new URLSearchParams(location.search).get('character')==='holly')activeCharacterIndex=3;
 const currentCharacter=()=>CHARACTERS[activeCharacterIndex];
 const isHolly=()=>currentCharacter().id==='holly';
 const isSanta=()=>currentCharacter().id==='santa';
@@ -315,20 +316,17 @@ function resize(){
  // Midnight Yule is framed farther back in the source: enlarge only her portrait.
  // A top-safe anchor keeps her face and hat clear of the iPhone status area.
  const midnightZoom=portrait && (currentCharacter().id==='midnight'||currentCharacter().id==='aurelia');
- // Holly: a closer upper-body view, retaining the same head-safe top anchor.
- // Holly r10 framing-only experiment: fit both interactive regions with side
- // clearance, then place the chest near the screen's visual center.
- // Preserve source-space physics, gestures and aspect ratio without retuning.
- const hollyClose=isHolly()&&portrait;
- const hollySideMargin=Math.max(22,cssW*.065);
- // Santa: fit the full face and belly, with a closer portrait view of the mass.
- const scale=isSanta()?Math.min(portrait?(cssW-32)/700:cssW/W,(cssH-topClear-bottomClear)/H):hollyClose?Math.min((cssW-2*hollySideMargin)/245,.27*(cssH-topClear)/146):baseScale*(midnightZoom?1.12:1);
+ // Holly portrait: fill the viewport edge to edge without stretching.
+ // Center the horizontal crop and keep the face and upper thighs in view.
+ const hollyPortrait=isHolly()&&portrait;
+ const hollyScale=portrait?Math.max(cssW/W,cssH/H):Math.min(cssW/W,cssH/H);
+ const scale=isSanta()?Math.min(portrait?(cssW-32)/700:cssW/W,(cssH-topClear-bottomClear)/H):isHolly()?hollyScale:baseScale*(midnightZoom?1.12:1);
  drawW=W*scale;drawH=H*scale;
- ox=hollyClose?cssW*.5-380*scale:(cssW-drawW)/2;
- oy=hollyClose?cssH*.55-350*scale:midnightZoom?Math.max(54,cssH*.066):(portrait?topClear+(cssH-topClear-bottomClear-drawH)/2:(cssH-drawH)/2);
+ ox=(cssW-drawW)/2;
+ oy=hollyPortrait?0:midnightZoom?Math.max(54,cssH*.066):(portrait?topClear+(cssH-topClear-bottomClear-drawH)/2:(cssH-drawH)/2);
  uvCover=[cssW/drawW,cssH/drawH,-ox/drawW,-oy/drawH];
- // Feather the photo's top and bottom edges into the blurred continuation.
- if(portrait){
+ // Retain edge feathering for the other portraits; Holly fills the screen.
+ if(portrait&&!isHolly()){
   const top=Math.max(0,oy),bottom=Math.min(cssH,oy+drawH);
   const fade=`linear-gradient(to bottom, transparent ${top}px, black ${top+15}px, black ${bottom-17}px, transparent ${bottom}px)`;
   canvas.style.webkitMaskImage=fade;canvas.style.maskImage=fade;
@@ -408,13 +406,11 @@ function createAureliaShapeTexture(){
 }
 
 
-// Holly: source-coordinate supports for the approved 720 x 1280 full-body portrait.
-// The zero envelope is inside the exposed skin, leaving fur, hair and center fixed.
+// Holly replacement: traced supports in the authoritative 754 x 1280 portrait.
+// Skin, garment, and input boundaries are independent; face/arms/lacing stay fixed.
 const HOLLY_CONTOURS=[
- [[301,291],[331,286],[357,297],[372,317],[377,340],[371,361],
-  [359,374],[334,365],[307,351],[283,337],[274,322],[282,305]],
- [[405,291],[431,286],[455,297],[473,317],[482,337],[471,350],
-  [448,364],[421,375],[405,365],[391,345],[388,319],[394,301]]
+ [[264,419],[305,402],[350,411],[383,438],[407,480],[411,519],[397,550],[359,543],[312,524],[270,509],[239,504],[239,467]],
+ [[438,413],[478,402],[522,416],[553,448],[573,483],[573,506],[541,516],[492,537],[447,553],[424,533],[419,491],[424,449]]
 ];
 const hollyPlanes=HOLLY_CONTOURS.map(points=>points.map(([x,y],i)=>{
  const [bx,by]=points[(i+1)%points.length],len=Math.hypot(bx-x,by-y),nx=-(by-y)/len,ny=(bx-x)/len;
@@ -427,13 +423,8 @@ function hollySkinWeight(side,x,y){
 // The soft upper cup and attached fur travel with the chest. The lower corset,
 // lacing, hair and central seam remain fixed. These are NOT input polygons.
 const HOLLY_MOTION_CONTOURS=[
- [[300,278],[337,278],[362,292],[375,314],[381,341],[377,365],
-  [366,387],[347,407],[326,422],[305,424],[285,411],[272,392],
-  [261,370],[255,348],[257,329],[266,310],[278,294],[289,284],
-  [295,280]],
- [[402,278],[435,278],[460,290],[478,310],[491,332],[496,351],
-  [489,375],[475,396],[454,414],[432,423],[411,419],[396,401],
-  [386,381],[382,358],[382,331],[387,308],[393,288],[398,281]]
+ [[260,403],[309,391],[358,405],[390,434],[410,478],[413,527],[402,570],[374,607],[328,618],[285,596],[252,560],[231,521],[229,474],[240,431]],
+ [[437,402],[483,391],[532,408],[562,442],[583,486],[584,528],[564,569],[529,604],[485,619],[446,606],[422,573],[414,530],[416,480],[422,437]]
 ];
 const hollyMotionPlanes=HOLLY_MOTION_CONTOURS.map(points=>points.map(([x,y],i)=>{
  const [bx,by]=points[(i+1)%points.length],len=Math.hypot(bx-x,by-y),nx=-(by-y)/len,ny=(bx-x)/len;
@@ -443,10 +434,8 @@ const hollyMotionPlanes=HOLLY_MOTION_CONTOURS.map(points=>points.map(([x,y],i)=>
 // inside the visible object, then soften inward. These guards exclude nearby
 // arm, loose hair and scenery, including the narrow strips missed by box tests.
 const HOLLY_OUTER_EDGES=[
- [[278,300],[290,288],[304,278],[316,270],[328,262],[340,258],
-  [355,260],[370,266],[385,276],[400,291],[412,315],[428,344]],
- [[278,443],[290,455],[304,469],[320,480],[335,486],[350,489],
-  [365,484],[380,476],[395,461],[410,439],[428,418]]
+ [[391,290],[413,260],[440,242],[470,234],[500,233],[525,240],[550,252],[577,274],[600,304],[624,350]],
+ [[391,490],[413,536],[440,558],[470,574],[500,579],[525,574],[550,561],[577,542],[600,513],[624,474]]
 ];
 function hollyOuterWeight(side,x,y){
  const points=HOLLY_OUTER_EDGES[side];let i=0;
@@ -470,15 +459,15 @@ function hollyMotionWeight(side,x,y){
  const smooth=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
  const edge=smooth(Math.min(...hollyMotionPlanes[side].map(([nx,ny,c],i)=>
   (nx*x+ny*y+c)/((side===0&&i>=9&&i<=17)||(side===1&&i>=2&&i<=9)?20:32))));
- const low=smooth((y-380)/20);
- const lace=side===0?smooth((357-x)/14):smooth((x-410)/16);
+ const low=smooth((y-558)/28);
+ const lace=side===0?smooth((388-x)/20):smooth((x-439)/22);
  return Math.min(edge,hollyOuterWeight(side,x,y))*(1-low*(1-lace));
 }
-// Upper-cup touch targets registered to the approved full-body portrait.
-// Mirror around x=380; the original input-to-center mapping is unchanged.
-// Input contours are deliberately separate from the fixed rendering envelopes.
-const HOLLY_RIGHT_TOUCH=[[403,340],[478,323],[490,337],[488,365],[477,389],[454,410],[427,417],[407,397],[399,374]];
-const HOLLY_TOUCH_CONTOURS=[HOLLY_RIGHT_TOUCH.map(([x,y])=>[760-x,y]),HOLLY_RIGHT_TOUCH];
+// Separate left/right targets trace the visible cups without mirroring the asymmetry.
+const HOLLY_TOUCH_CONTOURS=[
+ [[246,469],[281,429],[345,425],[385,455],[407,507],[396,560],[367,594],[325,602],[280,575],[246,535]],
+ [[433,458],[471,426],[526,437],[565,474],[575,519],[553,563],[514,594],[473,605],[441,576],[423,525]]
+];
 function insideTouchContour(points,x,y){
  let inside=false;
  for(let i=0,j=points.length-1;i<points.length;j=i++){
@@ -498,20 +487,18 @@ function touchAnchor(side,p){
  const [x,y]=currentCharacter().impactCenters[side];
  return {p:{...p,x,y},offsetX:x-p.x,offsetY:y-p.y};
 }
-const HOLLY_CROP=[240,264,272,176];
-// Diagnostic A/B switch. Default (A) is r9.1. With ?fabric=strong (B) the green
-// upper cup and fur trim move as one rigid block per side: a single spring-field
-// vector sampled at the trim's middle, so the garment holds its shape while
-// exposed skin keeps its own field and slides against the trim.
+const HOLLY_CROP=[216,380,384,256];
+// Retain Strong Fabric B's shared per-side garment vector and skin handoff.
+// The anchors, fur lines, and stationary envelope are retraced for this portrait.
 const HOLLY_FABRIC=true;
-const HOLLY_GARMENT_ANCHORS=[[318,368],[440,372]];
+const HOLLY_GARMENT_ANCHORS=[[320,536],[498,539]];
 if(HOLLY_FABRIC)document.querySelector('#panelHead .kicker').textContent+=' · fabric B';
 let hollyMaskLoc,hollyMaskPixels=null,hollySource=null,hollyLayer=null,hollyBackground=null;
 // Photo-traced white fur trim [x, top y, bottom y] in source pixels: left from
 // its outer tip to the lacing, right from the lacing to its outer tip.
 const HOLLY_FUR=[
- [[262,333,351],[270,330,353],[282,338,358],[294,346,370],[306,352,375],[318,358,378],[330,364,383],[342,369,386],[354,375,388],[362,381,388]],
- [[398,382,388],[408,374,389],[420,369,386],[432,365,383],[444,361,381],[456,355,376],[468,348,371],[480,333,363],[490,331,354]]
+ [[234,509,527],[250,502,521],[270,503,521],[290,508,527],[310,517,535],[330,527,545],[350,537,555],[370,548,565],[391,558,573]],
+ [[427,558,574],[446,548,566],[466,538,556],[486,529,547],[506,521,540],[526,514,532],[546,509,527],[566,508,526],[578,512,530]]
 ];
 // Smoothed trim centerline [x, y, vertical half-thickness, support level].
 // The trim moves as one piece. Its level is the r8 support at 40% depth, but
@@ -550,7 +537,7 @@ function buildHollyMask(){
  // r8 field weight, unchanged: ease from free skin into supported fur/cups
  // across 44 source pixels below an approximate neckline.
  const base=(side,px,py)=>{
-  const neckline=379-.004*(px-380)**2,t=clamp((py-neckline+26)/44,0,1);
+  const neckline=566-.0025*(px-410)**2,t=clamp((py-neckline+32)/56,0,1);
   return hollyMotionWeight(side,px,py)*(1-.45*t*t*(3-2*t));
  };
  const trims=HOLLY_FUR.map((points,side)=>hollyTrimLine(points,side,base));
@@ -587,7 +574,7 @@ function buildHollyMask(){
     const own=smooth(r[y*w+x]/16),core=1-smooth((Math.abs(p.d)-p.half)/6);
     const seam=Math.min(own+(Math.max(own,smooth(at(p.x,p.y)/16))-own)*core,r[y*w+x]/8);
     hollyMaskPixels[i+side]=Math.round(255*weight*(1-cover));
-    if((px<380)===(side===0))hollyMaskPixels[i+2]=Math.round(255*.3*cover*seam);
+    if((px<410)===(side===0))hollyMaskPixels[i+2]=Math.round(255*.3*cover*seam);
     continue;
    }
    const band=smooth((p.d+p.half+18)/16)*(1-smooth((p.d-p.half-6)/26));
@@ -609,6 +596,8 @@ function createHollyShapeTexture(){
 }
 // A shared central carrier keeps the visible neckline attached to the volume.
 // Local spring weighting and the fixed smooth envelope retain spatial deformation.
+// User-approved 10% increase applies to every Holly input in both renderers.
+const HOLLY_JIGGLE_GAIN=1.10;
 function hollyVelocity(x,y,side){
  let dx=0,dy=0,sum=0;
  for(let j=0;j<3;j++){
@@ -623,7 +612,7 @@ function hollyVelocity(x,y,side){
  const pressure=fall*(p.v*.08-p.contact*.09);
  dx+=hx*pressure;dy+=hy*pressure;
  const length=Math.hypot(dx,dy),gain=length>16?(16+8*(1-Math.exp(-(length-16)/8)))/length:1;
- return [dx*gain,dy*gain];
+ return [dx*gain*HOLLY_JIGGLE_GAIN,dy*gain*HOLLY_JIGGLE_GAIN];
 }
 // Bilinear CPU texture remapping: spatial deformation, never a translated patch.
 // Only Holly uses this path; the accepted three Canvas renderers are untouched.
@@ -637,7 +626,7 @@ function initHollyFallback(){
 // shared vector per side (channel B). The side is fixed by the lacing line.
 let hollyGarment=[[0,0],[0,0]];
 function renderHollyFabricPixel(x,y,active,weight,frame){
- const [cx,cy,w]=HOLLY_CROP,at=(y*w+x)*4,side=cx+x+.5<380?0:1;
+ const [cx,cy,w]=HOLLY_CROP,at=(y*w+x)*4,side=cx+x+.5<410?0:1;
  if(!active[side]||!(hollyMaskPixels[at+side]>0||hollyMaskPixels[at+2]>0))return;
  const v=hollyVelocity(cx+x+.5,cy+y+.5,side),g=hollyGarment[side];let sx=cx+x+.5,sy=cy+y+.5;
  for(let k=0;k<6;k++){const a=weight(sx,sy,side)/6,b=weight(sx,sy,2)/6;sx-=v[0]*a+g[0]*b;sy-=v[1]*a+g[1]*b;}
@@ -910,12 +899,12 @@ function initGL(){
   }
   motion=uOffsets[side*3+1]*.65+motion*.35/max(sum,.0001);
   motion+=uSecondary[side]*vec2(.50,.80);
-  vec4 h=uImpacts[side];vec2 delta=(uv-h.xy)*vec2(720.0,1280.0);
+  vec4 h=uImpacts[side];vec2 delta=(uv-h.xy)*vec2(754.0,1280.0);
   vec2 hi=delta/vec2(64.0,56.0);
   motion+=(uv-h.xy)*exp(-2.6*dot(hi,hi))*(h.z*.08-h.w*.09);
-  float travel=length(motion*vec2(720.0,1280.0));
+  float travel=length(motion*vec2(754.0,1280.0));
   if(travel>16.0)motion*=(16.0+8.0*(1.0-exp(-(travel-16.0)/8.0)))/travel;
-  return motion;
+  return motion*${HOLLY_JIGGLE_GAIN.toFixed(2)};
  }
  void main(){
   vAureliaLeft=vec2(0.0);vAureliaRight=vec2(0.0);
@@ -927,7 +916,7 @@ function initGL(){
    gl_Position=vec4(aPosition.x*2.0-1.0,1.0-aPosition.y*2.0,0.0,1.0);return;
   }
   if(uHolly>0.5){
-   vAureliaLeft=hollyVelocity(uv,0);vAureliaRight=hollyVelocity(uv,1);vUV=uv;${HOLLY_FABRIC?'vGarmentLeft=hollyVelocity(vec2(318.0/720.0,368.0/1280.0),0);vGarmentRight=hollyVelocity(vec2(440.0/720.0,372.0/1280.0),1);':''}
+   vAureliaLeft=hollyVelocity(uv,0);vAureliaRight=hollyVelocity(uv,1);vUV=uv;${HOLLY_FABRIC?'vGarmentLeft=hollyVelocity(vec2(320.0/754.0,536.0/1280.0),0);vGarmentRight=hollyVelocity(vec2(498.0/754.0,539.0/1280.0),1);':''}
    gl_Position=vec4(aPosition.x*2.0-1.0,1.0-aPosition.y*2.0,0.0,1.0);return;
   }
   if(uAurelia>0.5){
@@ -1035,8 +1024,8 @@ function initGL(){
   if(uHolly>0.5){
    vec2 sampleUV=vRawUV;
    for(int k=0;k<6;k++){
-    ${HOLLY_FABRIC?`vec3 weights=texture2D(uHollyShape,(sampleUV*vec2(720.0,1280.0)-vec2(240.0,264.0))/vec2(272.0,176.0)).rgb;
-    sampleUV-=(vAureliaLeft*weights.r+vAureliaRight*weights.g+(sampleUV.x<380.0/720.0?vGarmentLeft:vGarmentRight)*weights.b)/6.0;`:`vec2 weights=texture2D(uHollyShape,(sampleUV*vec2(720.0,1280.0)-vec2(240.0,264.0))/vec2(272.0,176.0)).rg;
+    ${HOLLY_FABRIC?`vec3 weights=texture2D(uHollyShape,(sampleUV*vec2(754.0,1280.0)-vec2(216.0,380.0))/vec2(384.0,256.0)).rgb;
+    sampleUV-=(vAureliaLeft*weights.r+vAureliaRight*weights.g+(sampleUV.x<410.0/754.0?vGarmentLeft:vGarmentRight)*weights.b)/6.0;`:`vec2 weights=texture2D(uHollyShape,(sampleUV*vec2(754.0,1280.0)-vec2(216.0,380.0))/vec2(384.0,256.0)).rg;
     sampleUV-=(vAureliaLeft*weights.r+vAureliaRight*weights.g)/6.0;`}
    }
    photoUV=sampleUV;

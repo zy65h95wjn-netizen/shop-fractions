@@ -8,8 +8,8 @@ for(const name of ['IMAGE','OTHER_IMAGE']){
 assert.equal(sha(fs.readFileSync(path.join(__dirname,'../assets/aurelia-frost.jpg'))),hashes.aurelia);
 console.log('All three original portrait hashes verified.');
 
-assert.equal(sha(fs.readFileSync(path.join(__dirname,'../assets/holly-heartbreaker.jpg'))),hashes.holly);
-console.log('Holly original JPEG hash verified.');
+assert.equal(sha(fs.readFileSync(path.join(__dirname,'../assets/holly-heartbreaker.png'))),hashes.holly);
+console.log('Holly approved cleaned PNG hash verified.');
 
 assert.equal(sha(fs.readFileSync(path.join(__dirname,'../assets/santa-claus.jpg'))),'0c081474e67e0f5a94a12fdce68f712884933485a21082d45b9c36188cfea5ed');
 console.log('Santa approved attachment JPEG hash verified.');

@@ -1,0 +1,16 @@
+[
+  {
+    "mode": "webgl",
+    "changedPixels": 96774,
+    "outsideSupportChangedPixels": 0,
+    "resetExact": true,
+    "errors": []
+  },
+  {
+    "mode": "canvas",
+    "changedPixels": 97154,
+    "outsideSupportChangedPixels": 0,
+    "resetExact": true,
+    "errors": []
+  }
+]

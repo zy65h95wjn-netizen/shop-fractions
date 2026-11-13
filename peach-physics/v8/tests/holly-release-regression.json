@@ -1,0 +1,8 @@
+{
+  "prior": "34673b618540e015d9db0745e560e415cc2d8cca",
+  "approved": "07bfc168072e537984b469fb358bf315a781b8c2",
+  "nonHollyExactComparisons": 48,
+  "hollyTrajectoriesUnchanged": 72,
+  "hollyGainSamples": 48,
+  "errors": []
+}

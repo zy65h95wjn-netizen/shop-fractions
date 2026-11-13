@@ -88,13 +88,15 @@ class MotionInput{
 function attachUI(controller,{win=window,doc=document,storage,onEnable=()=>{}}={}){
  try{storage=storage||win.localStorage;}catch{storage=null;}
  const key='peach-r13-motion-options-v1',shake=doc.getElementById('shakeMotion'),auto=doc.getElementById('autoMotion'),status=doc.getElementById('motionStatus');
- let saved={shake:false,auto:false},granted=false,pending=false,listening=false,epoch=0,timer=null,readings=false;
- try{const value=JSON.parse(storage.getItem(key)||'null');if(value?.version===1)saved={shake:value.shake===true,auto:value.auto===true};}catch{}
+ let saved={shake:false,auto:true},needsAutoDefault=true,granted=false,pending=false,listening=false,epoch=0,timer=null,readings=false;
+ // Enable Auto once for this release, then honor later saved On/Off choices.
+ try{const value=JSON.parse(storage.getItem(key)||'null');if(value?.version===1){needsAutoDefault=value.autoDefault!=='holly-fullscreen-v1';saved={shake:value.shake===true,auto:needsAutoDefault||value.auto===true};}}catch{}
  const policy=doc.permissionsPolicy||doc.featurePolicy;
  const policyAllows=!policy?.allowsFeature||['accelerometer','gyroscope'].every(name=>policy.allowsFeature(name));
  const supported=!!win.DeviceMotionEvent&&win.isSecureContext&&policyAllows;
  function message(text){status.textContent=text;const notice=doc.getElementById('motionNotice');if(notice){notice.textContent=text;notice.hidden=false;}}
- function persist(){try{storage.setItem(key,JSON.stringify({version:1,...saved}));}catch{}}
+ function persist(){try{storage.setItem(key,JSON.stringify({version:1,autoDefault:'holly-fullscreen-v1',...saved}));}catch{}}
+ if(needsAutoDefault)persist();
  function refresh(){shake.setAttribute('aria-checked',String(controller.shake));auto.setAttribute('aria-checked',String(saved.auto));shake.disabled=!supported||pending;shake.textContent=pending?'Shake to Jiggle: requesting…':controller.shake?'Shake to Jiggle: on':saved.shake?'Shake to Jiggle: tap to enable':'Shake to Jiggle: off';auto.textContent='Auto Jiggle: '+(saved.auto?'on':'off');}
  function detach(){if(listening)win.removeEventListener('devicemotion',onMotion);listening=false;win.clearTimeout(timer);timer=null;controller.clearSensor();}
  function onMotion(event){const angle=win.screen?.orientation?.angle??win.orientation??0;controller.sample(event,win.performance.now(),angle);const valid=value=>value&&Number.isFinite(value.x)&&Number.isFinite(value.y);if((valid(event.acceleration)||valid(event.accelerationIncludingGravity))&&!readings){readings=true;win.clearTimeout(timer);message('Motion ready. Move your phone gently; touch takes priority.');}}

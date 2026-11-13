@@ -1,3 +1,13 @@
+# Peach Physics r14 — full-screen Holly
+
+Promotes the approved Holly replacement, enables Auto Jiggle on fresh installs and once on upgrade, and adds 10% to Holly’s rendered motion in WebGL and Canvas. Other characters, R13 spring behavior, existing audio, Santa and per-character profiles are preserved.
+
+[Release details, hashes, validation and upgrade correction](HOLLY-R14.md)
+
+Live: https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/v8/?character=holly
+
+## Previous release
+
 # Peach Physics r13 — audio playback repair 2
 
 Repairs gesture activation and interrupted audio contexts while keeping the original sounds and approved R13 motion unchanged. Enabling Sound plays a confirmation; the settings panel also offers Test sound. Santa belly taps now start his existing optional laugh when Belly laugh is On; Sound controls audibility. Offline cache: `peach-physics-v008-r13-audio2`.

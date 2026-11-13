@@ -1,6 +1,6 @@
 // The v0.0.8 cache is independent of all earlier Peach Physics releases.
-const CACHE = 'peach-physics-v008-r13-audio2';
-const FILES = ['./', './index.html', './motion.js', './assets/aurelia-frost.jpg', './assets/holly-heartbreaker.jpg?v=r7', './assets/santa-claus.jpg', './manifest.webmanifest', './apple-touch-icon.png'];
+const CACHE = 'peach-physics-v008-r14-holly';
+const FILES = ['./', './index.html', './motion.js', './assets/aurelia-frost.jpg', './assets/holly-heartbreaker.png', './assets/santa-claus.jpg', './manifest.webmanifest', './apple-touch-icon.png'];
 self.addEventListener('install', event => {
  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)).then(() => self.skipWaiting()));
 });
@@ -12,6 +12,8 @@ self.addEventListener('fetch', event => {
  if(req.method!=='GET' || u.origin !== self.location.origin || !u.pathname.startsWith(new URL(self.registration.scope).pathname))return;
  event.respondWith((async()=>{
   try {const res=await fetch(req); if(res.ok){const copy=res.clone();event.waitUntil(caches.open(CACHE).then(c=>c.put(req,copy)).catch(()=>{}));}return res;}
-  catch(e){return await caches.match(req,{ignoreSearch:true}) || await caches.match('./index.html') || Response.error();}
+  // An old worker's in-flight write can recreate its retired cache after activation.
+  // Read only this release's complete cache, never a stale sibling release.
+  catch(e){const cache=await caches.open(CACHE);return await cache.match(req,{ignoreSearch:true}) || await cache.match('./index.html') || Response.error();}
  })());
 });
