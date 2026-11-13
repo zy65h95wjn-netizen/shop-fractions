@@ -1,3 +1,11 @@
+# Peach Physics r13 — audio playback repair 1
+
+Repairs gesture activation and interrupted audio contexts while keeping the original sounds and approved R13 motion unchanged. Enabling Sound plays a confirmation; the settings panel also offers Test sound. Offline cache: `peach-physics-v008-r13-audio1`.
+
+[Audio repair details and validation](AUDIO-FIX.md)
+
+## R13 release documentation
+
 # Peach Physics v0.0.8 r13 — approved motion inputs
 
 Promotes Lance's iPhone-approved R13.3 experiment (`2e48db4a0ab7833513bf1a1fbc82a0856869e3ad`) without physics tuning. Shake to Jiggle and continuous Auto Jiggle are optional and default off. All five characters, existing interactions, individual profiles, artwork and audio are preserved.

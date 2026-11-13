@@ -1,0 +1,116 @@
+{
+  "waveforms": [
+    {
+      "renderer": "webgl",
+      "kind": "slap",
+      "difference": 0,
+      "peak": 0.13786591589450836,
+      "rms": 0.0074334868677552604
+    },
+    {
+      "renderer": "webgl",
+      "kind": "santa",
+      "difference": 0,
+      "peak": 0.04807193577289581,
+      "rms": 0.003308501003840136
+    },
+    {
+      "renderer": "canvas",
+      "kind": "slap",
+      "difference": 0,
+      "peak": 0.13786591589450836,
+      "rms": 0.0074334868677552604
+    },
+    {
+      "renderer": "canvas",
+      "kind": "santa",
+      "difference": 0,
+      "peak": 0.04807193577289581,
+      "rms": 0.003308501003840136
+    }
+  ],
+  "characters": [
+    {
+      "id": "ember",
+      "renderer": "webgl",
+      "enabledPreview": true,
+      "testButton": true,
+      "tapAudio": true,
+      "audioState": "running"
+    },
+    {
+      "id": "midnight",
+      "renderer": "webgl",
+      "enabledPreview": true,
+      "testButton": true,
+      "tapAudio": true,
+      "audioState": "running"
+    },
+    {
+      "id": "aurelia",
+      "renderer": "webgl",
+      "enabledPreview": true,
+      "testButton": true,
+      "tapAudio": true,
+      "audioState": "running"
+    },
+    {
+      "id": "holly",
+      "renderer": "webgl",
+      "enabledPreview": true,
+      "testButton": true,
+      "tapAudio": true,
+      "audioState": "running"
+    },
+    {
+      "id": "santa",
+      "renderer": "webgl",
+      "enabledPreview": true,
+      "testButton": true,
+      "tapAudio": true,
+      "audioState": "running"
+    },
+    {
+      "id": "ember",
+      "renderer": "canvas",
+      "enabledPreview": true,
+      "testButton": true,
+      "tapAudio": true,
+      "audioState": "running"
+    },
+    {
+      "id": "midnight",
+      "renderer": "canvas",
+      "enabledPreview": true,
+      "testButton": true,
+      "tapAudio": true,
+      "audioState": "running"
+    },
+    {
+      "id": "aurelia",
+      "renderer": "canvas",
+      "enabledPreview": true,
+      "testButton": true,
+      "tapAudio": true,
+      "audioState": "running"
+    },
+    {
+      "id": "holly",
+      "renderer": "canvas",
+      "enabledPreview": true,
+      "testButton": true,
+      "tapAudio": true,
+      "audioState": "running"
+    },
+    {
+      "id": "santa",
+      "renderer": "canvas",
+      "enabledPreview": true,
+      "testButton": true,
+      "tapAudio": true,
+      "audioState": "running"
+    }
+  ],
+  "errors": [],
+  "keyboardSoundDoesNotBounce": true
+}

@@ -12,7 +12,7 @@
 
 
 
-<title>Peach Physics — Elf Lab 0.0.8 r13</title>
+<title>Peach Physics — Elf Lab 0.0.8 r13 audio fix 1</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -94,12 +94,13 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <p id="motionNotice" role="status" hidden style="position:absolute;z-index:5;pointer-events:none;top:max(12px,env(safe-area-inset-top));left:60px;right:60px;margin:0;padding:7px 10px;border-radius:12px;background:#07110fe8;color:#fff7eb;font-size:12px;text-align:center"></p><div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r13</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r13 · audio fix 1</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/5</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
    <p id="presetDesc" class="preset-desc">Realistic motion with gentle secondary response.</p>
    <section aria-label="Optional motion"><button id="shakeMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Shake to Jiggle: off</button><button id="autoMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Auto Jiggle: off</button><p id="motionStatus" style="font-size:13px;line-height:1.4">Optional motion effects</p></section><button id="grabHold" class="slap-audio" type="button">Grab and hold: on</button><button id="slapAudio" class="slap-audio" type="button" aria-pressed="false">Slap sound: Off</button>
+   <button id="testSound" class="slap-audio" type="button" disabled aria-describedby="audioStatus">Test sound</button><p id="audioStatus" role="status" style="font-size:12px;line-height:1.4">Sound is off.</p>
    <button id="santaLaugh" class="slap-audio" type="button" aria-pressed="false" hidden>Belly laugh: Off</button>
    <div class="control"><label for="bounce">Bounce strength <output id="bounceN">65</output></label><input id="bounce" type="range" min="0" max="100" value="65"></div>
   <div class="control"><label for="softness">Softness <output id="softnessN">65</output></label><input id="softness" type="range" min="0" max="100" value="65"></div>
@@ -271,6 +272,7 @@ const LEGACY_STORAGE_KEY='peach-physics-v004-settings';
 const descriptions={natural:'Realistic motion with gentle secondary response.',playful:'Softer springs and a longer, livelier bounce.',chaos:'Exaggerated reactions — still constrained to the photograph.',custom:'Your own physics mix, saved on this device.'};
 let activePreset='natural';
 let slapAudioEnabled=false, audioContext=null, slapCount=0, flickCount=0;
+let audioEpoch=0,audioLastError='';
 let lastGesture='none';
 // Character-specific elliptical masks, spring locations, and impulse origins.
 // Mutated in place on character switch; the original redhead configuration is preserved exactly.
@@ -775,17 +777,14 @@ function santaImpulse(side,x,y,amplitude=1,vx=0,vy=0,flick=false,tap=false){
 let santaLaughEnabled=false,santaLaughTime=-1,santaLaughBeat=0,santaLaughSound=false;
 function stopSantaLaugh(){santaLaughTime=-1;santaLaughBeat=0;document.getElementById('santaReaction').textContent='';}
 function santaChuckle(){
- if(!slapAudioEnabled)return;
- try{
-  const Context=window.AudioContext||window.webkitAudioContext;if(!Context)throw Error('Web Audio unavailable');
-  if(!audioContext)audioContext=new Context();if(audioContext.state==='suspended')void audioContext.resume();
-  const ac=audioContext,t=ac.currentTime,voice=ac.createOscillator(),formant=ac.createBiquadFilter(),gain=ac.createGain();
+ withAudio(ac=>{
+  const t=ac.currentTime,voice=ac.createOscillator(),formant=ac.createBiquadFilter(),gain=ac.createGain();
   voice.type='sawtooth';voice.frequency.setValueAtTime(108,t);voice.frequency.exponentialRampToValueAtTime(72,t+.22);
   formant.type='bandpass';formant.frequency.value=480;formant.Q.value=2.6;
   gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.13,t+.025);gain.gain.exponentialRampToValueAtTime(.0001,t+.24);
   voice.connect(formant);formant.connect(gain);gain.connect(ac.destination);voice.start(t);voice.stop(t+.25);
   santaLaughSound=true;
- }catch(e){santaLaughSound=false;say('Laugh sound unavailable · visual laugh is ready');}
+ },()=>{santaLaughSound=false;});
 }
 function startSantaLaugh(){
  if(!isSanta()||!santaLaughEnabled||santaLaughTime>=0)return;
@@ -1345,14 +1344,33 @@ function slapVisual(pt){
  ring.addEventListener('animationend',()=>ring.remove(),{once:true});
  setTimeout(()=>ring.remove(),500);
 }
-function slapSound(){
+// Audio is activated from a real Sound/Test/touch gesture. Safari may report
+// an interrupted context after app switching; resume any non-running context
+// and wait for it before scheduling the existing short sounds.
+function withAudio(play,onFailure=()=>{}){
  if(!slapAudioEnabled)return;
+ const epoch=audioEpoch,character=currentCharacter().id;
+ const fail=error=>{if(epoch!==audioEpoch||character!==currentCharacter().id||!slapAudioEnabled)return;audioLastError=String(error?.message||error);onFailure();document.getElementById('audioStatus').textContent='Sound could not start. Tap Test sound to retry.';};
  try{
+  // iOS uses the playback route for explicitly enabled sound, when supported.
+  // Older browsers retain their normal Web Audio routing.
+  try{if(navigator.audioSession&&navigator.audioSession.type!=='playback')navigator.audioSession.type='playback';}catch(e){}
   const Context=window.AudioContext||window.webkitAudioContext;
-  if(!Context)return;
-  if(!audioContext)audioContext=new Context();
-  if(audioContext.state==='suspended')void audioContext.resume();
-  const ac=audioContext,t=ac.currentTime,samples=Math.round(ac.sampleRate*.10);
+  if(!Context)throw Error('Web Audio unavailable');
+  if(!audioContext||audioContext.state==='closed')audioContext=new Context();
+  const ac=audioContext;
+  const start=()=>{
+   if(epoch!==audioEpoch||character!==currentCharacter().id||!slapAudioEnabled||document.hidden||ac!==audioContext)return;
+   if(ac.state!=='running'){fail(Error('Audio is '+ac.state));return;}
+   try{play(ac);audioLastError='';document.getElementById('audioStatus').textContent='Sound ready. Tap the character or Test sound.';}catch(error){fail(error);}
+  };
+  if(ac.state==='running')start();
+  else Promise.resolve(ac.resume()).then(start,fail);
+ }catch(error){fail(error);}
+}
+function slapSound(){
+ withAudio(ac=>{
+  const t=ac.currentTime,samples=Math.round(ac.sampleRate*.10);
   const buffer=ac.createBuffer(1,samples,ac.sampleRate),data=buffer.getChannelData(0);
   for(let i=0;i<samples;i++){
    const sec=i/ac.sampleRate;
@@ -1367,7 +1385,7 @@ function slapSound(){
   tone.frequency.setValueAtTime(145,t);tone.frequency.exponentialRampToValueAtTime(75,t+.075);
   low.gain.setValueAtTime(.085,t);low.gain.exponentialRampToValueAtTime(.0001,t+.085);
   tone.connect(low);low.connect(ac.destination);tone.start(t);tone.stop(t+.09);
- }catch(e){console.warn('Slap audio unavailable',e);}
+ });
 }
 function slap(side,x,y,pt,strength=1){
  if(isSanta()){santaImpulse(side,x,y,strength,0,0,false,true);slapVisual(pt);slapSound();slapCount++;lastGesture='slap';return;}
@@ -1404,6 +1422,7 @@ canvas.addEventListener('pointerdown',e=>{
  const {p,offsetX,offsetY}=touchAnchor(side,raw);
  e.preventDefault();
  try{canvas.setPointerCapture?.(e.pointerId);}catch(err){/* Pointer still works without capture. */}
+ withAudio(()=>{});
  wake();motion?.interrupt();
  pointers.set(e.pointerId,{id:e.pointerId,side,last:p,lastTime:performance.now(),startTime:performance.now(),travel:0,vx:0,vy:0,pressure:e.pressure||.5,offsetX,offsetY,
   grabOrigin:{x:p.x,y:p.y},grabbed:false,grabTargets:[],
@@ -1490,6 +1509,8 @@ function refreshPrefs(){
   const audioButton=document.getElementById('slapAudio');
   audioButton.setAttribute('aria-pressed',String(slapAudioEnabled));
   audioButton.textContent=(isSanta()?'Sound: ':'Slap sound: ')+(slapAudioEnabled?'On':'Off');
+  document.getElementById('testSound').disabled=!slapAudioEnabled;
+  document.getElementById('audioStatus').textContent=slapAudioEnabled?'Tap Test sound to check playback.':'Sound is off.';
   const laugh=document.getElementById('santaLaugh');laugh.hidden=!isSanta();laugh.setAttribute('aria-pressed',String(santaLaughEnabled));laugh.textContent='Belly laugh: '+(santaLaughEnabled?'On':'Off');
 }
 function restorePrefs(){
@@ -1519,7 +1540,9 @@ for(const [key,out] of [['bounce','bounceN'],['softness','softnessN'],['settle',
 restorePrefs();
 document.getElementById('grabHold').addEventListener('click',()=>{grabHoldEnabled=!grabHoldEnabled;for(const f of pointers.values())f.grabbed=false;presentCharacter();});
 document.getElementById('santaLaugh').addEventListener('click',()=>{santaLaughEnabled=!santaLaughEnabled;if(santaLaughEnabled)startSantaLaugh();else stopSantaLaugh();refreshPrefs();savePrefs();});
-document.getElementById('slapAudio').addEventListener('click',()=>{slapAudioEnabled=!slapAudioEnabled;refreshPrefs();savePrefs();});
+document.getElementById('slapAudio').addEventListener('click',()=>{audioEpoch++;slapAudioEnabled=!slapAudioEnabled;refreshPrefs();savePrefs();if(slapAudioEnabled)slapSound();});
+document.getElementById('testSound').addEventListener('click',()=>slapSound());
+for(const id of ['slapAudio','testSound'])document.getElementById(id).addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});
 document.getElementById('share').addEventListener('click',async()=>{
  const url=location.origin+location.pathname;
  try{
@@ -1534,7 +1557,7 @@ canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();webglLost=true
 canvas.addEventListener('webglcontextrestored',()=>{try{initGL();needSize=true;webglLost=false;say('');}catch(e){say('Reload to restore graphics');}});
 window.addEventListener('keydown',e=>{if(e.key==='Escape')openPanel(false);if(e.code==='Space'&&e.target.tagName!=='INPUT'){e.preventDefault();bounceBoth();}});
 // Read-only diagnostics for automated tests. Not a remote control or telemetry endpoint.
-window.__peachPhysicsDebug={snapshot:()=>({character:currentCharacter().id,characterName:currentCharacter().name,characters:CHARACTERS.map(c=>c.id),regions:regions.map(z=>({...z})),nodes:nodes.map(n=>({side:n.side,dx:+n.dx.toFixed(2),dy:+n.dy.toFixed(2)})),followers:followers.map(f=>({dx:+f.dx.toFixed(2),dy:+f.dy.toFixed(2)})),impacts:impacts.map(p=>({v:+p.v.toFixed(3),contact:+p.contact.toFixed(3),target:p.target})),waves:waves.map(w=>({age:+w.age.toFixed(3),strength:+w.strength.toFixed(3)})),frames,grabHold:canGrabHold(),activePointers:[...pointers.values()].map(p=>({id:p.id,side:p.side,vx:p.vx,vy:p.vy,grabbed:!!p.grabbed})),panelOpen:panel.classList.contains('open'),renderer:fallback?'canvas':'webgl',size:[cssW,cssH],image:[W,H],framing:{x:ox,y:oy,width:drawW,height:drawH},model:{...model},preset:activePreset,slapAudioEnabled,santaLaughEnabled,santaLaughSound,santaLaughTime,slapCount,flickCount,lastGesture,status:diagnostic}),kick:(side=0)=>{const c=currentCharacter();impulse(side,...c.bounceCenters[side],1);},switchCharacter:(id)=>chooseCharacter(typeof id==='number'?id:CHARACTERS.findIndex(c=>c.id===id))};
+window.__peachPhysicsDebug={snapshot:()=>({character:currentCharacter().id,characterName:currentCharacter().name,characters:CHARACTERS.map(c=>c.id),regions:regions.map(z=>({...z})),nodes:nodes.map(n=>({side:n.side,dx:+n.dx.toFixed(2),dy:+n.dy.toFixed(2)})),followers:followers.map(f=>({dx:+f.dx.toFixed(2),dy:+f.dy.toFixed(2)})),impacts:impacts.map(p=>({v:+p.v.toFixed(3),contact:+p.contact.toFixed(3),target:p.target})),waves:waves.map(w=>({age:+w.age.toFixed(3),strength:+w.strength.toFixed(3)})),frames,grabHold:canGrabHold(),activePointers:[...pointers.values()].map(p=>({id:p.id,side:p.side,vx:p.vx,vy:p.vy,grabbed:!!p.grabbed})),panelOpen:panel.classList.contains('open'),renderer:fallback?'canvas':'webgl',size:[cssW,cssH],image:[W,H],framing:{x:ox,y:oy,width:drawW,height:drawH},model:{...model},preset:activePreset,audioState:audioContext?.state||'not-started',audioError:audioLastError,slapAudioEnabled,santaLaughEnabled,santaLaughSound,santaLaughTime,slapCount,flickCount,lastGesture,status:diagnostic}),kick:(side=0)=>{const c=currentCharacter();impulse(side,...c.bounceCenters[side],1);},switchCharacter:(id)=>chooseCharacter(typeof id==='number'?id:CHARACTERS.findIndex(c=>c.id===id))};
 motion=new PeachMotion.MotionInput({character:()=>currentCharacter().id,nodes:()=>nodes,busy:()=>pointers.size>0||characterSwitchPending||webglLost||!img});
 const motionUI=PeachMotion.attachUI(motion,{onEnable:()=>openPanel(false)});
 window.__peachMotionDebug={snapshot:()=>({...motion.snapshot(),ui:motionUI.snapshot()})};
