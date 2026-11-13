@@ -1,0 +1,35 @@
+{
+  "checks": 56,
+  "rows": [
+    {
+      "id": "ember",
+      "autoSteps": 10800,
+      "strongShakeVelocity": 152.97468915869138
+    },
+    {
+      "id": "midnight",
+      "autoSteps": 10800,
+      "strongShakeVelocity": 146.02129419693267
+    },
+    {
+      "id": "aurelia",
+      "autoSteps": 10800,
+      "strongShakeVelocity": 118.20771434989787
+    },
+    {
+      "id": "holly",
+      "autoSteps": 10800,
+      "strongShakeVelocity": 34.766974808793485
+    },
+    {
+      "id": "santa",
+      "autoSteps": 10800,
+      "strongShakeVelocity": 34.766974808793485
+    }
+  ],
+  "eventRateVelocities": [
+    198.81144572222772,
+    202.50552939845568,
+    202.50552939845568
+  ]
+}

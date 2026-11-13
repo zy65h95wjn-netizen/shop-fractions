@@ -10,9 +10,9 @@
 <meta name="description" content="Peach Physics: a playful interactive Christmas character experiment with adjustable impact waves and linked motion.">
 
 
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="apple-touch-icon" href="./apple-touch-icon.png">
-<title>Peach Physics — Elf Lab 0.0.8 r12</title>
+
+
+<title>Peach Physics — Elf Lab 0.0.8 r13</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -67,7 +67,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
 .presets button[aria-pressed="true"]{background:#f5c895;color:#252018;border-color:#f5d5ac}
 .preset-desc{min-height:29px;margin:0 0 13px;color:#b9c8bf;font-size:11px;line-height:1.4}
 .slap-audio{width:100%;min-height:41px;margin:0 0 12px;border:1px solid #f8dbac4a;background:#fff8ef13;border-radius:12px;color:#f5e5ca;font-size:12px;font-weight:650;touch-action:manipulation;cursor:pointer}
-.slap-audio[aria-pressed="true"]{background:#c69a6940;border-color:#f0be8c;color:#fff1d9}
+.slap-audio[aria-checked="true"],.slap-audio[aria-pressed="true"]{background:#c69a6940;border-color:#f0be8c;color:#fff1d9}
 .slap-burst{position:absolute;z-index:4;pointer-events:none;width:55px;height:39px;border:2px solid rgba(255,224,178,.7);border-radius:50%;box-shadow:0 0 12px #e9a7783b;animation:slap-burst .27s ease-out forwards;transform:translate(-50%,-50%)}
 @keyframes slap-burst{0%{opacity:.83;transform:translate(-50%,-50%) scale(.48)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.9)}}
 @media(max-height:700px){#panel{padding-top:12px}.control{margin-bottom:8px}.preset-desc{margin-bottom:7px}}
@@ -77,6 +77,8 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
 #santaReaction{position:absolute;top:max(80px,12%);left:0;right:0;text-align:center;pointer-events:none;font-size:24px;font-weight:850;color:#ffe2ac;text-shadow:0 2px 8px #000;letter-spacing:.08em}
 [hidden]{display:none!important}
 </style>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
 </head>
 <body>
 <main id="stage" aria-label="Peach Physics interactive Christmas portrait">
@@ -90,14 +92,14 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="character" type="button" aria-label="Switch character" title="Switch character"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h13l-3-3m3 3-3 3M19 17H6l3-3m-3 3 3 3" /></svg></button>
  <div id="characterToast" role="status" aria-live="polite"></div>
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
- <div id="scrim" aria-hidden="true"></div>
+ <p id="motionNotice" role="status" hidden style="position:absolute;z-index:5;pointer-events:none;top:max(12px,env(safe-area-inset-top));left:60px;right:60px;margin:0;padding:7px 10px;border-radius:12px;background:#07110fe8;color:#fff7eb;font-size:12px;text-align:center"></p><div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r12</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r13</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/5</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
    <p id="presetDesc" class="preset-desc">Realistic motion with gentle secondary response.</p>
-   <button id="grabHold" class="slap-audio" type="button">Grab and hold: on</button><button id="slapAudio" class="slap-audio" type="button" aria-pressed="false">Slap sound: Off</button>
+   <section aria-label="Optional motion"><button id="shakeMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Shake to Jiggle: off</button><button id="autoMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Auto Jiggle: off</button><p id="motionStatus" style="font-size:13px;line-height:1.4">Optional motion effects</p></section><button id="grabHold" class="slap-audio" type="button">Grab and hold: on</button><button id="slapAudio" class="slap-audio" type="button" aria-pressed="false">Slap sound: Off</button>
    <button id="santaLaugh" class="slap-audio" type="button" aria-pressed="false" hidden>Belly laugh: Off</button>
    <div class="control"><label for="bounce">Bounce strength <output id="bounceN">65</output></label><input id="bounce" type="range" min="0" max="100" value="65"></div>
   <div class="control"><label for="softness">Softness <output id="softnessN">65</output></label><input id="softness" type="range" min="0" max="100" value="65"></div>
@@ -107,9 +109,12 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
   <p class="note">Tap the two-arrow button to switch characters. Each character has individually tuned deformation areas and remembers their own physics settings. Linked motion, taps, two-finger gestures, and optional sound are all preserved. No ads or tracking.</p>
  </section>
 </main>
+<script src="./motion.js"></script>
 <script>
 (() => {
 'use strict';
+let motion=null;
+
 // Rendering-only constraints. Springs and pointer targets are not modified.
 const dragBoundaryEnabled=new URLSearchParams(location.search).get('boundaries')!=='off';
 const dragBoundary=[0,0];
@@ -1290,7 +1295,7 @@ function loop(now){
  const elapsed=Math.min(.065,Math.max(0,(now-previous)/1000));previous=now;
  if(!document.hidden&&!webglLost){
   accumulator=Math.min(.065,accumulator+elapsed);
-  let count=0;while(accumulator>=1/120&&count++<8){step(1/120);accumulator-=1/120;}
+  let count=0;while(accumulator>=1/120&&count++<8){motion?.tick(1/120);step(1/120);accumulator-=1/120;}
   render();frames++;
  }
  requestAnimationFrame(loop);
@@ -1399,7 +1404,7 @@ canvas.addEventListener('pointerdown',e=>{
  const {p,offsetX,offsetY}=touchAnchor(side,raw);
  e.preventDefault();
  try{canvas.setPointerCapture?.(e.pointerId);}catch(err){/* Pointer still works without capture. */}
- wake();
+ wake();motion?.interrupt();
  pointers.set(e.pointerId,{id:e.pointerId,side,last:p,lastTime:performance.now(),startTime:performance.now(),travel:0,vx:0,vy:0,pressure:e.pressure||.5,offsetX,offsetY,
   grabOrigin:{x:p.x,y:p.y},grabbed:false,grabTargets:[],
   grabBase:nodes.slice(side*3,side*3+3).map(n=>({dx:n.dx,dy:n.dy,
@@ -1458,13 +1463,13 @@ function release(e){
    flickCount++;lastGesture='flick';
   }else{lastGesture='drag/hold';}
  }
- pointers.delete(e.pointerId);
+ pointers.delete(e.pointerId);motion?.interrupt();
  updatePress(f.side,f.last.x,f.last.y);
 }
 canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('lostpointercapture',release);
 window.addEventListener('blur',()=>{pointers.clear();for(const p of impacts)p.target=0;});
 function bounceBoth(){if(isSanta()){santaImpulse(0,470,790,1.25);startSantaLaugh();wake();return;}const c=currentCharacter();impulse(0,...c.bounceCenters[0],1.05);impulse(1,...c.bounceCenters[1],.93);wake();}
-function reset(){dragBoundary.fill(0);stopSantaLaugh();for(const n of nodes){n.dx=0;n.dy=0;n.vx=0;n.vy=0;}for(const f of followers){f.dx=f.dy=f.vx=f.vy=0;}for(const p of impacts){p.v=p.contact=p.target=0;}for(const w of waves){w.age=1;w.strength=0;}pointers.clear();}
+function reset(){motion?.interrupt();dragBoundary.fill(0);stopSantaLaugh();for(const n of nodes){n.dx=0;n.dy=0;n.vx=0;n.vy=0;}for(const f of followers){f.dx=f.dy=f.vx=f.vy=0;}for(const p of impacts){p.v=p.contact=p.target=0;}for(const w of waves){w.age=1;w.strength=0;}pointers.clear();}
 function openPanel(flag){const shown=typeof flag==='boolean'?flag:!panel.classList.contains('open');panel.classList.toggle('open',shown);scrim.classList.toggle('show',shown);panel.setAttribute('aria-hidden',String(!shown));gear.setAttribute('aria-expanded',String(shown));gear.setAttribute('aria-label',shown?'Close physics controls':'Show physics controls');/* Gear stays a single icon whether the panel is open or closed. */}
 gear.addEventListener('click',()=>openPanel());document.getElementById('close').addEventListener('click',()=>openPanel(false));scrim.addEventListener('click',()=>openPanel(false));document.getElementById('fullscreen').addEventListener('click',()=>openPanel(false));
 document.getElementById('both').addEventListener('click',()=>{bounceBoth();openPanel(false);});
@@ -1530,6 +1535,9 @@ canvas.addEventListener('webglcontextrestored',()=>{try{initGL();needSize=true;w
 window.addEventListener('keydown',e=>{if(e.key==='Escape')openPanel(false);if(e.code==='Space'&&e.target.tagName!=='INPUT'){e.preventDefault();bounceBoth();}});
 // Read-only diagnostics for automated tests. Not a remote control or telemetry endpoint.
 window.__peachPhysicsDebug={snapshot:()=>({character:currentCharacter().id,characterName:currentCharacter().name,characters:CHARACTERS.map(c=>c.id),regions:regions.map(z=>({...z})),nodes:nodes.map(n=>({side:n.side,dx:+n.dx.toFixed(2),dy:+n.dy.toFixed(2)})),followers:followers.map(f=>({dx:+f.dx.toFixed(2),dy:+f.dy.toFixed(2)})),impacts:impacts.map(p=>({v:+p.v.toFixed(3),contact:+p.contact.toFixed(3),target:p.target})),waves:waves.map(w=>({age:+w.age.toFixed(3),strength:+w.strength.toFixed(3)})),frames,grabHold:canGrabHold(),activePointers:[...pointers.values()].map(p=>({id:p.id,side:p.side,vx:p.vx,vy:p.vy,grabbed:!!p.grabbed})),panelOpen:panel.classList.contains('open'),renderer:fallback?'canvas':'webgl',size:[cssW,cssH],image:[W,H],framing:{x:ox,y:oy,width:drawW,height:drawH},model:{...model},preset:activePreset,slapAudioEnabled,santaLaughEnabled,santaLaughSound,santaLaughTime,slapCount,flickCount,lastGesture,status:diagnostic}),kick:(side=0)=>{const c=currentCharacter();impulse(side,...c.bounceCenters[side],1);},switchCharacter:(id)=>chooseCharacter(typeof id==='number'?id:CHARACTERS.findIndex(c=>c.id===id))};
+motion=new PeachMotion.MotionInput({character:()=>currentCharacter().id,nodes:()=>nodes,busy:()=>pointers.size>0||characterSwitchPending||webglLost||!img});
+const motionUI=PeachMotion.attachUI(motion,{onEnable:()=>openPanel(false)});
+window.__peachMotionDebug={snapshot:()=>({...motion.snapshot(),ui:motionUI.snapshot()})};
 presentCharacter();
 getPhoto(activeCharacterIndex,photo=>{
  img=photo;
@@ -1541,6 +1549,7 @@ getPhoto(activeCharacterIndex,photo=>{
 });
 })();
 </script>
+
 
 <script>
 if('serviceWorker' in navigator && location.protocol==='https:'){

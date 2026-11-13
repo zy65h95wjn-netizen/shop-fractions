@@ -1,0 +1,40 @@
+[
+  {
+    "renderer": "webgl",
+    "actualContact": {
+      "x": 0.33994559816640796,
+      "y": 0.6876343162898593,
+      "v": 0,
+      "contact": 0,
+      "target": 0
+    },
+    "referenceContact": {
+      "x": 0.281615302869288,
+      "y": 0.649311789347696,
+      "v": 0,
+      "contact": 0,
+      "target": 0
+    },
+    "pixelsIdentical": true,
+    "allOtherStateIdentical": true
+  },
+  {
+    "renderer": "canvas",
+    "actualContact": {
+      "x": 0.33994559816640796,
+      "y": 0.6876343162898593,
+      "v": 0,
+      "contact": 0,
+      "target": 0
+    },
+    "referenceContact": {
+      "x": 0.281615302869288,
+      "y": 0.649311789347696,
+      "v": 0,
+      "contact": 0,
+      "target": 0
+    },
+    "pixelsIdentical": true,
+    "allOtherStateIdentical": true
+  }
+]

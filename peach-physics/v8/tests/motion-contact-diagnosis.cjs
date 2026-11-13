@@ -1,0 +1,26 @@
+// R13 promotion contract. Frozen source commits are independent of branch heads.
+const h=require('./harness.cjs'),{execFileSync}=require('node:child_process'),crypto=require('node:crypto');
+const {assert,fs,path,chromium}=h,app=path.resolve(__dirname,'..');
+const approved='2e48db4a0ab7833513bf1a1fbc82a0856869e3ad',prior='76cc6f11cff4cf77bd3d6e1eb34880246b23e9e7';
+const show=(sha,file)=>execFileSync('git',['show',`${sha}:${file}`],{cwd:h.root,maxBuffer:4e6});
+const accepted=show(approved,'peach-physics/experiments/r13-motion/index.html').toString(),old=show(prior,'peach-physics/v8/index.html').toString(),current=fs.readFileSync(path.join(app,'index.html'),'utf8');
+const runtime=s=>s.match(/<script>\s*(\(\(\) => \{[\s\S]*?\}\)\(\);)\s*<\/script>/)[1];
+const normalized=runtime(accepted).replace(/const profileStorage=\{.*?\};\n/,'').replaceAll('profileStorage.','localStorage.');
+assert.equal(runtime(current),normalized,'only preview profile storage may change in approved runtime');
+assert.deepEqual(fs.readFileSync(path.join(app,'motion.js')),show(approved,'peach-physics/experiments/r13-motion/motion.js'),'approved controller byte-identical');
+for(const file of ['manifest.webmanifest','apple-touch-icon.png','assets/aurelia-frost.jpg','assets/holly-heartbreaker.jpg','assets/santa-claus.jpg'])assert.deepEqual(fs.readFileSync(path.join(app,file)),show(prior,'peach-physics/v8/'+file));
+assert(!current.includes('r13-preview:'));assert(current.includes('<title>Peach Physics — Elf Lab 0.0.8 r13</title>'));
+assert(current.includes(old.match(/<script>\s*if\('serviceWorker'[\s\S]*?<\/script>/)[0]));
+const sources={r12:old,approved:accepted,r13:current};
+for(const [key,html]of Object.entries(sources))fs.writeFileSync('/tmp/peach-release-'+key+'.html',html.replace('window.__peachMotionDebug=', 'window.__motionTest={motion};window.__peachMotionDebug='));
+async function setup(browser,key,fallback){
+ const proxy={newContext:async options=>{const c=await browser.newContext(options);await c.route('**/motion.js',r=>r.fulfill({path:path.join(app,'motion.js'),contentType:'text/javascript'}));await c.route('**/assets/*.jpg*',r=>{const name=new URL(r.request().url()).pathname.split('/').pop();return ['aurelia-frost.jpg','holly-heartbreaker.jpg','santa-claus.jpg'].includes(name)?r.fulfill({path:path.join(app,'assets',name),contentType:'image/jpeg'}):r.abort();});return c;}};
+ return h.setup(proxy,'v8',{width:390,height:844},true,fallback,false,'/tmp/peach-release-'+key+'.html');
+}
+async function select(p,id){await p.evaluate(id=>__test.chooseCharacter(['ember','midnight','aurelia','holly','santa'].indexOf(id)),id);await p.waitForFunction(id=>__peachPhysicsDebug.snapshot().character===id,id);await p.evaluate(()=>{__test.resize();__test.reset();});}
+const hash=x=>crypto.createHash('sha256').update(x).digest('hex');
+async function run(p,preset,kind){const r=await p.evaluate(({preset,kind})=>{const a=__test,m=window.__motionTest?.motion;document.querySelector(`[data-preset="${preset}"]`).click();a.reset();testClock=1000;let seed=123;if(m){m.time=0;m.lastCharacter=a.currentCharacter().id;m.interrupt();m.random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/4294967296);m.setShake(false);m.setAuto(false);}const tick=()=>{testClock+=1000/120;m?.tick(1/120);a.step(1/120);};for(let i=0;i<150;i++)tick();
+ const on=['shake','auto','both'].includes(kind);if(on){m.setShake(kind!=='auto');m.setAuto(kind!=='shake');}else a.gesture(kind,0);
+ const trace=[],pixels=[];for(let i=0;i<(on?480:120);i++){if(on&&kind!=='auto'&&i%2===0)m.sample({acceleration:{x:.8*Math.sin(i*.05),y:.3*Math.cos(i*.05),z:.4*Math.sin(i*.07)}},testClock);tick();if(i%30===0)trace.push(a.raw());if(i===60||i===119||i===479){a.render();pixels.push(document.querySelector('#game').toDataURL());}}
+ if(m){m.setShake(false);m.setAuto(false);}a.reset();return {trace,pixels};},{preset,kind});return {trace:r.trace,pixels:r.pixels.map(hash)};}
+(async()=>{const b=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});const report=[];try{for(const fallback of [false,true]){const prod=await setup(b,'r13',fallback),ref=await setup(b,'approved',fallback);for(const a of [prod,ref])await select(a.page,'ember');for(const kind of ['kick','drag','flick'])await run(prod.page,'natural',kind);const actual=await run(prod.page,'natural','shake'),expected=await run(ref.page,'natural','shake');assert.notDeepEqual(actual.trace,expected.trace);assert.deepEqual(actual.pixels,expected.pixels,'original mismatch has identical rendered frames');const inactiveOnly=r=>r.trace.map(frame=>({...frame,impacts:frame.impacts.map(p=>{assert.equal(p.v,0);assert.equal(p.contact,0);assert.equal(p.target,0);return{...p,x:0,y:0};})}));assert.deepEqual(inactiveOnly(actual),inactiveOnly(expected),'only inactive contact coordinates differ');report.push({renderer:fallback?'canvas':'webgl',actualContact:actual.trace[0].impacts[0],referenceContact:expected.trace[0].impacts[0],pixelsIdentical:true,allOtherStateIdentical:true});await prod.context.close();await ref.context.close();}fs.writeFileSync(path.join(__dirname,'motion-contact-diagnosis.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));}finally{await b.close()}})().catch(e=>{console.error(e);process.exit(1)});

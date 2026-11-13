@@ -1,3 +1,15 @@
+# Peach Physics v0.0.8 r13 — approved motion inputs
+
+Promotes Lance's iPhone-approved R13.3 experiment (`2e48db4a0ab7833513bf1a1fbc82a0856869e3ad`) without physics tuning. Shake to Jiggle and continuous Auto Jiggle are optional and default off. All five characters, existing interactions, individual profiles, artwork and audio are preserved.
+
+Normal production storage, manifest, icon, sharing and service-worker behavior are restored. The R13 offline cache includes `motion.js` and all seven previous resources. The approved experiment remains available for rollback and comparison.
+
+[Release details, failure diagnoses and validation](R13.md)
+
+Live: https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/v8/
+
+## Previous release documentation
+
 # Peach Physics v0.0.8 r12 — grab and hold approved
 
 Promotes the user-approved all-character preview at `c4b72cb86d27e1ae9f55577813be7f9cb429b7e4` to production. The runtime is identical to the accepted preview except that production preference storage is restored. Production release labels, manifest/icon links and the independent offline worker are restored as well.
