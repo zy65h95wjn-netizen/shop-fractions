@@ -1,62 +1,66 @@
-# R13.1 results and promotion recommendation
+# R13.2 results and promotion recommendation
 
-**Recommendation: ready for Lance's iPhone trial; do not promote yet.** Synthetic and desktop-browser checks pass, but permission prompts, physical sensor axes/feel and battery cost have not been validated on an actual iPhone. No human preference or physical-device results are invented.
+**Recommendation: iPhone trial only. Do not promote until Lance approves.** Lance requested continuous subtle Auto movement and reported that R13.1 still needed too much phone acceleration. This revision addresses those two points. Physical sensor feel and battery cost still require iPhone confirmation.
 
-## Correction after the first iPhone report
+## What changed
 
-Lance reported that neither feature worked. The original automated checks accepted any nonzero spring/pixel change, which did not establish visible movement. A matched Natural Auto pulse produced only 0.51–1.42 source pixels on the female characters (about 0.62–0.71 CSS pixels at the tested 390×844 framing, before mask attenuation). Its first pulse took 7.4 s in the deterministic case. Forward/back (Z-only) shakes produced no input at all. These are confirmed implementation shortcomings; they do not establish whether Lance's browser also withheld sensor readings.
+Auto now continuously applies a small, smoothly varying force to the existing springs. It no longer schedules isolated pulses separated by several seconds. Each side has two independent phases, with slightly different frequencies. The primary rate changes toward a random target over time, so the sides do not bounce in lockstep or repeat a short fixed loop. A 0.7 s fade introduces the motion gently. This replaces the original occasional-impulse requirement at Lance's explicit request.
 
-R13.1 increases only optional-input gains, reduces shake filtering/deadzone, projects depth acceleration into screen vertical movement, and starts the first eligible Auto pulse after 0.45–0.80 s. The normal 1.2 s post-touch/loading grace still applies. Later Auto intervals remain 3.8–8.6 s. Enabling either effect closes the settings panel so the result is visible. Active toggles have a highlighted state. A status notice outside settings distinguishes receiving motion from permission granted with no sensor readings; the latter recommends opening directly in Safari. Feature-policy restrictions disable Shake without disabling Auto.
+Shake uses a 0.12 m/s² dead zone, down from 0.45, and much larger gains for small acceleration. The effective input magnitude is `2.2 * tanh((magnitude - 0.12) / 2.2)` above the dead zone. This is approximately proportional near rest and smoothly saturates during vigorous shaking. Small movements become much more responsive without scaling large shakes by the same factor. Linear-sensor warmup is 0.05 s; gravity-fallback warmup remains 0.5 s. The existing 0.035 s low-pass filter, 16 ms sample limit, 0.18 s stale-reading cutoff, and 0.65 s sustained-input/0.18 s cooldown remain.
 
-The matched revised Auto peaks are 4.66/4.40/3.62/2.75/4.93 source pixels for Ember/Midnight/Aurelia/Holly/Santa, versus 1.42/1.29/1.03/0.51/2.74 originally. First response is about 1.8 s including the grace period. These spring-node measurements are not optical-flow measurements or physical iPhone results. `evidence/visibility.json` records all 20 before/after cases across both renderers. Real-animation-loop tests also verify touch activation, panel dismissal, prompt Auto start, no-reading feedback, and dispatched depth-only sensor events.
+X/Y readings are rotated into screen coordinates and negated for inertia. Z acceleration contributes 0.65-weighted vertical movement. Gravity fallback estimates and removes gravity on all three axes over 0.6 s. Depth projection is an approximation for a 2D image, not depth deformation.
 
-## Implementation
+Only optional-input gains changed:
 
-The R12 solver, renderers, masks, spring parameters, presets, touch/grab trajectories and audio functions are unchanged. `motion.js` adds optional node-velocity input immediately before the original 120 Hz solver step. It never calls audio, slap, bounceBoth, contact or laugh routines. Both features are off by default.
+| Character | Shake gain | Auto acceleration | Auto base frequency (Hz) | Input velocity ceiling |
+|---|---:|---:|---:|---:|
+| Winter Ember | 2200 | 1100 | 1.15 | 240 |
+| Midnight Yule | 2100 | 1050 | 1.12 | 230 |
+| Aurelia Frost | 1700 | 850 | 1.10 | 210 |
+| Holly Heartbreaker | 500 | 175 | 0.85 | 110 |
+| Santa Claus | 500 | 230 | 0.65 | 210 |
 
-Shake uses gravity-free acceleration when available. If only accelerationIncludingGravity exists, a 0.6 s gravity estimate is subtracted. A 0.035 s low-pass filter suppresses high-frequency noise. Startup warmup is 0.1 s for linear acceleration and 0.5 s for the gravity fallback. Samples are processed at most once per 16 ms. A 0.45 m/s² dead zone and 14 m/s² effective-force cap bound the input. After 0.65 s of sustained excitation, a 0.18 s cooldown interrupts further driving. Readings older than 0.18 s cannot keep adding force; long gaps reset the filter. Rotation uses screen orientation (with the older iPhone window.orientation fallback). X/Y are projected to screen axes and negated for inertial movement. Depth acceleration adds a 0.65-weighted vertical input before filtering and inertial sign reversal. This is an approximate 2D response, not depth deformation.
+Units are source pixels and seconds. Shake gain converts m/s² to source-pixel acceleration. Auto's value is now acceleration, not the impulse velocity used in earlier revisions. The velocity ceiling never truncates an existing gesture velocity already above it. R12's bounds remain authoritative.
 
-Input calibration (new-input gains, not changes to R12 physics):
+## Preservation and lifecycle
 
-| Character | Acceleration gain | Auto base velocity | Added-input velocity ceiling |
+The R12 solver, rendering, masks, spring parameters, presets, artwork, framing, grab-and-hold and audio functions remain unchanged. No optional effect calls audio, slap, contact, bounceBoth or laugh routines. Both effects default off. Settings persist separately from physics profiles; Shake still requires an explicit user gesture on each visit, with iOS permission requested directly from that gesture.
+
+Both effects yield during touch, loading and WebGL loss, and for 1.2 s after touch/release/reset/switch. Auto resumes with a fresh smooth fade. Hidden/pagehide suspends input and removes the sensor listener. Returning delivers no accumulated impulses. Auto uses the existing 120 Hz solver loop, without a timer or extra animation loop. No per-frame UI changes occur.
+
+Enabling an effect closes settings to reveal the artwork. Active switches are highlighted. A notice distinguishes receiving sensor data from permission granted without readings. Unsupported, denied, exception, insecure-context and feature-policy paths leave Shake inactive; Auto remains usable.
+
+## Measurements and validation
+
+Gentle shake test: a 0.8 m/s² sinusoid at 1.6 Hz, with each axis tested separately, Natural preset. Peak spring displacement expressed in CSS pixels at the unchanged 390×844 framing:
+
+| Character | R13.1 X/Y | R13.2 X/Y | R13.2 forward/back |
 |---|---:|---:|---:|
-| Winter Ember | 520 | 180 | 240 |
-| Midnight Yule | 490 | 170 | 230 |
-| Aurelia Frost | 390 | 140 | 210 |
-| Holly Heartbreaker | 140 | 75 | 110 |
-| Santa Claus | 140 | 90 | 210 |
+| Ember | 0.21 | 1.96 | 1.16 |
+| Midnight | 0.23 | 2.10 | 1.24 |
+| Aurelia | 0.22 | 2.11 | 1.25 |
+| Holly | 0.40 | 3.67 | 2.11 |
+| Santa | 0.31 | 3.11 | 1.77 |
 
-Units are source pixels and seconds: acceleration gain converts m/s² to source-pixel acceleration. The input ceiling never truncates an existing gesture velocity already above it. The original solver's bounds remain authoritative. Santa's slower belly dynamics produce more displacement with a lower acceleration gain; Holly's tighter source geometry uses smaller values.
+These are spring-node measurements after source-to-screen scaling, before mask attenuation, not optical flow or physical iPhone measurements.
 
-Auto uses intervals uniformly sampled from 3.8–8.6 s, variable direction, 55–100% of its base velocity, and a smaller 10–25% secondary-side response with a direction offset. Existing node weights and coupling develop the motion. There is no auto interval timer or extra animation loop.
+Auto ran for 30 seconds per case. After startup, every half-second window contained motion above 1 CSS pixel/second in R13.2; R13.1 had 36–44 quiet windows out of 54 in Natural. Natural peak Auto displacement was 1.40/1.45/1.48/1.43/2.72 CSS pixels for Ember/Midnight/Aurelia/Holly/Santa. Across all three presets, the largest peak was Santa Chaos at 5.02 CSS pixels. This confirms continuous modest spring motion, not a human realism score.
 
-Both effects yield during gameplay touch, for 1.2 s after touch/release/reset/switch, and during character loading or WebGL loss. Hiding/pagehide removes the sensor listener and resets timing/filter history; returning does not deliver accumulated impulses. Auto schedules a fresh interval. Turning an effect off leaves existing springs to settle naturally.
+Completed checks:
 
-Permission is requested directly inside the switch's click handler, before any timer or preceding await. Unsupported, denied and exception paths leave the sensor detached. A single 2.5 s watchdog reports absent readings; it is cancelled when readings arrive, when hidden, or when disabled. Settings failures are caught so blocked storage does not break the controls.
+- **56 controller checks:** direction, proportional small-input response, noise/gravity rejection, orientation, stale readings, continuous Auto, input budgets, touch/hidden exclusion and cooldown.
+- **60 before/after cases:** five characters × three presets × two renderers × R13.1/R13.2. All new cases maintain continuous Auto and respond more strongly to gentle X/Y/Z input. See `evidence/continuous.json`.
+- **90 R12 regression comparisons:** five characters × three presets × kick/drag/flick × WebGL/Canvas. With optional effects off, spring traces and rendered frames match R12 exactly.
+- **10 synthetic-motion cases:** all five characters in both renderers, visible rendered changes, touch priority and pixel-exact return to rest. Stronger ±6 m/s² input remains subject to the original boundaries; it can reach those bounds.
+- Permission denied/error/unsupported paths, direct-gesture permission, saved settings, hidden suspension, blocked storage, keyboard controls and listener removal pass. Real-animation-loop tests exercise touch activation, continuous Auto, the no-reading notice and gentle depth events.
+- The existing R12 promotion/offline suite previously passed 50 checks. Production files remain unchanged in this revision.
 
-## Validation
+A desktop JS-only batch of 100,000 controller ticks plus 50,000 synthetic samples took 79 ms. This excludes rendering, GPU, hardware sensors and battery drain and is not an iPhone performance result.
 
-- **53 controller checks:** direction, proportional response, orientation transform, threshold/noise rejection, gravity removal, stale readings, touch and post-touch exclusion, hidden suspension/no catch-up, character changes, sustained-shake cooldown, invalid values, rate tolerance and per-character budgets.
-- **90 R12 regression cases:** five characters × three presets × kick/drag/flick × WebGL/Canvas. With both features off, spring traces and rendered frames match R12 exactly.
-- **10 synthetic-motion cases:** all five characters in both renderers. Every case moved visibly in raw pixel comparison, yielded to touch, and returned pixel-exactly to rest. Spring-state response was the same across renderers.
-- Permission denied, thrown permission errors and unsupported devices stay off without listeners. A permitted prompt was initiated while browser user activation was active. Saved Auto resumes; saved Shake does not request permission automatically. Physics-profile storage survives reload unchanged.
-- Hidden-page checks stopped Auto and detached the motion listener. Separate UI checks cover storage denial, browsers without requestPermission, accessible switch state, Space-key activation without triggering R12’s bounce shortcut, and listener removal on disable.
-- The existing **R12 promotion/offline suite passed 50 checks** for both WebGL and Canvas. Production files and release evidence remain unchanged.
+## Recordings and remaining limits
 
-Representative Natural synthetic shake: alternating X acceleration ±6 m/s² with Y=2 m/s². Maximum node displacement in source pixels:
+`evidence.html` contains actual side-by-side rendered recordings: R12/off at rest on the left, R13.2 on the right. Gentle synthetic shake occurs early, and continuous Auto starts at 3 s. Five WebGL recordings cover all characters; Canvas recordings cover Ember and Santa. All five Canvas characters are tested. The captures are deterministic 20 fps frames from a 120 Hz simulation, not real-time performance recordings. Representative peak frames and raw measurements are included.
 
-| Ember | Midnight | Aurelia | Holly | Santa |
-|---:|---:|---:|---:|---:|
-| 20.05 | 18.89 | 15.46 | 11.91 | 27.45 |
+Sensor availability varies by browser even after permission is granted. Gravity fallback can confuse slow tilt with translation. The lower threshold may reveal more hand tremor, which requires real-phone evaluation. Z movement is approximated vertically. Original WebGL/Canvas sampling differences and texture/silhouette limitations remain. Preview hosting is online-only; no service worker is installed.
 
-These are controlled synthetic results, not measurements from a real phone. The recordings use a separate sinusoidal sequence, so their peaks differ.
-
-Performance observation: a desktop Chromium batch of 100,000 controller ticks, with 50,000 synthetic samples, took 51 ms. This is a coarse JS-only measurement excluding rendering, sensor hardware, GPU scheduling and battery drain. Structural overhead is bounded: no listener while off/hidden, no extra animation loop, no auto interval, no per-frame DOM updates, and only one temporary no-readings watchdog. Physical iPhone profiling remains outstanding.
-
-## Evidence and limits
-
-`evidence.html` offers actual rendered side-by-side recordings: R12/off at rest on the left, R13 on the right. Five WebGL recordings cover every character; Canvas recordings cover Ember and Santa, while all five Canvas responses are tested numerically and by pixel comparison. Videos are deterministic 20 fps captures of a 120 Hz simulation, not real-time performance recordings. Synthetic shake occurs early, followed by a naturally scheduled Auto pulse; each recording uses the same seeded timing. Representative peak frames and raw measurement JSON are included.
-
-Gravity-fallback filtering cannot perfectly distinguish slow tilt from translation. Sensor availability varies by browser and hardware even after permission is granted. Physical portrait/landscape direction must be confirmed on Lance's iPhone. Depth acceleration is approximated as vertical motion; real-phone direction and feel still need confirmation. R12's different WebGL and Canvas sampling architectures remain; matching spring trajectories does not imply pixel-identical backends. Existing texture/silhouette limitations are inherited.
-
-Before promotion, Lance should try Shake and Auto separately on each character, in portrait and landscape, then check holding/releasing during motion and returning from another app. Tune only the new input gains if the response is too weak or too strong. Approval on the iPhone is still required; main and live R12 remain untouched.
+Keep R13 experimental until Lance confirms gentle Shake, continuous Auto, touch/release, background/resume and character switching on his iPhone. Main and live R12 are untouched. R14 sound work remains out of scope.

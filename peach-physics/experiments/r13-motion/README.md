@@ -1,11 +1,11 @@
-# R13.1 motion experiment
+# R13.2 motion experiment
 
 **Experimental only. Do not promote until Lance approves it on his iPhone.** Baseline R12: `76cc6f11cff4cf77bd3d6e1eb34880246b23e9e7`. All implementation, copied original artwork and new evidence live in this directory; production remains byte-unchanged.
 
 Open the updated `index.html` directly in Safari over HTTPS on the iPhone, open the gear panel, and enable either optional switch. Both are off on a fresh visit. Switch characters with the existing portrait button. Touch gestures always take priority.
 
-- **Shake to Jiggle:** tap the switch and allow the iOS motion prompt. Movement is inertial and directional in the screen plane; forward/back shaking adds a smaller vertical response. Disabling it removes the sensor listener. Permission denial, exceptions, missing APIs, insecure contexts and missing readings produce explanatory status messages; Auto remains usable.
-- **Auto Jiggle:** starts shortly after enabling (typically within two seconds when untouched), then produces occasional small directional impulses, with independently randomized intervals, side, strength and secondary movement. It does not call slap, contact, sound or laugh routines.
+- **Shake to Jiggle:** tap the switch and allow the iOS motion prompt. Tuned for gentle phone movement, with a soft limit for vigorous shaking. Movement is inertial and directional in the screen plane; forward/back shaking adds a smaller vertical response. Disabling it removes the sensor listener. Permission denial, exceptions, missing APIs, insecure contexts and missing readings produce explanatory status messages; Auto remains usable.
+- **Auto Jiggle:** continuous gentle motion with independently drifting phases on each side and a smooth fade after enabling or releasing a touch. It does not call slap, contact, sound or laugh routines.
 - Preferences are global across characters in `peach-r13-motion-options-v1`, separate from physics profiles. Auto restores when previously enabled. A saved Shake preference requires another explicit enable gesture on a new page visit; browser permission is not assumed or requested on load.
 - Physics profiles retain their R12 semantics. The preview can read existing production values but writes only under `r13-preview:`. No live profile is overwritten.
 

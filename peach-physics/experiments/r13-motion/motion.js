@@ -2,21 +2,21 @@
 (function(root){
 'use strict';
 const calibration=Object.freeze({
- ember:{accel:520,auto:180,limit:240},midnight:{accel:490,auto:170,limit:230},
- aurelia:{accel:390,auto:140,limit:210},holly:{accel:140,auto:75,limit:110},
- santa:{accel:140,auto:90,limit:210}
+ ember:{accel:2200,auto:1100,autoHz:1.15,limit:240},midnight:{accel:2100,auto:1050,autoHz:1.12,limit:230},
+ aurelia:{accel:1700,auto:850,autoHz:1.10,limit:210},holly:{accel:500,auto:175,autoHz:.85,limit:110},
+ santa:{accel:500,auto:230,autoHz:.65,limit:210}
 });
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 class MotionInput{
  constructor({character,nodes,busy,random=Math.random,onChange=()=>{}}){
   Object.assign(this,{character,nodes,busy,random,onChange});
   this.shake=false;this.auto=false;this.visible=true;this.time=0;this.quietUntil=0;
-  this.nextAuto=null;this.firstAuto=true;this.lastCharacter=character();this.counts={shakeSteps:0,autoPulses:0};this.clearSensor();
+  this.autoDrive=null;this.lastCharacter=character();this.counts={shakeSteps:0,autoSteps:0};this.clearSensor();
  }
  clearSensor(){this.filtered=[0,0];this.gravity=null;this.lastEvent=null;this.lastSampleAt=-Infinity;this.warmup=0;this.source=null;this.force=[0,0];this.burst=0;this.cooldown=0;}
  setShake(value){this.shake=!!value;this.clearSensor();}
- setAuto(value){this.auto=!!value;this.nextAuto=null;this.firstAuto=true;}
- interrupt(){this.clearSensor();this.nextAuto=null;this.quietUntil=this.time+1.2;}
+ setAuto(value){this.auto=!!value;this.autoDrive=null;}
+ interrupt(){this.clearSensor();this.autoDrive=null;this.quietUntil=this.time+1.2;}
  setVisible(value){this.visible=!!value;this.interrupt();}
  sample(event,now,angle=0){
   if(!this.shake||!this.visible||this.busy()||this.time<this.quietUntil){this.clearSensor();return false;}
@@ -39,8 +39,9 @@ class MotionInput{
   const r=(Number.isFinite(angle)?angle:0)*Math.PI/180,c=Math.cos(r),s=Math.sin(r);
   const sx=x*c+y*s,sy=x*s-y*c+z*.65,alpha=1-Math.exp(-dt/.035);
   this.filtered[0]+=(sx-this.filtered[0])*alpha;this.filtered[1]+=(sy-this.filtered[1])*alpha;
-  if(this.warmup<(source==='gravity'?.5:.1)){this.force=[0,0];return true;}
-  const length=Math.hypot(...this.filtered),gain=length>.45?Math.min(14,length-.45)/length:0;
+  if(this.warmup<(source==='gravity'?.5:.05)){this.force=[0,0];return true;}
+  // High sensitivity near rest, smoothly limited force for vigorous shaking.
+  const length=Math.hypot(...this.filtered),gain=length>.12?2.2*Math.tanh((length-.12)/2.2)/length:0;
   this.force=this.filtered.map(v=>-v*gain);return true;
  }
  add(side,x,y,scale=1){
@@ -65,16 +66,24 @@ class MotionInput{
    else{this.add(0,this.force[0]*config.accel*dt,this.force[1]*config.accel*dt,.97);this.add(1,this.force[0]*config.accel*dt,this.force[1]*config.accel*dt,1.03);this.counts.shakeSteps++;}
   }else if(this.sensorAge>=.18||Math.hypot(...this.force)===0)this.burst=0;
   if(this.auto){
-   if(this.nextAuto===null)this.nextAuto=this.time+(this.firstAuto ? .45+this.random()*.35 : 3.8+this.random()*4.8);
-   if(this.time>=this.nextAuto){
-    const side=this.random()<.5?0:1,angle=this.random()*Math.PI*2,strength=config.auto*(.55+.45*this.random());
-    this.add(side,Math.cos(angle)*strength,Math.sin(angle)*strength*.8);
-    this.add(1-side,Math.cos(angle+.4)*strength,Math.sin(angle+.4)*strength*.8,.10+.15*this.random());
-    this.firstAuto=false;this.counts.autoPulses++;this.nextAuto=this.time+3.8+this.random()*4.8;
+   if(!this.autoDrive)this.autoDrive={age:0,sides:[0,1].map(()=>({p:this.random()*Math.PI*2,q:this.random()*Math.PI*2,rate:.85+this.random()*.3,target:1,change:2+this.random()*3}))};
+   const drive=this.autoDrive;drive.age+=dt;
+   // A smooth fade prevents an activation kick. Two drifting phases per side
+   // keep the input continuous without synchronized, repeating bounces.
+   const ramp=clamp(drive.age/.7,0,1),fade=ramp*ramp*(3-2*ramp);
+   for(let side=0;side<2;side++){
+    const a=drive.sides[side];a.change-=dt;
+    if(a.change<=0){a.target=.8+this.random()*.4;a.change=2+this.random()*3;}
+    a.rate+=(a.target-a.rate)*(1-Math.exp(-dt/1.2));
+    a.p=(a.p+Math.PI*2*config.autoHz*a.rate*dt)%(Math.PI*2);
+    a.q=(a.q+Math.PI*2*config.autoHz*.61*dt)%(Math.PI*2);
+    const x=.55*Math.sin(a.p)+.25*Math.sin(a.q+1.2),y=.8*Math.cos(a.p+.45)+.2*Math.cos(a.q);
+    this.add(side,x*config.auto*fade*dt,y*config.auto*fade*dt);
    }
+   this.counts.autoSteps++;
   }
  }
- snapshot(){return {shake:this.shake,auto:this.auto,visible:this.visible,counts:{...this.counts},force:[...this.force],cooldown:this.cooldown,nextAuto:this.nextAuto,source:this.source};}
+ snapshot(){return {shake:this.shake,auto:this.auto,visible:this.visible,counts:{...this.counts},force:[...this.force],cooldown:this.cooldown,autoActive:!!this.autoDrive,source:this.source};}
 }
 function attachUI(controller,{win=window,doc=document,storage,onEnable=()=>{}}={}){
  try{storage=storage||win.localStorage;}catch{storage=null;}
@@ -106,7 +115,7 @@ function attachUI(controller,{win=window,doc=document,storage,onEnable=()=>{}}={
  });
  // Keep native switch keyboard activation from reaching R12's global Space-to-bounce shortcut.
  for(const control of [shake,auto])control.addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});
- auto.addEventListener('click',()=>{saved.auto=!saved.auto;controller.setAuto(saved.auto);persist();message(saved.auto?'Auto Jiggle is on. The first jiggle starts shortly; touch pauses the effect.':controller.shake?'Auto Jiggle is off. Shake remains on.':'Motion effects are off.');refresh();if(saved.auto)onEnable('auto');});
+ auto.addEventListener('click',()=>{saved.auto=!saved.auto;controller.setAuto(saved.auto);persist();message(saved.auto?'Auto Jiggle is on. Continuous gentle motion; touch pauses the effect.':controller.shake?'Auto Jiggle is off. Shake remains on.':'Motion effects are off.');refresh();if(saved.auto)onEnable('auto');});
  doc.addEventListener('visibilitychange',()=>{controller.setVisible(!doc.hidden);if(doc.hidden)detach();else connect();});
  win.addEventListener('pagehide',()=>{controller.setVisible(false);detach();});
  win.addEventListener('pageshow',()=>{controller.setVisible(!doc.hidden);connect();});

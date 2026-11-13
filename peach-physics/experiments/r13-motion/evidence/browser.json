@@ -8,14 +8,14 @@
         "visible": true,
         "counts": {
           "shakeSteps": 0,
-          "autoPulses": 0
+          "autoSteps": 0
         },
         "force": [
           0,
           0
         ],
         "cooldown": 0,
-        "nextAuto": null,
+        "autoActive": false,
         "source": null,
         "ui": {
           "saved": {
@@ -25,7 +25,8 @@
           "granted": false,
           "pending": false,
           "listening": false,
-          "supported": true
+          "supported": true,
+          "readings": false
         }
       }
     },
@@ -37,14 +38,14 @@
         "visible": true,
         "counts": {
           "shakeSteps": 0,
-          "autoPulses": 0
+          "autoSteps": 0
         },
         "force": [
           0,
           0
         ],
         "cooldown": 0,
-        "nextAuto": null,
+        "autoActive": false,
         "source": null,
         "ui": {
           "saved": {
@@ -54,7 +55,8 @@
           "granted": false,
           "pending": false,
           "listening": false,
-          "supported": true
+          "supported": true,
+          "readings": false
         }
       }
     },
@@ -66,14 +68,14 @@
         "visible": true,
         "counts": {
           "shakeSteps": 0,
-          "autoPulses": 0
+          "autoSteps": 0
         },
         "force": [
           0,
           0
         ],
         "cooldown": 0,
-        "nextAuto": null,
+        "autoActive": false,
         "source": null,
         "ui": {
           "saved": {
@@ -83,29 +85,30 @@
           "granted": false,
           "pending": false,
           "listening": false,
-          "supported": false
+          "supported": false,
+          "readings": false
         }
       }
     },
     {
       "renderer": "webgl",
       "hidden": {
-        "before": 6,
-        "after": 6,
+        "before": 4656,
+        "after": 4656,
         "state": {
           "shake": true,
           "auto": true,
           "visible": false,
           "counts": {
-            "shakeSteps": 411,
-            "autoPulses": 6
+            "shakeSteps": 441,
+            "autoSteps": 4656
           },
           "force": [
             0,
             0
           ],
           "cooldown": 0,
-          "nextAuto": null,
+          "autoActive": false,
           "source": null,
           "ui": {
             "saved": {
@@ -115,7 +118,8 @@
             "granted": true,
             "pending": false,
             "listening": false,
-            "supported": true
+            "supported": true,
+            "readings": true
           }
         }
       }
@@ -123,22 +127,22 @@
     {
       "renderer": "canvas",
       "hidden": {
-        "before": 7,
-        "after": 7,
+        "before": 4656,
+        "after": 4656,
         "state": {
           "shake": true,
           "auto": true,
           "visible": false,
           "counts": {
-            "shakeSteps": 411,
-            "autoPulses": 7
+            "shakeSteps": 441,
+            "autoSteps": 4656
           },
           "force": [
             0,
             0
           ],
           "cooldown": 0,
-          "nextAuto": null,
+          "autoActive": false,
           "source": null,
           "ui": {
             "saved": {
@@ -148,7 +152,8 @@
             "granted": true,
             "pending": false,
             "listening": false,
-            "supported": true
+            "supported": true,
+            "readings": true
           }
         }
       }
@@ -158,7 +163,7 @@
     {
       "id": "ember",
       "renderer": "webgl",
-      "max": 20.04635971454667,
+      "max": 27.437871990411164,
       "changed": true,
       "returned": true,
       "counts": 77,
@@ -168,47 +173,47 @@
     {
       "id": "midnight",
       "renderer": "webgl",
-      "max": 18.889838961785397,
+      "max": 26.2621406779189,
       "changed": true,
       "returned": true,
-      "counts": 160,
+      "counts": 166,
       "blocked": true,
       "audio": 0
     },
     {
       "id": "aurelia",
       "renderer": "webgl",
-      "max": 15.456173054770947,
+      "max": 22.036683957408272,
       "changed": true,
       "returned": true,
-      "counts": 243,
+      "counts": 255,
       "blocked": true,
       "audio": 0
     },
     {
       "id": "holly",
       "renderer": "webgl",
-      "max": 11.911271551159142,
+      "max": 13.79137016868757,
       "changed": true,
       "returned": true,
-      "counts": 324,
+      "counts": 342,
       "blocked": true,
       "audio": 0
     },
     {
       "id": "santa",
       "renderer": "webgl",
-      "max": 27.445253156984215,
+      "max": 39.24102099322131,
       "changed": true,
       "returned": true,
-      "counts": 405,
+      "counts": 429,
       "blocked": true,
       "audio": 0
     },
     {
       "id": "ember",
       "renderer": "canvas",
-      "max": 20.04635971454667,
+      "max": 27.437871990411164,
       "changed": true,
       "returned": true,
       "counts": 77,
@@ -218,40 +223,40 @@
     {
       "id": "midnight",
       "renderer": "canvas",
-      "max": 18.889838961785397,
+      "max": 26.2621406779189,
       "changed": true,
       "returned": true,
-      "counts": 160,
+      "counts": 166,
       "blocked": true,
       "audio": 0
     },
     {
       "id": "aurelia",
       "renderer": "canvas",
-      "max": 15.456173054770947,
+      "max": 22.036683957408272,
       "changed": true,
       "returned": true,
-      "counts": 243,
+      "counts": 255,
       "blocked": true,
       "audio": 0
     },
     {
       "id": "holly",
       "renderer": "canvas",
-      "max": 11.911271551159142,
+      "max": 13.79137016868757,
       "changed": true,
       "returned": true,
-      "counts": 324,
+      "counts": 342,
       "blocked": true,
       "audio": 0
     },
     {
       "id": "santa",
       "renderer": "canvas",
-      "max": 27.445253156984215,
+      "max": 39.24102099322131,
       "changed": true,
       "returned": true,
-      "counts": 405,
+      "counts": 429,
       "blocked": true,
       "audio": 0
     }

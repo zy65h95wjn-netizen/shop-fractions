@@ -5,7 +5,7 @@
   "listenerRemovedOnDisable": true,
   "perf": {
     "ticks": 100000,
-    "elapsedMs": 51,
+    "elapsedMs": 79,
     "note": "Desktop JS-only batch, excludes renderer/GPU, not iPhone battery or frame timing"
   }
 }
