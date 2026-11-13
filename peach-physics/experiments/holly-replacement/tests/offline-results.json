@@ -1,0 +1,24 @@
+[
+  {
+    "renderer": "webgl",
+    "offlineCharacters": 5,
+    "profileReload": true,
+    "motionProfileReload": true,
+    "productionCacheAndSettingsIntact": true,
+    "audioRunning": true,
+    "santaLaugh": true,
+    "portraitHash": "f7267c4f7624ea17d2215251e0bdf63d3e1cbc59bb33e3b9bcaca7f81b486a58",
+    "errors": []
+  },
+  {
+    "renderer": "canvas",
+    "offlineCharacters": 5,
+    "profileReload": true,
+    "motionProfileReload": true,
+    "productionCacheAndSettingsIntact": true,
+    "audioRunning": true,
+    "santaLaugh": true,
+    "portraitHash": "f7267c4f7624ea17d2215251e0bdf63d3e1cbc59bb33e3b9bcaca7f81b486a58",
+    "errors": []
+  }
+]

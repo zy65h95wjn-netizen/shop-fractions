@@ -1,0 +1,1599 @@
+{
+  "baseline": "34673b618540e015d9db0745e560e415cc2d8cca",
+  "regressionComparisons": 48,
+  "hollyCases": [
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "slap",
+      "max": 19.53987432179087
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "flick",
+      "max": 22.379383336013422
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "auto",
+      "max": 1.2389283366844164
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "shake",
+      "max": 7.382989212247661
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "slap",
+      "max": 18.66068257325987
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "flick",
+      "max": 22.346472216798322
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "auto",
+      "max": 1.239252415894627
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "shake",
+      "max": 7.3992296660795525
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "slap",
+      "max": 17.963735032561935
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "flick",
+      "max": 22.314936325691757
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "auto",
+      "max": 1.2382925709835588
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "shake",
+      "max": 7.409875270857916
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "slap",
+      "max": 18.918187839710303
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "flick",
+      "max": 15.538713624284291
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "auto",
+      "max": 1.2389283366844164
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "shake",
+      "max": 7.382989212247661
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "slap",
+      "max": 18.155833097534458
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "flick",
+      "max": 15.190538191157499
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "auto",
+      "max": 1.239252415894627
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "shake",
+      "max": 7.3992296660795525
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "slap",
+      "max": 17.50263961097919
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "flick",
+      "max": 14.884160048222451
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "auto",
+      "max": 1.2382925709835588
+    },
+    {
+      "mode": "webgl",
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "shake",
+      "max": 7.409875270857916
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "slap",
+      "max": 29.37879916915373
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "flick",
+      "max": 33.61239793561593
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "auto",
+      "max": 1.5456358420879028
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "shake",
+      "max": 9.408674879087185
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "slap",
+      "max": 27.973812167816558
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "flick",
+      "max": 33.57414034660033
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "auto",
+      "max": 1.5487298755787897
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "shake",
+      "max": 9.447167305248714
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "slap",
+      "max": 26.870011128352306
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "flick",
+      "max": 33.5374659049151
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "auto",
+      "max": 1.548169372292035
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "shake",
+      "max": 9.45305981010315
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "slap",
+      "max": 28.38144714183232
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "flick",
+      "max": 19.025210856021907
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "auto",
+      "max": 1.5456358420879028
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "shake",
+      "max": 9.408674879087185
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "slap",
+      "max": 27.17685791107866
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "flick",
+      "max": 18.40758732611411
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "auto",
+      "max": 1.5487298755787897
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "shake",
+      "max": 9.447167305248714
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "slap",
+      "max": 26.111683082923044
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "flick",
+      "max": 17.83245818089925
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "auto",
+      "max": 1.548169372292035
+    },
+    {
+      "mode": "webgl",
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "shake",
+      "max": 9.45305981010315
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "slap",
+      "max": 32.565554312492516
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "flick",
+      "max": 39.698866482558415
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "auto",
+      "max": 1.9233742635289388
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "shake",
+      "max": 11.650068782859183
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "slap",
+      "max": 32.31220620373085
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "flick",
+      "max": 39.698866482558415
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "auto",
+      "max": 1.930531039086775
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "shake",
+      "max": 11.706837559062025
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "slap",
+      "max": 32.01225786126855
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "flick",
+      "max": 39.698866482558415
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "auto",
+      "max": 1.93115016746815
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "shake",
+      "max": 11.73095346234433
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "slap",
+      "max": 32.38057370788349
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "flick",
+      "max": 24.06123635595315
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "auto",
+      "max": 1.9233742635289388
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "shake",
+      "max": 11.650068782859183
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "slap",
+      "max": 32.076537907393174
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "flick",
+      "max": 23.068768622973995
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "auto",
+      "max": 1.930531039086775
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "shake",
+      "max": 11.706837559062025
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "slap",
+      "max": 31.134906044390767
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "flick",
+      "max": 22.241891138777635
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "auto",
+      "max": 1.93115016746815
+    },
+    {
+      "mode": "webgl",
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "shake",
+      "max": 11.73095346234433
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "slap",
+      "max": 19.53987432179087
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "flick",
+      "max": 22.379383336013422
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "auto",
+      "max": 1.2389283366844164
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 0,
+      "kind": "shake",
+      "max": 7.382989212247661
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "slap",
+      "max": 18.66068257325987
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "flick",
+      "max": 22.346472216798322
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "auto",
+      "max": 1.239252415894627
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 50,
+      "kind": "shake",
+      "max": 7.3992296660795525
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "slap",
+      "max": 17.963735032561935
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "flick",
+      "max": 22.314936325691757
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "auto",
+      "max": 1.2382925709835588
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 0,
+      "link": 100,
+      "kind": "shake",
+      "max": 7.409875270857916
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "slap",
+      "max": 18.918187839710303
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "flick",
+      "max": 15.538713624284291
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "auto",
+      "max": 1.2389283366844164
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 0,
+      "kind": "shake",
+      "max": 7.382989212247661
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "slap",
+      "max": 18.155833097534458
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "flick",
+      "max": 15.190538191157499
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "auto",
+      "max": 1.239252415894627
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 50,
+      "kind": "shake",
+      "max": 7.3992296660795525
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "slap",
+      "max": 17.50263961097919
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "flick",
+      "max": 14.884160048222451
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "auto",
+      "max": 1.2382925709835588
+    },
+    {
+      "mode": "canvas",
+      "preset": "natural",
+      "side": 1,
+      "link": 100,
+      "kind": "shake",
+      "max": 7.409875270857916
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "slap",
+      "max": 29.37879916915373
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "flick",
+      "max": 33.61239793561593
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "auto",
+      "max": 1.5456358420879028
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 0,
+      "kind": "shake",
+      "max": 9.408674879087185
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "slap",
+      "max": 27.973812167816558
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "flick",
+      "max": 33.57414034660033
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "auto",
+      "max": 1.5487298755787897
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 50,
+      "kind": "shake",
+      "max": 9.447167305248714
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "slap",
+      "max": 26.870011128352306
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "flick",
+      "max": 33.5374659049151
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "auto",
+      "max": 1.548169372292035
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 0,
+      "link": 100,
+      "kind": "shake",
+      "max": 9.45305981010315
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "slap",
+      "max": 28.38144714183232
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "flick",
+      "max": 19.025210856021907
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "auto",
+      "max": 1.5456358420879028
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 0,
+      "kind": "shake",
+      "max": 9.408674879087185
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "slap",
+      "max": 27.17685791107866
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "flick",
+      "max": 18.40758732611411
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "auto",
+      "max": 1.5487298755787897
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 50,
+      "kind": "shake",
+      "max": 9.447167305248714
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "slap",
+      "max": 26.111683082923044
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "flick",
+      "max": 17.83245818089925
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "auto",
+      "max": 1.548169372292035
+    },
+    {
+      "mode": "canvas",
+      "preset": "playful",
+      "side": 1,
+      "link": 100,
+      "kind": "shake",
+      "max": 9.45305981010315
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "slap",
+      "max": 32.565554312492516
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "flick",
+      "max": 39.698866482558415
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "auto",
+      "max": 1.9233742635289388
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 0,
+      "kind": "shake",
+      "max": 11.650068782859183
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "slap",
+      "max": 32.31220620373085
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "flick",
+      "max": 39.698866482558415
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "auto",
+      "max": 1.930531039086775
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 50,
+      "kind": "shake",
+      "max": 11.706837559062025
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "slap",
+      "max": 32.01225786126855
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "flick",
+      "max": 39.698866482558415
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "drag",
+      "max": 12.269651891901772
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "auto",
+      "max": 1.93115016746815
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 0,
+      "link": 100,
+      "kind": "shake",
+      "max": 11.73095346234433
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "slap",
+      "max": 32.38057370788349
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "flick",
+      "max": 24.06123635595315
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "auto",
+      "max": 1.9233742635289388
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 0,
+      "kind": "shake",
+      "max": 11.650068782859183
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "slap",
+      "max": 32.076537907393174
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "flick",
+      "max": 23.068768622973995
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "auto",
+      "max": 1.930531039086775
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 50,
+      "kind": "shake",
+      "max": 11.706837559062025
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "slap",
+      "max": 31.134906044390767
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "flick",
+      "max": 22.241891138777635
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "drag",
+      "max": 12.269651891901757
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "auto",
+      "max": 1.93115016746815
+    },
+    {
+      "mode": "canvas",
+      "preset": "chaos",
+      "side": 1,
+      "link": 100,
+      "kind": "shake",
+      "max": 11.73095346234433
+    }
+  ],
+  "framing": [
+    {
+      "mode": "webgl",
+      "size": [
+        375,
+        667
+      ],
+      "face": 162.32142857142858,
+      "thigh": 568.5357142857143,
+      "framing": {
+        "x": 13.474107142857122,
+        "y": 70,
+        "width": 348.05178571428576,
+        "height": 590.8571428571429
+      }
+    },
+    {
+      "mode": "webgl",
+      "size": [
+        390,
+        844
+      ],
+      "face": 167.0822281167109,
+      "thigh": 594.2440318302388,
+      "framing": {
+        "x": 12,
+        "y": 70,
+        "width": 366,
+        "height": 621.3262599469497
+      }
+    },
+    {
+      "mode": "webgl",
+      "size": [
+        430,
+        932
+      ],
+      "face": 180.3883076923077,
+      "thigh": 654.2344615384616,
+      "framing": {
+        "x": 12,
+        "y": 72.696,
+        "width": 406,
+        "height": 689.2307692307692
+      }
+    },
+    {
+      "mode": "webgl",
+      "size": [
+        440,
+        956
+      ],
+      "face": 184.9128275862069,
+      "thigh": 670.4300689655173,
+      "framing": {
+        "x": 12,
+        "y": 74.568,
+        "width": 416,
+        "height": 706.2068965517242
+      }
+    },
+    {
+      "mode": "webgl",
+      "size": [
+        844,
+        390
+      ],
+      "face": 60.9375,
+      "thigh": 329.0625,
+      "framing": {
+        "x": 307.1328125,
+        "y": 0,
+        "width": 229.734375,
+        "height": 390
+      }
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        375,
+        667
+      ],
+      "face": 162.32142857142858,
+      "thigh": 568.5357142857143,
+      "framing": {
+        "x": 13.474107142857122,
+        "y": 70,
+        "width": 348.05178571428576,
+        "height": 590.8571428571429
+      }
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        390,
+        844
+      ],
+      "face": 167.0822281167109,
+      "thigh": 594.2440318302388,
+      "framing": {
+        "x": 12,
+        "y": 70,
+        "width": 366,
+        "height": 621.3262599469497
+      }
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        430,
+        932
+      ],
+      "face": 180.3883076923077,
+      "thigh": 654.2344615384616,
+      "framing": {
+        "x": 12,
+        "y": 72.696,
+        "width": 406,
+        "height": 689.2307692307692
+      }
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        440,
+        956
+      ],
+      "face": 184.9128275862069,
+      "thigh": 670.4300689655173,
+      "framing": {
+        "x": 12,
+        "y": 74.568,
+        "width": 416,
+        "height": 706.2068965517242
+      }
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        844,
+        390
+      ],
+      "face": 60.9375,
+      "thigh": 329.0625,
+      "framing": {
+        "x": 307.1328125,
+        "y": 0,
+        "width": 229.734375,
+        "height": 390
+      }
+    }
+  ],
+  "errors": []
+}

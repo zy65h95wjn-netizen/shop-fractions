@@ -1,0 +1,29 @@
+[
+  {
+    "section": "function withAudio",
+    "bytes": 2437,
+    "exact": true
+  },
+  {
+    "section": "function stopSantaLaugh",
+    "bytes": 1299,
+    "exact": true
+  },
+  {
+    "section": "function step(",
+    "bytes": 4960,
+    "exact": true
+  },
+  {
+    "file": "motion.js",
+    "exact": true
+  },
+  {
+    "file": "assets/aurelia-frost.jpg",
+    "exact": true
+  },
+  {
+    "file": "assets/santa-claus.jpg",
+    "exact": true
+  }
+]

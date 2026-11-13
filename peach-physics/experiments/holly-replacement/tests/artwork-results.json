@@ -1,0 +1,10 @@
+{
+  "originalSHA256": "a8d269daecffe934aaa345727aa132bdeb070cb4a9747e936b451530a8ba1ea1",
+  "cleanedSHA256": "f7267c4f7624ea17d2215251e0bdf63d3e1cbc59bb33e3b9bcaca7f81b486a58",
+  "width": 754,
+  "height": 1280,
+  "repairMaskPixels": 1827,
+  "changedPixels": 1827,
+  "outsideMaskChangedPixels": 0,
+  "method": "Local Poisson blend of nearby background; lossless PNG; no character edits"
+}
