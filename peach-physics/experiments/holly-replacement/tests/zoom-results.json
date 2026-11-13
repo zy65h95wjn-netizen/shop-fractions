@@ -1,0 +1,157 @@
+{
+  "previous": "3f342e188b375593daa45be8d4114e7201158469",
+  "runtimeOnlyFramingChanged": true,
+  "otherCharacterExactComparisons": 8,
+  "rows": [
+    {
+      "mode": "webgl",
+      "size": [
+        375,
+        667
+      ],
+      "zoom": 1.0873786407766988,
+      "framing": {
+        "x": -1.732038834951453,
+        "y": 70,
+        "width": 378.4640776699029,
+        "height": 642.4854368932039
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "webgl",
+      "size": [
+        390,
+        844
+      ],
+      "zoom": 1.12,
+      "framing": {
+        "x": -9.960000000000008,
+        "y": 70,
+        "width": 409.92,
+        "height": 695.8854111405835
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "webgl",
+      "size": [
+        430,
+        932
+      ],
+      "zoom": 1.1199999999999999,
+      "framing": {
+        "x": -12.359999999999985,
+        "y": 72.696,
+        "width": 454.71999999999997,
+        "height": 771.9384615384615
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "webgl",
+      "size": [
+        440,
+        956
+      ],
+      "zoom": 1.1200000000000003,
+      "framing": {
+        "x": -12.960000000000065,
+        "y": 74.568,
+        "width": 465.92000000000013,
+        "height": 790.9517241379313
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "webgl",
+      "size": [
+        844,
+        390
+      ],
+      "zoom": 1,
+      "framing": {
+        "x": 307.1328125,
+        "y": 0,
+        "width": 229.734375,
+        "height": 390
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        375,
+        667
+      ],
+      "zoom": 1.0873786407766988,
+      "framing": {
+        "x": -1.732038834951453,
+        "y": 70,
+        "width": 378.4640776699029,
+        "height": 642.4854368932039
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        390,
+        844
+      ],
+      "zoom": 1.12,
+      "framing": {
+        "x": -9.960000000000008,
+        "y": 70,
+        "width": 409.92,
+        "height": 695.8854111405835
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        430,
+        932
+      ],
+      "zoom": 1.1199999999999999,
+      "framing": {
+        "x": -12.359999999999985,
+        "y": 72.696,
+        "width": 454.71999999999997,
+        "height": 771.9384615384615
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        440,
+        956
+      ],
+      "zoom": 1.1200000000000003,
+      "framing": {
+        "x": -12.960000000000065,
+        "y": 74.568,
+        "width": 465.92000000000013,
+        "height": 790.9517241379313
+      },
+      "skinTapsAndFlickBothSides": true
+    },
+    {
+      "mode": "canvas",
+      "size": [
+        844,
+        390
+      ],
+      "zoom": 1,
+      "framing": {
+        "x": 307.1328125,
+        "y": 0,
+        "width": 229.734375,
+        "height": 390
+      },
+      "skinTapsAndFlickBothSides": true
+    }
+  ]
+}

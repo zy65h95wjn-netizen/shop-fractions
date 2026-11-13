@@ -317,9 +317,9 @@ function resize(){
  // A top-safe anchor keeps her face and hat clear of the iPhone status area.
  const midnightZoom=portrait && (currentCharacter().id==='midnight'||currentCharacter().id==='aurelia');
  // Holly: preserve the source aspect ratio and show face through upper thighs.
- // Fit width with side clearance; source y=1120 must stay above bottom controls.
+ // Enlarge the first preview by 12%; cap short screens at upper-thigh y=1030.
  const hollyPortrait=isHolly()&&portrait;
- const hollyScale=portrait?Math.min((cssW-24)/W,(cssH-topClear-80)/1120):Math.min(cssW/W,cssH/H);
+ const hollyScale=portrait?Math.min((cssW-24)*1.12/W,(cssH-topClear-80)/1030):Math.min(cssW/W,cssH/H);
  const scale=isSanta()?Math.min(portrait?(cssW-32)/700:cssW/W,(cssH-topClear-bottomClear)/H):isHolly()?hollyScale:baseScale*(midnightZoom?1.12:1);
  drawW=W*scale;drawH=H*scale;
  ox=(cssW-drawW)/2;

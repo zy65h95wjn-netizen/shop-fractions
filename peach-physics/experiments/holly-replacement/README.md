@@ -4,6 +4,10 @@ Base: production/main `34673b618540e015d9db0745e560e415cc2d8cca` (Santa belly-ta
 
 **No production promotion.** All new files are under this experiment directory; `peach-physics/v8/` and every existing tracked file remain unchanged. Open `index.html?character=holly` to start in Holly's existing fourth slot. [Review gallery](review.html).
 
+## Closer framing revision
+
+Following review, Holly is 12% larger on standard portrait screens and about 8.7% larger at 375×667, where a height cap keeps her upper thighs visible. Face and skirt remain clear. Landscape is unchanged. Only the portrait scale expression changed in the runtime; artwork, calibration, physics and audio are byte-identical to the first preview. `tests/zoom-results.json` records ten framing/touch checks and eight exact non-Holly comparisons. The gallery captures have been refreshed. The 180-case calibration suite below describes the first preview; its physics is unchanged by this revision.
+
 ## Portrait provenance
 
 The user's attached `1-Photo-1.jpg` is the sole source, 754×1280.
@@ -26,7 +30,7 @@ Only 1,827 pixels in the upper-left arrow/background patch changed. A determinis
 | Support texture | Crop (216,380,384,256); all skin, motion, touch and outer-edge contours retraced |
 | Garment anchors | (320,536), (498,539); both fur lines independently retraced |
 | Lower support | Fade begins y=558 over 28 px; lacing guards at x=388/439 with 20/22 px transitions |
-| Framing | Aspect-preserving width fit with 12 px side clearance, head-safe top anchor, source y=1120 above bottom controls; landscape contains full image |
+| Framing | Aspect-preserving 1.12× initial width fit, head-safe top anchor, short-screen cap keeping source y=1030 above bottom controls; landscape contains full image |
 
 Strong Fabric B's existing architecture remains: independent skin channels and one supported garment vector per side. Canvas and WebGL use the same new dimensions, crop, split and anchors. The polygon/outer-edge masks provide the taper, so the generic taper pair remains `[0,0]` intentionally. Solver, spring timing, damping, presets, amplitude limits, gesture handling and R13 motion module are unchanged. The motion module remains byte-identical. No other character calibration or artwork changed; no Holly voice work.
 
@@ -40,7 +44,7 @@ The preview has its own manifest scope, cache prefix and preference namespace. I
 - 48 exact baseline comparisons: four non-Holly characters × six input kinds × two renderers. Spring traces and rendered frames match current production exactly.
 - Actual pointer events on skin and garment targets on both sides: correct side, slow hold, release and cleared capture. Independent Holly profile survives character switching and reload; production-key sentinel remains untouched.
 - Ten framing checks: both renderers at 375×667, 390×844, 430×932, 440×956, and 844×390. Face and meaningful upper thighs remain visible.
-- Stress poses on both sides: 52,372 WebGL / 52,624 Canvas changed-pixel observations, **zero changes outside the support crop**, and exact resting canvas after reset.
+- Stress poses on both sides: 65,690 WebGL / 66,021 Canvas changed-pixel observations, **zero changes outside the support crop**, and exact resting canvas after reset.
 - Real HTTPS service-worker install, offline reload and all-five-character switching passed in both renderers. Custom profile and auto-jiggle setting survive offline reload. Existing production cache and preferences survive preview installation. Fetched portrait hash matches the integrated file.
 - Offline Web Audio reaches `running`; Santa's existing optional laugh starts and toggles off. Audio activation, Santa laugh functions and spring integrator were additionally checked source-identical to main.
 - No browser errors in the suites. No app regression failures. An initial test-only hook typo (`hitRegion` instead of `pickSide`) was corrected before the suite ran.
