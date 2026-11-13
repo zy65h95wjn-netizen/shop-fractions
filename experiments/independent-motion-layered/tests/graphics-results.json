@@ -1,0 +1,22 @@
+{
+  "idle_vs_source": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right_motion_unchanged_left_core": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right_motion_background": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "right_motion_stockings": {
+    "maximum": 0,
+    "mean": 0.0
+  },
+  "outward_motion_left_core": {
+    "maximum": 0,
+    "mean": 0.0
+  }
+}
