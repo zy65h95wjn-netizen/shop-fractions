@@ -1,0 +1,189 @@
+{
+  "rows": [
+    {
+      "id": "ember",
+      "revision": "original",
+      "renderer": "webgl",
+      "firstAutoSeconds": 7.4,
+      "autoNodePeak": 1.4233940914753034,
+      "autoNodePeakCss": 0.6223756630579315,
+      "depthNodePeak": 0
+    },
+    {
+      "id": "midnight",
+      "revision": "original",
+      "renderer": "webgl",
+      "firstAutoSeconds": 7.416666666666667,
+      "autoNodePeak": 1.293593636109441,
+      "autoNodePeakCss": 0.6334952112290085,
+      "depthNodePeak": 0
+    },
+    {
+      "id": "aurelia",
+      "revision": "original",
+      "renderer": "webgl",
+      "firstAutoSeconds": 7.416666666666667,
+      "autoNodePeak": 1.0349074555905402,
+      "autoNodePeakCss": 0.6308335890410783,
+      "depthNodePeak": 0
+    },
+    {
+      "id": "holly",
+      "revision": "original",
+      "renderer": "webgl",
+      "firstAutoSeconds": 7.416666666666667,
+      "autoNodePeak": 0.513067707056484,
+      "autoNodePeakCss": 0.7105464204255715,
+      "depthNodePeak": 0
+    },
+    {
+      "id": "santa",
+      "revision": "original",
+      "renderer": "webgl",
+      "firstAutoSeconds": 7.408333333333333,
+      "autoNodePeak": 2.7408077785152463,
+      "autoNodePeakCss": 1.401727406726369,
+      "depthNodePeak": 0
+    },
+    {
+      "id": "ember",
+      "revision": "revised",
+      "renderer": "webgl",
+      "firstAutoSeconds": 1.8333333333333333,
+      "autoNodePeak": 4.6583806630100835,
+      "autoNodePeakCss": 2.036865806371412,
+      "depthNodePeak": 6.553474601805423
+    },
+    {
+      "id": "midnight",
+      "revision": "revised",
+      "renderer": "webgl",
+      "firstAutoSeconds": 1.8416666666666666,
+      "autoNodePeak": 4.398218362772099,
+      "autoNodePeakCss": 2.153883718178629,
+      "depthNodePeak": 6.091698688144486
+    },
+    {
+      "id": "aurelia",
+      "revision": "revised",
+      "renderer": "webgl",
+      "firstAutoSeconds": 1.8416666666666666,
+      "autoNodePeak": 3.622176094566891,
+      "autoNodePeakCss": 2.2079175616437743,
+      "depthNodePeak": 4.91375497993177
+    },
+    {
+      "id": "holly",
+      "revision": "revised",
+      "renderer": "webgl",
+      "firstAutoSeconds": 1.8416666666666666,
+      "autoNodePeak": 2.7485770020883065,
+      "autoNodePeakCss": 3.806498680851275,
+      "depthNodePeak": 4.594305231420901
+    },
+    {
+      "id": "santa",
+      "revision": "revised",
+      "renderer": "webgl",
+      "firstAutoSeconds": 1.8416666666666666,
+      "autoNodePeak": 4.933682530608078,
+      "autoNodePeakCss": 2.5232262085109882,
+      "depthNodePeak": 5.336740296567244
+    },
+    {
+      "id": "ember",
+      "revision": "original",
+      "renderer": "canvas",
+      "firstAutoSeconds": 7.4,
+      "autoNodePeak": 1.4233940914753034,
+      "autoNodePeakCss": 0.6223756630579315,
+      "depthNodePeak": 0
+    },
+    {
+      "id": "midnight",
+      "revision": "original",
+      "renderer": "canvas",
+      "firstAutoSeconds": 7.416666666666667,
+      "autoNodePeak": 1.293593636109441,
+      "autoNodePeakCss": 0.6334952112290085,
+      "depthNodePeak": 0
+    },
+    {
+      "id": "aurelia",
+      "revision": "original",
+      "renderer": "canvas",
+      "firstAutoSeconds": 7.416666666666667,
+      "autoNodePeak": 1.0349074555905402,
+      "autoNodePeakCss": 0.6308335890410783,
+      "depthNodePeak": 0
+    },
+    {
+      "id": "holly",
+      "revision": "original",
+      "renderer": "canvas",
+      "firstAutoSeconds": 7.416666666666667,
+      "autoNodePeak": 0.513067707056484,
+      "autoNodePeakCss": 0.7105464204255715,
+      "depthNodePeak": 0
+    },
+    {
+      "id": "santa",
+      "revision": "original",
+      "renderer": "canvas",
+      "firstAutoSeconds": 7.408333333333333,
+      "autoNodePeak": 2.7408077785152463,
+      "autoNodePeakCss": 1.401727406726369,
+      "depthNodePeak": 0
+    },
+    {
+      "id": "ember",
+      "revision": "revised",
+      "renderer": "canvas",
+      "firstAutoSeconds": 1.8333333333333333,
+      "autoNodePeak": 4.6583806630100835,
+      "autoNodePeakCss": 2.036865806371412,
+      "depthNodePeak": 6.553474601805423
+    },
+    {
+      "id": "midnight",
+      "revision": "revised",
+      "renderer": "canvas",
+      "firstAutoSeconds": 1.8416666666666666,
+      "autoNodePeak": 4.398218362772099,
+      "autoNodePeakCss": 2.153883718178629,
+      "depthNodePeak": 6.091698688144486
+    },
+    {
+      "id": "aurelia",
+      "revision": "revised",
+      "renderer": "canvas",
+      "firstAutoSeconds": 1.8416666666666666,
+      "autoNodePeak": 3.622176094566891,
+      "autoNodePeakCss": 2.2079175616437743,
+      "depthNodePeak": 4.91375497993177
+    },
+    {
+      "id": "holly",
+      "revision": "revised",
+      "renderer": "canvas",
+      "firstAutoSeconds": 1.8416666666666666,
+      "autoNodePeak": 2.7485770020883065,
+      "autoNodePeakCss": 3.806498680851275,
+      "depthNodePeak": 4.594305231420901
+    },
+    {
+      "id": "santa",
+      "revision": "revised",
+      "renderer": "canvas",
+      "firstAutoSeconds": 1.8416666666666666,
+      "autoNodePeak": 4.933682530608078,
+      "autoNodePeakCss": 2.5232262085109882,
+      "depthNodePeak": 5.336740296567244
+    }
+  ],
+  "realAnimationLoop": true,
+  "touchToggles": true,
+  "autoClosesPanel": true,
+  "noReadingsNotice": true,
+  "depthEventsReceived": true
+}

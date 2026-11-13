@@ -11,7 +11,7 @@ for(const fallback of [false,true]){
    assert.deepEqual(await simulate(p),await simulate(old.page));report.regressions.push({id,preset,kind,renderer:fallback?'canvas':'webgl'});
   }
  }
- await p.evaluate(()=>__test.reset());await p.locator('#gear').click();await p.locator('#shakeMotion').click();assert(await p.evaluate(()=>motionPermissionGesture));assert.equal(await p.evaluate(()=>motionPermissionCalls),1);await p.locator('#close').click();
+ await p.evaluate(()=>__test.reset());await p.locator('#gear').click();await p.locator('#shakeMotion').click();assert(await p.evaluate(()=>motionPermissionGesture));assert.equal(await p.evaluate(()=>motionPermissionCalls),1);if(await p.locator('#panel').evaluate(e=>e.classList.contains('open')))await p.locator('#close').click();
  for(const id of ['ember','midnight','aurelia','holly','santa']){
   await select(p,id);
   const r=await p.evaluate(()=>{const a=__test,m=__motionTest.motion;a.model.transfer=0;const step=()=>{testClock+=1000/120;m.tick(1/120);a.step(1/120);};for(let i=0;i<150;i++)step();const rest=(()=>{a.render();return document.querySelector('#game').toDataURL()})();
@@ -20,7 +20,7 @@ for(const fallback of [false,true]){
    a.gesture('drag',0);const before=m.counts.shakeSteps;for(let i=0;i<240;i++){const e=new Event('devicemotion');Object.defineProperty(e,'acceleration',{value:{x:20,y:20}});window.dispatchEvent(e);step();}const blocked=m.counts.shakeSteps===before;a.reset();return {max,changed,returned,counts,blocked,audio:__peachPhysicsDebug.snapshot().slapCount};});
   assert(r.max>0&&r.changed&&r.returned&&r.blocked);report.characters.push({id,renderer:fallback?'canvas':'webgl',...r});
  }
- await p.locator('#gear').click();await p.locator('#autoMotion').click();await p.locator('#close').click();
+ await p.locator('#gear').click();await p.locator('#autoMotion').click();if(await p.locator('#panel').evaluate(e=>e.classList.contains('open')))await p.locator('#close').click();
  const auto=await p.evaluate(()=>{__test.reset();const m=__motionTest.motion;for(let i=0;i<120*40;i++){testClock+=1000/120;m.tick(1/120);__test.step(1/120);}const before=m.counts.autoPulses;Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));for(let i=0;i<120*30;i++)m.tick(1/120);const after=m.counts.autoPulses,state=__peachMotionDebug.snapshot();Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new Event('visibilitychange'));return {before,after,state};});assert(auto.before>0);assert.equal(auto.after,auto.before);assert(!auto.state.ui.listening);report.permissions.push({renderer:fallback?'canvas':'webgl',hidden:auto});
  const storageBefore=await p.evaluate(()=>Object.fromEntries(Object.entries(localStorage).filter(([k])=>k!=='peach-r13-motion-options-v1')));await p.reload();await p.waitForFunction(()=>window.__motionTest&&document.querySelector('#loader').classList.contains('hiding'));const saved=await p.evaluate(()=>__peachMotionDebug.snapshot());assert(saved.auto&&saved.ui.saved.shake&&!saved.shake&&!saved.ui.listening);assert.equal(await p.evaluate(()=>motionPermissionCalls),0);assert.deepEqual(await p.evaluate(()=>Object.fromEntries(Object.entries(localStorage).filter(([k])=>k!=='peach-r13-motion-options-v1'))),storageBefore);
  report.errors.push(...app.errors,...old.errors);await app.context.close();await old.context.close();

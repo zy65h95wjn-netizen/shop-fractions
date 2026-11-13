@@ -123,15 +123,15 @@
     {
       "renderer": "canvas",
       "hidden": {
-        "before": 5,
-        "after": 5,
+        "before": 7,
+        "after": 7,
         "state": {
           "shake": true,
           "auto": true,
           "visible": false,
           "counts": {
             "shakeSteps": 411,
-            "autoPulses": 5
+            "autoPulses": 7
           },
           "force": [
             0,
@@ -158,7 +158,7 @@
     {
       "id": "ember",
       "renderer": "webgl",
-      "max": 5.711643302037267,
+      "max": 20.04635971454667,
       "changed": true,
       "returned": true,
       "counts": 77,
@@ -168,7 +168,7 @@
     {
       "id": "midnight",
       "renderer": "webgl",
-      "max": 5.3036687804634495,
+      "max": 18.889838961785397,
       "changed": true,
       "returned": true,
       "counts": 160,
@@ -178,7 +178,7 @@
     {
       "id": "aurelia",
       "renderer": "webgl",
-      "max": 4.14666843622157,
+      "max": 15.456173054770947,
       "changed": true,
       "returned": true,
       "counts": 243,
@@ -188,7 +188,7 @@
     {
       "id": "holly",
       "renderer": "webgl",
-      "max": 2.3772086094817304,
+      "max": 11.911271551159142,
       "changed": true,
       "returned": true,
       "counts": 324,
@@ -198,7 +198,7 @@
     {
       "id": "santa",
       "renderer": "webgl",
-      "max": 13.645378509579931,
+      "max": 27.445253156984215,
       "changed": true,
       "returned": true,
       "counts": 405,
@@ -208,7 +208,7 @@
     {
       "id": "ember",
       "renderer": "canvas",
-      "max": 5.711643302037267,
+      "max": 20.04635971454667,
       "changed": true,
       "returned": true,
       "counts": 77,
@@ -218,7 +218,7 @@
     {
       "id": "midnight",
       "renderer": "canvas",
-      "max": 5.3036687804634495,
+      "max": 18.889838961785397,
       "changed": true,
       "returned": true,
       "counts": 160,
@@ -228,7 +228,7 @@
     {
       "id": "aurelia",
       "renderer": "canvas",
-      "max": 4.14666843622157,
+      "max": 15.456173054770947,
       "changed": true,
       "returned": true,
       "counts": 243,
@@ -238,7 +238,7 @@
     {
       "id": "holly",
       "renderer": "canvas",
-      "max": 2.3772086094817304,
+      "max": 11.911271551159142,
       "changed": true,
       "returned": true,
       "counts": 324,
@@ -248,7 +248,7 @@
     {
       "id": "santa",
       "renderer": "canvas",
-      "max": 13.645378509579931,
+      "max": 27.445253156984215,
       "changed": true,
       "returned": true,
       "counts": 405,

@@ -1,7 +1,7 @@
 [
   {
     "name": "webgl-ember",
-    "peak": 3.2494678827169095,
+    "peak": 10.63547707376485,
     "timing": [
       {
         "frame": 0,
@@ -85,343 +85,343 @@
         "time": 0.55,
         "shakeSteps": 2,
         "autoPulses": 0,
-        "displacement": 0.053935222429520174
+        "displacement": 0.2840134670187743
       },
       {
         "frame": 12,
         "time": 0.6,
         "shakeSteps": 8,
         "autoPulses": 0,
-        "displacement": 0.6347421239
+        "displacement": 2.9607360667736122
       },
       {
         "frame": 13,
         "time": 0.65,
         "shakeSteps": 14,
         "autoPulses": 0,
-        "displacement": 1.6448917578775741
+        "displacement": 6.832297989276087
       },
       {
         "frame": 14,
         "time": 0.7,
         "shakeSteps": 20,
         "autoPulses": 0,
-        "displacement": 2.663798146995666
+        "displacement": 9.825506356164935
       },
       {
         "frame": 15,
         "time": 0.75,
         "shakeSteps": 26,
         "autoPulses": 0,
-        "displacement": 3.2494678827169095
+        "displacement": 10.63547707376485
       },
       {
         "frame": 16,
         "time": 0.8,
         "shakeSteps": 32,
         "autoPulses": 0,
-        "displacement": 3.1834185114764932
+        "displacement": 9.284481855553578
       },
       {
         "frame": 17,
         "time": 0.85,
         "shakeSteps": 38,
         "autoPulses": 0,
-        "displacement": 2.527038613513772
+        "displacement": 6.744638982443319
       },
       {
         "frame": 18,
         "time": 0.9,
         "shakeSteps": 44,
         "autoPulses": 0,
-        "displacement": 1.610616367203532
+        "displacement": 4.617492242508685
       },
       {
         "frame": 19,
         "time": 0.95,
         "shakeSteps": 50,
         "autoPulses": 0,
-        "displacement": 1.126938904642677
+        "displacement": 4.699513861916597
       },
       {
         "frame": 20,
         "time": 1,
         "shakeSteps": 56,
         "autoPulses": 0,
-        "displacement": 1.4566293822739207
+        "displacement": 6.319669740760775
       },
       {
         "frame": 21,
         "time": 1.05,
         "shakeSteps": 62,
         "autoPulses": 0,
-        "displacement": 1.9994132951826855
+        "displacement": 8.012724276685194
       },
       {
         "frame": 22,
         "time": 1.1,
         "shakeSteps": 68,
         "autoPulses": 0,
-        "displacement": 2.5286322622643054
+        "displacement": 9.130008871719903
       },
       {
         "frame": 23,
         "time": 1.15,
         "shakeSteps": 74,
         "autoPulses": 0,
-        "displacement": 2.8774183470296006
+        "displacement": 9.220056446354272
       },
       {
         "frame": 24,
         "time": 1.2,
         "shakeSteps": 77,
         "autoPulses": 0,
-        "displacement": 2.520796650076572
+        "displacement": 7.1807476084516475
       },
       {
         "frame": 25,
         "time": 1.25,
         "shakeSteps": 77,
         "autoPulses": 0,
-        "displacement": 0.809364941661111
+        "displacement": 1.9208208942242964
       },
       {
         "frame": 26,
         "time": 1.3,
         "shakeSteps": 77,
         "autoPulses": 0,
-        "displacement": 0.9059858025237647
+        "displacement": 3.1783607825738853
       },
       {
         "frame": 27,
         "time": 1.35,
         "shakeSteps": 77,
         "autoPulses": 0,
-        "displacement": 1.274510526914203
+        "displacement": 3.772852117625823
       },
       {
         "frame": 28,
         "time": 1.4,
         "shakeSteps": 82,
         "autoPulses": 0,
-        "displacement": 0.9407223753683105
+        "displacement": 3.0805054217928136
       },
       {
         "frame": 29,
         "time": 1.45,
         "shakeSteps": 88,
         "autoPulses": 0,
-        "displacement": 1.2733330829796767
+        "displacement": 5.363360937747455
       },
       {
         "frame": 30,
         "time": 1.5,
         "shakeSteps": 94,
         "autoPulses": 0,
-        "displacement": 2.192882365733867
+        "displacement": 8.457539896251651
       },
       {
         "frame": 31,
         "time": 1.55,
         "shakeSteps": 100,
         "autoPulses": 0,
-        "displacement": 2.9604786446873597
+        "displacement": 10.067161188590937
       },
       {
         "frame": 32,
         "time": 1.6,
         "shakeSteps": 106,
         "autoPulses": 0,
-        "displacement": 3.153968338082373
+        "displacement": 9.21905285542432
       },
       {
         "frame": 33,
         "time": 1.65,
         "shakeSteps": 112,
         "autoPulses": 0,
-        "displacement": 2.555833953419115
+        "displacement": 6.668227942426086
       },
       {
         "frame": 34,
         "time": 1.7,
         "shakeSteps": 118,
         "autoPulses": 0,
-        "displacement": 1.7222551225135838
+        "displacement": 4.890329259224553
       },
       {
         "frame": 35,
         "time": 1.75,
         "shakeSteps": 124,
         "autoPulses": 0,
-        "displacement": 1.213748677352027
+        "displacement": 3.946939222351472
       },
       {
         "frame": 36,
         "time": 1.8,
         "shakeSteps": 130,
         "autoPulses": 0,
-        "displacement": 1.0279484304016957
+        "displacement": 3.075699769544586
       },
       {
         "frame": 37,
         "time": 1.85,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.8060520724664856
+        "displacement": 2.477830542800969
       },
       {
         "frame": 38,
         "time": 1.9,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.39057074104150397
+        "displacement": 1.4207051416369578
       },
       {
         "frame": 39,
         "time": 1.95,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.38361758865379636
+        "displacement": 1.241880518393556
       },
       {
         "frame": 40,
         "time": 2,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.4249103804499457
+        "displacement": 1.2852740212543876
       },
       {
         "frame": 41,
         "time": 2.05,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.2473653244443608
+        "displacement": 0.8132329355300806
       },
       {
         "frame": 42,
         "time": 2.1,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.14459058907272299
+        "displacement": 0.5119670672037926
       },
       {
         "frame": 43,
         "time": 2.15,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.20546926387262382
+        "displacement": 0.6202025675808828
       },
       {
         "frame": 44,
         "time": 2.2,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.1459834343818141
+        "displacement": 0.45337311317317197
       },
       {
         "frame": 45,
         "time": 2.25,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.05940322521361543
+        "displacement": 0.22269667281177197
       },
       {
         "frame": 46,
         "time": 2.3,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.09185649430163699
+        "displacement": 0.2794412293539882
       },
       {
         "frame": 47,
         "time": 2.35,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.07838564464958506
+        "displacement": 0.23661904126020777
       },
       {
         "frame": 48,
         "time": 2.4,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.031416812496325545
+        "displacement": 0.1097821470064818
       },
       {
         "frame": 49,
         "time": 2.45,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.03795715085873267
+        "displacement": 0.11770815714366784
       },
       {
         "frame": 50,
         "time": 2.5,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.03873693517555217
+        "displacement": 0.11532733533458576
       },
       {
         "frame": 51,
         "time": 2.55,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.017924587933647762
+        "displacement": 0.05837793607264437
       },
       {
         "frame": 52,
         "time": 2.6,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.014400988543406714
+        "displacement": 0.046377952742051504
       },
       {
         "frame": 53,
         "time": 2.65,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.01749900962706771
+        "displacement": 0.05259642803836121
       },
       {
         "frame": 54,
         "time": 2.7,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.009513599786331126
+        "displacement": 0.030330266537789596
       },
       {
         "frame": 55,
         "time": 2.75,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.005042651012258174
+        "displacement": 0.01729191776596933
       },
       {
         "frame": 56,
         "time": 2.8,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0
+        "displacement": 0.02239803499293896
       },
       {
         "frame": 57,
         "time": 2.85,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0
+        "displacement": 0.013424994308427224
       },
       {
         "frame": 58,
         "time": 2.9,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0
+        "displacement": 0.008046886185771797
       },
       {
         "frame": 59,
         "time": 2.95,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0
+        "displacement": 0.004945639652033291
       },
       {
         "frame": 60,
@@ -497,196 +497,196 @@
         "frame": 70,
         "time": 3.5,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.9224333895472375
       },
       {
         "frame": 71,
         "time": 3.55,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 3.9386099263602823
       },
       {
         "frame": 72,
         "time": 3.6,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 3.2063519714327384
       },
       {
         "frame": 73,
         "time": 3.65,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.5701291877284576
       },
       {
         "frame": 74,
         "time": 3.7,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 1.4795219477095514
       },
       {
         "frame": 75,
         "time": 3.75,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 1.7412655698420538
       },
       {
         "frame": 76,
         "time": 3.8,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.6829667923624742
       },
       {
         "frame": 77,
         "time": 3.85,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.46455875525386064
       },
       {
         "frame": 78,
         "time": 3.9,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.8496718136383793
       },
       {
         "frame": 79,
         "time": 3.95,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.47912778664810635
       },
       {
         "frame": 80,
         "time": 4,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.09493604750633926
       },
       {
         "frame": 81,
         "time": 4.05,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.3782365677254858
       },
       {
         "frame": 82,
         "time": 4.1,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.27664296540884303
       },
       {
         "frame": 83,
         "time": 4.15,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.03538265096646914
       },
       {
         "frame": 84,
         "time": 4.2,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.15303501859643695
       },
       {
         "frame": 85,
         "time": 4.25,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.1419243055808111
       },
       {
         "frame": 86,
         "time": 4.3,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.03934672782003424
       },
       {
         "frame": 87,
         "time": 4.35,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.0548312720921417
       },
       {
         "frame": 88,
         "time": 4.4,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.06633673194886905
       },
       {
         "frame": 89,
         "time": 4.45,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.026967177502801688
       },
       {
         "frame": 90,
         "time": 4.5,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.016452265239492902
       },
       {
         "frame": 91,
         "time": 4.55,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.02777737998322242
       },
       {
         "frame": 92,
         "time": 4.6,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.015433892271886004
       },
       {
         "frame": 93,
         "time": 4.65,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.00435955574420979
       },
       {
         "frame": 94,
         "time": 4.7,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.0058012177143779466
       },
       {
         "frame": 95,
         "time": 4.75,
         "shakeSteps": 131,
-        "autoPulses": 0,
+        "autoPulses": 1,
         "displacement": 0
       },
       {
         "frame": 96,
         "time": 4.8,
         "shakeSteps": 131,
-        "autoPulses": 0,
+        "autoPulses": 1,
         "displacement": 0
       },
       {
         "frame": 97,
         "time": 4.85,
         "shakeSteps": 131,
-        "autoPulses": 0,
+        "autoPulses": 1,
         "displacement": 0
       },
       {
@@ -694,147 +694,147 @@
         "time": 4.9,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.9128637752682356
+        "displacement": 0
       },
       {
         "frame": 99,
         "time": 4.95,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 1.2136853718472498
+        "displacement": 0
       },
       {
         "frame": 100,
         "time": 5,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.5977933899783587
+        "displacement": 0
       },
       {
         "frame": 101,
         "time": 5.05,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.2595593376522196
+        "displacement": 0
       },
       {
         "frame": 102,
         "time": 5.1,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.5613756283512672
+        "displacement": 0
       },
       {
         "frame": 103,
         "time": 5.15,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.3981331560282008
+        "displacement": 0
       },
       {
         "frame": 104,
         "time": 5.2,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.03581435176047123
+        "displacement": 0
       },
       {
         "frame": 105,
         "time": 5.25,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.23573126306552752
+        "displacement": 0
       },
       {
         "frame": 106,
         "time": 5.3,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.2230107769783992
+        "displacement": 0
       },
       {
         "frame": 107,
         "time": 5.35,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.054720013715720606
+        "displacement": 0
       },
       {
         "frame": 108,
         "time": 5.4,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.08832121957648845
+        "displacement": 0
       },
       {
         "frame": 109,
         "time": 5.45,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.11172801986254197
+        "displacement": 0
       },
       {
         "frame": 110,
         "time": 5.5,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.04476157770824802
+        "displacement": 0
       },
       {
         "frame": 111,
         "time": 5.55,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.028140242696701654
+        "displacement": 0
       },
       {
         "frame": 112,
         "time": 5.6,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.050078252394066075
+        "displacement": 0
       },
       {
         "frame": 113,
         "time": 5.65,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.027345527309182195
+        "displacement": 0
       },
       {
         "frame": 114,
         "time": 5.7,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.005771310996950964
+        "displacement": 0
       },
       {
         "frame": 115,
         "time": 5.75,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.020942418232781375
+        "displacement": 0
       },
       {
         "frame": 116,
         "time": 5.8,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.014394966531394082
+        "displacement": 0
       },
       {
         "frame": 117,
         "time": 5.85,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.0011653073393673836
+        "displacement": 0
       },
       {
         "frame": 118,
         "time": 5.9,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.009801785621118669
+        "displacement": 0
       },
       {
         "frame": 119,
@@ -1127,7 +1127,7 @@
   },
   {
     "name": "webgl-midnight",
-    "peak": 3.0167430793243324,
+    "peak": 10.019294169899917,
     "timing": [
       {
         "frame": 0,
@@ -1211,343 +1211,343 @@
         "time": 0.55,
         "shakeSteps": 133,
         "autoPulses": 1,
-        "displacement": 0.050080918175780684
+        "displacement": 0.26761851815996984
       },
       {
         "frame": 12,
         "time": 0.6,
         "shakeSteps": 139,
         "autoPulses": 1,
-        "displacement": 0.5890851307464201
+        "displacement": 2.7883167498356833
       },
       {
         "frame": 13,
         "time": 0.65,
         "shakeSteps": 145,
         "autoPulses": 1,
-        "displacement": 1.5273544008887412
+        "displacement": 6.437905104537257
       },
       {
         "frame": 14,
         "time": 0.7,
         "shakeSteps": 151,
         "autoPulses": 1,
-        "displacement": 2.4732907895436447
+        "displacement": 9.257564516978908
       },
       {
         "frame": 15,
         "time": 0.75,
         "shakeSteps": 157,
         "autoPulses": 1,
-        "displacement": 3.0167430793243324
+        "displacement": 10.019294169899917
       },
       {
         "frame": 16,
         "time": 0.8,
         "shakeSteps": 163,
         "autoPulses": 1,
-        "displacement": 2.955013912700387
+        "displacement": 8.745126097771841
       },
       {
         "frame": 17,
         "time": 0.85,
         "shakeSteps": 169,
         "autoPulses": 1,
-        "displacement": 2.3453949823264097
+        "displacement": 6.352091232636523
       },
       {
         "frame": 18,
         "time": 0.9,
         "shakeSteps": 175,
         "autoPulses": 1,
-        "displacement": 1.494626547725108
+        "displacement": 4.348284735542612
       },
       {
         "frame": 19,
         "time": 0.95,
         "shakeSteps": 181,
         "autoPulses": 1,
-        "displacement": 1.045504391869107
+        "displacement": 4.424326912813512
       },
       {
         "frame": 20,
         "time": 1,
         "shakeSteps": 187,
         "autoPulses": 1,
-        "displacement": 1.3512918341100992
+        "displacement": 5.950067726124367
       },
       {
         "frame": 21,
         "time": 1.05,
         "shakeSteps": 193,
         "autoPulses": 1,
-        "displacement": 1.8552555102246229
+        "displacement": 7.546413982615693
       },
       {
         "frame": 22,
         "time": 1.1,
         "shakeSteps": 199,
         "autoPulses": 1,
-        "displacement": 2.3471487865559504
+        "displacement": 8.601313406581518
       },
       {
         "frame": 23,
         "time": 1.15,
         "shakeSteps": 205,
         "autoPulses": 1,
-        "displacement": 2.671633158728909
+        "displacement": 8.687700223824205
       },
       {
         "frame": 24,
         "time": 1.2,
         "shakeSteps": 208,
         "autoPulses": 1,
-        "displacement": 2.3407788455267586
+        "displacement": 6.766307499274669
       },
       {
         "frame": 25,
         "time": 1.25,
         "shakeSteps": 208,
         "autoPulses": 1,
-        "displacement": 0.7653628213934991
+        "displacement": 1.8621153217357154
       },
       {
         "frame": 26,
         "time": 1.3,
         "shakeSteps": 208,
         "autoPulses": 1,
-        "displacement": 0.8416975427515376
+        "displacement": 2.9960123367209603
       },
       {
         "frame": 27,
         "time": 1.35,
         "shakeSteps": 208,
         "autoPulses": 1,
-        "displacement": 1.1834426701749452
+        "displacement": 3.5543176847293436
       },
       {
         "frame": 28,
         "time": 1.4,
         "shakeSteps": 213,
         "autoPulses": 1,
-        "displacement": 0.8630496818570975
+        "displacement": 2.875612973405791
       },
       {
         "frame": 29,
         "time": 1.45,
         "shakeSteps": 219,
         "autoPulses": 1,
-        "displacement": 1.1831074769950873
+        "displacement": 5.057348347723968
       },
       {
         "frame": 30,
         "time": 1.5,
         "shakeSteps": 225,
         "autoPulses": 1,
-        "displacement": 2.0381705021087546
+        "displacement": 7.9689506969113415
       },
       {
         "frame": 31,
         "time": 1.55,
         "shakeSteps": 231,
         "autoPulses": 1,
-        "displacement": 2.749550750100909
+        "displacement": 9.48793827532549
       },
       {
         "frame": 32,
         "time": 1.6,
         "shakeSteps": 237,
         "autoPulses": 1,
-        "displacement": 2.9293167467348953
+        "displacement": 8.68807716559992
       },
       {
         "frame": 33,
         "time": 1.65,
         "shakeSteps": 243,
         "autoPulses": 1,
-        "displacement": 2.3728872456931143
+        "displacement": 6.2818205094667565
       },
       {
         "frame": 34,
         "time": 1.7,
         "shakeSteps": 249,
         "autoPulses": 1,
-        "displacement": 1.5980007877329228
+        "displacement": 4.6055364474970375
       },
       {
         "frame": 35,
         "time": 1.75,
         "shakeSteps": 255,
         "autoPulses": 1,
-        "displacement": 1.1257202151103245
+        "displacement": 3.715423602325557
       },
       {
         "frame": 36,
         "time": 1.8,
         "shakeSteps": 261,
         "autoPulses": 1,
-        "displacement": 0.9580477062596853
+        "displacement": 2.9055457379106406
       },
       {
         "frame": 37,
         "time": 1.85,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.7497308758415011
+        "displacement": 2.338803585159057
       },
       {
         "frame": 38,
         "time": 1.9,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.3634575179718948
+        "displacement": 1.3397937282209464
       },
       {
         "frame": 39,
         "time": 1.95,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.3568261448080902
+        "displacement": 1.1674523926715923
       },
       {
         "frame": 40,
         "time": 2,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.39532434512729037
+        "displacement": 1.2134585772391229
       },
       {
         "frame": 41,
         "time": 2.05,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.23043790786731036
+        "displacement": 0.7679458680221681
       },
       {
         "frame": 42,
         "time": 2.1,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.1338400375981029
+        "displacement": 0.48041073251152067
       },
       {
         "frame": 43,
         "time": 2.15,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.19122970013648574
+        "displacement": 0.5856027784689858
       },
       {
         "frame": 44,
         "time": 2.2,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.13590887336524124
+        "displacement": 0.4281342003410128
       },
       {
         "frame": 45,
         "time": 2.25,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.05491529803686486
+        "displacement": 0.2086156964917163
       },
       {
         "frame": 46,
         "time": 2.3,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.08555755189969087
+        "displacement": 0.2638928561752919
       },
       {
         "frame": 47,
         "time": 2.35,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.07289385728740744
+        "displacement": 0.2232829600279837
       },
       {
         "frame": 48,
         "time": 2.4,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.027222728816423177
+        "displacement": 0.09987606523351879
       },
       {
         "frame": 49,
         "time": 2.45,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.03541452314115703
+        "displacement": 0.11120973458219643
       },
       {
         "frame": 50,
         "time": 2.5,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.035990160536353434
+        "displacement": 0.10873909346127736
       },
       {
         "frame": 51,
         "time": 2.55,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.014567409230777328
+        "displacement": 0.05112093423878829
       },
       {
         "frame": 52,
         "time": 2.6,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.014082040517247058
+        "displacement": 0.043854876752507536
       },
       {
         "frame": 53,
         "time": 2.65,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.017080634741909795
+        "displacement": 0.04958000492535176
       },
       {
         "frame": 54,
         "time": 2.7,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.007514213383293906
+        "displacement": 0.02630264290819616
       },
       {
         "frame": 55,
         "time": 2.75,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.0029284185442334087
+        "displacement": 0.016355880658662506
       },
       {
         "frame": 56,
         "time": 2.8,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0
+        "displacement": 0.021150231700046783
       },
       {
         "frame": 57,
         "time": 2.85,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0
+        "displacement": 0.012622172962414526
       },
       {
         "frame": 58,
         "time": 2.9,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0
+        "displacement": 0.007571059120136928
       },
       {
         "frame": 59,
         "time": 2.95,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0
+        "displacement": 0.004958112899141084
       },
       {
         "frame": 60,
@@ -1623,196 +1623,196 @@
         "frame": 70,
         "time": 3.5,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.8711870901279466
       },
       {
         "frame": 71,
         "time": 3.55,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 3.7194338353690815
       },
       {
         "frame": 72,
         "time": 3.6,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 3.0231741474810887
       },
       {
         "frame": 73,
         "time": 3.65,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.5222864947944537
       },
       {
         "frame": 74,
         "time": 3.7,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 1.4195448273707791
       },
       {
         "frame": 75,
         "time": 3.75,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 1.6544193002767806
       },
       {
         "frame": 76,
         "time": 3.8,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.6307139562886184
       },
       {
         "frame": 77,
         "time": 3.85,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.4661373466277469
       },
       {
         "frame": 78,
         "time": 3.9,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.8184775512239404
       },
       {
         "frame": 79,
         "time": 3.95,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.44440661695958256
       },
       {
         "frame": 80,
         "time": 4,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.1114149243233998
       },
       {
         "frame": 81,
         "time": 4.05,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.3718006621586006
       },
       {
         "frame": 82,
         "time": 4.1,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.25823396229500417
       },
       {
         "frame": 83,
         "time": 4.15,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.026074747744081056
       },
       {
         "frame": 84,
         "time": 4.2,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.15498011802711603
       },
       {
         "frame": 85,
         "time": 4.25,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.13382180190030074
       },
       {
         "frame": 86,
         "time": 4.3,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.034607807729317805
       },
       {
         "frame": 87,
         "time": 4.35,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.05825604772371252
       },
       {
         "frame": 88,
         "time": 4.4,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.0635284198600228
       },
       {
         "frame": 89,
         "time": 4.45,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.02380380349543362
       },
       {
         "frame": 90,
         "time": 4.5,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.0191535216298371
       },
       {
         "frame": 91,
         "time": 4.55,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.027285287691187873
       },
       {
         "frame": 92,
         "time": 4.6,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.01358406629826607
       },
       {
         "frame": 93,
         "time": 4.65,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.004177664986501352
       },
       {
         "frame": 94,
         "time": 4.7,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0
+        "autoPulses": 2,
+        "displacement": 0.006412570807239129
       },
       {
         "frame": 95,
         "time": 4.75,
         "shakeSteps": 262,
-        "autoPulses": 1,
+        "autoPulses": 2,
         "displacement": 0
       },
       {
         "frame": 96,
         "time": 4.8,
         "shakeSteps": 262,
-        "autoPulses": 1,
+        "autoPulses": 2,
         "displacement": 0
       },
       {
         "frame": 97,
         "time": 4.85,
         "shakeSteps": 262,
-        "autoPulses": 1,
+        "autoPulses": 2,
         "displacement": 0
       },
       {
@@ -1820,147 +1820,147 @@
         "time": 4.9,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.6728834301587111
+        "displacement": 0
       },
       {
         "frame": 99,
         "time": 4.95,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 1.128195594606545
+        "displacement": 0
       },
       {
         "frame": 100,
         "time": 5,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.6656604169819187
+        "displacement": 0
       },
       {
         "frame": 101,
         "time": 5.05,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.1888195828841499
+        "displacement": 0
       },
       {
         "frame": 102,
         "time": 5.1,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.4981163144468002
+        "displacement": 0
       },
       {
         "frame": 103,
         "time": 5.15,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.411112458635811
+        "displacement": 0
       },
       {
         "frame": 104,
         "time": 5.2,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.06382907554389994
+        "displacement": 0
       },
       {
         "frame": 105,
         "time": 5.25,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.20067817446816189
+        "displacement": 0
       },
       {
         "frame": 106,
         "time": 5.3,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.22136202827633805
+        "displacement": 0
       },
       {
         "frame": 107,
         "time": 5.35,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.07333789302537401
+        "displacement": 0
       },
       {
         "frame": 108,
         "time": 5.4,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.07170765729230064
+        "displacement": 0
       },
       {
         "frame": 109,
         "time": 5.45,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.10817463531874359
+        "displacement": 0
       },
       {
         "frame": 110,
         "time": 5.5,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.050935328116861606
+        "displacement": 0
       },
       {
         "frame": 111,
         "time": 5.55,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.021111788961806276
+        "displacement": 0
       },
       {
         "frame": 112,
         "time": 5.6,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.047601429637743296
+        "displacement": 0
       },
       {
         "frame": 113,
         "time": 5.65,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.028940928749719423
+        "displacement": 0
       },
       {
         "frame": 114,
         "time": 5.7,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.00537847862832899
+        "displacement": 0
       },
       {
         "frame": 115,
         "time": 5.75,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.019669536594201304
+        "displacement": 0
       },
       {
         "frame": 116,
         "time": 5.8,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.014715084783683411
+        "displacement": 0
       },
       {
         "frame": 117,
         "time": 5.85,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.000157831198390284
+        "displacement": 0
       },
       {
         "frame": 118,
         "time": 5.9,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.009192738519155712
+        "displacement": 0
       },
       {
         "frame": 119,
@@ -2253,7 +2253,7 @@
   },
   {
     "name": "webgl-aurelia",
-    "peak": 2.3503951622681805,
+    "peak": 8.138409464824056,
     "timing": [
       {
         "frame": 0,
@@ -2344,329 +2344,329 @@
         "time": 0.6,
         "shakeSteps": 268,
         "autoPulses": 2,
-        "displacement": 0.3445741070839357
+        "displacement": 1.6215679575285353
       },
       {
         "frame": 13,
         "time": 0.65,
         "shakeSteps": 274,
         "autoPulses": 2,
-        "displacement": 1.0963136502341353
+        "displacement": 4.690080682214061
       },
       {
         "frame": 14,
         "time": 0.7,
         "shakeSteps": 280,
         "autoPulses": 2,
-        "displacement": 1.894496104002294
+        "displacement": 7.323620947275832
       },
       {
         "frame": 15,
         "time": 0.75,
         "shakeSteps": 286,
         "autoPulses": 2,
-        "displacement": 2.3503951622681805
+        "displacement": 8.138409464824056
       },
       {
         "frame": 16,
         "time": 0.8,
         "shakeSteps": 292,
         "autoPulses": 2,
-        "displacement": 2.2956677635803104
+        "displacement": 7.073322124096376
       },
       {
         "frame": 17,
         "time": 0.85,
         "shakeSteps": 298,
         "autoPulses": 2,
-        "displacement": 1.8072933370104753
+        "displacement": 5.0581119321149295
       },
       {
         "frame": 18,
         "time": 0.9,
         "shakeSteps": 304,
         "autoPulses": 2,
-        "displacement": 1.1550528855777338
+        "displacement": 3.5158914487579027
       },
       {
         "frame": 19,
         "time": 0.95,
         "shakeSteps": 310,
         "autoPulses": 2,
-        "displacement": 0.827802035022691
+        "displacement": 3.657342963284718
       },
       {
         "frame": 20,
         "time": 1,
         "shakeSteps": 316,
         "autoPulses": 2,
-        "displacement": 1.0512195994363362
+        "displacement": 4.799634899584469
       },
       {
         "frame": 21,
         "time": 1.05,
         "shakeSteps": 322,
         "autoPulses": 2,
-        "displacement": 1.424743167596555
+        "displacement": 5.99166099636663
       },
       {
         "frame": 22,
         "time": 1.1,
         "shakeSteps": 328,
         "autoPulses": 2,
-        "displacement": 1.7984816970438897
+        "displacement": 6.806470868991398
       },
       {
         "frame": 23,
         "time": 1.15,
         "shakeSteps": 334,
         "autoPulses": 2,
-        "displacement": 2.050956848750029
+        "displacement": 6.892544408192176
       },
       {
         "frame": 24,
         "time": 1.2,
         "shakeSteps": 339,
         "autoPulses": 2,
-        "displacement": 1.9807358004895907
+        "displacement": 5.925185968780086
       },
       {
         "frame": 25,
         "time": 1.25,
         "shakeSteps": 339,
         "autoPulses": 2,
-        "displacement": 0.9296826228087648
+        "displacement": 2.4200327691387464
       },
       {
         "frame": 26,
         "time": 1.3,
         "shakeSteps": 339,
         "autoPulses": 2,
-        "displacement": 0.4390514763989984
+        "displacement": 1.745048318840143
       },
       {
         "frame": 27,
         "time": 1.35,
         "shakeSteps": 339,
         "autoPulses": 2,
-        "displacement": 0.91690728579176
+        "displacement": 2.8482559687471536
       },
       {
         "frame": 28,
         "time": 1.4,
         "shakeSteps": 342,
         "autoPulses": 2,
-        "displacement": 0.7151355776933728
+        "displacement": 2.1732706484836424
       },
       {
         "frame": 29,
         "time": 1.45,
         "shakeSteps": 348,
         "autoPulses": 2,
-        "displacement": 0.8447655791347461
+        "displacement": 3.430070963705571
       },
       {
         "frame": 30,
         "time": 1.5,
         "shakeSteps": 354,
         "autoPulses": 2,
-        "displacement": 1.5220335514563954
+        "displacement": 6.031934501096855
       },
       {
         "frame": 31,
         "time": 1.55,
         "shakeSteps": 360,
         "autoPulses": 2,
-        "displacement": 2.090474740206957
+        "displacement": 7.557126735464006
       },
       {
         "frame": 32,
         "time": 1.6,
         "shakeSteps": 366,
         "autoPulses": 2,
-        "displacement": 2.2356287948534033
+        "displacement": 7.017155104413931
       },
       {
         "frame": 33,
         "time": 1.65,
         "shakeSteps": 372,
         "autoPulses": 2,
-        "displacement": 1.8171290798118647
+        "displacement": 5.023770891792323
       },
       {
         "frame": 34,
         "time": 1.7,
         "shakeSteps": 378,
         "autoPulses": 2,
-        "displacement": 1.2446149995139104
+        "displacement": 3.700767224497659
       },
       {
         "frame": 35,
         "time": 1.75,
         "shakeSteps": 384,
         "autoPulses": 2,
-        "displacement": 0.9004352440028995
+        "displacement": 3.088971444807387
       },
       {
         "frame": 36,
         "time": 1.8,
         "shakeSteps": 390,
         "autoPulses": 2,
-        "displacement": 0.744324124765932
+        "displacement": 2.33640640873883
       },
       {
         "frame": 37,
         "time": 1.85,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.5701268087688133
+        "displacement": 1.8351022834237491
       },
       {
         "frame": 38,
         "time": 1.9,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.280776740533059
+        "displacement": 1.0995463843469062
       },
       {
         "frame": 39,
         "time": 1.95,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.28342723726484714
+        "displacement": 0.9816059876978919
       },
       {
         "frame": 40,
         "time": 2,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.30306837507466244
+        "displacement": 0.9590073183507735
       },
       {
         "frame": 41,
         "time": 2.05,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.17452667906642658
+        "displacement": 0.6124789722886864
       },
       {
         "frame": 42,
         "time": 2.1,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.10960134790916677
+        "displacement": 0.4118550297702102
       },
       {
         "frame": 43,
         "time": 2.15,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.1477155109856432
+        "displacement": 0.4669428293759304
       },
       {
         "frame": 44,
         "time": 2.2,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.102926753473652
+        "displacement": 0.3377808021820398
       },
       {
         "frame": 45,
         "time": 2.25,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.04467105195751109
+        "displacement": 0.1787764172845789
       },
       {
         "frame": 46,
         "time": 2.3,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.06656097684862437
+        "displacement": 0.21246209991570555
       },
       {
         "frame": 47,
         "time": 2.35,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.05544708961301704
+        "displacement": 0.1758751763311552
       },
       {
         "frame": 48,
         "time": 2.4,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.022695671279623998
+        "displacement": 0.08515754825851803
       },
       {
         "frame": 49,
         "time": 2.45,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.027744421080598408
+        "displacement": 0.09047128527791477
       },
       {
         "frame": 50,
         "time": 2.5,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.02751625275965552
+        "displacement": 0.08585382964806534
       },
       {
         "frame": 51,
         "time": 2.55,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.012395806159700807
+        "displacement": 0.04429573131018693
       },
       {
         "frame": 52,
         "time": 2.6,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0.011639357376264927
+        "displacement": 0.03607167339007789
       },
       {
         "frame": 53,
         "time": 2.65,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0
+        "displacement": 0.03931388497385271
       },
       {
         "frame": 54,
         "time": 2.7,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0
+        "displacement": 0.022880014676043246
       },
       {
         "frame": 55,
         "time": 2.75,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0
+        "displacement": 0.013577941379627763
       },
       {
         "frame": 56,
         "time": 2.8,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0
+        "displacement": 0.01682827021439049
       },
       {
         "frame": 57,
         "time": 2.85,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0
+        "displacement": 0.0069401584370935975
       },
       {
         "frame": 58,
         "time": 2.9,
         "shakeSteps": 391,
         "autoPulses": 2,
-        "displacement": 0
+        "displacement": 0.005872590987722391
       },
       {
         "frame": 59,
@@ -2749,196 +2749,196 @@
         "frame": 70,
         "time": 3.5,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.7174481918700736
       },
       {
         "frame": 71,
         "time": 3.55,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 3.063093727340497
       },
       {
         "frame": 72,
         "time": 3.6,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 2.4900973046354533
       },
       {
         "frame": 73,
         "time": 3.65,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.43147039437651374
       },
       {
         "frame": 74,
         "time": 3.7,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 1.1672214959978702
       },
       {
         "frame": 75,
         "time": 3.75,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 1.3617663199091845
       },
       {
         "frame": 76,
         "time": 3.8,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.5207810201797352
       },
       {
         "frame": 77,
         "time": 3.85,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.3815148191292538
       },
       {
         "frame": 78,
         "time": 3.9,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.6728227042335756
       },
       {
         "frame": 79,
         "time": 3.95,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.36689108956799693
       },
       {
         "frame": 80,
         "time": 4,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.08978829238003844
       },
       {
         "frame": 81,
         "time": 4.05,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.30502191522817634
       },
       {
         "frame": 82,
         "time": 4.1,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.21309764514877655
       },
       {
         "frame": 83,
         "time": 4.15,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.021728307286311272
       },
       {
         "frame": 84,
         "time": 4.2,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.12675241827652925
       },
       {
         "frame": 85,
         "time": 4.25,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.11030198210255612
       },
       {
         "frame": 86,
         "time": 4.3,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.028229549607450832
       },
       {
         "frame": 87,
         "time": 4.35,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.04766512482141997
       },
       {
         "frame": 88,
         "time": 4.4,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.05234307551851277
       },
       {
         "frame": 89,
         "time": 4.45,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.019780803812299384
       },
       {
         "frame": 90,
         "time": 4.5,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.015660473969683734
       },
       {
         "frame": 91,
         "time": 4.55,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.02239141401031558
       },
       {
         "frame": 92,
         "time": 4.6,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.01128585657946073
       },
       {
         "frame": 93,
         "time": 4.65,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.003274913732782981
       },
       {
         "frame": 94,
         "time": 4.7,
         "shakeSteps": 391,
-        "autoPulses": 2,
-        "displacement": 0
+        "autoPulses": 3,
+        "displacement": 0.005217628143576461
       },
       {
         "frame": 95,
         "time": 4.75,
         "shakeSteps": 391,
-        "autoPulses": 2,
+        "autoPulses": 3,
         "displacement": 0
       },
       {
         "frame": 96,
         "time": 4.8,
         "shakeSteps": 391,
-        "autoPulses": 2,
+        "autoPulses": 3,
         "displacement": 0
       },
       {
         "frame": 97,
         "time": 4.85,
         "shakeSteps": 391,
-        "autoPulses": 2,
+        "autoPulses": 3,
         "displacement": 0
       },
       {
@@ -2946,147 +2946,147 @@
         "time": 4.9,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.5384079111323499
+        "displacement": 0
       },
       {
         "frame": 99,
         "time": 4.95,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.9025837815452203
+        "displacement": 0
       },
       {
         "frame": 100,
         "time": 5,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.5327279823500823
+        "displacement": 0
       },
       {
         "frame": 101,
         "time": 5.05,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.14881845053599976
+        "displacement": 0
       },
       {
         "frame": 102,
         "time": 5.1,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.3980265054895473
+        "displacement": 0
       },
       {
         "frame": 103,
         "time": 5.15,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.3288833836735622
+        "displacement": 0
       },
       {
         "frame": 104,
         "time": 5.2,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.05161027712603641
+        "displacement": 0
       },
       {
         "frame": 105,
         "time": 5.25,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.15991174476633335
+        "displacement": 0
       },
       {
         "frame": 106,
         "time": 5.3,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.1769418670430537
+        "displacement": 0
       },
       {
         "frame": 107,
         "time": 5.35,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.05908675727422066
+        "displacement": 0
       },
       {
         "frame": 108,
         "time": 5.4,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.05682688980056758
+        "displacement": 0
       },
       {
         "frame": 109,
         "time": 5.45,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.08633557987241955
+        "displacement": 0
       },
       {
         "frame": 110,
         "time": 5.5,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.04085501019433793
+        "displacement": 0
       },
       {
         "frame": 111,
         "time": 5.55,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.016800145838648754
+        "displacement": 0
       },
       {
         "frame": 112,
         "time": 5.6,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.03792598986903453
+        "displacement": 0
       },
       {
         "frame": 113,
         "time": 5.65,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.02326349496795501
+        "displacement": 0
       },
       {
         "frame": 114,
         "time": 5.7,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.004319826402368886
+        "displacement": 0
       },
       {
         "frame": 115,
         "time": 5.75,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.015626558510827546
+        "displacement": 0
       },
       {
         "frame": 116,
         "time": 5.8,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.011808743756841242
+        "displacement": 0
       },
       {
         "frame": 117,
         "time": 5.85,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.000029542609771300533
+        "displacement": 0
       },
       {
         "frame": 118,
         "time": 5.9,
         "shakeSteps": 391,
         "autoPulses": 3,
-        "displacement": 0.007299381221831272
+        "displacement": 0
       },
       {
         "frame": 119,
@@ -3379,7 +3379,7 @@
   },
   {
     "name": "webgl-holly",
-    "peak": 1.2361135518436417,
+    "peak": 6.4428607933112705,
     "timing": [
       {
         "frame": 0,
@@ -3470,791 +3470,791 @@
         "time": 0.6,
         "shakeSteps": 397,
         "autoPulses": 3,
-        "displacement": 0.09312226968467148
+        "displacement": 0.6574092227793269
       },
       {
         "frame": 13,
         "time": 0.65,
         "shakeSteps": 403,
         "autoPulses": 3,
-        "displacement": 0.33146973912788374
+        "displacement": 2.140239095648601
       },
       {
         "frame": 14,
         "time": 0.7,
         "shakeSteps": 409,
         "autoPulses": 3,
-        "displacement": 0.6521361916470338
+        "displacement": 3.886838225020028
       },
       {
         "frame": 15,
         "time": 0.75,
         "shakeSteps": 415,
         "autoPulses": 3,
-        "displacement": 0.9481317220744824
+        "displacement": 5.22500617427418
       },
       {
         "frame": 16,
         "time": 0.8,
         "shakeSteps": 421,
         "autoPulses": 3,
-        "displacement": 1.1295006425356477
+        "displacement": 5.741952112375403
       },
       {
         "frame": 17,
         "time": 0.85,
         "shakeSteps": 427,
         "autoPulses": 3,
-        "displacement": 1.1053330101691947
+        "displacement": 5.130923537407236
       },
       {
         "frame": 18,
         "time": 0.9,
         "shakeSteps": 433,
         "autoPulses": 3,
-        "displacement": 0.8712733241108894
+        "displacement": 3.7056554222275824
       },
       {
         "frame": 19,
         "time": 0.95,
         "shakeSteps": 439,
         "autoPulses": 3,
-        "displacement": 0.5603830872243213
+        "displacement": 2.7286574355302937
       },
       {
         "frame": 20,
         "time": 1,
         "shakeSteps": 445,
         "autoPulses": 3,
-        "displacement": 0.5518083421593535
+        "displacement": 3.8355064476845495
       },
       {
         "frame": 21,
         "time": 1.05,
         "shakeSteps": 451,
         "autoPulses": 3,
-        "displacement": 0.8206302686557221
+        "displacement": 5.29675454125734
       },
       {
         "frame": 22,
         "time": 1.1,
         "shakeSteps": 457,
         "autoPulses": 3,
-        "displacement": 1.097689287997444
+        "displacement": 6.325273484062017
       },
       {
         "frame": 23,
         "time": 1.15,
         "shakeSteps": 463,
         "autoPulses": 3,
-        "displacement": 1.2361135518436417
+        "displacement": 6.4428607933112705
       },
       {
         "frame": 24,
         "time": 1.2,
         "shakeSteps": 468,
         "autoPulses": 3,
-        "displacement": 1.1880261235844702
+        "displacement": 5.627137329529579
       },
       {
         "frame": 25,
         "time": 1.25,
         "shakeSteps": 468,
         "autoPulses": 3,
-        "displacement": 0.806212063236189
+        "displacement": 3.4846589700928354
       },
       {
         "frame": 26,
         "time": 1.3,
         "shakeSteps": 468,
         "autoPulses": 3,
-        "displacement": 0.29352501144185666
+        "displacement": 1.416440079239397
       },
       {
         "frame": 27,
         "time": 1.35,
         "shakeSteps": 468,
         "autoPulses": 3,
-        "displacement": 0.39062099823603014
+        "displacement": 2.2190366118014326
       },
       {
         "frame": 28,
         "time": 1.4,
         "shakeSteps": 471,
         "autoPulses": 3,
-        "displacement": 0.5957737051481665
+        "displacement": 3.0987541939140018
       },
       {
         "frame": 29,
         "time": 1.45,
         "shakeSteps": 477,
         "autoPulses": 3,
-        "displacement": 0.7439145989935037
+        "displacement": 3.8224164999583694
       },
       {
         "frame": 30,
         "time": 1.5,
         "shakeSteps": 483,
         "autoPulses": 3,
-        "displacement": 0.8470458867569627
+        "displacement": 4.4176730756354745
       },
       {
         "frame": 31,
         "time": 1.55,
         "shakeSteps": 489,
         "autoPulses": 3,
-        "displacement": 0.9165147346714955
+        "displacement": 4.744056245814952
       },
       {
         "frame": 32,
         "time": 1.6,
         "shakeSteps": 495,
         "autoPulses": 3,
-        "displacement": 0.9136868927328486
+        "displacement": 4.529745191958585
       },
       {
         "frame": 33,
         "time": 1.65,
         "shakeSteps": 501,
         "autoPulses": 3,
-        "displacement": 0.7997324432314493
+        "displacement": 3.64620670234577
       },
       {
         "frame": 34,
         "time": 1.7,
         "shakeSteps": 507,
         "autoPulses": 3,
-        "displacement": 0.6264802245456053
+        "displacement": 2.6084386067168013
       },
       {
         "frame": 35,
         "time": 1.75,
         "shakeSteps": 513,
         "autoPulses": 3,
-        "displacement": 0.5177398859328581
+        "displacement": 2.3436243199987534
       },
       {
         "frame": 36,
         "time": 1.8,
         "shakeSteps": 519,
         "autoPulses": 3,
-        "displacement": 0.4770641060105062
+        "displacement": 2.365712611760391
       },
       {
         "frame": 37,
         "time": 1.85,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.371893360115073
+        "displacement": 1.9603567502700379
       },
       {
         "frame": 38,
         "time": 1.9,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.16444409288183162
+        "displacement": 0.9450875209549648
       },
       {
         "frame": 39,
         "time": 1.95,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.12692585036272824
+        "displacement": 0.553435820050703
       },
       {
         "frame": 40,
         "time": 2,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.227236755522836
+        "displacement": 1.1351179004988254
       },
       {
         "frame": 41,
         "time": 2.05,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.22494636638622448
+        "displacement": 1.1424342573654513
       },
       {
         "frame": 42,
         "time": 2.1,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.1551522507473486
+        "displacement": 0.8343721895075471
       },
       {
         "frame": 43,
         "time": 2.15,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.04990239505541776
+        "displacement": 0.2938008051450474
       },
       {
         "frame": 44,
         "time": 2.2,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.10052328367122385
+        "displacement": 0.4933600050045605
       },
       {
         "frame": 45,
         "time": 2.25,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.11389043755761827
+        "displacement": 0.5875124283073678
       },
       {
         "frame": 46,
         "time": 2.3,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.10293844855342095
+        "displacement": 0.5326256825384466
       },
       {
         "frame": 47,
         "time": 2.35,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.05826657665458598
+        "displacement": 0.31967411281886915
       },
       {
         "frame": 48,
         "time": 2.4,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.0392798740774749
+        "displacement": 0.18767997255931448
       },
       {
         "frame": 49,
         "time": 2.45,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.05777594880175271
+        "displacement": 0.29406602934917675
       },
       {
         "frame": 50,
         "time": 2.5,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.055159962956384784
+        "displacement": 0.27634670575940634
       },
       {
         "frame": 51,
         "time": 2.55,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.04319128621846086
+        "displacement": 0.2266657258341198
       },
       {
         "frame": 52,
         "time": 2.6,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.01772287022037164
+        "displacement": 0.10019499510659369
       },
       {
         "frame": 53,
         "time": 2.65,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.025021125532488846
+        "displacement": 0.1355241395731452
       },
       {
         "frame": 54,
         "time": 2.7,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.023668864127216485
+        "displacement": 0.12973686788119532
       },
       {
         "frame": 55,
         "time": 2.75,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.023474950505411728
+        "displacement": 0.1282886768756508
       },
       {
         "frame": 56,
         "time": 2.8,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.014594101637154475
+        "displacement": 0.08519125980992952
       },
       {
         "frame": 57,
         "time": 2.85,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.01190290913727691
+        "displacement": 0.056831475018330954
       },
       {
         "frame": 58,
         "time": 2.9,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.012579776399901554
+        "displacement": 0.06556494944186224
       },
       {
         "frame": 59,
         "time": 2.95,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.006673000881235206
+        "displacement": 0.06008264553732538
       },
       {
         "frame": 60,
         "time": 3,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.001049788138609631
+        "displacement": 0.05350863402167579
       },
       {
         "frame": 61,
         "time": 3.05,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0.0061660110739986075
+        "displacement": 0.027444476045559763
       },
       {
         "frame": 62,
         "time": 3.1,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0
+        "displacement": 0.03080754065491735
       },
       {
         "frame": 63,
         "time": 3.15,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0
+        "displacement": 0.02350976255135149
       },
       {
         "frame": 64,
         "time": 3.2,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0
+        "displacement": 0.027693563763596208
       },
       {
         "frame": 65,
         "time": 3.25,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0
+        "displacement": 0.020725645839154157
       },
       {
         "frame": 66,
         "time": 3.3,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0
+        "displacement": 0.013443729011090423
       },
       {
         "frame": 67,
         "time": 3.35,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0
+        "displacement": 0.012063246311095408
       },
       {
         "frame": 68,
         "time": 3.4,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0
+        "displacement": 0.011633617627676469
       },
       {
         "frame": 69,
         "time": 3.45,
         "shakeSteps": 520,
         "autoPulses": 3,
-        "displacement": 0
+        "displacement": 0.0027004874110223946
       },
       {
         "frame": 70,
         "time": 3.5,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.39752049216441876
       },
       {
         "frame": 71,
         "time": 3.55,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 2.006068088302451
       },
       {
         "frame": 72,
         "time": 3.6,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 2.3698165844039614
       },
       {
         "frame": 73,
         "time": 3.65,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 1.6371738033622667
       },
       {
         "frame": 74,
         "time": 3.7,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.3873374700513649
       },
       {
         "frame": 75,
         "time": 3.75,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.8008289807186488
       },
       {
         "frame": 76,
         "time": 3.8,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 1.2344132763561855
       },
       {
         "frame": 77,
         "time": 3.85,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 1.074547831299913
       },
       {
         "frame": 78,
         "time": 3.9,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.4731501873530887
       },
       {
         "frame": 79,
         "time": 3.95,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.2211508448500951
       },
       {
         "frame": 80,
         "time": 4,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.5998697061651098
       },
       {
         "frame": 81,
         "time": 4.05,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.6291211829252064
       },
       {
         "frame": 82,
         "time": 4.1,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.3612640243904899
       },
       {
         "frame": 83,
         "time": 4.15,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.09776990235573856
       },
       {
         "frame": 84,
         "time": 4.2,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.2685786652632192
       },
       {
         "frame": 85,
         "time": 4.25,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.3377130576399004
       },
       {
         "frame": 86,
         "time": 4.3,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.2310654512174174
       },
       {
         "frame": 87,
         "time": 4.35,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.06869937080719288
       },
       {
         "frame": 88,
         "time": 4.4,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.10752884125442655
       },
       {
         "frame": 89,
         "time": 4.45,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.1680503718018256
       },
       {
         "frame": 90,
         "time": 4.5,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.13339694741351668
       },
       {
         "frame": 91,
         "time": 4.55,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.049169523420077424
       },
       {
         "frame": 92,
         "time": 4.6,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.035641665249981115
       },
       {
         "frame": 93,
         "time": 4.65,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.07765253493945931
       },
       {
         "frame": 94,
         "time": 4.7,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.0715816220709918
       },
       {
         "frame": 95,
         "time": 4.75,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.034477687669468245
       },
       {
         "frame": 96,
         "time": 4.8,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.01887359447406241
       },
       {
         "frame": 97,
         "time": 4.85,
         "shakeSteps": 520,
-        "autoPulses": 3,
-        "displacement": 0
+        "autoPulses": 4,
+        "displacement": 0.032249955130956916
       },
       {
         "frame": 98,
         "time": 4.9,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.20458967625121263
+        "displacement": 0.035495201082970836
       },
       {
         "frame": 99,
         "time": 4.95,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.42400500706786104
+        "displacement": 0.02179747018988542
       },
       {
         "frame": 100,
         "time": 5,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.4152769356204671
+        "displacement": 0.009273276370081131
       },
       {
         "frame": 101,
         "time": 5.05,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.23209134772356252
+        "displacement": 0.012149614502991459
       },
       {
         "frame": 102,
         "time": 5.1,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.07595373040260389
+        "displacement": 0.016976706856128003
       },
       {
         "frame": 103,
         "time": 5.15,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.18081876499986457
+        "displacement": 0.012401802494526002
       },
       {
         "frame": 104,
         "time": 5.2,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.2333761015667636
+        "displacement": 0.0027764872061359297
       },
       {
         "frame": 105,
         "time": 5.25,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.16900456314062415
+        "displacement": 0.005681741505104027
       },
       {
         "frame": 106,
         "time": 5.3,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.04478230990968141
+        "displacement": 0
       },
       {
         "frame": 107,
         "time": 5.35,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.06845934005070575
+        "displacement": 0
       },
       {
         "frame": 108,
         "time": 5.4,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.12164589482794862
+        "displacement": 0
       },
       {
         "frame": 109,
         "time": 5.45,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.10524483847001263
+        "displacement": 0
       },
       {
         "frame": 110,
         "time": 5.5,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.044586679709225446
+        "displacement": 0
       },
       {
         "frame": 111,
         "time": 5.55,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.020723918633975966
+        "displacement": 0
       },
       {
         "frame": 112,
         "time": 5.6,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.05883550964328933
+        "displacement": 0
       },
       {
         "frame": 113,
         "time": 5.65,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.05921198638997802
+        "displacement": 0
       },
       {
         "frame": 114,
         "time": 5.7,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.031930763330693744
+        "displacement": 0
       },
       {
         "frame": 115,
         "time": 5.75,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.011536088647944233
+        "displacement": 0
       },
       {
         "frame": 116,
         "time": 5.8,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.02540891917954707
+        "displacement": 0
       },
       {
         "frame": 117,
         "time": 5.85,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.030228788406944245
+        "displacement": 0
       },
       {
         "frame": 118,
         "time": 5.9,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.01947684081678374
+        "displacement": 0
       },
       {
         "frame": 119,
         "time": 5.95,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.0029404842883641417
+        "displacement": 0
       },
       {
         "frame": 120,
         "time": 6,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.01134383884411262
+        "displacement": 0
       },
       {
         "frame": 121,
         "time": 6.05,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.01568342446095294
+        "displacement": 0
       },
       {
         "frame": 122,
         "time": 6.1,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.01091545238948116
+        "displacement": 0
       },
       {
         "frame": 123,
         "time": 6.15,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.0018640846424682787
+        "displacement": 0
       },
       {
         "frame": 124,
         "time": 6.2,
         "shakeSteps": 520,
         "autoPulses": 4,
-        "displacement": 0.005709206115160169
+        "displacement": 0
       },
       {
         "frame": 125,
@@ -4505,7 +4505,7 @@
   },
   {
     "name": "webgl-santa",
-    "peak": 11.89837036154982,
+    "peak": 25.431772792710163,
     "timing": [
       {
         "frame": 0,
@@ -4589,1049 +4589,1049 @@
         "time": 0.55,
         "shakeSteps": 522,
         "autoPulses": 4,
-        "displacement": 0.023821169135136735
+        "displacement": 0.08343621471674871
       },
       {
         "frame": 12,
         "time": 0.6,
         "shakeSteps": 528,
         "autoPulses": 4,
-        "displacement": 0.34323098006246555
+        "displacement": 1.078050744466262
       },
       {
         "frame": 13,
         "time": 0.65,
         "shakeSteps": 534,
         "autoPulses": 4,
-        "displacement": 1.1222021063168612
+        "displacement": 3.209136453973594
       },
       {
         "frame": 14,
         "time": 0.7,
         "shakeSteps": 540,
         "autoPulses": 4,
-        "displacement": 2.3663981655202995
+        "displacement": 6.252752031939499
       },
       {
         "frame": 15,
         "time": 0.75,
         "shakeSteps": 546,
         "autoPulses": 4,
-        "displacement": 3.9224359594162586
+        "displacement": 9.681988414036661
       },
       {
         "frame": 16,
         "time": 0.8,
         "shakeSteps": 552,
         "autoPulses": 4,
-        "displacement": 5.535547683675196
+        "displacement": 12.959977681885146
       },
       {
         "frame": 17,
         "time": 0.85,
         "shakeSteps": 558,
         "autoPulses": 4,
-        "displacement": 6.901753045685851
+        "displacement": 15.324851857376952
       },
       {
         "frame": 18,
         "time": 0.9,
         "shakeSteps": 564,
         "autoPulses": 4,
-        "displacement": 7.617767285240238
+        "displacement": 16.09715718566232
       },
       {
         "frame": 19,
         "time": 0.95,
         "shakeSteps": 570,
         "autoPulses": 4,
-        "displacement": 7.528003249416058
+        "displacement": 15.111560575807486
       },
       {
         "frame": 20,
         "time": 1,
         "shakeSteps": 576,
         "autoPulses": 4,
-        "displacement": 6.559015583639591
+        "displacement": 12.255545859924142
       },
       {
         "frame": 21,
         "time": 1.05,
         "shakeSteps": 582,
         "autoPulses": 4,
-        "displacement": 4.827941150787402
+        "displacement": 8.536273497039243
       },
       {
         "frame": 22,
         "time": 1.1,
         "shakeSteps": 588,
         "autoPulses": 4,
-        "displacement": 3.194212887598575
+        "displacement": 8.064812922906095
       },
       {
         "frame": 23,
         "time": 1.15,
         "shakeSteps": 594,
         "autoPulses": 4,
-        "displacement": 4.432644434421762
+        "displacement": 12.692418255860275
       },
       {
         "frame": 24,
         "time": 1.2,
         "shakeSteps": 597,
         "autoPulses": 4,
-        "displacement": 6.736511712806921
+        "displacement": 17.2780568737205
       },
       {
         "frame": 25,
         "time": 1.25,
         "shakeSteps": 597,
         "autoPulses": 4,
-        "displacement": 8.419259824547936
+        "displacement": 20.469063929621818
       },
       {
         "frame": 26,
         "time": 1.3,
         "shakeSteps": 597,
         "autoPulses": 4,
-        "displacement": 9.166952272062366
+        "displacement": 21.022625643848738
       },
       {
         "frame": 27,
         "time": 1.35,
         "shakeSteps": 597,
         "autoPulses": 4,
-        "displacement": 8.759184153283051
+        "displacement": 19.09822097012116
       },
       {
         "frame": 28,
         "time": 1.4,
         "shakeSteps": 602,
         "autoPulses": 4,
-        "displacement": 7.264322048665819
+        "displacement": 14.839338121620523
       },
       {
         "frame": 29,
         "time": 1.45,
         "shakeSteps": 608,
         "autoPulses": 4,
-        "displacement": 4.779124482223707
+        "displacement": 8.652733947283773
       },
       {
         "frame": 30,
         "time": 1.5,
         "shakeSteps": 614,
         "autoPulses": 4,
-        "displacement": 2.3443727451540735
+        "displacement": 6.082000159775316
       },
       {
         "frame": 31,
         "time": 1.55,
         "shakeSteps": 620,
         "autoPulses": 4,
-        "displacement": 4.613399477055876
+        "displacement": 12.42208645190188
       },
       {
         "frame": 32,
         "time": 1.6,
         "shakeSteps": 626,
         "autoPulses": 4,
-        "displacement": 7.362441837531607
+        "displacement": 18.155588400489815
       },
       {
         "frame": 33,
         "time": 1.65,
         "shakeSteps": 632,
         "autoPulses": 4,
-        "displacement": 9.86955867249626
+        "displacement": 23.183634246915208
       },
       {
         "frame": 34,
         "time": 1.7,
         "shakeSteps": 638,
         "autoPulses": 4,
-        "displacement": 11.459994106977433
+        "displacement": 25.431772792710163
       },
       {
         "frame": 35,
         "time": 1.75,
         "shakeSteps": 644,
         "autoPulses": 4,
-        "displacement": 11.89837036154982
+        "displacement": 25.083932051332607
       },
       {
         "frame": 36,
         "time": 1.8,
         "shakeSteps": 650,
         "autoPulses": 4,
-        "displacement": 11.342972088411761
+        "displacement": 22.715949301080055
       },
       {
         "frame": 37,
         "time": 1.85,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 9.881386645523687
+        "displacement": 18.821734518926814
       },
       {
         "frame": 38,
         "time": 1.9,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 7.631310599058812
+        "displacement": 13.925492969036943
       },
       {
         "frame": 39,
         "time": 1.95,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 5.109146789769478
+        "displacement": 9.366557191933463
       },
       {
         "frame": 40,
         "time": 2,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 3.1263464113437416
+        "displacement": 7.18996385671318
       },
       {
         "frame": 41,
         "time": 2.05,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 2.9889396517859286
+        "displacement": 8.276637646894963
       },
       {
         "frame": 42,
         "time": 2.1,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 4.126022313842237
+        "displacement": 10.22892892575886
       },
       {
         "frame": 43,
         "time": 2.15,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 5.082214007610215
+        "displacement": 11.38256536014053
       },
       {
         "frame": 44,
         "time": 2.2,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 5.43193737677014
+        "displacement": 11.318533840140104
       },
       {
         "frame": 45,
         "time": 2.25,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 5.143497233095281
+        "displacement": 10.121566951507864
       },
       {
         "frame": 46,
         "time": 2.3,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 4.334708628599968
+        "displacement": 8.119258713559514
       },
       {
         "frame": 47,
         "time": 2.35,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 3.2073390862627593
+        "displacement": 5.8054235895643025
       },
       {
         "frame": 48,
         "time": 2.4,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 2.041972844680668
+        "displacement": 3.910232912145115
       },
       {
         "frame": 49,
         "time": 2.45,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 1.3292447911606828
+        "displacement": 3.4272109837365767
       },
       {
         "frame": 50,
         "time": 2.5,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 1.5608945760431836
+        "displacement": 4.190767000707093
       },
       {
         "frame": 51,
         "time": 2.55,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 2.103180214633917
+        "displacement": 5.0020317248018245
       },
       {
         "frame": 52,
         "time": 2.6,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 2.4464684388884566
+        "displacement": 5.321673461676236
       },
       {
         "frame": 53,
         "time": 2.65,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 2.485220135390052
+        "displacement": 5.062762906539058
       },
       {
         "frame": 54,
         "time": 2.7,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 2.2422351983301794
+        "displacement": 4.3240975386265506
       },
       {
         "frame": 55,
         "time": 2.75,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 1.794904643133978
+        "displacement": 3.3017906251105233
       },
       {
         "frame": 56,
         "time": 2.8,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 1.2532084910341066
+        "displacement": 2.2716473948890354
       },
       {
         "frame": 57,
         "time": 2.85,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 0.773721493217131
+        "displacement": 1.6399344054971634
       },
       {
         "frame": 58,
         "time": 2.9,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 0.623515142213505
+        "displacement": 1.7174268798187142
       },
       {
         "frame": 59,
         "time": 2.95,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 0.8229419795340934
+        "displacement": 2.104061952918134
       },
       {
         "frame": 60,
         "time": 3,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 1.037617395395153
+        "displacement": 2.3705344873859304
       },
       {
         "frame": 61,
         "time": 3.05,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 1.1339472297339055
+        "displacement": 2.388247181996508
       },
       {
         "frame": 62,
         "time": 3.1,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 1.0939664800075788
+        "displacement": 2.1639475215341406
       },
       {
         "frame": 63,
         "time": 3.15,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 0.9392413121510206
+        "displacement": 1.7637326047196045
       },
       {
         "frame": 64,
         "time": 3.2,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 0.7109577453022964
+        "displacement": 1.2883761959994817
       },
       {
         "frame": 65,
         "time": 3.25,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 0.46545907448986396
+        "displacement": 0.8782788544639035
       },
       {
         "frame": 66,
         "time": 3.3,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 0.2932955416856381
+        "displacement": 0.722648698083043
       },
       {
         "frame": 67,
         "time": 3.35,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 0.3079012084920234
+        "displacement": 0.836216208559904
       },
       {
         "frame": 68,
         "time": 3.4,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 0.4128431383415576
+        "displacement": 0.9913349732561691
       },
       {
         "frame": 69,
         "time": 3.45,
         "shakeSteps": 651,
         "autoPulses": 4,
-        "displacement": 0.48627814088643023
+        "displacement": 1.0596603920957617
       },
       {
         "frame": 70,
         "time": 3.5,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.4988608560746859
+        "autoPulses": 5,
+        "displacement": 1.431040475559279
       },
       {
         "frame": 71,
         "time": 3.55,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.4535127618331149
+        "autoPulses": 5,
+        "displacement": 3.522422587289832
       },
       {
         "frame": 72,
         "time": 3.6,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.36571686838090206
+        "autoPulses": 5,
+        "displacement": 4.569612818085992
       },
       {
         "frame": 73,
         "time": 3.65,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.2576733101428936
+        "autoPulses": 5,
+        "displacement": 4.519700704666357
       },
       {
         "frame": 74,
         "time": 3.7,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.15985169919829534
+        "autoPulses": 5,
+        "displacement": 3.6345890070494855
       },
       {
         "frame": 75,
         "time": 3.75,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.1181460439627288
+        "autoPulses": 5,
+        "displacement": 3.1234580757152752
       },
       {
         "frame": 76,
         "time": 3.8,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.1511437629213317
+        "autoPulses": 5,
+        "displacement": 2.728579120346081
       },
       {
         "frame": 77,
         "time": 3.85,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.1923250721603802
+        "autoPulses": 5,
+        "displacement": 1.9389322409248864
       },
       {
         "frame": 78,
         "time": 3.9,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.21203345197185103
+        "autoPulses": 5,
+        "displacement": 0.8018309127739746
       },
       {
         "frame": 79,
         "time": 3.95,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.2061947990434038
+        "autoPulses": 5,
+        "displacement": 0.9063635372108496
       },
       {
         "frame": 80,
         "time": 4,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.17881323833716622
+        "autoPulses": 5,
+        "displacement": 1.6576946264360166
       },
       {
         "frame": 81,
         "time": 4.05,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.13741411917736948
+        "autoPulses": 5,
+        "displacement": 2.0910855307100937
       },
       {
         "frame": 82,
         "time": 4.1,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.09177487248268121
+        "autoPulses": 5,
+        "displacement": 2.164005966048548
       },
       {
         "frame": 83,
         "time": 4.15,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.06179365066420328
+        "autoPulses": 5,
+        "displacement": 1.7962468216819791
       },
       {
         "frame": 84,
         "time": 4.2,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.0523091095844005
+        "autoPulses": 5,
+        "displacement": 1.2195804839079896
       },
       {
         "frame": 85,
         "time": 4.25,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.06995565716511495
+        "autoPulses": 5,
+        "displacement": 1.1386601900917992
       },
       {
         "frame": 86,
         "time": 4.3,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.08440270533139844
+        "autoPulses": 5,
+        "displacement": 0.8432179695058046
       },
       {
         "frame": 87,
         "time": 4.35,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.08852686885719055
+        "autoPulses": 5,
+        "displacement": 0.3709715411870245
       },
       {
         "frame": 88,
         "time": 4.4,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.08224968628965725
+        "autoPulses": 5,
+        "displacement": 0.4815259261540409
       },
       {
         "frame": 89,
         "time": 4.45,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.06799046540337524
+        "autoPulses": 5,
+        "displacement": 0.6890388529790805
       },
       {
         "frame": 90,
         "time": 4.5,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.049773241710122165
+        "autoPulses": 5,
+        "displacement": 0.9816053026709741
       },
       {
         "frame": 91,
         "time": 4.55,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.03719109314010204
+        "autoPulses": 5,
+        "displacement": 1.02928762857191
       },
       {
         "frame": 92,
         "time": 4.6,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.02401786673484254
+        "autoPulses": 5,
+        "displacement": 0.853601702884559
       },
       {
         "frame": 93,
         "time": 4.65,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.022654304879679926
+        "autoPulses": 5,
+        "displacement": 0.539413315355509
       },
       {
         "frame": 94,
         "time": 4.7,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.030241213808640546
+        "autoPulses": 5,
+        "displacement": 0.4521024358136569
       },
       {
         "frame": 95,
         "time": 4.75,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.034906893376580976
+        "autoPulses": 5,
+        "displacement": 0.32912951094803145
       },
       {
         "frame": 96,
         "time": 4.8,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.03531603494425091
+        "autoPulses": 5,
+        "displacement": 0.24701649888632257
       },
       {
         "frame": 97,
         "time": 4.85,
         "shakeSteps": 651,
-        "autoPulses": 4,
-        "displacement": 0.031905079454271894
+        "autoPulses": 5,
+        "displacement": 0.29968031343684814
       },
       {
         "frame": 98,
         "time": 4.9,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.7574032938258225
+        "displacement": 0.33593592296704644
       },
       {
         "frame": 99,
         "time": 4.95,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 1.8933504875118061
+        "displacement": 0.4648089581093508
       },
       {
         "frame": 100,
         "time": 5,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 2.366563445268268
+        "displacement": 0.48082539678248326
       },
       {
         "frame": 101,
         "time": 5.05,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 2.3180793506560033
+        "displacement": 0.39116574246169633
       },
       {
         "frame": 102,
         "time": 5.1,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 1.8582318763822767
+        "displacement": 0.2346569157642893
       },
       {
         "frame": 103,
         "time": 5.15,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 1.8333387402672405
+        "displacement": 0.15729604407593367
       },
       {
         "frame": 104,
         "time": 5.2,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 1.6401468451596015
+        "displacement": 0.11152268680835886
       },
       {
         "frame": 105,
         "time": 5.25,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 1.1394167038722562
+        "displacement": 0.1526867419153712
       },
       {
         "frame": 106,
         "time": 5.3,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.44485670378291053
+        "displacement": 0.17232473367894302
       },
       {
         "frame": 107,
         "time": 5.35,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.5188915482155142
+        "displacement": 0.15570673215280273
       },
       {
         "frame": 108,
         "time": 5.4,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.8658686908209762
+        "displacement": 0.20747721651359763
       },
       {
         "frame": 109,
         "time": 5.45,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 1.1380127046522333
+        "displacement": 0.20977501351447753
       },
       {
         "frame": 110,
         "time": 5.5,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 1.152827384387878
+        "displacement": 0.1650978748076308
       },
       {
         "frame": 111,
         "time": 5.55,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.9400150288606354
+        "displacement": 0.09080506512613172
       },
       {
         "frame": 112,
         "time": 5.6,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.7597345959952039
+        "displacement": 0.04499735537157354
       },
       {
         "frame": 113,
         "time": 5.65,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.6952162536466526
+        "displacement": 0.05180040364179017
       },
       {
         "frame": 114,
         "time": 5.7,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.492892158347204
+        "displacement": 0.08557829634809355
       },
       {
         "frame": 115,
         "time": 5.75,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.19109981760730085
+        "displacement": 0.08969231837707822
       },
       {
         "frame": 116,
         "time": 5.8,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.2326347045771567
+        "displacement": 0.07304123538330397
       },
       {
         "frame": 117,
         "time": 5.85,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.4038660482881638
+        "displacement": 0.08760390522248873
       },
       {
         "frame": 118,
         "time": 5.9,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.5507869728341793
+        "displacement": 0.08592893209899505
       },
       {
         "frame": 119,
         "time": 5.95,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.5567319684131732
+        "displacement": 0.0651917185617295
       },
       {
         "frame": 120,
         "time": 6,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.44531626369585864
+        "displacement": 0.032547971072450305
       },
       {
         "frame": 121,
         "time": 6.05,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.30394353987653216
+        "displacement": 0.015567059934347703
       },
       {
         "frame": 122,
         "time": 6.1,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.2718384932586849
+        "displacement": 0.030853070225947014
       },
       {
         "frame": 123,
         "time": 6.15,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.18567885071227982
+        "displacement": 0.0455651261795648
       },
       {
         "frame": 124,
         "time": 6.2,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.1320960483752235
+        "displacement": 0.045048021714176524
       },
       {
         "frame": 125,
         "time": 6.25,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.1484266348655721
+        "displacement": 0.032168620332068534
       },
       {
         "frame": 126,
         "time": 6.3,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.19672041123777154
+        "displacement": 0.019309906469279037
       },
       {
         "frame": 127,
         "time": 6.35,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.2581442002359488
+        "displacement": 0.01699088329929191
       },
       {
         "frame": 128,
         "time": 6.4,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.255699878666806
+        "displacement": 0.020270433902637608
       },
       {
         "frame": 129,
         "time": 6.45,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.1991390426092391
+        "displacement": 0.025598560110137454
       },
       {
         "frame": 130,
         "time": 6.5,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.11676030826730152
+        "displacement": 0.022543399275320595
       },
       {
         "frame": 131,
         "time": 6.55,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.10199163374239954
+        "displacement": 0.013530843143159024
       },
       {
         "frame": 132,
         "time": 6.6,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.06548341213477613
+        "displacement": 0.006005739215214155
       },
       {
         "frame": 133,
         "time": 6.65,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.07528808762465333
+        "displacement": 0.00784387199413178
       },
       {
         "frame": 134,
         "time": 6.7,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.08129850873300934
+        "displacement": 0.014029683407766993
       },
       {
         "frame": 135,
         "time": 6.75,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.09428375688430406
+        "displacement": 0.01518812220514769
       },
       {
         "frame": 136,
         "time": 6.8,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.11740357292270139
+        "displacement": 0.011806575798010322
       },
       {
         "frame": 137,
         "time": 6.85,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.11197911295109701
+        "displacement": 0.005593654813897441
       },
       {
         "frame": 138,
         "time": 6.9,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.0827931962295963
+        "displacement": 0.0012093139465070984
       },
       {
         "frame": 139,
         "time": 6.95,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.04194518456395483
+        "displacement": 0.006557211228000268
       },
       {
         "frame": 140,
         "time": 7,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.03012245320041534
+        "displacement": 0
       },
       {
         "frame": 141,
         "time": 7.05,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.03248637571006247
+        "displacement": 0
       },
       {
         "frame": 142,
         "time": 7.1,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.044321761014346976
+        "displacement": 0
       },
       {
         "frame": 143,
         "time": 7.15,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.04248266921543541
+        "displacement": 0
       },
       {
         "frame": 144,
         "time": 7.2,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.040017423080456443
+        "displacement": 0
       },
       {
         "frame": 145,
         "time": 7.25,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.048648642932762255
+        "displacement": 0
       },
       {
         "frame": 146,
         "time": 7.3,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.04571000923944525
+        "displacement": 0
       },
       {
         "frame": 147,
         "time": 7.35,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.032752996201246866
+        "displacement": 0
       },
       {
         "frame": 148,
         "time": 7.4,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.014688855683504903
+        "displacement": 0
       },
       {
         "frame": 149,
         "time": 7.45,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.009394424938440489
+        "displacement": 0
       },
       {
         "frame": 150,
         "time": 7.5,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.020322951263660897
+        "displacement": 0
       },
       {
         "frame": 151,
         "time": 7.55,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.026448688235972653
+        "displacement": 0
       },
       {
         "frame": 152,
         "time": 7.6,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.02411026972780049
+        "displacement": 0
       },
       {
         "frame": 153,
         "time": 7.65,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.015404036631476681
+        "displacement": 0
       },
       {
         "frame": 154,
         "time": 7.7,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.003714568293519391
+        "displacement": 0
       },
       {
         "frame": 155,
         "time": 7.75,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.007134149878616823
+        "displacement": 0
       },
       {
         "frame": 156,
         "time": 7.8,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.014171106804186297
+        "displacement": 0
       },
       {
         "frame": 157,
         "time": 7.85,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.016001471608345277
+        "displacement": 0
       },
       {
         "frame": 158,
         "time": 7.9,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.012949339183615564
+        "displacement": 0
       },
       {
         "frame": 159,
         "time": 7.95,
         "shakeSteps": 651,
         "autoPulses": 5,
-        "displacement": 0.006684763306948747
+        "displacement": 0
       }
     ]
   },
   {
     "name": "canvas-ember",
-    "peak": 3.2494678827169095,
+    "peak": 10.63547707376485,
     "timing": [
       {
         "frame": 0,
@@ -5715,343 +5715,343 @@
         "time": 0.55,
         "shakeSteps": 2,
         "autoPulses": 0,
-        "displacement": 0.053935222429520174
+        "displacement": 0.2840134670187743
       },
       {
         "frame": 12,
         "time": 0.6,
         "shakeSteps": 8,
         "autoPulses": 0,
-        "displacement": 0.6347421239
+        "displacement": 2.9607360667736122
       },
       {
         "frame": 13,
         "time": 0.65,
         "shakeSteps": 14,
         "autoPulses": 0,
-        "displacement": 1.6448917578775741
+        "displacement": 6.832297989276087
       },
       {
         "frame": 14,
         "time": 0.7,
         "shakeSteps": 20,
         "autoPulses": 0,
-        "displacement": 2.663798146995666
+        "displacement": 9.825506356164935
       },
       {
         "frame": 15,
         "time": 0.75,
         "shakeSteps": 26,
         "autoPulses": 0,
-        "displacement": 3.2494678827169095
+        "displacement": 10.63547707376485
       },
       {
         "frame": 16,
         "time": 0.8,
         "shakeSteps": 32,
         "autoPulses": 0,
-        "displacement": 3.1834185114764932
+        "displacement": 9.284481855553578
       },
       {
         "frame": 17,
         "time": 0.85,
         "shakeSteps": 38,
         "autoPulses": 0,
-        "displacement": 2.527038613513772
+        "displacement": 6.744638982443319
       },
       {
         "frame": 18,
         "time": 0.9,
         "shakeSteps": 44,
         "autoPulses": 0,
-        "displacement": 1.610616367203532
+        "displacement": 4.617492242508685
       },
       {
         "frame": 19,
         "time": 0.95,
         "shakeSteps": 50,
         "autoPulses": 0,
-        "displacement": 1.126938904642677
+        "displacement": 4.699513861916597
       },
       {
         "frame": 20,
         "time": 1,
         "shakeSteps": 56,
         "autoPulses": 0,
-        "displacement": 1.4566293822739207
+        "displacement": 6.319669740760775
       },
       {
         "frame": 21,
         "time": 1.05,
         "shakeSteps": 62,
         "autoPulses": 0,
-        "displacement": 1.9994132951826855
+        "displacement": 8.012724276685194
       },
       {
         "frame": 22,
         "time": 1.1,
         "shakeSteps": 68,
         "autoPulses": 0,
-        "displacement": 2.5286322622643054
+        "displacement": 9.130008871719903
       },
       {
         "frame": 23,
         "time": 1.15,
         "shakeSteps": 74,
         "autoPulses": 0,
-        "displacement": 2.8774183470296006
+        "displacement": 9.220056446354272
       },
       {
         "frame": 24,
         "time": 1.2,
         "shakeSteps": 77,
         "autoPulses": 0,
-        "displacement": 2.520796650076572
+        "displacement": 7.1807476084516475
       },
       {
         "frame": 25,
         "time": 1.25,
         "shakeSteps": 77,
         "autoPulses": 0,
-        "displacement": 0.809364941661111
+        "displacement": 1.9208208942242964
       },
       {
         "frame": 26,
         "time": 1.3,
         "shakeSteps": 77,
         "autoPulses": 0,
-        "displacement": 0.9059858025237647
+        "displacement": 3.1783607825738853
       },
       {
         "frame": 27,
         "time": 1.35,
         "shakeSteps": 77,
         "autoPulses": 0,
-        "displacement": 1.274510526914203
+        "displacement": 3.772852117625823
       },
       {
         "frame": 28,
         "time": 1.4,
         "shakeSteps": 82,
         "autoPulses": 0,
-        "displacement": 0.9407223753683105
+        "displacement": 3.0805054217928136
       },
       {
         "frame": 29,
         "time": 1.45,
         "shakeSteps": 88,
         "autoPulses": 0,
-        "displacement": 1.2733330829796767
+        "displacement": 5.363360937747455
       },
       {
         "frame": 30,
         "time": 1.5,
         "shakeSteps": 94,
         "autoPulses": 0,
-        "displacement": 2.192882365733867
+        "displacement": 8.457539896251651
       },
       {
         "frame": 31,
         "time": 1.55,
         "shakeSteps": 100,
         "autoPulses": 0,
-        "displacement": 2.9604786446873597
+        "displacement": 10.067161188590937
       },
       {
         "frame": 32,
         "time": 1.6,
         "shakeSteps": 106,
         "autoPulses": 0,
-        "displacement": 3.153968338082373
+        "displacement": 9.21905285542432
       },
       {
         "frame": 33,
         "time": 1.65,
         "shakeSteps": 112,
         "autoPulses": 0,
-        "displacement": 2.555833953419115
+        "displacement": 6.668227942426086
       },
       {
         "frame": 34,
         "time": 1.7,
         "shakeSteps": 118,
         "autoPulses": 0,
-        "displacement": 1.7222551225135838
+        "displacement": 4.890329259224553
       },
       {
         "frame": 35,
         "time": 1.75,
         "shakeSteps": 124,
         "autoPulses": 0,
-        "displacement": 1.213748677352027
+        "displacement": 3.946939222351472
       },
       {
         "frame": 36,
         "time": 1.8,
         "shakeSteps": 130,
         "autoPulses": 0,
-        "displacement": 1.0279484304016957
+        "displacement": 3.075699769544586
       },
       {
         "frame": 37,
         "time": 1.85,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.8060520724664856
+        "displacement": 2.477830542800969
       },
       {
         "frame": 38,
         "time": 1.9,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.39057074104150397
+        "displacement": 1.4207051416369578
       },
       {
         "frame": 39,
         "time": 1.95,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.38361758865379636
+        "displacement": 1.241880518393556
       },
       {
         "frame": 40,
         "time": 2,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.4249103804499457
+        "displacement": 1.2852740212543876
       },
       {
         "frame": 41,
         "time": 2.05,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.2473653244443608
+        "displacement": 0.8132329355300806
       },
       {
         "frame": 42,
         "time": 2.1,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.14459058907272299
+        "displacement": 0.5119670672037926
       },
       {
         "frame": 43,
         "time": 2.15,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.20546926387262382
+        "displacement": 0.6202025675808828
       },
       {
         "frame": 44,
         "time": 2.2,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.1459834343818141
+        "displacement": 0.45337311317317197
       },
       {
         "frame": 45,
         "time": 2.25,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.05940322521361543
+        "displacement": 0.22269667281177197
       },
       {
         "frame": 46,
         "time": 2.3,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.09185649430163699
+        "displacement": 0.2794412293539882
       },
       {
         "frame": 47,
         "time": 2.35,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.07838564464958506
+        "displacement": 0.23661904126020777
       },
       {
         "frame": 48,
         "time": 2.4,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.031416812496325545
+        "displacement": 0.1097821470064818
       },
       {
         "frame": 49,
         "time": 2.45,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.03795715085873267
+        "displacement": 0.11770815714366784
       },
       {
         "frame": 50,
         "time": 2.5,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.03873693517555217
+        "displacement": 0.11532733533458576
       },
       {
         "frame": 51,
         "time": 2.55,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.017924587933647762
+        "displacement": 0.05837793607264437
       },
       {
         "frame": 52,
         "time": 2.6,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.014400988543406714
+        "displacement": 0.046377952742051504
       },
       {
         "frame": 53,
         "time": 2.65,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.01749900962706771
+        "displacement": 0.05259642803836121
       },
       {
         "frame": 54,
         "time": 2.7,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.009513599786331126
+        "displacement": 0.030330266537789596
       },
       {
         "frame": 55,
         "time": 2.75,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0.005042651012258174
+        "displacement": 0.01729191776596933
       },
       {
         "frame": 56,
         "time": 2.8,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0
+        "displacement": 0.02239803499293896
       },
       {
         "frame": 57,
         "time": 2.85,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0
+        "displacement": 0.013424994308427224
       },
       {
         "frame": 58,
         "time": 2.9,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0
+        "displacement": 0.008046886185771797
       },
       {
         "frame": 59,
         "time": 2.95,
         "shakeSteps": 131,
         "autoPulses": 0,
-        "displacement": 0
+        "displacement": 0.004945639652033291
       },
       {
         "frame": 60,
@@ -6127,196 +6127,196 @@
         "frame": 70,
         "time": 3.5,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.9224333895472375
       },
       {
         "frame": 71,
         "time": 3.55,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 3.9386099263602823
       },
       {
         "frame": 72,
         "time": 3.6,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 3.2063519714327384
       },
       {
         "frame": 73,
         "time": 3.65,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.5701291877284576
       },
       {
         "frame": 74,
         "time": 3.7,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 1.4795219477095514
       },
       {
         "frame": 75,
         "time": 3.75,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 1.7412655698420538
       },
       {
         "frame": 76,
         "time": 3.8,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.6829667923624742
       },
       {
         "frame": 77,
         "time": 3.85,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.46455875525386064
       },
       {
         "frame": 78,
         "time": 3.9,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.8496718136383793
       },
       {
         "frame": 79,
         "time": 3.95,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.47912778664810635
       },
       {
         "frame": 80,
         "time": 4,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.09493604750633926
       },
       {
         "frame": 81,
         "time": 4.05,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.3782365677254858
       },
       {
         "frame": 82,
         "time": 4.1,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.27664296540884303
       },
       {
         "frame": 83,
         "time": 4.15,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.03538265096646914
       },
       {
         "frame": 84,
         "time": 4.2,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.15303501859643695
       },
       {
         "frame": 85,
         "time": 4.25,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.1419243055808111
       },
       {
         "frame": 86,
         "time": 4.3,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.03934672782003424
       },
       {
         "frame": 87,
         "time": 4.35,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.0548312720921417
       },
       {
         "frame": 88,
         "time": 4.4,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.06633673194886905
       },
       {
         "frame": 89,
         "time": 4.45,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.026967177502801688
       },
       {
         "frame": 90,
         "time": 4.5,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.016452265239492902
       },
       {
         "frame": 91,
         "time": 4.55,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.02777737998322242
       },
       {
         "frame": 92,
         "time": 4.6,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.015433892271886004
       },
       {
         "frame": 93,
         "time": 4.65,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.00435955574420979
       },
       {
         "frame": 94,
         "time": 4.7,
         "shakeSteps": 131,
-        "autoPulses": 0,
-        "displacement": 0
+        "autoPulses": 1,
+        "displacement": 0.0058012177143779466
       },
       {
         "frame": 95,
         "time": 4.75,
         "shakeSteps": 131,
-        "autoPulses": 0,
+        "autoPulses": 1,
         "displacement": 0
       },
       {
         "frame": 96,
         "time": 4.8,
         "shakeSteps": 131,
-        "autoPulses": 0,
+        "autoPulses": 1,
         "displacement": 0
       },
       {
         "frame": 97,
         "time": 4.85,
         "shakeSteps": 131,
-        "autoPulses": 0,
+        "autoPulses": 1,
         "displacement": 0
       },
       {
@@ -6324,147 +6324,147 @@
         "time": 4.9,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.9128637752682356
+        "displacement": 0
       },
       {
         "frame": 99,
         "time": 4.95,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 1.2136853718472498
+        "displacement": 0
       },
       {
         "frame": 100,
         "time": 5,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.5977933899783587
+        "displacement": 0
       },
       {
         "frame": 101,
         "time": 5.05,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.2595593376522196
+        "displacement": 0
       },
       {
         "frame": 102,
         "time": 5.1,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.5613756283512672
+        "displacement": 0
       },
       {
         "frame": 103,
         "time": 5.15,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.3981331560282008
+        "displacement": 0
       },
       {
         "frame": 104,
         "time": 5.2,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.03581435176047123
+        "displacement": 0
       },
       {
         "frame": 105,
         "time": 5.25,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.23573126306552752
+        "displacement": 0
       },
       {
         "frame": 106,
         "time": 5.3,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.2230107769783992
+        "displacement": 0
       },
       {
         "frame": 107,
         "time": 5.35,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.054720013715720606
+        "displacement": 0
       },
       {
         "frame": 108,
         "time": 5.4,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.08832121957648845
+        "displacement": 0
       },
       {
         "frame": 109,
         "time": 5.45,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.11172801986254197
+        "displacement": 0
       },
       {
         "frame": 110,
         "time": 5.5,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.04476157770824802
+        "displacement": 0
       },
       {
         "frame": 111,
         "time": 5.55,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.028140242696701654
+        "displacement": 0
       },
       {
         "frame": 112,
         "time": 5.6,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.050078252394066075
+        "displacement": 0
       },
       {
         "frame": 113,
         "time": 5.65,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.027345527309182195
+        "displacement": 0
       },
       {
         "frame": 114,
         "time": 5.7,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.005771310996950964
+        "displacement": 0
       },
       {
         "frame": 115,
         "time": 5.75,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.020942418232781375
+        "displacement": 0
       },
       {
         "frame": 116,
         "time": 5.8,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.014394966531394082
+        "displacement": 0
       },
       {
         "frame": 117,
         "time": 5.85,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.0011653073393673836
+        "displacement": 0
       },
       {
         "frame": 118,
         "time": 5.9,
         "shakeSteps": 131,
         "autoPulses": 1,
-        "displacement": 0.009801785621118669
+        "displacement": 0
       },
       {
         "frame": 119,
@@ -6757,7 +6757,7 @@
   },
   {
     "name": "canvas-santa",
-    "peak": 11.898370361549103,
+    "peak": 25.43177279270974,
     "timing": [
       {
         "frame": 0,
@@ -6841,1043 +6841,1043 @@
         "time": 0.55,
         "shakeSteps": 133,
         "autoPulses": 1,
-        "displacement": 0.02382116913513233
+        "displacement": 0.08343621471674346
       },
       {
         "frame": 12,
         "time": 0.6,
         "shakeSteps": 139,
         "autoPulses": 1,
-        "displacement": 0.34323098006240904
+        "displacement": 1.0780507444661922
       },
       {
         "frame": 13,
         "time": 0.65,
         "shakeSteps": 145,
         "autoPulses": 1,
-        "displacement": 1.1222021063167
+        "displacement": 3.209136453973405
       },
       {
         "frame": 14,
         "time": 0.7,
         "shakeSteps": 151,
         "autoPulses": 1,
-        "displacement": 2.3663981655200055
+        "displacement": 6.252752031939183
       },
       {
         "frame": 15,
         "time": 0.75,
         "shakeSteps": 157,
         "autoPulses": 1,
-        "displacement": 3.922435959415843
+        "displacement": 9.681988414036258
       },
       {
         "frame": 16,
         "time": 0.8,
         "shakeSteps": 163,
         "autoPulses": 1,
-        "displacement": 5.535547683674704
+        "displacement": 12.959977681884725
       },
       {
         "frame": 17,
         "time": 0.85,
         "shakeSteps": 169,
         "autoPulses": 1,
-        "displacement": 6.90175304568536
+        "displacement": 15.32485185737661
       },
       {
         "frame": 18,
         "time": 0.9,
         "shakeSteps": 175,
         "autoPulses": 1,
-        "displacement": 7.617767285239843
+        "displacement": 16.09715718566213
       },
       {
         "frame": 19,
         "time": 0.95,
         "shakeSteps": 181,
         "autoPulses": 1,
-        "displacement": 7.528003249415812
+        "displacement": 15.11156057580754
       },
       {
         "frame": 20,
         "time": 1,
         "shakeSteps": 187,
         "autoPulses": 1,
-        "displacement": 6.559015583639554
+        "displacement": 12.255545859924428
       },
       {
         "frame": 21,
         "time": 1.05,
         "shakeSteps": 193,
         "autoPulses": 1,
-        "displacement": 4.827941150787554
+        "displacement": 8.536273497039554
       },
       {
         "frame": 22,
         "time": 1.1,
         "shakeSteps": 199,
         "autoPulses": 1,
-        "displacement": 3.194212887598555
+        "displacement": 8.064812922905547
       },
       {
         "frame": 23,
         "time": 1.15,
         "shakeSteps": 205,
         "autoPulses": 1,
-        "displacement": 4.432644434420978
+        "displacement": 12.69241825585946
       },
       {
         "frame": 24,
         "time": 1.2,
         "shakeSteps": 208,
         "autoPulses": 1,
-        "displacement": 6.736511712806007
+        "displacement": 17.278056873719635
       },
       {
         "frame": 25,
         "time": 1.25,
         "shakeSteps": 208,
         "autoPulses": 1,
-        "displacement": 8.419259824546943
+        "displacement": 20.469063929621047
       },
       {
         "frame": 26,
         "time": 1.3,
         "shakeSteps": 208,
         "autoPulses": 1,
-        "displacement": 9.166952272061497
+        "displacement": 21.022625643848187
       },
       {
         "frame": 27,
         "time": 1.35,
         "shakeSteps": 208,
         "autoPulses": 1,
-        "displacement": 8.759184153282394
+        "displacement": 19.098220970120863
       },
       {
         "frame": 28,
         "time": 1.4,
         "shakeSteps": 213,
         "autoPulses": 1,
-        "displacement": 7.264322048665455
+        "displacement": 14.839338121620507
       },
       {
         "frame": 29,
         "time": 1.45,
         "shakeSteps": 219,
         "autoPulses": 1,
-        "displacement": 4.779124482223695
+        "displacement": 8.652733947284016
       },
       {
         "frame": 30,
         "time": 1.5,
         "shakeSteps": 225,
         "autoPulses": 1,
-        "displacement": 2.3443727451541045
+        "displacement": 6.082000159774863
       },
       {
         "frame": 31,
         "time": 1.55,
         "shakeSteps": 231,
         "autoPulses": 1,
-        "displacement": 4.613399477055113
+        "displacement": 12.422086451901215
       },
       {
         "frame": 32,
         "time": 1.6,
         "shakeSteps": 237,
         "autoPulses": 1,
-        "displacement": 7.3624418375306835
+        "displacement": 18.155588400489037
       },
       {
         "frame": 33,
         "time": 1.65,
         "shakeSteps": 243,
         "autoPulses": 1,
-        "displacement": 9.869558672495192
+        "displacement": 23.18363424691454
       },
       {
         "frame": 34,
         "time": 1.7,
         "shakeSteps": 249,
         "autoPulses": 1,
-        "displacement": 11.459994106976477
+        "displacement": 25.43177279270974
       },
       {
         "frame": 35,
         "time": 1.75,
         "shakeSteps": 255,
         "autoPulses": 1,
-        "displacement": 11.898370361549103
+        "displacement": 25.083932051332482
       },
       {
         "frame": 36,
         "time": 1.8,
         "shakeSteps": 261,
         "autoPulses": 1,
-        "displacement": 11.342972088411358
+        "displacement": 22.715949301080236
       },
       {
         "frame": 37,
         "time": 1.85,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 9.881386645523593
+        "displacement": 18.821734518927226
       },
       {
         "frame": 38,
         "time": 1.9,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 7.631310599058953
+        "displacement": 13.92549296903741
       },
       {
         "frame": 39,
         "time": 1.95,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 5.109146789769704
+        "displacement": 9.366557191933722
       },
       {
         "frame": 40,
         "time": 2,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 3.1263464113437247
+        "displacement": 7.189963856712929
       },
       {
         "frame": 41,
         "time": 2.05,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 2.988939651785427
+        "displacement": 8.27663764689445
       },
       {
         "frame": 42,
         "time": 2.1,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 4.126022313841665
+        "displacement": 10.22892892575844
       },
       {
         "frame": 43,
         "time": 2.15,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 5.082214007609755
+        "displacement": 11.382565360140303
       },
       {
         "frame": 44,
         "time": 2.2,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 5.43193737676984
+        "displacement": 11.318533840140079
       },
       {
         "frame": 45,
         "time": 2.25,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 5.143497233095144
+        "displacement": 10.121566951507997
       },
       {
         "frame": 46,
         "time": 2.3,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 4.334708628599971
+        "displacement": 8.119258713559732
       },
       {
         "frame": 47,
         "time": 2.35,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 3.2073390862628517
+        "displacement": 5.805423589564506
       },
       {
         "frame": 48,
         "time": 2.4,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 2.041972844680757
+        "displacement": 3.91023291214516
       },
       {
         "frame": 49,
         "time": 2.45,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 1.3292447911605876
+        "displacement": 3.427210983736384
       },
       {
         "frame": 50,
         "time": 2.5,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 1.5608945760429211
+        "displacement": 4.190767000706858
       },
       {
         "frame": 51,
         "time": 2.55,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 2.1031802146336656
+        "displacement": 5.002031724801661
       },
       {
         "frame": 52,
         "time": 2.6,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 2.446468438888268
+        "displacement": 5.321673461676167
       },
       {
         "frame": 53,
         "time": 2.65,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 2.4852201353899392
+        "displacement": 5.062762906539074
       },
       {
         "frame": 54,
         "time": 2.7,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 2.2422351983301403
+        "displacement": 4.324097538626628
       },
       {
         "frame": 55,
         "time": 2.75,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 1.7949046431339974
+        "displacement": 3.301790625110625
       },
       {
         "frame": 56,
         "time": 2.8,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 1.253208491034156
+        "displacement": 2.2716473948891087
       },
       {
         "frame": 57,
         "time": 2.85,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.77372149321715
+        "displacement": 1.6399344054971348
       },
       {
         "frame": 58,
         "time": 2.9,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.6235151422134149
+        "displacement": 1.7174268798186039
       },
       {
         "frame": 59,
         "time": 2.95,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.8229419795339662
+        "displacement": 2.104061952918032
       },
       {
         "frame": 60,
         "time": 3,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 1.0376173953950474
+        "displacement": 2.3705344873858705
       },
       {
         "frame": 61,
         "time": 3.05,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 1.1339472297338358
+        "displacement": 2.3882471819964937
       },
       {
         "frame": 62,
         "time": 3.1,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 1.0939664800075468
+        "displacement": 2.163947521534164
       },
       {
         "frame": 63,
         "time": 3.15,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.9392413121510206
+        "displacement": 1.7637326047196498
       },
       {
         "frame": 64,
         "time": 3.2,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.7109577453023164
+        "displacement": 1.288376195999527
       },
       {
         "frame": 65,
         "time": 3.25,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.46545907448988494
+        "displacement": 0.8782788544639184
       },
       {
         "frame": 66,
         "time": 3.3,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.29329554168562544
+        "displacement": 0.7226486980830072
       },
       {
         "frame": 67,
         "time": 3.35,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.3079012084919715
+        "displacement": 0.8362162085598539
       },
       {
         "frame": 68,
         "time": 3.4,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.41284313834150665
+        "displacement": 0.9913349732561338
       },
       {
         "frame": 69,
         "time": 3.45,
         "shakeSteps": 262,
         "autoPulses": 1,
-        "displacement": 0.4862781408863926
+        "displacement": 1.059660392095747
       },
       {
         "frame": 70,
         "time": 3.5,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.4988608560746638
+        "autoPulses": 2,
+        "displacement": 1.4310404755592843
       },
       {
         "frame": 71,
         "time": 3.55,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.45351276183310746
+        "autoPulses": 2,
+        "displacement": 3.5224225872898582
       },
       {
         "frame": 72,
         "time": 3.6,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.36571686838090595
+        "autoPulses": 2,
+        "displacement": 4.569612818086032
       },
       {
         "frame": 73,
         "time": 3.65,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.25767331014290384
+        "autoPulses": 2,
+        "displacement": 4.519700704666403
       },
       {
         "frame": 74,
         "time": 3.7,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.15985169919830014
+        "autoPulses": 2,
+        "displacement": 3.634589007049528
       },
       {
         "frame": 75,
         "time": 3.75,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.11814604396271358
+        "autoPulses": 2,
+        "displacement": 3.1234580757152957
       },
       {
         "frame": 76,
         "time": 3.8,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.15114376292130788
+        "autoPulses": 2,
+        "displacement": 2.7285791203461036
       },
       {
         "frame": 77,
         "time": 3.85,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.19232507216036013
+        "autoPulses": 2,
+        "displacement": 1.938932240924898
       },
       {
         "frame": 78,
         "time": 3.9,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.21203345197183765
+        "autoPulses": 2,
+        "displacement": 0.801830912773973
       },
       {
         "frame": 79,
         "time": 3.95,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.20619479904339752
+        "autoPulses": 2,
+        "displacement": 0.9063635372108481
       },
       {
         "frame": 80,
         "time": 4,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.17881323833716592
+        "autoPulses": 2,
+        "displacement": 1.657694626436019
       },
       {
         "frame": 81,
         "time": 4.05,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.13741411917737306
+        "autoPulses": 2,
+        "displacement": 2.091085530710113
       },
       {
         "frame": 82,
         "time": 4.1,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.09177487248268541
+        "autoPulses": 2,
+        "displacement": 2.1640059660485673
       },
       {
         "frame": 83,
         "time": 4.15,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.061793650664205835
+        "autoPulses": 2,
+        "displacement": 1.7962468216819958
       },
       {
         "frame": 84,
         "time": 4.2,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.05230910958439179
+        "autoPulses": 2,
+        "displacement": 1.2195804839080011
       },
       {
         "frame": 85,
         "time": 4.25,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.06995565716510588
+        "autoPulses": 2,
+        "displacement": 1.1386601900918063
       },
       {
         "frame": 86,
         "time": 4.3,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.08440270533139171
+        "autoPulses": 2,
+        "displacement": 0.843217969505807
       },
       {
         "frame": 87,
         "time": 4.35,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.0885268688571866
+        "autoPulses": 2,
+        "displacement": 0.3709715411870221
       },
       {
         "frame": 88,
         "time": 4.4,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.08224968628965575
+        "autoPulses": 2,
+        "displacement": 0.4815259261540459
       },
       {
         "frame": 89,
         "time": 4.45,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.06799046540337564
+        "autoPulses": 2,
+        "displacement": 0.689038852979087
       },
       {
         "frame": 90,
         "time": 4.5,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.04977324171012207
+        "autoPulses": 2,
+        "displacement": 0.9816053026709814
       },
       {
         "frame": 91,
         "time": 4.55,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.03719109314010303
+        "autoPulses": 2,
+        "displacement": 1.0292876285719168
       },
       {
         "frame": 92,
         "time": 4.6,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.024017866734843574
+        "autoPulses": 2,
+        "displacement": 0.8536017028845645
       },
       {
         "frame": 93,
         "time": 4.65,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.022654304879676145
+        "autoPulses": 2,
+        "displacement": 0.5394133153555128
       },
       {
         "frame": 94,
         "time": 4.7,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.03024121380863705
+        "autoPulses": 2,
+        "displacement": 0.4521024358136587
       },
       {
         "frame": 95,
         "time": 4.75,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.034906893376578436
+        "autoPulses": 2,
+        "displacement": 0.3291295109480313
       },
       {
         "frame": 96,
         "time": 4.8,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.035316034944249466
+        "autoPulses": 2,
+        "displacement": 0.24701649888632374
       },
       {
         "frame": 97,
         "time": 4.85,
         "shakeSteps": 262,
-        "autoPulses": 1,
-        "displacement": 0.03190507945427147
+        "autoPulses": 2,
+        "displacement": 0.29968031343685025
       },
       {
         "frame": 98,
         "time": 4.9,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.7574032938258223
+        "displacement": 0.3359359229670491
       },
       {
         "frame": 99,
         "time": 4.95,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 1.8933504875118043
+        "displacement": 0.46480895810935363
       },
       {
         "frame": 100,
         "time": 5,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 2.366563445268266
+        "displacement": 0.4808253967824858
       },
       {
         "frame": 101,
         "time": 5.05,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 2.3180793506560016
+        "displacement": 0.3911657424616984
       },
       {
         "frame": 102,
         "time": 5.1,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 1.858231876382275
+        "displacement": 0.23465691576429076
       },
       {
         "frame": 103,
         "time": 5.15,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 1.8333387402672392
+        "displacement": 0.1572960440759343
       },
       {
         "frame": 104,
         "time": 5.2,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 1.6401468451596006
+        "displacement": 0.11152268680835875
       },
       {
         "frame": 105,
         "time": 5.25,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 1.1394167038722556
+        "displacement": 0.15268674191537182
       },
       {
         "frame": 106,
         "time": 5.3,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.4448567037829105
+        "displacement": 0.17232473367894405
       },
       {
         "frame": 107,
         "time": 5.35,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.5188915482155138
+        "displacement": 0.15570673215280387
       },
       {
         "frame": 108,
         "time": 5.4,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.8658686908209757
+        "displacement": 0.20747721651359882
       },
       {
         "frame": 109,
         "time": 5.45,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 1.1380127046522324
+        "displacement": 0.20977501351447866
       },
       {
         "frame": 110,
         "time": 5.5,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 1.1528273843878771
+        "displacement": 0.16509787480763174
       },
       {
         "frame": 111,
         "time": 5.55,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.9400150288606346
+        "displacement": 0.09080506512613233
       },
       {
         "frame": 112,
         "time": 5.6,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.7597345959952032
+        "displacement": 0.044997355371573886
       },
       {
         "frame": 113,
         "time": 5.65,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.6952162536466522
+        "displacement": 0.0518004036417902
       },
       {
         "frame": 114,
         "time": 5.7,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.4928921583472037
+        "displacement": 0.08557829634809377
       },
       {
         "frame": 115,
         "time": 5.75,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.19109981760730071
+        "displacement": 0.0896923183770786
       },
       {
         "frame": 116,
         "time": 5.8,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.2326347045771568
+        "displacement": 0.07304123538330443
       },
       {
         "frame": 117,
         "time": 5.85,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.4038660482881635
+        "displacement": 0.08760390522248925
       },
       {
         "frame": 118,
         "time": 5.9,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.5507869728341788
+        "displacement": 0.08592893209899553
       },
       {
         "frame": 119,
         "time": 5.95,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.5567319684131725
+        "displacement": 0.06519171856172991
       },
       {
         "frame": 120,
         "time": 6,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.44531626369585803
+        "displacement": 0.032547971072450596
       },
       {
         "frame": 121,
         "time": 6.05,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.3039435398765318
+        "displacement": 0.015567059934347831
       },
       {
         "frame": 122,
         "time": 6.1,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.2718384932586846
+        "displacement": 0.03085307022594705
       },
       {
         "frame": 123,
         "time": 6.15,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.18567885071227966
+        "displacement": 0.04556512617956495
       },
       {
         "frame": 124,
         "time": 6.2,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.1320960483752234
+        "displacement": 0.045048021714176725
       },
       {
         "frame": 125,
         "time": 6.25,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.14842663486557187
+        "displacement": 0.03216862033206873
       },
       {
         "frame": 126,
         "time": 6.3,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.1967204112377714
+        "displacement": 0.019309906469279235
       },
       {
         "frame": 127,
         "time": 6.35,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.25814420023594864
+        "displacement": 0.016990883299292076
       },
       {
         "frame": 128,
         "time": 6.4,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.25569987866680577
+        "displacement": 0.020270433902637622
       },
       {
         "frame": 129,
         "time": 6.45,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.19913904260923887
+        "displacement": 0.025598560110137534
       },
       {
         "frame": 130,
         "time": 6.5,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.11676030826730144
+        "displacement": 0.022543399275320702
       },
       {
         "frame": 131,
         "time": 6.55,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.10199163374239953
+        "displacement": 0.013530843143159124
       },
       {
         "frame": 132,
         "time": 6.6,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.06548341213477614
+        "displacement": 0.006005739215214219
       },
       {
         "frame": 133,
         "time": 6.65,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.07528808762465332
+        "displacement": 0.007843871994131765
       },
       {
         "frame": 134,
         "time": 6.7,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.08129850873300928
+        "displacement": 0.014029683407767023
       },
       {
         "frame": 135,
         "time": 6.75,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.09428375688430402
+        "displacement": 0.01518812220514775
       },
       {
         "frame": 136,
         "time": 6.8,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.11740357292270136
+        "displacement": 0.011806575798010392
       },
       {
         "frame": 137,
         "time": 6.85,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.11197911295109698
+        "displacement": 0.005593654813897497
       },
       {
         "frame": 138,
         "time": 6.9,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.08279319622959627
+        "displacement": 0.0012093139465070655
       },
       {
         "frame": 139,
         "time": 6.95,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.04194518456395478
+        "displacement": 0.006557211228000264
       },
       {
         "frame": 140,
         "time": 7,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.03012245320041535
+        "displacement": 0
       },
       {
         "frame": 141,
         "time": 7.05,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.03248637571006249
+        "displacement": 0
       },
       {
         "frame": 142,
         "time": 7.1,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.044321761014347
+        "displacement": 0
       },
       {
         "frame": 143,
         "time": 7.15,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.0424826692154354
+        "displacement": 0
       },
       {
         "frame": 144,
         "time": 7.2,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.04001742308045646
+        "displacement": 0
       },
       {
         "frame": 145,
         "time": 7.25,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.048648642932762276
+        "displacement": 0
       },
       {
         "frame": 146,
         "time": 7.3,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.04571000923944527
+        "displacement": 0
       },
       {
         "frame": 147,
         "time": 7.35,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.03275299620124687
+        "displacement": 0
       },
       {
         "frame": 148,
         "time": 7.4,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.014688855683504894
+        "displacement": 0
       },
       {
         "frame": 149,
         "time": 7.45,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.009394424938440483
+        "displacement": 0
       },
       {
         "frame": 150,
         "time": 7.5,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.02032295126366093
+        "displacement": 0
       },
       {
         "frame": 151,
         "time": 7.55,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.02644868823597268
+        "displacement": 0
       },
       {
         "frame": 152,
         "time": 7.6,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.024110269727800504
+        "displacement": 0
       },
       {
         "frame": 153,
         "time": 7.65,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.015404036631476683
+        "displacement": 0
       },
       {
         "frame": 154,
         "time": 7.7,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.0037145682935193812
+        "displacement": 0
       },
       {
         "frame": 155,
         "time": 7.75,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.007134149878616837
+        "displacement": 0
       },
       {
         "frame": 156,
         "time": 7.8,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.01417110680418631
+        "displacement": 0
       },
       {
         "frame": 157,
         "time": 7.85,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.01600147160834529
+        "displacement": 0
       },
       {
         "frame": 158,
         "time": 7.9,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.012949339183615571
+        "displacement": 0
       },
       {
         "frame": 159,
         "time": 7.95,
         "shakeSteps": 262,
         "autoPulses": 2,
-        "displacement": 0.006684763306948744
+        "displacement": 0
       }
     ]
   }

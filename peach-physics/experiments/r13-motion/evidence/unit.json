@@ -1,35 +1,35 @@
 {
-  "checks": 53,
+  "checks": 56,
   "rows": [
     {
       "id": "ember",
-      "autoPulses": 14,
-      "strongShakeVelocity": 210
+      "autoPulses": 15,
+      "strongShakeVelocity": 240
     },
     {
       "id": "midnight",
-      "autoPulses": 14,
-      "strongShakeVelocity": 200
+      "autoPulses": 15,
+      "strongShakeVelocity": 230
     },
     {
       "id": "aurelia",
-      "autoPulses": 14,
-      "strongShakeVelocity": 165
+      "autoPulses": 15,
+      "strongShakeVelocity": 204.55101672504136
     },
     {
       "id": "holly",
-      "autoPulses": 14,
-      "strongShakeVelocity": 49.171408940779294
+      "autoPulses": 15,
+      "strongShakeVelocity": 73.42857010642508
     },
     {
       "id": "santa",
-      "autoPulses": 14,
-      "strongShakeVelocity": 116.09915999906225
+      "autoPulses": 15,
+      "strongShakeVelocity": 73.42857010642508
     }
   ],
   "eventRateVelocities": [
-    210,
-    210,
-    210
+    240,
+    240,
+    240
   ]
 }
