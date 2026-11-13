@@ -2,9 +2,9 @@
 (function(root){
 'use strict';
 const calibration=Object.freeze({
- ember:{accel:2200,auto:1100,autoHz:1.15,limit:240},midnight:{accel:2100,auto:1050,autoHz:1.12,limit:230},
- aurelia:{accel:1700,auto:850,autoHz:1.10,limit:210},holly:{accel:500,auto:175,autoHz:.85,limit:110},
- santa:{accel:500,auto:230,autoHz:.65,limit:210}
+ ember:{accel:2200,auto:1375,autoHz:1.15,limit:240},midnight:{accel:2100,auto:1312.5,autoHz:1.12,limit:230},
+ aurelia:{accel:1700,auto:1062.5,autoHz:1.10,limit:210},holly:{accel:500,auto:218.75,autoHz:.85,limit:110},
+ santa:{accel:500,auto:287.5,autoHz:.65,limit:210}
 });
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 class MotionInput{
@@ -41,7 +41,7 @@ class MotionInput{
   this.filtered[0]+=(sx-this.filtered[0])*alpha;this.filtered[1]+=(sy-this.filtered[1])*alpha;
   if(this.warmup<(source==='gravity'?.5:.05)){this.force=[0,0];return true;}
   // High sensitivity near rest, smoothly limited force for vigorous shaking.
-  const length=Math.hypot(...this.filtered),gain=length>.12?2.2*Math.tanh((length-.12)/2.2)/length:0;
+  const length=Math.hypot(...this.filtered),gain=length>.08?2.2*Math.tanh((length-.08)*1.5/2.2)/length:0;
   this.force=this.filtered.map(v=>-v*gain);return true;
  }
  add(side,x,y,scale=1){

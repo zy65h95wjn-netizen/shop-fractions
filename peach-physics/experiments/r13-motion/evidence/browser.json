@@ -163,7 +163,7 @@
     {
       "id": "ember",
       "renderer": "webgl",
-      "max": 27.437871990411164,
+      "max": 27.461596689810378,
       "changed": true,
       "returned": true,
       "counts": 77,
@@ -173,7 +173,7 @@
     {
       "id": "midnight",
       "renderer": "webgl",
-      "max": 26.2621406779189,
+      "max": 26.389908105463757,
       "changed": true,
       "returned": true,
       "counts": 166,
@@ -183,7 +183,7 @@
     {
       "id": "aurelia",
       "renderer": "webgl",
-      "max": 22.036683957408272,
+      "max": 22.10964249862948,
       "changed": true,
       "returned": true,
       "counts": 255,
@@ -193,7 +193,7 @@
     {
       "id": "holly",
       "renderer": "webgl",
-      "max": 13.79137016868757,
+      "max": 13.833055010201912,
       "changed": true,
       "returned": true,
       "counts": 342,
@@ -203,7 +203,7 @@
     {
       "id": "santa",
       "renderer": "webgl",
-      "max": 39.24102099322131,
+      "max": 39.611703957714745,
       "changed": true,
       "returned": true,
       "counts": 429,
@@ -213,7 +213,7 @@
     {
       "id": "ember",
       "renderer": "canvas",
-      "max": 27.437871990411164,
+      "max": 27.461596689810378,
       "changed": true,
       "returned": true,
       "counts": 77,
@@ -223,7 +223,7 @@
     {
       "id": "midnight",
       "renderer": "canvas",
-      "max": 26.2621406779189,
+      "max": 26.389908105463757,
       "changed": true,
       "returned": true,
       "counts": 166,
@@ -233,7 +233,7 @@
     {
       "id": "aurelia",
       "renderer": "canvas",
-      "max": 22.036683957408272,
+      "max": 22.10964249862948,
       "changed": true,
       "returned": true,
       "counts": 255,
@@ -243,7 +243,7 @@
     {
       "id": "holly",
       "renderer": "canvas",
-      "max": 13.79137016868757,
+      "max": 13.833055010201912,
       "changed": true,
       "returned": true,
       "counts": 342,
@@ -253,7 +253,7 @@
     {
       "id": "santa",
       "renderer": "canvas",
-      "max": 39.24102099322131,
+      "max": 39.611703957714745,
       "changed": true,
       "returned": true,
       "counts": 429,

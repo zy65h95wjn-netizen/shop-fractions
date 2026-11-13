@@ -2,7 +2,7 @@ from pathlib import Path
 import subprocess,re,shutil
 p=Path(__file__).resolve().parent;root=p.parents[2]
 s=subprocess.check_output(['git','show','76cc6f11cff4cf77bd3d6e1eb34880246b23e9e7:peach-physics/v8/index.html'],cwd=root).decode()
-s=s.replace('<title>Peach Physics — Elf Lab 0.0.8 r12</title>','<title>Peach Physics — R13.2 motion experiment</title>').replace('v0.0.8 · r12','R13.2 motion experiment')
+s=s.replace('<title>Peach Physics — Elf Lab 0.0.8 r12</title>','<title>Peach Physics — R13.3 motion experiment</title>').replace('v0.0.8 · r12','R13.3 motion experiment')
 s=s.replace('<link rel="manifest" href="./manifest.webmanifest">','').replace('<link rel="apple-touch-icon" href="./apple-touch-icon.png">','')
 s=re.sub(r'<script>\s*if\(\'serviceWorker\'.*?</script>','',s,flags=re.S)
 s=s.replace('.slap-audio[aria-pressed="true"]', '.slap-audio[aria-checked="true"],.slap-audio[aria-pressed="true"]')

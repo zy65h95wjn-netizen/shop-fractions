@@ -3,441 +3,6 @@
     {
       "id": "ember",
       "preset": "natural",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 4.735679557153761,
-      "autoCssPeak": 2.070664563008411,
-      "autoSpeedPeakCss": 56.41704597691779,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 44,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.48807389053922257,
-          "cssPeak": 0.21340914161781413
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.48807389053927613,
-          "cssPeak": 0.21340914161783756
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0.03886746570894036,
-          "cssPeak": 0.016994706446273655
-        }
-      ]
-    },
-    {
-      "id": "ember",
-      "preset": "playful",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 5.468273814561715,
-      "autoCssPeak": 2.390989650373451,
-      "autoSpeedPeakCss": 57.621302626007555,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 43,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.5926633952701994,
-          "cssPeak": 0.2591406524802588
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.5926633952701994,
-          "cssPeak": 0.2591406524802588
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0.04539883840544614,
-          "cssPeak": 0.019850533540829766
-        }
-      ]
-    },
-    {
-      "id": "ember",
-      "preset": "chaos",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 6.358457061400635,
-      "autoCssPeak": 2.7802201465603518,
-      "autoSpeedPeakCss": 58.80902146881957,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 40,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.7575751462803731,
-          "cssPeak": 0.3312479212933682
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.7575751462803731,
-          "cssPeak": 0.3312479212933682
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0.05354072528343974,
-          "cssPeak": 0.02341055411038393
-        }
-      ]
-    },
-    {
-      "id": "midnight",
-      "preset": "natural",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 4.471112455435285,
-      "autoCssPeak": 2.1895812180271093,
-      "autoSpeedPeakCss": 59.67669752225082,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 44,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.45986238607148944,
-          "cssPeak": 0.22520257619448253
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.45986238607148944,
-          "cssPeak": 0.22520257619448253
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0.03662375384690154,
-          "cssPeak": 0.017935286655413978
-        }
-      ]
-    },
-    {
-      "id": "midnight",
-      "preset": "playful",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 5.162613069663514,
-      "autoCssPeak": 2.528221046986843,
-      "autoSpeedPeakCss": 60.950533444399085,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 43,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.558412668043322,
-          "cssPeak": 0.2734643563638638
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.558412668043322,
-          "cssPeak": 0.2734643563638638
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0.042778087388184664,
-          "cssPeak": 0.02094917039593285
-        }
-      ]
-    },
-    {
-      "id": "midnight",
-      "preset": "chaos",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 6.0028692725185335,
-      "autoCssPeak": 2.939709064441106,
-      "autoSpeedPeakCss": 62.2068760425736,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 41,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.7132762510434766,
-          "cssPeak": 0.34930373550569505
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.7132762510426665,
-          "cssPeak": 0.3493037355052983
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0.050179946047326174,
-          "cssPeak": 0.024573988796294407
-        }
-      ]
-    },
-    {
-      "id": "aurelia",
-      "preset": "natural",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 3.6822148486970603,
-      "autoCssPeak": 2.244514517772453,
-      "autoSpeedPeakCss": 61.171865325095915,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 44,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.36602590992116113,
-          "cssPeak": 0.22311312686972118
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.36602590992116113,
-          "cssPeak": 0.22311312686972118
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0.027686628493100766,
-          "cssPeak": 0.016876538212572317
-        }
-      ]
-    },
-    {
-      "id": "aurelia",
-      "preset": "playful",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 4.251718255920378,
-      "autoCssPeak": 2.5916584835532444,
-      "autoSpeedPeakCss": 62.47761652633941,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 43,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.44446371313583893,
-          "cssPeak": 0.2709253255848015
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.44446371313583893,
-          "cssPeak": 0.2709253255848015
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0.0323799054448624,
-          "cssPeak": 0.01973735125227946
-        }
-      ]
-    },
-    {
-      "id": "aurelia",
-      "preset": "chaos",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 4.9437325427122705,
-      "autoCssPeak": 3.0134796365910583,
-      "autoSpeedPeakCss": 63.765436117714366,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 40,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.5678608901448743,
-          "cssPeak": 0.34614276037053127
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.5678608901448743,
-          "cssPeak": 0.34614276037053127
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0.040741682950225185,
-          "cssPeak": 0.024834319184992827
-        }
-      ]
-    },
-    {
-      "id": "holly",
-      "preset": "natural",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 2.794036090171457,
-      "autoCssPeak": 3.8694548791639813,
-      "autoSpeedPeakCss": 77.0066569175794,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 41,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.28646595051992024,
-          "cssPeak": 0.3967261102506487
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.28646595051992024,
-          "cssPeak": 0.3967261102506487
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0,
-          "cssPeak": 0
-        }
-      ]
-    },
-    {
-      "id": "holly",
-      "preset": "playful",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 3.142869722192276,
-      "autoCssPeak": 4.352553864244242,
-      "autoSpeedPeakCss": 77.9054376302251,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 39,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.3908403428797325,
-          "cssPeak": 0.5412739932207887
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.3908403428797325,
-          "cssPeak": 0.5412739932207887
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0,
-          "cssPeak": 0
-        }
-      ]
-    },
-    {
-      "id": "holly",
-      "preset": "chaos",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 3.5122688011363645,
-      "autoCssPeak": 4.864133894798239,
-      "autoSpeedPeakCss": 78.68021006555111,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 35,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.5409556239403465,
-          "cssPeak": 0.7491683396039165
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.5409556239403465,
-          "cssPeak": 0.7491683396039165
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0,
-          "cssPeak": 0
-        }
-      ]
-    },
-    {
-      "id": "santa",
-      "preset": "natural",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 4.950509944654796,
-      "autoCssPeak": 2.531832228837739,
-      "autoSpeedPeakCss": 35.032260601081035,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 36,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.6088994298333769,
-          "cssPeak": 0.3114085655433556
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.6088994298333769,
-          "cssPeak": 0.3114085655433556
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0,
-          "cssPeak": 0
-        }
-      ]
-    },
-    {
-      "id": "santa",
-      "preset": "playful",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 5.6201053876054425,
-      "autoCssPeak": 2.874282469661069,
-      "autoSpeedPeakCss": 35.31685843358253,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 32,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.6940015830108669,
-          "cssPeak": 0.3549322381684148
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.6940015830108669,
-          "cssPeak": 0.3549322381684148
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0,
-          "cssPeak": 0
-        }
-      ]
-    },
-    {
-      "id": "santa",
-      "preset": "chaos",
-      "revision": "r13.1",
-      "renderer": "webgl",
-      "autoNodePeak": 6.405679309094004,
-      "autoCssPeak": 3.276047418079505,
-      "autoSpeedPeakCss": 35.5501800322189,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 25,
-      "windowCount": 54,
-      "shake": [
-        {
-          "axis": "x",
-          "nodePeak": 0.752905384048751,
-          "cssPeak": 0.38505732498493267
-        },
-        {
-          "axis": "y",
-          "nodePeak": 0.752905384048751,
-          "cssPeak": 0.38505732498493267
-        },
-        {
-          "axis": "z",
-          "nodePeak": 0,
-          "cssPeak": 0
-        }
-      ]
-    },
-    {
-      "id": "ember",
-      "preset": "natural",
       "revision": "r13.2",
       "renderer": "webgl",
       "autoNodePeak": 3.1976149271187517,
@@ -873,435 +438,435 @@
     {
       "id": "ember",
       "preset": "natural",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 4.735679557153761,
-      "autoCssPeak": 2.070664563008411,
-      "autoSpeedPeakCss": 56.41704597691779,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 44,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 3.9970186588984395,
+      "autoCssPeak": 1.7476868514386426,
+      "autoSpeedPeakCss": 13.069508058876337,
+      "minHalfSecondSpeedPeakCss": 10.232891812156618,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.48807389053922257,
-          "cssPeak": 0.21340914161781413
+          "nodePeak": 6.922750947951273,
+          "cssPeak": 3.0269562991865575
         },
         {
           "axis": "y",
-          "nodePeak": 0.48807389053927613,
-          "cssPeak": 0.21340914161783756
+          "nodePeak": 6.885523549652432,
+          "cssPeak": 3.010678708293829
         },
         {
           "axis": "z",
-          "nodePeak": 0.03886746570894036,
-          "cssPeak": 0.016994706446273655
+          "nodePeak": 4.357133226037441,
+          "cssPeak": 1.9051460848598354
         }
       ]
     },
     {
       "id": "ember",
       "preset": "playful",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 5.468273814561715,
-      "autoCssPeak": 2.390989650373451,
-      "autoSpeedPeakCss": 57.621302626007555,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 43,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 5.018190356520014,
+      "autoCssPeak": 2.1941917345272683,
+      "autoSpeedPeakCss": 16.44885247091062,
+      "minHalfSecondSpeedPeakCss": 12.745652604711179,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.5926633952701994,
-          "cssPeak": 0.2591406524802588
+          "nodePeak": 9.357840413236271,
+          "cssPeak": 4.0916933454049556
         },
         {
           "axis": "y",
-          "nodePeak": 0.5926633952701994,
-          "cssPeak": 0.2591406524802588
+          "nodePeak": 9.357840413236271,
+          "cssPeak": 4.0916933454049556
         },
         {
           "axis": "z",
-          "nodePeak": 0.04539883840544614,
-          "cssPeak": 0.019850533540829766
+          "nodePeak": 5.747628403673439,
+          "cssPeak": 2.5131367765052457
         }
       ]
     },
     {
       "id": "ember",
       "preset": "chaos",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 6.358457061400635,
-      "autoCssPeak": 2.7802201465603518,
-      "autoSpeedPeakCss": 58.80902146881957,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 40,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 6.285205682749113,
+      "autoCssPeak": 2.748191156394391,
+      "autoSpeedPeakCss": 20.685781845061538,
+      "minHalfSecondSpeedPeakCss": 15.84873615877821,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.7575751462803731,
-          "cssPeak": 0.3312479212933682
+          "nodePeak": 13.15896513702721,
+          "cssPeak": 5.753726042114606
         },
         {
           "axis": "y",
-          "nodePeak": 0.7575751462803731,
-          "cssPeak": 0.3312479212933682
+          "nodePeak": 13.15896513702721,
+          "cssPeak": 5.753726042114606
         },
         {
           "axis": "z",
-          "nodePeak": 0.05354072528343974,
-          "cssPeak": 0.02341055411038393
+          "nodePeak": 8.107459655024854,
+          "cssPeak": 3.5449673486290925
         }
       ]
     },
     {
       "id": "midnight",
       "preset": "natural",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 4.471112455435285,
-      "autoCssPeak": 2.1895812180271093,
-      "autoSpeedPeakCss": 59.67669752225082,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 44,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 3.7131635643206313,
+      "autoCssPeak": 1.8184005168591824,
+      "autoSpeedPeakCss": 13.641737783124597,
+      "minHalfSecondSpeedPeakCss": 10.453527417428822,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.45986238607148944,
-          "cssPeak": 0.22520257619448253
+          "nodePeak": 6.571261811948277,
+          "cssPeak": 3.2180607366942113
         },
         {
           "axis": "y",
-          "nodePeak": 0.45986238607148944,
-          "cssPeak": 0.22520257619448253
+          "nodePeak": 6.571261811948277,
+          "cssPeak": 3.2180607366942113
         },
         {
           "axis": "z",
-          "nodePeak": 0.03662375384690154,
-          "cssPeak": 0.017935286655413978
+          "nodePeak": 4.158357131977782,
+          "cssPeak": 2.036419518582922
         }
       ]
     },
     {
       "id": "midnight",
       "preset": "playful",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 5.162613069663514,
-      "autoCssPeak": 2.528221046986843,
-      "autoSpeedPeakCss": 60.950533444399085,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 43,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 4.642051676072664,
+      "autoCssPeak": 2.2732931153820504,
+      "autoSpeedPeakCss": 17.157166619974856,
+      "minHalfSecondSpeedPeakCss": 13.07155911036855,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.558412668043322,
-          "cssPeak": 0.2734643563638638
+          "nodePeak": 8.90775367856731,
+          "cssPeak": 4.362281276484699
         },
         {
           "axis": "y",
-          "nodePeak": 0.558412668043322,
-          "cssPeak": 0.2734643563638638
+          "nodePeak": 8.90775367856731,
+          "cssPeak": 4.362281276484699
         },
         {
           "axis": "z",
-          "nodePeak": 0.042778087388184664,
-          "cssPeak": 0.02094917039593285
+          "nodePeak": 5.480306801336688,
+          "cssPeak": 2.683801170477341
         }
       ]
     },
     {
       "id": "midnight",
       "preset": "chaos",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 6.0028692725185335,
-      "autoCssPeak": 2.939709064441106,
-      "autoSpeedPeakCss": 62.2068760425736,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 41,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 5.784293994748461,
+      "autoCssPeak": 2.832668964756605,
+      "autoSpeedPeakCss": 21.547369190413143,
+      "minHalfSecondSpeedPeakCss": 16.208102978665426,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.7132762510434766,
-          "cssPeak": 0.34930373550569505
+          "nodePeak": 12.508392759100474,
+          "cssPeak": 6.12557660448429
         },
         {
           "axis": "y",
-          "nodePeak": 0.7132762510426665,
-          "cssPeak": 0.3493037355052983
+          "nodePeak": 12.552836742768854,
+          "cssPeak": 6.147341593145286
         },
         {
           "axis": "z",
-          "nodePeak": 0.050179946047326174,
-          "cssPeak": 0.024573988796294407
+          "nodePeak": 7.738501719512712,
+          "cssPeak": 3.789678338355713
         }
       ]
     },
     {
       "id": "aurelia",
       "preset": "natural",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 3.6822148486970603,
-      "autoCssPeak": 2.244514517772453,
-      "autoSpeedPeakCss": 61.171865325095915,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 44,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 3.044987997879859,
+      "autoCssPeak": 1.8560893507076568,
+      "autoSpeedPeakCss": 13.613767916779345,
+      "minHalfSecondSpeedPeakCss": 10.316222956060864,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.36602590992116113,
-          "cssPeak": 0.22311312686972118
+          "nodePeak": 5.348725129120429,
+          "cssPeak": 3.2603451175949645
         },
         {
           "axis": "y",
-          "nodePeak": 0.36602590992116113,
-          "cssPeak": 0.22311312686972118
+          "nodePeak": 5.348725129120429,
+          "cssPeak": 3.2603451175949645
         },
         {
           "axis": "z",
-          "nodePeak": 0.027686628493100766,
-          "cssPeak": 0.016876538212572317
+          "nodePeak": 3.369411266339413,
+          "cssPeak": 2.0538433563486698
         }
       ]
     },
     {
       "id": "aurelia",
       "preset": "playful",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 4.251718255920378,
-      "autoCssPeak": 2.5916584835532444,
-      "autoSpeedPeakCss": 62.47761652633941,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 43,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 3.800657637465814,
+      "autoCssPeak": 2.3167119776819405,
+      "autoSpeedPeakCss": 17.081447134205813,
+      "minHalfSecondSpeedPeakCss": 12.842333539149081,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.44446371313583893,
-          "cssPeak": 0.2709253255848015
+          "nodePeak": 7.228040386095389,
+          "cssPeak": 4.405892173124368
         },
         {
           "axis": "y",
-          "nodePeak": 0.44446371313583893,
-          "cssPeak": 0.2709253255848015
+          "nodePeak": 7.228040386095389,
+          "cssPeak": 4.405892173124368
         },
         {
           "axis": "z",
-          "nodePeak": 0.0323799054448624,
-          "cssPeak": 0.01973735125227946
+          "nodePeak": 4.4393309637083,
+          "cssPeak": 2.706018851878193
         }
       ]
     },
     {
       "id": "aurelia",
       "preset": "chaos",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 4.9437325427122705,
-      "autoCssPeak": 3.0134796365910583,
-      "autoSpeedPeakCss": 63.765436117714366,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 40,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 4.723469425104067,
+      "autoCssPeak": 2.879217029568991,
+      "autoSpeedPeakCss": 21.371336744879148,
+      "minHalfSecondSpeedPeakCss": 15.900749153916168,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.5678608901448743,
-          "cssPeak": 0.34614276037053127
+          "nodePeak": 10.163982502270098,
+          "cssPeak": 6.195512000828197
         },
         {
           "axis": "y",
-          "nodePeak": 0.5678608901448743,
-          "cssPeak": 0.34614276037053127
+          "nodePeak": 10.163982502270098,
+          "cssPeak": 6.195512000828197
         },
         {
           "axis": "z",
-          "nodePeak": 0.040741682950225185,
-          "cssPeak": 0.024834319184992827
+          "nodePeak": 6.265822514161705,
+          "cssPeak": 3.819366923632347
         }
       ]
     },
     {
       "id": "holly",
       "preset": "natural",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 2.794036090171457,
-      "autoCssPeak": 3.8694548791639813,
-      "autoSpeedPeakCss": 77.0066569175794,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 41,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 1.2906290514164624,
+      "autoCssPeak": 1.7873895393698191,
+      "autoSpeedPeakCss": 9.97433329045449,
+      "minHalfSecondSpeedPeakCss": 6.853532776732662,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.28646595051992024,
-          "cssPeak": 0.3967261102506487
+          "nodePeak": 4.1648434756641475,
+          "cssPeak": 5.767883229766715
         },
         {
           "axis": "y",
-          "nodePeak": 0.28646595051992024,
-          "cssPeak": 0.3967261102506487
+          "nodePeak": 4.1648434756641475,
+          "cssPeak": 5.767883229766715
         },
         {
           "axis": "z",
-          "nodePeak": 0,
-          "cssPeak": 0
+          "nodePeak": 2.5698618897810714,
+          "cssPeak": 3.5589964865417043
         }
       ]
     },
     {
       "id": "holly",
       "preset": "playful",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 3.142869722192276,
-      "autoCssPeak": 4.352553864244242,
-      "autoSpeedPeakCss": 77.9054376302251,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 39,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 1.575592124795459,
+      "autoCssPeak": 2.182034318135099,
+      "autoSpeedPeakCss": 12.223006773340016,
+      "minHalfSecondSpeedPeakCss": 8.304512852575098,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.3908403428797325,
-          "cssPeak": 0.5412739932207887
+          "nodePeak": 5.6890299264895505,
+          "cssPeak": 7.878725934930222
         },
         {
           "axis": "y",
-          "nodePeak": 0.3908403428797325,
-          "cssPeak": 0.5412739932207887
+          "nodePeak": 5.6890299264895505,
+          "cssPeak": 7.878725934930222
         },
         {
           "axis": "z",
-          "nodePeak": 0,
-          "cssPeak": 0
+          "nodePeak": 3.507812965483632,
+          "cssPeak": 4.857963017096312
         }
       ]
     },
     {
       "id": "holly",
       "preset": "chaos",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 3.5122688011363645,
-      "autoCssPeak": 4.864133894798239,
-      "autoSpeedPeakCss": 78.68021006555111,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 35,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 1.930531039086775,
+      "autoCssPeak": 2.673588496172011,
+      "autoSpeedPeakCss": 14.867178179367018,
+      "minHalfSecondSpeedPeakCss": 9.966389777794657,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.5409556239403465,
-          "cssPeak": 0.7491683396039165
+          "nodePeak": 7.9962232926537995,
+          "cssPeak": 11.073953319173201
         },
         {
           "axis": "y",
-          "nodePeak": 0.5409556239403465,
-          "cssPeak": 0.7491683396039165
+          "nodePeak": 7.9962232926537995,
+          "cssPeak": 11.073953319173201
         },
         {
           "axis": "z",
-          "nodePeak": 0,
-          "cssPeak": 0
+          "nodePeak": 4.932027907452176,
+          "cssPeak": 6.830355383667442
         }
       ]
     },
     {
       "id": "santa",
       "preset": "natural",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 4.950509944654796,
-      "autoCssPeak": 2.531832228837739,
-      "autoSpeedPeakCss": 35.032260601081035,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 36,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 6.658301963855573,
+      "autoCssPeak": 3.4052458615147074,
+      "autoSpeedPeakCss": 15.456587634832085,
+      "minHalfSecondSpeedPeakCss": 3.3189218036017762,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.6088994298333769,
-          "cssPeak": 0.3114085655433556
+          "nodePeak": 9.659223659312834,
+          "cssPeak": 4.940002957191421
         },
         {
           "axis": "y",
-          "nodePeak": 0.6088994298333769,
-          "cssPeak": 0.3114085655433556
+          "nodePeak": 9.659223659312834,
+          "cssPeak": 4.940002957191421
         },
         {
           "axis": "z",
-          "nodePeak": 0,
-          "cssPeak": 0
+          "nodePeak": 5.9041520851318205,
+          "cssPeak": 3.0195520663959883
         }
       ]
     },
     {
       "id": "santa",
       "preset": "playful",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 5.6201053876054425,
-      "autoCssPeak": 2.874282469661069,
-      "autoSpeedPeakCss": 35.31685843358253,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 32,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 8.658570078046917,
+      "autoCssPeak": 4.428240125629709,
+      "autoSpeedPeakCss": 20.6942162321198,
+      "minHalfSecondSpeedPeakCss": 4.065300049250011,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.6940015830108669,
-          "cssPeak": 0.3549322381684148
+          "nodePeak": 10.934627319891066,
+          "cssPeak": 5.592280829315716
         },
         {
           "axis": "y",
-          "nodePeak": 0.6940015830108669,
-          "cssPeak": 0.3549322381684148
+          "nodePeak": 10.934627319891066,
+          "cssPeak": 5.592280829315716
         },
         {
           "axis": "z",
-          "nodePeak": 0,
-          "cssPeak": 0
+          "nodePeak": 6.682669729584498,
+          "cssPeak": 3.417708233130358
         }
       ]
     },
     {
       "id": "santa",
       "preset": "chaos",
-      "revision": "r13.1",
-      "renderer": "canvas",
-      "autoNodePeak": 6.405679309094004,
-      "autoCssPeak": 3.276047418079505,
-      "autoSpeedPeakCss": 35.5501800322189,
-      "minHalfSecondSpeedPeakCss": 0,
-      "quietWindows": 25,
+      "revision": "r13.3",
+      "renderer": "webgl",
+      "autoNodePeak": 12.276453815407482,
+      "autoCssPeak": 6.278529237022684,
+      "autoSpeedPeakCss": 29.538782040689686,
+      "minHalfSecondSpeedPeakCss": 5.394003838255217,
+      "quietWindows": 0,
       "windowCount": 54,
       "shake": [
         {
           "axis": "x",
-          "nodePeak": 0.752905384048751,
-          "cssPeak": 0.38505732498493267
+          "nodePeak": 11.846878868359532,
+          "cssPeak": 6.058832335532447
         },
         {
           "axis": "y",
-          "nodePeak": 0.752905384048751,
-          "cssPeak": 0.38505732498493267
+          "nodePeak": 11.846878868359532,
+          "cssPeak": 6.058832335532447
         },
         {
           "axis": "z",
-          "nodePeak": 0,
-          "cssPeak": 0
+          "nodePeak": 7.2351632133639,
+          "cssPeak": 3.700269186263252
         }
       ]
     },
@@ -1737,6 +1302,441 @@
           "axis": "z",
           "nodePeak": 4.234863860381273,
           "cssPeak": 2.1658303743092797
+        }
+      ]
+    },
+    {
+      "id": "ember",
+      "preset": "natural",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 3.9970186588984395,
+      "autoCssPeak": 1.7476868514386426,
+      "autoSpeedPeakCss": 13.069508058876337,
+      "minHalfSecondSpeedPeakCss": 10.232891812156618,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 6.922750947951273,
+          "cssPeak": 3.0269562991865575
+        },
+        {
+          "axis": "y",
+          "nodePeak": 6.885523549652432,
+          "cssPeak": 3.010678708293829
+        },
+        {
+          "axis": "z",
+          "nodePeak": 4.357133226037441,
+          "cssPeak": 1.9051460848598354
+        }
+      ]
+    },
+    {
+      "id": "ember",
+      "preset": "playful",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 5.018190356520014,
+      "autoCssPeak": 2.1941917345272683,
+      "autoSpeedPeakCss": 16.44885247091062,
+      "minHalfSecondSpeedPeakCss": 12.745652604711179,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 9.357840413236271,
+          "cssPeak": 4.0916933454049556
+        },
+        {
+          "axis": "y",
+          "nodePeak": 9.357840413236271,
+          "cssPeak": 4.0916933454049556
+        },
+        {
+          "axis": "z",
+          "nodePeak": 5.747628403673439,
+          "cssPeak": 2.5131367765052457
+        }
+      ]
+    },
+    {
+      "id": "ember",
+      "preset": "chaos",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 6.285205682749113,
+      "autoCssPeak": 2.748191156394391,
+      "autoSpeedPeakCss": 20.685781845061538,
+      "minHalfSecondSpeedPeakCss": 15.84873615877821,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 13.15896513702721,
+          "cssPeak": 5.753726042114606
+        },
+        {
+          "axis": "y",
+          "nodePeak": 13.15896513702721,
+          "cssPeak": 5.753726042114606
+        },
+        {
+          "axis": "z",
+          "nodePeak": 8.107459655024854,
+          "cssPeak": 3.5449673486290925
+        }
+      ]
+    },
+    {
+      "id": "midnight",
+      "preset": "natural",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 3.7131635643206313,
+      "autoCssPeak": 1.8184005168591824,
+      "autoSpeedPeakCss": 13.641737783124597,
+      "minHalfSecondSpeedPeakCss": 10.453527417428822,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 6.571261811948277,
+          "cssPeak": 3.2180607366942113
+        },
+        {
+          "axis": "y",
+          "nodePeak": 6.571261811948277,
+          "cssPeak": 3.2180607366942113
+        },
+        {
+          "axis": "z",
+          "nodePeak": 4.158357131977782,
+          "cssPeak": 2.036419518582922
+        }
+      ]
+    },
+    {
+      "id": "midnight",
+      "preset": "playful",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 4.642051676072664,
+      "autoCssPeak": 2.2732931153820504,
+      "autoSpeedPeakCss": 17.157166619974856,
+      "minHalfSecondSpeedPeakCss": 13.07155911036855,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 8.90775367856731,
+          "cssPeak": 4.362281276484699
+        },
+        {
+          "axis": "y",
+          "nodePeak": 8.90775367856731,
+          "cssPeak": 4.362281276484699
+        },
+        {
+          "axis": "z",
+          "nodePeak": 5.480306801336688,
+          "cssPeak": 2.683801170477341
+        }
+      ]
+    },
+    {
+      "id": "midnight",
+      "preset": "chaos",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 5.784293994748461,
+      "autoCssPeak": 2.832668964756605,
+      "autoSpeedPeakCss": 21.547369190413143,
+      "minHalfSecondSpeedPeakCss": 16.208102978665426,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 12.508392759100474,
+          "cssPeak": 6.12557660448429
+        },
+        {
+          "axis": "y",
+          "nodePeak": 12.552836742768854,
+          "cssPeak": 6.147341593145286
+        },
+        {
+          "axis": "z",
+          "nodePeak": 7.738501719512712,
+          "cssPeak": 3.789678338355713
+        }
+      ]
+    },
+    {
+      "id": "aurelia",
+      "preset": "natural",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 3.044987997879859,
+      "autoCssPeak": 1.8560893507076568,
+      "autoSpeedPeakCss": 13.613767916779345,
+      "minHalfSecondSpeedPeakCss": 10.316222956060864,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 5.348725129120429,
+          "cssPeak": 3.2603451175949645
+        },
+        {
+          "axis": "y",
+          "nodePeak": 5.348725129120429,
+          "cssPeak": 3.2603451175949645
+        },
+        {
+          "axis": "z",
+          "nodePeak": 3.369411266339413,
+          "cssPeak": 2.0538433563486698
+        }
+      ]
+    },
+    {
+      "id": "aurelia",
+      "preset": "playful",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 3.800657637465814,
+      "autoCssPeak": 2.3167119776819405,
+      "autoSpeedPeakCss": 17.081447134205813,
+      "minHalfSecondSpeedPeakCss": 12.842333539149081,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 7.228040386095389,
+          "cssPeak": 4.405892173124368
+        },
+        {
+          "axis": "y",
+          "nodePeak": 7.228040386095389,
+          "cssPeak": 4.405892173124368
+        },
+        {
+          "axis": "z",
+          "nodePeak": 4.4393309637083,
+          "cssPeak": 2.706018851878193
+        }
+      ]
+    },
+    {
+      "id": "aurelia",
+      "preset": "chaos",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 4.723469425104067,
+      "autoCssPeak": 2.879217029568991,
+      "autoSpeedPeakCss": 21.371336744879148,
+      "minHalfSecondSpeedPeakCss": 15.900749153916168,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 10.163982502270098,
+          "cssPeak": 6.195512000828197
+        },
+        {
+          "axis": "y",
+          "nodePeak": 10.163982502270098,
+          "cssPeak": 6.195512000828197
+        },
+        {
+          "axis": "z",
+          "nodePeak": 6.265822514161705,
+          "cssPeak": 3.819366923632347
+        }
+      ]
+    },
+    {
+      "id": "holly",
+      "preset": "natural",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 1.2906290514164624,
+      "autoCssPeak": 1.7873895393698191,
+      "autoSpeedPeakCss": 9.97433329045449,
+      "minHalfSecondSpeedPeakCss": 6.853532776732662,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 4.1648434756641475,
+          "cssPeak": 5.767883229766715
+        },
+        {
+          "axis": "y",
+          "nodePeak": 4.1648434756641475,
+          "cssPeak": 5.767883229766715
+        },
+        {
+          "axis": "z",
+          "nodePeak": 2.5698618897810714,
+          "cssPeak": 3.5589964865417043
+        }
+      ]
+    },
+    {
+      "id": "holly",
+      "preset": "playful",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 1.575592124795459,
+      "autoCssPeak": 2.182034318135099,
+      "autoSpeedPeakCss": 12.223006773340016,
+      "minHalfSecondSpeedPeakCss": 8.304512852575098,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 5.6890299264895505,
+          "cssPeak": 7.878725934930222
+        },
+        {
+          "axis": "y",
+          "nodePeak": 5.6890299264895505,
+          "cssPeak": 7.878725934930222
+        },
+        {
+          "axis": "z",
+          "nodePeak": 3.507812965483632,
+          "cssPeak": 4.857963017096312
+        }
+      ]
+    },
+    {
+      "id": "holly",
+      "preset": "chaos",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 1.930531039086775,
+      "autoCssPeak": 2.673588496172011,
+      "autoSpeedPeakCss": 14.867178179367018,
+      "minHalfSecondSpeedPeakCss": 9.966389777794657,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 7.9962232926537995,
+          "cssPeak": 11.073953319173201
+        },
+        {
+          "axis": "y",
+          "nodePeak": 7.9962232926537995,
+          "cssPeak": 11.073953319173201
+        },
+        {
+          "axis": "z",
+          "nodePeak": 4.932027907452176,
+          "cssPeak": 6.830355383667442
+        }
+      ]
+    },
+    {
+      "id": "santa",
+      "preset": "natural",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 6.658301963855573,
+      "autoCssPeak": 3.4052458615147074,
+      "autoSpeedPeakCss": 15.456587634832085,
+      "minHalfSecondSpeedPeakCss": 3.3189218036017762,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 9.659223659312834,
+          "cssPeak": 4.940002957191421
+        },
+        {
+          "axis": "y",
+          "nodePeak": 9.659223659312834,
+          "cssPeak": 4.940002957191421
+        },
+        {
+          "axis": "z",
+          "nodePeak": 5.9041520851318205,
+          "cssPeak": 3.0195520663959883
+        }
+      ]
+    },
+    {
+      "id": "santa",
+      "preset": "playful",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 8.658570078046917,
+      "autoCssPeak": 4.428240125629709,
+      "autoSpeedPeakCss": 20.6942162321198,
+      "minHalfSecondSpeedPeakCss": 4.065300049250011,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 10.934627319891066,
+          "cssPeak": 5.592280829315716
+        },
+        {
+          "axis": "y",
+          "nodePeak": 10.934627319891066,
+          "cssPeak": 5.592280829315716
+        },
+        {
+          "axis": "z",
+          "nodePeak": 6.682669729584498,
+          "cssPeak": 3.417708233130358
+        }
+      ]
+    },
+    {
+      "id": "santa",
+      "preset": "chaos",
+      "revision": "r13.3",
+      "renderer": "canvas",
+      "autoNodePeak": 12.276453815407482,
+      "autoCssPeak": 6.278529237022684,
+      "autoSpeedPeakCss": 29.538782040689686,
+      "minHalfSecondSpeedPeakCss": 5.394003838255217,
+      "quietWindows": 0,
+      "windowCount": 54,
+      "shake": [
+        {
+          "axis": "x",
+          "nodePeak": 11.846878868359532,
+          "cssPeak": 6.058832335532447
+        },
+        {
+          "axis": "y",
+          "nodePeak": 11.846878868359532,
+          "cssPeak": 6.058832335532447
+        },
+        {
+          "axis": "z",
+          "nodePeak": 7.2351632133639,
+          "cssPeak": 3.700269186263252
         }
       ]
     }

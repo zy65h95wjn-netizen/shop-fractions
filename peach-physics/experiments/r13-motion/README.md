@@ -1,4 +1,4 @@
-# R13.2 motion experiment
+# R13.3 motion experiment
 
 **Experimental only. Do not promote until Lance approves it on his iPhone.** Baseline R12: `76cc6f11cff4cf77bd3d6e1eb34880246b23e9e7`. All implementation, copied original artwork and new evidence live in this directory; production remains byte-unchanged.
 

@@ -4,32 +4,32 @@
     {
       "id": "ember",
       "autoSteps": 10800,
-      "strongShakeVelocity": 102.07715489030352
+      "strongShakeVelocity": 152.97468915869138
     },
     {
       "id": "midnight",
       "autoSteps": 10800,
-      "strongShakeVelocity": 97.43728421347151
+      "strongShakeVelocity": 146.02129419693267
     },
     {
       "id": "aurelia",
       "autoSteps": 10800,
-      "strongShakeVelocity": 78.87780150614363
+      "strongShakeVelocity": 118.20771434989787
     },
     {
       "id": "holly",
       "autoSteps": 10800,
-      "strongShakeVelocity": 23.199353384159885
+      "strongShakeVelocity": 34.766974808793485
     },
     {
       "id": "santa",
       "autoSteps": 10800,
-      "strongShakeVelocity": 23.199353384159885
+      "strongShakeVelocity": 34.766974808793485
     }
   ],
   "eventRateVelocities": [
-    120.38570265608679,
-    122.94060297101271,
-    122.94060297101271
+    198.81144572222772,
+    202.50552939845568,
+    202.50552939845568
   ]
 }
