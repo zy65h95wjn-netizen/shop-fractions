@@ -25,7 +25,7 @@
       "renderer": "webgl",
       "sound": true,
       "laugh": true,
-      "laughSources": 3,
+      "laughSources": 1,
       "exactPhysicsAndFrames": true
     },
     {
@@ -40,7 +40,7 @@
       "sound": true,
       "laugh": true,
       "repeat": true,
-      "laughSources": 3,
+      "laughSources": 1,
       "exactPhysicsAndFrames": true
     },
     {
@@ -54,7 +54,7 @@
       "renderer": "canvas",
       "sound": true,
       "laugh": true,
-      "laughSources": 3,
+      "laughSources": 1,
       "exactPhysicsAndFrames": true
     },
     {
@@ -69,7 +69,7 @@
       "sound": true,
       "laugh": true,
       "repeat": true,
-      "laughSources": 3,
+      "laughSources": 1,
       "exactPhysicsAndFrames": true
     }
   ],

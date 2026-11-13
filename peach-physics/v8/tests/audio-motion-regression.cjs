@@ -10,18 +10,22 @@ const normalized=runtime(accepted).replace(/const profileStorage=\{.*?\};\n/,'')
 // original full-runtime equality check after explicitly removing those changes.
 let audioNormalized=runtime(current).replace("let audioEpoch=0,audioLastError='';\n",'');
 const replaceFunction=(text,start,end)=>{const a=text.indexOf(start),b=text.indexOf(end,a),x=normalized.indexOf(start),y=normalized.indexOf(end,x);assert(a>=0&&b>a&&x>=0&&y>x);return text.slice(0,a)+normalized.slice(x,y)+text.slice(b);};
-audioNormalized=replaceFunction(audioNormalized,'function santaChuckle(){','function startSantaLaugh(){');
+const voiceStart=audioNormalized.indexOf('// Recorded CC0 Santa voice.'),voiceEnd=audioNormalized.indexOf('function startSantaLaugh(){',voiceStart);
+const oldVoiceStart=normalized.indexOf('// Original synthesized three-pulse chuckle'),oldVoiceEnd=normalized.indexOf('function startSantaLaugh(){',oldVoiceStart);
+assert(voiceStart>=0&&voiceEnd>voiceStart&&oldVoiceStart>=0&&oldVoiceEnd>oldVoiceStart);
+audioNormalized=audioNormalized.slice(0,voiceStart)+normalized.slice(oldVoiceStart,oldVoiceEnd)+audioNormalized.slice(voiceEnd);
+audioNormalized=audioNormalized.replace('if(santaLaughBeat===1)santaChuckle();','santaChuckle();').replace('if(santaLaughTime>1.6)stopSantaLaugh(false);','if(santaLaughTime>1.6)stopSantaLaugh();').replace(' if(isSanta())loadSantaVoice().catch(()=>{});\n','').replace('if(document.hidden){stopSantaVoice();pointers.clear();','if(document.hidden){pointers.clear();').replace("  document.getElementById('testSound').textContent=isSanta()?'Test Santa laugh':'Test sound';\n",'');
 const helperStart=audioNormalized.indexOf('// Audio is activated from a real Sound/Test/touch gesture.');
 const helperEnd=audioNormalized.indexOf('function slapSound(){',helperStart);assert(helperStart>=0&&helperEnd>helperStart);
 audioNormalized=audioNormalized.slice(0,helperStart)+audioNormalized.slice(helperEnd);
 audioNormalized=replaceFunction(audioNormalized,'function slapSound(){','function slap(side');
 audioNormalized=audioNormalized.replace(' withAudio(()=>{});\n','').replace("  document.getElementById('testSound').disabled=!slapAudioEnabled;\n",'').replace("  document.getElementById('audioStatus').textContent=slapAudioEnabled?'Tap Test sound to check playback.':'Sound is off.';\n",'');
-audioNormalized=audioNormalized.replace(/document.getElementById\('slapAudio'\).addEventListener\('click',.*?\n/,normalized.match(/document.getElementById\('slapAudio'\).addEventListener\('click',.*?\n/)[0]).replace("document.getElementById('testSound').addEventListener('click',()=>slapSound());\n",'').replace("for(const id of ['slapAudio','testSound','santaLaugh'])document.getElementById(id).addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});\n",'').replace("audioState:audioContext?.state||'not-started',audioError:audioLastError,",'');
+audioNormalized=audioNormalized.replace(/document.getElementById\('slapAudio'\).addEventListener\('click',.*?\n/,normalized.match(/document.getElementById\('slapAudio'\).addEventListener\('click',.*?\n/)[0]).replace("document.getElementById('testSound').addEventListener('click',()=>{if(isSanta())santaChuckle(true);else slapSound();});\n",'').replace("for(const id of ['slapAudio','testSound','santaLaugh'])document.getElementById(id).addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});\n",'').replace("audioState:audioContext?.state||'not-started',audioError:audioLastError,",'');
 audioNormalized=audioNormalized.replace("slapVisual(pt);slapSound();startSantaLaugh();slapCount++;lastGesture='slap';return;","slapVisual(pt);slapSound();slapCount++;lastGesture='slap';return;");
 assert.equal(audioNormalized,normalized,'non-audio runtime must remain identical to approved R13.3');
 assert.deepEqual(fs.readFileSync(path.join(app,'motion.js')),show(approved,'peach-physics/experiments/r13-motion/motion.js'),'approved controller byte-identical');
 for(const file of ['manifest.webmanifest','apple-touch-icon.png','assets/aurelia-frost.jpg','assets/holly-heartbreaker.jpg','assets/santa-claus.jpg'])assert.deepEqual(fs.readFileSync(path.join(app,file)),show(prior,'peach-physics/v8/'+file));
-assert(!current.includes('r13-preview:'));assert(current.includes('<title>Peach Physics — Elf Lab 0.0.8 r13 audio fix 2</title>'));
+assert(!current.includes('r13-preview:'));assert(current.includes('<title>Peach Physics — Elf Lab 0.0.8 r13 Santa voice preview</title>'));
 assert(current.includes(old.match(/<script>\s*if\('serviceWorker'[\s\S]*?<\/script>/)[0]));
 const sources={r12:old,approved:accepted,r13:current};
 for(const [key,html]of Object.entries(sources))fs.writeFileSync('/tmp/peach-release-'+key+'.html',html.replace('window.__peachMotionDebug=', 'window.__motionTest={motion};window.__peachMotionDebug='));

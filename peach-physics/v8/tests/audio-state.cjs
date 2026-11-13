@@ -2,7 +2,8 @@ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),asse
 const root=path.resolve(__dirname,'../../..'),html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8'),old=execFileSync('git',['show','48eb1ae:peach-physics/v8/index.html'],{cwd:root,maxBuffer:4e6}).toString();
 const between=(s,a,b)=>s.slice(s.indexOf(a),s.indexOf(b,s.indexOf(a)));
 assert.equal(between(html,'  const buffer=ac.createBuffer','\n  tone.connect'),between(old,'  const buffer=ac.createBuffer','\n  tone.connect'));
-assert.equal(between(html,"  voice.type='sawtooth'",'\n  santaLaughSound=true;'),between(old,"  voice.type='sawtooth'",'\n  santaLaughSound=true;'));
+// Santa's replacement recording is covered by santa-voice.cjs. The slap's
+// waveform and common iPhone activation contracts must still remain unchanged.
 assert.deepEqual(fs.readFileSync(path.join(__dirname,'../motion.js')),execFileSync('git',['show','2e48db4:peach-physics/experiments/r13-motion/motion.js'],{cwd:root}));
 function rig(state='running',legacy=false,options={}){const log={starts:0,resumes:0,contexts:[],status:{textContent:''},errors:[]},navigator={audioSession:{type:'auto'}},document={hidden:false,getElementById:()=>log.status};let next=state,character='ember';
  const param=()=>({value:0,setValueAtTime(){},exponentialRampToValueAtTime(){}}),node=()=>({connect(){},start(){log.starts++;},stop(){},gain:param(),frequency:param(),Q:param()});
@@ -23,5 +24,5 @@ let checks=0;const ok=(v,msg)=>{assert(v,msg);checks++;};const flush=async()=>{a
  const absent=rig('running',false,{unsupported:true});absent.api.slapSound();ok(absent.log.status.textContent.includes('could not start'),'unsupported audio gives visible message');
  const disabled=rig();disabled.api.off();disabled.api.slapSound();ok(disabled.log.contexts.length===0&&disabled.navigator.audioSession.type==='auto','sound off does not activate audio');
  const routing=rig();Object.defineProperty(routing.navigator,'audioSession',{get(){throw Error('not allowed')}});routing.api.slapSound();ok(routing.log.starts===2,'unsupported audio-session routing falls back to Web Audio');
- const report={checks,oldInterruptedFailureReproduced:true,waveformSourceUnchanged:true,approvedMotionByteIdentical:true};fs.writeFileSync(path.join(__dirname,'audio-state.json'),JSON.stringify(report,null,2)+'\n');console.log(report);
+ const report={checks,oldInterruptedFailureReproduced:true,slapWaveformSourceUnchanged:true,approvedMotionByteIdentical:true};fs.writeFileSync(path.join(__dirname,'audio-state.json'),JSON.stringify(report,null,2)+'\n');console.log(report);
 })().catch(e=>{console.error(e);process.exit(1)});

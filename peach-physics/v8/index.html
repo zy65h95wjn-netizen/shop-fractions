@@ -12,7 +12,7 @@
 
 
 
-<title>Peach Physics — Elf Lab 0.0.8 r13 audio fix 2</title>
+<title>Peach Physics — Elf Lab 0.0.8 r13 Santa voice preview</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -94,7 +94,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <p id="motionNotice" role="status" hidden style="position:absolute;z-index:5;pointer-events:none;top:max(12px,env(safe-area-inset-top));left:60px;right:60px;margin:0;padding:7px 10px;border-radius:12px;background:#07110fe8;color:#fff7eb;font-size:12px;text-align:center"></p><div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r13 · audio fix 2</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r13 · Santa voice preview</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/5</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
@@ -772,19 +772,45 @@ function santaImpulse(side,x,y,amplitude=1,vx=0,vy=0,flick=false,tap=false){
  const p=impacts[side];p.x=x/W;p.y=y/H;p.v=clamp(p.v+(tap?.9:.3)*power,0,1.2);
  startWave(side,power*(tap?.55:.2));
 }
-// Original synthesized three-pulse chuckle, no recording, network or speech
-// service. Visual pulses use the same simulation clock; sound is opt-in.
+// Recorded CC0 Santa voice. Visual pulses retain their original simulation
+// timing; the complete spoken phrase plays once, at its natural speed.
 let santaLaughEnabled=false,santaLaughTime=-1,santaLaughBeat=0,santaLaughSound=false;
-function stopSantaLaugh(){santaLaughTime=-1;santaLaughBeat=0;document.getElementById('santaReaction').textContent='';}
-function santaChuckle(){
+let santaVoiceBytes=null,santaVoiceBuffer=null,santaVoiceContext=null,santaVoiceSource=null,santaVoicePending=false,santaVoiceToken=0;
+function loadSantaVoice(){
+ if(!santaVoiceBytes){
+  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);
+  santaVoiceBytes=fetch('./assets/santa-ho-ho-ho.mp3',{signal:controller.signal})
+   .then(response=>{if(!response.ok)throw Error('Santa voice HTTP '+response.status);return response.arrayBuffer();})
+   .catch(error=>{santaVoiceBytes=null;throw error;}).finally(()=>clearTimeout(timeout));
+ }
+ return santaVoiceBytes;
+}
+function stopSantaVoice(){
+ santaVoiceToken++;santaVoicePending=false;
+ if(santaVoiceSource){santaVoiceSource.onended=null;santaVoiceSource.stop();santaVoiceSource.disconnect();santaVoiceSource=null;}
+}
+function stopSantaLaugh(stopVoice=true){santaLaughTime=-1;santaLaughBeat=0;document.getElementById('santaReaction').textContent='';if(stopVoice)stopSantaVoice();}
+function santaChuckle(preview=false){
+ if(!isSanta()||!slapAudioEnabled||document.hidden||(!preview&&!santaLaughEnabled)||santaVoicePending||santaVoiceSource)return;
+ const token=++santaVoiceToken,epoch=audioEpoch;
+ const valid=()=>token===santaVoiceToken&&epoch===audioEpoch&&isSanta()&&slapAudioEnabled&&!document.hidden&&(preview||santaLaughEnabled);
+ const fail=error=>{if(!valid())return;santaVoicePending=false;santaLaughSound=false;audioLastError=String(error?.message||error);document.getElementById('audioStatus').textContent='Santa’s voice could not load. Tap Test sound to retry.';};
+ santaVoicePending=true;
  withAudio(ac=>{
-  const t=ac.currentTime,voice=ac.createOscillator(),formant=ac.createBiquadFilter(),gain=ac.createGain();
-  voice.type='sawtooth';voice.frequency.setValueAtTime(108,t);voice.frequency.exponentialRampToValueAtTime(72,t+.22);
-  formant.type='bandpass';formant.frequency.value=480;formant.Q.value=2.6;
-  gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.13,t+.025);gain.gain.exponentialRampToValueAtTime(.0001,t+.24);
-  voice.connect(formant);formant.connect(gain);gain.connect(ac.destination);voice.start(t);voice.stop(t+.25);
-  santaLaughSound=true;
- },()=>{santaLaughSound=false;});
+  if(!valid())return;
+  (async()=>{
+   const bytes=await loadSantaVoice();if(!valid())return;
+   if(santaVoiceContext!==ac||!santaVoiceBuffer){
+    const buffer=await ac.decodeAudioData(bytes.slice(0));if(!valid())return;
+    santaVoiceBuffer=buffer;santaVoiceContext=ac;
+   }
+   if(!valid()||ac.state!=='running'){if(valid())fail(Error('Audio is '+ac.state));return;}
+   const source=ac.createBufferSource();source.buffer=santaVoiceBuffer;source.connect(ac.destination);
+   source.onended=()=>{source.disconnect();if(santaVoiceSource===source)santaVoiceSource=null;};
+   source.start();santaVoiceSource=source;santaVoicePending=false;santaLaughSound=true;
+   audioLastError='';document.getElementById('audioStatus').textContent='Santa: Ho ho ho!';
+  })().catch(error=>{if(valid())santaVoiceBytes=null;fail(error);});
+ },()=>{if(token===santaVoiceToken){santaVoicePending=false;santaLaughSound=false;}});
 }
 function startSantaLaugh(){
  if(!isSanta()||!santaLaughEnabled||santaLaughTime>=0)return;
@@ -794,9 +820,9 @@ function advanceSantaLaugh(dt){
  if(santaLaughTime<0)return;santaLaughTime+=dt;
  if(santaLaughBeat<3&&santaLaughTime>=santaLaughBeat*.36){
   santaImpulse(santaLaughBeat%2,470,790,.55,0,-600,true);
-  santaLaughBeat++;document.getElementById('santaReaction').textContent=Array(santaLaughBeat).fill('HO').join(' ')+'!';santaChuckle();
+  santaLaughBeat++;document.getElementById('santaReaction').textContent=Array(santaLaughBeat).fill('HO').join(' ')+'!';if(santaLaughBeat===1)santaChuckle();
  }
- if(santaLaughTime>1.6)stopSantaLaugh();
+ if(santaLaughTime>1.6)stopSantaLaugh(false);
 }
 
 function initGL(){
@@ -1510,6 +1536,7 @@ function refreshPrefs(){
   audioButton.setAttribute('aria-pressed',String(slapAudioEnabled));
   audioButton.textContent=(isSanta()?'Sound: ':'Slap sound: ')+(slapAudioEnabled?'On':'Off');
   document.getElementById('testSound').disabled=!slapAudioEnabled;
+  document.getElementById('testSound').textContent=isSanta()?'Test Santa laugh':'Test sound';
   document.getElementById('audioStatus').textContent=slapAudioEnabled?'Tap Test sound to check playback.':'Sound is off.';
   const laugh=document.getElementById('santaLaugh');laugh.hidden=!isSanta();laugh.setAttribute('aria-pressed',String(santaLaughEnabled));laugh.textContent='Belly laugh: '+(santaLaughEnabled?'On':'Off');
 }
@@ -1529,6 +1556,7 @@ function restorePrefs(){
   }
  }catch(e){/* Defaults remain in effect. */}
  refreshPrefs();
+ if(isSanta())loadSantaVoice().catch(()=>{});
 }
 for(const b of presetButtons)b.addEventListener('click',()=>{
  activePreset=b.dataset.preset;Object.assign(model,currentPresets()[activePreset]);refreshPrefs();savePrefs();
@@ -1540,8 +1568,8 @@ for(const [key,out] of [['bounce','bounceN'],['softness','softnessN'],['settle',
 restorePrefs();
 document.getElementById('grabHold').addEventListener('click',()=>{grabHoldEnabled=!grabHoldEnabled;for(const f of pointers.values())f.grabbed=false;presentCharacter();});
 document.getElementById('santaLaugh').addEventListener('click',()=>{santaLaughEnabled=!santaLaughEnabled;if(santaLaughEnabled)startSantaLaugh();else stopSantaLaugh();refreshPrefs();savePrefs();});
-document.getElementById('slapAudio').addEventListener('click',()=>{audioEpoch++;slapAudioEnabled=!slapAudioEnabled;refreshPrefs();savePrefs();if(slapAudioEnabled)slapSound();});
-document.getElementById('testSound').addEventListener('click',()=>slapSound());
+document.getElementById('slapAudio').addEventListener('click',()=>{audioEpoch++;stopSantaVoice();slapAudioEnabled=!slapAudioEnabled;refreshPrefs();savePrefs();if(slapAudioEnabled){if(isSanta())santaChuckle(true);else slapSound();}});
+document.getElementById('testSound').addEventListener('click',()=>{if(isSanta())santaChuckle(true);else slapSound();});
 for(const id of ['slapAudio','testSound','santaLaugh'])document.getElementById(id).addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});
 document.getElementById('share').addEventListener('click',async()=>{
  const url=location.origin+location.pathname;
@@ -1552,7 +1580,7 @@ document.getElementById('share').addEventListener('click',async()=>{
  }catch(e){if(e.name!=='AbortError')say('Use Safari Share to copy the link');}
 });
 window.addEventListener('resize',()=>needSize=true);
-document.addEventListener('visibilitychange',()=>{previous=0;accumulator=0;if(document.hidden){pointers.clear();for(const p of impacts)p.target=0;}});
+document.addEventListener('visibilitychange',()=>{previous=0;accumulator=0;if(document.hidden){stopSantaVoice();pointers.clear();for(const p of impacts)p.target=0;}});
 canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();webglLost=true;say('Graphics paused');});
 canvas.addEventListener('webglcontextrestored',()=>{try{initGL();needSize=true;webglLost=false;say('');}catch(e){say('Reload to restore graphics');}});
 window.addEventListener('keydown',e=>{if(e.key==='Escape')openPanel(false);if(e.code==='Space'&&e.target.tagName!=='INPUT'){e.preventDefault();bounceBoth();}});

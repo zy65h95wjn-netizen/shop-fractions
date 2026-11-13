@@ -1,0 +1,73 @@
+{
+  "backends": [
+    {
+      "renderer": "webgl",
+      "recording": "webgl-belly-tap.webm",
+      "buffers": [
+        {
+          "duration": 1.5,
+          "peak": 0.9482862949371338,
+          "rms": 0.15381307458574595,
+          "rate": 1
+        },
+        {
+          "duration": 1.5,
+          "peak": 0.9482862949371338,
+          "rms": 0.15381307458574595,
+          "rate": 1
+        },
+        {
+          "duration": 1.5,
+          "peak": 0.9482862949371338,
+          "rms": 0.15381307458574595,
+          "rate": 1
+        },
+        {
+          "duration": 1.5,
+          "peak": 0.9482862949371338,
+          "rms": 0.15381307458574595,
+          "rate": 1
+        }
+      ],
+      "actualTap": true,
+      "noOverlap": true,
+      "mute": true,
+      "characterSwitch": true
+    },
+    {
+      "renderer": "canvas",
+      "recording": "canvas-belly-tap.webm",
+      "buffers": [
+        {
+          "duration": 1.5,
+          "peak": 0.9482862949371338,
+          "rms": 0.15381307458574595,
+          "rate": 1
+        },
+        {
+          "duration": 1.5,
+          "peak": 0.9482862949371338,
+          "rms": 0.15381307458574595,
+          "rate": 1
+        },
+        {
+          "duration": 1.5,
+          "peak": 0.9482862949371338,
+          "rms": 0.15381307458574595,
+          "rate": 1
+        },
+        {
+          "duration": 1.5,
+          "peak": 0.9482862949371338,
+          "rms": 0.15381307458574595,
+          "rate": 1
+        }
+      ],
+      "actualTap": true,
+      "noOverlap": true,
+      "mute": true,
+      "characterSwitch": true
+    }
+  ],
+  "errors": []
+}

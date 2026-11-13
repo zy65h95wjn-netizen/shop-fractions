@@ -1,3 +1,9 @@
+# Peach Physics — Santa voice preview
+
+Santa now uses a recorded **“Ho, ho, ho!”** phrase. This branch is a separate preview, based on production `34673b6`. [Voice, license, recordings and validation](SANTA-VOICE.md). Offline cache: `peach-physics-v008-r13-santa-voice1`.
+
+## Previous audio repair
+
 # Peach Physics r13 — audio playback repair 2
 
 Repairs gesture activation and interrupted audio contexts while keeping the original sounds and approved R13 motion unchanged. Enabling Sound plays a confirmation; the settings panel also offers Test sound. Santa belly taps now start his existing optional laugh when Belly laugh is On; Sound controls audibility. Offline cache: `peach-physics-v008-r13-audio2`.

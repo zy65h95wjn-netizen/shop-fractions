@@ -1,0 +1,109 @@
+{
+  "model": "Systran/faster-whisper-small.en",
+  "prompt": null,
+  "channel": "left (no stereo summing gain)",
+  "recordings": [
+    {
+      "file": "canvas-belly-tap.webm",
+      "sha256": "8085d8eb3d697e606e05592e931ebe7997e4f2596b6c57c9881c1d482b849486",
+      "duration": 1.44,
+      "peak": 0.9359158277511597,
+      "rms": 0.156358540058136,
+      "text": "Ho, ho, ho!",
+      "segments": [
+        {
+          "id": 1,
+          "seek": 0,
+          "start": 0.0,
+          "end": 1.2,
+          "text": " Ho, ho, ho!",
+          "tokens": [
+            50363,
+            9544,
+            11,
+            8169,
+            11,
+            8169,
+            0,
+            50435
+          ],
+          "avg_logprob": -0.5747586356268989,
+          "compression_ratio": 0.7333333333333333,
+          "no_speech_prob": 0.0221962109208107,
+          "words": [
+            {
+              "start": 0.0,
+              "end": 0.38,
+              "word": " Ho,",
+              "probability": 0.692469596862793
+            },
+            {
+              "start": 0.64,
+              "end": 0.74,
+              "word": " ho,",
+              "probability": 0.831142008304596
+            },
+            {
+              "start": 0.78,
+              "end": 1.2,
+              "word": " ho!",
+              "probability": 0.9946150183677673
+            }
+          ],
+          "temperature": 0.0
+        }
+      ]
+    },
+    {
+      "file": "webgl-belly-tap.webm",
+      "sha256": "ab5c42bd2b3d0629c5757840b92b9c0105cb5a0e77f3299eb7d46577046b5c72",
+      "duration": 1.44,
+      "peak": 0.9359158277511597,
+      "rms": 0.156358540058136,
+      "text": "Ho, ho, ho!",
+      "segments": [
+        {
+          "id": 1,
+          "seek": 0,
+          "start": 0.0,
+          "end": 1.2,
+          "text": " Ho, ho, ho!",
+          "tokens": [
+            50363,
+            9544,
+            11,
+            8169,
+            11,
+            8169,
+            0,
+            50435
+          ],
+          "avg_logprob": -0.5747586356268989,
+          "compression_ratio": 0.7333333333333333,
+          "no_speech_prob": 0.0221962109208107,
+          "words": [
+            {
+              "start": 0.0,
+              "end": 0.38,
+              "word": " Ho,",
+              "probability": 0.692469596862793
+            },
+            {
+              "start": 0.64,
+              "end": 0.74,
+              "word": " ho,",
+              "probability": 0.831142008304596
+            },
+            {
+              "start": 0.78,
+              "end": 1.2,
+              "word": " ho!",
+              "probability": 0.9946150183677673
+            }
+          ],
+          "temperature": 0.0
+        }
+      ]
+    }
+  ]
+}

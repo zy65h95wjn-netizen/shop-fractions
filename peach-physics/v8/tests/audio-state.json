@@ -1,6 +1,6 @@
 {
   "checks": 18,
   "oldInterruptedFailureReproduced": true,
-  "waveformSourceUnchanged": true,
+  "slapWaveformSourceUnchanged": true,
   "approvedMotionByteIdentical": true
 }
