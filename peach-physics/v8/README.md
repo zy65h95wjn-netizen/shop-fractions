@@ -1,3 +1,22 @@
+# Peach Physics v0.0.8 r12 — grab and hold approved
+
+Promotes the user-approved all-character preview at `c4b72cb86d27e1ae9f55577813be7f9cb429b7e4` to production. The runtime is identical to the accepted preview except that production preference storage is restored. Production release labels, manifest/icon links and the independent offline worker are restored as well.
+
+- Winter Ember, Midnight Yule, Aurelia Frost and Holly Heartbreaker support slow grab-and-hold; release resumes their existing springs. The settings panel can disable holding. Santa retains his original interaction.
+- Ember's curved crease guard separates the cheeks during dragging. Midnight's left boundary fades before the upper thigh. Aurelia's upper-left area is anchored and both cheek edges transition more gently. These rendering guards fade out after release; ordinary bounce is unchanged.
+- All five portraits, existing character framing, presets, saved profile keys and character selection are preserved. No Kelvinlet comparison or experiment-only zoom is promoted.
+- `peach-physics-v008-r12` precaches the same seven runtime resources. The r11-to-r12 upgrade is checked in both WebGL and Canvas, including offline loading of all five characters and retention of Holly's custom profile and framing.
+
+Validation: `tests/grab-hold-release.cjs` checks exact approved runtime identity and the real service-worker upgrade. Results are in `tests/grab-hold-release.json`. The approved preview's evidence includes 48 holds, 30 unchanged free-bounce comparisons, 64 same-state boundary comparisons, and 32 protected-region pixel probes. Those artifacts remain on the experimental branch and are not copied into the live application.
+
+Approved preview and before/after evidence: https://raw.githack.com/zy65h95wjn-netizen/shop-fractions/c4b72cb86d27e1ae9f55577813be7f9cb429b7e4/peach-physics/experiments/female-grab-hold/evidence.html
+
+Prior production: `d2a1fa1686aa1dda3cb1553872f0ad126138b873` (r11).
+
+Live: https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/v8/
+
+## Previous release documentation
+
 # Peach Physics v0.0.8 r11 — Santa approved
 
 The user approved Santa's belly experiment and requested production promotion. This release adopts `35eead11b205f1d5cf23297a9529ca2992bfc06a` without retuning the artwork, physics, controls or framing. Production labels and the offline cache identify r11.
