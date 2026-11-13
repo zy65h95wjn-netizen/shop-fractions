@@ -1,0 +1,77 @@
+{
+  "priorTapFailure": [
+    {
+      "renderer": "webgl",
+      "laughEnabled": true,
+      "soundEnabled": true,
+      "laughSourcesAfterTap": 0
+    },
+    {
+      "renderer": "canvas",
+      "laughEnabled": true,
+      "soundEnabled": true,
+      "laughSourcesAfterTap": 0
+    }
+  ],
+  "cases": [
+    {
+      "renderer": "webgl",
+      "sound": true,
+      "laugh": false,
+      "laughSources": 0,
+      "exactPhysicsAndFrames": true
+    },
+    {
+      "renderer": "webgl",
+      "sound": true,
+      "laugh": true,
+      "laughSources": 3,
+      "exactPhysicsAndFrames": true
+    },
+    {
+      "renderer": "webgl",
+      "sound": false,
+      "laugh": true,
+      "laughSources": 0,
+      "exactPhysicsAndFrames": true
+    },
+    {
+      "renderer": "webgl",
+      "sound": true,
+      "laugh": true,
+      "repeat": true,
+      "laughSources": 3,
+      "exactPhysicsAndFrames": true
+    },
+    {
+      "renderer": "canvas",
+      "sound": true,
+      "laugh": false,
+      "laughSources": 0,
+      "exactPhysicsAndFrames": true
+    },
+    {
+      "renderer": "canvas",
+      "sound": true,
+      "laugh": true,
+      "laughSources": 3,
+      "exactPhysicsAndFrames": true
+    },
+    {
+      "renderer": "canvas",
+      "sound": false,
+      "laugh": true,
+      "laughSources": 0,
+      "exactPhysicsAndFrames": true
+    },
+    {
+      "renderer": "canvas",
+      "sound": true,
+      "laugh": true,
+      "repeat": true,
+      "laughSources": 3,
+      "exactPhysicsAndFrames": true
+    }
+  ],
+  "errors": []
+}

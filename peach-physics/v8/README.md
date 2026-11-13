@@ -1,6 +1,6 @@
-# Peach Physics r13 — audio playback repair 1
+# Peach Physics r13 — audio playback repair 2
 
-Repairs gesture activation and interrupted audio contexts while keeping the original sounds and approved R13 motion unchanged. Enabling Sound plays a confirmation; the settings panel also offers Test sound. Offline cache: `peach-physics-v008-r13-audio1`.
+Repairs gesture activation and interrupted audio contexts while keeping the original sounds and approved R13 motion unchanged. Enabling Sound plays a confirmation; the settings panel also offers Test sound. Santa belly taps now start his existing optional laugh when Belly laugh is On; Sound controls audibility. Offline cache: `peach-physics-v008-r13-audio2`.
 
 [Audio repair details and validation](AUDIO-FIX.md)
 

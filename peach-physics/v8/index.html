@@ -12,7 +12,7 @@
 
 
 
-<title>Peach Physics — Elf Lab 0.0.8 r13 audio fix 1</title>
+<title>Peach Physics — Elf Lab 0.0.8 r13 audio fix 2</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -94,7 +94,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <p id="motionNotice" role="status" hidden style="position:absolute;z-index:5;pointer-events:none;top:max(12px,env(safe-area-inset-top));left:60px;right:60px;margin:0;padding:7px 10px;border-radius:12px;background:#07110fe8;color:#fff7eb;font-size:12px;text-align:center"></p><div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r13 · audio fix 1</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r13 · audio fix 2</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/5</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
@@ -1388,7 +1388,7 @@ function slapSound(){
  });
 }
 function slap(side,x,y,pt,strength=1){
- if(isSanta()){santaImpulse(side,x,y,strength,0,0,false,true);slapVisual(pt);slapSound();slapCount++;lastGesture='slap';return;}
+ if(isSanta()){santaImpulse(side,x,y,strength,0,0,false,true);slapVisual(pt);slapSound();startSantaLaugh();slapCount++;lastGesture='slap';return;}
  // Quick contact compression followed by a stronger, localized spring rebound.
  // Keep the source photograph, seam, and the opposite side anchored.
  const leftTune=isHolly()?(.65+model.bounce*.009):currentCharacter().id==='midnight' && side===0?.90:1;
@@ -1542,7 +1542,7 @@ document.getElementById('grabHold').addEventListener('click',()=>{grabHoldEnable
 document.getElementById('santaLaugh').addEventListener('click',()=>{santaLaughEnabled=!santaLaughEnabled;if(santaLaughEnabled)startSantaLaugh();else stopSantaLaugh();refreshPrefs();savePrefs();});
 document.getElementById('slapAudio').addEventListener('click',()=>{audioEpoch++;slapAudioEnabled=!slapAudioEnabled;refreshPrefs();savePrefs();if(slapAudioEnabled)slapSound();});
 document.getElementById('testSound').addEventListener('click',()=>slapSound());
-for(const id of ['slapAudio','testSound'])document.getElementById(id).addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});
+for(const id of ['slapAudio','testSound','santaLaugh'])document.getElementById(id).addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});
 document.getElementById('share').addEventListener('click',async()=>{
  const url=location.origin+location.pathname;
  try{

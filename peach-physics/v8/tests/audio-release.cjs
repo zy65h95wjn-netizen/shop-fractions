@@ -8,7 +8,7 @@ const names=['ember','midnight','aurelia','holly','santa'];
 const profiles=Object.fromEntries(names.map((id,i)=>[id,{version:2,preset:'custom',bounce:61+i,softness:64+i,settle:50+i,transfer:17*i,slapAudioEnabled:i%2===0,...(id==='santa'?{santaLaughEnabled:true}:{})}]));
 let checks=0;const ok=(x,label)=>{assert.ok(x,label);checks++;},eq=(a,b,label)=>{assert.deepEqual(a,b,label);checks++;};
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
-const report={prior,release:'r13-audio1',checks:0,backends:[],errors:[]};
+const report={prior,release:'r13-audio2',checks:0,backends:[],errors:[]};
 (async()=>{const b=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});try{
 for(const fallback of [false,true]){
  let promoted=false,pendingMotion=null;let notifyMotion;const motionRequested=new Promise(r=>notifyMotion=r);const allowed=new Set(['index.html','sw.js','motion.js','manifest.webmanifest','apple-touch-icon.png','assets/aurelia-frost.jpg','assets/holly-heartbreaker.jpg','assets/santa-claus.jpg']);
@@ -35,7 +35,7 @@ for(const fallback of [false,true]){
  await motionRequested;
  const observe=()=>p.evaluate(async()=>{
   const reg=await navigator.serviceWorker.getRegistration(),keys=await caches.keys(),url=new URL('./motion.js',location.href).href;
-  const cache=keys.includes('peach-physics-v008-r13-audio1')?await caches.open('peach-physics-v008-r13-audio1'):null;
+  const cache=keys.includes('peach-physics-v008-r13-audio2')?await caches.open('peach-physics-v008-r13-audio2'):null;
   const response=cache?await cache.match(url):null;
   return {requestedURL:url,controllerChanged:navigator.serviceWorker.controller!==window.priorWorker,controllerState:navigator.serviceWorker.controller?.state,activeIsController:reg.active===navigator.serviceWorker.controller,installingState:reg.installing?.state||null,keys:cache?(await cache.keys()).map(r=>new URL(r.url).pathname+new URL(r.url).search):[],motion:response?await response.text():null,response:response?{url:response.url,status:response.status,type:response.type,contentType:response.headers.get('content-type')}:null,caches:keys};
  });
@@ -46,7 +46,7 @@ for(const fallback of [false,true]){
  eq(cached.keys.slice().sort(),['','index.html','motion.js','assets/aurelia-frost.jpg','assets/holly-heartbreaker.jpg?v=r7','assets/santa-claus.jpg','manifest.webmanifest','apple-touch-icon.png'].map(x=>'/peach-physics/v8/'+x).sort(),'exact production URLs cached');
  eq(cached.response,{url:new URL('motion.js',base).href,status:200,type:'basic',contentType:'text/javascript'},'cached response is the requested JavaScript, not an HTML fallback');
  eq(cached.keys.length,8,'all eight resources precached');eq(hash(cached.motion),hash(fs.readFileSync(path.join(app,'motion.js'))),'offline motion is exact approved controller');ok(!cached.caches.includes('peach-physics-v008-r13'),'old v8 cache retired');ok(cached.caches.includes('peach-physics-v0071-preservation-sentinel'),'earlier release cache preserved');
- await c.setOffline(true);await p.reload();await ready();ok((await p.title()).includes('audio fix 1'),'upgrade opens R13 offline');const after=await snap();eq(after.renderer,fallback?'canvas':'webgl','requested renderer');eq(after.character,before.character,'selection preserved');eq(after.model,before.model,'initial custom profile preserved');eq(after.framing,before.framing,'framing preserved');eq(await stored(),beforeStored,'all stored profiles and preview keys untouched on upgrade');
+ await c.setOffline(true);await p.reload();await ready();ok((await p.title()).includes('audio fix 2'),'upgrade opens R13 offline');const after=await snap();eq(after.renderer,fallback?'canvas':'webgl','requested renderer');eq(after.character,before.character,'selection preserved');eq(after.model,before.model,'initial custom profile preserved');eq(after.framing,before.framing,'framing preserved');eq(await stored(),beforeStored,'all stored profiles and preview keys untouched on upgrade');
  const offlineScript=await p.evaluate(async()=>{const r=await fetch('./motion.js');return {status:r.status,type:r.headers.get('content-type'),body:await r.text()};});eq(offlineScript.status,200,'offline fetch succeeds');eq(offlineScript.type,'text/javascript','offline fetch is JavaScript');eq(hash(offlineScript.body),hash(fs.readFileSync(path.join(app,'motion.js'))),'offline fetch body is exact approved code');
  const defaults=await p.evaluate(()=>__peachMotionDebug.snapshot());ok(!defaults.shake&&!defaults.auto,'features initially off');eq(await p.evaluate(()=>permissionCalls),0,'no unsolicited permission prompt');
  const installed=await p.evaluate(async()=>({manifest:await(await fetch(document.querySelector('link[rel="manifest"]').href)).json(),icon:Array.from(new Uint8Array(await(await fetch(document.querySelector('link[rel="apple-touch-icon"]').href)).arrayBuffer()))}));eq(installed.manifest,JSON.parse(fs.readFileSync(path.join(app,'manifest.webmanifest'),'utf8')),'manifest available offline');eq(hash(Buffer.from(installed.icon)),hash(fs.readFileSync(path.join(app,'apple-touch-icon.png'))),'icon exact offline');
