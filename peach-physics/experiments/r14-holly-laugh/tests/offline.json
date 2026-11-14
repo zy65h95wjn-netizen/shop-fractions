@@ -1,26 +1,28 @@
 {
-  "checks": 78,
+  "checks": 84,
   "results": [
     {
       "renderer": "webgl",
       "offlineCharacters": 5,
-      "upgradedFrom": "2143e6c4f973859ab2f331678a43ee4fc3af395a",
+      "upgradedFrom": "975b581a0dcf8100e20b44e87e2376d0b8f54f50",
       "atomicAudioInstall": true,
       "staleCacheRace": true,
       "profileMigration": true,
       "productionIsolation": true,
       "offlineRecordingHash": "cf12b7572327f49cafab183eb206b610b3c07117f5d0f5f778ee37846860d97b",
+      "secondRecordingHash": "2a5537074dc37db937e604545132815d09f4e21dd4084a736560bed12bb20533",
       "passed": true
     },
     {
       "renderer": "canvas",
       "offlineCharacters": 5,
-      "upgradedFrom": "2143e6c4f973859ab2f331678a43ee4fc3af395a",
+      "upgradedFrom": "975b581a0dcf8100e20b44e87e2376d0b8f54f50",
       "atomicAudioInstall": true,
       "staleCacheRace": true,
       "profileMigration": true,
       "productionIsolation": true,
       "offlineRecordingHash": "cf12b7572327f49cafab183eb206b610b3c07117f5d0f5f778ee37846860d97b",
+      "secondRecordingHash": "2a5537074dc37db937e604545132815d09f4e21dd4084a736560bed12bb20533",
       "passed": true
     }
   ],

@@ -39,6 +39,24 @@ let checks=0;const eq=(a,b,msg)=>{assert.deepEqual(a,b,msg);checks++;},ok=(v,msg
  for(const corrupt of [false,true]){
   const c=await browser.newContext(),p=await c.newPage();let failed=true;await p.route('**/index.html?*',r=>r.fulfill({contentType:'text/html',body:html}));await p.route('**/holly-giggle.wav',r=>r.fulfill(failed?{status:corrupt?200:503,contentType:'text/plain',body:'unavailable'}:{contentType:'audio/wav',body:fs.readFileSync(dir+'/assets/audio/holly-giggle.wav')}));await p.goto(url);await p.click('#gear');await p.click('#slapAudio');await p.click('#testSound');await p.waitForFunction(()=>__hollyAudioDebug.snapshot().error&&!__hollyAudioDebug.snapshot().pending);ok((await p.locator('#audioStatus').textContent()).includes('retry'),'visible retry '+corrupt);failed=false;await p.click('#testSound');await p.waitForFunction(()=>__hollyAudioDebug.snapshot().active);eq(await p.evaluate(()=>__hollyAudioDebug.snapshot().counts.test),1,'failed recording retry '+corrupt);await c.close();
  }
+ // The second take cannot block the first, queue behind it, or skip on cancellation/failure.
+ for(const mode of ['delayed','failed']){
+  const c=await browser.newContext({viewport:{width:390,height:844}}),p=await c.newPage();let release,failed=true;const gate=new Promise(r=>release=r);
+  await p.route('**/index.html?*',r=>r.fulfill({contentType:'text/html',body:html}));
+  await p.route('**/holly-giggle-2.wav',async r=>{if(mode==='delayed')await gate;await r.fulfill(mode==='failed'&&failed?{status:503,body:'unavailable'}:{contentType:'audio/wav',body:fs.readFileSync(dir+'/assets/audio/holly-giggle-2.wav')});});
+  await p.goto(url);await p.click('#gear');await p.click('#slapAudio');await p.waitForFunction(()=>__hollyAudioDebug.snapshot().ready);await p.click('#close');
+  const target=await p.evaluate(()=>{const d=__peachPhysicsDebug.snapshot(),f=d.framing,r=d.regions[0];return{x:f.x+r.x/d.image[0]*f.width,y:f.y+r.y/d.image[1]*f.height};});
+  await p.mouse.click(target.x,target.y);await p.waitForFunction(()=>__hollyAudioDebug.snapshot().active);eq(await p.evaluate(()=>__hollyAudioDebug.snapshot().lastClip),1,'first take available despite second '+mode);await p.waitForTimeout(2700);
+  await p.mouse.click(target.x,target.y);
+  if(mode==='delayed'){
+   ok(await p.evaluate(()=>__hollyAudioDebug.snapshot().pending),'second take waits without advancing');
+   for(let i=0;i<4;i++)await p.mouse.click(target.x,target.y);
+   await p.evaluate(()=>__audioTest.reset());release();await p.waitForFunction(()=>__hollyAudioDebug.snapshot().clips[1].ready);await p.waitForTimeout(100);
+  }else{await p.waitForFunction(()=>__hollyAudioDebug.snapshot().error&&!__hollyAudioDebug.snapshot().pending);failed=false;}
+  eq(await p.evaluate(()=>__hollyAudioDebug.snapshot().counts.tap),1,'no queued or failed second laugh '+mode);
+  eq(await p.evaluate(()=>__hollyAudioDebug.snapshot().nextTap),2,'second remains next after '+mode);
+  await p.mouse.click(target.x,target.y);await p.waitForFunction(()=>__hollyAudioDebug.snapshot().active);eq(await p.evaluate(()=>__hollyAudioDebug.snapshot().lastClip),2,'second retry plays correct take '+mode);eq(await p.evaluate(()=>__hollyAudioDebug.snapshot().nextTap),1,'sequence advances only on successful second playback '+mode);await c.close();
+ }
  // Safari-like interrupted resume, rejected resume and late resume cancellation.
  {
   const c=await browser.newContext(),p=await c.newPage();await p.route('**/index.html?*',r=>r.fulfill({contentType:'text/html',body:html}));await p.goto(url);await p.click('#gear');await p.click('#slapAudio');await p.waitForFunction(()=>__hollyAudioDebug.snapshot().ready);

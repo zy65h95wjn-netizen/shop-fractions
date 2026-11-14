@@ -111,7 +111,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  </section>
 </main>
 <script src="./motion.js?v=r14-auto2"></script>
-<script src="./holly-audio.js?v=r14-laugh2"></script>
+<script src="./holly-audio.js?v=r14-laugh3"></script>
 <script>
 (() => {
 'use strict';
@@ -1510,7 +1510,7 @@ function refreshPrefs(){
   audioButton.textContent=(isSanta()||isHolly()?'Sound: ':'Slap sound: ')+(slapAudioEnabled?'On':'Off');
   document.getElementById('testSound').disabled=!slapAudioEnabled;
   document.getElementById('testSound').textContent=isHolly()?'Test Holly Laugh':'Test sound';
-  document.getElementById('audioStatus').textContent=slapAudioEnabled?(isHolly()?'Tap Test Holly Laugh to check playback.':'Tap Test sound to check playback.'):'Sound is off.';
+  document.getElementById('audioStatus').textContent=slapAudioEnabled?(isHolly()?'Test Holly Laugh plays each laugh in turn.':'Tap Test sound to check playback.'):'Sound is off.';
   const laugh=document.getElementById('santaLaugh');laugh.hidden=!isSanta();laugh.setAttribute('aria-pressed',String(santaLaughEnabled));laugh.textContent='Belly laugh: '+(santaLaughEnabled?'On':'Off');
 }
 function restorePrefs(){

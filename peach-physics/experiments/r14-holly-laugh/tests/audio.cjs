@@ -67,7 +67,14 @@ async function cancelCase(p,action,name){
   await p.evaluate(()=>document.querySelector('#game').dispatchEvent(new PointerEvent('pointercancel',{pointerId:999,pointerType:'touch'})));
   ok((await snap(p)).active,'unrelated cancelled touch does not interrupt an accepted laugh');
   await p.waitForTimeout(1950);await waitDone(p);const tapRecording=await recorded(p,fallback?'canvas-tap':'webgl-tap');ok(tapRecording.peak>.1&&tapRecording.rms>.005,'complete tap graph audible');await tap(p);eq((await snap(p)).counts.tap,1,'cooldown after clip');
-  await next(p);await tap(p,'flick');await waitActive(p);eq((await snap(p)).counts.release,1,'flick release laugh');await waitDone(p);
+  eq((await snap(p)).nextTap,2,'blocked taps never advance variety');
+  await next(p);await clearCapture(p);await tap(p);await waitActive(p);eq((await snap(p)).lastClip,2,'second accepted tap selects the other recording');
+  const blockedCounts=(await snap(p)).counts;await click(p,'testSound');eq((await snap(p)).counts,blockedCounts,'Test never overlaps a tap');
+  await p.waitForTimeout(2300);await waitDone(p);const secondTap=await recorded(p,fallback?'canvas-tap-2':'webgl-tap-2');ok(secondTap.peak>.1&&secondTap.peak<.9,'second tap audible and unclipped');
+  await next(p);await tap(p);await waitActive(p);eq((await snap(p)).lastClip,1,'third accepted tap returns to first laugh');await waitDone(p);
+  const nextTap=(await snap(p)).nextTap;await clearCapture(p);await click(p,'testSound');await waitActive(p);eq((await snap(p)).lastClip,2,'Test cycles independently to second laugh');eq((await snap(p)).nextTap,nextTap,'Test does not consume tap variety');
+  await p.waitForTimeout(2300);await waitDone(p);await recorded(p,fallback?'canvas-test-2':'webgl-test-2');
+  await next(p);await tap(p,'flick');await waitActive(p);eq((await snap(p)).counts.release,1,'flick release laugh');eq((await snap(p)).lastClip,1,'existing flick recording retained');await waitDone(p);
   await next(p);await tap(p,'drag');await waitActive(p);eq((await snap(p)).counts.release,2,'deliberate slow drag release laugh');await waitDone(p);
   await next(p);const beforeCancel=(await snap(p)).counts;await tap(p,'cancel');await p.waitForTimeout(100);eq((await snap(p)).counts,beforeCancel,'pointer cancel silent');
   // Existing R14 Auto default remains on and cannot call the physical sample hook.
@@ -91,7 +98,7 @@ async function cancelCase(p,action,name){
   // Saved per-character sound preference restores without activating or playing on load.
   await p.reload();await p.waitForFunction(()=>window.__test&&document.querySelector('#loader').classList.contains('hiding'));eq(await p.evaluate(()=>__peachPhysicsDebug.snapshot().slapAudioEnabled),true,'Holly sound preference persists');ok(!(await snap(p)).activated,'reload never activates audio');
   await click(p,'testSound');await waitActive(p);await waitDone(p);eq(errors,[],'no browser exceptions');
-  results.push({renderer:fallback?'canvas':'webgl',full,tap:tapRecording,passed:true});await context.close();
+  results.push({renderer:fallback?'canvas':'webgl',full,tap:tapRecording,secondTap,passed:true});await context.close();
  }
  const report={checks,results,passed:true,limitations:['Chromium Web Audio capture does not establish iPhone speaker playback or human naturalness.','Physical shake is synthetic sensor input, not a real iPhone.']};h.fs.writeFileSync(h.path.join(__dirname,'audio.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
  }finally{await browser.close();}

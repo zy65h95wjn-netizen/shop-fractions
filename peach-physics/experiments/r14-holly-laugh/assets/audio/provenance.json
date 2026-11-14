@@ -67,5 +67,27 @@
   },
   "final_file": "holly-giggle.wav",
   "final_sha256": "cf12b7572327f49cafab183eb206b610b3c07117f5d0f5f778ee37846860d97b",
-  "ffmpeg_command": "ffmpeg -i source-855464-preview.mp3 -af 'atrim=start=0.20:end=1.96,asetpts=PTS-STARTPTS,volume=23.7dB,afade=t=in:d=0.01,afade=t=out:st=1.73:d=0.03' -c:a pcm_s16le -map_metadata -1 holly-giggle.wav"
+  "ffmpeg_command": "ffmpeg -i source-855464-preview.mp3 -af 'atrim=start=0.20:end=1.96,asetpts=PTS-STARTPTS,volume=23.7dB,afade=t=in:d=0.01,afade=t=out:st=1.73:d=0.03' -c:a pcm_s16le -map_metadata -1 holly-giggle.wav",
+  "tap_mode": "Alternate complete recordings 1 and 2 on successful taps. Test uses a separate sequence; ignored, cancelled-before-playback and failed requests do not advance either sequence.",
+  "additional_recordings": [
+    {
+      "file": "holly-giggle-2.wav",
+      "sha256": "2a5537074dc37db937e604545132815d09f4e21dd4084a736560bed12bb20533",
+      "source": "Same CC0 mvVoiceActing recording 855464 and retained source-855464-preview.mp3 bytes. A distinct second laugh, not a time/pitch variant of the first.",
+      "source_interval_seconds": [
+        2.42,
+        4.5
+      ],
+      "duration_seconds": 2.08,
+      "gain_db": 23.7,
+      "fade_in_seconds": 0.01,
+      "fade_out_seconds": 0.08,
+      "sample_rate": 24000,
+      "channels": 2,
+      "codec": "PCM signed 16-bit little-endian WAV",
+      "pitch_or_speed_change": false,
+      "ffmpeg_command": "ffmpeg -i source-855464-preview.mp3 -af 'atrim=start=2.42:end=4.50,asetpts=PTS-STARTPTS,volume=23.7dB,afade=t=in:d=0.01,afade=t=out:st=2.00:d=0.08' -c:a pcm_s16le -map_metadata -1 holly-giggle-2.wav",
+      "listening_status": "Second passage selected from waveform boundaries; this environment cannot audition audio. User iPhone listening approval remains open."
+    }
+  ]
 }
