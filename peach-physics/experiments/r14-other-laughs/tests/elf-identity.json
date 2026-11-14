@@ -1,0 +1,98 @@
+[
+  {
+    "renderer": "webgl",
+    "character": "ember",
+    "take": 1,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 1.0,
+    "comparedSamples": 73867
+  },
+  {
+    "renderer": "webgl",
+    "character": "ember",
+    "take": 2,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 1.0,
+    "comparedSamples": 138915
+  },
+  {
+    "renderer": "webgl",
+    "character": "midnight",
+    "take": 1,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 1.0,
+    "comparedSamples": 63062
+  },
+  {
+    "renderer": "webgl",
+    "character": "midnight",
+    "take": 2,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 1.0,
+    "comparedSamples": 74970
+  },
+  {
+    "renderer": "webgl",
+    "character": "aurelia",
+    "take": 1,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 0.9999999999999998,
+    "comparedSamples": 68796
+  },
+  {
+    "renderer": "webgl",
+    "character": "aurelia",
+    "take": 2,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 0.9999999999999998,
+    "comparedSamples": 122157
+  },
+  {
+    "renderer": "canvas",
+    "character": "ember",
+    "take": 1,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 1.0,
+    "comparedSamples": 73867
+  },
+  {
+    "renderer": "canvas",
+    "character": "ember",
+    "take": 2,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 1.0,
+    "comparedSamples": 138915
+  },
+  {
+    "renderer": "canvas",
+    "character": "midnight",
+    "take": 1,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 1.0,
+    "comparedSamples": 63062
+  },
+  {
+    "renderer": "canvas",
+    "character": "midnight",
+    "take": 2,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 1.0,
+    "comparedSamples": 74970
+  },
+  {
+    "renderer": "canvas",
+    "character": "aurelia",
+    "take": 1,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 0.9999999999999998,
+    "comparedSamples": 68796
+  },
+  {
+    "renderer": "canvas",
+    "character": "aurelia",
+    "take": 2,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 0.9999999999999998,
+    "comparedSamples": 122157
+  }
+]

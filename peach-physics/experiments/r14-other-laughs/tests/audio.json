@@ -4,7 +4,7 @@
     {
       "test": "mute false",
       "stats": {
-        "samples": 7168,
+        "samples": 8192,
         "sampleRate": 44100,
         "peak": 0,
         "rms": 0,
@@ -14,7 +14,7 @@
     {
       "test": "reset false",
       "stats": {
-        "samples": 7168,
+        "samples": 6144,
         "sampleRate": 44100,
         "peak": 0,
         "rms": 0,
@@ -54,7 +54,7 @@
     {
       "test": "pagehide false",
       "stats": {
-        "samples": 7168,
+        "samples": 8192,
         "sampleRate": 44100,
         "peak": 0,
         "rms": 0,
@@ -64,10 +64,10 @@
     {
       "renderer": "webgl",
       "full": {
-        "samples": 92160,
+        "samples": 95232,
         "sampleRate": 44100,
         "peak": 0.4358372688293457,
-        "rms": 0.03925397051727642,
+        "rms": 0.038615652033497185,
         "audibleSamples": 71625
       },
       "tap": {
@@ -78,10 +78,10 @@
         "audibleSamples": 71625
       },
       "secondTap": {
-        "samples": 105472,
+        "samples": 102400,
         "sampleRate": 44100,
         "peak": 0.43463313579559326,
-        "rms": 0.04619569468430005,
+        "rms": 0.04688350961250683,
         "audibleSamples": 81754
       },
       "passed": true
@@ -109,7 +109,7 @@
     {
       "test": "switch true",
       "stats": {
-        "samples": 6144,
+        "samples": 7168,
         "sampleRate": 44100,
         "peak": 0,
         "rms": 0,
@@ -129,7 +129,7 @@
     {
       "test": "blur true",
       "stats": {
-        "samples": 7168,
+        "samples": 6144,
         "sampleRate": 44100,
         "peak": 0,
         "rms": 0,
@@ -139,7 +139,7 @@
     {
       "test": "pagehide true",
       "stats": {
-        "samples": 7168,
+        "samples": 6144,
         "sampleRate": 44100,
         "peak": 0,
         "rms": 0,
@@ -149,24 +149,24 @@
     {
       "renderer": "canvas",
       "full": {
-        "samples": 88064,
+        "samples": 91136,
         "sampleRate": 44100,
         "peak": 0.4358372688293457,
-        "rms": 0.040156478541785064,
+        "rms": 0.03947388243693595,
         "audibleSamples": 71625
       },
       "tap": {
-        "samples": 88064,
+        "samples": 89088,
         "sampleRate": 44100,
         "peak": 0.4358372688293457,
-        "rms": 0.040156478541785064,
+        "rms": 0.03992502716995867,
         "audibleSamples": 71625
       },
       "secondTap": {
-        "samples": 105472,
+        "samples": 104448,
         "sampleRate": 44100,
         "peak": 0.43463313579559326,
-        "rms": 0.04619569468430005,
+        "rms": 0.046421591848946925,
         "audibleSamples": 81754
       },
       "passed": true

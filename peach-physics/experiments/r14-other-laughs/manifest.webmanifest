@@ -1,7 +1,7 @@
 {
   "name": "Peach Physics \u2014 R14.2 Voice Preview",
   "short_name": "R14.2 Preview",
-  "description": "R14.2 audition checkpoint; new character voice assignments remain pending.",
+  "description": "R14.2 isolated preview with two recorded laughs per elf.",
   "start_url": "./?character=holly",
   "scope": "./",
   "display": "standalone",

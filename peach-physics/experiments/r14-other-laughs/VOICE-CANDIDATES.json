@@ -163,7 +163,9 @@
       "pitch_or_speed_change": false,
       "sha256": "9805b6594512785378fd27c4314881c8b38123575f2a8fd1f8f50bff49696934",
       "edits": "atrim=start=3.45:end=5.125,asetpts=PTS-STARTPTS,volume=-7.43dB,afade=t=in:d=0.01,afade=t=out:st=1.625000:d=0.05",
-      "status": "Prepared from waveform boundaries for audition; not listened to or assigned to a character."
+      "status": "Candidate take approved by Lance in conversation (\"i like them\"); assigned for combined iPhone preview review. Audio bytes unchanged from audition.",
+      "character_id": "ember",
+      "character_name": "Winter Ember"
     },
     {
       "candidate": "cv",
@@ -181,7 +183,9 @@
       "pitch_or_speed_change": false,
       "sha256": "bf7fb89f44736d68137eeef1e430c9ca926aca01c24bd26b202f58d8f7d9c989",
       "edits": "atrim=start=0.3:end=3.45,asetpts=PTS-STARTPTS,volume=-7.43dB,afade=t=in:d=0.01,afade=t=out:st=3.100000:d=0.05",
-      "status": "Prepared from waveform boundaries for audition; not listened to or assigned to a character."
+      "status": "Candidate take approved by Lance in conversation (\"i like them\"); assigned for combined iPhone preview review. Audio bytes unchanged from audition.",
+      "character_id": "ember",
+      "character_name": "Winter Ember"
     },
     {
       "candidate": "splice",
@@ -199,7 +203,9 @@
       "pitch_or_speed_change": false,
       "sha256": "918df2cd75d219518ba542c8bfa14a58d8107a005830cdf875e029b0a7718840",
       "edits": "atrim=start=0.07:end=1.5,asetpts=PTS-STARTPTS,volume=4.47dB,afade=t=in:d=0.01,afade=t=out:st=1.380000:d=0.05",
-      "status": "Prepared from waveform boundaries for audition; not listened to or assigned to a character."
+      "status": "Candidate take approved by Lance in conversation (\"i like them\"); assigned for combined iPhone preview review. Audio bytes unchanged from audition.",
+      "character_id": "midnight",
+      "character_name": "Midnight Yule"
     },
     {
       "candidate": "splice",
@@ -217,7 +223,9 @@
       "pitch_or_speed_change": false,
       "sha256": "9181f10f4727537d66ef3aeed769d47b4747fcaf4455a6b822c5df1be3452c14",
       "edits": "atrim=start=3.6:end=5.3,asetpts=PTS-STARTPTS,volume=4.47dB,afade=t=in:d=0.01,afade=t=out:st=1.650000:d=0.05",
-      "status": "Prepared from waveform boundaries for audition; not listened to or assigned to a character."
+      "status": "Candidate take approved by Lance in conversation (\"i like them\"); assigned for combined iPhone preview review. Audio bytes unchanged from audition.",
+      "character_id": "midnight",
+      "character_name": "Midnight Yule"
     },
     {
       "candidate": "mox",
@@ -235,7 +243,9 @@
       "pitch_or_speed_change": false,
       "sha256": "dae0b65975a57ce0828c40ae332fe63cab6311a2b9f54a12884e5a0a90c24919",
       "edits": "atrim=start=4.89:end=6.45,asetpts=PTS-STARTPTS,volume=-4.02dB,afade=t=in:d=0.01,afade=t=out:st=1.510000:d=0.05",
-      "status": "Prepared from waveform boundaries for audition; not listened to or assigned to a character."
+      "status": "Candidate take approved by Lance in conversation (\"i like them\"); assigned for combined iPhone preview review. Audio bytes unchanged from audition.",
+      "character_id": "aurelia",
+      "character_name": "Aurelia Frost"
     },
     {
       "candidate": "mox",
@@ -253,9 +263,11 @@
       "pitch_or_speed_change": false,
       "sha256": "89b47b792cc652f5ca02cb6d8f0270406ad4a8aeb62db017000baa1b508519d2",
       "edits": "atrim=start=1.33:end=4.1,asetpts=PTS-STARTPTS,volume=-4.02dB,afade=t=in:d=0.01,afade=t=out:st=2.720000:d=0.05",
-      "status": "Prepared from waveform boundaries for audition; not listened to or assigned to a character."
+      "status": "Candidate take approved by Lance in conversation (\"i like them\"); assigned for combined iPhone preview review. Audio bytes unchanged from audition.",
+      "character_id": "aurelia",
+      "character_name": "Aurelia Frost"
     }
   ],
-  "assignment_status": "UNASSIGNED. Issue #21 requires listening before choosing character voices. This execution environment cannot hear audio. Human source/take review is pending.",
+  "assignment_status": "Lance approved the audition candidates. C-V paired with Winter Ember, SpliceSound with Midnight Yule, moxobna with Aurelia Frost for combined iPhone review; no production approval.",
   "access": "All files were anonymous public hq previews explicitly linked in source page data-static-file-url. No login-gated originals, paid access, credentials or bypass."
 }

@@ -89,7 +89,7 @@ async function cancelCase(p,action,name){
   console.log('Audio cancellation checks',fallback);
   await cancelCase(p,()=>click(p,'slapAudio'),'mute '+fallback);await tap(p);ok(!(await snap(p)).active,'muted taps remain silent');await click(p,'slapAudio');
   await cancelCase(p,()=>p.evaluate(()=>__test.reset()),'reset '+fallback);
-  await cancelCase(p,()=>p.evaluate(()=>__test.chooseCharacter(0)),'switch '+fallback);await p.waitForFunction(()=>__peachPhysicsDebug.snapshot().character==='ember');eq(await p.locator('#testSound').textContent(),'Test sound','other label retained');await h.character(p,'holly');
+  await cancelCase(p,()=>p.evaluate(()=>__test.chooseCharacter(0)),'switch '+fallback);await p.waitForFunction(()=>__peachPhysicsDebug.snapshot().character==='ember');eq(await p.locator('#testSound').textContent(),'Test Winter Ember Laugh','character-specific label');await h.character(p,'holly');
   await cancelCase(p,()=>p.evaluate(()=>{Object.defineProperty(document,'hidden',{value:true,configurable:true});document.dispatchEvent(new Event('visibilitychange'));}),'hidden '+fallback);
   await p.evaluate(()=>{Object.defineProperty(document,'hidden',{value:false,configurable:true});document.dispatchEvent(new Event('visibilitychange'));});ok(!(await snap(p)).active,'return never auto-replays');
   await cancelCase(p,()=>p.evaluate(()=>window.dispatchEvent(new Event('blur'))),'blur '+fallback);

@@ -1,8 +1,8 @@
 const fs=require('fs'),path=require('path'),http=require('http'),assert=require('assert/strict'),crypto=require('crypto'),{execFileSync}=require('child_process'),{chromium}=require('playwright');
-const app=path.resolve(__dirname,'..'),baseline=path.resolve(app,'../../v8'),scope='/peach-physics/experiments/r14-other-laughs/',prefix='peach-preview-r142-other-laughs-',cache=prefix+'v1',motionKey=prefix+'peach-r13-motion-options-v1',ids=['ember','midnight','aurelia','holly','santa'];
+const app=path.resolve(__dirname,'..'),baseline=path.resolve(app,'../../v8'),scope='/peach-physics/experiments/r14-other-laughs/',prefix='peach-preview-r142-other-laughs-',cache=prefix+'v2',motionKey=prefix+'peach-r13-motion-options-v1',ids=['ember','midnight','aurelia','holly','santa'];
 const profiles=Object.fromEntries(ids.map((id,i)=>[id,{version:2,preset:'custom',bounce:61+i,softness:64+i,settle:50+i,transfer:17*i,slapAudioEnabled:false,...(id==='santa'?{santaLaughEnabled:true}:{})}]));
-const prior='5441324244eb2e28ffc115f8cf0d34f1ff2c5d21';
-const previous=Object.fromEntries(['index.html','sw.js','holly-audio.js','assets/audio/holly-giggle.wav'].map(name=>[name,execFileSync('git',['show',prior+':peach-physics/experiments/r14-holly-laugh/'+name],{cwd:app,maxBuffer:4e6})]));
+const checkpoint=process.argv[2]==='checkpoint',prior=checkpoint?'331d1e5a1a623e958498fc8c0746af36f6de7fe2':'5441324244eb2e28ffc115f8cf0d34f1ff2c5d21',oldVersion=checkpoint?'v1':'v0';
+const previous=Object.fromEntries(['index.html','sw.js','holly-audio.js','assets/audio/holly-giggle.wav',...(checkpoint?['voice-profiles.js','voice-bank.js']:[])].map(name=>[name,execFileSync('git',['show',prior+':peach-physics/experiments/'+(checkpoint?'r14-other-laughs':'r14-holly-laugh')+'/'+name],{cwd:app,maxBuffer:4e6})]));
 for(const name of ['index.html','sw.js'])previous[name]=Buffer.from(previous[name].toString().replaceAll('peach-preview-r14-holly-laugh-',prefix).replace(prefix+'v3',prefix+'v0'));
 const oldHTML=previous['index.html'].toString();
 let checks=0;const ok=(v,label)=>{assert(v,label);checks++;},eq=(a,b,label)=>{assert.deepEqual(a,b,label);checks++;};const report=[];
@@ -41,9 +41,9 @@ let checks=0;const ok=(v,label)=>{assert(v,label);checks++;},eq=(a,b,label)=>{as
    await p.reload();await ready();await p.waitForFunction(()=>!!navigator.serviceWorker.controller);await p.evaluate(()=>window.previousController=navigator.serviceWorker.controller);
    promoted=true;await p.evaluate(()=>navigator.serviceWorker.getRegistration().then(r=>r.update()));await audioRequested;
    ok(await p.evaluate(()=>navigator.serviceWorker.controller===previousController),'audio install gate retains prior controller');
-   ok((await p.evaluate(()=>caches.keys())).includes(prefix+'v0'),'prior cache retained until complete install');
+   ok((await p.evaluate(()=>caches.keys())).includes(prefix+oldVersion),'prior cache retained until complete install');
    releaseAudio();await p.waitForFunction(async cache=>navigator.serviceWorker.controller!==previousController&&(await caches.keys()).includes(cache),cache);
-   await p.evaluate(async({key,html})=>{const c=await caches.open(key);for(const name of ['./','./index.html'])await c.put(name,new Response(html,{headers:{'Content-Type':'text/html'}}));},{key:prefix+'v0',html:oldHTML});
+   await p.evaluate(async({key,html})=>{const c=await caches.open(key);for(const name of ['./','./index.html'])await c.put(name,new Response(html,{headers:{'Content-Type':'text/html'}}));},{key:prefix+oldVersion,html:oldHTML});
    await context.setOffline(true);await p.reload();await ready();
    eq(await p.title(),'Peach Physics — R14.2 Voice Preview','offline uses updated cache despite resurrected stale cache');
    eq(await p.evaluate(()=>__peachPhysicsDebug.snapshot().renderer),fallback?'canvas':'webgl','offline renderer');
@@ -59,29 +59,45 @@ let checks=0;const ok=(v,label)=>{assert(v,label);checks++;},eq=(a,b,label)=>{as
    await p.reload();await ready();ok(await p.evaluate(()=>__peachPhysicsDebug.snapshot().slapAudioEnabled),'offline Sound preference persists');eq(await p.evaluate(()=>__peachPhysicsDebug.snapshot().audioState),'not-started','reload never starts sound');
    await click('testSound');await p.waitForFunction(()=>__hollyAudioDebug.snapshot().counts.test===1);
    await click('autoMotion');await p.reload();await ready();ok(await p.evaluate(()=>__peachMotionDebug.snapshot().auto),'Auto On persisted');await p.waitForFunction(()=>__peachMotionDebug.snapshot().counts.autoSteps>30);eq(await p.evaluate(()=>__hollyAudioDebug.snapshot().counts),{tap:0,release:0,shake:0,test:0},'offline Auto silent');
-   for(const id of ['ember','midnight','aurelia','santa']){
-    await select(id);await click('slapAudio');await p.waitForFunction(()=>__peachPhysicsDebug.snapshot().audioState==='running');await click('testSound');
-    ok(await p.evaluate(()=>__sounds.some(s=>Math.abs(s.duration-.1)<.01)),'original slap sample '+id);
-    if(id==='santa'){await p.evaluate(()=>document.querySelector('#both').click());await p.waitForFunction(()=>__peachPhysicsDebug.snapshot().santaLaughSound);ok(await p.evaluate(()=>__voices.includes('sawtooth')),'current synthetic Santa remains');}
+   for(const id of ['ember','midnight','aurelia']){
+    await select(id);await click('slapAudio');await p.waitForFunction(()=>__elfAudioDebug.snapshot().current.clips.every(c=>c.ready));
+    eq(await p.locator('#testSound').textContent(),'Test '+({ember:'Winter Ember',midnight:'Midnight Yule',aurelia:'Aurelia Frost'})[id]+' Laugh','offline Test label '+id);
+    for(let take=1;take<=2;take++){
+     await click('testSound');await p.waitForFunction(()=>__elfAudioDebug.snapshot().current.active);
+     const d=await p.evaluate(()=>__elfAudioDebug.snapshot());eq(d.current.lastClip,take,'offline alternate take '+id+take);eq(d.activeCount,1,'one offline sound '+id+take);
+     const clip=await p.evaluate(async({id,take})=>{const file=ElfVoiceProfiles[id].clips[take-1].url,b=await(await fetch(file)).arrayBuffer();return{file,hash:Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',b)),x=>x.toString(16).padStart(2,'0')).join('')};},{id,take});
+     eq(clip.hash,crypto.createHash('sha256').update(fs.readFileSync(app+'/'+clip.file)).digest('hex'),'exact offline recording '+id+take);
+     await p.waitForFunction(()=>!__elfAudioDebug.snapshot().current.active);
+    }
+    await p.reload();await ready();eq(await p.evaluate(()=>__peachPhysicsDebug.snapshot().character),id,'offline selected character '+id);ok(await p.evaluate(()=>__peachPhysicsDebug.snapshot().slapAudioEnabled),'offline Sound profile '+id);
+    eq(await p.evaluate(()=>__elfAudioDebug.snapshot().current.counts),{tap:0,release:0,shake:0,test:0},'offline Auto and reload silent '+id);
+    if(await p.locator('#panel').evaluate(x=>x.classList.contains('open')))await p.click('#close');
+    const target=await p.evaluate(()=>{const d=__peachPhysicsDebug.snapshot(),f=d.framing,r=d.regions[0];return{x:f.x+r.x/d.image[0]*f.width,y:f.y+r.y/d.image[1]*f.height};});
+    await p.touchscreen.tap(target.x,target.y);await p.waitForFunction(()=>__elfAudioDebug.snapshot().current.active);eq(await p.evaluate(()=>__elfAudioDebug.snapshot().current.lastClip),1,'first offline native tap '+id);await p.waitForFunction(()=>!__elfAudioDebug.snapshot().current.active);
    }
+   eq(await p.evaluate(()=>__voices),[],'new elves never synthesize laughter');
+   await select('santa');await click('slapAudio');await click('testSound');
+   ok(await p.evaluate(()=>__sounds.some(s=>Math.abs(s.duration-.1)<.01)),'original Santa slap sample');
+   await p.evaluate(()=>document.querySelector('#both').click());await p.waitForFunction(()=>__peachPhysicsDebug.snapshot().santaLaughSound);ok(await p.evaluate(()=>__voices.includes('sawtooth')),'current synthetic Santa remains');
    const preserved=await p.evaluate(async()=>({keys:await caches.keys(),profile:localStorage.getItem('peach-physics-v008-profile-holly'),motion:localStorage.getItem('peach-r13-motion-options-v1')}));
    ok(preserved.keys.includes('peach-physics-v008-r14-auto2')&&preserved.keys.includes('peach-santa-approved-preview-sentinel'),'production/other preview caches untouched');eq(preserved.profile,'production-sentinel','production profile untouched');eq(preserved.motion,'production-motion-sentinel','production motion preference untouched');
    const remoteHash=await p.evaluate(async()=>{const b=await(await fetch('./assets/audio/holly-giggle.wav')).arrayBuffer();return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',b)),x=>x.toString(16).padStart(2,'0')).join('');});eq(remoteHash,crypto.createHash('sha256').update(fs.readFileSync(app+'/assets/audio/holly-giggle.wav')).digest('hex'),'offline recording exact bytes');
    const offlineAudio=await p.evaluate(async()=>await(await fetch('./holly-audio.js?v=r14-laugh3')).text());eq(offlineAudio,fs.readFileSync(app+'/holly-audio.js','utf8'),'offline upgrade retains approved Holly engine');
    const motion=await p.evaluate(async()=>await(await fetch('./motion.js?v=r14-auto2')).text());eq(motion,fs.readFileSync(baseline+'/motion.js','utf8'),'warm motion HTTP cache preserves approved module');
-   const bankCode=await p.evaluate(async()=>await(await fetch('./voice-bank.js?v=r142-1')).text());eq(bankCode,fs.readFileSync(app+'/voice-bank.js','utf8'),'new voice bank cached completely');
+   const bankCode=await p.evaluate(async()=>await(await fetch('./voice-bank.js?v=r142-2')).text());eq(bankCode,fs.readFileSync(app+'/voice-bank.js','utf8'),'new voice bank cached completely');
+   const profileCode=await p.evaluate(async()=>await(await fetch('./voice-profiles.js?v=r142-2')).text());eq(profileCode,fs.readFileSync(app+'/voice-profiles.js','utf8'),'new character assignments cached completely');
    await p.goto(url+'audition.html');await p.waitForFunction(()=>window.__auditionDebug);
    for(const candidate of ['cv','splice','mox'])for(let take=1;take<=2;take++){
     await p.click('[data-voice='+candidate+']');await p.waitForFunction(()=>__auditionDebug.snapshot().current?.active);
-    eq(await p.evaluate(()=>__auditionDebug.snapshot().current.lastClip),take,'unassigned candidate take offline '+candidate+take);
+    eq(await p.evaluate(()=>__auditionDebug.snapshot().current.lastClip),take,'source comparison take offline '+candidate+take);
     await p.waitForFunction(()=>!__auditionDebug.snapshot().current?.active);
    }
    eq(errors,[],'no offline page errors');
    await context.setOffline(false);
    for(const staleMigration of [false,true]){const fresh=await browser.newContext();if(staleMigration)await fresh.addInitScript(key=>localStorage.setItem(key,JSON.stringify({version:1,auto:false,shake:false})),motionKey);const q=await fresh.newPage();await q.goto(url+'?character=holly');await q.waitForFunction(()=>window.__peachMotionDebug);ok(await q.evaluate(()=>__peachMotionDebug.snapshot().auto),staleMigration?'R14 Auto migration retained':'fresh Auto On');eq(await q.evaluate(()=>__peachPhysicsDebug.snapshot().slapAudioEnabled),false,'fresh Sound off');await fresh.close();}
-   report.push({renderer:fallback?'canvas':'webgl',offlineCharacters:5,offlineCandidateTakes:6,assignmentsPending:true,upgradedFrom:prior,atomicAudioInstall:true,staleCacheRace:true,profileMigration:true,productionIsolation:true,offlineRecordingHash:remoteHash,secondRecordingHash:secondHash,passed:true});
+   report.push({renderer:fallback?'canvas':'webgl',offlineCharacters:5,offlineRecordedElfTakes:8,offlineNativeTapCharacters:3,assignmentsPending:false,upgradedFrom:prior,atomicAudioInstall:true,staleCacheRace:true,profileMigration:true,productionIsolation:true,offlineRecordingHash:remoteHash,secondRecordingHash:secondHash,passed:true});
   }finally{await context.close();await new Promise(r=>server.close(r));}
  }
- fs.writeFileSync(__dirname+'/offline.json',JSON.stringify({checks,results:report,passed:true},null,2)+'\n');console.log({checks,results:report});
+ fs.writeFileSync(__dirname+'/offline-'+(checkpoint?'checkpoint':'holly')+'.json',JSON.stringify({checks,results:report,passed:true},null,2)+'\n');console.log({checks,results:report});
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});

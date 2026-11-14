@@ -1,0 +1,199 @@
+{
+  "url": "http://127.0.0.1:8000/peach-physics/experiments/r14-other-laughs/index.html?character=ember",
+  "checks": 148,
+  "results": [
+    {
+      "renderer": "webgl",
+      "offline": false,
+      "id": "ember",
+      "take": 1
+    },
+    {
+      "renderer": "webgl",
+      "offline": false,
+      "id": "ember",
+      "take": 2
+    },
+    {
+      "renderer": "webgl",
+      "offline": false,
+      "id": "midnight",
+      "take": 1
+    },
+    {
+      "renderer": "webgl",
+      "offline": false,
+      "id": "midnight",
+      "take": 2
+    },
+    {
+      "renderer": "webgl",
+      "offline": false,
+      "id": "aurelia",
+      "take": 1
+    },
+    {
+      "renderer": "webgl",
+      "offline": false,
+      "id": "aurelia",
+      "take": 2
+    },
+    {
+      "renderer": "webgl",
+      "offline": false,
+      "id": "holly",
+      "take": 1
+    },
+    {
+      "renderer": "webgl",
+      "offline": false,
+      "id": "holly",
+      "take": 2
+    },
+    {
+      "renderer": "webgl",
+      "offline": true,
+      "id": "ember",
+      "take": 1
+    },
+    {
+      "renderer": "webgl",
+      "offline": true,
+      "id": "ember",
+      "take": 2
+    },
+    {
+      "renderer": "webgl",
+      "offline": true,
+      "id": "midnight",
+      "take": 1
+    },
+    {
+      "renderer": "webgl",
+      "offline": true,
+      "id": "midnight",
+      "take": 2
+    },
+    {
+      "renderer": "webgl",
+      "offline": true,
+      "id": "aurelia",
+      "take": 1
+    },
+    {
+      "renderer": "webgl",
+      "offline": true,
+      "id": "aurelia",
+      "take": 2
+    },
+    {
+      "renderer": "webgl",
+      "offline": true,
+      "id": "holly",
+      "take": 1
+    },
+    {
+      "renderer": "webgl",
+      "offline": true,
+      "id": "holly",
+      "take": 2
+    },
+    {
+      "renderer": "canvas",
+      "offline": false,
+      "id": "ember",
+      "take": 1
+    },
+    {
+      "renderer": "canvas",
+      "offline": false,
+      "id": "ember",
+      "take": 2
+    },
+    {
+      "renderer": "canvas",
+      "offline": false,
+      "id": "midnight",
+      "take": 1
+    },
+    {
+      "renderer": "canvas",
+      "offline": false,
+      "id": "midnight",
+      "take": 2
+    },
+    {
+      "renderer": "canvas",
+      "offline": false,
+      "id": "aurelia",
+      "take": 1
+    },
+    {
+      "renderer": "canvas",
+      "offline": false,
+      "id": "aurelia",
+      "take": 2
+    },
+    {
+      "renderer": "canvas",
+      "offline": false,
+      "id": "holly",
+      "take": 1
+    },
+    {
+      "renderer": "canvas",
+      "offline": false,
+      "id": "holly",
+      "take": 2
+    },
+    {
+      "renderer": "canvas",
+      "offline": true,
+      "id": "ember",
+      "take": 1
+    },
+    {
+      "renderer": "canvas",
+      "offline": true,
+      "id": "ember",
+      "take": 2
+    },
+    {
+      "renderer": "canvas",
+      "offline": true,
+      "id": "midnight",
+      "take": 1
+    },
+    {
+      "renderer": "canvas",
+      "offline": true,
+      "id": "midnight",
+      "take": 2
+    },
+    {
+      "renderer": "canvas",
+      "offline": true,
+      "id": "aurelia",
+      "take": 1
+    },
+    {
+      "renderer": "canvas",
+      "offline": true,
+      "id": "aurelia",
+      "take": 2
+    },
+    {
+      "renderer": "canvas",
+      "offline": true,
+      "id": "holly",
+      "take": 1
+    },
+    {
+      "renderer": "canvas",
+      "offline": true,
+      "id": "holly",
+      "take": 2
+    }
+  ],
+  "passed": true
+}

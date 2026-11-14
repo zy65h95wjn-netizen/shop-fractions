@@ -1,26 +1,37 @@
-# R14.2 — implementation and audition checkpoint
+# R14.2 — four elf voices for iPhone review
 
-**Partial work. New character voices are not assigned.** [Issue #21](https://github.com/zy65h95wjn-netizen/shop-fractions/issues/21) requires: “Each recording must be listened to before choosing its character.” This execution environment cannot hear audio. Candidate metadata, waveform analysis and browser capture cannot establish naturalness, distinct performers or the requested voice personalities. The listening question remains pending; no character mapping has been inferred from filenames or pitch measurements.
+This isolated preview implements [issue #21](https://github.com/zy65h95wjn-netizen/shop-fractions/issues/21): Winter Ember, Midnight Yule and Aurelia Frost each have two recorded human laugh excerpts, alongside Holly's approved two-laugh implementation. Production has not been changed. Santa retains its shipping behavior; its separate approved human-voice preview remains separate.
 
-Open **`audition.html`** on the commit-pinned HTTPS preview to hear two candidate excerpts each from C-V, SpliceSound and moxobna, alongside Holly's approved recordings. Each button cycles two complete takes. There is no automatic playback, queue or overlap. Listen to both takes from each source, then identify which fits Winter Ember, Midnight Yule and Aurelia Frost, or reject unsuitable candidates. These files are review candidates, not approved final selections.
+Lance approved the candidate excerpts in the audition checkpoint (`331d1e5`) by replying “i like them.” The same audio bytes are now paired with characters as follows. The pairings are implementation choices for final listening review, not a claim of separate character-by-character approval.
 
-`index.html?character=holly` contains the implemented R14.2 foundation and approved Holly. Queries also accept `ember`, `midnight`, `aurelia` and `santa`. Until the listening gate is completed, the three new elves retain their current production sound behavior. This checkpoint does **not** claim to deliver their requested new laughs.
+| Character | Recording source | Take 1 | Take 2 |
+| --- | --- | --- | --- |
+| Winter Ember | C-V, Freesound 556251 | 1.675 s | 3.150 s |
+| Midnight Yule | SpliceSound, Freesound 218310 | 1.430 s | 1.700 s |
+| Aurelia Frost | moxobna, Freesound 102211 | 1.560 s | 2.770 s |
+| Holly Heartbreaker | Approved R14.1 recordings | 1.760 s | 2.080 s |
 
-## Implemented safely
+## Listen on iPhone
 
-- Fresh main was checked immediately before branching: `2adb9257532ac3b17e39aeea815a23f5fb7f85ce`. Its production app tree matched approved Holly's baseline exactly, so there was no integration conflict.
-- New branch: `experiment/r14-other-laughs`. All work is in this new experiment directory. Production, the approved Holly branch and separate Santa voice preview are untouched.
-- Ported Holly's approved audio engine and both recordings from `5441324244eb2e28ffc115f8cf0d34f1ff2c5d21` byte-for-byte. Her first-tap behavior, alternating tap/Test cursors, full endings, cooldowns, reactions and cancellation policy remain in the unchanged engine.
-- Added `ElfVoiceBank`, a thin coordinator with independent character state and a shared eligibility gate. It configures additional unstarted players without changing the engine. Only Holly is registered in `voice-profiles.js` pending the new voice decisions.
-- Existing physics, portraits, masks, rendering and `motion.js` are unchanged. Auto Jiggle remains silent. Production Santa retains its existing implementation; the separately approved recorded Santa preview `c5ef60e19a11cd3f5212b7a05940995b608a58fa` was not merged or modified.
-- New preview storage/cache namespaces preserve the current profile logic without touching production settings. The service worker atomically caches the foundation and audition assets and reads only its current cache.
+Open the commit-pinned HTTPS `index.html?character=ember`. If the hosting service shows its external-content notice, select **Open the page**. Use the upper-left character button to cycle Ember → Midnight → Aurelia → Holly → Santa.
 
-## Remaining quality gates
+For each elf, open Settings, turn **Sound: On**, then tap **Test [Name] Laugh** twice, allowing each take to finish. The test control cycles its own two takes and does not move the character. Close Settings to try taps and deliberate flick/drag releases. **Auto Jiggle is silent**, even with Sound enabled. Shake reactions require explicitly granting motion access and sufficiently energetic physical readings.
 
-1. Human listening: confirm three recognizably distinct natural adult voices and acceptable complete takes; select the character mapping and reject/revise unsuitable excerpts.
-2. Register the approved new voice pairs and run character-specific native tap, flick/release, permitted/unpermitted physical shake, lifecycle and audio output tests for all three new characters.
-3. Verify the final combined commit-pinned preview on iPhone. Browser output and synthetic sensor tests do not prove iPhone speaker/routing/sensor behavior.
+Fresh profiles start with Sound off. Existing saved settings are retained per character. URL queries support `ember`, `midnight`, `aurelia`, `holly` and `santa`. `audition.html` remains available for source comparison; the combined app is the review entry point.
 
-No production promotion is authorized or included. This is an honest partial result at the required listening gate, not a completed R14.2 release.
+## Behavior and preservation
 
-See [CREDITS.md](CREDITS.md), [VOICE-CANDIDATES.json](VOICE-CANDIDATES.json), [HOLLY-CREDITS.md](HOLLY-CREDITS.md) and [TEST-REPORT.md](TEST-REPORT.md).
+- Fresh main was verified at `2adb9257532ac3b17e39aeea815a23f5fb7f85ce`, including a re-check after candidate approval. The approved Holly preview's production app tree matched main, so no newer production changes were lost.
+- Branch: `experiment/r14-other-laughs`. All changes are confined to this experiment directory. The approved Holly and separate Santa branches are untouched.
+- Holly's `holly-audio.js`, both WAVs and portrait are byte-identical to `5441324244eb2e28ffc115f8cf0d34f1ff2c5d21`. Her playback logic is unchanged. The new characters use independent instances of that same engine through `ElfVoiceBank`; a shared eligibility check prevents multiple active or pending elf sources.
+- Accepted taps alternate complete takes with a 2.6-second cooldown. A longer recording finishes even if the cooldown expires during playback. Blocked, failed or cancelled requests never advance the sequence. Test controls have independent cursors.
+- Deliberate flick/drag-release reactions use the first take and a 4.2-second cooldown. Physical-shake reactions require accepted sensor readings, sustained energy, prior audio activation and a 12-second shake cooldown. Auto runs through a separate motion path and never requests audio.
+- Mute, reset, switch, hide, blur and pagehide cancel playback immediately. Unrelated touches do not truncate an accepted laugh. Failed/expired loads and late context resumes cannot queue stale playback. Existing iOS gesture activation and recovery logic are retained.
+- R14 physics, calibration, images, framing, masks, profiles and `motion.js` are unchanged. All five characters' motion traces and rendered frames match main. The separate Santa recorded-voice preview `c5ef60e19a11cd3f5212b7a05940995b608a58fa` is not merged.
+- Preview storage uses `peach-preview-r142-other-laughs-`; the service-worker cache is `peach-preview-r142-other-laughs-v2`. All eight elf WAVs are local and atomically precached. Only this release's cache is read on network failure, protecting against a late old-worker write.
+
+## Evidence and review limits
+
+See [TEST-REPORT.md](TEST-REPORT.md) for WebGL/Canvas, native touch, audio capture, motion, lifecycle, profile and offline results. Tests include upgrades from both approved Holly and the audition checkpoint. Source pages, CC0 licenses, original preview hashes, extraction windows, transforms and exact final hashes are documented in [CREDITS.md](CREDITS.md), [VOICE-CANDIDATES.json](VOICE-CANDIDATES.json) and [HOLLY-CREDITS.md](HOLLY-CREDITS.md).
+
+The environment cannot independently hear audio; Lance supplied candidate listening approval. Browser capture verifies PCM playback and complete file endings, not subjective voice fit or real iPhone speaker output. Character pairings, perceived volume, device audio routing/interruption recovery and physical shake feel still need iPhone review. This preview is ready for that review; no production promotion is authorized or included.

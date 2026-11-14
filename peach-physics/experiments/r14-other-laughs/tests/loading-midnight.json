@@ -1,0 +1,35 @@
+{
+  "character": "midnight",
+  "checks": 52,
+  "results": [
+    {
+      "cancel": "mute",
+      "passed": true
+    },
+    {
+      "cancel": "reset",
+      "passed": true
+    },
+    {
+      "cancel": "switch",
+      "passed": true
+    },
+    {
+      "cancel": "hidden",
+      "passed": true
+    },
+    {
+      "cancel": "blur",
+      "passed": true
+    },
+    {
+      "cancel": "pagehide",
+      "passed": true
+    },
+    {
+      "cancel": "pointercancel",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

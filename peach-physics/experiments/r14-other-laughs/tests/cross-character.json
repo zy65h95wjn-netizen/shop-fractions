@@ -1,0 +1,118 @@
+{
+  "checks": 96,
+  "results": [
+    {
+      "from": "ember",
+      "to": "midnight",
+      "mode": "late load",
+      "renderer": "webgl",
+      "passed": true
+    },
+    {
+      "from": "midnight",
+      "to": "aurelia",
+      "mode": "late load",
+      "renderer": "webgl",
+      "passed": true
+    },
+    {
+      "from": "aurelia",
+      "to": "holly",
+      "mode": "late load",
+      "renderer": "webgl",
+      "passed": true
+    },
+    {
+      "from": "holly",
+      "to": "ember",
+      "mode": "late load",
+      "renderer": "webgl",
+      "passed": true
+    },
+    {
+      "from": "ember",
+      "to": "midnight",
+      "mode": "late resume",
+      "renderer": "webgl",
+      "passed": true
+    },
+    {
+      "from": "midnight",
+      "to": "aurelia",
+      "mode": "late resume",
+      "renderer": "webgl",
+      "passed": true
+    },
+    {
+      "from": "aurelia",
+      "to": "holly",
+      "mode": "late resume",
+      "renderer": "webgl",
+      "passed": true
+    },
+    {
+      "from": "holly",
+      "to": "ember",
+      "mode": "late resume",
+      "renderer": "webgl",
+      "passed": true
+    },
+    {
+      "from": "ember",
+      "to": "midnight",
+      "mode": "late load",
+      "renderer": "canvas",
+      "passed": true
+    },
+    {
+      "from": "midnight",
+      "to": "aurelia",
+      "mode": "late load",
+      "renderer": "canvas",
+      "passed": true
+    },
+    {
+      "from": "aurelia",
+      "to": "holly",
+      "mode": "late load",
+      "renderer": "canvas",
+      "passed": true
+    },
+    {
+      "from": "holly",
+      "to": "ember",
+      "mode": "late load",
+      "renderer": "canvas",
+      "passed": true
+    },
+    {
+      "from": "ember",
+      "to": "midnight",
+      "mode": "late resume",
+      "renderer": "canvas",
+      "passed": true
+    },
+    {
+      "from": "midnight",
+      "to": "aurelia",
+      "mode": "late resume",
+      "renderer": "canvas",
+      "passed": true
+    },
+    {
+      "from": "aurelia",
+      "to": "holly",
+      "mode": "late resume",
+      "renderer": "canvas",
+      "passed": true
+    },
+    {
+      "from": "holly",
+      "to": "ember",
+      "mode": "late resume",
+      "renderer": "canvas",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

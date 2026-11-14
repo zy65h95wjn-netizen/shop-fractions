@@ -1,12 +1,13 @@
 {
-  "checks": 98,
+  "checks": 162,
   "results": [
     {
       "renderer": "webgl",
       "offlineCharacters": 5,
-      "offlineCandidateTakes": 6,
-      "assignmentsPending": true,
-      "upgradedFrom": "5441324244eb2e28ffc115f8cf0d34f1ff2c5d21",
+      "offlineRecordedElfTakes": 8,
+      "offlineNativeTapCharacters": 3,
+      "assignmentsPending": false,
+      "upgradedFrom": "331d1e5a1a623e958498fc8c0746af36f6de7fe2",
       "atomicAudioInstall": true,
       "staleCacheRace": true,
       "profileMigration": true,
@@ -18,9 +19,10 @@
     {
       "renderer": "canvas",
       "offlineCharacters": 5,
-      "offlineCandidateTakes": 6,
-      "assignmentsPending": true,
-      "upgradedFrom": "5441324244eb2e28ffc115f8cf0d34f1ff2c5d21",
+      "offlineRecordedElfTakes": 8,
+      "offlineNativeTapCharacters": 3,
+      "assignmentsPending": false,
+      "upgradedFrom": "331d1e5a1a623e958498fc8c0746af36f6de7fe2",
       "atomicAudioInstall": true,
       "staleCacheRace": true,
       "profileMigration": true,
