@@ -1,0 +1,16 @@
+[
+  {
+    "recording": "webgl-laugh.wav",
+    "sourceCorrelation": 0.9999775960479593,
+    "onsetOffsetSamples": 1408,
+    "sampleRate": 44100,
+    "comparedSamples": 77616
+  },
+  {
+    "recording": "canvas-laugh.wav",
+    "sourceCorrelation": 0.9999775960479593,
+    "onsetOffsetSamples": 1792,
+    "sampleRate": 44100,
+    "comparedSamples": 77616
+  }
+]

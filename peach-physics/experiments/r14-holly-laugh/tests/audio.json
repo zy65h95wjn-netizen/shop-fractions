@@ -1,0 +1,166 @@
+{
+  "checks": 78,
+  "results": [
+    {
+      "test": "mute false",
+      "stats": {
+        "samples": 7168,
+        "sampleRate": 44100,
+        "peak": 0,
+        "rms": 0,
+        "audibleSamples": 0
+      }
+    },
+    {
+      "test": "reset false",
+      "stats": {
+        "samples": 7168,
+        "sampleRate": 44100,
+        "peak": 0,
+        "rms": 0,
+        "audibleSamples": 0
+      }
+    },
+    {
+      "test": "switch false",
+      "stats": {
+        "samples": 8192,
+        "sampleRate": 44100,
+        "peak": 0,
+        "rms": 0,
+        "audibleSamples": 0
+      }
+    },
+    {
+      "test": "hidden false",
+      "stats": {
+        "samples": 7168,
+        "sampleRate": 44100,
+        "peak": 0,
+        "rms": 0,
+        "audibleSamples": 0
+      }
+    },
+    {
+      "test": "blur false",
+      "stats": {
+        "samples": 7168,
+        "sampleRate": 44100,
+        "peak": 0,
+        "rms": 0,
+        "audibleSamples": 0
+      }
+    },
+    {
+      "test": "pagehide false",
+      "stats": {
+        "samples": 7168,
+        "sampleRate": 44100,
+        "peak": 0,
+        "rms": 0,
+        "audibleSamples": 0
+      }
+    },
+    {
+      "renderer": "webgl",
+      "full": {
+        "samples": 88064,
+        "sampleRate": 44100,
+        "peak": 0.4358372688293457,
+        "rms": 0.040156478541785064,
+        "audibleSamples": 71625
+      },
+      "short": {
+        "samples": 57344,
+        "sampleRate": 44100,
+        "peak": 0.4358372688293457,
+        "rms": 0.04821825082647862,
+        "audibleSamples": 45507
+      },
+      "passed": true
+    },
+    {
+      "test": "mute true",
+      "stats": {
+        "samples": 7168,
+        "sampleRate": 44100,
+        "peak": 0,
+        "rms": 0,
+        "audibleSamples": 0
+      }
+    },
+    {
+      "test": "reset true",
+      "stats": {
+        "samples": 7168,
+        "sampleRate": 44100,
+        "peak": 0,
+        "rms": 0,
+        "audibleSamples": 0
+      }
+    },
+    {
+      "test": "switch true",
+      "stats": {
+        "samples": 7168,
+        "sampleRate": 44100,
+        "peak": 0,
+        "rms": 0,
+        "audibleSamples": 0
+      }
+    },
+    {
+      "test": "hidden true",
+      "stats": {
+        "samples": 8192,
+        "sampleRate": 44100,
+        "peak": 0,
+        "rms": 0,
+        "audibleSamples": 0
+      }
+    },
+    {
+      "test": "blur true",
+      "stats": {
+        "samples": 7168,
+        "sampleRate": 44100,
+        "peak": 0,
+        "rms": 0,
+        "audibleSamples": 0
+      }
+    },
+    {
+      "test": "pagehide true",
+      "stats": {
+        "samples": 7168,
+        "sampleRate": 44100,
+        "peak": 0,
+        "rms": 0,
+        "audibleSamples": 0
+      }
+    },
+    {
+      "renderer": "canvas",
+      "full": {
+        "samples": 88064,
+        "sampleRate": 44100,
+        "peak": 0.4358372688293457,
+        "rms": 0.040156478541785064,
+        "audibleSamples": 71625
+      },
+      "short": {
+        "samples": 57344,
+        "sampleRate": 44100,
+        "peak": 0.4358372688293457,
+        "rms": 0.048339749797446034,
+        "audibleSamples": 45507
+      },
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "limitations": [
+    "Chromium Web Audio capture does not establish iPhone speaker playback or human naturalness.",
+    "Physical shake is synthetic sensor input, not a real iPhone."
+  ]
+}

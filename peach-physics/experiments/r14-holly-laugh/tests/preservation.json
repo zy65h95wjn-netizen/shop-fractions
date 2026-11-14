@@ -1,0 +1,77 @@
+{
+  "baseline": "2adb9257532ac3b17e39aeea815a23f5fb7f85ce",
+  "checks": 248,
+  "results": [
+    {
+      "character": "ember",
+      "renderer": "webgl",
+      "manualTrajectories": 18,
+      "motionTrajectories": 2,
+      "identicalFrames": 2
+    },
+    {
+      "character": "midnight",
+      "renderer": "webgl",
+      "manualTrajectories": 18,
+      "motionTrajectories": 2,
+      "identicalFrames": 2
+    },
+    {
+      "character": "aurelia",
+      "renderer": "webgl",
+      "manualTrajectories": 18,
+      "motionTrajectories": 2,
+      "identicalFrames": 2
+    },
+    {
+      "character": "holly",
+      "renderer": "webgl",
+      "manualTrajectories": 18,
+      "motionTrajectories": 2,
+      "identicalFrames": 2
+    },
+    {
+      "character": "santa",
+      "renderer": "webgl",
+      "manualTrajectories": 18,
+      "motionTrajectories": 2,
+      "identicalFrames": 2
+    },
+    {
+      "character": "ember",
+      "renderer": "canvas",
+      "manualTrajectories": 18,
+      "motionTrajectories": 2,
+      "identicalFrames": 2
+    },
+    {
+      "character": "midnight",
+      "renderer": "canvas",
+      "manualTrajectories": 18,
+      "motionTrajectories": 2,
+      "identicalFrames": 2
+    },
+    {
+      "character": "aurelia",
+      "renderer": "canvas",
+      "manualTrajectories": 18,
+      "motionTrajectories": 2,
+      "identicalFrames": 2
+    },
+    {
+      "character": "holly",
+      "renderer": "canvas",
+      "manualTrajectories": 18,
+      "motionTrajectories": 2,
+      "identicalFrames": 2
+    },
+    {
+      "character": "santa",
+      "renderer": "canvas",
+      "manualTrajectories": 18,
+      "motionTrajectories": 2,
+      "identicalFrames": 2
+    }
+  ],
+  "passed": true
+}

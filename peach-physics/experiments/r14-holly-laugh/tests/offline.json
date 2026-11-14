@@ -1,0 +1,26 @@
+{
+  "checks": 76,
+  "results": [
+    {
+      "renderer": "webgl",
+      "offlineCharacters": 5,
+      "atomicAudioInstall": true,
+      "staleCacheRace": true,
+      "profileMigration": true,
+      "productionIsolation": true,
+      "offlineRecordingHash": "cf12b7572327f49cafab183eb206b610b3c07117f5d0f5f778ee37846860d97b",
+      "passed": true
+    },
+    {
+      "renderer": "canvas",
+      "offlineCharacters": 5,
+      "atomicAudioInstall": true,
+      "staleCacheRace": true,
+      "profileMigration": true,
+      "productionIsolation": true,
+      "offlineRecordingHash": "cf12b7572327f49cafab183eb206b610b3c07117f5d0f5f778ee37846860d97b",
+      "passed": true
+    }
+  ],
+  "passed": true
+}
