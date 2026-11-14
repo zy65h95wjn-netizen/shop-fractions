@@ -13,7 +13,7 @@ The CC0-labeled [DarkNightPrincess candidate](https://freesound.org/people/DarkN
 
 **Audition limitation:** no claim of human listening is made. The environment reported that it cannot consume audio input. The included clip is a technically verified, properly licensed candidate for the user's listening review; whether it is the most natural choice remains unresolved.
 
-Edits: retain source interval 0.20–1.96 seconds, add 23.7 dB constant gain, apply 10 ms leading and 30 ms trailing fades, encode 16-bit stereo PCM WAV at the original preview sample rate. No pitch, pace, formant, denoising or synthetic changes. The final file peaks at approximately −7.2 dBFS with mean level −27.4 dBFS across the entire clip. Runtime fades smooth the shorter tap cut.
+Edits: retain source interval 0.20–1.96 seconds, add 23.7 dB constant gain, apply 10 ms leading and 30 ms trailing fades, encode 16-bit stereo PCM WAV at the original preview sample rate. No pitch, pace, formant, denoising or synthetic changes. The final file peaks at approximately −7.2 dBFS with mean level −27.4 dBFS across the entire clip. Runtime fades apply at the file boundaries for every reaction. Normal taps now play the same complete file as Test Holly Laugh; there is no shortened tap cut.
 
 Final app WAV SHA-256:
 

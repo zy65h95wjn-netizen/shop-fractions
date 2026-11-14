@@ -1,6 +1,6 @@
 // This preview cache and scope are independent of production and other experiments.
-const CACHE = 'peach-preview-r14-holly-laugh-v1';
-const FILES = ['./', './index.html', './motion.js?v=r14-auto2', './holly-audio.js?v=r14-laugh1', './assets/audio/holly-giggle.wav', './assets/aurelia-frost.jpg', './assets/holly-heartbreaker.png', './assets/santa-claus.jpg', './manifest.webmanifest', './apple-touch-icon.png'];
+const CACHE = 'peach-preview-r14-holly-laugh-v2';
+const FILES = ['./', './index.html', './motion.js?v=r14-auto2', './holly-audio.js?v=r14-laugh2', './assets/audio/holly-giggle.wav', './assets/aurelia-frost.jpg', './assets/holly-heartbreaker.png', './assets/santa-claus.jpg', './manifest.webmanifest', './apple-touch-icon.png'];
 self.addEventListener('install', event => {
  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)).then(() => self.skipWaiting()));
 });

@@ -1,8 +1,9 @@
-const fs=require('fs'),path=require('path'),http=require('http'),assert=require('assert/strict'),crypto=require('crypto'),{chromium}=require('playwright');
-const app=path.resolve(__dirname,'..'),baseline=path.resolve(app,'../../v8'),scope='/peach-physics/experiments/r14-holly-laugh/',prefix='peach-preview-r14-holly-laugh-',cache=prefix+'v1',motionKey=prefix+'peach-r13-motion-options-v1',ids=['ember','midnight','aurelia','holly','santa'];
+const fs=require('fs'),path=require('path'),http=require('http'),assert=require('assert/strict'),crypto=require('crypto'),{execFileSync}=require('child_process'),{chromium}=require('playwright');
+const app=path.resolve(__dirname,'..'),baseline=path.resolve(app,'../../v8'),scope='/peach-physics/experiments/r14-holly-laugh/',prefix='peach-preview-r14-holly-laugh-',cache=prefix+'v2',motionKey=prefix+'peach-r13-motion-options-v1',ids=['ember','midnight','aurelia','holly','santa'];
 const profiles=Object.fromEntries(ids.map((id,i)=>[id,{version:2,preset:'custom',bounce:61+i,softness:64+i,settle:50+i,transfer:17*i,slapAudioEnabled:false,...(id==='santa'?{santaLaughEnabled:true}:{})}]));
-const oldHTML=fs.readFileSync(baseline+'/index.html','utf8').replaceAll('peach-physics-v00',prefix+'v00').replace('const motionUI=PeachMotion.attachUI(motion,{onEnable:()=>openPanel(false)});',`const motionUI=PeachMotion.attachUI(motion,{onEnable:()=>openPanel(false),storage:{getItem:k=>localStorage.getItem('${prefix}'+k),setItem:(k,v)=>localStorage.setItem('${prefix}'+k,v)}});`);
-const oldSW=fs.readFileSync(baseline+'/sw.js','utf8').replaceAll('peach-physics-v008-',prefix).replace("r14-auto2';","v0';");
+const prior='2143e6c4f973859ab2f331678a43ee4fc3af395a';
+const previous=Object.fromEntries(['index.html','sw.js','holly-audio.js','assets/audio/holly-giggle.wav'].map(name=>[name,execFileSync('git',['show',prior+':peach-physics/experiments/r14-holly-laugh/'+name],{cwd:app,maxBuffer:4e6})]));
+const oldHTML=previous['index.html'].toString();
 let checks=0;const ok=(v,label)=>{assert(v,label);checks++;},eq=(a,b,label)=>{assert.deepEqual(a,b,label);checks++;};const report=[];
 (async()=>{
  const browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
@@ -13,7 +14,7 @@ let checks=0;const ok=(v,label)=>{assert(v,label);checks++;},eq=(a,b,label)=>{as
    if(!req.url.startsWith(scope)||name.includes('..')||!fs.existsSync(path.join(app,name))){res.writeHead(404);res.end();return;}
    res.writeHead(200,{'Content-Type':name.endsWith('.js')?'text/javascript':name.endsWith('.html')?'text/html':name.endsWith('.wav')?'audio/wav':name.endsWith('.png')?'image/png':name.endsWith('.jpg')?'image/jpeg':'application/json','Cache-Control':name==='motion.js'?'public,max-age=3600':'no-store'});
    if(promoted&&gateAudio&&name==='assets/audio/holly-giggle.wav'){releaseAudio=()=>{gateAudio=false;res.end(fs.readFileSync(path.join(app,name)));};requested();return;}
-   res.end(!promoted&&name==='index.html'?oldHTML:!promoted&&name==='sw.js'?oldSW:fs.readFileSync(path.join(app,name)));
+   res.end(!promoted&&previous[name]?previous[name]:fs.readFileSync(path.join(app,name)));
   });await new Promise(r=>server.listen(0,'127.0.0.1',r));const url=`http://127.0.0.1:${server.address().port}${scope}`;
   const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
   await context.addInitScript(fallback=>{
@@ -39,9 +40,9 @@ let checks=0;const ok=(v,label)=>{assert(v,label);checks++;},eq=(a,b,label)=>{as
    await p.reload();await ready();await p.waitForFunction(()=>!!navigator.serviceWorker.controller);await p.evaluate(()=>window.previousController=navigator.serviceWorker.controller);
    promoted=true;await p.evaluate(()=>navigator.serviceWorker.getRegistration().then(r=>r.update()));await audioRequested;
    ok(await p.evaluate(()=>navigator.serviceWorker.controller===previousController),'audio install gate retains prior controller');
-   ok((await p.evaluate(()=>caches.keys())).includes(prefix+'v0'),'prior cache retained until complete install');
+   ok((await p.evaluate(()=>caches.keys())).includes(prefix+'v1'),'prior cache retained until complete install');
    releaseAudio();await p.waitForFunction(async cache=>navigator.serviceWorker.controller!==previousController&&(await caches.keys()).includes(cache),cache);
-   await p.evaluate(async({key,html})=>{const c=await caches.open(key);for(const name of ['./','./index.html'])await c.put(name,new Response(html,{headers:{'Content-Type':'text/html'}}));},{key:prefix+'v0',html:oldHTML});
+   await p.evaluate(async({key,html})=>{const c=await caches.open(key);for(const name of ['./','./index.html'])await c.put(name,new Response(html,{headers:{'Content-Type':'text/html'}}));},{key:prefix+'v1',html:oldHTML});
    await context.setOffline(true);await p.reload();await ready();
    eq(await p.title(),'Peach Physics — Holly Laugh Preview','offline uses updated cache despite resurrected stale cache');
    eq(await p.evaluate(()=>__peachPhysicsDebug.snapshot().renderer),fallback?'canvas':'webgl','offline renderer');
@@ -62,11 +63,12 @@ let checks=0;const ok=(v,label)=>{assert(v,label);checks++;},eq=(a,b,label)=>{as
    const preserved=await p.evaluate(async()=>({keys:await caches.keys(),profile:localStorage.getItem('peach-physics-v008-profile-holly'),motion:localStorage.getItem('peach-r13-motion-options-v1')}));
    ok(preserved.keys.includes('peach-physics-v008-r14-auto2')&&preserved.keys.includes('peach-santa-approved-preview-sentinel'),'production/other preview caches untouched');eq(preserved.profile,'production-sentinel','production profile untouched');eq(preserved.motion,'production-motion-sentinel','production motion preference untouched');
    const remoteHash=await p.evaluate(async()=>{const b=await(await fetch('./assets/audio/holly-giggle.wav')).arrayBuffer();return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',b)),x=>x.toString(16).padStart(2,'0')).join('');});eq(remoteHash,crypto.createHash('sha256').update(fs.readFileSync(app+'/assets/audio/holly-giggle.wav')).digest('hex'),'offline recording exact bytes');
+   const offlineAudio=await p.evaluate(async()=>await(await fetch('./holly-audio.js?v=r14-laugh2')).text());eq(offlineAudio,fs.readFileSync(app+'/holly-audio.js','utf8'),'offline upgrade includes full-length tap playback module');
    const motion=await p.evaluate(async()=>await(await fetch('./motion.js?v=r14-auto2')).text());eq(motion,fs.readFileSync(baseline+'/motion.js','utf8'),'warm motion HTTP cache preserves approved module');
    eq(errors,[],'no offline page errors');
    await context.setOffline(false);
    for(const staleMigration of [false,true]){const fresh=await browser.newContext();if(staleMigration)await fresh.addInitScript(key=>localStorage.setItem(key,JSON.stringify({version:1,auto:false,shake:false})),motionKey);const q=await fresh.newPage();await q.goto(url+'?character=holly');await q.waitForFunction(()=>window.__peachMotionDebug);ok(await q.evaluate(()=>__peachMotionDebug.snapshot().auto),staleMigration?'R14 Auto migration retained':'fresh Auto On');eq(await q.evaluate(()=>__peachPhysicsDebug.snapshot().slapAudioEnabled),false,'fresh Sound off');await fresh.close();}
-   report.push({renderer:fallback?'canvas':'webgl',offlineCharacters:5,atomicAudioInstall:true,staleCacheRace:true,profileMigration:true,productionIsolation:true,offlineRecordingHash:remoteHash,passed:true});
+   report.push({renderer:fallback?'canvas':'webgl',offlineCharacters:5,upgradedFrom:prior,atomicAudioInstall:true,staleCacheRace:true,profileMigration:true,productionIsolation:true,offlineRecordingHash:remoteHash,passed:true});
   }finally{await context.close();await new Promise(r=>server.close(r));}
  }
  fs.writeFileSync(__dirname+'/offline.json',JSON.stringify({checks,results:report,passed:true},null,2)+'\n');console.log({checks,results:report});

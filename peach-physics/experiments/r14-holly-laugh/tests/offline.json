@@ -1,9 +1,10 @@
 {
-  "checks": 76,
+  "checks": 78,
   "results": [
     {
       "renderer": "webgl",
       "offlineCharacters": 5,
+      "upgradedFrom": "2143e6c4f973859ab2f331678a43ee4fc3af395a",
       "atomicAudioInstall": true,
       "staleCacheRace": true,
       "profileMigration": true,
@@ -14,6 +15,7 @@
     {
       "renderer": "canvas",
       "offlineCharacters": 5,
+      "upgradedFrom": "2143e6c4f973859ab2f331678a43ee4fc3af395a",
       "atomicAudioInstall": true,
       "staleCacheRace": true,
       "profileMigration": true,

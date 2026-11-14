@@ -19,10 +19,19 @@ async function tap(p,kind='tap'){
  },kind);
 }
 async function capture(p){
- await p.evaluate(()=>{
-  const ac=__audioTest.ac(),tap=ac.createGain(),processor=ac.createScriptProcessor(1024,2,2),sink=ac.createGain();sink.gain.value=0;
+ await p.evaluate(async()=>{
+  const ac=__audioTest.ac(),tap=ac.createGain(),sink=ac.createGain();sink.gain.value=0;
+  // Capture on the audio thread. ScriptProcessor can lose a render quantum
+  // while the main thread handles the rapid-tap stress case.
+  const code=`class GraphCapture extends AudioWorkletProcessor {
+   constructor(){super();this.data=new Float32Array(1024);this.offset=0;}
+   process(inputs){const data=inputs[0]?.[0]||new Float32Array(128);this.data.set(data,this.offset);this.offset+=data.length;
+    if(this.offset===1024){this.port.postMessage(this.data.buffer,[this.data.buffer]);this.data=new Float32Array(1024);this.offset=0;}return true;}
+  }registerProcessor('graph-capture',GraphCapture);`;
+  const url=URL.createObjectURL(new Blob([code],{type:'text/javascript'}));await ac.audioWorklet.addModule(url);URL.revokeObjectURL(url);
+  const processor=new AudioWorkletNode(ac,'graph-capture',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[1]});
+  window.__recording=[];processor.port.onmessage=e=>{__recording.push(...new Float32Array(e.data));};
   tap.connect(processor);processor.connect(sink);sink.connect(ac.destination);
-  window.__recording=[];processor.onaudioprocess=e=>{__recording.push(...e.inputBuffer.getChannelData(0));};
   const original=AudioNode.prototype.connect;
   AudioNode.prototype.connect=function(dest,...args){const r=original.call(this,dest,...args);if(dest===ac.destination&&this!==sink)original.call(this,tap);return r;};
   window.__capture={rate:ac.sampleRate,tap,processor,sink};
@@ -55,7 +64,9 @@ async function cancelCase(p,action,name){
   await p.waitForTimeout(1950);const full=await recorded(p,fallback?'canvas-laugh':'webgl-laugh');ok(full.peak>.1&&full.peak<.9&&full.rms>.005,'actual human recording graph non-silent and unclipped');ok(full.audibleSamples>10000,'substantial recorded output');
   await waitDone(p);await next(p);await clearCapture(p);await tap(p);await waitActive(p);eq((await snap(p)).counts.tap,1,'first tap deterministic');
   for(let i=0;i<20;i++)await tap(p);eq((await snap(p)).counts.tap,1,'rapid taps never stack');
-  await p.waitForTimeout(1250);const short=await recorded(p);ok(short.peak>.1&&short.rms>.005,'tap graph audible');await tap(p);eq((await snap(p)).counts.tap,1,'cooldown after clip');
+  await p.evaluate(()=>document.querySelector('#game').dispatchEvent(new PointerEvent('pointercancel',{pointerId:999,pointerType:'touch'})));
+  ok((await snap(p)).active,'unrelated cancelled touch does not interrupt an accepted laugh');
+  await p.waitForTimeout(1950);await waitDone(p);const tapRecording=await recorded(p,fallback?'canvas-tap':'webgl-tap');ok(tapRecording.peak>.1&&tapRecording.rms>.005,'complete tap graph audible');await tap(p);eq((await snap(p)).counts.tap,1,'cooldown after clip');
   await next(p);await tap(p,'flick');await waitActive(p);eq((await snap(p)).counts.release,1,'flick release laugh');await waitDone(p);
   await next(p);await tap(p,'drag');await waitActive(p);eq((await snap(p)).counts.release,2,'deliberate slow drag release laugh');await waitDone(p);
   await next(p);const beforeCancel=(await snap(p)).counts;await tap(p,'cancel');await p.waitForTimeout(100);eq((await snap(p)).counts,beforeCancel,'pointer cancel silent');
@@ -80,7 +91,7 @@ async function cancelCase(p,action,name){
   // Saved per-character sound preference restores without activating or playing on load.
   await p.reload();await p.waitForFunction(()=>window.__test&&document.querySelector('#loader').classList.contains('hiding'));eq(await p.evaluate(()=>__peachPhysicsDebug.snapshot().slapAudioEnabled),true,'Holly sound preference persists');ok(!(await snap(p)).activated,'reload never activates audio');
   await click(p,'testSound');await waitActive(p);await waitDone(p);eq(errors,[],'no browser exceptions');
-  results.push({renderer:fallback?'canvas':'webgl',full,short,passed:true});await context.close();
+  results.push({renderer:fallback?'canvas':'webgl',full,tap:tapRecording,passed:true});await context.close();
  }
  const report={checks,results,passed:true,limitations:['Chromium Web Audio capture does not establish iPhone speaker playback or human naturalness.','Physical shake is synthetic sensor input, not a real iPhone.']};h.fs.writeFileSync(h.path.join(__dirname,'audio.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
  }finally{await browser.close();}

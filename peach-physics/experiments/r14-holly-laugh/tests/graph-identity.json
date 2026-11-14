@@ -2,6 +2,7 @@
   {
     "recording": "webgl-laugh.wav",
     "sourceCorrelation": 0.9999775960479593,
+    "tailCorrelation": 0.9999759208140987,
     "onsetOffsetSamples": 1408,
     "sampleRate": 44100,
     "comparedSamples": 77616
@@ -9,7 +10,24 @@
   {
     "recording": "canvas-laugh.wav",
     "sourceCorrelation": 0.9999775960479593,
-    "onsetOffsetSamples": 1792,
+    "tailCorrelation": 0.9999759208140987,
+    "onsetOffsetSamples": 2176,
+    "sampleRate": 44100,
+    "comparedSamples": 77616
+  },
+  {
+    "recording": "webgl-tap.wav",
+    "sourceCorrelation": 0.9999775960479593,
+    "tailCorrelation": 0.9999759208140987,
+    "onsetOffsetSamples": 256,
+    "sampleRate": 44100,
+    "comparedSamples": 77616
+  },
+  {
+    "recording": "canvas-tap.wav",
+    "sourceCorrelation": 0.9999775960479593,
+    "tailCorrelation": 0.9999759208140987,
+    "onsetOffsetSamples": 768,
     "sampleRate": 44100,
     "comparedSamples": 77616
   }

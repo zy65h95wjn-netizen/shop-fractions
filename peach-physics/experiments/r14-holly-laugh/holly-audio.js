@@ -62,14 +62,16 @@ class HollyAudio {
     if(ac.state!=='running'||ac!==this.context){this.cancel('audio interrupted');return;}
     if(this.now()>request.expires){this.pending=null;this.status('Holly laugh ready. Tap again to play.');return;}
     const source=ac.createBufferSource(),gain=ac.createGain(),t=ac.currentTime;
-    const duration=kind==='tap'?1.10:buffer.duration;
     source.buffer=buffer;source.playbackRate.value=1;source.loop=false;
+    // Match Test Holly Laugh for every accepted reaction. The old 1.10-second
+    // tap duration cut off the rest of the performance; always play to EOF.
+    const duration=buffer.duration;
     gain.gain.setValueAtTime(0,t);gain.gain.linearRampToValueAtTime(1,t+.01);
     gain.gain.setValueAtTime(1,t+duration-.025);gain.gain.linearRampToValueAtTime(0,t+duration);
     source.connect(gain);gain.connect(ac.destination);
     const active={source,gain};this.active=active;this.pending=null;
     source.onended=()=>{source.disconnect();gain.disconnect();if(this.active===active)this.active=null;};
-    source.start(t,0,duration);
+    source.start(t);
     this.nextAt=this.now()+(kind==='tap'?2600:4200);
     if(kind==='shake')this.shakeAt=this.now()+12000;
     this.counts[kind]++;this.lastReason=kind;this.error='';

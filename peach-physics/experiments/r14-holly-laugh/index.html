@@ -111,7 +111,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  </section>
 </main>
 <script src="./motion.js?v=r14-auto2"></script>
-<script src="./holly-audio.js?v=r14-laugh1"></script>
+<script src="./holly-audio.js?v=r14-laugh2"></script>
 <script>
 (() => {
 'use strict';
@@ -1467,7 +1467,8 @@ canvas.addEventListener('pointermove',e=>{
  finger.last=p;finger.lastTime=now;
 },{passive:false});
 function release(e){
- if(e.type==='pointercancel')cancelHolly('pointer cancelled');
+ // Cancel a waiting request, never an earlier laugh already playing.
+ if(e.type==='pointercancel'&&hollyLaugh.snapshot().pending)cancelHolly('pointer cancelled');
  const f=pointers.get(e.pointerId);
  if(!f)return;
  if(e.type==='pointerup'){

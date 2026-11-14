@@ -58,12 +58,12 @@
     "sample_rate": 24000,
     "channels": 2,
     "pitch_or_speed_change": false,
-    "tap_duration_seconds": 1.1,
+    "tap_duration_seconds": 1.76,
     "runtime_fades_seconds": [
       0.01,
       0.025
     ],
-    "tap_cut": "Ends in the measured low-energy pause at source 1.20\u20131.42 seconds. Ear validation still required."
+    "tap_cut": "No runtime trim. Normal taps now play the complete file to EOF, matching Test Holly Laugh; the original 1.10-second tap cutoff was removed after user feedback."
   },
   "final_file": "holly-giggle.wav",
   "final_sha256": "cf12b7572327f49cafab183eb206b610b3c07117f5d0f5f778ee37846860d97b",
