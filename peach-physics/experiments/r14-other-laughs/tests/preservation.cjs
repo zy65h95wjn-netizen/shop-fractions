@@ -7,10 +7,13 @@ const sha=x=>crypto.createHash('sha256').update(x).digest('hex');
 for(const f of ['motion.js','assets/holly-heartbreaker.png','assets/aurelia-frost.jpg','assets/santa-claus.jpg','apple-touch-icon.png'])equal(sha(h.fs.readFileSync(h.path.join(dir,f))),sha(h.fs.readFileSync(h.path.join(baseDir,f))),f+' source bytes');
 equal(sha(h.fs.readFileSync(h.path.join(dir,'assets/holly-heartbreaker.png'))),'f7267c4f7624ea17d2215251e0bdf63d3e1cbc59bb33e3b9bcaca7f81b486a58','approved Holly hash');
 const main=h.fs.readFileSync(h.path.join(baseDir,'index.html'),'utf8'),html=h.fs.readFileSync(h.path.join(dir,'index.html'),'utf8');
-for(const [start,end] of [['const CHARACTERS=','const CHARACTER_KEY='],['const MIDNIGHT_LEFT_CONTOUR=','// Profiles are separate'],['function step(','function loop('],['function fallbackRect(','function impulse('],['function slapSound(){','function slap(side'],['function stopSantaLaugh(){','function initGL(){']]){
+for(const [start,end] of [['const CHARACTERS=','const CHARACTER_KEY='],['const MIDNIGHT_LEFT_CONTOUR=','// Profiles are separate'],['function step(','function loop('],['function fallbackRect(','function impulse('],['function slapSound(){','function slap(side']]){
  const section=s=>{const a=s.indexOf(start),b=s.indexOf(end,a+start.length);h.assert(a>=0&&b>a,[start,end]);return s.slice(a,b);};
  equal(section(html),section(main),start+' byte-identical');
 }
+const approvedSanta=require('child_process').execFileSync('git',['show','c5ef60e:peach-physics/v8/index.html'],{maxBuffer:4e6}).toString();
+const voiceBlock=s=>s.slice(s.indexOf('// Recorded CC0 Santa voice.'),s.indexOf('function initGL(){'));
+equal(voiceBlock(html),voiceBlock(approvedSanta),'approved Santa voice implementation byte-identical');
 const extra='window.__motionTest=motion;\npresentCharacter();\ngetPhoto';
 const src={};for(const [key,content] of [['baseline',main],['preview',html]]){src[key]='/tmp/holly-'+key+'.html';h.fs.writeFileSync(src[key],content.replace('presentCharacter();\ngetPhoto',extra));}
 (async()=>{

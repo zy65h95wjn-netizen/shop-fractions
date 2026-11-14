@@ -1,0 +1,14 @@
+[
+  {
+    "renderer": "webgl",
+    "sourceCorrelation": 0.9999999999999998,
+    "tailCorrelation": 1.0,
+    "comparedSamples": 66150
+  },
+  {
+    "renderer": "canvas",
+    "sourceCorrelation": 0.9999999999999998,
+    "tailCorrelation": 1.0,
+    "comparedSamples": 66150
+  }
+]

@@ -14,8 +14,10 @@ The first three source preview files are retained in `assets/candidates/`. Exact
 
 Processing uses only constant gain, boundary fades and PCM16 WAV encoding. Original sample rates/channels, pitch and speed are retained. Gain: C-V −7.43 dB; SpliceSound +4.47 dB; moxobna −4.02 dB. Fades: 10 ms leading, 50 ms trailing. Windows were chosen from waveform gaps for **audition preparation only**, not from an unheard personality assessment. No synthesis, pitch alteration, speech generation or artificial laugh variation is used.
 
-**Candidate listening approved by Lance:** after receiving the pinned audition checkpoint containing these six excerpts and Holly's reference, the user replied “i like them.” The approved excerpt bytes are unchanged. For the combined iPhone preview, C-V is paired with Winter Ember, SpliceSound with Midnight Yule and moxobna with Aurelia Frost. These pairings were implementation choices; they are not claimed as a separate user approval of the final character experience.
+**Candidate listening approved by Lance:** after receiving the pinned audition checkpoint containing these six excerpts and Holly's reference, the user replied “i like them.” The approved excerpt bytes are unchanged. For the combined iPhone preview, C-V is paired with Winter Ember, SpliceSound with Midnight Yule and moxobna with Aurelia Frost. Lance subsequently approved the combined elf preview (“Sounds great”).
 
 This environment cannot independently hear the recordings. Different uploaders do not alone prove recognizably different performers, and non-silent waveforms do not establish naturalness, perceived volume or absence of source distortion. User review supplies the subjective listening gate. C-V's fuller excerpt plays for all 3.15 seconds, including when a second tap arrives after the 2.6-second cooldown; the active-source gate prevents interruption or overlap.
 
 Holly's approved engine, both WAVs and existing source/provenance remain unchanged. See [HOLLY-CREDITS.md](HOLLY-CREDITS.md).
+
+Santa’s approved CC0 recording and exact-byte provenance are documented in [assets/santa-ho-ho-ho.LICENSE.md](assets/santa-ho-ho-ho.LICENSE.md). Its integration is described in [SANTA-VOICE.md](SANTA-VOICE.md).

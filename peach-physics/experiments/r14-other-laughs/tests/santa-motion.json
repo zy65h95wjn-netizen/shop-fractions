@@ -1,0 +1,72 @@
+{
+  "cases": 8,
+  "results": [
+    {
+      "renderer": "webgl",
+      "sound": true,
+      "laugh": false,
+      "identicalMotion": true,
+      "identicalFrames": 3,
+      "recordedPhrases": 0
+    },
+    {
+      "renderer": "webgl",
+      "sound": true,
+      "laugh": true,
+      "identicalMotion": true,
+      "identicalFrames": 3,
+      "recordedPhrases": 1
+    },
+    {
+      "renderer": "webgl",
+      "sound": false,
+      "laugh": true,
+      "identicalMotion": true,
+      "identicalFrames": 3,
+      "recordedPhrases": 0
+    },
+    {
+      "renderer": "webgl",
+      "sound": true,
+      "laugh": true,
+      "repeat": true,
+      "identicalMotion": true,
+      "identicalFrames": 3,
+      "recordedPhrases": 1
+    },
+    {
+      "renderer": "canvas",
+      "sound": true,
+      "laugh": false,
+      "identicalMotion": true,
+      "identicalFrames": 3,
+      "recordedPhrases": 0
+    },
+    {
+      "renderer": "canvas",
+      "sound": true,
+      "laugh": true,
+      "identicalMotion": true,
+      "identicalFrames": 3,
+      "recordedPhrases": 1
+    },
+    {
+      "renderer": "canvas",
+      "sound": false,
+      "laugh": true,
+      "identicalMotion": true,
+      "identicalFrames": 3,
+      "recordedPhrases": 0
+    },
+    {
+      "renderer": "canvas",
+      "sound": true,
+      "laugh": true,
+      "repeat": true,
+      "identicalMotion": true,
+      "identicalFrames": 3,
+      "recordedPhrases": 1
+    }
+  ],
+  "passed": true
+}

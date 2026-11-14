@@ -1,0 +1,28 @@
+{
+  "checks": 28,
+  "results": [
+    {
+      "renderer": "webgl",
+      "stats": {
+        "samples": 73728,
+        "sampleRate": 44100,
+        "peak": 0.9482862949371338,
+        "rms": 0.14569409534033223,
+        "audibleSamples": 60896
+      },
+      "passed": true
+    },
+    {
+      "renderer": "canvas",
+      "stats": {
+        "samples": 76800,
+        "sampleRate": 44100,
+        "peak": 0.9482862949371338,
+        "rms": 0.1427504768480873,
+        "audibleSamples": 60896
+      },
+      "passed": true
+    }
+  ],
+  "passed": true
+}

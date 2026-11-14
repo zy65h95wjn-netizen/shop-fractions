@@ -1,6 +1,6 @@
 {
   "url": "http://127.0.0.1:8000/peach-physics/experiments/r14-other-laughs/index.html?character=ember",
-  "checks": 148,
+  "checks": 154,
   "results": [
     {
       "renderer": "webgl",
@@ -52,6 +52,12 @@
     },
     {
       "renderer": "webgl",
+      "offline": false,
+      "id": "santa",
+      "take": 1
+    },
+    {
+      "renderer": "webgl",
       "offline": true,
       "id": "ember",
       "take": 1
@@ -99,6 +105,12 @@
       "take": 2
     },
     {
+      "renderer": "webgl",
+      "offline": true,
+      "id": "santa",
+      "take": 1
+    },
+    {
       "renderer": "canvas",
       "offline": false,
       "id": "ember",
@@ -148,6 +160,12 @@
     },
     {
       "renderer": "canvas",
+      "offline": false,
+      "id": "santa",
+      "take": 1
+    },
+    {
+      "renderer": "canvas",
       "offline": true,
       "id": "ember",
       "take": 1
@@ -193,6 +211,12 @@
       "offline": true,
       "id": "holly",
       "take": 2
+    },
+    {
+      "renderer": "canvas",
+      "offline": true,
+      "id": "santa",
+      "take": 1
     }
   ],
   "passed": true

@@ -18,6 +18,7 @@ let checks=0;const results=[],eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;},ok
   await p.waitForFunction(()=>navigator.serviceWorker.controller,null,{timeout:60000});
   for(const offline of [false,true]){
    if(offline){await c.setOffline(true);await p.reload({waitUntil:'domcontentloaded'});await ready();}
+   if(await p.evaluate(()=>__peachPhysicsDebug.snapshot().character==='santa'))await advance('ember');
    for(let i=0;i<ids.length;i++){
     const id=ids[i];eq(await p.evaluate(()=>__peachPhysicsDebug.snapshot().character),id,'visible selector '+id);await settings();
     eq(await p.locator('#testSound').textContent(),'Test '+labels[i]+' Laugh','Test label '+id);
@@ -38,9 +39,15 @@ let checks=0;const results=[],eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;},ok
     }
     await advance(i===3?'santa':ids[i+1]);
    }
-   await settings();eq(await p.locator('#testSound').textContent(),'Test sound','Santa unchanged');await advance('ember');
+   await settings();eq(await p.locator('#testSound').textContent(),'Test Santa laugh','approved Santa control');
+   if(!offline){await p.click('#slapAudio');await p.waitForFunction(()=>__santaAudioDebug.snapshot().active);await p.waitForFunction(()=>!__santaAudioDebug.snapshot().active);}
+   else ok(await p.evaluate(()=>__peachPhysicsDebug.snapshot().slapAudioEnabled),'Santa saved Sound offline');
+   await p.click('#testSound');await p.waitForFunction(()=>__santaAudioDebug.snapshot().active);eq(await p.evaluate(()=>__elfAudioDebug.snapshot().activeCount),0,'Santa alone');await p.waitForFunction(()=>!__santaAudioDebug.snapshot().active);
+   results.push({renderer:fallback?'canvas':'webgl',offline,id:'santa',take:1});
+   if(!remote&&!offline){await p.evaluate(()=>{document.querySelector('#stage').scrollTo(0,0);document.querySelector('#panel').scrollTop=0;});await p.waitForTimeout(300);await p.screenshot({path:__dirname+'/settings-'+(fallback?'canvas':'webgl')+'-santa.png'});}
+   await advance('ember');
   }
-  const cacheKeys=await p.evaluate(()=>caches.keys());ok(cacheKeys.includes('peach-preview-r142-other-laughs-v2'),'current complete cache');eq(errors,[],'no page exceptions');await c.close();
+  const cacheKeys=await p.evaluate(()=>caches.keys());ok(cacheKeys.includes('peach-preview-r142-other-laughs-v3'),'current complete cache');eq(errors,[],'no page exceptions');await c.close();
  }
  fs.writeFileSync(output,JSON.stringify({url,checks,results,passed:true},null,2)+'\n');console.log({checks,passed:true,output});
 }finally{await b.close();}})().catch(e=>{console.error(e);process.exit(1)});

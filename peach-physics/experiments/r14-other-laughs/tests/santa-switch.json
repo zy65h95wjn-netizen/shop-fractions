@@ -1,0 +1,62 @@
+{
+  "checks": 48,
+  "results": [
+    {
+      "renderer": "webgl",
+      "from": "santa",
+      "to": "holly",
+      "mode": "load",
+      "passed": true
+    },
+    {
+      "renderer": "webgl",
+      "from": "holly",
+      "to": "santa",
+      "mode": "load",
+      "passed": true
+    },
+    {
+      "renderer": "webgl",
+      "from": "santa",
+      "to": "holly",
+      "mode": "resume",
+      "passed": true
+    },
+    {
+      "renderer": "webgl",
+      "from": "holly",
+      "to": "santa",
+      "mode": "resume",
+      "passed": true
+    },
+    {
+      "renderer": "canvas",
+      "from": "santa",
+      "to": "holly",
+      "mode": "load",
+      "passed": true
+    },
+    {
+      "renderer": "canvas",
+      "from": "holly",
+      "to": "santa",
+      "mode": "load",
+      "passed": true
+    },
+    {
+      "renderer": "canvas",
+      "from": "santa",
+      "to": "holly",
+      "mode": "resume",
+      "passed": true
+    },
+    {
+      "renderer": "canvas",
+      "from": "holly",
+      "to": "santa",
+      "mode": "resume",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

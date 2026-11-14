@@ -277,6 +277,7 @@ const descriptions={natural:'Realistic motion with gentle secondary response.',p
 let activePreset='natural';
 let slapAudioEnabled=false, audioContext=null, slapCount=0, flickCount=0;
 let audioEpoch=0,audioLastError='';
+const santaAudioContexts=new WeakSet();
 const voices=new ElfVoiceBank({
  profiles:ElfVoiceProfiles,character:()=>currentCharacter().id,enabled:()=>slapAudioEnabled,
  available:()=>!document.hidden&&!characterSwitchPending&&!webglLost,
@@ -284,7 +285,7 @@ const voices=new ElfVoiceBank({
 });
 const isVoicedElf=()=>voices.has();
 voices.preload(); // Downloading bytes alone never activates sound.
-function cancelVoices(reason){if(isVoicedElf())audioEpoch++;voices.cancel(reason,reason!=='reset'&&reason!=='pointer cancelled');}
+function cancelVoices(reason){audioEpoch++;voices.cancel(reason,reason!=='reset'&&reason!=='pointer cancelled');stopSantaVoice();}
 let lastGesture='none';
 // Character-specific elliptical masks, spring locations, and impulse origins.
 // Mutated in place on character switch; the original redhead configuration is preserved exactly.
@@ -771,19 +772,45 @@ function santaImpulse(side,x,y,amplitude=1,vx=0,vy=0,flick=false,tap=false){
  const p=impacts[side];p.x=x/W;p.y=y/H;p.v=clamp(p.v+(tap?.9:.3)*power,0,1.2);
  startWave(side,power*(tap?.55:.2));
 }
-// Original synthesized three-pulse chuckle, no recording, network or speech
-// service. Visual pulses use the same simulation clock; sound is opt-in.
+// Recorded CC0 Santa voice. Visual pulses retain their original simulation
+// timing; the complete spoken phrase plays once, at its natural speed.
 let santaLaughEnabled=false,santaLaughTime=-1,santaLaughBeat=0,santaLaughSound=false;
-function stopSantaLaugh(){santaLaughTime=-1;santaLaughBeat=0;document.getElementById('santaReaction').textContent='';}
-function santaChuckle(){
+let santaVoiceBytes=null,santaVoiceBuffer=null,santaVoiceContext=null,santaVoiceSource=null,santaVoicePending=false,santaVoiceToken=0;
+function loadSantaVoice(){
+ if(!santaVoiceBytes){
+  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);
+  santaVoiceBytes=fetch('./assets/santa-ho-ho-ho.mp3',{signal:controller.signal})
+   .then(response=>{if(!response.ok)throw Error('Santa voice HTTP '+response.status);return response.arrayBuffer();})
+   .catch(error=>{santaVoiceBytes=null;throw error;}).finally(()=>clearTimeout(timeout));
+ }
+ return santaVoiceBytes;
+}
+function stopSantaVoice(){
+ santaVoiceToken++;santaVoicePending=false;
+ if(santaVoiceSource){santaVoiceSource.onended=null;santaVoiceSource.stop();santaVoiceSource.disconnect();santaVoiceSource=null;}
+}
+function stopSantaLaugh(stopVoice=true){santaLaughTime=-1;santaLaughBeat=0;document.getElementById('santaReaction').textContent='';if(stopVoice)stopSantaVoice();}
+function santaChuckle(preview=false){
+ if(!isSanta()||!slapAudioEnabled||document.hidden||(!preview&&!santaLaughEnabled)||santaVoicePending||santaVoiceSource)return;
+ const token=++santaVoiceToken,epoch=audioEpoch;
+ const valid=()=>token===santaVoiceToken&&epoch===audioEpoch&&isSanta()&&slapAudioEnabled&&!document.hidden&&(preview||santaLaughEnabled);
+ const fail=error=>{if(!valid())return;santaVoicePending=false;santaLaughSound=false;audioLastError=String(error?.message||error);document.getElementById('audioStatus').textContent='Santa’s voice could not load. Tap Test sound to retry.';};
+ santaVoicePending=true;
  withAudio(ac=>{
-  const t=ac.currentTime,voice=ac.createOscillator(),formant=ac.createBiquadFilter(),gain=ac.createGain();
-  voice.type='sawtooth';voice.frequency.setValueAtTime(108,t);voice.frequency.exponentialRampToValueAtTime(72,t+.22);
-  formant.type='bandpass';formant.frequency.value=480;formant.Q.value=2.6;
-  gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.13,t+.025);gain.gain.exponentialRampToValueAtTime(.0001,t+.24);
-  voice.connect(formant);formant.connect(gain);gain.connect(ac.destination);voice.start(t);voice.stop(t+.25);
-  santaLaughSound=true;
- },()=>{santaLaughSound=false;});
+  if(!valid())return;
+  (async()=>{
+   const bytes=await loadSantaVoice();if(!valid())return;
+   if(santaVoiceContext!==ac||!santaVoiceBuffer){
+    const buffer=await ac.decodeAudioData(bytes.slice(0));if(!valid())return;
+    santaVoiceBuffer=buffer;santaVoiceContext=ac;
+   }
+   if(!valid()||ac.state!=='running'){if(valid())fail(Error('Audio is '+ac.state));return;}
+   const source=ac.createBufferSource();source.buffer=santaVoiceBuffer;source.connect(ac.destination);
+   source.onended=()=>{source.disconnect();if(santaVoiceSource===source)santaVoiceSource=null;};
+   source.start();santaVoiceSource=source;santaVoicePending=false;santaLaughSound=true;
+   audioLastError='';document.getElementById('audioStatus').textContent='Santa: Ho ho ho!';
+  })().catch(error=>{if(valid())santaVoiceBytes=null;fail(error);});
+ },()=>{if(token===santaVoiceToken){santaVoicePending=false;santaLaughSound=false;}});
 }
 function startSantaLaugh(){
  if(!isSanta()||!santaLaughEnabled||santaLaughTime>=0)return;
@@ -793,9 +820,9 @@ function advanceSantaLaugh(dt){
  if(santaLaughTime<0)return;santaLaughTime+=dt;
  if(santaLaughBeat<3&&santaLaughTime>=santaLaughBeat*.36){
   santaImpulse(santaLaughBeat%2,470,790,.55,0,-600,true);
-  santaLaughBeat++;document.getElementById('santaReaction').textContent=Array(santaLaughBeat).fill('HO').join(' ')+'!';santaChuckle();
+  santaLaughBeat++;document.getElementById('santaReaction').textContent=Array(santaLaughBeat).fill('HO').join(' ')+'!';if(santaLaughBeat===1)santaChuckle();
  }
- if(santaLaughTime>1.6)stopSantaLaugh();
+ if(santaLaughTime>1.6)stopSantaLaugh(false);
 }
 
 function initGL(){
@@ -1359,6 +1386,10 @@ function withAudio(play,onFailure=()=>{}){
   if(!Context)throw Error('Web Audio unavailable');
   if(!audioContext||audioContext.state==='closed')audioContext=new Context();
   const ac=audioContext;
+  if(isSanta()&&!santaAudioContexts.has(ac)){
+   santaAudioContexts.add(ac);
+   ac.addEventListener('statechange',()=>{if(ac===audioContext&&isSanta()&&ac.state!=='running')cancelVoices('audio interrupted');});
+  }
   const start=()=>{
    if(epoch!==audioEpoch||character!==currentCharacter().id||!slapAudioEnabled||document.hidden||ac!==audioContext)return;
    if(ac.state!=='running'){fail(Error('Audio is '+ac.state));return;}
@@ -1512,7 +1543,7 @@ function refreshPrefs(){
   audioButton.setAttribute('aria-pressed',String(slapAudioEnabled));
   audioButton.textContent=(isSanta()||isVoicedElf()?'Sound: ':'Slap sound: ')+(slapAudioEnabled?'On':'Off');
   document.getElementById('testSound').disabled=!slapAudioEnabled;
-  document.getElementById('testSound').textContent=isVoicedElf()?'Test '+voices.label()+' Laugh':'Test sound';
+  document.getElementById('testSound').textContent=isSanta()?'Test Santa laugh':isVoicedElf()?'Test '+voices.label()+' Laugh':'Test sound';
   document.getElementById('audioStatus').textContent=slapAudioEnabled?(isVoicedElf()?'Test '+voices.label()+' Laugh plays each laugh in turn.':'Tap Test sound to check playback.'):'Sound is off.';
   const laugh=document.getElementById('santaLaugh');laugh.hidden=!isSanta();laugh.setAttribute('aria-pressed',String(santaLaughEnabled));laugh.textContent='Belly laugh: '+(santaLaughEnabled?'On':'Off');
 }
@@ -1532,6 +1563,7 @@ function restorePrefs(){
   }
  }catch(e){/* Defaults remain in effect. */}
  refreshPrefs();
+ if(isSanta())loadSantaVoice().catch(()=>{});
 }
 for(const b of presetButtons)b.addEventListener('click',()=>{
  activePreset=b.dataset.preset;Object.assign(model,currentPresets()[activePreset]);refreshPrefs();savePrefs();
@@ -1543,8 +1575,8 @@ for(const [key,out] of [['bounce','bounceN'],['softness','softnessN'],['settle',
 restorePrefs();
 document.getElementById('grabHold').addEventListener('click',()=>{grabHoldEnabled=!grabHoldEnabled;for(const f of pointers.values())f.grabbed=false;presentCharacter();});
 document.getElementById('santaLaugh').addEventListener('click',()=>{santaLaughEnabled=!santaLaughEnabled;if(santaLaughEnabled)startSantaLaugh();else stopSantaLaugh();refreshPrefs();savePrefs();});
-document.getElementById('slapAudio').addEventListener('click',()=>{audioEpoch++;voices.cancel('sound toggle');slapAudioEnabled=!slapAudioEnabled;refreshPrefs();savePrefs();if(slapAudioEnabled){if(isVoicedElf())withAudio(()=>{});else slapSound();}});
-document.getElementById('testSound').addEventListener('click',()=>{if(isVoicedElf())voices.request('test');else slapSound();});
+document.getElementById('slapAudio').addEventListener('click',()=>{audioEpoch++;voices.cancel('sound toggle');stopSantaVoice();slapAudioEnabled=!slapAudioEnabled;refreshPrefs();savePrefs();if(slapAudioEnabled){if(isSanta())santaChuckle(true);else if(isVoicedElf())withAudio(()=>{});else slapSound();}});
+document.getElementById('testSound').addEventListener('click',()=>{if(isSanta())santaChuckle(true);else if(isVoicedElf())voices.request('test');else slapSound();});
 for(const id of ['slapAudio','testSound','santaLaugh'])document.getElementById(id).addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});
 document.getElementById('share').addEventListener('click',async()=>{
  const url=location.origin+location.pathname;
@@ -1574,6 +1606,7 @@ motion.sample=function(event,now,angle){
  const accepted=sampleMotion.call(this,event,now,angle);
  voices.physicalSample(this,accepted,now);return accepted;
 };
+window.__santaAudioDebug={snapshot:()=>({ready:!!santaVoiceBuffer,active:!!santaVoiceSource,pending:santaVoicePending,duration:santaVoiceBuffer?.duration||0,error:audioLastError})};
 window.__hollyAudioDebug={snapshot:()=>voices.players.holly.snapshot()};
 window.__elfAudioDebug={snapshot:()=>voices.snapshot()};
 window.__peachMotionDebug={snapshot:()=>({...motion.snapshot(),ui:motionUI.snapshot()})};
