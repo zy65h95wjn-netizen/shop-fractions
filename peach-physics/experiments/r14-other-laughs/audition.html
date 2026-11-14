@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#10251e"><title>R14.2 — voice audition</title>
+<style>
+:root{font:17px/1.5 -apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:#fff2df;background:#10251e}*{box-sizing:border-box}body{margin:0}main{max-width:760px;margin:auto;padding:28px 20px 50px}h1{font-size:30px;line-height:1.15;margin:8px 0 16px}h2{font-size:21px;margin:0 0 6px}.eyebrow{font-size:12px;letter-spacing:.13em;color:#d2b783;text-transform:uppercase}p{color:#dfdbcc}article{border:1px solid #617469;border-radius:18px;padding:20px;margin:16px 0;background:#17382d}button{width:100%;font:inherit;font-weight:650;background:#f7d6a5;color:#10251e;border:0;border-radius:12px;padding:13px 15px;touch-action:manipulation}button:focus-visible,a:focus-visible{outline:3px solid #fff;outline-offset:4px}button.secondary{background:transparent;color:#fff2df;border:1px solid #82958b}a{color:#f7d6a5}.time{font-size:14px;margin:8px 0 16px}.notice{padding:16px;border-left:3px solid #f7d6a5;background:#223c31;border-radius:4px}#status{position:sticky;top:0;z-index:2;background:#10251ef5;border-bottom:1px solid #617469;padding:12px;margin:20px -4px 0;min-height:52px}.reference{background:#132c24}footer{margin-top:30px;font-size:14px}
+</style></head><body><main>
+<div class="eyebrow">Peach Physics · R14.2 · listening gate</div><h1>Three voices to audition</h1>
+<p class="notice">These candidates have verified CC0 source pages and local recordings, but have not been assigned to characters. Listen to both takes from each voice, then tell Cody which fits Winter Ember, Midnight Yule and Aurelia Frost—or which should be rejected.</p>
+<p>Ember: cheeky and confident. Midnight: warm and lower. Aurelia: bright and energetic. Tap each button twice, allowing the first take to finish. Holly is included for comparison.</p>
+<div id="status" role="status" aria-live="polite">Tap a candidate to hear its first take.</div>
+<article><h2>C-V</h2><a href="https://freesound.org/people/C-V/sounds/556251/" target="_blank" rel="noopener">woman_laughs.wav · CC0 source</a><p class="time">Take 1: 1.68 seconds · Take 2: 3.15 seconds</p><button data-voice="cv">Play next C-V take</button></article>
+<article><h2>SpliceSound</h2><a href="https://freesound.org/people/SpliceSound/sounds/218310/" target="_blank" rel="noopener">Woman, female, laughing, giggling.wav · CC0 source</a><p class="time">Take 1: 1.43 seconds · Take 2: 1.70 seconds</p><button data-voice="splice">Play next SpliceSound take</button></article>
+<article><h2>moxobna</h2><a href="https://freesound.org/people/moxobna/sounds/102211/" target="_blank" rel="noopener">072810_laughter_woman.wav · CC0 source</a><p class="time">Take 1: 1.56 seconds · Take 2: 2.77 seconds</p><button data-voice="mox">Play next moxobna take</button></article>
+<article class="reference"><h2>Approved Holly reference</h2><p class="time">The two approved recordings are unchanged.</p><button data-voice="holly" class="secondary">Play next Holly take</button></article>
+<button id="stop" class="secondary">Stop sound</button>
+<footer><p>These are recorded performances at their natural pitch and speed. Waveform checks do not establish voice personality or naturalness. The new voices remain unassigned until listening is complete.</p><p><a href="./index.html?character=holly">Open the R14.2 foundation with approved Holly</a> · <a href="./VOICE-CANDIDATES.json">Sources, edits and hashes</a></p></footer>
+</main><script src="./holly-audio.js?v=r14-laugh3"></script><script src="./voice-bank.js?v=r142-1"></script><script>
+'use strict';
+const profiles={holly:{label:'Holly'},cv:{label:'C-V',clips:[{url:'./assets/candidates/cv-1.wav',minimum:1.65},{url:'./assets/candidates/cv-2.wav',minimum:3.13}]},splice:{label:'SpliceSound',clips:[{url:'./assets/candidates/splice-1.wav',minimum:1.41},{url:'./assets/candidates/splice-2.wav',minimum:1.68}]},mox:{label:'moxobna',clips:[{url:'./assets/candidates/mox-1.wav',minimum:1.54},{url:'./assets/candidates/mox-2.wav',minimum:2.75}]}};
+let selected='holly',context=null,epoch=0;
+const status=document.getElementById('status');
+function withAudio(play,fail){
+ const token=epoch,id=selected;
+ try{
+  try{if(navigator.audioSession)navigator.audioSession.type='playback';}catch{}
+  const Context=window.AudioContext||window.webkitAudioContext;if(!Context)throw Error('Web Audio unavailable');
+  if(!context||context.state==='closed')context=new Context();const ac=context;
+  const start=()=>{if(token!==epoch||id!==selected||document.hidden||context!==ac)return;if(ac.state!=='running'){fail();return;}bank.activate(ac);play(ac);};
+  if(ac.state==='running')start();else Promise.resolve(ac.resume()).then(start,fail);
+ }catch{fail();}
+}
+const bank=new ElfVoiceBank({profiles,character:()=>selected,enabled:()=>true,available:()=>!document.hidden,withAudio,status:text=>{status.textContent=text.replace('Auto Jiggle stays silent.','');}});
+bank.preload();
+for(const button of document.querySelectorAll('[data-voice]'))button.addEventListener('click',()=>{const id=button.dataset.voice;if(id!==selected){epoch++;bank.cancel('candidate switch');selected=id;}bank.request('test');});
+function stop(reason){epoch++;bank.cancel(reason);status.textContent='Stopped. Tap a candidate to continue.';}
+document.getElementById('stop').addEventListener('click',()=>stop('stop'));
+for(const name of ['blur','pagehide'])window.addEventListener(name,()=>stop(name));
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stop('hidden');});
+window.__auditionDebug={snapshot:()=>bank.snapshot()};
+if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(()=>{}));
+</script></body></html>

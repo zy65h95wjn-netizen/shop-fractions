@@ -1,0 +1,44 @@
+[
+  {
+    "candidate": "cv",
+    "take": 1,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 1.0,
+    "comparedSamples": 73867
+  },
+  {
+    "candidate": "cv",
+    "take": 2,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 1.0,
+    "comparedSamples": 138915
+  },
+  {
+    "candidate": "splice",
+    "take": 1,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 1.0,
+    "comparedSamples": 63062
+  },
+  {
+    "candidate": "splice",
+    "take": 2,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 1.0,
+    "comparedSamples": 74970
+  },
+  {
+    "candidate": "mox",
+    "take": 1,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 0.9999999999999998,
+    "comparedSamples": 68796
+  },
+  {
+    "candidate": "mox",
+    "take": 2,
+    "sourceCorrelation": 1.0,
+    "tailCorrelation": 0.9999999999999998,
+    "comparedSamples": 122157
+  }
+]

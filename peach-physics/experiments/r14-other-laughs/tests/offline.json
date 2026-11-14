@@ -1,0 +1,34 @@
+{
+  "checks": 98,
+  "results": [
+    {
+      "renderer": "webgl",
+      "offlineCharacters": 5,
+      "offlineCandidateTakes": 6,
+      "assignmentsPending": true,
+      "upgradedFrom": "5441324244eb2e28ffc115f8cf0d34f1ff2c5d21",
+      "atomicAudioInstall": true,
+      "staleCacheRace": true,
+      "profileMigration": true,
+      "productionIsolation": true,
+      "offlineRecordingHash": "cf12b7572327f49cafab183eb206b610b3c07117f5d0f5f778ee37846860d97b",
+      "secondRecordingHash": "2a5537074dc37db937e604545132815d09f4e21dd4084a736560bed12bb20533",
+      "passed": true
+    },
+    {
+      "renderer": "canvas",
+      "offlineCharacters": 5,
+      "offlineCandidateTakes": 6,
+      "assignmentsPending": true,
+      "upgradedFrom": "5441324244eb2e28ffc115f8cf0d34f1ff2c5d21",
+      "atomicAudioInstall": true,
+      "staleCacheRace": true,
+      "profileMigration": true,
+      "productionIsolation": true,
+      "offlineRecordingHash": "cf12b7572327f49cafab183eb206b610b3c07117f5d0f5f778ee37846860d97b",
+      "secondRecordingHash": "2a5537074dc37db937e604545132815d09f4e21dd4084a736560bed12bb20533",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,93 @@
+{
+  "verified_date_utc": "2026-11-14",
+  "candidates": [
+    {
+      "id": "611781",
+      "creator": "DarkNightPrincess",
+      "title": "Female Giggle",
+      "source_url": "https://freesound.org/people/DarkNightPrincess/sounds/611781/",
+      "public_preview_url": "https://cdn.freesound.org/previews/611/611781_13567167-lq.mp3",
+      "license": "CC0 1.0 Universal",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_evidence": "Source page explicitly labels the sound Creative Commons 0 and links to the CC0 dedication.",
+      "source_page_sha256": "288744caa3807a427996ed4b9d641e355ff2bcca357bace164b90484c9ffbdfd",
+      "downloaded_preview_sha256": "8df08d8ff46fbe805f2abb614974a233f70871cc8abe44c45ae67c5f54036e30",
+      "access": "Public anonymous preview; no login or original-download endpoint used."
+    },
+    {
+      "id": "855464",
+      "creator": "mvVoiceActing",
+      "title": "female giggles - laughter",
+      "source_url": "https://freesound.org/people/mvVoiceActing/sounds/855464/",
+      "public_preview_url": "https://cdn.freesound.org/previews/855/855464_3298571-lq.mp3",
+      "license": "CC0 1.0 Universal",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_evidence": "Source page explicitly labels the sound Creative Commons 0 and links to the CC0 dedication.",
+      "source_page_sha256": "7c1bca58d27fc7f5ae3d190440245d0a7b2035be7d6fc06987b0b32c284857c0",
+      "downloaded_preview_sha256": "be49c9adc8da96acbcb612ac94d9ccbd916315ccda8568fc7a56cf03ffd3b08c",
+      "access": "Public anonymous preview; no login or original-download endpoint used."
+    },
+    {
+      "id": "855462",
+      "creator": "mvVoiceActing",
+      "title": "evil giggles - female voice - giggles for mischievous behavior",
+      "source_url": "https://freesound.org/people/mvVoiceActing/sounds/855462/",
+      "public_preview_url": "https://cdn.freesound.org/previews/855/855462_3298571-lq.mp3",
+      "license": "CC0 1.0 Universal",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_evidence": "Source page explicitly labels the sound Creative Commons 0 and links to the CC0 dedication.",
+      "source_page_sha256": "f78c3d32ff557d3e196d0357eec9d32bf27878263e310b611c962b132b392f04",
+      "downloaded_preview_sha256": "c2e18a34a41653193821d384522fb68161c277e231217ae424d8a9db0f59d6dd",
+      "access": "Public anonymous preview; no login or original-download endpoint used."
+    }
+  ],
+  "provisional_selection": "855464",
+  "selection_status": "Licensed and technically verified. Human audition/naturalness gate remains OPEN: this execution environment cannot consume audio input. This is a listening-review preview, not a claim of best-sounding or iPhone-approved voice.",
+  "original_local_file": "source-855464-preview.mp3",
+  "original_description_excerpt": "Got tickled and decided to giggle.",
+  "edits": {
+    "source_interval_seconds": [
+      0.2,
+      1.96
+    ],
+    "output_duration_seconds": 1.76,
+    "gain_db": 23.7,
+    "fade_in_seconds": 0.01,
+    "fade_out_seconds": 0.03,
+    "codec": "PCM signed 16-bit little-endian WAV",
+    "sample_rate": 24000,
+    "channels": 2,
+    "pitch_or_speed_change": false,
+    "tap_duration_seconds": 1.76,
+    "runtime_fades_seconds": [
+      0.01,
+      0.025
+    ],
+    "tap_cut": "No runtime trim. Normal taps now play the complete file to EOF, matching Test Holly Laugh; the original 1.10-second tap cutoff was removed after user feedback."
+  },
+  "final_file": "holly-giggle.wav",
+  "final_sha256": "cf12b7572327f49cafab183eb206b610b3c07117f5d0f5f778ee37846860d97b",
+  "ffmpeg_command": "ffmpeg -i source-855464-preview.mp3 -af 'atrim=start=0.20:end=1.96,asetpts=PTS-STARTPTS,volume=23.7dB,afade=t=in:d=0.01,afade=t=out:st=1.73:d=0.03' -c:a pcm_s16le -map_metadata -1 holly-giggle.wav",
+  "tap_mode": "Alternate complete recordings 1 and 2 on successful taps. Test uses a separate sequence; ignored, cancelled-before-playback and failed requests do not advance either sequence.",
+  "additional_recordings": [
+    {
+      "file": "holly-giggle-2.wav",
+      "sha256": "2a5537074dc37db937e604545132815d09f4e21dd4084a736560bed12bb20533",
+      "source": "Same CC0 mvVoiceActing recording 855464 and retained source-855464-preview.mp3 bytes. A distinct second laugh, not a time/pitch variant of the first.",
+      "source_interval_seconds": [
+        2.42,
+        4.5
+      ],
+      "duration_seconds": 2.08,
+      "gain_db": 23.7,
+      "fade_in_seconds": 0.01,
+      "fade_out_seconds": 0.08,
+      "sample_rate": 24000,
+      "channels": 2,
+      "codec": "PCM signed 16-bit little-endian WAV",
+      "pitch_or_speed_change": false,
+      "ffmpeg_command": "ffmpeg -i source-855464-preview.mp3 -af 'atrim=start=2.42:end=4.50,asetpts=PTS-STARTPTS,volume=23.7dB,afade=t=in:d=0.01,afade=t=out:st=2.00:d=0.08' -c:a pcm_s16le -map_metadata -1 holly-giggle-2.wav",
+      "listening_status": "Second passage selected from waveform boundaries; this environment cannot audition audio. User iPhone listening approval remains open."
+    }
+  ]
+}

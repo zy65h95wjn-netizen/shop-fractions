@@ -1,0 +1,74 @@
+[
+  {
+    "recording": "webgl-laugh.wav",
+    "variant": 1,
+    "sourceCorrelation": 0.9999775960479593,
+    "tailCorrelation": 0.9999759208140987,
+    "onsetOffsetSamples": 5760,
+    "sampleRate": 44100,
+    "comparedSamples": 77616
+  },
+  {
+    "recording": "canvas-laugh.wav",
+    "variant": 1,
+    "sourceCorrelation": 0.9999775960479593,
+    "tailCorrelation": 0.9999759208140987,
+    "onsetOffsetSamples": 2688,
+    "sampleRate": 44100,
+    "comparedSamples": 77616
+  },
+  {
+    "recording": "webgl-tap.wav",
+    "variant": 1,
+    "sourceCorrelation": 0.9999775960479593,
+    "tailCorrelation": 0.9999759208140987,
+    "onsetOffsetSamples": 640,
+    "sampleRate": 44100,
+    "comparedSamples": 77616
+  },
+  {
+    "recording": "canvas-tap.wav",
+    "variant": 1,
+    "sourceCorrelation": 0.9999775960479593,
+    "tailCorrelation": 0.9999759208140987,
+    "onsetOffsetSamples": 512,
+    "sampleRate": 44100,
+    "comparedSamples": 77616
+  },
+  {
+    "recording": "webgl-tap-2.wav",
+    "variant": 2,
+    "sourceCorrelation": 0.999993766935044,
+    "tailCorrelation": 0.9999580086962634,
+    "onsetOffsetSamples": 512,
+    "sampleRate": 44100,
+    "comparedSamples": 91728
+  },
+  {
+    "recording": "canvas-tap-2.wav",
+    "variant": 2,
+    "sourceCorrelation": 0.999993766935044,
+    "tailCorrelation": 0.9999580086962634,
+    "onsetOffsetSamples": 640,
+    "sampleRate": 44100,
+    "comparedSamples": 91728
+  },
+  {
+    "recording": "webgl-test-2.wav",
+    "variant": 2,
+    "sourceCorrelation": 0.999993766935044,
+    "tailCorrelation": 0.9999580086962634,
+    "onsetOffsetSamples": 2048,
+    "sampleRate": 44100,
+    "comparedSamples": 91728
+  },
+  {
+    "recording": "canvas-test-2.wav",
+    "variant": 2,
+    "sourceCorrelation": 0.999993766935044,
+    "tailCorrelation": 0.9999580086962634,
+    "onsetOffsetSamples": 1280,
+    "sampleRate": 44100,
+    "comparedSamples": 91728
+  }
+]

@@ -1,0 +1,85 @@
+{
+  "checks": 33,
+  "results": [
+    {
+      "candidate": "cv",
+      "take": 1,
+      "duration": 1.6749886621315193,
+      "stats": {
+        "samples": 80896,
+        "sampleRate": 44100,
+        "peak": 0.32763564586639404,
+        "rms": 0.019538811517046402,
+        "audibleSamples": 54907
+      },
+      "hash": "9805b6594512785378fd27c4314881c8b38123575f2a8fd1f8f50bff49696934"
+    },
+    {
+      "candidate": "cv",
+      "take": 2,
+      "duration": 3.15,
+      "stats": {
+        "samples": 145408,
+        "sampleRate": 44100,
+        "peak": 0.2229630947113037,
+        "rms": 0.018607851192663633,
+        "audibleSamples": 112181
+      },
+      "hash": "bf7fb89f44736d68137eeef1e430c9ca926aca01c24bd26b202f58d8f7d9c989"
+    },
+    {
+      "candidate": "splice",
+      "take": 1,
+      "duration": 1.4299773242630385,
+      "stats": {
+        "samples": 70656,
+        "sampleRate": 44100,
+        "peak": 0.45174407958984375,
+        "rms": 0.042671839691280994,
+        "audibleSamples": 40414
+      },
+      "hash": "918df2cd75d219518ba542c8bfa14a58d8107a005830cdf875e029b0a7718840"
+    },
+    {
+      "candidate": "splice",
+      "take": 2,
+      "duration": 1.7,
+      "stats": {
+        "samples": 79872,
+        "sampleRate": 44100,
+        "peak": 0.21399369835853577,
+        "rms": 0.01682970411609559,
+        "audibleSamples": 33341
+      },
+      "hash": "9181f10f4727537d66ef3aeed769d47b4747fcaf4455a6b822c5df1be3452c14"
+    },
+    {
+      "candidate": "mox",
+      "take": 1,
+      "duration": 1.56,
+      "stats": {
+        "samples": 74752,
+        "sampleRate": 44100,
+        "peak": 0.0953093022108078,
+        "rms": 0.018153566837178895,
+        "audibleSamples": 57198
+      },
+      "hash": "dae0b65975a57ce0828c40ae332fe63cab6311a2b9f54a12884e5a0a90c24919"
+    },
+    {
+      "candidate": "mox",
+      "take": 2,
+      "duration": 2.77,
+      "stats": {
+        "samples": 129024,
+        "sampleRate": 44100,
+        "peak": 0.33066806197166443,
+        "rms": 0.03045848452368029,
+        "audibleSamples": 79712
+      },
+      "hash": "89b47b792cc652f5ca02cb6d8f0270406ad4a8aeb62db017000baa1b508519d2"
+    }
+  ],
+  "passed": true,
+  "scope": "Unassigned candidate technical audition only; no subjective voice, personality or character selection claim."
+}

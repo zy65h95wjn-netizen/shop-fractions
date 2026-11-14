@@ -1,0 +1,19 @@
+{
+  "name": "Peach Physics \u2014 R14.2 Voice Preview",
+  "short_name": "R14.2 Preview",
+  "description": "R14.2 audition checkpoint; new character voice assignments remain pending.",
+  "start_url": "./?character=holly",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#09100e",
+  "theme_color": "#09100e",
+  "icons": [
+    {
+      "src": "./apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
