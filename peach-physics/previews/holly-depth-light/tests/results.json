@@ -1,0 +1,250 @@
+{
+ "renderer": {
+  "production": "webgl",
+  "preview": "webgl"
+ },
+ "character": {
+  "production": "holly",
+  "preview": "holly"
+ },
+ "sameFraming": true,
+ "sameCalibration": true,
+ "defaultLevel": "Medium",
+ "restPreviewVsProduction": {
+  "changed": 0,
+  "maxDelta": 0,
+  "bbox": null
+ },
+ "left-down-out": {
+  "nodesMatch": false,
+  "heldNodes": [
+   {
+    "side": 0,
+    "dx": -4.42,
+    "dy": 7.58
+   },
+   {
+    "side": 0,
+    "dx": -10.9,
+    "dy": 18.68
+   },
+   {
+    "side": 0,
+    "dx": -2.35,
+    "dy": 4.03
+   },
+   {
+    "side": 1,
+    "dx": -0.15,
+    "dy": 0.26
+   },
+   {
+    "side": 1,
+    "dx": -1.28,
+    "dy": 2.19
+   },
+   {
+    "side": 1,
+    "dx": -0.15,
+    "dy": 0.26
+   }
+  ],
+  "offVsProduction": {
+   "changed": 0,
+   "maxDelta": 0,
+   "bbox": null
+  },
+  "level1": {
+   "changed": 4979,
+   "maxDelta": 26,
+   "bbox": [
+    123,
+    207,
+    291,
+    308
+   ],
+   "bboxSource": [
+    238,
+    399,
+    562,
+    594
+   ]
+  },
+  "level2": {
+   "changed": 6525,
+   "maxDelta": 38,
+   "bbox": [
+    123,
+    206,
+    292,
+    311
+   ],
+   "bboxSource": [
+    238,
+    397,
+    564,
+    600
+   ]
+  },
+  "level3": {
+   "changed": 8040,
+   "maxDelta": 50,
+   "bbox": [
+    123,
+    206,
+    293,
+    311
+   ],
+   "bboxSource": [
+    238,
+    397,
+    566,
+    600
+   ]
+  },
+  "strongVsRest": {
+   "changed": 12505,
+   "maxDelta": 193,
+   "bbox": [
+    122,
+    205,
+    296,
+    317
+   ],
+   "bboxSource": [
+    236,
+    395,
+    572,
+    611
+   ]
+  }
+ },
+ "right-up": {
+  "nodesMatch": true,
+  "heldNodes": [
+   {
+    "side": 0,
+    "dx": 0.11,
+    "dy": -0.37
+   },
+   {
+    "side": 0,
+    "dx": 0.8,
+    "dy": -2.79
+   },
+   {
+    "side": 0,
+    "dx": 0.11,
+    "dy": -0.37
+   },
+   {
+    "side": 1,
+    "dx": 2.45,
+    "dy": -8.58
+   },
+   {
+    "side": 1,
+    "dx": 6.23,
+    "dy": -21.79
+   },
+   {
+    "side": 1,
+    "dx": 1.32,
+    "dy": -4.61
+   }
+  ],
+  "offVsProduction": {
+   "changed": 0,
+   "maxDelta": 0,
+   "bbox": null
+  },
+  "level1": {
+   "changed": 5104,
+   "maxDelta": 23,
+   "bbox": [
+    128,
+    206,
+    295,
+    312
+   ],
+   "bboxSource": [
+    248,
+    397,
+    570,
+    601
+   ]
+  },
+  "level2": {
+   "changed": 6693,
+   "maxDelta": 35,
+   "bbox": [
+    127,
+    206,
+    295,
+    312
+   ],
+   "bboxSource": [
+    246,
+    397,
+    570,
+    601
+   ]
+  },
+  "level3": {
+   "changed": 7694,
+   "maxDelta": 50,
+   "bbox": [
+    127,
+    204,
+    295,
+    312
+   ],
+   "bboxSource": [
+    246,
+    393,
+    570,
+    601
+   ]
+  },
+  "strongVsRest": {
+   "changed": 12671,
+   "maxDelta": 175,
+   "bbox": [
+    123,
+    204,
+    296,
+    318
+   ],
+   "bboxSource": [
+    238,
+    393,
+    572,
+    613
+   ]
+  }
+ },
+ "restAfterMotionStrong": {
+  "changed": 0,
+  "maxDelta": 0,
+  "bbox": null
+ },
+ "controls": {
+  "afterChip": [
+   "Strong",
+   "2.5D: Strong",
+   "3"
+  ],
+  "stillHolly": true,
+  "characterButtonVisible": false
+ },
+ "storageKeys": [
+  "peach-physics-preview-holly25d-depth",
+  "peach-preview-holly25d-motion-options-v1",
+  "peach-r13-motion-options-v1"
+ ],
+ "serviceWorkers": 0,
+ "errors": {
+  "production": [],
+  "preview": []
+ }
+}

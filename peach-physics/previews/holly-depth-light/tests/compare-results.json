@@ -1,0 +1,103 @@
+{
+ "levels": [
+  "Off",
+  "Medium"
+ ],
+ "renderers": [
+  "webgl:holly",
+  "webgl:holly"
+ ],
+ "autoStatesIdentical": true,
+ "autoMoving": true,
+ "restPaneDifference": {
+  "changed": 0,
+  "maxDelta": 0,
+  "size": [
+   364,
+   618
+  ]
+ },
+ "hold": {
+  "statesIdentical": true,
+  "moved": [
+   [
+    -2.2,
+    5.6
+   ],
+   [
+    -6.3,
+    15.6
+   ],
+   [
+    -1.7,
+    4.3
+   ],
+   [
+    -0.1,
+    0.2
+   ],
+   [
+    -0.7,
+    1.8
+   ],
+   [
+    -0.1,
+    0.2
+   ]
+  ],
+  "paneDifference": {
+   "changed": 18001,
+   "maxDelta": 31,
+   "size": [
+    364,
+    618
+   ]
+  },
+  "pointers": [
+   1,
+   1
+  ]
+ },
+ "afterRelease": {
+  "statesIdentical": true,
+  "gestures": [
+   "drag/hold",
+   "drag/hold"
+  ]
+ },
+ "tapOnRight": {
+  "statesIdentical": true,
+  "gestures": [
+   "slap",
+   "slap"
+  ],
+  "slaps": [
+   1,
+   1
+  ]
+ },
+ "controls": {
+  "levels": [
+   "Off",
+   "Strong"
+  ],
+  "bounceStatesIdentical": true,
+  "preset": [
+   "chaos",
+   "chaos"
+  ],
+  "closeupPressed": "false"
+ },
+ "layout": {
+  "horizontalOverflow": false,
+  "pageHeight": 1072,
+  "viewport": [
+   390,
+   664
+  ]
+ },
+ "storageKeys": [
+  "peach-preview-holly25d-motion-options-v1"
+ ],
+ "errors": []
+}
