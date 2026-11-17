@@ -30,7 +30,7 @@ In the side-by-side page, Auto Jiggle uses a fixed random sequence in both engin
 
 All of it is in the fragment shader and one table in `frame.html` (generated; change `build.py` to keep it reproducible):
 
-- `DEPTH_LEVELS`: `[shading, highlight, parallax]` per level.
+- `DEPTH_LEVELS`: `[largest light change, highlight, parallax]` per level. The light change is soft-limited: it approaches that fraction and never exceeds it.
 - `HOLLY_DEPTH`: how deep the dome is, in source pixels.
 - `hollySurface`: dome centres and radii in source pixels.
 - `light`: direction of the portrait's key light (upper left, in front).
@@ -69,6 +69,12 @@ Requires Node and Playwright with Chromium.
 - During a hold the pictures differ, which is the depth effect.
 - Controls change both engines; no horizontal overflow at 390 px; no page errors.
 
-`tests/zoom-sheet.png` shows one held two-finger pose at Off, Medium and Strong.
+`tests/zoom-sheet.png` shows one held two-finger pose at Off, Medium and Strong (version 2).
+
+## Version 2 — softer light
+
+First phone review: pulling a side to the right left a visible shadow, and the skin tone appeared to change colour. Version 2 soft-limits the light change to 5%, 9% or 14% (Subtle, Medium, Strong), tints shade warm and light pale instead of grey, no longer removes the photograph's own highlights, and narrows how far the shape may lean. Off, the resting picture and the springs are unchanged.
+
+`tests/results.json` was recorded with version 1 levels; its changed-pixel counts for depth levels predate this change. `tests/compare-results.json` and `tests/zoom-sheet.png` are from version 2.
 
 These checks use desktop Chromium with software WebGL at an iPhone 13 viewport. They do not establish frame rate, appearance or feel on a physical iPhone; that needs review on the phone.
