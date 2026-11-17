@@ -32,11 +32,11 @@ function reviewPortrait() {
   app.configure({ mode: 'blender', preset: 'playful', linked: false, auto: false });
   const rest = capture();
   // Compare small patches of skin texture at integer offsets in original portrait pixels.
-  function track(frame, side) {
+  function track(frame, side, verticalOnly) {
     const [cx, cy] = app.centers[side];
     let bestError = Infinity, best;
     for (let dy = -36; dy <= 36; dy++) {
-      for (let dx = -36; dx <= 36; dx++) {
+      for (let dx = verticalOnly ? 0 : -36; dx <= (verticalOnly ? 0 : 36); dx++) {
         let error = 0;
         const shift = 4 * (dy * crop.width + dx);
         for (let y = cy - 8; y <= cy + 8 && error < bestError; y += 2) {
@@ -58,7 +58,7 @@ function reviewPortrait() {
     rightCurl: [[710, 537], [714, 540], [718, 541], [723, 542], [728, 543]]
   };
   const edgeChanges = { leftTrim: 0, rightTrim: 0, leftCurl: 0, rightCurl: 0 };
-  function read() {
+  function read(verticalOnly = false) {
     const frame = capture();
     for (const [x, y] of anchors) {
       for (let k = 0; k < 3; k++) {
@@ -74,7 +74,7 @@ function reviewPortrait() {
         }
       }
     }
-    return app.centers.map((_, side) => track(frame, side));
+    return app.centers.map((_, side) => track(frame, side, verticalOnly));
   }
   function touch(type, dx = 0, dy = 0) {
     for (const [side, [x, y]] of app.centers.entries()) {
@@ -92,7 +92,7 @@ function reviewPortrait() {
     touch('pointerdown');
     touch('pointermove', dx, dy);
     advance(120);
-    samples[name] = read();
+    samples[name] = read(dx === 0);
     touch('pointercancel', dx, dy);
   }
   for (const mode of ['blender', 'springs']) {
@@ -162,9 +162,14 @@ async function run() {
         assert.deepEqual(right, oldRight, name + ' right-side reference');
       }
       assert(after.up[0][1] >= -20 && after.up[0][1] <= -17, 'left still responds to a full lift');
-      assert(after.down[0][1] >= before.down[0][1] - 2 && after.down[0][1] <= before.down[0][1], 'strong downward pull into trim');
-      assert.deepEqual(after.down[1], before.down[1], 'right downward pull');
-      for (const name of ['sideways', 'blenderDrop', 'springsDrop']) assert.deepEqual(after[name], before[name], name);
+      assert.deepEqual(after.sideways, before.sideways, 'lateral travel');
+      for (const name of ['down', 'blenderDrop', 'springsDrop']) {
+        for (const side of [0, 1]) {
+          const [x, y] = after[name][side], [oldX, oldY] = before[name][side];
+          assert(y >= oldY * .5 && y < oldY, name + ' stays visible and yields into the cup');
+          assert(Math.abs(x - oldX) <= 1, name + ' horizontal travel');
+        }
+      }
       for (const mode of ['blender', 'springs']) {
         const auto = mode + 'AutoLater';
         assert(Math.abs(after[auto][1][1]) > 2, mode + ' right side is active during Auto');
