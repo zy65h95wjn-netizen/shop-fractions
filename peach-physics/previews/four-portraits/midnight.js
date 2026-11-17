@@ -37,7 +37,10 @@ function drawMidnightLeft(sc) {
   for(let step=0;step<4;step++){
    const ix=Math.floor(sx),iy=Math.floor(sy),fx=sx-ix,fy=sy-iy,k=iy*w+ix;
    const weight=(1-fy)*((1-fx)*weights[k]+fx*weights[k+1])+fy*((1-fx)*weights[k+w]+fx*weights[k+w+1]);
-   sx-=dx*weight/4;sy-=dy*weight/4;
+   // Match the right Canvas carrier (.97 gain) after the left input's
+   // .90 gain. Retain the accepted motion through both support bands.
+   const gain=1+(.97/.90-1)*boundarySmooth(.62,.98,weight);
+   sx-=dx*weight*gain/4;sy-=dy*weight*gain/4;
   }
   const ix=Math.floor(sx),iy=Math.floor(sy),fx=sx-ix,fy=sy-iy;
   const src=4*(iy*w+ix),dst=4*index;

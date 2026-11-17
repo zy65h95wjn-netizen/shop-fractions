@@ -59,6 +59,19 @@ edit("leftShapePixels[y*w+x]=Math.round(255*t*t*(3-2*t));",
      "const weight=bounceExperiment&&selection==='midnight'?midnightSeamWeight(px,py):t*t*(3-2*t);\n   leftShapePixels[y*w+x]=Math.round(255*weight);")
 edit("   const [srcX,srcY,sw,sh]=fallbackRect(side);",
      "   if(bounceExperiment&&selection==='midnight'&&side===0){drawMidnightLeft(sc);continue;}\n   const [srcX,srcY,sw,sh]=fallbackRect(side);")
+# In the free interior, evaluate the same spatial response as Midnight's right
+# side using the three left nodes. The fragment mask selects the transition.
+edit("if(s==0 && uLeftMask>0.5)local*=",
+     "if(s==0 && uLeftMask>0.5 && uSoftBounce<.5)local*=")
+edit("    vLeftVelocity=leftVelocity(uv);", """    vLeftVelocity=leftVelocity(uv);
+    if(uSoftBounce>.5)vEmberLeft=(local+press+wave);""")
+edit("for(int k=0;k<4;k++)sampleUV-=vLeftVelocity*leftEnvelope(sampleUV)*mix(1.0,midnightSupport(sampleUV),uDragBoundary.x)/4.0;",
+     """for(int k=0;k<4;k++){
+    float support=leftEnvelope(sampleUV);
+    float interior=smoothstep(.62,.98,support);
+    vec2 response=mix(vLeftVelocity,vEmberLeft,interior*${bounceExperiment&&selection==='midnight'?'1.0':'0.0'});
+    sampleUV-=response*support*mix(1.0,midnightSupport(sampleUV),uDragBoundary.x)/4.0;
+   }""")
 depth=(previews/'holly-25d/frame-hook.js').read_text()
 holly=depth[depth.index('const reliefSmooth='):depth.index('function reliefInit()')]
 aurelia=(previews/'aurelia-comparison/frame-hook.js').read_text()

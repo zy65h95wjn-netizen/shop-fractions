@@ -522,7 +522,10 @@ function drawMidnightLeft(sc) {
   for(let step=0;step<4;step++){
    const ix=Math.floor(sx),iy=Math.floor(sy),fx=sx-ix,fy=sy-iy,k=iy*w+ix;
    const weight=(1-fy)*((1-fx)*weights[k]+fx*weights[k+1])+fy*((1-fx)*weights[k+w]+fx*weights[k+w+1]);
-   sx-=dx*weight/4;sy-=dy*weight/4;
+   // Match the right Canvas carrier (.97 gain) after the left input's
+   // .90 gain. Retain the accepted motion through both support bands.
+   const gain=1+(.97/.90-1)*boundarySmooth(.62,.98,weight);
+   sx-=dx*weight*gain/4;sy-=dy*weight*gain/4;
   }
   const ix=Math.floor(sx),iy=Math.floor(sy),fx=sx-ix,fy=sy-iy;
   const src=4*(iy*w+ix),dst=4*index;
@@ -1170,7 +1173,7 @@ function initGL(){
    }
    // Partition-of-unity blending: all three springs carry the interior together.
    // Retain their different phases, without a Gaussian amplitude peak in the center.
-   if(s==0 && uLeftMask>0.5)local*=1.15/max(.68*weightSum,.0001);
+   if(s==0 && uLeftMask>0.5 && uSoftBounce<.5)local*=1.15/max(.68*weightSum,.0001);
    local+=uSecondary[s]*.35; // Restore expressive secondary motion inside the clothing-safe mask.
    vec4 h=uImpacts[s];vec2 hi=(uv-h.xy)/vec2(.12,.14);
    float contactFalloff=exp(-2.6*dot(hi,hi));
@@ -1185,6 +1188,7 @@ function initGL(){
     // Pass the smooth spring field to the pixel shader. Applying the boundary
     // there avoids both triangle leakage and folds at the expanded skin rim.
     vLeftVelocity=leftVelocity(uv);
+    if(uSoftBounce>.5)vEmberLeft=(local+press+wave);
    }else{
     vec2 contribution=edge*(local+press+wave);
     if(s==0)vEmberLeft=contribution;else vEmberRight=contribution;
@@ -1246,7 +1250,12 @@ function initGL(){
    // Flow through a fixed skin envelope in four short increments. The moving
    // region does not shrink as the gesture gets stronger. Clothing stays fixed.
    vec2 sampleUV=vRawUV;
-   for(int k=0;k<4;k++)sampleUV-=vLeftVelocity*leftEnvelope(sampleUV)*mix(1.0,midnightSupport(sampleUV),uDragBoundary.x)/4.0;
+   for(int k=0;k<4;k++){
+    float support=leftEnvelope(sampleUV);
+    float interior=smoothstep(.62,.98,support);
+    vec2 response=mix(vLeftVelocity,vEmberLeft,interior*${bounceExperiment&&selection==='midnight'?'1.0':'0.0'});
+    sampleUV-=response*support*mix(1.0,midnightSupport(sampleUV),uDragBoundary.x)/4.0;
+   }
    photoUV+=sampleUV-vRawUV;
   }
   if(uAurelia>0.5){
