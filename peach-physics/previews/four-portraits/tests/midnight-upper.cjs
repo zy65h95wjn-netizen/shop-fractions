@@ -28,8 +28,10 @@ async function checkUpperEdge(browser, renderer) {
       strip.width = 675;
       strip.height = 210;
       const paint = strip.getContext('2d', { willReadFrequently: true });
-      const crest = [[321, 1054], [614, 1048]];
-      const spans = [[305, 395, 255], [598, 523, 679]];
+      // Sample the crest, inner slope, outer slope, and tip. The last span
+      // follows the whole inner arc so a local hook cannot hide in a median.
+      const spans = [[305, 395, 255, 425, 370], [598, 523, 679, 487]];
+      const widths = [33, 15, 15, 15, 81];
       const step = n => { for (let i = 0; i < n; i++) study.tick(1 / 120); };
       const median = a => a.sort((a, b) => a - b)[Math.floor(a.length / 2)];
 
@@ -43,7 +45,7 @@ async function checkUpperEdge(browser, renderer) {
         const pixels = paint.getImageData(0, 0, strip.width, strip.height).data;
         // Scan upward from the warmer skin into the pale trim. Compare the same
         // columns before and during the gesture, accounting for the two different arcs.
-        return spans[side].map((start, j) => Array.from({ length: j === 0 ? 33 : 15 }, (_, col) => {
+        return spans[side].map((start, j) => Array.from({ length: widths[j] }, (_, col) => {
           const x = start + col - 135;
           for (let y = strip.height - 1; y > 0; y--) {
             const k = 4 * (strip.width * y + x);
@@ -53,7 +55,12 @@ async function checkUpperEdge(browser, renderer) {
         }));
       }
 
-      return [[0, 150], [85, -138]].map(([dx, dy]) => crest.map(([x, y], side) => {
+      const pulls = [
+        { points: [[321, 1054], [614, 1048]], dx: 0, dy: 150 },
+        { points: [[283, 1147], [601, 1146]], dx: 85, dy: -138 },
+        { points: [[374, 1065], [561, 1059]], dx: 115, dy: 225 },
+      ];
+      return pulls.map(({ points, dx, dy }) => points.map(([x, y], side) => {
         study.cancel();
         study.reset();
         study.auto(false);
@@ -67,7 +74,6 @@ async function checkUpperEdge(browser, renderer) {
           clientX: rect.left + f.x + px * f.width / state.image[0],
           clientY: rect.top + f.y + py * f.height / state.image[1],
         }));
-        if (dx) [x, y] = side ? [601, 1146] : [283, 1147];
         pointer('pointerdown', x, y);
         for (let i = 1; i <= 6; i++) {
           step(4);
@@ -78,18 +84,28 @@ async function checkUpperEdge(browser, renderer) {
         if (touch?.side !== side || !touch.grabbed) throw Error('Gesture missed its target');
         const held = heights(side, state);
         study.cancel();
-        return held.map((line, j) => median(line.map((height, i) => height - before[j][i])));
+        const travel = held.slice(0, 4).map((line, j) => median(line.map((height, i) => height - before[j][i])));
+        if (side === 1) return { travel };
+        const arc = held[4];
+        let deepest = 0, rise = 0;
+        for (let i = 0; i <= arc.length - 7; i++) {
+          const height = arc.slice(i, i + 7).reduce((a, b) => a + b) / 7;
+          deepest = Math.max(deepest, height);
+          rise = Math.max(rise, deepest - height);
+        }
+        return { travel, rise };
       }));
     });
-    const [down, diagonal] = measurements;
-    assert(down[0][0] >= 9 && down[1][0] >= 9, renderer + ' upper arch follows the downward pull');
-    if (renderer === 'webgl') {
-      for (const [left, right] of measurements) left.forEach((d, i) => {
-        assert(Math.abs(d - right[i]) <= 5, 'WebGL arch, inner and outer edges match within five source pixels');
-      });
-      assert(diagonal[0][0] < -3, 'the left upper edge follows an upward diagonal');
+    const [down, diagonal, outward] = measurements;
+    const leftCrest = down[0].travel[0], rightCrest = down[1].travel[0];
+    assert(leftCrest >= 4 && leftCrest < rightCrest * .72, renderer + ' supported trim still gives at the crest');
+    assert(rightCrest >= (renderer === 'webgl' ? 22 : 10), renderer + ' right reference retains its travel');
+    for (const [left] of [down, outward]) {
+      assert(Math.abs(left.travel[3]) <= 4, renderer + ' inner tip stays with the seam');
+      assert(left.rise <= 3.5, renderer + ' inner arc stays smooth under a one-sided pull');
     }
-    console.log(renderer, 'upper-edge travel in source pixels', measurements);
+    if (renderer === 'webgl') assert(diagonal[0].travel[0] < -2, 'the left upper edge follows an upward diagonal');
+    console.log(renderer, 'upper-edge travel in source pixels', JSON.stringify(measurements));
   } finally {
     await context.close();
   }

@@ -57,6 +57,7 @@ function exercise(kind) {
  impulse(0,x,y,1.2);
 }
 window.study={
+ revision:6,
  ready:()=>!!img&&loader.classList.contains('hiding'),
  view:(x,y)=>{viewX=x;viewY=y},
  draw:()=>{if(needSize)resize();render()},

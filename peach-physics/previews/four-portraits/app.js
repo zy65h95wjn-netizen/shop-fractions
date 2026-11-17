@@ -79,7 +79,7 @@ async function selectPortrait(){
   if(job!==generation)return;
   const engine=new URL('./engine.html',location.href);
   engine.searchParams.set('portrait',id);
-  engine.searchParams.set('v','5');
+  engine.searchParams.set('v','6');
   for(const frame of frames)frame.src=engine.href;
   const limit=performance.now()+45000;
   while(!frames.every(f=>f.contentWindow.location.href===engine.href&&f.contentWindow.study?.ready())){
@@ -89,6 +89,8 @@ async function selectPortrait(){
   }
   if(job!==generation)return;
   const apis=panes();apis.forEach(p=>{p.configure();p.close(zoom)});
+  const revision=apis[1].revision;
+  frames[1].previousElementSibling.textContent=Number.isInteger(revision)?'New motion · v'+revision:'New motion';
   controls.forEach(b=>b.disabled=false);
   const hasDepth=apis.every(p=>p.snapshot().renderer==='webgl');
   get('depth').disabled=!hasDepth;
@@ -108,8 +110,10 @@ const artReady=fetch('../../v8/index.html').then(async response=>{
   return match[1];
  });
 });
-const requestedPortrait=new URLSearchParams(location.search).get('portrait');
+const query=new URLSearchParams(location.search);
+const requestedPortrait=query.get('portrait');
 if(Object.hasOwn(names,requestedPortrait))get('portrait').value=requestedPortrait;
+if(query.get('view')==='study')document.querySelector('button[data-mode="study"]').click();
 get('portrait').onchange=selectPortrait;
 selectPortrait();
 requestAnimationFrame(loop);

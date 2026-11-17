@@ -72,11 +72,14 @@ edit("if(s==0 && uLeftMask>0.5)local*=",
      "if(s==0 && uLeftMask>0.5 && uSoftBounce<.5)local*=")
 edit("    vLeftVelocity=leftVelocity(uv);", """    vLeftVelocity=leftVelocity(uv);
     if(uSoftBounce>.5)vEmberLeft=(local+press+wave);""")
+# Sample trim support at each substep as the gesture approaches the anchored seam.
 edit("for(int k=0;k<4;k++)sampleUV-=vLeftVelocity*leftEnvelope(sampleUV)*mix(1.0,midnightSupport(sampleUV),uDragBoundary.x)/4.0;",
-     """for(int k=0;k<4;k++){
+     """${bounceExperiment&&selection==='midnight'?'float upper=1.0-smoothstep(1070.0,1148.0,vRawUV.y*1671.0);':''}
+   for(int k=0;k<4;k++){
     float support=leftEnvelope(sampleUV);
     float interior=smoothstep(.62,.98,support);
     vec2 response=mix(vLeftVelocity,vEmberLeft,interior*${bounceExperiment&&selection==='midnight'?'1.0':'0.0'});
+    ${bounceExperiment&&selection==='midnight'?'response=mix(response,vEmberLeft*1.15,upper);':''}
     // During a held drag, keep the fold attached to the same moving surface.
     float holdLimit=${bounceExperiment&&selection==='midnight'?'1.0':'mix(1.0,midnightSupport(sampleUV),uDragBoundary.x)'};
     sampleUV-=response*support*holdLimit/4.0;
@@ -93,13 +96,6 @@ edit("     vec2 n=(uv-p.xy)/p.zw;",
       vec2 relative=(mirrored-peer.xy)/peer.zw;
       n=mix(n,vec2(-relative.x,relative.y),1.0-smoothstep(1070.0,1148.0,uv.y*1671.0));
      }` : ''}""")
-# In the upper band the right shader takes a single backward sample. Keep
-# that response across both materials, blending into the established solver below.
-edit("   photoUV+=sampleUV-vRawUV;", """   ${bounceExperiment&&selection==='midnight'?`
-   float upper=1.0-smoothstep(1070.0,1148.0,vRawUV.y*1671.0);
-   vec2 rimUV=vRawUV-vEmberLeft*leftEnvelope(vRawUV)*1.15;
-   sampleUV=mix(sampleUV,rimUV,upper);` : ''}
-   photoUV+=sampleUV-vRawUV;""")
 depth=(previews/'holly-25d/frame-hook.js').read_text()
 holly=depth[depth.index('const reliefSmooth='):depth.index('function reliefInit()')]
 aurelia=(previews/'aurelia-comparison/frame-hook.js').read_text()

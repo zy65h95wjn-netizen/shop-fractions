@@ -17,14 +17,17 @@ function midnightSeamWeight(x, y, downwardTrim = null) {
  if (upperBlend > 0) {
   const height = 1100 - y;
   const outerX = 194 + .39 * height + .0010 * height * height;
-  const anchors = boundarySmooth(3, 23, x - outerX) * boundarySmooth(3, 40, 458 - x);
+  // The strip narrows as it meets the center seam. Spread its support along
+  // that curve so a one-sided pull can't leave a moving lobe next to a fixed tip.
+  const anchors = boundarySmooth(3, 23, x - outerX) * boundarySmooth(4, 112, 458 - x);
+  const trimTravel = .54 + .46 * boundarySmooth(4, 66, belowHem);
   const radius = Math.hypot((x - 330) / 205, (y - 1156) / 267);
   const rightEdge = 1 - boundarySmooth(.48, .98, radius);
   // In Canvas a downward pull opens the middle of the right arch. Its
   // corners and upward recoil stay more tightly supported.
   const center = 1 - boundarySmooth(30, 83, Math.abs(offset));
   const give = center * (downwardTrim ?? 0);
-  const upper = anchors * (downwardTrim === null
+  const upper = anchors * trimTravel * (downwardTrim === null
    ? rightEdge * boundarySmooth(927, 1006, y - 6) * boundarySmooth(-78, -20, belowHem)
    : boundarySmooth(-3 - 54 * give, 27 - 30 * give, belowHem));
   return previous + upperBlend * (upper - previous);
