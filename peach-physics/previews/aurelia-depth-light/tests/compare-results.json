@@ -1,0 +1,103 @@
+{
+ "levels": [
+  "Off",
+  "Medium"
+ ],
+ "renderers": [
+  "webgl:aurelia",
+  "webgl:aurelia"
+ ],
+ "autoStatesIdentical": true,
+ "autoMoving": true,
+ "restPaneDifference": {
+  "changed": 0,
+  "maxDelta": 0,
+  "size": [
+   364,
+   616
+  ]
+ },
+ "hold": {
+  "statesIdentical": true,
+  "moved": [
+   [
+    -9.6,
+    24
+   ],
+   [
+    -9.6,
+    24
+   ],
+   [
+    -2.5,
+    6.4
+   ],
+   [
+    0,
+    0.1
+   ],
+   [
+    -0.4,
+    1
+   ],
+   [
+    0,
+    0.1
+   ]
+  ],
+  "paneDifference": {
+   "changed": 8038,
+   "maxDelta": 21,
+   "size": [
+    364,
+    616
+   ]
+  },
+  "pointers": [
+   1,
+   1
+  ]
+ },
+ "afterRelease": {
+  "statesIdentical": true,
+  "gestures": [
+   "drag/hold",
+   "drag/hold"
+  ]
+ },
+ "tapOnRight": {
+  "statesIdentical": true,
+  "gestures": [
+   "slap",
+   "slap"
+  ],
+  "slaps": [
+   1,
+   1
+  ]
+ },
+ "controls": {
+  "levels": [
+   "Off",
+   "Strong"
+  ],
+  "bounceStatesIdentical": true,
+  "preset": [
+   "chaos",
+   "chaos"
+  ],
+  "closeupPressed": "false"
+ },
+ "layout": {
+  "horizontalOverflow": false,
+  "pageHeight": 1070,
+  "viewport": [
+   390,
+   664
+  ]
+ },
+ "storageKeys": [
+  "peach-preview-aureliadepth-motion-options-v1"
+ ],
+ "errors": []
+}

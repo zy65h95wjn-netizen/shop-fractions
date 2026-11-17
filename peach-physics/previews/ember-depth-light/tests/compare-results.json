@@ -1,0 +1,103 @@
+{
+ "levels": [
+  "Off",
+  "Medium"
+ ],
+ "renderers": [
+  "webgl:ember",
+  "webgl:ember"
+ ],
+ "autoStatesIdentical": true,
+ "autoMoving": true,
+ "restPaneDifference": {
+  "changed": 0,
+  "maxDelta": 0,
+  "size": [
+   364,
+   646
+  ]
+ },
+ "hold": {
+  "statesIdentical": true,
+  "moved": [
+   [
+    -14.1,
+    30
+   ],
+   [
+    -14.8,
+    30
+   ],
+   [
+    -6.3,
+    15.7
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ],
+   [
+    0,
+    0
+   ]
+  ],
+  "paneDifference": {
+   "changed": 6535,
+   "maxDelta": 38,
+   "size": [
+    364,
+    646
+   ]
+  },
+  "pointers": [
+   1,
+   1
+  ]
+ },
+ "afterRelease": {
+  "statesIdentical": true,
+  "gestures": [
+   "drag/hold",
+   "drag/hold"
+  ]
+ },
+ "tapOnRight": {
+  "statesIdentical": true,
+  "gestures": [
+   "slap",
+   "slap"
+  ],
+  "slaps": [
+   1,
+   1
+  ]
+ },
+ "controls": {
+  "levels": [
+   "Off",
+   "Strong"
+  ],
+  "bounceStatesIdentical": true,
+  "preset": [
+   "chaos",
+   "chaos"
+  ],
+  "closeupPressed": "false"
+ },
+ "layout": {
+  "horizontalOverflow": false,
+  "pageHeight": 1101,
+  "viewport": [
+   390,
+   664
+  ]
+ },
+ "storageKeys": [
+  "peach-preview-emberdepth-motion-options-v1"
+ ],
+ "errors": []
+}
