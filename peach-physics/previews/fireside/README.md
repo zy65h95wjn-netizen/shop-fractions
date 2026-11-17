@@ -9,3 +9,9 @@ The original supplied portrait and Blender spring-rig response are embedded. The
 The actual Peaches application remains at /peach-physics/v8/ and is unchanged by this preview. This is a 2D prototype using a Blender-baked spring response, not a reconstructed 3D character or cloth simulation.
 
 Validation before publication: WebGL and Canvas stability, settling, two-pointer interactions, 16 protected-region poses and 144 fixed pixel probes, original JPEG byte identity, and operation with no external requests. Physical iPhone Safari feel/performance still requires review.
+
+## Preview 2 — screen-left inner boundary
+
+Added a curved, gradual support boundary inside the screen-left deformation mask. This anchors the upper center-crease shadow that previously pulled into a sharp notch. Both renderers use the same mask; the artwork, spring trajectories, motion strength, right-side mask, and controls are unchanged.
+
+Validation: all 12 stability cases, 16 protected-region poses, and both-renderer multitouch checks pass. Eight targeted before/after poses reproduce movement in the old inner-shadow band and show zero changed probe pixels in the corrected band, while retaining motion at the center of the left region. No browser errors. Chromium checks do not establish physical iPhone Safari behavior.
