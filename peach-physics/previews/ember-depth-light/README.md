@@ -41,6 +41,6 @@ node peach-physics/previews/ember-depth-light/verify.cjs peach-physics/previews/
 
 `verify-compare.cjs` (`tests/compare-results.json`): both engines hold identical spring state under Auto, during a real drag-and-hold, after release, after a tap on the other picture and after Bounce; with Auto off and the springs settled the two pictures are pixel-identical; no page errors.
 
-`verify.cjs` compares the engine with production Winter Ember at rest and in held poses. Its results are added in `tests/results.json` when recorded.
+`verify.cjs` (`tests/results.json`): at rest the engine is pixel-identical to production Winter Ember; in two held poses the engine at Off is pixel-identical to production with identical spring state; turning depth on changes pixels only within her moving area (source x 101–810, y 862–1323 at Strong); after release and settling at Strong the portrait returns exactly; no service worker; no page errors. Separately, comparing a moved frame with the resting frame shows a few changed pixels far outside the moving area. Production does the same, since the engine at Off matches it exactly, so this is existing production behaviour and not part of the depth effect.
 
 These checks use desktop Chromium with software WebGL at an iPhone 13 viewport. They do not establish frame rate, appearance or feel on a physical iPhone.

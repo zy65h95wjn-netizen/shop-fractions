@@ -41,6 +41,6 @@ node peach-physics/previews/aurelia-depth-light/verify.cjs peach-physics/preview
 
 `verify-compare.cjs` (`tests/compare-results.json`): both engines hold identical spring state under Auto, during a real drag-and-hold, after release, after a tap on the other picture and after Bounce; with Auto off and the springs settled the two pictures are pixel-identical; no page errors.
 
-`verify.cjs` compares the engine with production Aurelia Frost at rest and in held poses. Its results are added in `tests/results.json` when recorded.
+`verify.cjs` (`tests/results.json`): at rest the engine is pixel-identical to production Aurelia Frost; in two held poses the engine at Off is pixel-identical to production with identical spring state; with depth on, changed pixels stay within her moving area (source x 132–608, y 802–1004 at Strong); after release and settling at Strong the portrait returns exactly; no service worker; no page errors.
 
 These checks use desktop Chromium with software WebGL at an iPhone 13 viewport. They do not establish frame rate, appearance or feel on a physical iPhone.
