@@ -107,6 +107,24 @@ html = sub(html, " gl.uniform3fv(gl.getUniformLocation(program,'uDepth'),DEPTH_L
            " gl.uniform3fv(gl.getUniformLocation(program,'uDepth'),DEPTH_LEVELS[depthLevel].values);\n"
            " gl.uniform1f(gl.getUniformLocation(program,'uMatchLeft'),matchLeft?1:0);")
 
+# With the option on, the screen-left side is weighed with the screen-right side's
+# own profile, mirrored about the centre crease and scaled to the left cheek's
+# width. Using the left's original oval instead let it spill past the hip or
+# stop short of the crease. uMirror = (crease x as a fraction, width ratio, on).
+html = sub(html, ' uniform vec2 uRightTaper;\n', ' uniform vec2 uRightTaper;\n uniform vec3 uMirror;\n')
+html = sub(html, '   vec4 z=uRegions[s];vec2 q=(uv-z.xy)/z.zw;\n', '''   vec4 z=uRegions[s];vec2 q=(uv-z.xy)/z.zw;
+   bool mirrored=s==0&&uMirror.z>0.5;
+   float sideMix=s==0?1.0-rightMix:rightMix;
+   if(mirrored){
+    float mirrorX=uMirror.x+(uMirror.x-uv.x)*uMirror.y;
+    q=(vec2(mirrorX,uv.y)-uRegions[1].xy)/uRegions[1].zw;
+    sideMix=smoothstep(uSplit.x,uSplit.y,mirrorX);
+   }
+''')
+html = sub(html, '   float rightTaper=s==1?(1.0-uRightTaper.x', '   float rightTaper=(s==1||mirrored)?(1.0-uRightTaper.x')
+html = sub(html, '   edge*=seam*thigh*rightTaper*(s==0?1.0-rightMix:rightMix);', '   edge*=seam*thigh*rightTaper*sideMix;')
+html = sub(html, " gl.uniform1f(leftMaskLoc,", " gl.uniform3f(gl.getUniformLocation(program,'uMirror'),375/W,1.51,matchLeft?1:0);\n gl.uniform1f(leftMaskLoc,")
+
 # Controls: a chip on the stage for quick A/B, and the same control in the panel.
 html = sub(html, '#character svg{', '''#character{display:none!important}
 #depthChip{position:absolute;left:max(12px,env(safe-area-inset-left));top:max(76px,calc(env(safe-area-inset-top) + 14px));z-index:5;min-height:44px;padding:0 14px;border:1px solid #f9eadf77;border-radius:22px;color:#fff7eb;background:#07110fc9;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 3px 16px #0005;font-size:12px;font-weight:700;cursor:pointer;touch-action:manipulation}

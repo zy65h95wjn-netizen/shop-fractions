@@ -52,3 +52,7 @@ Phone review: the screen-right cheek pulls down further than the left and takes 
 On in the 2.5D picture by default; the Current picture never changes. `frame.html?match=0` keeps production behaviour; the panel has **Left side: matches right / current**. WebGL only. Switching it in the side-by-side page resets both pictures. This undoes the earlier left-side correction in this test only; production is unchanged.
 
 `tests/compare-match-hold.png` shows the left cheek held with the option on. `tests/results.json` was recorded with the option off (`?match=0`).
+
+### Version 2 — mirrored shape
+
+Phone review of the first version: the left cheeks were not pulling correctly. Measuring the moved pixels showed why: the left side's original oval did not fit the cheek the way the right side's does. On Midnight Yule it spilled past the hip and dragged the background; on Winter Ember it stopped short of the centre crease and bent the lower fold into a hook. With the option on, the left side is now weighed with the right side's own profile, mirrored about the centre crease and scaled to the left cheek's width (the centre crease is taken at source x 375 and the right cheek is 1.51 times the width of the left). These two numbers were read from the portrait by eye and are the first things to adjust if the left still looks off.

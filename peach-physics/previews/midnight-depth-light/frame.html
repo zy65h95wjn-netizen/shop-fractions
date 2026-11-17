@@ -836,6 +836,7 @@ function initGL(){
  uniform vec2 uSplit;
  uniform vec4 uBounds;
  uniform vec2 uRightTaper;
+ uniform vec3 uMirror;
  uniform float uLeftMask;
  uniform vec4 uPoints[6];
  uniform vec2 uOffsets[6];
@@ -965,13 +966,20 @@ function initGL(){
   vec2 drift=vec2(0.0);
   for(int s=0;s<2;s++){
    vec4 z=uRegions[s];vec2 q=(uv-z.xy)/z.zw;
+   bool mirrored=s==0&&uMirror.z>0.5;
+   float sideMix=s==0?1.0-rightMix:rightMix;
+   if(mirrored){
+    float mirrorX=uMirror.x+(uMirror.x-uv.x)*uMirror.y;
+    q=(vec2(mirrorX,uv.y)-uRegions[1].xy)/uRegions[1].zw;
+    sideMix=smoothstep(uSplit.x,uSplit.y,mirrorX);
+   }
    float edge=1.0-smoothstep(.48,.98,length(q));
    // Keep the shorts seam and stocking tops stable with a feathered safety band.
    float seam=smoothstep(uBounds.x,uBounds.y,uv.y);
    float thigh=1.0-smoothstep(uBounds.z,uBounds.w,uv.y);
    // Screen-right only: tighter feather at the outer edge and into the upper thigh.
-   float rightTaper=s==1?(1.0-uRightTaper.x*smoothstep(.69,.81,uv.y))*(1.0-uRightTaper.y*smoothstep(.55,.97,q.x)):1.0;
-   edge*=seam*thigh*rightTaper*(s==0?1.0-rightMix:rightMix);
+   float rightTaper=(s==1||mirrored)?(1.0-uRightTaper.x*smoothstep(.69,.81,uv.y))*(1.0-uRightTaper.y*smoothstep(.55,.97,q.x)):1.0;
+   edge*=seam*thigh*rightTaper*sideMix;
    vec2 local=vec2(0.0);
    float weightSum=0.0;
    for(int j=0;j<3;j++){
@@ -1170,6 +1178,7 @@ function uploadCharacterCalibration(){
  gl.uniform2fv(splitLoc,new Float32Array(c.split));
  gl.uniform4fv(boundLoc,new Float32Array(c.bounds));
  gl.uniform2fv(taperLoc,new Float32Array(c.taper));
+ gl.uniform3f(gl.getUniformLocation(program,'uMirror'),466/W,1.03,matchLeft?1:0);
  gl.uniform1f(leftMaskLoc,c.id==='midnight'&&!matchLeft?1:0);
  gl.uniform1f(aureliaMaskLoc,c.id==='aurelia'?1:0);
  gl.uniform1f(hollyMaskLoc,isHolly()?1:0);
