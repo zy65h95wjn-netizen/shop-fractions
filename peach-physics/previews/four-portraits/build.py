@@ -53,6 +53,12 @@ edit("follow=(linkedTransfer()/50)*.020", "follow=(linkedTransfer()/50)*.020*(bo
 edit("const cross=k*.24*(linkedTransfer()/100);", "const cross=k*.24*(linkedTransfer()/100)*(bounceExperiment&&selection==='midnight'?1.3:1);")
 edit("createLeftShapeTexture();createAureliaShapeTexture();createHollyShapeTexture();createSantaShapeTexture();",
      "if(isHolly())createHollyShapeTexture();else if(selection==='aurelia')createAureliaShapeTexture();else createLeftShapeTexture();")
+# Keep the accepted right-hand field and both spring trajectories intact.
+edit("let leftShapePixels=null;", (here/'midnight.js').read_text()+"\nlet leftShapePixels=null;")
+edit("leftShapePixels[y*w+x]=Math.round(255*t*t*(3-2*t));",
+     "const weight=bounceExperiment&&selection==='midnight'?midnightSeamWeight(px,py):t*t*(3-2*t);\n   leftShapePixels[y*w+x]=Math.round(255*weight);")
+edit("   const [srcX,srcY,sw,sh]=fallbackRect(side);",
+     "   if(bounceExperiment&&selection==='midnight'&&side===0){drawMidnightLeft(sc);continue;}\n   const [srcX,srcY,sw,sh]=fallbackRect(side);")
 depth=(previews/'holly-25d/frame-hook.js').read_text()
 holly=depth[depth.index('const reliefSmooth='):depth.index('function reliefInit()')]
 aurelia=(previews/'aurelia-comparison/frame-hook.js').read_text()

@@ -79,6 +79,7 @@ async function selectPortrait(){
   if(job!==generation)return;
   const engine=new URL('./engine.html',location.href);
   engine.searchParams.set('portrait',id);
+  engine.searchParams.set('v','2');
   for(const frame of frames)frame.src=engine.href;
   const limit=performance.now()+45000;
   while(!frames.every(f=>f.contentWindow.location.href===engine.href&&f.contentWindow.study?.ready())){
@@ -107,6 +108,8 @@ const artReady=fetch('../../v8/index.html').then(async response=>{
   return match[1];
  });
 });
+const requestedPortrait=new URLSearchParams(location.search).get('portrait');
+if(Object.hasOwn(names,requestedPortrait))get('portrait').value=requestedPortrait;
 get('portrait').onchange=selectPortrait;
 selectPortrait();
 requestAnimationFrame(loop);
