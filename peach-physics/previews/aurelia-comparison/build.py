@@ -47,5 +47,5 @@ template=(HERE/'shell.html').read_text()
 # Escape closing script tags inside the string embedded in the outer script.
 bundled=template.replace('__FRAME__',json.dumps(source).replace('</','<\\/'))
 (HERE/'index.html').write_text(bundled)
-(HERE/'build-info.json').write_text(json.dumps({'sourceSHA256':hashlib.sha256((V8/'index.html').read_bytes()).hexdigest(),'artworkSHA256':hashlib.sha256(art).hexdigest(),'blender':bake['tool'],'description':'Original six-node Aurelia engine versus the same engine with Blender-baked follow-through and drag-release damping; identical calibrated deformation masks.'},indent=2)+'\n')
+(HERE/'build-info.json').write_text(json.dumps({'sourceSHA256':hashlib.sha256((V8/'index.html').read_bytes()).hexdigest(),'artworkSHA256':hashlib.sha256(art).hexdigest(),'blender':bake['tool'],'description':'Original six-node Aurelia engine versus the same engine with Blender-baked follow-through and drag-release damping; identical calibrated deformation masks and shared mirrored horizontal Auto input.'},indent=2)+'\n')
 print('Built',len(bundled),'characters')

@@ -1,7 +1,7 @@
 // Runs inside a private copy of the v8 closure. Never loaded by production v8.
 const comparisonBake=__BAKE__;
 const comparisonExperiment=window.name==='blender';
-let comparisonTime=0,comparisonCloseup=false,comparisonNext=[.1,.6];
+let comparisonTime=0,comparisonCloseup=false,comparisonNext=.1,comparisonDt=1/120;
 const comparisonPulses=[[],[]],comparisonReleased=[-Infinity,-Infinity];
 function comparisonDamping(side){
  if(!comparisonExperiment)return 1;
@@ -14,14 +14,14 @@ function comparisonCurve(side,age){
  if(i<0||i>=a.length-1)return 0;
  return (a[i]+(a[i+1]-a[i])*(at-i))*Math.exp(-age*1.1);
 }
-function comparisonPulse(side,power=1,dx=0){
+function comparisonPulse(side,power=1,dx=0,clap=false){
  if(!comparisonExperiment)return;
- comparisonPulses[side].push({t:comparisonTime,x:dx|| (side?1:-1)*1.1*power,y:(4+model.bounce*.08)*power});
+ comparisonPulses[side].push({t:comparisonTime,x:clap?(side?-1:1)*(4+model.bounce*.08)*power:dx||(side?1:-1)*1.1*power,y:clap?0:(4+model.bounce*.08)*power,clap});
  if(comparisonPulses[side].length>16)comparisonPulses[side].shift();
 }
 function comparisonOffset(index){
  const side=nodes[index].side,layer=[.72,1,.88][index%3];let x=0,y=0;
- for(const p of comparisonPulses[side]){const k=comparisonCurve(side,comparisonTime-p.t)*layer;x+=p.x*k;y+=p.y*k}
+ for(const p of comparisonPulses[side]){const k=comparisonCurve(p.clap?0:side,comparisonTime-p.t)*layer;x+=p.x*k;y+=p.y*k}
  return {x,y};
 }
 const comparisonNativeRender=render;
@@ -37,17 +37,28 @@ const comparisonNativeSlap=slap;
 slap=function(side,...args){comparisonNativeSlap(side,...args);comparisonReleased[side]=-Infinity;comparisonPulse(side,.75)};
 function comparisonReset(){
  reset();comparisonPulses.forEach(p=>p.length=0);comparisonReleased.fill(-Infinity);
- comparisonTime=0;comparisonNext=[.1,.6];
- // Equal deterministic Auto phases in both panes; production's driver is retained.
+ comparisonTime=0;comparisonNext=.1;
+ // Keep the production controller's timing and touch interruption behavior.
  let seed=8147;motion.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296};
  motion.time=0;motion.quietUntil=0;motion.autoDrive=null;
 }
 function comparisonDraw(){if(stage.clientWidth&&stage.clientHeight)render()}
+// One horizontal force, mirrored about the center. No vertical Auto input.
+const comparisonNativeAdd=motion.add.bind(motion);
+motion.add=function(side,x,y,scale=1){
+ if(this.auto&&!this.shake){
+  const age=this.autoDrive?.age||0,t=clamp(age/.7,0,1),fade=t*t*(3-2*t);
+  x=(side?-1:1)*PeachMotion.calibration.aurelia.auto*.85*fade*Math.sin(age*2*Math.PI*.8)*comparisonDt;
+  y=0;
+ }
+ return comparisonNativeAdd(side,x,y,scale);
+};
 function comparisonTick(dt){
- motion.tick(dt);step(dt);
+ comparisonDt=dt;motion.tick(dt);step(dt);
  if(comparisonExperiment&&motion.auto&&motion.time>=motion.quietUntil&&pointers.size===0){
-  for(let side=0;side<2;side++)if(comparisonTime>=comparisonNext[side]){
-   comparisonPulse(side,.55);comparisonNext[side]=comparisonTime+1.18+side*.12;
+  if(comparisonTime>=comparisonNext){
+   comparisonPulse(0,.55,0,true);comparisonPulse(1,.55,0,true);
+   comparisonNext=comparisonTime+1.25;
   }
  }
  for(let s=0;s<2;s++)comparisonPulses[s]=comparisonPulses[s].filter(p=>comparisonTime-p.t<4.4);
@@ -76,7 +87,7 @@ window.__aureliaFrame={
  ready:()=>!!img&&loader.classList.contains('hiding'),tick:comparisonTick,draw:comparisonDraw,pointer:comparisonPointer,
  reset:comparisonReset,
  bounce:()=>{motion.interrupt();bounceBoth();comparisonPulse(0,1);comparisonPulse(1,.88)},
- auto:value=>{motion.setAuto(value);comparisonNext=[comparisonTime+.1,comparisonTime+.6]},
+ auto:value=>{motion.setAuto(value);comparisonNext=comparisonTime+.1},
  preset:value=>{activePreset=value;Object.assign(model,currentPresets()[value]);refreshPrefs();comparisonReset()},
  closeup:value=>{comparisonCloseup=value;needSize=true;comparisonDraw()},
  resize:()=>{needSize=true;comparisonDraw()},

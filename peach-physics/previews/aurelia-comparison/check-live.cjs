@@ -1,7 +1,7 @@
 const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),assert=require('assert/strict');
 (async()=>{const b=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});try{
  const p=await b.newPage({viewport:{width:390,height:844},deviceScaleFactor:2,isMobile:true,hasTouch:true});const errors=[];p.on('pageerror',e=>errors.push(e.message));
- const url='https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/previews/aurelia-comparison/?v=1';
+ const url='https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/previews/aurelia-comparison/?v=2';
  const r=await p.goto(url);assert(r.ok());assert.equal(await r.text(),fs.readFileSync(path.join(__dirname,'index.html'),'utf8'));
  await p.waitForFunction(()=>window.__aureliaComparison?.ready(),null,{polling:100});
  await p.locator('#auto').tap();assert.equal(await p.locator('#auto').getAttribute('aria-pressed'),'false');

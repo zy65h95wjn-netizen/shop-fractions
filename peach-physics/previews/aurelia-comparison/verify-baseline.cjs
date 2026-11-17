@@ -1,4 +1,4 @@
-// Compare original-pane trajectories against the actual, unmodified v8 solver.
+// Compare manual Bounce trajectories against v8. Preview 2 intentionally changes Auto; verify-clap.cjs covers that input.
 const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),assert=require('assert/strict');
 const dir=__dirname,v8=path.resolve(dir,'../../v8');
 let source=fs.readFileSync(path.join(v8,'index.html'),'utf8');
@@ -12,7 +12,7 @@ presentCharacter();\ngetPhoto`);
  const p=await b.newPage();await p.addInitScript(()=>{const r=requestAnimationFrame;window.requestAnimationFrame=f=>r(t=>{if(!window.testPaused)f(t)})});
  await p.route('http://localhost/preview',r=>r.fulfill({contentType:'text/html',body:fs.readFileSync(path.join(dir,'index.html'),'utf8')}));await p.goto('http://localhost/preview');await p.waitForFunction(()=>__aureliaComparison.ready(),null,{polling:100});await p.evaluate(()=>testPaused=true);
  const n=await b.newPage();await n.route('http://localhost/native/',r=>r.fulfill({contentType:'text/html',body:source}));await n.route('**/assets/aurelia-frost.jpg',r=>r.fulfill({contentType:'image/jpeg',body:fs.readFileSync(path.join(v8,'assets/aurelia-frost.jpg'))}));await n.goto('http://localhost/native/');await n.waitForFunction(()=>window.__native?.ready(),null,{polling:100});
- for(const preset of ['natural','playful','chaos'])for(const auto of [false,true]){
+ for(const preset of ['natural','playful','chaos'])for(const auto of [false]){
   await p.evaluate(({preset,auto})=>{const a=__aureliaComparison.apis()[0];a.preset(preset);a.auto(auto);if(!auto)a.bounce()},{preset,auto});
   await n.evaluate(({preset,auto})=>{__native.configure(preset,auto);if(!auto)__native.bounce()},{preset,auto});
   for(let sample=0;sample<12;sample++){
