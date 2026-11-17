@@ -1,0 +1,19 @@
+{
+  "name": "Peach Physics \u2014 Midnight Yule 2.5D Preview",
+  "short_name": "Midnight 2.5D",
+  "description": "Isolated preview: Midnight Yule with depth lighting on the approved portrait.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#09100e",
+  "theme_color": "#09100e",
+  "icons": [
+    {
+      "src": "./apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

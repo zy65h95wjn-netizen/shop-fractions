@@ -153,6 +153,9 @@ html = sub(html, 'function loop(now){', 'function loop(now){\n if(embedded)retur
 html = sub(html, "\ncanvas.addEventListener('pointerdown',e=>{", """
 if(embedded){
  document.body.classList.add('embedded');
+ // The motion controller pauses Auto when the page is first shown. Report ready only
+ // after that has happened, so one engine cannot start its pause after the other.
+ let pageShown=false;window.addEventListener('pageshow',()=>{pageShown=true;});
  // Gesture timing comes from the test page so both engines measure identical taps and flicks.
  const nativeNow=performance.now.bind(performance);let relayClock=null;
  performance.now=()=>relayClock===null?nativeNow():relayClock;
@@ -168,7 +171,7 @@ if(embedded){
  // Same random sequence in both engines keeps Auto Jiggle identical.
  const reseed=()=>{let s=8147;motion.random=()=>{s=(Math.imul(s,1664525)+1013904223)>>>0;return s/4294967296;};motion.time=0;motion.quietUntil=0;motion.autoDrive=null;};
  window.__hollyFrame={
-  ready:()=>!!img&&!!motion&&loader.classList.contains('hiding'),
+  ready:()=>pageShown&&!!img&&!!motion&&loader.classList.contains('hiding'),
   tick:dt=>{motion.tick(dt);step(dt);},
   draw:()=>{if(stage.clientWidth&&stage.clientHeight&&!webglLost)render();},
   pointer:data=>{

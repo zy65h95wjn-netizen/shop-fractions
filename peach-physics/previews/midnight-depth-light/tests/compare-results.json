@@ -1,0 +1,103 @@
+{
+ "levels": [
+  "Off",
+  "Medium"
+ ],
+ "renderers": [
+  "webgl:midnight",
+  "webgl:midnight"
+ ],
+ "autoStatesIdentical": true,
+ "autoMoving": true,
+ "restPaneDifference": {
+  "changed": 0,
+  "maxDelta": 0,
+  "size": [
+   364,
+   646
+  ]
+ },
+ "hold": {
+  "statesIdentical": true,
+  "moved": [
+   [
+    -10.9,
+    27.4
+   ],
+   [
+    -5.8,
+    14.4
+   ],
+   [
+    -2.6,
+    6.5
+   ],
+   [
+    0,
+    0.1
+   ],
+   [
+    -0.3,
+    0.7
+   ],
+   [
+    0,
+    0.1
+   ]
+  ],
+  "paneDifference": {
+   "changed": 12892,
+   "maxDelta": 30,
+   "size": [
+    364,
+    646
+   ]
+  },
+  "pointers": [
+   1,
+   1
+  ]
+ },
+ "afterRelease": {
+  "statesIdentical": true,
+  "gestures": [
+   "drag/hold",
+   "drag/hold"
+  ]
+ },
+ "tapOnRight": {
+  "statesIdentical": true,
+  "gestures": [
+   "slap",
+   "slap"
+  ],
+  "slaps": [
+   1,
+   1
+  ]
+ },
+ "controls": {
+  "levels": [
+   "Off",
+   "Strong"
+  ],
+  "bounceStatesIdentical": true,
+  "preset": [
+   "chaos",
+   "chaos"
+  ],
+  "closeupPressed": "false"
+ },
+ "layout": {
+  "horizontalOverflow": false,
+  "pageHeight": 1101,
+  "viewport": [
+   390,
+   664
+  ]
+ },
+ "storageKeys": [
+  "peach-preview-midnightdepth-motion-options-v1"
+ ],
+ "errors": []
+}

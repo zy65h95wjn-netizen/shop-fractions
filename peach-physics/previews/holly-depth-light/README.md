@@ -78,3 +78,7 @@ First phone review: pulling a side to the right left a visible shadow, and the s
 `tests/results.json` was recorded with version 1 levels; its changed-pixel counts for depth levels predate this change. `tests/compare-results.json` and `tests/zoom-sheet.png` are from version 2.
 
 These checks use desktop Chromium with software WebGL at an iPhone 13 viewport. They do not establish frame rate, appearance or feel on a physical iPhone; that needs review on the phone.
+
+## Version 3 — start-up sync
+
+Each engine pauses Auto briefly when its page is first shown. On a fast load one side could report ready before that pause, start late and stay out of step with the other. Each engine now reports ready only after the page-shown event. `tests/compare-results.json` is from this version.
