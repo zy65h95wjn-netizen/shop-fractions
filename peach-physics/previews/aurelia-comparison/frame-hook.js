@@ -43,12 +43,19 @@ function comparisonReset(){
  motion.time=0;motion.quietUntil=0;motion.autoDrive=null;
 }
 function comparisonDraw(){if(stage.clientWidth&&stage.clientHeight)render()}
-// One horizontal force, mirrored about the center. No vertical Auto input.
+// Reference-paced clap: two cycles per second, a quicker closing beat, then rebound.
+// Input only: preserve the solver, masks, manual gestures and original limits.
 const comparisonNativeAdd=motion.add.bind(motion);
 motion.add=function(side,x,y,scale=1){
  if(this.auto&&!this.shake){
   const age=this.autoDrive?.age||0,t=clamp(age/.7,0,1),fade=t*t*(3-2*t);
-  x=(side?-1:1)*PeachMotion.calibration.aurelia.auto*.85*fade*Math.sin(age*2*Math.PI*.8)*comparisonDt;
+  const phase=age*2*Math.PI*2,omega=2*Math.PI*(4.3-model.softness*.018);
+  const driveOmega=2*Math.PI*2,damping=2*omega*(.13+model.settle*.0032)*.97;
+  // Compensate for preset stiffness so the cadence stays visible without hitting travel stops.
+  const response=Math.hypot(omega*omega-driveOmega*driveOmega,damping*driveOmega);
+  const amplitude=13+model.bounce*.085;
+  const beat=Math.sin(phase)+.35*Math.sin(phase*2);
+  x=(side?-1:1)*amplitude*response*fade*beat*comparisonDt;
   y=0;
  }
  return comparisonNativeAdd(side,x,y,scale);
@@ -57,8 +64,8 @@ function comparisonTick(dt){
  comparisonDt=dt;motion.tick(dt);step(dt);
  if(comparisonExperiment&&motion.auto&&motion.time>=motion.quietUntil&&pointers.size===0){
   if(comparisonTime>=comparisonNext){
-   comparisonPulse(0,.55,0,true);comparisonPulse(1,.55,0,true);
-   comparisonNext=comparisonTime+1.25;
+   comparisonPulse(0,.3,0,true);comparisonPulse(1,.3,0,true);
+   comparisonNext=comparisonTime+.5;
   }
  }
  for(let s=0;s<2;s++)comparisonPulses[s]=comparisonPulses[s].filter(p=>comparisonTime-p.t<4.4);

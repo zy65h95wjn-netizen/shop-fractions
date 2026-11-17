@@ -1,5 +1,5 @@
 const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),assert=require('assert/strict'),{execFileSync}=require('child_process');
-const old=execFileSync('git',['show','af77a2566d499c7ab7dfd8713488b6892627534e:peach-physics/previews/aurelia-comparison/index.html'],{maxBuffer:2e6}).toString();
+const old=execFileSync('git',['show','2ec4cc004ac8782d332754037bc31d5fdabfb62c:peach-physics/previews/aurelia-comparison/index.html'],{maxBuffer:2e6}).toString();
 const current=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
 (async()=>{const b=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});try{
  const pages=[];for(const html of [old,current]){
@@ -29,11 +29,11 @@ const current=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
   }
   const results=await pages[1].evaluate(preset=>{
    const apis=__aureliaComparison.apis();apis.forEach(a=>{a.preset(preset);a.auto(true)});
-   const stats=apis.map(()=>({maxY:0,minX:0,maxX:0,opposed:0,samples:0,maxBound:0}));
+   const stats=apis.map(()=>({maxY:0,minX:0,maxX:0,opposed:0,samples:0,maxBound:0,claps:0,previousX:0}));
    for(let i=0;i<120*20;i++){
     __aureliaComparison.step(1/120);
     apis.forEach((a,j)=>{const s=a.snapshot(),r=a.raw(),st=stats[j],l=s.renderOffsets[1].dx,right=s.renderOffsets[4].dx;
-     st.minX=Math.min(st.minX,l);st.maxX=Math.max(st.maxX,l);
+     if(i>240&&st.previousX<0&&l>=0)st.claps++;st.previousX=l;st.minX=Math.min(st.minX,l);st.maxX=Math.max(st.maxX,l);
      for(const n of [...r.nodes,...r.followers,...s.renderOffsets]){st.maxY=Math.max(st.maxY,Math.abs(n.dy));if(!Number.isFinite(n.dx+n.dy))throw Error('Nonfinite motion')}
      for(const n of s.renderOffsets)st.maxBound=Math.max(st.maxBound,Math.abs(n.dx)/26,Math.abs(n.dy)/30);
      if(i>120&&Math.abs(l)>1&&Math.abs(right)>1){st.samples++;if(l*right<0)st.opposed++}
@@ -42,7 +42,7 @@ const current=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
    apis.forEach(a=>a.auto(false));for(let i=0;i<120*10;i++)__aureliaComparison.step(1/120);
    return{stats,rest:apis.map(a=>a.snapshot().renderOffsets)};
   },preset);
-  for(const s of results.stats){assert.equal(s.maxY,0,'no vertical Auto motion');assert(s.minX<-2&&s.maxX>2,'inward and outward travel');assert(s.samples>100&&s.opposed/s.samples>.98,'paired sides move toward/away from one another');assert(s.maxBound<=1)}
+  for(const s of results.stats){assert.equal(s.maxY,0,'no vertical Auto motion');assert(s.minX<-2&&s.maxX>2,'inward and outward travel');assert(s.samples>100&&s.opposed/s.samples>.98,'paired sides move toward/away from one another');assert(s.maxBound<=1);assert(s.claps>=34&&s.claps<=38,'roughly two clap cycles per second');assert(s.minX<-10&&s.maxX>10,'reference-sized travel')}
   assert(results.rest.flat().every(n=>Math.abs(n.dx)+Math.abs(n.dy)<.02),'Auto off settles');autoResults.push({preset,...results.stats.reduce((v,s)=>({maxY:Math.max(v.maxY,s.maxY),minX:Math.min(v.minX,s.minX),maxX:Math.max(v.maxX,s.maxX)}),{maxY:0,minX:0,maxX:0})});
  }
  console.log({unchangedManualCases,autoCases:6,autoResults});

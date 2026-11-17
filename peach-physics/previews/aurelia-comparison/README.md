@@ -1,4 +1,4 @@
-# Aurelia Frost comparison — preview 2
+# Aurelia Frost comparison — preview 3
 
 Open https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/previews/aurelia-comparison/
 
@@ -27,7 +27,7 @@ The build reads `v8/index.html`, `v8/motion.js`, and `v8/assets/aurelia-frost.jp
 ## Validation
 
 - 36 exact manual Bounce state comparisons against the actual v8 solver across all three presets. Auto intentionally uses the shared clap input in preview 2.
-- 18 unchanged manual bounce/tap/drag cases against preview 1, across both panes and all three presets.
+- 18 unchanged manual bounce/tap/drag cases against preview 2, across both panes and all three presets.
 - Six 20-second Auto cases: zero vertical node/follower/render-offset motion, inward and outward travel, opposing paired directions, bounded displacement, and settling after Auto is disabled.
 - WebGL and forced Canvas: six 15-second stability cases, bounded experimental offsets, settling after Auto stops, and eight extreme protected-region poses. Equal node poses render identically in both panes.
 - Real browser taps and drags mirror to both engines, including two-finger diagonal holds and release/cancel cleanup.
@@ -43,3 +43,11 @@ These are automated Chromium checks; physical iPhone Safari performance and the 
 Both panes now share one smooth horizontal Auto drive with opposite signs on the left and right. The existing motion controller still supplies activation fade, timing, and touch interruption. The Blender pane adds synchronized, mirrored horizontal baked pulses with no vertical component. Manual taps, drags, Bounce, and their release behavior are unchanged. The artwork, calibrated masks, and production v8 files are unchanged.
 
 Before manual input, Auto alone produces exactly zero vertical offsets. Vertical movement from a user's tap or drag still settles naturally; Auto does not snap it away.
+
+## Preview 3 — reference-paced clap
+
+The supplied short phone recording shows a stronger closing/rebound rhythm at approximately two cycles per second. Auto now uses that pace, with a second harmonic to sharpen the closing beat. Drive amplitude compensates for the existing preset stiffness so all three presets keep visible travel. The Blender Auto pulses run at the same half-second cadence with reduced pulse strength, adding follow-through without overpowering the common movement.
+
+Both sides remain horizontally opposed, with no vertical Auto input. The existing node travel and velocity limits, calibrated boundaries, manual gestures, presets, and release behavior are preserved. The glass experiment is unchanged. This matches the reference's approximate rhythm and feel rather than copying the other character's calibration.
+
+Updated verification checks 34–38 inward crossings over an 18-second steady interval, more than 10 source pixels of travel in each direction, zero vertical Auto offsets, bounded motion and return to rest. Across all presets, measured center-node/render-offset extrema were approximately −17 to −18 and +18 to +20 source pixels. Eighteen manual comparisons against preview 2 and 36 Bounce snapshots against v8 remain exact.
