@@ -1,0 +1,251 @@
+{
+ "renderer": {
+  "production": "webgl",
+  "preview": "webgl"
+ },
+ "character": {
+  "production": "midnight",
+  "preview": "midnight"
+ },
+ "sameFraming": true,
+ "sameCalibration": true,
+ "defaultLevel": "Medium",
+ "restPreviewVsProduction": {
+  "changed": 0,
+  "maxDelta": 0,
+  "bbox": null
+ },
+ "left-down-out": {
+  "nodesMatch": true,
+  "heldNodes": [
+   {
+    "side": 0,
+    "dx": -7.78,
+    "dy": 13.34
+   },
+   {
+    "side": 0,
+    "dx": -13.99,
+    "dy": 23.98
+   },
+   {
+    "side": 0,
+    "dx": -9.84,
+    "dy": 16.86
+   },
+   {
+    "side": 1,
+    "dx": -0.08,
+    "dy": 0.14
+   },
+   {
+    "side": 1,
+    "dx": -0.63,
+    "dy": 1.08
+   },
+   {
+    "side": 1,
+    "dx": -0.08,
+    "dy": 0.14
+   }
+  ],
+  "offVsProduction": {
+   "changed": 0,
+   "maxDelta": 0,
+   "bbox": null
+  },
+  "level1": {
+   "changed": 7836,
+   "maxDelta": 22,
+   "bbox": [
+    80,
+    434,
+    247,
+    543
+   ],
+   "bboxSource": [
+    167,
+    1002,
+    608,
+    1289
+   ]
+  },
+  "level2": {
+   "changed": 8278,
+   "maxDelta": 28,
+   "bbox": [
+    79,
+    434,
+    275,
+    544
+   ],
+   "bboxSource": [
+    165,
+    1002,
+    681,
+    1292
+   ]
+  },
+  "level3": {
+   "changed": 8480,
+   "maxDelta": 30,
+   "bbox": [
+    79,
+    428,
+    284,
+    550
+   ],
+   "bboxSource": [
+    165,
+    986,
+    705,
+    1307
+   ]
+  },
+  "strongVsRest": {
+   "changed": 14483,
+   "maxDelta": 73,
+   "bbox": [
+    78,
+    414,
+    300,
+    557
+   ],
+   "bboxSource": [
+    162,
+    949,
+    747,
+    1326
+   ]
+  }
+ },
+ "right-up": {
+  "nodesMatch": true,
+  "heldNodes": [
+   {
+    "side": 0,
+    "dx": 0.05,
+    "dy": -0.18
+   },
+   {
+    "side": 0,
+    "dx": 0.41,
+    "dy": -1.39
+   },
+   {
+    "side": 0,
+    "dx": 0.05,
+    "dy": -0.18
+   },
+   {
+    "side": 1,
+    "dx": 4.67,
+    "dy": -16.36
+   },
+   {
+    "side": 1,
+    "dx": 8.92,
+    "dy": -30
+   },
+   {
+    "side": 1,
+    "dx": 5.54,
+    "dy": -19.39
+   }
+  ],
+  "offVsProduction": {
+   "changed": 0,
+   "maxDelta": 0,
+   "bbox": null
+  },
+  "level1": {
+   "changed": 10893,
+   "maxDelta": 40,
+   "bbox": [
+    127,
+    411,
+    310,
+    559
+   ],
+   "bboxSource": [
+    291,
+    941,
+    774,
+    1331
+   ]
+  },
+  "level2": {
+   "changed": 11895,
+   "maxDelta": 50,
+   "bbox": [
+    99,
+    411,
+    312,
+    559
+   ],
+   "bboxSource": [
+    217,
+    941,
+    779,
+    1331
+   ]
+  },
+  "level3": {
+   "changed": 12511,
+   "maxDelta": 55,
+   "bbox": [
+    97,
+    410,
+    313,
+    559
+   ],
+   "bboxSource": [
+    212,
+    938,
+    782,
+    1331
+   ]
+  },
+  "strongVsRest": {
+   "changed": 22284,
+   "maxDelta": 148,
+   "bbox": [
+    81,
+    404,
+    319,
+    577
+   ],
+   "bboxSource": [
+    170,
+    923,
+    797,
+    1379
+   ]
+  }
+ },
+ "restAfterMotionStrong": {
+  "changed": 0,
+  "maxDelta": 0,
+  "bbox": null
+ },
+ "controls": {
+  "afterChip": [
+   "Strong",
+   "2.5D: Strong",
+   "3"
+  ],
+  "stillMidnight": true,
+  "characterButtonVisible": false
+ },
+ "storageKeys": [
+  "peach-physics-preview-midnightdepth-depth",
+  "peach-physics-v008-active",
+  "peach-preview-midnightdepth-motion-options-v1",
+  "peach-r13-motion-options-v1"
+ ],
+ "serviceWorkers": 0,
+ "errors": {
+  "production": [],
+  "preview": []
+ }
+}
