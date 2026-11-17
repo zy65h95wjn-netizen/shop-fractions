@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101c1b"><title>Aurelia Frost · Glass comparison</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#f4e8da;background:#101c1b;color-scheme:dark}*{box-sizing:border-box}body{margin:0;min-height:100svh;background:radial-gradient(ellipse at 50% 30%,#294039,#0d1717 80%)}main{max-width:1050px;margin:auto;padding:18px 10px max(18px,env(safe-area-inset-bottom))}header{text-align:center;margin:0 0 16px}small{color:#d0b88b;text-transform:uppercase;font-size:10px;letter-spacing:.18em}h1{font-size:25px;margin:5px 0 0;font-weight:650;letter-spacing:-.04em}.views,.controls{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin:12px 0}button,select{font:inherit;font-size:13px;border:1px solid #6b7a69;background:#243a32;color:#fff0de;padding:11px 13px;border-radius:24px;touch-action:manipulation;min-height:44px}button{cursor:pointer}button[aria-pressed=true]{background:#eac798;color:#202d27;border-color:#eac798}button:focus-visible,select:focus-visible{outline:3px solid #f3d5a9;outline-offset:3px}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 auto;max-width:850px}.pane{min-width:0;background:#091310;border:1px solid #53685a;border-radius:17px;overflow:hidden}.label{padding:10px 4px;text-align:center;background:#182b24;font-size:12px;font-weight:650}.label span{display:block;font-weight:400;font-size:10px;color:#c1cdbf;margin-top:3px}iframe{display:block;width:100%;aspect-ratio:756/1280;border:0;background:#15201b}.comparison[data-view=current],.comparison[data-view=glass]{grid-template-columns:1fr;max-width:390px}.comparison[data-view=current] .pane:nth-child(2),.comparison[data-view=glass] .pane:first-child{display:none}.hint,.detail{text-align:center;font-size:12px;line-height:1.55;color:#c6cfc4;margin:10px auto;max-width:480px}.detail{font-size:10px;color:#9faf9f}#loading{color:#f1cc94;text-align:center;font-size:12px}button:disabled,select:disabled{opacity:.5}label{display:flex;align-items:center;gap:6px;font-size:12px;color:#c6cfc4}@media(min-width:700px){iframe{max-height:calc(100svh - 265px)}h1{font-size:30px}}@media(max-height:500px){main{padding-top:8px}header{margin-bottom:5px}.views{margin:5px}.comparison{max-width:700px}iframe{height:65svh;aspect-ratio:auto}}
+</style></head><body><main>
+<header><small>Peaches · Glass experiment 1</small><h1>Aurelia Frost</h1></header>
+<div class="views" aria-label="Comparison view"><button data-view="both" aria-pressed="true">Side by side</button><button data-view="current" aria-pressed="false">Current</button><button data-view="glass" aria-pressed="false">Glass</button></div>
+<div class="comparison" data-view="both"><section class="pane"><div class="label">Current Aurelia<span>Blender · in/out Auto</span></div><iframe title="Current Aurelia clap motion" name="current"></iframe></section><section class="pane"><div class="label">Against glass<span>Hold to add pressure</span></div><iframe title="Aurelia against glass experiment" name="glass"></iframe></section></div>
+<p id="loading" role="status">Warming up both sides…</p>
+<p class="hint">Hold either portrait to press against the glass. Both receive the same touch.</p>
+<div class="controls"><button id="bounce" disabled>Bounce both</button><button id="auto" aria-pressed="true" disabled>Auto on</button><button id="closeup" aria-pressed="false" disabled>Closer look</button></div>
+<div class="controls"><label>Feel <select id="preset" disabled><option value="natural">Natural</option><option value="playful" selected>Playful</option><option value="chaos">Chaos</option></select></label><button id="reset" disabled>Reset</button></div>
+<p class="detail">A gentle glass illusion using the original artwork. This separate experiment keeps your current Aurelia preview intact.</p>
+</main><script>
+const FRAME=__FRAME__;
+const frames=[...document.querySelectorAll('iframe')];frames.forEach(f=>f.srcdoc=FRAME);
+let ready=false,auto=true,closeup=false,previous=0,accumulator=0;
+const apis=()=>frames.map(f=>f.contentWindow.__aureliaFrame);
+const each=fn=>apis().forEach(fn);
+window.__aureliaRelay=data=>{if(ready)each(a=>a.pointer(data))};
+function changeView(view){document.querySelector('.comparison').dataset.view=view;document.querySelectorAll('[data-view]').forEach(b=>{if(b.tagName==='BUTTON')b.setAttribute('aria-pressed',b.dataset.view===view)});requestAnimationFrame(()=>each(a=>a?.resize()))}
+document.querySelectorAll('button[data-view]').forEach(b=>b.onclick=()=>changeView(b.dataset.view));
+document.getElementById('bounce').onclick=()=>each(a=>a.bounce());
+document.getElementById('auto').onclick=()=>{auto=!auto;each(a=>a.auto(auto));const b=document.getElementById('auto');b.textContent=auto?'Auto on':'Auto off';b.setAttribute('aria-pressed',auto)};
+document.getElementById('closeup').onclick=()=>{closeup=!closeup;each(a=>a.closeup(closeup));const b=document.getElementById('closeup');b.setAttribute('aria-pressed',closeup);b.textContent=closeup?'Full portrait':'Closer look'};
+document.getElementById('preset').onchange=e=>each(a=>a.preset(e.target.value));
+document.getElementById('reset').onclick=()=>each(a=>a.reset());
+function cancel(){if(ready)each(a=>{for(const p of a.snapshot().activePointers)a.pointer({type:'pointercancel',id:p.id,x:0,y:0})});previous=0;accumulator=0}
+document.addEventListener('visibilitychange',cancel);window.addEventListener('blur',cancel);
+window.addEventListener('resize',()=>{if(ready)each(a=>a.resize())});
+function loop(now){
+ if(!ready&&apis().every(a=>a?.ready())){ready=true;each(a=>a.preset('playful'));document.getElementById('loading').hidden=true;document.querySelectorAll('[disabled]').forEach(b=>b.disabled=false)}
+ if(ready&&!document.hidden){if(previous)accumulator+=Math.min(.05,(now-previous)/1000);while(accumulator>=1/120){each(a=>a.tick(1/120));accumulator-=1/120}each(a=>a.draw())}
+ previous=now;requestAnimationFrame(loop);
+}
+window.__aureliaComparison={ready:()=>ready,apis,changeView,step:dt=>each(a=>a.tick(dt)),draw:()=>each(a=>a.draw()),frameSource:()=>FRAME};
+requestAnimationFrame(loop);
+</script></body></html>
