@@ -2,9 +2,9 @@
 
 A separate, user-authorized phone preview of the tested Fireside prototype.
 
-Open: https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/previews/fireside/
+[Open Fireside preview 4](https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/previews/fireside/?v=4)
 
-The original supplied portrait and Blender spring-rig response are embedded. The published prototype differs from the validated offline file only in its header label (preview rather than private playground). Tap, hold, drag, flick, Auto, and the Blender/live-springs comparison are available. Preferences are session-only. No production profiles or service worker are used.
+The original supplied portrait and Blender spring-rig response are embedded in a single HTML file. Tap, hold, drag, flick, Auto, and the Blender/live-springs comparison are available. Preferences are session-only. No production profiles or service worker are used.
 
 The actual Peaches application remains at /peach-physics/v8/ and is unchanged by this preview. This is a 2D prototype using a Blender-baked spring response, not a reconstructed 3D character or cloth simulation.
 
@@ -21,3 +21,11 @@ Validation: all 12 stability cases, 16 protected-region poses, and both-renderer
 After a drag, each side briefly uses slightly lighter damping for the first rebound, then stronger damping for the trailing oscillations. This release adjustment lasts 1.2 seconds and clears on a fresh grab, kick, or reset. The existing flick velocity and displacement limits remain in place. The approved preview-2 artwork, deformation masks, diagonal hold behavior, Blender bake, and default tap/Auto responses are preserved.
 
 Validation: `node peach-physics/previews/fireside/tests/release.cjs` passed 24 before/after release comparisons, 36 unchanged tap/Auto/cancel comparisons, and 12 bounded flick/settling cases. Each release comparison checks unchanged held motion and independent sides, a slightly fuller first rebound, and smaller trailing oscillations. Existing checks also passed 12 stability cases, 16 protected poses, both-renderer multitouch, eight inner-crease regression cases, and original artwork identity with no external requests or browser errors. These are Chromium results; iPhone feel remains subject to user review.
+
+## Preview 4 — screen-left lift
+
+The screen-left side eases into the top of its travel. A small bounce gets a light adjustment and a strong upward pull gets more support. The movement fades before the white fur tips and loose hair on each side. Both sides also hold their displayed position when caught mid-bounce.
+
+The lift check tracks skin texture on the actual portrait in WebGL and Canvas. On a Playful tap, the screen-left side dropped 27 portrait pixels and rebounded 16 pixels, down from 26 in preview 3. The right side dropped 27 and rebounded 26 in both versions. On a sustained upward drag, screen-left travel went from 34 to 19 pixels. The checks also cover diagonal travel, Auto, the Bounce button, Blender and live springs, and fixed points on the trim and inner crease.
+
+Run `node peach-physics/previews/fireside/tests/lift.cjs` and `node peach-physics/previews/fireside/tests/release.cjs` from the repository root.

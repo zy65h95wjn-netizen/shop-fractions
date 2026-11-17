@@ -2,7 +2,7 @@
 <style>
 :root{font-family:system-ui,-apple-system,sans-serif;color:#fff1dc;color-scheme:dark;background:#17130e}*{box-sizing:border-box}body{margin:0;height:100svh;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#49301e,#15150f 78%)}header{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 18px}h1{font-size:17px;font-weight:600;margin:0}small{font-size:10px;color:#d8b78d;letter-spacing:.16em;text-transform:uppercase}button{font:inherit;cursor:pointer;background:#303a27;color:#fff1dc;border:1px solid #6a6846;border-radius:24px;padding:11px 17px;touch-action:manipulation}button:focus-visible{outline:2px solid #f7c984;outline-offset:3px}button[aria-pressed=true]{background:#f2c794;border-color:#f2c794;color:#272015}#stage{height:calc(100svh - 143px);display:flex;align-items:center;justify-content:center;position:relative}canvas{display:block;touch-action:none;max-width:100%;border-radius:12px;box-shadow:0 12px 60px #0008}footer{height:85px;text-align:center;padding:9px 8px}footer .bar{display:flex;justify-content:center;gap:8px}#tip{font-size:11px;color:#d9c1a6;margin:8px 0 0}#settings{position:fixed;inset:auto 12px 96px;background:#17251af5;border:1px solid #65724d;border-radius:20px;padding:20px;max-width:420px;margin:auto;box-shadow:0 15px 70px #000b;z-index:2}#settings[hidden]{display:none}#settings p{font-size:12px;color:#c4cfbc;line-height:1.55}#settings .row{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}#settings h2{font-size:17px;margin:0 0 12px}#settings button{padding:9px 12px;font-size:13px}label{font-size:13px;display:flex;gap:8px;align-items:center}#status{position:absolute;bottom:12px;font-size:12px;background:#17251aee;border-radius:20px;padding:8px 14px;pointer-events:none}#status:empty{display:none}.tag{font-size:11px;color:#c6bf9b}#gear{padding:8px 12px;font-size:19px}@media(min-width:800px){header{max-width:660px;margin:auto}#settings{bottom:110px}}
 </style></head><body>
-<header><div><small>Peaches · preview 3</small><h1>Fireside</h1></div><button id="gear" aria-label="Motion settings" aria-expanded="false">⚙</button></header>
+<header><div><small>Peaches · preview 4</small><h1>Fireside</h1></div><button id="gear" aria-label="Motion settings" aria-expanded="false">⚙</button></header>
 <main id="stage"><canvas id="portrait" aria-label="Interactive portrait. Tap, hold or drag either active region. Keyboard users can use Bounce."></canvas><div id="status" role="status">Warming up…</div></main>
 <footer><div class="bar"><button id="bounce">Bounce ✦</button><button id="auto" aria-pressed="true">Auto on</button><button id="motion">Blender bounce</button></div><p id="tip">Tap · hold · drag · flick. Each side has its own response.</p></footer>
 <section id="settings" hidden aria-label="Motion settings"><h2>A little more playful</h2><div class="row" role="group" aria-label="Intensity"><button data-preset="gentle">Gentle</button><button data-preset="playful" aria-pressed="true">Playful</button><button data-preset="bold">Bold</button></div><label><input id="linked" type="checkbox" checked> Gentle linked movement</label><p id="explain">Blender bounce uses the timing of a baked Blender spring-rig response for taps and Auto. Dragging stays interactive with live springs.</p><p class="tag">An isolated 2D portrait experiment. Original artwork, silent playback, no account or network needed. Session-only settings.</p><div class="row"><button id="reset">Reset motion</button><button id="close">Done</button></div></section>
@@ -21,7 +21,33 @@ const mask=new Uint8Array(box.w*box.h*4);
 // Keep the left field inside the photographed skin, before the curved inner shadow.
 // The broad fade prevents the upper crease being pulled into a sharp notch.
 function leftInnerSupport(x,y){const edge=676-.0055*(y-645)*(y-645);return smooth((edge-8-x)/48);}
-for(let y=0;y<box.h;y++)for(let x=0;x<box.w;x++){const i=(y*box.w+x)*4,px=box.x+x+.5,py=box.y+y+.5;for(let s=0;s<2;s++)mask[i+s]=Math.round(envelope(px,py,polygons[s])*(s===0?leftInnerSupport(px,py):1)*255);mask[i+3]=255;}
+// Upper edges of the two white trims in original portrait pixels.
+const trimEdges=[
+ [[505,608],[530,623],[550,642],[570,657],[590,669],[610,679],[630,695],[650,713]],
+ [[674,718],[696,714],[716,712],[735,707],[755,699],[775,689],[790,676],[800,664],[810,644],[814,625]]
+];
+function trimHeight(points,x){
+ if(x<=points[0][0])return points[0][1];
+ for(let i=1;i<points.length;i++){
+  const [ax,ay]=points[i-1],[bx,by]=points[i];
+  if(x<=bx)return ay+(by-ay)*(x-ax)/(bx-ax);
+ }
+ return points[points.length-1][1];
+}
+for(let x=0;x<box.w;x++){
+ const px=box.x+x+.5;
+ const trim=trimEdges.map(edge=>trimHeight(edge,px));
+ for(let y=0;y<box.h;y++){
+  const py=box.y+y+.5,i=(y*box.w+x)*4;
+  // The left curl follows the outer edge. The right curl ends above the moving region.
+  const leftCurlEdge=547-.006*(py-577)*(py-577);
+  const leftSupport=leftInnerSupport(px,py)*smooth((px-leftCurlEdge-4)/24);
+  const rightSupport=smooth((py-548)/32);
+  mask[i]=Math.round(255*envelope(px,py,polygons[0])*leftSupport*smooth((trim[0]-py-8)/27));
+  mask[i+1]=Math.round(255*envelope(px,py,polygons[1])*rightSupport*smooth((trim[1]-py-7)/28));
+  mask[i+3]=255;
+ }
+}
 function weight(x,y,side){x-=box.x+.5;y-=box.y+.5;if(x<0||y<0||x>=box.w-1||y>=box.h-1)return 0;const ix=x|0,iy=y|0,tx=x-ix,ty=y-iy,i=(iy*box.w+ix)*4+side;return ((mask[i]*(1-tx)+mask[i+4]*tx)*(1-ty)+(mask[i+box.w*4]*(1-tx)+mask[i+box.w*4+4]*tx)*ty)/255;}
 let ready=false,mode='blender',preset='playful',auto=true,linked=true,time=0,previous=0,accumulator=0,renderer='webgl';
 const nodes=Array.from({length:2},()=>({x:0,y:0,vx:0,vy:0,fx:0,fy:0})),holds=new Map(),pulses=[[],[]],nextPulse=[.05,.48];
@@ -67,7 +93,13 @@ function initGL(){
  offsetLoc=gl.getUniformLocation(program,'offsets[0]');
 }
 function initCanvas(){renderer='canvas';ctx=canvas.getContext('2d',{alpha:false});background=document.createElement('canvas');const source=document.createElement('canvas');source.width=W;source.height=H;const sc=source.getContext('2d');sc.drawImage(photo,0,0);original=sc.getImageData(0,0,W,H).data;patch=document.createElement('canvas');patch.width=box.w;patch.height=box.h;patchCtx=patch.getContext('2d');buffer=patchCtx.createImageData(box.w,box.h);}
-function draw(){if(!ready)return;const d=offsets();if(gl){gl.viewport(0,0,canvas.width,canvas.height);gl.uniform2fv(offsetLoc,new Float32Array(d.flat()));gl.drawArrays(gl.TRIANGLE_STRIP,0,4);return;}
+function draw(){
+ if(!ready)return;
+ const d=offsets();
+ // Give the screen-left side progressively less upward travel as it rises toward the shoulder.
+ const leftLift=-d[0][1];
+ if(leftLift>0)d[0][1]=-leftLift/(1+leftLift/42);
+ if(gl){gl.viewport(0,0,canvas.width,canvas.height);gl.uniform2fv(offsetLoc,new Float32Array(d.flat()));gl.drawArrays(gl.TRIANGLE_STRIP,0,4);return;}
  if(background.width!==canvas.width||background.height!==canvas.height){background.width=canvas.width;background.height=canvas.height;background.getContext('2d').drawImage(photo,0,0,canvas.width,canvas.height);}
  ctx.drawImage(background,0,0);
  if(d.flat().every(v=>Math.abs(v)<.001))return;
@@ -81,7 +113,9 @@ function draw(){if(!ready)return;const d=offsets();if(gl){gl.viewport(0,0,canvas
 }
 function resize(){const s=Math.min(stage.clientWidth/W,stage.clientHeight/H),dpr=Math.min(devicePixelRatio||1,2);canvas.style.width=W*s+'px';canvas.style.height=H*s+'px';canvas.width=Math.round(W*s*dpr);canvas.height=Math.round(H*s*dpr);draw();}
 function point(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}}
-canvas.addEventListener('pointerdown',e=>{if(!ready||e.button>0)return;const p=point(e),weights=polygons.map(poly=>envelope(p.x,p.y,poly)),side=weights[0]>weights[1]?0:1;if(weights[side]<.03||[...holds.values()].some(h=>h.side===side))return;e.preventDefault();try{canvas.setPointerCapture(e.pointerId)}catch{}releasedAt[side]=-Infinity;const o=offsets()[side];Object.assign(nodes[side],{x:o[0],y:o[1],vx:0,vy:0});pulses[side]=[];holds.set(e.pointerId,{side,start:p,last:p,x:o[0],y:o[1],base:o,at:performance.now(),lastAt:performance.now(),vx:0,vy:0,travel:0});quietUntil=time+1.2;});
+canvas.addEventListener('pointerdown',e=>{if(!ready||e.button>0)return;const p=point(e),weights=polygons.map(poly=>envelope(p.x,p.y,poly)),side=weights[0]>weights[1]?0:1;if(weights[side]<.03||[...holds.values()].some(h=>h.side===side))return;e.preventDefault();try{canvas.setPointerCapture(e.pointerId)}catch{}releasedAt[side]=-Infinity;
+ // Transfer the combined motion into both parts of the spring before clearing a baked bounce.
+ const o=offsets()[side];Object.assign(nodes[side],{x:o[0],y:o[1],fx:o[0],fy:o[1],vx:0,vy:0});pulses[side]=[];holds.set(e.pointerId,{side,start:p,last:p,x:o[0],y:o[1],base:o,at:performance.now(),lastAt:performance.now(),vx:0,vy:0,travel:0});quietUntil=time+1.2;});
 canvas.addEventListener('pointermove',e=>{const h=holds.get(e.pointerId);if(!h)return;e.preventDefault();const p=point(e),now=performance.now(),dt=Math.max(.008,(now-h.lastAt)/1000);h.vx=(p.x-h.last.x)/dt;h.vy=(p.y-h.last.y)/dt;h.travel=Math.max(h.travel,Math.hypot(p.x-h.start.x,p.y-h.start.y));h.x=clamp(h.base[0]+(p.x-h.start.x)*.7,-34,34);h.y=clamp(h.base[1]+(p.y-h.start.y)*.7,-34,34);h.last=p;h.lastAt=now;});
 function release(e){const h=holds.get(e.pointerId);if(!h)return;holds.delete(e.pointerId);quietUntil=time+1.2;if(e.type==='pointerup'){const now=performance.now();if(h.travel<12&&now-h.at<400)kick(h.side);else {releasedAt[h.side]=time;if(now-h.lastAt<100){nodes[h.side].vx=clamp(h.vx*.18,-300,300);nodes[h.side].vy=clamp(h.vy*.18,-300,300);}}}}
 for(const e of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(e,release);
