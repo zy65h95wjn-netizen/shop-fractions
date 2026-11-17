@@ -1,3 +1,7 @@
+## Winter Ember left-side boundary correction
+
+Winter Ember's screen-left garment edge, inner crease and lower fold now constrain the rendered movement during Auto Jiggle and manual interaction. Spring motion, artwork, other characters and saved profiles are preserved. Cache: `peach-physics-v008-r14-ember1`. [Details and validation](EMBER-FIX.md).
+
 ## Auto Jiggle strength update
 
 Midnight Yule, Aurelia Frost and Holly Heartbreaker now use 50% stronger Auto Jiggle drive. Tempo, touch/shake strength, saved settings, Winter Ember and Santa are unchanged. [Details and validation](AUTO-STRENGTH.md).
