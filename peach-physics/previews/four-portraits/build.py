@@ -70,7 +70,9 @@ edit("for(int k=0;k<4;k++)sampleUV-=vLeftVelocity*leftEnvelope(sampleUV)*mix(1.0
     float support=leftEnvelope(sampleUV);
     float interior=smoothstep(.62,.98,support);
     vec2 response=mix(vLeftVelocity,vEmberLeft,interior*${bounceExperiment&&selection==='midnight'?'1.0':'0.0'});
-    sampleUV-=response*support*mix(1.0,midnightSupport(sampleUV),uDragBoundary.x)/4.0;
+    // During a held drag, keep the fold attached to the same moving surface.
+    float holdLimit=${bounceExperiment&&selection==='midnight'?'1.0':'mix(1.0,midnightSupport(sampleUV),uDragBoundary.x)'};
+    sampleUV-=response*support*holdLimit/4.0;
    }""")
 depth=(previews/'holly-25d/frame-hook.js').read_text()
 holly=depth[depth.index('const reliefSmooth='):depth.index('function reliefInit()')]

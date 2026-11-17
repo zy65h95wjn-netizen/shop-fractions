@@ -484,7 +484,8 @@ function pickSide(x,y){
 }
 function compiler(kind,source){const sh=gl.createShader(kind);gl.shaderSource(sh,source);gl.compileShader(sh);if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(sh));return sh;}
 // Screen-left only. Coordinates are in Midnight's 941 × 1671 source portrait.
-// Distances to the fur hem and lower fold fade the flow over intact skin.
+// Trace the hem in source pixels. Across the lower fold, borrow the right
+// side’s falloff in normalized region coordinates, then guard the left silhouette.
 function midnightSeamWeight(x, y) {
  const offset = x - 321;
  const hem = 996 + offset * offset * (offset < 0 ? .0051 : .0042);
@@ -492,7 +493,30 @@ function midnightSeamWeight(x, y) {
  const belowHem = (y - hem) / Math.hypot(1, hemSlope);
  const fold = 1293 - .00136 * (x - 314) ** 2;
  const aboveFold = (fold - y) / Math.hypot(1, .00272 * (x - 314));
- return leftSkinWeight(x, y) * boundarySmooth(6, 91, belowHem) * boundarySmooth(6, 76, aboveFold);
+ const fur = boundarySmooth(6, 91, belowHem);
+ const previous = leftSkinWeight(x, y) * fur * boundarySmooth(6, 76, aboveFold);
+ const blend = boundarySmooth(fold - 122, fold - 55, y) * boundarySmooth(91, 105, belowHem);
+ if (blend === 0) return previous;
+
+ const [left, right] = regions;
+ const qx = (left.x - x) / left.rx, qy = (y - left.y) / left.ry;
+ const rightY = (right.y + qy * right.ry) / H;
+ const bounds = currentCharacter().bounds, taper = currentCharacter().taper;
+ const rightEdge = 1 - boundarySmooth(.48, .98, Math.hypot(qx, qy));
+ const thigh = 1 - boundarySmooth(bounds[2], bounds[3], rightY);
+ const outside = boundarySmooth(.55, .97, qx);
+ const rightSupport = rightEdge * thigh * (1 - taper[0] * boundarySmooth(.69, .81, rightY) * outside)
+   * (1 - taper[1] * outside);
+
+ // Fade onto the upper thigh across the crease. Keep the scenery, center
+ // gap and stockings anchored, including the inside edge near the other leg.
+ const outerEdge = 157 + .0024 * Math.max(0, y - 1240) ** 2;
+ const leftOutline = boundarySmooth(5, 53, x - outerEdge);
+ const centerGap = boundarySmooth(4, 53, 457 - x);
+ // A left held pose travels farther through the backward sampler than the
+ // corresponding right pose. Tune this band at the fold, away from the fur.
+ const lower = .93 * rightSupport * leftOutline * centerGap * (1 - boundarySmooth(1360, 1394, y));
+ return previous + blend * (lower - previous);
 }
 
 // Canvas uses the same fixed sampling field as WebGL. Sampling the source
@@ -1254,7 +1278,9 @@ function initGL(){
     float support=leftEnvelope(sampleUV);
     float interior=smoothstep(.62,.98,support);
     vec2 response=mix(vLeftVelocity,vEmberLeft,interior*${bounceExperiment&&selection==='midnight'?'1.0':'0.0'});
-    sampleUV-=response*support*mix(1.0,midnightSupport(sampleUV),uDragBoundary.x)/4.0;
+    // During a held drag, keep the fold attached to the same moving surface.
+    float holdLimit=${bounceExperiment&&selection==='midnight'?'1.0':'mix(1.0,midnightSupport(sampleUV),uDragBoundary.x)'};
+    sampleUV-=response*support*holdLimit/4.0;
    }
    photoUV+=sampleUV-vRawUV;
   }
