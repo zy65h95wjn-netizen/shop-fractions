@@ -96,6 +96,16 @@ html = sub(html, " gl.uniform2fv(gl.getUniformLocation(program,'uDragBoundary'),
            " gl.uniform2fv(gl.getUniformLocation(program,'uDragBoundary'),dragBoundary);\n"
            " gl.uniform3fv(gl.getUniformLocation(program,'uDepth'),DEPTH_LEVELS[depthLevel].values);")
 
+# --- Test option: screen-left side moves like the screen-right side ---------
+# Production gives Midnight Yule's screen-left side its own traced skin mask, 10%
+# weaker taps and drags, and 6% more damping. With the option on, the left side
+# uses the same rendering path and the same strength as the right side.
+html = sub(html, " gl.uniform1f(leftMaskLoc,c.id==='midnight'?1:0);", " gl.uniform1f(leftMaskLoc,c.id==='midnight'&&!matchLeft?1:0);")
+html = sub(html, "currentCharacter().id==='midnight' && n.side===0?1.06:1", "currentCharacter().id==='midnight' && n.side===0&&!matchLeft?1.06:1")
+html = sub(html, "currentCharacter().id==='midnight' && side===0?.90:1", "currentCharacter().id==='midnight' && side===0&&!matchLeft?.90:1", 2)
+html = sub(html, "currentCharacter().id==='midnight'&&finger.side===0?.90:1", "currentCharacter().id==='midnight'&&finger.side===0&&!matchLeft?.90:1")
+html = sub(html, "currentCharacter().id==='midnight' && finger.side===0?.90:1", "currentCharacter().id==='midnight' && finger.side===0&&!matchLeft?.90:1")
+
 # Controls: a chip on the stage for quick A/B, and the same control in the panel.
 html = sub(html, '#character svg{', '''#character{display:none!important}
 #depthChip{position:absolute;left:max(12px,env(safe-area-inset-left));top:max(76px,calc(env(safe-area-inset-top) + 14px));z-index:5;min-height:44px;padding:0 14px;border:1px solid #f9eadf77;border-radius:22px;color:#fff7eb;background:#07110fc9;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 3px 16px #0005;font-size:12px;font-weight:700;cursor:pointer;touch-action:manipulation}
@@ -105,11 +115,14 @@ html = sub(html, '#character svg{', '''#character{display:none!important}
 html = sub(html, ' <div id="characterToast"', ' <button id="depthChip" type="button" aria-pressed="true">2.5D: Medium</button>\n <div id="characterToast"')
 html = sub(html, '<button id="grabHold" class="slap-audio" type="button">Grab and hold: on</button>',
            '<button id="depthLight" class="slap-audio" type="button" aria-pressed="true">Depth lighting: Medium</button>'
+           '<button id="matchLeft" class="slap-audio" type="button" aria-pressed="true">Left side: matches right</button>'
            '<button id="grabHold" class="slap-audio" type="button">Grab and hold: on</button>')
 html = sub(html, 'let grabHoldEnabled=', '''// 2.5D preview levels: [largest light change, highlight, parallax]. Off is production r14.
 const DEPTH_LEVELS=[{name:'Off',values:[0,0,0]},{name:'Subtle',values:[.05,.03,.20]},{name:'Medium',values:[.09,.05,.28]},{name:'Strong',values:[.14,.08,.35]}];
 const DEPTH_KEY='peach-physics-preview-midnightdepth-depth';
 let depthLevel=2;
+// Test option: let the screen-left side move like the screen-right side. ?match=0 keeps production behaviour.
+let matchLeft=new URLSearchParams(location.search).get('match')!=='0';
 // Side-by-side test page: this engine runs inside a frame and is driven by the page around it.
 const embedded=new URLSearchParams(location.search).get('embed')==='1'&&parent!==window;
 let embedCloseup=false;
@@ -125,7 +138,11 @@ function refreshDepth(){
 }
 function cycleDepth(){if(fallback)return;depthLevel=(depthLevel+1)%DEPTH_LEVELS.length;try{localStorage.setItem(DEPTH_KEY,String(depthLevel));}catch(e){}refreshDepth();}
 for(const id of ['depthChip','depthLight']){const el=document.getElementById(id);el.addEventListener('click',cycleDepth);el.addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});}
-window.__depthDebug={level:()=>depthLevel,name:()=>DEPTH_LEVELS[depthLevel].name,set:value=>{if(DEPTH_LEVELS[value]){depthLevel=value;refreshDepth();}}};
+function refreshMatch(){const el=document.getElementById('matchLeft');el.setAttribute('aria-pressed',String(matchLeft));el.textContent=matchLeft?'Left side: matches right':'Left side: current';}
+function setMatch(value){matchLeft=!!value;uploadCharacterCalibration();refreshMatch();}
+{const el=document.getElementById('matchLeft');el.addEventListener('click',()=>setMatch(!matchLeft));el.addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});}
+refreshMatch();
+window.__depthDebug={match:()=>matchLeft,setMatch,level:()=>depthLevel,name:()=>DEPTH_LEVELS[depthLevel].name,set:value=>{if(DEPTH_LEVELS[value]){depthLevel=value;refreshDepth();}}};
 refreshDepth();
 presentCharacter();
 ''')
@@ -177,6 +194,7 @@ if(embedded){
   preset:value=>{activePreset=value;Object.assign(model,currentPresets()[value]);refreshPrefs();reset();reseed();},
   closeup:value=>{embedCloseup=!!value;needSize=true;},
   depth:value=>window.__depthDebug.set(value),
+  match:value=>setMatch(value),
   resize:()=>{needSize=true;},
   raw:()=>JSON.parse(JSON.stringify({nodes,followers,impacts,waves})),
   snapshot:()=>window.__peachPhysicsDebug.snapshot()

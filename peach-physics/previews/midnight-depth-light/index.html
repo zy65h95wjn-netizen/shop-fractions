@@ -39,14 +39,14 @@ iframe{display:block;width:100%;aspect-ratio:941/1671;border:0;background:#15201
 <header><small>Peaches · test only</small><h1>Midnight Yule: current vs 2.5D</h1></header>
 <div class="bar" aria-label="Comparison view"><button data-view="both" aria-pressed="true">Side by side</button><button data-view="current" aria-pressed="false">Current</button><button data-view="depth" aria-pressed="false">2.5D</button></div>
 <div class="comparison" data-view="both">
- <section class="pane"><div class="label">Current<span>Production r14 look</span></div><iframe title="Midnight Yule with the current production rendering" src="./frame.html?embed=1&amp;depth=0"></iframe></section>
- <section class="pane"><div class="label">2.5D<span id="depthLabel">Depth lighting · Medium</span></div><iframe title="Midnight Yule with 2.5D depth lighting" src="./frame.html?embed=1&amp;depth=2"></iframe></section>
+ <section class="pane"><div class="label">Current<span>Production r14 look</span></div><iframe title="Midnight Yule with the current production rendering" src="./frame.html?embed=1&amp;depth=0&amp;match=0"></iframe></section>
+ <section class="pane"><div class="label">2.5D<span id="depthLabel">Depth lighting · Medium</span></div><iframe title="Midnight Yule with 2.5D depth lighting" src="./frame.html?embed=1&amp;depth=2&amp;match=1"></iframe></section>
 </div>
 <p id="loading" role="status">Warming up both sides…</p>
 <p class="hint">Tap or drag either picture. Both sides get the same touch and the same motion.</p>
-<div class="bar"><button id="bounce" disabled>Bounce both</button><button id="auto" aria-pressed="true" disabled>Auto</button><button id="closeup" aria-pressed="true" disabled>Closer look</button></div>
+<div class="bar"><button id="bounce" disabled>Bounce both</button><button id="auto" aria-pressed="true" disabled>Auto</button><button id="closeup" aria-pressed="true" disabled>Closer look</button><button id="match" aria-pressed="true" disabled>Match left side</button></div>
 <div class="bar"><label>2.5D strength <select id="depth" disabled><option value="1">Subtle</option><option value="2" selected>Medium</option><option value="3">Strong</option></select></label><label>Feel <select id="preset" disabled><option value="natural" selected>Natural</option><option value="playful">Playful</option><option value="chaos">Chaos</option></select></label><button id="reset" disabled>Reset</button></div>
-<p class="detail">Test page only. Same approved portrait, springs and boundaries on both sides; the right adds light that changes with the motion and a slight parallax. Silent. Nothing here reads or changes your saved Peaches settings.</p>
+<p class="detail">Test page only. Same approved portrait, springs and boundaries on both sides; the right adds light that changes with the motion and a slight parallax. Match left side lets the left cheek on the 2.5D picture move like the right cheek; the Current picture never changes. Silent. Nothing here reads or changes your saved Peaches settings.</p>
 </main>
 <script>
 const frames=[...document.querySelectorAll('iframe')];
@@ -64,6 +64,7 @@ document.querySelectorAll('button[data-view]').forEach(b=>b.onclick=()=>changeVi
 document.getElementById('bounce').onclick=()=>each(a=>a.bounce());
 document.getElementById('auto').onclick=()=>{auto=!auto;each(a=>a.auto(auto));const b=document.getElementById('auto');b.setAttribute('aria-pressed',String(auto))};
 document.getElementById('closeup').onclick=()=>{closeup=!closeup;each(a=>a.closeup(closeup));const b=document.getElementById('closeup');b.setAttribute('aria-pressed',String(closeup))};
+document.getElementById('match').onclick=()=>{const b=document.getElementById('match'),on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',String(on));const a=apis()[1];if(a)a.match(on);each(e=>e.reset())};
 document.getElementById('depth').onchange=e=>{const a=apis()[1];if(a)a.depth(Number(e.target.value));document.getElementById('depthLabel').textContent='Depth lighting · '+e.target.selectedOptions[0].textContent};
 document.getElementById('preset').onchange=e=>each(a=>a.preset(e.target.value));
 document.getElementById('reset').onclick=()=>each(a=>a.reset());

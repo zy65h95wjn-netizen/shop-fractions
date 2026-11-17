@@ -44,3 +44,11 @@ node peach-physics/previews/midnight-depth-light/verify.cjs peach-physics/previe
 `verify.cjs` (`tests/results.json`): at rest the engine is pixel-identical to production Midnight Yule; in two held poses the engine at Off is pixel-identical to production with identical spring state; with depth on, changed pixels stay within her moving area (source x 165–782, y 938–1331 at Strong); after release and settling at Strong the portrait returns exactly; no service worker; no page errors.
 
 These checks use desktop Chromium with software WebGL at an iPhone 13 viewport. They do not establish frame rate, appearance or feel on a physical iPhone.
+
+## Left side matches right — test option
+
+Phone review: the screen-right cheek pulls down further than the left and takes the fabric with it, and that was preferred. Production gives Midnight Yule's screen-left side its own traced skin mask that keeps clothing, the lower crease and inner thigh still, 10% weaker taps and drags, and 6% more damping. With **Match left side** on, the 2.5D picture renders the left side through the same path as the right and uses the same strength and damping.
+
+On in the 2.5D picture by default; the Current picture never changes. Because the left springs are stronger with the option on, the two pictures are no longer in identical spring state while it is on (in the recorded hold the left centre node travelled 30 source pixels instead of 27.4). `frame.html?match=0` keeps production behaviour; the panel has **Left side: matches right / current**. The rendering part is WebGL only. Switching it in the side-by-side page resets both pictures. Production is unchanged.
+
+`tests/compare-match-hold.png` shows the left cheek held with the option on. `tests/results.json` was recorded with the option off (`?match=0`).

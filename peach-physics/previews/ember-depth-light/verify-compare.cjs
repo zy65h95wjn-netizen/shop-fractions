@@ -23,6 +23,9 @@ const results = {};
     for (let i = 0; i < a.data.length; i += 4) { const d = Math.max(Math.abs(a.data[i] - b.data[i]), Math.abs(a.data[i + 1] - b.data[i + 1]), Math.abs(a.data[i + 2] - b.data[i + 2])); if (d > 1) { n++; max = Math.max(max, d); } }
     done({ changed: n, maxDelta: max, size: [a.width, a.height] });
   })));
+  // Sync checks run with the left-side option off, so both engines share one behaviour.
+  await page.click('#match'); await page.evaluate(() => scrollTo(0, 0));
+  results.matchOffAtStart = await page.evaluate(() => [...document.querySelectorAll('iframe')].map(f => f.contentWindow.__depthDebug.match()));
   results.levels = await levels();
   results.renderers = (await info()).map(i => i.renderer + ':' + i.character);
   await page.waitForTimeout(2500); // Auto Jiggle running
@@ -58,6 +61,19 @@ const results = {};
   r = await raw(); results.tapOnRight = { statesIdentical: r[0] === r[1], gestures: (await info()).map(i => i.gesture), slaps: (await info()).map(i => i.slaps) };
   await page.screenshot({ path: `${OUT}/compare-tap.png` });
 
+  // Left-side option on (2.5D picture only): hold the left cheek again.
+  await page.click('#match'); await page.evaluate(() => scrollTo(0, 0)); await page.waitForTimeout(1600);
+  const boxM = await page.locator('iframe').first().boundingBox();
+  const m = { x: boxM.x + boxM.width * (a.x - box.x) / box.width, y: boxM.y + boxM.height * (a.y - box.y) / box.height };
+  await t('touchStart', m.x, m.y);
+  for (let k = 1; k <= 10; k++) { await t('touchMove', m.x - 2 * k, m.y + 5 * k); await page.waitForTimeout(20); }
+  await page.waitForTimeout(1200);
+  r = await raw();
+  const held2 = JSON.parse(r[0]), held3 = JSON.parse(r[1]);
+  results.matchOn = { leftNodesCurrent: held2.nodes.slice(0, 3).map(n => [+n.dx.toFixed(1), +n.dy.toFixed(1)]), leftNodesMatched: held3.nodes.slice(0, 3).map(n => [+n.dx.toFixed(1), +n.dy.toFixed(1)]), flags: await page.evaluate(() => [...document.querySelectorAll('iframe')].map(f => f.contentWindow.__depthDebug.match())), statesIdentical: r[0] === r[1], paneDifference: await paneDiff() };
+  await page.screenshot({ path: `${OUT}/compare-match-hold.png` });
+  await t('touchEnd'); await page.waitForTimeout(300);
+  await page.click('#match'); await page.waitForTimeout(300);
   // Controls.
   await page.selectOption('#depth', '3'); await page.selectOption('#preset', 'chaos'); await page.click('#bounce'); await page.waitForTimeout(200);
   r = await raw(); results.controls = { levels: await levels(), bounceStatesIdentical: r[0] === r[1], preset: await page.evaluate(() => window.__depthComparison.apis().map(a => a.snapshot().preset)) };

@@ -105,7 +105,7 @@ body.embedded #gear,body.embedded #depthChip,body.embedded #hint,body.embedded #
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
    <p id="presetDesc" class="preset-desc">Realistic motion with gentle secondary response.</p>
-   <section aria-label="Optional motion"><button id="shakeMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Shake to Jiggle: off</button><button id="autoMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Auto Jiggle: off</button><p id="motionStatus" style="font-size:13px;line-height:1.4">Optional motion effects</p></section><button id="depthLight" class="slap-audio" type="button" aria-pressed="true">Depth lighting: Medium</button><button id="grabHold" class="slap-audio" type="button">Grab and hold: on</button><button id="slapAudio" class="slap-audio" type="button" aria-pressed="false">Slap sound: Off</button>
+   <section aria-label="Optional motion"><button id="shakeMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Shake to Jiggle: off</button><button id="autoMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Auto Jiggle: off</button><p id="motionStatus" style="font-size:13px;line-height:1.4">Optional motion effects</p></section><button id="depthLight" class="slap-audio" type="button" aria-pressed="true">Depth lighting: Medium</button><button id="matchLeft" class="slap-audio" type="button" aria-pressed="true">Left side: matches right</button><button id="grabHold" class="slap-audio" type="button">Grab and hold: on</button><button id="slapAudio" class="slap-audio" type="button" aria-pressed="false">Slap sound: Off</button>
    <button id="testSound" class="slap-audio" type="button" disabled aria-describedby="audioStatus">Test sound</button><p id="audioStatus" role="status" style="font-size:12px;line-height:1.4">Sound is off.</p>
    <button id="santaLaugh" class="slap-audio" type="button" aria-pressed="false" hidden>Belly laugh: Off</button>
    <div class="control"><label for="bounce">Bounce strength <output id="bounceN">65</output></label><input id="bounce" type="range" min="0" max="100" value="65"></div>
@@ -192,6 +192,8 @@ function legacyFallbackDragMask(backup,side,shiftX,shiftY){
 const DEPTH_LEVELS=[{name:'Off',values:[0,0,0]},{name:'Subtle',values:[.05,.03,.20]},{name:'Medium',values:[.09,.05,.28]},{name:'Strong',values:[.14,.08,.35]}];
 const DEPTH_KEY='peach-physics-preview-midnightdepth-depth';
 let depthLevel=2;
+// Test option: let the screen-left side move like the screen-right side. ?match=0 keeps production behaviour.
+let matchLeft=new URLSearchParams(location.search).get('match')!=='0';
 // Side-by-side test page: this engine runs inside a frame and is driven by the page around it.
 const embedded=new URLSearchParams(location.search).get('embed')==='1'&&parent!==window;
 let embedCloseup=false;
@@ -1168,7 +1170,7 @@ function uploadCharacterCalibration(){
  gl.uniform2fv(splitLoc,new Float32Array(c.split));
  gl.uniform4fv(boundLoc,new Float32Array(c.bounds));
  gl.uniform2fv(taperLoc,new Float32Array(c.taper));
- gl.uniform1f(leftMaskLoc,c.id==='midnight'?1:0);
+ gl.uniform1f(leftMaskLoc,c.id==='midnight'&&!matchLeft?1:0);
  gl.uniform1f(aureliaMaskLoc,c.id==='aurelia'?1:0);
  gl.uniform1f(hollyMaskLoc,isHolly()?1:0);
  gl.uniform1f(santaMaskLoc,isSanta()?1:0);
@@ -1315,7 +1317,7 @@ function step(dt){
  const dampingRatio=isSanta()?.12+model.settle*.0025:isHolly()?.12+model.settle*.0022:.13+model.settle*.0032,damping=2*omega*dampingRatio*.97,couple=k*.145; // Small lift in decay time.
  const forces=nodes.map(n=>{
   const sideFrequency=isSanta()?(n.side===0?.98:1.02):isHolly()?(n.side===0?.94:1.06):n.side===0?.986:1.014; // small natural asymmetry
-  const localDamping=currentCharacter().id==='midnight' && n.side===0?1.06:1; // Smooth only brunette's screen-left spring.
+  const localDamping=currentCharacter().id==='midnight' && n.side===0&&!matchLeft?1.06:1; // Smooth only brunette's screen-left spring.
   return {fx:-k*sideFrequency*n.dx-damping*localDamping*n.vx,fy:-k*sideFrequency*n.dy-damping*localDamping*n.vy};
  });
  for(const [a,b] of connections){
@@ -1414,7 +1416,7 @@ function updatePress(side,x,y){
 function impulse(side,x,y,amplitude=1,vx=0,vy=0,flick=false){
  if(side<0)return;
  if(isSanta()){santaImpulse(side,x,y,amplitude,vx,vy,flick);return;}
- const leftTune=isHolly()?(.65+model.bounce*.009):currentCharacter().id==='midnight' && side===0?.90:1;
+ const leftTune=isHolly()?(.65+model.bounce*.009):currentCharacter().id==='midnight' && side===0&&!matchLeft?.90:1;
  const power=(.43+model.bounce*.011)*amplitude*1.06*leftTune; // Keep the brunette's right-side response unchanged.
  // Tap: gentle downward/outward kick. Flick: use both directions of measured finger velocity.
  const pushX=flick?clamp(vx*.35,-320,320):(side?48:-48);
@@ -1485,7 +1487,7 @@ function slap(side,x,y,pt,strength=1){
  if(isSanta()){santaImpulse(side,x,y,strength,0,0,false,true);slapVisual(pt);slapSound();startSantaLaugh();slapCount++;lastGesture='slap';return;}
  // Quick contact compression followed by a stronger, localized spring rebound.
  // Keep the source photograph, seam, and the opposite side anchored.
- const leftTune=isHolly()?(.65+model.bounce*.009):currentCharacter().id==='midnight' && side===0?.90:1;
+ const leftTune=isHolly()?(.65+model.bounce*.009):currentCharacter().id==='midnight' && side===0&&!matchLeft?.90:1;
  const power=(.62+model.bounce*.008)*1.06*leftTune*(isHolly()?strength:1); // Keep the brunette's right-side slap unchanged.
  const z=regions[side];
  const vBias=clamp((y-z.y)/z.ry,-.85,.85);
@@ -1544,6 +1546,7 @@ if(embedded){
   preset:value=>{activePreset=value;Object.assign(model,currentPresets()[value]);refreshPrefs();reset();reseed();},
   closeup:value=>{embedCloseup=!!value;needSize=true;},
   depth:value=>window.__depthDebug.set(value),
+  match:value=>setMatch(value),
   resize:()=>{needSize=true;},
   raw:()=>JSON.parse(JSON.stringify({nodes,followers,impacts,waves})),
   snapshot:()=>window.__peachPhysicsDebug.snapshot()
@@ -1579,7 +1582,7 @@ canvas.addEventListener('pointermove',e=>{
  finger.vy=clamp(finger.vy*.55+(dy/dt)*.45,-1100,1100);
  if(canGrabHold()){
   finger.grabbed=finger.grabbed||finger.travel>8;
-  const gain=.17*(isHolly()?.95:currentCharacter().id==='midnight'&&finger.side===0?.90:1);
+  const gain=.17*(isHolly()?.95:currentCharacter().id==='midnight'&&finger.side===0&&!matchLeft?.90:1);
   finger.grabTargets=finger.grabBase.map(n=>({
    dx:clamp(n.dx+(p.x-finger.grabOrigin.x)*gain*n.weight,-26,26),
    dy:clamp(n.dy+(p.y-finger.grabOrigin.y)*gain*n.weight,-30,30)}));
@@ -1588,7 +1591,7 @@ canvas.addEventListener('pointermove',e=>{
  for(let i=finger.side*3;i<finger.side*3+3;i++){
   if(canGrabHold()&&finger.grabbed){const n=nodes[i],target=finger.grabTargets[i%3];n.dx=target.dx;n.dy=target.dy;n.vx=n.vy=0;continue;}
   const n=nodes[i],q=((p.x-n.x)/n.rx)**2+((p.y-n.y)/n.ry)**2,weight=.20+.8*Math.exp(-q*1.4);
-  const leftTune=isSanta()?1.55:isHolly()?.95:currentCharacter().id==='midnight' && finger.side===0?.90:1;
+  const leftTune=isSanta()?1.55:isHolly()?.95:currentCharacter().id==='midnight' && finger.side===0&&!matchLeft?.90:1;
   const bx=isSanta()?58:26,by=isSanta()?66:30;
   n.dx=clamp(n.dx+dx*.17*weight*leftTune,-bx,bx);n.dy=clamp(n.dy+dy*.17*weight*leftTune,-by,by);
   n.vx=clamp(n.vx+(dx/dt)*.055*weight*leftTune,-600,600);n.vy=clamp(n.vy+(dy/dt)*.055*weight*leftTune,-600,600);
@@ -1704,7 +1707,11 @@ function refreshDepth(){
 }
 function cycleDepth(){if(fallback)return;depthLevel=(depthLevel+1)%DEPTH_LEVELS.length;try{localStorage.setItem(DEPTH_KEY,String(depthLevel));}catch(e){}refreshDepth();}
 for(const id of ['depthChip','depthLight']){const el=document.getElementById(id);el.addEventListener('click',cycleDepth);el.addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});}
-window.__depthDebug={level:()=>depthLevel,name:()=>DEPTH_LEVELS[depthLevel].name,set:value=>{if(DEPTH_LEVELS[value]){depthLevel=value;refreshDepth();}}};
+function refreshMatch(){const el=document.getElementById('matchLeft');el.setAttribute('aria-pressed',String(matchLeft));el.textContent=matchLeft?'Left side: matches right':'Left side: current';}
+function setMatch(value){matchLeft=!!value;uploadCharacterCalibration();refreshMatch();}
+{const el=document.getElementById('matchLeft');el.addEventListener('click',()=>setMatch(!matchLeft));el.addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});}
+refreshMatch();
+window.__depthDebug={match:()=>matchLeft,setMatch,level:()=>depthLevel,name:()=>DEPTH_LEVELS[depthLevel].name,set:value=>{if(DEPTH_LEVELS[value]){depthLevel=value;refreshDepth();}}};
 refreshDepth();
 presentCharacter();
 getPhoto(activeCharacterIndex,photo=>{

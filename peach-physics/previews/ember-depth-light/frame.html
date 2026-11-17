@@ -105,7 +105,7 @@ body.embedded #gear,body.embedded #depthChip,body.embedded #hint,body.embedded #
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
    <p id="presetDesc" class="preset-desc">Realistic motion with gentle secondary response.</p>
-   <section aria-label="Optional motion"><button id="shakeMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Shake to Jiggle: off</button><button id="autoMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Auto Jiggle: off</button><p id="motionStatus" style="font-size:13px;line-height:1.4">Optional motion effects</p></section><button id="depthLight" class="slap-audio" type="button" aria-pressed="true">Depth lighting: Medium</button><button id="grabHold" class="slap-audio" type="button">Grab and hold: on</button><button id="slapAudio" class="slap-audio" type="button" aria-pressed="false">Slap sound: Off</button>
+   <section aria-label="Optional motion"><button id="shakeMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Shake to Jiggle: off</button><button id="autoMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Auto Jiggle: off</button><p id="motionStatus" style="font-size:13px;line-height:1.4">Optional motion effects</p></section><button id="depthLight" class="slap-audio" type="button" aria-pressed="true">Depth lighting: Medium</button><button id="matchLeft" class="slap-audio" type="button" aria-pressed="true">Left side: matches right</button><button id="grabHold" class="slap-audio" type="button">Grab and hold: on</button><button id="slapAudio" class="slap-audio" type="button" aria-pressed="false">Slap sound: Off</button>
    <button id="testSound" class="slap-audio" type="button" disabled aria-describedby="audioStatus">Test sound</button><p id="audioStatus" role="status" style="font-size:12px;line-height:1.4">Sound is off.</p>
    <button id="santaLaugh" class="slap-audio" type="button" aria-pressed="false" hidden>Belly laugh: Off</button>
    <div class="control"><label for="bounce">Bounce strength <output id="bounceN">65</output></label><input id="bounce" type="range" min="0" max="100" value="65"></div>
@@ -192,6 +192,8 @@ function legacyFallbackDragMask(backup,side,shiftX,shiftY){
 const DEPTH_LEVELS=[{name:'Off',values:[0,0,0]},{name:'Subtle',values:[.05,.03,.20]},{name:'Medium',values:[.09,.05,.28]},{name:'Strong',values:[.14,.08,.35]}];
 const DEPTH_KEY='peach-physics-preview-emberdepth-depth';
 let depthLevel=2;
+// Test option: let the screen-left side move like the screen-right side. ?match=0 keeps production behaviour.
+let matchLeft=new URLSearchParams(location.search).get('match')!=='0';
 // Side-by-side test page: this engine runs inside a frame and is driven by the page around it.
 const embedded=new URLSearchParams(location.search).get('embed')==='1'&&parent!==window;
 let embedCloseup=false;
@@ -1039,6 +1041,7 @@ function initGL(){
  // 2.5D preview. x = largest light change (fraction), y = highlight gain, z = parallax lean.
  // All zero reproduces the production r14 picture exactly.
  uniform vec3 uDepth;
+ uniform float uMatchLeft;
  const float FORM_DEPTH=130.0;
  // Rounded depth dome per side in source pixels: xy = depth gradient, z = height 0..1.
  vec3 formDome(vec2 s,vec2 c,vec2 r){
@@ -1065,7 +1068,7 @@ function initGL(){
    vec2 left=vEmberLeft*mix(1.0,l,uDragBoundary.x);
    // Short backward steps approach the fixed boundary smoothly, instead of
    // dragging garment pixels or stretching the lower fold with the center.
-   for(int k=0;k<6;k++)sampleUV-=left*emberLeftEnvelope(sampleUV)/6.0;
+   for(int k=0;k<6;k++)sampleUV-=left*mix(emberLeftEnvelope(sampleUV),1.0,uMatchLeft)/6.0;
    photoUV=clamp(sampleUV-vEmberRight*mix(1.0,r,uDragBoundary.y),.001,.999);
   }
   if(dot(vLeftVelocity,vLeftVelocity)>0.0 && vRawUV.x>.15 && vRawUV.x<.50 && vRawUV.y>.58 && vRawUV.y<.84){
@@ -1300,6 +1303,7 @@ function render(){
  gl.useProgram(program);
  gl.uniform2fv(gl.getUniformLocation(program,'uDragBoundary'),dragBoundary);
  gl.uniform3fv(gl.getUniformLocation(program,'uDepth'),DEPTH_LEVELS[depthLevel].values);
+ gl.uniform1f(gl.getUniformLocation(program,'uMatchLeft'),matchLeft?1:0);
  gl.uniform1f(gl.getUniformLocation(program,'uEmberBoundary'),currentCharacter().id==='ember'?1:0);
  gl.uniform4fv(coverLoc,new Float32Array(uvCover));
   gl.uniform2fv(offsetLoc,new Float32Array(nodes.flatMap(n=>[n.dx/W,n.dy/H])));
@@ -1544,6 +1548,7 @@ if(embedded){
   preset:value=>{activePreset=value;Object.assign(model,currentPresets()[value]);refreshPrefs();reset();reseed();},
   closeup:value=>{embedCloseup=!!value;needSize=true;},
   depth:value=>window.__depthDebug.set(value),
+  match:value=>setMatch(value),
   resize:()=>{needSize=true;},
   raw:()=>JSON.parse(JSON.stringify({nodes,followers,impacts,waves})),
   snapshot:()=>window.__peachPhysicsDebug.snapshot()
@@ -1704,7 +1709,11 @@ function refreshDepth(){
 }
 function cycleDepth(){if(fallback)return;depthLevel=(depthLevel+1)%DEPTH_LEVELS.length;try{localStorage.setItem(DEPTH_KEY,String(depthLevel));}catch(e){}refreshDepth();}
 for(const id of ['depthChip','depthLight']){const el=document.getElementById(id);el.addEventListener('click',cycleDepth);el.addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});}
-window.__depthDebug={level:()=>depthLevel,name:()=>DEPTH_LEVELS[depthLevel].name,set:value=>{if(DEPTH_LEVELS[value]){depthLevel=value;refreshDepth();}}};
+function refreshMatch(){const el=document.getElementById('matchLeft');el.setAttribute('aria-pressed',String(matchLeft));el.textContent=matchLeft?'Left side: matches right':'Left side: current';}
+function setMatch(value){matchLeft=!!value;uploadCharacterCalibration();refreshMatch();}
+{const el=document.getElementById('matchLeft');el.addEventListener('click',()=>setMatch(!matchLeft));el.addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});}
+refreshMatch();
+window.__depthDebug={match:()=>matchLeft,setMatch,level:()=>depthLevel,name:()=>DEPTH_LEVELS[depthLevel].name,set:value=>{if(DEPTH_LEVELS[value]){depthLevel=value;refreshDepth();}}};
 refreshDepth();
 presentCharacter();
 getPhoto(activeCharacterIndex,photo=>{

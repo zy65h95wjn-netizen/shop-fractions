@@ -3,7 +3,7 @@ const { chromium, devices } = require('playwright');
 const fs = require('fs');
 const OUT = process.argv[2]; fs.mkdirSync(OUT, { recursive: true });
 const BASE = 'http://127.0.0.1:8765/peach-physics/';
-const PREVIEW = BASE + 'previews/midnight-depth-light/frame.html', PROD = BASE + 'v8/';
+const PREVIEW = BASE + 'previews/midnight-depth-light/frame.html?match=0', PROD = BASE + 'v8/';
 const results = {};
 
 async function open(browser, url) {

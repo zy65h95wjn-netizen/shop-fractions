@@ -44,3 +44,11 @@ node peach-physics/previews/ember-depth-light/verify.cjs peach-physics/previews/
 `verify.cjs` (`tests/results.json`): at rest the engine is pixel-identical to production Winter Ember; in two held poses the engine at Off is pixel-identical to production with identical spring state; turning depth on changes pixels only within her moving area (source x 101–810, y 862–1323 at Strong); after release and settling at Strong the portrait returns exactly; no service worker; no page errors. Separately, comparing a moved frame with the resting frame shows a few changed pixels far outside the moving area. Production does the same, since the engine at Off matches it exactly, so this is existing production behaviour and not part of the depth effect.
 
 These checks use desktop Chromium with software WebGL at an iPhone 13 viewport. They do not establish frame rate, appearance or feel on a physical iPhone.
+
+## Left side matches right — test option
+
+Phone review: the screen-right cheek pulls down further than the left and takes the fabric with it, and that was preferred. Production r14 holds the screen-left side back with a skin envelope that keeps the garment edge and lower fold still; it was added after an earlier report of an unnatural pull on that side (see `v8/EMBER-FIX.md`). With **Match left side** on, the 2.5D picture bypasses that envelope so the left side is handled as the right side is. The springs are unchanged, so both pictures stay in the same spring state.
+
+On in the 2.5D picture by default; the Current picture never changes. `frame.html?match=0` keeps production behaviour; the panel has **Left side: matches right / current**. WebGL only. Switching it in the side-by-side page resets both pictures. This undoes the earlier left-side correction in this test only; production is unchanged.
+
+`tests/compare-match-hold.png` shows the left cheek held with the option on. `tests/results.json` was recorded with the option off (`?match=0`).
