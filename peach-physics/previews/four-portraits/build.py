@@ -55,6 +55,13 @@ edit("createLeftShapeTexture();createAureliaShapeTexture();createHollyShapeTextu
      "if(isHolly())createHollyShapeTexture();else if(selection==='aurelia')createAureliaShapeTexture();else createLeftShapeTexture();")
 # Keep the accepted right-hand field and both spring trajectories intact.
 edit("let leftShapePixels=null;", (here/'midnight.js').read_text()+"\nlet leftShapePixels=null;")
+# The upper trim extends beyond the original skin-only crop. Use the same
+# source coordinates for rasterization and texture lookup in both renderers.
+edit("const w=320,h=416;", "const [x0,y0,w,h]=midnightLeftCrop;")
+edit("const px=148+x+.5,py=984+y+.5;", "const px=x0+x+.5,py=y0+y+.5;")
+edit("vec2(148.0,984.0))/vec2(320.0,416.0)",
+     "vec2(${midnightLeftCrop[0]}.,${midnightLeftCrop[1]}.))/vec2(${midnightLeftCrop[2]}.,${midnightLeftCrop[3]}.)")
+edit("vRawUV.y>.58 && vRawUV.y<.84", "vRawUV.y>${midnightLeftCrop[1]/1671} && vRawUV.y<.84")
 edit("leftShapePixels[y*w+x]=Math.round(255*t*t*(3-2*t));",
      "const weight=bounceExperiment&&selection==='midnight'?midnightSeamWeight(px,py):t*t*(3-2*t);\n   leftShapePixels[y*w+x]=Math.round(255*weight);")
 edit("   const [srcX,srcY,sw,sh]=fallbackRect(side);",
@@ -74,6 +81,25 @@ edit("for(int k=0;k<4;k++)sampleUV-=vLeftVelocity*leftEnvelope(sampleUV)*mix(1.0
     float holdLimit=${bounceExperiment&&selection==='midnight'?'1.0':'mix(1.0,midnightSupport(sampleUV),uDragBoundary.x)'};
     sampleUV-=response*support*holdLimit/4.0;
    }""")
+# Match the spacing between the three spring influences at each arch. The
+# left springs still supply all offsets, impacts, and follow-through here.
+# The arch crests are at x=321 and 614. The left crest sits six pixels lower.
+edit("     vec2 n=(uv-p.xy)/p.zw;",
+     """     vec2 n=(uv-p.xy)/p.zw;
+     ${bounceExperiment&&selection==='midnight'?`
+     if(s==0){
+      vec4 peer=uPoints[3+j];
+      vec2 mirrored=vec2(935.0/941.0-uv.x,uv.y-6.0/1671.0);
+      vec2 relative=(mirrored-peer.xy)/peer.zw;
+      n=mix(n,vec2(-relative.x,relative.y),1.0-smoothstep(1070.0,1148.0,uv.y*1671.0));
+     }` : ''}""")
+# In the upper band the right shader takes a single backward sample. Keep
+# that response across both materials, blending into the established solver below.
+edit("   photoUV+=sampleUV-vRawUV;", """   ${bounceExperiment&&selection==='midnight'?`
+   float upper=1.0-smoothstep(1070.0,1148.0,vRawUV.y*1671.0);
+   vec2 rimUV=vRawUV-vEmberLeft*leftEnvelope(vRawUV)*1.15;
+   sampleUV=mix(sampleUV,rimUV,upper);` : ''}
+   photoUV+=sampleUV-vRawUV;""")
 depth=(previews/'holly-25d/frame-hook.js').read_text()
 holly=depth[depth.index('const reliefSmooth='):depth.index('function reliefInit()')]
 aurelia=(previews/'aurelia-comparison/frame-hook.js').read_text()

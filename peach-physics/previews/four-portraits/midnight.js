@@ -1,7 +1,8 @@
 // Screen-left only. Coordinates are in Midnight's 941 × 1671 source portrait.
 // Trace the hem in source pixels. Across the lower fold, borrow the right
 // side’s falloff in normalized region coordinates, then guard the left silhouette.
-function midnightSeamWeight(x, y) {
+const midnightLeftCrop = [148, 920, 320, 480];
+function midnightSeamWeight(x, y, downwardTrim = null) {
  const offset = x - 321;
  const hem = 996 + offset * offset * (offset < 0 ? .0051 : .0042);
  const hemSlope = 2 * offset * (offset < 0 ? .0051 : .0042);
@@ -10,6 +11,24 @@ function midnightSeamWeight(x, y) {
  const aboveFold = (fold - y) / Math.hypot(1, .00272 * (x - 314));
  const fur = boundarySmooth(6, 91, belowHem);
  const previous = leftSkinWeight(x, y) * fur * boundarySmooth(6, 76, aboveFold);
+ // The white trim and the skin at its edge form one surface. Transfer motion
+ // smoothly through the trim, feathering to zero at the waist and silhouette.
+ const upperBlend = (1 - boundarySmooth(58, 103, belowHem)) * (1 - boundarySmooth(1100, 1150, y));
+ if (upperBlend > 0) {
+  const height = 1100 - y;
+  const outerX = 194 + .39 * height + .0010 * height * height;
+  const anchors = boundarySmooth(3, 23, x - outerX) * boundarySmooth(3, 40, 458 - x);
+  const radius = Math.hypot((x - 330) / 205, (y - 1156) / 267);
+  const rightEdge = 1 - boundarySmooth(.48, .98, radius);
+  // In Canvas a downward pull opens the middle of the right arch. Its
+  // corners and upward recoil stay more tightly supported.
+  const center = 1 - boundarySmooth(30, 83, Math.abs(offset));
+  const give = center * (downwardTrim ?? 0);
+  const upper = anchors * (downwardTrim === null
+   ? rightEdge * boundarySmooth(927, 1006, y - 6) * boundarySmooth(-78, -20, belowHem)
+   : boundarySmooth(-3 - 54 * give, 27 - 30 * give, belowHem));
+  return previous + upperBlend * (upper - previous);
+ }
  const blend = boundarySmooth(fold - 122, fold - 55, y) * boundarySmooth(91, 105, belowHem);
  if (blend === 0) return previous;
 
@@ -38,21 +57,32 @@ function midnightSeamWeight(x, y) {
 // once avoids the double edge from compositing a shifted patch over the trim.
 let midnightPatch;
 function drawMidnightLeft(sc) {
- const x0=148, y0=984, w=320, h=416;
+ const [x0,y0,w,h]=midnightLeftCrop;
  if (!midnightPatch) {
   const layer=document.createElement('canvas');
   layer.width=w; layer.height=h;
   const context=layer.getContext('2d');
   context.drawImage(img,x0,y0,w,h,0,0,w,h);
   const photo=context.getImageData(0,0,w,h);
-  const weights=new Float32Array(w*h);
-  for(let y=0;y<h;y++)for(let x=0;x<w;x++)weights[y*w+x]=midnightSeamWeight(x0+x+.5,y0+y+.5);
-  midnightPatch={layer,context,photo,weights,frame:context.createImageData(w,h)};
+  const supported=new Float32Array(w*h);
+  const extra=new Float32Array(w*(1150-y0));
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+   const k=y*w+x, px=x0+x+.5, py=y0+y+.5;
+   supported[k]=midnightSeamWeight(px,py,0);
+   if(k<extra.length)extra[k]=midnightSeamWeight(px,py,1)-supported[k];
+  }
+  midnightPatch={layer,context,photo,supported,extra,weights:supported.slice(),give:0,frame:context.createImageData(w,h)};
  }
  const {layer,context,photo,weights,frame}=midnightPatch;
  const center=nodes[1], follow=followers[0];
  const dx=.8*(center.dx+follow.dx*.35), dy=.8*(center.dy+follow.dy*.35);
  if(Math.abs(dx)+Math.abs(dy)<.05)return;
+ const give=boundarySmooth(0,10,dy);
+ if(give!==midnightPatch.give){
+  const {supported,extra}=midnightPatch;
+  for(let i=0;i<extra.length;i++)weights[i]=supported[i]+give*extra[i];
+  midnightPatch.give=give;
+ }
  frame.data.fill(0);
  for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){
   const index=y*w+x;
