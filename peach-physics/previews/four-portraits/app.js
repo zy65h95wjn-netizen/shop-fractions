@@ -79,7 +79,7 @@ async function selectPortrait(){
   if(job!==generation)return;
   const engine=new URL('./engine.html',location.href);
   engine.searchParams.set('portrait',id);
-  engine.searchParams.set('v','6');
+  engine.searchParams.set('v','7');
   for(const frame of frames)frame.src=engine.href;
   const limit=performance.now()+45000;
   while(!frames.every(f=>f.contentWindow.location.href===engine.href&&f.contentWindow.study?.ready())){

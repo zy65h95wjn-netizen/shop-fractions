@@ -1205,7 +1205,8 @@ function initGL(){
    vec2 projected=aPosition+uView*aDepth/uCover.xy;gl_Position=vec4(projected.x*2.0-1.0,1.0-projected.y*2.0,0.0,1.0);return;
   }
   if(uAurelia>0.5){
-   vAureliaLeft=aureliaVelocity(uv,0);vAureliaRight=aureliaVelocity(uv,1);vUV=uv;
+   vAureliaLeft=aureliaVelocity(uv,0)*${aureliaMotionGain.toFixed(2)};
+   vAureliaRight=aureliaVelocity(uv,1)*${aureliaMotionGain.toFixed(2)};vUV=uv;
    vec2 projected=aPosition+uView*aDepth/uCover.xy;gl_Position=vec4(projected.x*2.0-1.0,1.0-projected.y*2.0,0.0,1.0);return;
   }
   float rightMix=smoothstep(uSplit.x,uSplit.y,uv.x);
@@ -1509,7 +1510,7 @@ function render(){
    ctx.clearRect(0,0,layer.width,layer.height);
    ctx.globalCompositeOperation='source-over';
    // Preserve source sampling on the left; gently reduce the screen-right displacement.
-   const gain=side===1?.97:1,followGain=side===1?.35:.35;
+   const gain=(side===1?.97:1)*aureliaMotionGain,followGain=.35;
    ctx.drawImage(img,srcX-(n.dx+followers[side].dx*followGain)*.8*gain,srcY-(n.dy+followers[side].dy*followGain)*.8*gain,sw,sh,0,0,layer.width,layer.height);
    ctx.globalCompositeOperation='destination-in';ctx.drawImage(fallbackDragMask(backups[side],side,(n.dx+followers[side].dx*followGain)*.8*gain,(n.dy+followers[side].dy*followGain)*.8*gain),0,0);
    ctx.globalCompositeOperation='source-over';
@@ -2028,6 +2029,7 @@ function comparisonTick(dt){
  }
  for(let s=0;s<2;s++)comparisonPulses[s]=comparisonPulses[s].filter(p=>comparisonTime-p.t<4.4);
 }
+const aureliaMotionGain = comparisonExperiment ? 1.25 : 1;
 // Normalized silhouette points traced on each original portrait. Depth feathers
 // across the outline and goes to zero at the photo edges.
 const outlines = {
@@ -2087,7 +2089,7 @@ function exercise(kind) {
  impulse(0,x,y,1.2);
 }
 window.study={
- revision:6,
+ revision:7,
  ready:()=>!!img&&loader.classList.contains('hiding'),
  view:(x,y)=>{viewX=x;viewY=y},
  draw:()=>{if(needSize)resize();render()},

@@ -30,6 +30,13 @@ assert source.count(projection)==4
 source=source.replace(projection, "vec2 projected=aPosition+uView*aDepth/uCover.xy;gl_Position=vec4(projected.x*2.0-1.0,1.0-projected.y*2.0,0.0,1.0);")
 edit(" uploadCharacterCalibration();\n}", " depthBuffer=gl.createBuffer();\n depthAttribute=gl.getAttribLocation(program,'aDepth');\n viewUniform=gl.getUniformLocation(program,'uView');\n uploadCharacterCalibration();\n}")
 edit(" gl.uniform1f(gl.getUniformLocation(program,'uSoftBounce')", " gl.uniform2f(viewUniform,viewX,viewY*W/H);\n gl.uniform1f(gl.getUniformLocation(program,'uSoftBounce')")
+# Scale Aurelia's calibrated render displacement before the existing masks sample
+# the photo. Canvas uses the same gain for its source shift and boundary check.
+edit("   vAureliaLeft=aureliaVelocity(uv,0);vAureliaRight=aureliaVelocity(uv,1);vUV=uv;",
+     """   vAureliaLeft=aureliaVelocity(uv,0)*${aureliaMotionGain.toFixed(2)};
+   vAureliaRight=aureliaVelocity(uv,1)*${aureliaMotionGain.toFixed(2)};vUV=uv;""")
+edit("const gain=side===1?.97:1,followGain=side===1?.35:.35;",
+     "const gain=(side===1?.97:1)*aureliaMotionGain,followGain=.35;")
 # Rotate the upper cup and its trim together about the garment anchor.
 edit("vGarmentRight=hollyOriginalVelocity(vec2(498.0/754.0,539.0/1280.0),1);", """vGarmentRight=hollyOriginalVelocity(vec2(498.0/754.0,539.0/1280.0),1);
    if(uSoftBounce>.5){

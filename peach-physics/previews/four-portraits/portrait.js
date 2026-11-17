@@ -1,3 +1,4 @@
+const aureliaMotionGain = comparisonExperiment ? 1.25 : 1;
 // Normalized silhouette points traced on each original portrait. Depth feathers
 // across the outline and goes to zero at the photo edges.
 const outlines = {
@@ -57,7 +58,7 @@ function exercise(kind) {
  impulse(0,x,y,1.2);
 }
 window.study={
- revision:6,
+ revision:7,
  ready:()=>!!img&&loader.classList.contains('hiding'),
  view:(x,y)=>{viewX=x;viewY=y},
  draw:()=>{if(needSize)resize();render()},
