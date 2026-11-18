@@ -31,7 +31,7 @@ window.releaseProbe={
   if(approvedStudy){study.pointer({type,id:side+1,x,y});return;}
   const box=canvas.getBoundingClientRect();
   canvas.dispatchEvent(new PointerEvent(type,{pointerId:side+1,pointerType:'touch',
-   clientX:box.left+x*drawW/W,clientY:box.top+y*drawH/H,bubbles:true,cancelable:true}));
+   clientX:box.left+ox+x*drawW/W,clientY:box.top+oy+y*drawH/H,bubbles:true,cancelable:true}));
  },
  bounce(){if(approvedStudy)study.exercise('bounce');else bounceBoth();},
  auto(){motion.setAuto(true);},
@@ -45,10 +45,76 @@ window.releaseProbe={
  }
 };
 `;
+// Inject this function into the production closure. Markers measure the displayed
+// movement after mask sampling, including Aurelia's existing baked Auto accent.
+function trackClap(){
+  releaseProbe.prepare();resize();
+  const id=currentCharacter().id;
+  const guards={ember:[[216,900],[210,1240]],midnight:[[320,895],[461,1430]],aurelia:[[270,754],[520,1040]]};
+  const points=[...currentCharacter().impactCenters,...guards[id]];
+  const portrait=img,patch=midnightPatch;
+  const markers=document.createElement('canvas');markers.width=W;markers.height=H;
+  const ink=markers.getContext('2d');ink.fillRect(0,0,W,H);ink.fillStyle='white';
+  for(const [x,y] of points)ink.fillRect(x-4,y-4,8,8);
+  function useImage(image){
+    img=image;midnightPatch=null;
+    if(!fallback){gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
+      gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,image);}
+  }
+  const surface=document.createElement('canvas');
+  surface.width=canvas.width;surface.height=canvas.height;
+  const read=surface.getContext('2d',{willReadFrequently:true});
+  function locate(){
+    // Measure the Auto motion independently of camera sway.
+    viewX=0;viewY=0;render();read.drawImage(canvas,0,0);
+    return points.map(([x,y],i)=>{
+      const scale=canvas.width/cssW,r=i<2?Math.ceil(28*scale):Math.ceil(5*scale);
+      const cx=Math.round((ox+x/W*drawW)*scale),cy=Math.round((oy+y/H*drawH)*scale);
+      const w=2*r+1,data=read.getImageData(cx-r,cy-r,w,w).data;
+      let mass=0,dx=0,dy=0;
+      for(let j=0;j<w;j++)for(let k=0;k<w;k++){
+        const v=data[4*(j*w+k)];mass+=v;dx+=v*(k-r);dy+=v*(j-r);
+      }
+      if(!mass)throw Error(id+' missing Auto marker at '+[x,y]);
+      return [dx/mass/scale,dy/mass/scale];
+    });
+  }
+  try{
+    useImage(markers);
+    const rest=locate(),offsets=()=>locate().map(([x,y],i)=>[x-rest[i][0],y-rest[i][1]]);
+    releaseProbe.auto();releaseProbe.tick(180);
+    const samples=[];
+    let bakedTravel=0;
+    for(let n=0;n<48;n++){
+      releaseProbe.tick(5);samples.push(offsets());
+      bakedTravel=Math.max(bakedTravel,Math.abs(reboundOffset(1).x));
+    }
+    // Catch an active clap. The grab must begin at the visible position and
+    // automatic inputs must pause through both the hold and the release delay.
+    const beforeGrab=clamp(nodes[1].dx+reboundOffset(1).x,-26,26),steps=motion.counts.autoSteps;
+    releaseProbe.pointer('pointerdown',0);
+    const caught=pointers.get(1)?.grabBase[1].dx;
+    releaseProbe.tick(160);releaseProbe.pointer('pointerup',0);releaseProbe.tick(140);
+    const paused=motion.counts.autoSteps===steps;
+    releaseProbe.tick(24);
+    const resumed=motion.counts.autoSteps>steps;
+    motion.setAuto(false);releaseProbe.tick(540);
+    const gap=samples.map(([[left],[right]])=>left-right);
+    const lo=Math.min(...gap),hi=Math.max(...gap),middle=(lo+hi)/2;
+    const crossings=gap.filter((v,i)=>i&&v>=middle&&gap[i-1]<middle).length;
+    const peak=(array)=>Math.max(...array.map(Math.abs));
+    const movingBoth=samples.filter(([[l],[r]])=>Math.abs(l)>.7&&Math.abs(r)>.7);
+    return {inward:hi,outward:-lo,crossings,bakedTravel,catchError:Math.abs(beforeGrab-caught),paused,resumed,
+      opposite:movingBoth.length>=32&&movingBoth.every(([[l],[r]])=>l*r<0),
+      vertical:peak(samples.flatMap(frame=>frame.slice(0,2).map(p=>p[1]))),
+      guards:peak(samples.flatMap(frame=>frame.slice(2).flat())),
+      settled:peak(offsets().flat())};
+  }finally{useImage(portrait);midnightPatch=patch;releaseProbe.prepare();}
+}
 function instrument(html) {
   const marker = 'presentCharacter();\ngetPhoto';
   assert(html.includes(marker));
-  return html.replace(marker, hook + '\n' + marker);
+  return html.replace(marker, hook + '\n' + trackClap.toString() + '\nreleaseProbe.trackClap=trackClap;\n' + marker);
 }
 async function check(renderer, browser) {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, serviceWorkers: 'block' });
@@ -115,13 +181,25 @@ async function check(renderer, browser) {
         clean();both('pointer','pointerdown',0);both('pointer','pointerdown',1);both('tick',9);
         both('pointer','pointermove',0,-25,-34);both('pointer','pointermove',1,14,21);both('tick',24);
         compare('two fingers and upper trim');both('pointer','pointerup',0,-25,-34);both('pointer','pointerup',1,14,21);
-        clean();both('auto');both('tick',143);compare('auto');
+        // These two portraits deliberately replace the reference's drifting Auto.
+        if(['aurelia','holly'].includes(snapshots()[0].character)){
+          clean();both('auto');both('tick',143);compare('auto');
+        }
         return checks;
       }, renderer);
       for (const frame of result) {
         assert(frame.renderer && frame.solver, id+' '+renderer+' '+JSON.stringify(frame));
         assert(frame.mae < .05 && frame.bad < 120, id+' '+renderer+' '+JSON.stringify(frame));
         if(frame.label==='bounce'||(frame.label==='depth'&&renderer==='webgl')) assert(frame.moving>100,id+' blank '+frame.label);
+      }
+      if(id!=='holly'){
+        const travel=await live.locator('#game').evaluate(()=>releaseProbe.trackClap());
+        console.log(renderer,id,'Auto motion in phone CSS pixels',JSON.stringify(travel));
+        const minGap=renderer==='webgl'?12:8;
+        assert(travel.inward>minGap&&travel.outward>minGap&&travel.opposite,id+' needs opposite, visible horizontal travel');
+        assert(travel.bakedTravel>1&&travel.catchError<.001&&travel.paused&&travel.resumed,id+' baked accent and touch takeover');
+        assert(travel.crossings>=3&&travel.crossings<=4,id+' needs two claps per second');
+        assert(travel.vertical<.6&&travel.guards<.25&&travel.settled<.25,id+' vertical drift, moving guard or residual Auto');
       }
       console.log(renderer,id,result.length+' preview comparisons, max changed pixels (>3 RGB)',Math.max(...result.map(r=>r.bad)));
     }

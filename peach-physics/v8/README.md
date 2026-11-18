@@ -1,3 +1,9 @@
+# Peach Physics R15.1
+
+With Auto Jiggle on, Winter Ember and Midnight Yule now close and open twice per second. They use Aurelia’s horizontal drive and the same baked accent on each closing beat, with each portrait’s own springs, motion limits and garment support. The existing Auto switch controls the effect and remembers its setting. Touch pauses Auto while you drag and for 1.2 seconds after release.
+
+The release comparison tracks each side through four claps in the phone layout, alongside fixed garment markers. The offline test covers updates from both R14 and R15. The cache is `peach-physics-v008-r15-clap1`.
+
 # Peach Physics R15
 
 The main app includes the four portraits from revision 7 of the approved 2.5D study (`909b47d`). Winter Ember has a damped screen-left diagonal release. Midnight Yule’s screen-left motion follows her right-side response with support through the upper trim. Aurelia Frost has the stronger horizontal Auto clap and a baked rebound. Holly Heartbreaker has softer coordinated movement and a supported cup and trim.

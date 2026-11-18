@@ -6,6 +6,7 @@ const calibration=Object.freeze({
  aurelia:{accel:1700,auto:1593.75,autoHz:1.10,limit:210},holly:{accel:500,auto:328.125,autoHz:.85,limit:110},
  santa:{accel:500,auto:287.5,autoHz:.65,limit:210}
 });
+const autoClapCharacters=new Set(['ember','midnight','aurelia']);
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 class MotionInput{
  constructor({character,nodes,busy,settings=()=>({bounce:65,softness:65,settle:48}),random=Math.random,onChange=()=>{}}){
@@ -13,6 +14,7 @@ class MotionInput{
   this.shake=false;this.auto=false;this.visible=true;this.time=0;this.quietUntil=0;
   this.autoDrive=null;this.lastCharacter=character();this.counts={shakeSteps:0,autoSteps:0};this.clearSensor();
  }
+ get usesAutoClap(){return autoClapCharacters.has(this.character());}
  clearSensor(){this.filtered=[0,0];this.gravity=null;this.lastEvent=null;this.lastSampleAt=-Infinity;this.warmup=0;this.source=null;this.force=[0,0];this.burst=0;this.cooldown=0;}
  setShake(value){this.shake=!!value;this.clearSensor();}
  setAuto(value){this.auto=!!value;this.autoDrive=null;}
@@ -68,11 +70,10 @@ class MotionInput{
   if(this.auto){
    if(!this.autoDrive)this.autoDrive={age:0,sides:[0,1].map(()=>({p:this.random()*Math.PI*2,q:this.random()*Math.PI*2,rate:.85+this.random()*.3,target:1,change:2+this.random()*3}))};
    const drive=this.autoDrive;drive.age+=dt;
-   // A smooth fade prevents an activation kick. Two drifting phases per side
-   // keep the input continuous without synchronized, repeating bounces.
+   // Ease into Auto after activation or a manual gesture.
    const ramp=clamp(drive.age/.7,0,1),fade=ramp*ramp*(3-2*ramp);
-   // Aurelia's two horizontal inputs close together twice per second.
-   if(this.character()==='aurelia'){
+   // Drive each side toward the center, then outward, twice per second.
+   if(this.usesAutoClap){
     const {softness,settle,bounce}=this.settings(),driveOmega=4*Math.PI;
     const omega=2*Math.PI*(4.3-softness*.018),damping=2*omega*(.13+settle*.0032)*.97;
     const response=Math.hypot(omega*omega-driveOmega*driveOmega,damping*driveOmega);

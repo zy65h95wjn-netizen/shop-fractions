@@ -1,14 +1,15 @@
-// Serve the last production worker first, upgrade a real installation, then disconnect.
+// Upgrade installations from R14 (Santa selected) and R15 (Midnight selected), then disconnect.
 const {chromium,assert,fs,path,root}=require('./harness.cjs');
 const http=require('node:http'),{execFileSync}=require('node:child_process');
 const app=path.join(root,'peach-physics/v8'),prefix='/peach-physics/v8/';
 const active=['ember','midnight','aurelia','holly'],ids=[...active,'santa'];
-const cacheName='peach-physics-v008-r15-four';
-const old=Object.fromEntries(['index.html','sw.js','motion.js','manifest.webmanifest'].map(file=>[
-  file,execFileSync('git',['show','0b1444a:peach-physics/v8/'+file],{cwd:root,maxBuffer:4e6})
-]));
+const cacheName='peach-physics-v008-r15-clap1';
+const releases={r14:'0b1444a',r15:'363d875'};
 const types={html:'text/html',js:'application/javascript',webmanifest:'application/manifest+json',jpg:'image/jpeg',png:'image/png'};
-function fixture(){
+function fixture(release){
+  const old=Object.fromEntries(['index.html','sw.js','motion.js','manifest.webmanifest'].map(file=>[
+    file,execFileSync('git',['show',releases[release]+':peach-physics/v8/'+file],{cwd:root,maxBuffer:4e6})
+  ]));
   let upgraded=false;
   const server=http.createServer((req,res)=>{
     const pathname=new URL(req.url,'http://localhost').pathname;
@@ -28,8 +29,9 @@ const profiles=Object.fromEntries(ids.map((id,i)=>[id,{
 async function ready(page){
   await page.waitForFunction(()=>window.__peachPhysicsDebug&&document.querySelector('#loader.hiding')&&__peachPhysicsDebug.snapshot().frames>0);
 }
-async function run(browser,renderer){
-  const fixtureServer=fixture(),{server}=fixtureServer;
+async function run(browser,renderer,release){
+  const selected=release==='r14'?'santa':'midnight',first=selected==='santa'?'ember':selected;
+  const fixtureServer=fixture(release),{server}=fixtureServer;
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
   const url='http://127.0.0.1:'+server.address().port+prefix;
   const ctx=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true});
@@ -40,16 +42,16 @@ async function run(browser,renderer){
     });
     const page=await ctx.newPage(),errors=[];
     page.on('pageerror',e=>errors.push(e.message));
-    await page.goto(url+'?character=santa');
+    await page.goto(url+'?character='+selected);
     await ready(page);
-    assert.equal(await page.evaluate(()=>__peachPhysicsDebug.snapshot().character),'santa');
-    await page.evaluate(async profiles=>{
+    assert.equal(await page.evaluate(()=>__peachPhysicsDebug.snapshot().character),selected);
+    await page.evaluate(async ({profiles,selected})=>{
       await navigator.serviceWorker.register('./sw.js');
       await navigator.serviceWorker.ready;
       for(const [id,value] of Object.entries(profiles))localStorage.setItem('peach-physics-v008-profile-'+id,JSON.stringify(value));
-      localStorage.setItem('peach-physics-v008-active','santa');
+      localStorage.setItem('peach-physics-v008-active',selected);
       localStorage.setItem('peach-r13-motion-options-v1',JSON.stringify({version:1,autoDefault:'holly-fullscreen-v1',auto:false,shake:true}));
-    },profiles);
+    },{profiles,selected});
     await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
     fixtureServer.upgrade();
     await page.evaluate(async()=>{
@@ -60,27 +62,33 @@ async function run(browser,renderer){
     await page.waitForFunction(()=>navigator.serviceWorker.controller?.state==='activated');
     const cacheFiles=await page.evaluate(async name=>(await (await caches.open(name)).keys()).map(k=>k.url),cacheName);
     assert.deepEqual(cacheFiles.map(u=>u.slice(url.length)).sort(),[
-      '','index.html','motion.js?v=r15-four','assets/aurelia-frost.jpg','assets/holly-heartbreaker.png','manifest.webmanifest','apple-touch-icon.png'
+      '','index.html','motion.js?v=r15-clap1','assets/aurelia-frost.jpg','assets/holly-heartbreaker.png','manifest.webmanifest','apple-touch-icon.png'
     ].sort());
     await ctx.setOffline(true);
-    await page.goto(url+'?character=santa&v=r15');
+    await page.goto(url+'?character=santa&v=r15.1');
     await ready(page);
     await page.waitForFunction(async expected=>(await caches.keys()).every(key=>key===expected),cacheName);
-    assert.equal(await page.evaluate(()=>localStorage.getItem('peach-physics-v008-active')),'ember');
-    const appBytes=await page.evaluate(async()=>Promise.all(['./','./index.html','./motion.js?v=r15-four','./manifest.webmanifest'].map(async file=>(await fetch(file)).text())));
+    assert.equal(await page.evaluate(()=>localStorage.getItem('peach-physics-v008-active')),first);
+    const appBytes=await page.evaluate(async()=>Promise.all(['./','./index.html','./motion.js?v=r15-clap1','./manifest.webmanifest'].map(async file=>(await fetch(file)).text())));
     for(const [i,file] of ['index.html','index.html','motion.js','manifest.webmanifest'].entries())assert.equal(appBytes[i],fs.readFileSync(path.join(app,file),'utf8'),file);
-    for(const [i,id] of [...active,'ember'].entries()){
+    const start=active.indexOf(first),cycle=[...active.slice(start),...active.slice(0,start),first];
+    for(const [i,id] of cycle.entries()){
       if(i)await page.locator('#character').tap();
       await page.waitForFunction(id=>__peachPhysicsDebug.snapshot().character===id,id);
       const {state,motion}=await page.evaluate(()=>({state:__peachPhysicsDebug.snapshot(),motion:__peachMotionDebug.snapshot()}));
       assert.deepEqual(state.characters,active);assert.equal(state.renderer,renderer);
       assert.deepEqual(state.model,Object.fromEntries(['bounce','softness','settle','transfer'].map(k=>[k,profiles[id][k]])));
       assert.equal(state.slapAudioEnabled,profiles[id].slapAudioEnabled);assert(!motion.auto&&motion.ui.saved.shake);
-      assert.equal(await page.locator('#characterName').textContent(),state.characterName+' · '+(i%4+1)+'/4');
+      assert.equal(await page.locator('#characterName').textContent(),state.characterName+' · '+(active.indexOf(id)+1)+'/4');
     }
     const saved=await page.evaluate(ids=>Object.fromEntries(ids.map(id=>[id,JSON.parse(localStorage.getItem('peach-physics-v008-profile-'+id))])),ids);
     assert.deepEqual(saved,profiles);
     await page.locator('#gear').tap();
+    await page.locator('#autoMotion').tap();
+    await page.waitForFunction(()=>__peachMotionDebug.snapshot().counts.autoSteps>24);
+    const duringClap=await page.evaluate(()=>__peachPhysicsDebug.snapshot().nodes);
+    assert(duringClap.some(n=>Math.abs(n.dx)>.1)&&duringClap.every(n=>n.dy===0),'offline horizontal Auto');
+    await page.locator('#gear').tap();await page.locator('#autoMotion').tap();
     assert.equal(await page.locator('#santaLaugh').isVisible(),false);
     assert.equal(await page.locator('#depthSway').isDisabled(),renderer==='canvas');
     if(renderer==='webgl')await page.locator('#depthSway').tap();
@@ -94,12 +102,12 @@ async function run(browser,renderer){
     });
     await page.touchscreen.tap(...target);
     await page.waitForFunction(()=>__peachPhysicsDebug.snapshot().slapCount>0);
-    await page.goto(url+'?v=r15');await ready(page);
+    await page.goto(url+'?v=r15.1');await ready(page);
     assert.equal(await page.locator('#depthSway').getAttribute('aria-checked'),'false');
     assert.equal(await page.evaluate(()=>__peachMotionDebug.snapshot().auto),false);
     assert.deepEqual(errors,[]);
-    console.log(renderer,'R14 Santa → R15 offline, 4 picker entries, 5 saved profiles, motion preferences, audio and touch passed');
-    if(renderer==='webgl'){
+    console.log(renderer,release,selected,'→ R15.1 offline, 4 picker entries, 5 saved profiles, motion preferences, audio and touch passed');
+    if(renderer==='webgl'&&release==='r15'){
       const fresh=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
       try{
         const tab=await fresh.newPage();await tab.goto(url+'?character=aurelia');await ready(tab);
@@ -113,6 +121,6 @@ async function run(browser,renderer){
 }
 (async()=>{
   const browser=await chromium.launch({executablePath:process.env.CHROMIUM||'/usr/bin/chromium',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
-  try{for(const renderer of ['webgl','canvas'])await run(browser,renderer);}
+  try{for(const renderer of ['webgl','canvas'])for(const release of ['r15','r14'])await run(browser,renderer,release);}
   finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

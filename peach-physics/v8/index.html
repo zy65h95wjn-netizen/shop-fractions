@@ -12,7 +12,7 @@
 
 
 
-<title>Peach Physics — Elf Lab 0.0.8 r15</title>
+<title>Peach Physics — Elf Lab 0.0.8 r15.1</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -94,7 +94,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <p id="motionNotice" role="status" hidden style="position:absolute;z-index:5;pointer-events:none;top:max(12px,env(safe-area-inset-top));left:60px;right:60px;margin:0;padding:7px 10px;border-radius:12px;background:#07110fe8;color:#fff7eb;font-size:12px;text-align:center"></p><div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r15 · Four portraits</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r15.1 · Four portraits</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/4</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Playful</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="false">Natural</button><button type="button" data-preset="playful" aria-pressed="true">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
@@ -110,7 +110,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
   <p class="note">Tap the two-arrow button to switch characters. Each character has individually tuned deformation areas and remembers their own physics settings. Linked motion, taps, two-finger gestures, and optional sound are all preserved. No ads or tracking.</p>
  </section>
 </main>
-<script src="./motion.js?v=r15-four"></script>
+<script src="./motion.js?v=r15-clap1"></script>
 <script>
 (() => {
 'use strict';
@@ -1477,44 +1477,56 @@ const aureliaBake={fps:60,curves:[
  [-0.0,0.1502552,0.3005104,0.4507656,0.6010208,0.751276,0.8791633,0.9633477,1.0,0.9876339,0.9271644,0.8218469,0.6771043,0.5002486,0.3001115,0.086605,-0.1297702,-0.3384398,-0.5292728,-0.6930726,-0.8220199,-0.9100454,-0.9531147,-0.9494123,-0.899416,-0.8058589,-0.673582,-0.5092845,-0.3211852,-0.1186117,0.0884612,0.289903,0.475922,0.637541,0.7670307,0.8582777,0.9070736,0.9113075,0.8710559,0.7885653,0.6681283,0.5158615,0.3393956,0.1474933,-0.0503854,-0.2445489,-0.4255483,-0.5846373,-0.7141938,-0.808085,-0.8619569,-0.8734356,-0.8422305,-0.7701351,-0.6609263,-0.5201678,-0.3549269,-0.1734207,0.0153929,0.2022559,0.3780646,0.5343124,0.6635008,0.7594993,0.8178354,0.8359025,0.8130748,0.7507261,0.652149,0.5223828,0.3679564,0.1965601,0.0166636,-0.1629031,-0.3333816,-0.4865128,-0.6149365,-0.7125443,-0.7747702,-0.7988034,-0.7837139,-0.7304864,-0.64196,-0.5226778,-0.3786543,-0.217073,-0.0459283,0.1263697,0.2914081,0.4411815,0.5684802,0.6672365,0.732814,0.7622243,0.7542623,0.7095539,0.6305136,0.5212156,0.3871844,0.2351156,0.0725428,-0.0925362,-0.252052,-0.3982579,-0.5241058,-0.6235854,-0.6920111,-0.726242,-0.7248255,-0.6880571,-0.6179551,-0.5181512,-0.3937033,-0.2508389,-0.096645,0.0612842,0.2152203,0.3576787,0.4817827,0.5815942,0.6523982,0.6909249,0.6954998,0.6661154,0.6044209,0.5136315,0.3983611,0.2643889,0.1183695,-0.0324969,-0.1808195,-0.3193784,-0.4414759,-0.5412602,-0.614005,-0.6563331,-0.6663728,-0.6438394,-0.5900392,-0.5077955,-0.4013014,-0.2759061,-0.1378473,0.0060593,0.1487561,0.2832891,0.4031471,0.5025758,0.5768546,0.6225193,0.6375241,0.6213316,0.5749301,0.5007752,0.4026608,0.2855259,0.1552056,0.0181415,-0.1189368,-0.2493419,-0.3667542,-0.4655284,-0.540964,-0.5895292,-0.6090254,-0.5986863,-0.5592056,-0.4926947,-0.40257,-0.2933784,-0.1705679,-0.0402164,0.0912689,0.2174663,0.3322527,0.4301008,0.5063446,0.5574018,0.5809415,0.5759903,0.5429704,0.4836715,0.4011531,0.2995885,0.1840537,0.0602737,-0.0656604,-0.1875911,-0.2995954,-0.3962723,-0.4730026,-0.5261699,-0.5533299,-0.553323,-0.526322,-0.4738158,-0.3985278,-0.3042758,-0.1957783,-0.078419,0.0420203,0.1596445,0.2687331,0.3640184,0.4409395,0.4958605,0.5262419,0.5307573,0.5093507,0.4632313,0.394806,0.3075546,0.2058534,0.0947556,-0.020259,-0.1335546,-0.2396148,-0.3333116,-0.4101523,-0.4664954,-0.4997224,-0.5083591,-0.4921404,-0.4520155,-0.3900937,-0.3095345,-0.2143863,-0.1093837,0.0002882,0.1092492,0.2121882,0.3041215,0.3806341,0.4380912,0.4738108,0.4861884,0.4747684,0.4402592,0.3844911,0.3103197,0.2214804,0.1224006,0.0179788,-0.0866566,-0.1848128,-0.2670827,-0.3259846,-0.3570707,-0.3594237,-0.3356276,-0.291227,-0.2337715,-0.1716033,-0.1125857,-0.0629738,-0.0266038,-0.0045187,0.0049208,0.0054763,0.0021297,0.0],
  [-0.0,0.1557365,0.311473,0.4672095,0.622946,0.7786825,0.9070326,0.9821265,1.0,0.9600199,0.864897,0.7205068,0.535528,0.3209219,0.089284,-0.145895,-0.3710135,-0.5731458,-0.7407831,-0.864488,-0.9374252,-0.9557375,-0.9187483,-0.8289782,-0.691977,-0.5159828,-0.311427,-0.0903175,0.134466,0.3499213,0.5436753,0.7046939,0.8239097,0.8947315,0.9134079,0.8792239,0.7945211,0.6645412,0.4971031,0.3021339,0.0910806,-0.1237607,-0.3299612,-0.515677,-0.6703298,-0.7852079,-0.8539564,-0.8729279,-0.8413739,-0.7614677,-0.6381592,-0.4788691,-0.2930436,-0.0915953,0.1137378,0.3110747,0.4890792,0.6376097,0.748297,0.8150149,0.8342179,0.8051285,0.7297622,0.6127922,0.461261,0.2841569,0.0918821,-0.1043578,-0.2932065,-0.4638132,-0.6064562,-0.7130955,-0.7778256,-0.7972016,-0.7704209,-0.6993509,-0.5884029,-0.4442597,-0.2754736,-0.0919602,0.0955839,0.2763037,0.4398141,0.5767956,0.679525,0.7423106,0.7618058,0.7371869,0.6701822,0.5649551,0.4278465,0.2669935,0.0918476,-0.0873808,-0.2603165,-0.4170198,-0.5485575,-0.6475113,-0.7083956,-0.7279608,-0.7053651,-0.6422065,-0.5424139,-0.4120031,-0.258716,-0.0915611,0.0797154,0.2451971,0.3953712,0.5216749,0.6169831,0.6760095,0.6955993,0.6748963,0.6153763,0.5207456,0.3967118,0.25064,0.0911163,-0.0725564,-0.2309005,-0.3748121,-0.4960838,-0.5878723,-0.6450841,-0.6646574,-0.645724,-0.5896456,-0.4999178,-0.3819552,-0.2427641,-0.090528,0.065874,0.2173838,0.355289,0.4717232,0.5601142,0.6155546,0.6350735,0.6177941,0.5649703,0.4798991,0.3677163,0.2350868,0.0898097,-0.0596403,-0.2046064,-0.336751,-0.4485349,-0.5336468,-0.5873588,-0.6067889,-0.5910544,-0.5413083,-0.4606594,-0.3539787,-0.2276061,-0.0889741,0.0538287,0.1925294,0.3191496,0.4264636,0.5084108,0.5604371,0.5797475,0.565455,0.5186188,0.4421693,0.3407263,0.2203199,0.0880332,-0.0484142,-0.1811164,-0.3024386,-0.4054563,-0.4843499,-0.5347328,-0.5538951,-0.540948,-0.4968627,-0.4244009,-0.3279434,-0.2132259,-0.0869979,0.0433732,0.1703324,0.2865742,0.3854627,0.46141,0.5101915,0.5291803,0.5174878,0.4760025,0.4073269,0.3156149,0.2063215,0.0858786,-0.0386832,-0.1601443,-0.2715144,-0.3664346,-0.4395397,-0.4867613,-0.5055538,-0.4950301,-0.456002,-0.3909211,-0.303726,-0.1996042,-0.0846847,0.0343232,0.1505208,0.2572197,0.3483263,0.4186898,0.4643927,0.4829681,0.4735329,0.4368267,0.3751585,0.2922622,0.1930712,0.0834251,-0.0302733,-0.1414321,-0.2436521,-0.3310942,-0.3988135,-0.443038,-0.4613782,-0.4529558,-0.4184431,-0.3600145,-0.2812095,-0.1867193,-0.0821081,0.0265145,0.13285,0.2307755,0.3146965,0.3798659,0.422652,0.4407407,0.4332599,0.397407,0.3338016,0.2502922,0.1569854,0.0646994,-0.0166471,-0.0794431,-0.1193608,-0.1357484,-0.1313959,-0.1117367,-0.0836482,-0.0540784,-0.0287527,-0.0111924,-0.0022159,-0.0]
 ]};
-let aureliaTime=0,aureliaNext=.1;
-const aureliaPulses=[[],[]],aureliaReleased=[-Infinity,-Infinity];
+let reboundTime=0,nextAutoClap=.1;
+const reboundPulses=[[],[]],aureliaReleased=[-Infinity,-Infinity];
 function aureliaDamping(side){
- const age=aureliaTime-aureliaReleased[side];
+ const age=reboundTime-aureliaReleased[side];
  if(age>=1.2)return 1;
  const t=clamp((age-.16)/.5,0,1);return .92+.65*t*t*(3-2*t);
 }
-function aureliaCurve(side,age){
+function bakedRebound(side,age){
  const a=aureliaBake.curves[side],at=age*aureliaBake.fps,i=Math.floor(at);
  if(i<0||i>=a.length-1)return 0;
  return (a[i]+(a[i+1]-a[i])*(at-i))*Math.exp(-age*1.1);
 }
-function aureliaPulse(side,power,clap=false){
+function addRebound(side,power,clap=false){
  const travel=(4+model.bounce*.08)*power;
  const x=clap?(side?-travel:travel):(side?1:-1)*1.1*power;
- aureliaPulses[side].push({t:aureliaTime,x,y:clap?0:travel,clap});
- if(aureliaPulses[side].length>16)aureliaPulses[side].shift();
+ reboundPulses[side].push({t:reboundTime,x,y:clap?0:travel,clap});
+ if(reboundPulses[side].length>16)reboundPulses[side].shift();
 }
-function aureliaOffset(index){
+function reboundOffset(index){
  const side=nodes[index].side,layer=[.72,1,.88][index%3];let x=0,y=0;
- for(const p of aureliaPulses[side]){const k=aureliaCurve(p.clap?0:side,aureliaTime-p.t)*layer;x+=p.x*k;y+=p.y*k}
+ for(const p of reboundPulses[side]){const k=bakedRebound(p.clap?0:side,reboundTime-p.t)*layer;x+=p.x*k;y+=p.y*k}
  return {x,y};
 }
-function advanceAurelia(dt){
- aureliaTime+=dt;
- if(motion?.autoDrive&&motion.visible&&!pointers.size&&aureliaTime>=aureliaNext){
-  aureliaPulse(0,.3,true);aureliaPulse(1,.3,true);aureliaNext=aureliaTime+.5;
+function advanceRebounds(dt){
+ reboundTime+=dt;
+ if(motion?.autoDrive&&motion.visible&&!pointers.size&&reboundTime>=nextAutoClap){
+  addRebound(0,.3,true);addRebound(1,.3,true);nextAutoClap=reboundTime+.5;
  }
- for(const pulses of aureliaPulses)while(pulses.length&&aureliaTime-pulses[0].t>=4.4)pulses.shift();
+ for(const pulses of reboundPulses)while(pulses.length&&reboundTime-pulses[0].t>=4.4)pulses.shift();
 }
-function renderAurelia(){
+// Auto contributes only a horizontal offset to Ember and Midnight. A finger
+// that catches a clap takes over at the displayed position.
+function applyRebound(index){
+ const n=nodes[index],aurelia=isAurelia();
+ if(!aurelia&&!reboundPulses[n.side].length)return;
+ const d=reboundOffset(index);
+ n.dx=clamp(n.dx+d.x,-26,26);
+ if(aurelia)n.dy=clamp(n.dy+d.y,-30,30);
+}
+function renderWithRebound(){
  const saved=nodes.map(n=>[n.dx,n.dy]);
  try{
-  nodes.forEach((n,i)=>{const d=aureliaOffset(i);n.dx=clamp(n.dx+d.x,-26,26);n.dy=clamp(n.dy+d.y,-30,30);});
+  for(let i=0;i<nodes.length;i++)applyRebound(i);
   renderPortrait();
  }finally{nodes.forEach((n,i)=>{[n.dx,n.dy]=saved[i];});}
 }
-function render(){if(isAurelia())renderAurelia();else renderPortrait();}
+function render(){
+ if(isAurelia()||reboundPulses[0].length||reboundPulses[1].length)renderWithRebound();
+ else renderPortrait();
+}
 function renderPortrait(){
  if(needSize)resize();
  if(fallback){
@@ -1568,7 +1580,7 @@ function step(dt){
  depthTime+=dt;
  viewX=(depthEnabled&&!fallback)? .073*Math.sin(depthTime*.74):0;
  viewY=(depthEnabled&&!fallback)? .025*Math.sin(depthTime*.52):0;
- if(isAurelia())advanceAurelia(dt);
+ if(motion?.usesAutoClap)advanceRebounds(dt);
  advanceDragBoundary(dt);
  if(isSanta())advanceSantaLaugh(dt);
  const hz=isSanta()?1.65-model.softness*.007:isHolly()?3.0-model.softness*.012:4.3-model.softness*.018,omega=2*Math.PI*hz,k=omega*omega;
@@ -1769,7 +1781,7 @@ function slap(side,x,y,pt,strength=1){
  // Minimal delayed coupling, not a mirrored second slap.
  linkedImpulse(side,power*9);
  startWave(side,power*.56);
- if(isAurelia()){aureliaReleased[side]=-Infinity;aureliaPulse(side,.75);}
+ if(isAurelia()){aureliaReleased[side]=-Infinity;addRebound(side,.75);}
  slapVisual(pt);slapSound();slapCount++;lastGesture='slap';
 }
 function wake(){hint.classList.add('fade');}
@@ -1778,11 +1790,10 @@ canvas.addEventListener('pointerdown',e=>{
  const raw=readPoint(e),side=pickSide(raw.x,raw.y);
  if(side<0)return;
  if(canGrabHold()&&[...pointers.values()].some(f=>f.side===side))return;
- if(isAurelia()){
-  for(let i=side*3;i<side*3+3;i++){
-   const n=nodes[i],d=aureliaOffset(i);n.dx=clamp(n.dx+d.x,-26,26);n.dy=clamp(n.dy+d.y,-30,30);
-  }
-  aureliaPulses[side].length=0;aureliaReleased[side]=-Infinity;
+ if(isAurelia()||reboundPulses[side].length){
+  for(let i=side*3;i<side*3+3;i++)applyRebound(i);
+  reboundPulses[side].length=0;
+  if(isAurelia())aureliaReleased[side]=-Infinity;
  }
  const {p,offsetX,offsetY}=touchAnchor(side,raw);
  e.preventDefault();
@@ -1838,7 +1849,7 @@ function release(e){
  const f=pointers.get(e.pointerId);
  if(!f)return;
  if(e.type==='pointerup'){
-  if(isAurelia()&&f.grabbed)aureliaReleased[f.side]=aureliaTime;
+  if(isAurelia()&&f.grabbed)aureliaReleased[f.side]=reboundTime;
   const now=performance.now(),speed=Math.hypot(f.vx,f.vy),age=now-f.lastTime;
   const held=now-f.startTime;
   if(!(canGrabHold()&&f.grabbed)&&f.travel<27&&held<400){
@@ -1853,9 +1864,9 @@ function release(e){
 }
 canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('lostpointercapture',release);
 window.addEventListener('blur',()=>{pointers.clear();for(const p of impacts)p.target=0;});
-function bounceBoth(){if(isSanta()){santaImpulse(0,470,790,1.25);startSantaLaugh();wake();return;}const c=currentCharacter();impulse(0,...c.bounceCenters[0],1.05);impulse(1,...c.bounceCenters[1],.93);if(isAurelia()){aureliaPulse(0,1);aureliaPulse(1,.88);}wake();}
+function bounceBoth(){if(isSanta()){santaImpulse(0,470,790,1.25);startSantaLaugh();wake();return;}const c=currentCharacter();impulse(0,...c.bounceCenters[0],1.05);impulse(1,...c.bounceCenters[1],.93);if(isAurelia()){addRebound(0,1);addRebound(1,.88);}wake();}
 function reset(){
- aureliaTime=0;aureliaNext=.1;aureliaPulses.forEach(p=>p.length=0);aureliaReleased.fill(-Infinity);
+ reboundTime=0;nextAutoClap=.1;reboundPulses.forEach(p=>p.length=0);aureliaReleased.fill(-Infinity);
  depthTime=0;viewX=0;viewY=0;
  motion?.interrupt();dragBoundary.fill(0);stopSantaLaugh();for(const n of nodes){n.dx=0;n.dy=0;n.vx=0;n.vy=0;}for(const f of followers){f.dx=f.dy=f.vx=f.vy=0;}for(const p of impacts){p.v=p.contact=p.target=0;}for(const w of waves){w.age=1;w.strength=0;}pointers.clear();}
 function openPanel(flag){const shown=typeof flag==='boolean'?flag:!panel.classList.contains('open');panel.classList.toggle('open',shown);scrim.classList.toggle('show',shown);panel.setAttribute('aria-hidden',String(!shown));gear.setAttribute('aria-expanded',String(shown));gear.setAttribute('aria-label',shown?'Close physics controls':'Show physics controls');/* Gear stays a single icon whether the panel is open or closed. */}
