@@ -12,7 +12,7 @@
 
 
 
-<title>Peach Physics — Elf Lab 0.0.8 r14 Ember fix</title>
+<title>Peach Physics — Elf Lab 0.0.8 r15</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -94,12 +94,12 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <p id="motionNotice" role="status" hidden style="position:absolute;z-index:5;pointer-events:none;top:max(12px,env(safe-area-inset-top));left:60px;right:60px;margin:0;padding:7px 10px;border-radius:12px;background:#07110fe8;color:#fff7eb;font-size:12px;text-align:center"></p><div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r14 · Holly</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
-   <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/5</span></div>
-   <div class="preset-head"><span>Physics preset</span><span id="presetName">Natural</span></div>
-   <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="true">Natural</button><button type="button" data-preset="playful" aria-pressed="false">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
-   <p id="presetDesc" class="preset-desc">Realistic motion with gentle secondary response.</p>
-   <section aria-label="Optional motion"><button id="shakeMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Shake to Jiggle: off</button><button id="autoMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Auto Jiggle: off</button><p id="motionStatus" style="font-size:13px;line-height:1.4">Optional motion effects</p></section><button id="grabHold" class="slap-audio" type="button">Grab and hold: on</button><button id="slapAudio" class="slap-audio" type="button" aria-pressed="false">Slap sound: Off</button>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r15 · Four portraits</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+   <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/4</span></div>
+   <div class="preset-head"><span>Physics preset</span><span id="presetName">Playful</span></div>
+   <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="false">Natural</button><button type="button" data-preset="playful" aria-pressed="true">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
+   <p id="presetDesc" class="preset-desc">Softer springs and a longer, livelier bounce.</p>
+   <section aria-label="Optional motion"><button id="shakeMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Shake to Jiggle: off</button><button id="autoMotion" class="slap-audio" type="button" role="switch" aria-checked="false" aria-describedby="motionStatus">Auto Jiggle: off</button><p id="motionStatus" style="font-size:13px;line-height:1.4">Optional motion effects</p></section><button id="depthSway" class="slap-audio" type="button" role="switch" aria-checked="true">Depth sway: on</button><button id="grabHold" class="slap-audio" type="button">Grab and hold: on</button><button id="slapAudio" class="slap-audio" type="button" aria-pressed="false">Slap sound: Off</button>
    <button id="testSound" class="slap-audio" type="button" disabled aria-describedby="audioStatus">Test sound</button><p id="audioStatus" role="status" style="font-size:12px;line-height:1.4">Sound is off.</p>
    <button id="santaLaugh" class="slap-audio" type="button" aria-pressed="false" hidden>Belly laugh: Off</button>
    <div class="control"><label for="bounce">Bounce strength <output id="bounceN">65</output></label><input id="bounce" type="range" min="0" max="100" value="65"></div>
@@ -110,7 +110,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
   <p class="note">Tap the two-arrow button to switch characters. Each character has individually tuned deformation areas and remembers their own physics settings. Linked motion, taps, two-finger gestures, and optional sound are all preserved. No ads or tracking.</p>
  </section>
 </main>
-<script src="./motion.js?v=r14-auto2"></script>
+<script src="./motion.js?v=r15-four"></script>
 <script>
 (() => {
 'use strict';
@@ -219,14 +219,14 @@ const CHARACTERS=[
    {side:1,x:488,y:434,rx:62,ry:43},{side:1,x:495,y:477,rx:69,ry:58},{side:1,x:457,y:532,rx:46,ry:36}
   ],impactCenters:[[323,474],[495,477]],bounceCenters:[[323,474],[495,477]],
   split:[.534,.553],sideMid:.544,bounds:[.303,.327,.464,.5],taper:[0,0],intensity:.46},
- {id:'santa',name:'Santa Claus',src:'./assets/santa-claus.jpg',width:1024,height:1280,
+ {id:'santa',available:false,name:'Santa Claus',src:'./assets/santa-claus.jpg',width:1024,height:1280,
   regions:[{x:350,y:780,rx:180,ry:235},{x:578,y:782,rx:174,ry:220}],
   nodes:[
    {side:0,x:345,y:657,rx:210,ry:180},{side:0,x:356,y:800,rx:240,ry:245},{side:0,x:373,y:931,rx:210,ry:175},
    {side:1,x:578,y:666,rx:210,ry:180},{side:1,x:578,y:799,rx:240,ry:245},{side:1,x:549,y:926,rx:210,ry:175}
   ],impactCenters:[[355,790],[572,790]],bounceCenters:[[355,790],[572,790]],
   split:[.44,.48],sideMid:.46,bounds:[.40,.45,.76,.81],taper:[0,0],intensity:1}
-];
+].filter(character=>character.available!==false);
 const CHARACTER_KEY='peach-physics-v008-active';
 const V71_CHARACTER_KEY='peach-physics-v0071-active';
 const V7_CHARACTER_KEY='peach-physics-v007-active';
@@ -244,10 +244,13 @@ const V621_PREFS_PREFIX='peach-physics-v00621-profile-';
 const V62_PREFS_PREFIX='peach-physics-v0062-profile-';
 const OLDER_PREFS_PREFIX='peach-physics-v006-profile-';
 let activeCharacterIndex=0;
-try{const saved=localStorage.getItem(CHARACTER_KEY)||localStorage.getItem(V71_CHARACTER_KEY)||localStorage.getItem(V7_CHARACTER_KEY)||localStorage.getItem(BASELINE_CHARACTER_KEY)||localStorage.getItem(IMPORT_CHARACTER_KEY)||localStorage.getItem(V621_CHARACTER_KEY)||localStorage.getItem(V62_CHARACTER_KEY)||localStorage.getItem(OLDER_CHARACTER_KEY);activeCharacterIndex=Math.max(0,CHARACTERS.findIndex(c=>c.id===saved));}catch(e){}
-if(new URLSearchParams(location.search).get('character')==='santa')activeCharacterIndex=4;
-if(new URLSearchParams(location.search).get('character')==='holly')activeCharacterIndex=3;
+try{const saved=localStorage.getItem(CHARACTER_KEY)||localStorage.getItem(V71_CHARACTER_KEY)||localStorage.getItem(V7_CHARACTER_KEY)||localStorage.getItem(BASELINE_CHARACTER_KEY)||localStorage.getItem(IMPORT_CHARACTER_KEY)||localStorage.getItem(V621_CHARACTER_KEY)||localStorage.getItem(V62_CHARACTER_KEY)||localStorage.getItem(OLDER_CHARACTER_KEY);activeCharacterIndex=Math.max(0,CHARACTERS.findIndex(c=>c.id===saved));
+ if(saved==='santa')localStorage.setItem(CHARACTER_KEY,CHARACTERS[activeCharacterIndex].id);}catch(e){}
+const requestedCharacter=new URLSearchParams(location.search).get('character');
+const requestedIndex=CHARACTERS.findIndex(c=>c.id===requestedCharacter);
+if(requestedIndex>=0)activeCharacterIndex=requestedIndex;
 const currentCharacter=()=>CHARACTERS[activeCharacterIndex];
+const isAurelia=()=>currentCharacter().id==='aurelia';
 const isHolly=()=>currentCharacter().id==='holly';
 const isSanta=()=>currentCharacter().id==='santa';
 const loadedPhotos=CHARACTERS.map(()=>null);
@@ -291,7 +294,7 @@ const STORAGE_KEY=CHARACTER_PREFS_PREFIX;
 const PRIOR_STORAGE_KEY='peach-physics-v005-settings';
 const LEGACY_STORAGE_KEY='peach-physics-v004-settings';
 const descriptions={natural:'Realistic motion with gentle secondary response.',playful:'Softer springs and a longer, livelier bounce.',chaos:'Exaggerated reactions — still constrained to the photograph.',custom:'Your own physics mix, saved on this device.'};
-let activePreset='natural';
+let activePreset='playful';
 let slapAudioEnabled=false, audioContext=null, slapCount=0, flickCount=0;
 let audioEpoch=0,audioLastError='';
 let lastGesture='none';
@@ -321,6 +324,77 @@ let posLoc,coverLoc,regionLoc,pointLoc,offsetLoc,impactLoc,secondaryLoc,waveLoc,
 let hintTimer=null,diagnostic='';
 function say(msg){diagnostic=msg;status.textContent=msg;}
 function showReady(){loader.classList.add('hiding');setTimeout(()=>{loader.style.display='none';},500);setTimeout(()=>hint.classList.add('fade'),3000);}
+// Approximate relief only: these silhouettes are authored from the unchanged
+// photograph, not measured anatomy. Broad flat areas keep facial detail intact.
+const reliefShapes=[
+ {z:76,p:[[247,0],[426,0],[477,46],[498,95],[506,151],[530,163],[509,201],[485,226],[482,292],[499,344],[469,370],[307,368],[295,313],[281,268],[264,229],[235,201],[211,253],[193,244],[206,196],[211,125],[219,65]]},
+ {z:94,p:[[201,358],[273,352],[329,367],[407,370],[479,355],[536,372],[568,409],[580,458],[577,532],[545,609],[519,696],[531,758],[576,802],[621,866],[605,916],[513,953],[393,954],[293,926],[223,891],[144,866],[169,811],[211,752],[248,707],[255,625],[236,556],[227,484],[215,434]]},
+ {z:82,p:[[193,363],[228,379],[238,464],[227,551],[205,647],[178,752],[148,852],[140,937],[157,1004],[147,1071],[128,1058],[105,998],[93,951],[95,884],[116,782],[140,663],[151,565],[151,470],[165,398]]},
+ {z:82,p:[[538,379],[568,392],[591,441],[592,532],[604,640],[625,757],[650,873],[663,942],[655,1006],[632,1055],[616,1065],[607,1043],[626,985],[623,923],[603,852],[569,747],[544,641],[537,546],[535,459]]},
+ {z:90,p:[[160,859],[302,885],[393,951],[519,909],[599,868],[622,968],[608,1082],[582,1176],[581,1280],[188,1280],[174,1180],[148,1092],[130,979]]}
+];
+function reliefPolygon(poly,x,y){
+ let inside=false,d=Infinity;
+ for(let i=0,j=poly.length-1;i<poly.length;j=i++){
+  const [ax,ay]=poly[j],[bx,by]=poly[i],dx=bx-ax,dy=by-ay;
+  const t=clamp(((x-ax)*dx+(y-ay)*dy)/(dx*dx+dy*dy),0,1);
+  d=Math.min(d,Math.hypot(x-ax-t*dx,y-ay-t*dy));
+  if((ay>y)!==(by>y)&&x<(bx-ax)*(y-ay)/(by-ay)+ax)inside=!inside;
+ }
+ return boundarySmooth(-12,34,inside?d:-d);
+}
+function reliefDepth(x,y){
+ let d=0;
+ for(const shape of reliefShapes)d=Math.max(d,shape.z*reliefPolygon(shape.p,x,y));
+ const bump=(cx,cy,rx,ry)=>Math.exp(-2*(((x-cx)/rx)**2+((y-cy)/ry)**2));
+ const face=16*bump(399,238,75,95),chest=27*bump(323,474,80,74)+27*bump(495,477,77,75);
+ return (d+(face+chest)*boundarySmooth(40,75,d))*boundarySmooth(0,24,x)*boundarySmooth(0,24,W-x)*boundarySmooth(0,24,y)*boundarySmooth(0,24,H-y);
+}
+// Normalized silhouette points traced on each original portrait. Depth feathers
+// across the outline and goes to zero at the photo edges.
+const outlines = {
+ ember: [[.09,.99],[.09,.87],[.07,.73],[.08,.60],[.12,.54],[.12,.43],[.14,.29],[.18,.18],[.16,.07],[.25,0],[.66,0],[.72,.08],[.78,.15],[.81,.25],[.91,.33],[.90,.39],[.84,.42],[.90,.57],[.97,.65],[.90,.74],[.83,.83],[.79,.99]],
+ midnight: [[.18,1],[.18,.88],[.13,.77],[.14,.69],[.20,.60],[.32,.53],[.23,.49],[.22,.38],[.18,.29],[.23,.14],[.32,.06],[.51,.02],[.64,.04],[.72,.11],[.74,.22],[.78,.31],[.84,.38],[.80,.46],[.77,.56],[.83,.63],[.84,.77],[.76,.90],[.71,1]],
+ aurelia: [[.22,1],[.17,.90],[.14,.78],[.16,.68],[.23,.60],[.18,.62],[.18,.51],[.23,.42],[.18,.39],[.18,.34],[.26,.32],[.28,.24],[.33,.16],[.35,.07],[.40,.02],[.60,0],[.74,.05],[.80,.15],[.84,.24],[.78,.28],[.76,.37],[.81,.40],[.78,.45],[.77,.57],[.74,.61],[.82,.68],[.85,.81],[.79,.94],[.75,1]]
+};
+let depthBuffer, depthAttribute, viewUniform, viewX=0, viewY=0;
+let outline=[];
+function depthAt(x,y) {
+ if (isHolly()) return reliefDepth(x,y)/W;
+ const edge = boundarySmooth(0,32,Math.min(x,W-x,y,H-y));
+ let bulge=0;
+ for (const region of regions) {
+  const radius=((x-region.x)/region.rx)**2+((y-region.y)/region.ry)**2;
+  bulge+=.024*Math.exp(-2*radius);
+ }
+ return edge*reliefPolygon(outline,x,y)*(.094+bulge);
+}
+function uploadDepth() {
+ outline=(outlines[currentCharacter().id]||[]).map(([u,v])=>[u*W,v*H]);
+ const data=new Float32Array(63*113);
+ for(let y=0;y<=112;y++)for(let x=0;x<=62;x++){
+  data[y*63+x]=depthAt((x/62*uvCover[0]+uvCover[2])*W,(y/112*uvCover[1]+uvCover[3])*H);
+ }
+ gl.bindBuffer(gl.ARRAY_BUFFER,depthBuffer);
+ gl.bufferData(gl.ARRAY_BUFFER,data,gl.STATIC_DRAW);
+ gl.enableVertexAttribArray(depthAttribute);
+ gl.vertexAttribPointer(depthAttribute,1,gl.FLOAT,false,0,0);
+}
+const depthControl=document.getElementById('depthSway');
+let depthEnabled=!window.matchMedia('(prefers-reduced-motion: reduce)').matches,depthTime=0;
+try{const value=localStorage.getItem('peach-v8-depth-sway');if(value!==null)depthEnabled=value==='on';}catch{}
+function showDepthSetting(){
+ depthControl.disabled=fallback;
+ depthControl.setAttribute('aria-checked',String(depthEnabled&&!fallback));
+ depthControl.textContent=fallback?'Depth sway · flat view':'Depth sway: '+(depthEnabled?'on':'off');
+}
+depthControl.addEventListener('click',()=>{
+ depthEnabled=!depthEnabled;
+ if(!depthEnabled){viewX=0;viewY=0;}
+ try{localStorage.setItem('peach-v8-depth-sway',depthEnabled?'on':'off');}catch{}
+ showDepthSetting();
+});
+depthControl.addEventListener('keydown',e=>{if(e.code==='Space')e.stopPropagation();});
 function resize(){
  const rect=stage.getBoundingClientRect();cssW=Math.max(1,rect.width);cssH=Math.max(1,rect.height);
  const dpr=Math.min(window.devicePixelRatio||1,2.1);
@@ -351,10 +425,19 @@ function resize(){
   const fade=`linear-gradient(to bottom, transparent ${top}px, black ${top+15}px, black ${bottom-17}px, transparent ${bottom}px)`;
   canvas.style.webkitMaskImage=fade;canvas.style.maskImage=fade;
  }else{canvas.style.webkitMaskImage='none';canvas.style.maskImage='none';}
- if(gl)gl.viewport(0,0,canvas.width,canvas.height);
+ if(gl&&!fallback){uploadDepth();gl.viewport(0,0,canvas.width,canvas.height);}
  needSize=false;
 }
-function readPoint(e){const r=canvas.getBoundingClientRect();const sx=e.clientX-r.left,sy=e.clientY-r.top;return {sx,sy,x:(sx-ox)/drawW*W,y:(sy-oy)/drawH*H};}
+function readPoint(e){
+ if(needSize)resize();
+ const r=canvas.getBoundingClientRect(),sx=e.clientX-r.left,sy=e.clientY-r.top;
+ const rawX=(sx-ox)/drawW*W,rawY=(sy-oy)/drawH*H;
+ let x=rawX,y=rawY;
+ if(!fallback&&(viewX||viewY))for(let i=0;i<6;i++){
+  const depth=depthAt(x,y)*W;x=rawX-viewX*depth;y=rawY-viewY*depth;
+ }
+ return {sx,sy,x,y};
+}
 function pickSide(x,y){
  if(isSanta())return santaWeight(x,y)>.025?(x<470?0:1):-1;
  if(isHolly()){
@@ -371,17 +454,128 @@ function pickSide(x,y){
  });return best<1.10?index:-1;
 }
 function compiler(kind,source){const sh=gl.createShader(kind);gl.shaderSource(sh,source);gl.compileShader(sh);if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(sh));return sh;}
+// Screen-left only. Coordinates are in Midnight's 941 × 1671 source portrait.
+// Trace the hem in source pixels. Across the lower fold, borrow the right
+// side’s falloff in normalized region coordinates, then guard the left silhouette.
+const midnightCalibration=CHARACTERS.find(c=>c.id==='midnight');
+const midnightLeftCrop = [148, 920, 320, 480];
+function midnightSeamWeight(x, y, downwardTrim = null) {
+ const offset = x - 321;
+ const hem = 996 + offset * offset * (offset < 0 ? .0051 : .0042);
+ const hemSlope = 2 * offset * (offset < 0 ? .0051 : .0042);
+ const belowHem = (y - hem) / Math.hypot(1, hemSlope);
+ const fold = 1293 - .00136 * (x - 314) ** 2;
+ const aboveFold = (fold - y) / Math.hypot(1, .00272 * (x - 314));
+ const fur = boundarySmooth(6, 91, belowHem);
+ const previous = leftSkinWeight(x, y) * fur * boundarySmooth(6, 76, aboveFold);
+ // The white trim and the skin at its edge form one surface. Transfer motion
+ // smoothly through the trim, feathering to zero at the waist and silhouette.
+ const upperBlend = (1 - boundarySmooth(58, 103, belowHem)) * (1 - boundarySmooth(1100, 1150, y));
+ if (upperBlend > 0) {
+  const height = 1100 - y;
+  const outerX = 194 + .39 * height + .0010 * height * height;
+  // The strip narrows as it meets the center seam. Spread its support along
+  // that curve so a one-sided pull can't leave a moving lobe next to a fixed tip.
+  const anchors = boundarySmooth(3, 23, x - outerX) * boundarySmooth(4, 112, 458 - x);
+  const trimTravel = .54 + .46 * boundarySmooth(4, 66, belowHem);
+  const radius = Math.hypot((x - 330) / 205, (y - 1156) / 267);
+  const rightEdge = 1 - boundarySmooth(.48, .98, radius);
+  // In Canvas a downward pull opens the middle of the right arch. Its
+  // corners and upward recoil stay more tightly supported.
+  const center = 1 - boundarySmooth(30, 83, Math.abs(offset));
+  const give = center * (downwardTrim ?? 0);
+  const upper = anchors * trimTravel * (downwardTrim === null
+   ? rightEdge * boundarySmooth(927, 1006, y - 6) * boundarySmooth(-78, -20, belowHem)
+   : boundarySmooth(-3 - 54 * give, 27 - 30 * give, belowHem));
+  return previous + upperBlend * (upper - previous);
+ }
+ const blend = boundarySmooth(fold - 122, fold - 55, y) * boundarySmooth(91, 105, belowHem);
+ if (blend === 0) return previous;
+
+ const {regions:[left,right],bounds,taper}=midnightCalibration;
+ const qx = (left.x - x) / left.rx, qy = (y - left.y) / left.ry;
+ const rightY = (right.y + qy * right.ry) / 1671;
+ const rightEdge = 1 - boundarySmooth(.48, .98, Math.hypot(qx, qy));
+ const thigh = 1 - boundarySmooth(bounds[2], bounds[3], rightY);
+ const outside = boundarySmooth(.55, .97, qx);
+ const rightSupport = rightEdge * thigh * (1 - taper[0] * boundarySmooth(.69, .81, rightY) * outside)
+   * (1 - taper[1] * outside);
+
+ // Fade onto the upper thigh across the crease. Keep the scenery, center
+ // gap and stockings anchored, including the inside edge near the other leg.
+ const outerEdge = 157 + .0024 * Math.max(0, y - 1240) ** 2;
+ const leftOutline = boundarySmooth(5, 53, x - outerEdge);
+ const centerGap = boundarySmooth(4, 53, 457 - x);
+ // A left held pose travels farther through the backward sampler than the
+ // corresponding right pose. Tune this band at the fold, away from the fur.
+ const lower = .93 * rightSupport * leftOutline * centerGap * (1 - boundarySmooth(1360, 1394, y));
+ return previous + blend * (lower - previous);
+}
+
+// Canvas uses the same fixed sampling field as WebGL. Sampling the source
+// once avoids the double edge from compositing a shifted patch over the trim.
+let midnightPatch;
+function drawMidnightLeft(sc) {
+ const [x0,y0,w,h]=midnightLeftCrop;
+ if (!midnightPatch) {
+  const layer=document.createElement('canvas');
+  layer.width=w; layer.height=h;
+  const context=layer.getContext('2d');
+  context.drawImage(img,x0,y0,w,h,0,0,w,h);
+  const photo=context.getImageData(0,0,w,h);
+  const supported=new Float32Array(w*h);
+  const extra=new Float32Array(w*(1150-y0));
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+   const k=y*w+x, px=x0+x+.5, py=y0+y+.5;
+   supported[k]=midnightSeamWeight(px,py,0);
+   if(k<extra.length)extra[k]=midnightSeamWeight(px,py,1)-supported[k];
+  }
+  midnightPatch={layer,context,photo,supported,extra,weights:supported.slice(),give:0,frame:context.createImageData(w,h)};
+ }
+ const {layer,context,photo,weights,frame}=midnightPatch;
+ const center=nodes[1], follow=followers[0];
+ const dx=.8*(center.dx+follow.dx*.35), dy=.8*(center.dy+follow.dy*.35);
+ if(Math.abs(dx)+Math.abs(dy)<.05)return;
+ const give=boundarySmooth(0,10,dy);
+ if(give!==midnightPatch.give){
+  const {supported,extra}=midnightPatch;
+  for(let i=0;i<extra.length;i++)weights[i]=supported[i]+give*extra[i];
+  midnightPatch.give=give;
+ }
+ frame.data.fill(0);
+ for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){
+  const index=y*w+x;
+  if(!weights[index])continue;
+  let sx=x,sy=y;
+  for(let step=0;step<4;step++){
+   const ix=Math.floor(sx),iy=Math.floor(sy),fx=sx-ix,fy=sy-iy,k=iy*w+ix;
+   const weight=(1-fy)*((1-fx)*weights[k]+fx*weights[k+1])+fy*((1-fx)*weights[k+w]+fx*weights[k+w+1]);
+   // Match the right Canvas carrier (.97 gain) after the left input's
+   // .90 gain. Retain the accepted motion through both support bands.
+   const gain=1+(.97/.90-1)*boundarySmooth(.62,.98,weight);
+   sx-=dx*weight*gain/4;sy-=dy*weight*gain/4;
+  }
+  const ix=Math.floor(sx),iy=Math.floor(sy),fx=sx-ix,fy=sy-iy;
+  const src=4*(iy*w+ix),dst=4*index;
+  for(let c=0;c<3;c++){
+   const k=src+c;
+   frame.data[dst+c]=(1-fy)*((1-fx)*photo.data[k]+fx*photo.data[k+4])+fy*((1-fx)*photo.data[k+4*w]+fx*photo.data[k+4*w+4]);
+  }
+  frame.data[dst+3]=255;
+ }
+ context.putImageData(frame,0,0);
+ ctx2.drawImage(layer,(ox+x0*drawW/W)*sc,(oy+y0*drawH/H)*sc,w*drawW/W*sc,h*drawH/H*sc);
+}
+
 let leftShapePixels=null;
 function createLeftShapeTexture(){
  // Only the deformation mask is rasterized; the approved photo stays full resolution.
  // The support sits inside this small crop, whose zero border makes CLAMP safe.
- const w=320,h=416;
+ const [x0,y0,w,h]=midnightLeftCrop;
  if(!leftShapePixels){
   leftShapePixels=new Uint8Array(w*h);
   for(let y=0;y<h;y++)for(let x=0;x<w;x++){
-   let margin=1;const px=148+x+.5,py=984+y+.5;
-   for(const [nx,ny,c,width] of leftPlanes)margin=Math.min(margin,(nx*px+ny*py+c)/width);
-   const t=clamp(margin,0,1);leftShapePixels[y*w+x]=Math.round(255*t*t*(3-2*t));
+   leftShapePixels[y*w+x]=Math.round(255*midnightSeamWeight(x0+x+.5,y0+y+.5));
   }
  }
  const mask=gl.createTexture();gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,mask);
@@ -550,6 +744,15 @@ function hollyTrimPoint(line,x,y){
  }
  best.ends=Math.min(best.u,arc-best.u);return best;
 }
+// Give upper skin a longer transition into its attachments. The silhouette,
+// central gap and garment support keep the existing guards and trim handoff.
+const hollyBounceContours=HOLLY_MOTION_CONTOURS.map(points=>points.map(p=>[...p]));
+hollyBounceContours[0].splice(0,4,[274,372],[316,360],[359,378],[392,414]);
+hollyBounceContours[1].splice(0,3,[437,381],[477,369],[524,400]);
+const hollyBouncePlanes=hollyBounceContours.map(points=>points.map(([x,y],i)=>{
+ const [bx,by]=points[(i+1)%points.length],len=Math.hypot(bx-x,by-y),nx=-(by-y)/len,ny=(bx-x)/len;return[nx,ny,-nx*x-ny*y];
+}));
+
 function buildHollyMask(){
  if(hollyMaskPixels)return;
  const [ox,oy,w,h]=HOLLY_CROP;hollyMaskPixels=new Uint8Array(w*h*4);
@@ -603,6 +806,16 @@ function buildHollyMask(){
    if(value>weight)value=Math.min(value,Math.max(weight,room[side][y*w+x]/22));
    hollyMaskPixels[i+side]=Math.round(255*value);
   }
+  for(let side=0;side<2;side++){
+   const edge=smooth(Math.min(...hollyBouncePlanes[side].map(([nx,ny,c])=>(nx*px+ny*py+c)/38)));
+   const p=hollyTrimPoint(trims[side],px,py);
+   const cover=smooth((p.d+p.half+26)/24)*smooth(p.ends/10);
+   // Keep the texture border zero so CLAMP cannot carry motion outside this crop.
+   const cropGuard=smooth((py-oy-2)/22)*smooth((oy+h-2-py)/14)*smooth((px-ox-2)/16)*smooth((ox+w-2-px)/16);
+   const low=smooth((py-558)/28),lace=side===0?smooth((388-px)/20):smooth((px-439)/22);
+   const broader=Math.min(edge,hollyOuterWeight(side,px,py))*(1-cover)*cropGuard*(1-low*(1-lace));
+   hollyMaskPixels[i+side]=Math.round(.25*hollyMaskPixels[i+side]+.75*255*broader);
+  }
   hollyMaskPixels[i+3]=255;
  }
 }
@@ -618,7 +831,7 @@ function createHollyShapeTexture(){
 // Local spring weighting and the fixed smooth envelope retain spatial deformation.
 // User-approved 10% increase applies to every Holly input in both renderers.
 const HOLLY_JIGGLE_GAIN=1.10;
-function hollyVelocity(x,y,side){
+function hollyGarmentVelocity(x,y,side){
  let dx=0,dy=0,sum=0;
  for(let j=0;j<3;j++){
   const n=nodes[side*3+j],w=Math.exp(-1.75*(((x-n.x)/n.rx)**2+((y-n.y)/n.ry)**2));
@@ -634,6 +847,17 @@ function hollyVelocity(x,y,side){
  const length=Math.hypot(dx,dy),gain=length>16?(16+8*(1-Math.exp(-(length-16)/8)))/length:1;
  return [dx*gain*HOLLY_JIGGLE_GAIN,dy*gain*HOLLY_JIGGLE_GAIN];
 }
+function hollyVelocity(x,y,side){
+ const upper=nodes[side*3],center=nodes[side*3+1],lower=nodes[side*3+2],f=followers[side];
+ let dx=.18*upper.dx+.64*center.dx+.18*lower.dx+f.dx*.35;
+ let dy=.18*upper.dy+.64*center.dy+.18*lower.dy+f.dy*.50;
+ const roll=clamp((lower.dx-upper.dx)*.0014,-.018,.018),shape=clamp((lower.dy-upper.dy)*.00065,-.010,.010);
+ const lx=x-center.x,ly=y-center.y;dx+=-ly*roll+lx*shape;dy+=lx*roll-ly*shape;
+ const p=impacts[side],hx=x-p.x*W,hy=y-p.y*H,fall=Math.exp(-2.6*((hx/74)**2+(hy/66)**2));
+ const pressure=fall*(p.v*.035-p.contact*.045);dx+=hx*pressure;dy+=hy*pressure;
+ const length=Math.hypot(dx,dy),gain=length>16?(16+8*(1-Math.exp(-(length-16)/8)))/length:1;
+ return [dx*gain*HOLLY_JIGGLE_GAIN,dy*gain*HOLLY_JIGGLE_GAIN];
+}
 // Bilinear CPU texture remapping: spatial deformation, never a translated patch.
 // Only Holly uses this path; the accepted three Canvas renderers are untouched.
 function initHollyFallback(){
@@ -644,12 +868,14 @@ function initHollyFallback(){
 }
 // B only: skin moves with its local field (channel R/G), the garment with one
 // shared vector per side (channel B). The side is fixed by the lacing line.
-let hollyGarment=[[0,0],[0,0]];
+let hollyGarment=[[0,0,0],[0,0,0]];
 function renderHollyFabricPixel(x,y,active,weight,frame){
  const [cx,cy,w]=HOLLY_CROP,at=(y*w+x)*4,side=cx+x+.5<410?0:1;
  if(!active[side]||!(hollyMaskPixels[at+side]>0||hollyMaskPixels[at+2]>0))return;
- const v=hollyVelocity(cx+x+.5,cy+y+.5,side),g=hollyGarment[side];let sx=cx+x+.5,sy=cy+y+.5;
- for(let k=0;k<6;k++){const a=weight(sx,sy,side)/6,b=weight(sx,sy,2)/6;sx-=v[0]*a+g[0]*b;sy-=v[1]*a+g[1]*b;}
+ const v=hollyVelocity(cx+x+.5,cy+y+.5,side),[gx,gy,angle]=hollyGarment[side];
+ let sx=cx+x+.5,sy=cy+y+.5;
+ const [ax,ay]=HOLLY_GARMENT_ANCHORS[side],garmentX=gx-(sy-ay)*angle,garmentY=gy+(sx-ax)*angle;
+ for(let k=0;k<6;k++){const a=weight(sx,sy,side)/6,b=weight(sx,sy,2)/6;sx-=v[0]*a+garmentX*b;sy-=v[1]*a+garmentY*b;}
  sx-=.5;sy-=.5;
  const ix=Math.floor(sx),iy=Math.floor(sy),fx=sx-ix,fy=sy-iy,i=(iy*W+ix)*4;
  for(let k=0;k<3;k++)frame.data[at+k]=(hollySource[i+k]*(1-fx)+hollySource[i+4+k]*fx)*(1-fy)+(hollySource[i+W*4+k]*(1-fx)+hollySource[i+W*4+4+k]*fx)*fy;
@@ -661,7 +887,10 @@ function renderHollyFallback(sc){
  }
  const active=[0,1].map(side=>nodes.slice(side*3,side*3+3).some(n=>n.dx||n.dy)||followers[side].dx||followers[side].dy||impacts[side].contact||impacts[side].v);
  const [cx,cy,w,h]=HOLLY_CROP,c=hollyLayer.getContext('2d'),frame=c.createImageData(w,h);
- if(HOLLY_FABRIC)hollyGarment=HOLLY_GARMENT_ANCHORS.map(([x,y],side)=>hollyVelocity(x,y,side));
+ if(HOLLY_FABRIC)hollyGarment=HOLLY_GARMENT_ANCHORS.map(([x,y],side)=>{
+  const angle=clamp((side?1:-1)*nodes[side*3+1].dy*.0013,-.03,.03);
+  return [...hollyGarmentVelocity(x,y,side),angle];
+ });
  const weight=(x,y,side)=>{
   x=clamp(x-cx-.5,0,w-1.001);y=clamp(y-cy-.5,0,h-1.001);
   const ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy,i=(iy*w+ix)*4+side;
@@ -813,6 +1042,8 @@ function initGL(){
  if(!gl)throw Error('WebGL unavailable');
  const vertex=`precision highp float;
  attribute vec2 aPosition;
+ attribute float aDepth;
+ uniform vec2 uView;
  uniform vec4 uCover;
  uniform vec4 uRegions[2];
  uniform vec2 uSplit;
@@ -911,7 +1142,7 @@ function initGL(){
   return motion;
  }
 
- vec2 hollyVelocity(vec2 uv,int side){
+ vec2 hollyGarmentVelocity(vec2 uv,int side){
   vec2 motion=vec2(0.0);float sum=0.0;
   for(int j=0;j<3;j++){
    int id=side*3+j;vec4 p=uPoints[id];vec2 n=(uv-p.xy)/p.zw;
@@ -926,22 +1157,48 @@ function initGL(){
   if(travel>16.0)motion*=(16.0+8.0*(1.0-exp(-(travel-16.0)/8.0)))/travel;
   return motion*${HOLLY_JIGGLE_GAIN.toFixed(2)};
  }
+ vec2 hollyVelocity(vec2 uv,int side){
+   vec2 size=vec2(754.0,1280.0);
+   vec2 upper=uOffsets[side*3]*size,center=uOffsets[side*3+1]*size,lower=uOffsets[side*3+2]*size;
+   vec2 local=(uv-uPoints[side*3+1].xy)*size;
+   // A shared carrier plus a restrained roll keeps the region coordinated.
+   vec2 motion=.18*upper+.64*center+.18*lower+uSecondary[side]*size*vec2(.35,.50);
+   float roll=clamp((lower.x-upper.x)*.0014,-.018,.018);
+   float shape=clamp((lower.y-upper.y)*.00065,-.010,.010);
+   motion+=vec2(-local.y,local.x)*roll+vec2(local.x,-local.y)*shape;
+   vec4 h=uImpacts[side];vec2 delta=(uv-h.xy)*size;
+   vec2 hi=delta/vec2(74.0,66.0);
+   motion+=delta*exp(-2.6*dot(hi,hi))*(h.z*.035-h.w*.045);
+   float travel=length(motion);
+   if(travel>16.0)motion*=(16.0+8.0*(1.0-exp(-(travel-16.0)/8.0)))/travel;
+   return motion/size*${HOLLY_JIGGLE_GAIN.toFixed(2)};
+ }
  void main(){
+  vec2 projected=aPosition+uView*aDepth/uCover.xy;gl_Position=vec4(projected.x*2.0-1.0,1.0-projected.y*2.0,0.0,1.0);
   vAureliaLeft=vec2(0.0);vAureliaRight=vec2(0.0);
   vLeftVelocity=vec2(0.0);
   vec2 uv=aPosition*uCover.xy+uCover.zw;
   vRawUV=uv;vEmberLeft=vec2(0.0);vEmberRight=vec2(0.0);
   if(uSanta>0.5){
    vAureliaLeft=santaVelocity(uv);vUV=uv;
-   gl_Position=vec4(aPosition.x*2.0-1.0,1.0-aPosition.y*2.0,0.0,1.0);return;
+   return;
   }
   if(uHolly>0.5){
-   vAureliaLeft=hollyVelocity(uv,0);vAureliaRight=hollyVelocity(uv,1);vUV=uv;${HOLLY_FABRIC?'vGarmentLeft=hollyVelocity(vec2(320.0/754.0,536.0/1280.0),0);vGarmentRight=hollyVelocity(vec2(498.0/754.0,539.0/1280.0),1);':''}
-   gl_Position=vec4(aPosition.x*2.0-1.0,1.0-aPosition.y*2.0,0.0,1.0);return;
+   vAureliaLeft=hollyVelocity(uv,0);vAureliaRight=hollyVelocity(uv,1);vUV=uv;
+   ${HOLLY_FABRIC?`
+    vec2 size=vec2(754.,1280.);
+    vec2 left=uv*size-vec2(320.,536.),right=uv*size-vec2(498.,539.);
+    vGarmentLeft=hollyGarmentVelocity(vec2(320.,536.)/size,0);
+    vGarmentRight=hollyGarmentVelocity(vec2(498.,539.)/size,1);
+    vGarmentLeft+=vec2(-left.y,left.x)*clamp(-uOffsets[1].y*1280.*.0013,-.03,.03)/size;
+    vGarmentRight+=vec2(-right.y,right.x)*clamp(uOffsets[4].y*1280.*.0013,-.03,.03)/size;
+   `:''}
+   return;
   }
   if(uAurelia>0.5){
-   vAureliaLeft=aureliaVelocity(uv,0);vAureliaRight=aureliaVelocity(uv,1);vUV=uv;
-   gl_Position=vec4(aPosition.x*2.0-1.0,1.0-aPosition.y*2.0,0.0,1.0);return;
+   vAureliaLeft=aureliaVelocity(uv,0)*${AURELIA_MOTION_GAIN.toFixed(2)};
+   vAureliaRight=aureliaVelocity(uv,1)*${AURELIA_MOTION_GAIN.toFixed(2)};vUV=uv;
+   return;
   }
   float rightMix=smoothstep(uSplit.x,uSplit.y,uv.x);
   vec2 drift=vec2(0.0);
@@ -955,17 +1212,20 @@ function initGL(){
    float rightTaper=s==1?(1.0-uRightTaper.x*smoothstep(.69,.81,uv.y))*(1.0-uRightTaper.y*smoothstep(.55,.97,q.x)):1.0;
    edge*=seam*thigh*rightTaper*(s==0?1.0-rightMix:rightMix);
    vec2 local=vec2(0.0);
-   float weightSum=0.0;
    for(int j=0;j<3;j++){
      int id=s*3+j;vec4 p=uPoints[id];
      vec2 n=(uv-p.xy)/p.zw;
+     if(s==0 && uLeftMask>.5){
+      vec4 peer=uPoints[3+j];
+      vec2 mirrored=vec2(935.0/941.0-uv.x,uv.y-6.0/1671.0);
+      vec2 relative=(mirrored-peer.xy)/peer.zw;
+      n=mix(n,vec2(-relative.x,relative.y),1.0-smoothstep(1070.0,1148.0,uv.y*1671.0));
+     }
      float weight=exp(-1.75*dot(n,n));
      local+=uOffsets[id]*weight*.68;
-     weightSum+=weight;
    }
    // Partition-of-unity blending: all three springs carry the interior together.
    // Retain their different phases, without a Gaussian amplitude peak in the center.
-   if(s==0 && uLeftMask>0.5)local*=1.15/max(.68*weightSum,.0001);
    local+=uSecondary[s]*.35; // Restore expressive secondary motion inside the clothing-safe mask.
    vec4 h=uImpacts[s];vec2 hi=(uv-h.xy)/vec2(.12,.14);
    float contactFalloff=exp(-2.6*dot(hi,hi));
@@ -980,6 +1240,7 @@ function initGL(){
     // Pass the smooth spring field to the pixel shader. Applying the boundary
     // there avoids both triangle leakage and folds at the expanded skin rim.
     vLeftVelocity=leftVelocity(uv);
+    vEmberLeft=(local+press+wave);
    }else{
     vec2 contribution=edge*(local+press+wave);
     if(s==0)vEmberLeft=contribution;else vEmberRight=contribution;
@@ -987,7 +1248,7 @@ function initGL(){
    }
   }
   vUV=clamp(uv-drift,.001,.999);
-  gl_Position=vec4(aPosition.x*2.0-1.0,1.0-aPosition.y*2.0,0.0,1.0);
+
  }`;
  const fragment=`precision highp float;
  uniform sampler2D uPhoto;
@@ -1022,7 +1283,7 @@ function initGL(){
  uniform sampler2D uSantaShape;
  float leftEnvelope(vec2 uv){
   // A cached source-pixel mask replaces repeated polygon arithmetic per fragment.
-  return texture2D(uLeftShape,(uv*vec2(941.0,1671.0)-vec2(148.0,984.0))/vec2(320.0,416.0)).r;
+  return texture2D(uLeftShape,(uv*vec2(941.0,1671.0)-vec2(${midnightLeftCrop[0]}.,${midnightLeftCrop[1]}.))/vec2(${midnightLeftCrop[2]}.,${midnightLeftCrop[3]}.)).r;
  }
  void main(){
   if(vRawUV.x<0.0 || vRawUV.x>1.0 || vRawUV.y<0.0 || vRawUV.y>1.0) discard;
@@ -1037,11 +1298,19 @@ function initGL(){
    for(int k=0;k<6;k++)sampleUV-=left*emberLeftEnvelope(sampleUV)/6.0;
    photoUV=clamp(sampleUV-vEmberRight*mix(1.0,r,uDragBoundary.y),.001,.999);
   }
-  if(dot(vLeftVelocity,vLeftVelocity)>0.0 && vRawUV.x>.15 && vRawUV.x<.50 && vRawUV.y>.58 && vRawUV.y<.84){
+  if(dot(vLeftVelocity,vLeftVelocity)>0.0 && vRawUV.x>.15 && vRawUV.x<.50 && vRawUV.y>${midnightLeftCrop[1]/1671} && vRawUV.y<.84){
    // Flow through a fixed skin envelope in four short increments. The moving
    // region does not shrink as the gesture gets stronger. Clothing stays fixed.
    vec2 sampleUV=vRawUV;
-   for(int k=0;k<4;k++)sampleUV-=vLeftVelocity*leftEnvelope(sampleUV)*mix(1.0,midnightSupport(sampleUV),uDragBoundary.x)/4.0;
+   float upper=1.0-smoothstep(1070.0,1148.0,vRawUV.y*1671.0);
+   for(int k=0;k<4;k++){
+    float support=leftEnvelope(sampleUV);
+    float interior=smoothstep(.62,.98,support);
+    vec2 response=mix(vLeftVelocity,vEmberLeft,interior);
+    response=mix(response,vEmberLeft*1.15,upper);
+    // During a held drag, keep the fold attached to the same moving surface.
+    sampleUV-=response*support/4.0;
+   }
    photoUV+=sampleUV-vRawUV;
   }
   if(uAurelia>0.5){
@@ -1093,10 +1362,13 @@ function initGL(){
  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,0);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
  gl.uniform1i(gl.getUniformLocation(p,'uPhoto'),0);
- createLeftShapeTexture();createAureliaShapeTexture();createHollyShapeTexture();createSantaShapeTexture();
+ createLeftShapeTexture();createAureliaShapeTexture();createHollyShapeTexture();
  santaMaskLoc=gl.getUniformLocation(program,'uSanta');
  hollyMaskLoc=gl.getUniformLocation(program,'uHolly');
  aureliaMaskLoc=gl.getUniformLocation(program,'uAurelia');
+ depthBuffer=gl.createBuffer();
+ depthAttribute=gl.getAttribLocation(program,'aDepth');
+ viewUniform=gl.getUniformLocation(program,'uView');
  uploadCharacterCalibration();
 }
 function uploadCharacterCalibration(){
@@ -1165,6 +1437,7 @@ function initFallback(){
  if(isHolly()){initHollyFallback();say('Reduced graphics mode');return;}
  if(isSanta()){initSantaFallback();say('Reduced graphics mode');return;}
  backups=regions.map((z,side)=>{
+  if(currentCharacter().id==='midnight'&&side===0)return null; // The trim uses its own backward sampler.
   const w=420,h=480,layer=document.createElement('canvas'),mask=document.createElement('canvas');
   layer.width=mask.width=w;layer.height=mask.height=h;
   const m=mask.getContext('2d');
@@ -1173,13 +1446,13 @@ function initFallback(){
   grad.addColorStop(0,'rgba(0,0,0,1)');grad.addColorStop(.55,'rgba(0,0,0,1)');
   grad.addColorStop(.82,'rgba(0,0,0,.78)');grad.addColorStop(1,'rgba(0,0,0,0)');
   m.fillStyle=grad;m.fillRect(-1,-1,2,2);m.restore();
-  if(currentCharacter().id==='aurelia'||(currentCharacter().id==='midnight' && side===0)){
+  if(isAurelia()){
    const pixels=m.getImageData(0,0,w,h),[srcX,srcY,sw,sh]=fallbackRect(side);
    for(let y=0;y<h;y++)for(let x=0;x<w;x++){
     const px=srcX+(x+.5)/w*sw;
     const py=srcY+(y+.5)/h*sh;
-    pixels.data[(y*w+x)*4+3]=255*(currentCharacter().id==='aurelia'?aureliaSkinWeight(side,px,py):leftSkinWeight(px,py));
-    if(currentCharacter().id==='aurelia' && side===1){
+    pixels.data[(y*w+x)*4+3]=255*aureliaSkinWeight(side,px,py);
+    if(side===1){
      const crease=1014-.0014*(px-520)**2,t=clamp((py-(crease-72))/60,0,1);
      pixels.data[(y*w+x)*4+3]*=1-.6*t*t*(3-2*t);
     }
@@ -1198,7 +1471,51 @@ function initFallback(){
  });
  say('Reduced graphics mode');
 }
-function render(){
+const AURELIA_MOTION_GAIN=1.25;
+// Displacement samples from the approved offline bake, at 60 samples per second.
+const aureliaBake={fps:60,curves:[
+ [-0.0,0.1502552,0.3005104,0.4507656,0.6010208,0.751276,0.8791633,0.9633477,1.0,0.9876339,0.9271644,0.8218469,0.6771043,0.5002486,0.3001115,0.086605,-0.1297702,-0.3384398,-0.5292728,-0.6930726,-0.8220199,-0.9100454,-0.9531147,-0.9494123,-0.899416,-0.8058589,-0.673582,-0.5092845,-0.3211852,-0.1186117,0.0884612,0.289903,0.475922,0.637541,0.7670307,0.8582777,0.9070736,0.9113075,0.8710559,0.7885653,0.6681283,0.5158615,0.3393956,0.1474933,-0.0503854,-0.2445489,-0.4255483,-0.5846373,-0.7141938,-0.808085,-0.8619569,-0.8734356,-0.8422305,-0.7701351,-0.6609263,-0.5201678,-0.3549269,-0.1734207,0.0153929,0.2022559,0.3780646,0.5343124,0.6635008,0.7594993,0.8178354,0.8359025,0.8130748,0.7507261,0.652149,0.5223828,0.3679564,0.1965601,0.0166636,-0.1629031,-0.3333816,-0.4865128,-0.6149365,-0.7125443,-0.7747702,-0.7988034,-0.7837139,-0.7304864,-0.64196,-0.5226778,-0.3786543,-0.217073,-0.0459283,0.1263697,0.2914081,0.4411815,0.5684802,0.6672365,0.732814,0.7622243,0.7542623,0.7095539,0.6305136,0.5212156,0.3871844,0.2351156,0.0725428,-0.0925362,-0.252052,-0.3982579,-0.5241058,-0.6235854,-0.6920111,-0.726242,-0.7248255,-0.6880571,-0.6179551,-0.5181512,-0.3937033,-0.2508389,-0.096645,0.0612842,0.2152203,0.3576787,0.4817827,0.5815942,0.6523982,0.6909249,0.6954998,0.6661154,0.6044209,0.5136315,0.3983611,0.2643889,0.1183695,-0.0324969,-0.1808195,-0.3193784,-0.4414759,-0.5412602,-0.614005,-0.6563331,-0.6663728,-0.6438394,-0.5900392,-0.5077955,-0.4013014,-0.2759061,-0.1378473,0.0060593,0.1487561,0.2832891,0.4031471,0.5025758,0.5768546,0.6225193,0.6375241,0.6213316,0.5749301,0.5007752,0.4026608,0.2855259,0.1552056,0.0181415,-0.1189368,-0.2493419,-0.3667542,-0.4655284,-0.540964,-0.5895292,-0.6090254,-0.5986863,-0.5592056,-0.4926947,-0.40257,-0.2933784,-0.1705679,-0.0402164,0.0912689,0.2174663,0.3322527,0.4301008,0.5063446,0.5574018,0.5809415,0.5759903,0.5429704,0.4836715,0.4011531,0.2995885,0.1840537,0.0602737,-0.0656604,-0.1875911,-0.2995954,-0.3962723,-0.4730026,-0.5261699,-0.5533299,-0.553323,-0.526322,-0.4738158,-0.3985278,-0.3042758,-0.1957783,-0.078419,0.0420203,0.1596445,0.2687331,0.3640184,0.4409395,0.4958605,0.5262419,0.5307573,0.5093507,0.4632313,0.394806,0.3075546,0.2058534,0.0947556,-0.020259,-0.1335546,-0.2396148,-0.3333116,-0.4101523,-0.4664954,-0.4997224,-0.5083591,-0.4921404,-0.4520155,-0.3900937,-0.3095345,-0.2143863,-0.1093837,0.0002882,0.1092492,0.2121882,0.3041215,0.3806341,0.4380912,0.4738108,0.4861884,0.4747684,0.4402592,0.3844911,0.3103197,0.2214804,0.1224006,0.0179788,-0.0866566,-0.1848128,-0.2670827,-0.3259846,-0.3570707,-0.3594237,-0.3356276,-0.291227,-0.2337715,-0.1716033,-0.1125857,-0.0629738,-0.0266038,-0.0045187,0.0049208,0.0054763,0.0021297,0.0],
+ [-0.0,0.1557365,0.311473,0.4672095,0.622946,0.7786825,0.9070326,0.9821265,1.0,0.9600199,0.864897,0.7205068,0.535528,0.3209219,0.089284,-0.145895,-0.3710135,-0.5731458,-0.7407831,-0.864488,-0.9374252,-0.9557375,-0.9187483,-0.8289782,-0.691977,-0.5159828,-0.311427,-0.0903175,0.134466,0.3499213,0.5436753,0.7046939,0.8239097,0.8947315,0.9134079,0.8792239,0.7945211,0.6645412,0.4971031,0.3021339,0.0910806,-0.1237607,-0.3299612,-0.515677,-0.6703298,-0.7852079,-0.8539564,-0.8729279,-0.8413739,-0.7614677,-0.6381592,-0.4788691,-0.2930436,-0.0915953,0.1137378,0.3110747,0.4890792,0.6376097,0.748297,0.8150149,0.8342179,0.8051285,0.7297622,0.6127922,0.461261,0.2841569,0.0918821,-0.1043578,-0.2932065,-0.4638132,-0.6064562,-0.7130955,-0.7778256,-0.7972016,-0.7704209,-0.6993509,-0.5884029,-0.4442597,-0.2754736,-0.0919602,0.0955839,0.2763037,0.4398141,0.5767956,0.679525,0.7423106,0.7618058,0.7371869,0.6701822,0.5649551,0.4278465,0.2669935,0.0918476,-0.0873808,-0.2603165,-0.4170198,-0.5485575,-0.6475113,-0.7083956,-0.7279608,-0.7053651,-0.6422065,-0.5424139,-0.4120031,-0.258716,-0.0915611,0.0797154,0.2451971,0.3953712,0.5216749,0.6169831,0.6760095,0.6955993,0.6748963,0.6153763,0.5207456,0.3967118,0.25064,0.0911163,-0.0725564,-0.2309005,-0.3748121,-0.4960838,-0.5878723,-0.6450841,-0.6646574,-0.645724,-0.5896456,-0.4999178,-0.3819552,-0.2427641,-0.090528,0.065874,0.2173838,0.355289,0.4717232,0.5601142,0.6155546,0.6350735,0.6177941,0.5649703,0.4798991,0.3677163,0.2350868,0.0898097,-0.0596403,-0.2046064,-0.336751,-0.4485349,-0.5336468,-0.5873588,-0.6067889,-0.5910544,-0.5413083,-0.4606594,-0.3539787,-0.2276061,-0.0889741,0.0538287,0.1925294,0.3191496,0.4264636,0.5084108,0.5604371,0.5797475,0.565455,0.5186188,0.4421693,0.3407263,0.2203199,0.0880332,-0.0484142,-0.1811164,-0.3024386,-0.4054563,-0.4843499,-0.5347328,-0.5538951,-0.540948,-0.4968627,-0.4244009,-0.3279434,-0.2132259,-0.0869979,0.0433732,0.1703324,0.2865742,0.3854627,0.46141,0.5101915,0.5291803,0.5174878,0.4760025,0.4073269,0.3156149,0.2063215,0.0858786,-0.0386832,-0.1601443,-0.2715144,-0.3664346,-0.4395397,-0.4867613,-0.5055538,-0.4950301,-0.456002,-0.3909211,-0.303726,-0.1996042,-0.0846847,0.0343232,0.1505208,0.2572197,0.3483263,0.4186898,0.4643927,0.4829681,0.4735329,0.4368267,0.3751585,0.2922622,0.1930712,0.0834251,-0.0302733,-0.1414321,-0.2436521,-0.3310942,-0.3988135,-0.443038,-0.4613782,-0.4529558,-0.4184431,-0.3600145,-0.2812095,-0.1867193,-0.0821081,0.0265145,0.13285,0.2307755,0.3146965,0.3798659,0.422652,0.4407407,0.4332599,0.397407,0.3338016,0.2502922,0.1569854,0.0646994,-0.0166471,-0.0794431,-0.1193608,-0.1357484,-0.1313959,-0.1117367,-0.0836482,-0.0540784,-0.0287527,-0.0111924,-0.0022159,-0.0]
+]};
+let aureliaTime=0,aureliaNext=.1;
+const aureliaPulses=[[],[]],aureliaReleased=[-Infinity,-Infinity];
+function aureliaDamping(side){
+ const age=aureliaTime-aureliaReleased[side];
+ if(age>=1.2)return 1;
+ const t=clamp((age-.16)/.5,0,1);return .92+.65*t*t*(3-2*t);
+}
+function aureliaCurve(side,age){
+ const a=aureliaBake.curves[side],at=age*aureliaBake.fps,i=Math.floor(at);
+ if(i<0||i>=a.length-1)return 0;
+ return (a[i]+(a[i+1]-a[i])*(at-i))*Math.exp(-age*1.1);
+}
+function aureliaPulse(side,power,clap=false){
+ const travel=(4+model.bounce*.08)*power;
+ const x=clap?(side?-travel:travel):(side?1:-1)*1.1*power;
+ aureliaPulses[side].push({t:aureliaTime,x,y:clap?0:travel,clap});
+ if(aureliaPulses[side].length>16)aureliaPulses[side].shift();
+}
+function aureliaOffset(index){
+ const side=nodes[index].side,layer=[.72,1,.88][index%3];let x=0,y=0;
+ for(const p of aureliaPulses[side]){const k=aureliaCurve(p.clap?0:side,aureliaTime-p.t)*layer;x+=p.x*k;y+=p.y*k}
+ return {x,y};
+}
+function advanceAurelia(dt){
+ aureliaTime+=dt;
+ if(motion?.autoDrive&&motion.visible&&!pointers.size&&aureliaTime>=aureliaNext){
+  aureliaPulse(0,.3,true);aureliaPulse(1,.3,true);aureliaNext=aureliaTime+.5;
+ }
+ for(const pulses of aureliaPulses)while(pulses.length&&aureliaTime-pulses[0].t>=4.4)pulses.shift();
+}
+function renderAurelia(){
+ const saved=nodes.map(n=>[n.dx,n.dy]);
+ try{
+  nodes.forEach((n,i)=>{const d=aureliaOffset(i);n.dx=clamp(n.dx+d.x,-26,26);n.dy=clamp(n.dy+d.y,-30,30);});
+  renderPortrait();
+ }finally{nodes.forEach((n,i)=>{[n.dx,n.dy]=saved[i];});}
+}
+function render(){if(isAurelia())renderAurelia();else renderPortrait();}
+function renderPortrait(){
  if(needSize)resize();
  if(fallback){
   ctx2.clearRect(0,0,canvas.width,canvas.height);
@@ -1217,13 +1534,14 @@ function render(){
   // Fallback is photo-first: show a gentle localized crop motion rather than fabric seams.
   for(let side=0;side<2;side++){
    const n=nodes[side*3+1];if(Math.abs(n.dx)+Math.abs(n.dy)<.25 && impacts[side].contact<.02 && waves[side].strength<.02)continue;
+   if(currentCharacter().id==='midnight'&&side===0){drawMidnightLeft(sc);continue;}
    const [srcX,srcY,sw,sh]=fallbackRect(side);
    const dstX=(ox+srcX*drawW/W)*sc,dstY=(oy+srcY*drawH/H)*sc,dstW=sw*drawW/W*sc,dstH=sh*drawH/H*sc;
    const {layer,mask,ctx}=backups[side];
    ctx.clearRect(0,0,layer.width,layer.height);
    ctx.globalCompositeOperation='source-over';
    // Preserve source sampling on the left; gently reduce the screen-right displacement.
-   const gain=side===1?.97:1,followGain=side===1?.35:.35;
+   const gain=(side===1?.97:1)*(isAurelia()?AURELIA_MOTION_GAIN:1),followGain=.35;
    ctx.drawImage(img,srcX-(n.dx+followers[side].dx*followGain)*.8*gain,srcY-(n.dy+followers[side].dy*followGain)*.8*gain,sw,sh,0,0,layer.width,layer.height);
    ctx.globalCompositeOperation='destination-in';ctx.drawImage(fallbackDragMask(backups[side],side,(n.dx+followers[side].dx*followGain)*.8*gain,(n.dy+followers[side].dy*followGain)*.8*gain),0,0);
    ctx.globalCompositeOperation='source-over';
@@ -1238,6 +1556,7 @@ function render(){
  gl.useProgram(program);
  gl.uniform2fv(gl.getUniformLocation(program,'uDragBoundary'),dragBoundary);
  gl.uniform1f(gl.getUniformLocation(program,'uEmberBoundary'),currentCharacter().id==='ember'?1:0);
+ gl.uniform2f(viewUniform,viewX,viewY*W/H);
  gl.uniform4fv(coverLoc,new Float32Array(uvCover));
   gl.uniform2fv(offsetLoc,new Float32Array(nodes.flatMap(n=>[n.dx/W,n.dy/H])));
   gl.uniform2fv(secondaryLoc,new Float32Array(followers.flatMap(f=>[f.dx/W,f.dy/H])));
@@ -1246,13 +1565,22 @@ function render(){
  gl.drawElements(gl.TRIANGLES,meshCount,gl.UNSIGNED_SHORT,0);
 }
 function step(dt){
+ depthTime+=dt;
+ viewX=(depthEnabled&&!fallback)? .073*Math.sin(depthTime*.74):0;
+ viewY=(depthEnabled&&!fallback)? .025*Math.sin(depthTime*.52):0;
+ if(isAurelia())advanceAurelia(dt);
  advanceDragBoundary(dt);
  if(isSanta())advanceSantaLaugh(dt);
  const hz=isSanta()?1.65-model.softness*.007:isHolly()?3.0-model.softness*.012:4.3-model.softness*.018,omega=2*Math.PI*hz,k=omega*omega;
  const dampingRatio=isSanta()?.12+model.settle*.0025:isHolly()?.12+model.settle*.0022:.13+model.settle*.0032,damping=2*omega*dampingRatio*.97,couple=k*.145; // Small lift in decay time.
  const forces=nodes.map(n=>{
   const sideFrequency=isSanta()?(n.side===0?.98:1.02):isHolly()?(n.side===0?.94:1.06):n.side===0?.986:1.014; // small natural asymmetry
-  const localDamping=currentCharacter().id==='midnight' && n.side===0?1.06:1; // Smooth only brunette's screen-left spring.
+  let localDamping=1;
+  if(n.side===0&&currentCharacter().id==='ember'){
+   const x=Math.abs(n.vx),y=Math.abs(n.vy);
+   localDamping+=.30*Math.min(x,y)/(1+Math.max(x,y));
+  }else if(n.side===0&&currentCharacter().id==='midnight')localDamping=1.06;
+  else if(isAurelia())localDamping=aureliaDamping(n.side);
   return {fx:-k*sideFrequency*n.dx-damping*localDamping*n.vx,fy:-k*sideFrequency*n.dy-damping*localDamping*n.vy};
  });
  for(const [a,b] of connections){
@@ -1261,9 +1589,9 @@ function step(dt){
  }
  // The earlier linked effect only fired on taps and was too small to see.
  // This gentle cross-center spring now transfers displacement DURING DRAGS as well.
- // Redhead mechanics remain untouched; 0 on the slider still means fully independent.
+ // A zero transfer setting keeps the springs independent.
  if((currentCharacter().id==='midnight'||currentCharacter().id==='aurelia') && model.transfer>0){
-  const cross=k*.24*(linkedTransfer()/100);
+  const cross=k*.24*(linkedTransfer()/100)*(currentCharacter().id==='midnight'?1.3:1);
   const dx=nodes[1].dx-nodes[4].dx,dy=nodes[1].dy-nodes[4].dy;
   forces[1].fx-=cross*dx;forces[4].fx+=cross*dx;
   forces[1].fy-=cross*dy;forces[4].fy+=cross*dy;
@@ -1441,6 +1769,7 @@ function slap(side,x,y,pt,strength=1){
  // Minimal delayed coupling, not a mirrored second slap.
  linkedImpulse(side,power*9);
  startWave(side,power*.56);
+ if(isAurelia()){aureliaReleased[side]=-Infinity;aureliaPulse(side,.75);}
  slapVisual(pt);slapSound();slapCount++;lastGesture='slap';
 }
 function wake(){hint.classList.add('fade');}
@@ -1449,6 +1778,12 @@ canvas.addEventListener('pointerdown',e=>{
  const raw=readPoint(e),side=pickSide(raw.x,raw.y);
  if(side<0)return;
  if(canGrabHold()&&[...pointers.values()].some(f=>f.side===side))return;
+ if(isAurelia()){
+  for(let i=side*3;i<side*3+3;i++){
+   const n=nodes[i],d=aureliaOffset(i);n.dx=clamp(n.dx+d.x,-26,26);n.dy=clamp(n.dy+d.y,-30,30);
+  }
+  aureliaPulses[side].length=0;aureliaReleased[side]=-Infinity;
+ }
  const {p,offsetX,offsetY}=touchAnchor(side,raw);
  e.preventDefault();
  try{canvas.setPointerCapture?.(e.pointerId);}catch(err){/* Pointer still works without capture. */}
@@ -1491,7 +1826,7 @@ canvas.addEventListener('pointermove',e=>{
  // A moving finger pulls the opposite cheek slightly with it: taps alone are not enough.
  // Restrict to Midnight and honor the exact 0 = independent slider setting.
  if((currentCharacter().id==='midnight'||currentCharacter().id==='aurelia') && model.transfer>0){
-  const other=nodes[(1-finger.side)*3+1],follow=(linkedTransfer()/50)*.020;
+  const other=nodes[(1-finger.side)*3+1],follow=(linkedTransfer()/50)*.020*(currentCharacter().id==='midnight'?.55:1);
   other.vx=clamp(other.vx+(dx/dt)*follow,-280,280);
   other.vy=clamp(other.vy+(dy/dt)*follow,-280,280);
  }
@@ -1503,6 +1838,7 @@ function release(e){
  const f=pointers.get(e.pointerId);
  if(!f)return;
  if(e.type==='pointerup'){
+  if(isAurelia()&&f.grabbed)aureliaReleased[f.side]=aureliaTime;
   const now=performance.now(),speed=Math.hypot(f.vx,f.vy),age=now-f.lastTime;
   const held=now-f.startTime;
   if(!(canGrabHold()&&f.grabbed)&&f.travel<27&&held<400){
@@ -1517,8 +1853,11 @@ function release(e){
 }
 canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('lostpointercapture',release);
 window.addEventListener('blur',()=>{pointers.clear();for(const p of impacts)p.target=0;});
-function bounceBoth(){if(isSanta()){santaImpulse(0,470,790,1.25);startSantaLaugh();wake();return;}const c=currentCharacter();impulse(0,...c.bounceCenters[0],1.05);impulse(1,...c.bounceCenters[1],.93);wake();}
-function reset(){motion?.interrupt();dragBoundary.fill(0);stopSantaLaugh();for(const n of nodes){n.dx=0;n.dy=0;n.vx=0;n.vy=0;}for(const f of followers){f.dx=f.dy=f.vx=f.vy=0;}for(const p of impacts){p.v=p.contact=p.target=0;}for(const w of waves){w.age=1;w.strength=0;}pointers.clear();}
+function bounceBoth(){if(isSanta()){santaImpulse(0,470,790,1.25);startSantaLaugh();wake();return;}const c=currentCharacter();impulse(0,...c.bounceCenters[0],1.05);impulse(1,...c.bounceCenters[1],.93);if(isAurelia()){aureliaPulse(0,1);aureliaPulse(1,.88);}wake();}
+function reset(){
+ aureliaTime=0;aureliaNext=.1;aureliaPulses.forEach(p=>p.length=0);aureliaReleased.fill(-Infinity);
+ depthTime=0;viewX=0;viewY=0;
+ motion?.interrupt();dragBoundary.fill(0);stopSantaLaugh();for(const n of nodes){n.dx=0;n.dy=0;n.vx=0;n.vy=0;}for(const f of followers){f.dx=f.dy=f.vx=f.vy=0;}for(const p of impacts){p.v=p.contact=p.target=0;}for(const w of waves){w.age=1;w.strength=0;}pointers.clear();}
 function openPanel(flag){const shown=typeof flag==='boolean'?flag:!panel.classList.contains('open');panel.classList.toggle('open',shown);scrim.classList.toggle('show',shown);panel.setAttribute('aria-hidden',String(!shown));gear.setAttribute('aria-expanded',String(shown));gear.setAttribute('aria-label',shown?'Close physics controls':'Show physics controls');/* Gear stays a single icon whether the panel is open or closed. */}
 gear.addEventListener('click',()=>openPanel());document.getElementById('close').addEventListener('click',()=>openPanel(false));scrim.addEventListener('click',()=>openPanel(false));document.getElementById('fullscreen').addEventListener('click',()=>openPanel(false));
 document.getElementById('both').addEventListener('click',()=>{bounceBoth();openPanel(false);});
@@ -1544,8 +1883,8 @@ function refreshPrefs(){
   const laugh=document.getElementById('santaLaugh');laugh.hidden=!isSanta();laugh.setAttribute('aria-pressed',String(santaLaughEnabled));laugh.textContent='Belly laugh: '+(santaLaughEnabled?'On':'Off');
 }
 function restorePrefs(){
- // Start a new character with the familiar Natural values; restore a saved profile when present.
- Object.assign(model,{...currentPresets().natural,transfer:50});activePreset='natural';slapAudioEnabled=false;santaLaughEnabled=false;
+ // New profiles open with the Playful settings used for the approved four-portrait study.
+ Object.assign(model,{...currentPresets().playful,transfer:50});activePreset='playful';slapAudioEnabled=false;santaLaughEnabled=false;
  try{
   const profile=localStorage.getItem(STORAGE_KEY+currentCharacter().id)||localStorage.getItem(V71_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(V7_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(BASELINE_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(IMPORT_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(V621_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(V62_PREFS_PREFIX+currentCharacter().id)||localStorage.getItem(OLDER_PREFS_PREFIX+currentCharacter().id);
   const prior=currentCharacter().id==='ember'?(localStorage.getItem(PRIOR_STORAGE_KEY)||localStorage.getItem(LEGACY_STORAGE_KEY)):null;
@@ -1588,7 +1927,7 @@ canvas.addEventListener('webglcontextrestored',()=>{try{initGL();needSize=true;w
 window.addEventListener('keydown',e=>{if(e.key==='Escape')openPanel(false);if(e.code==='Space'&&e.target.tagName!=='INPUT'){e.preventDefault();bounceBoth();}});
 // Read-only diagnostics for automated tests. Not a remote control or telemetry endpoint.
 window.__peachPhysicsDebug={snapshot:()=>({character:currentCharacter().id,characterName:currentCharacter().name,characters:CHARACTERS.map(c=>c.id),regions:regions.map(z=>({...z})),nodes:nodes.map(n=>({side:n.side,dx:+n.dx.toFixed(2),dy:+n.dy.toFixed(2)})),followers:followers.map(f=>({dx:+f.dx.toFixed(2),dy:+f.dy.toFixed(2)})),impacts:impacts.map(p=>({v:+p.v.toFixed(3),contact:+p.contact.toFixed(3),target:p.target})),waves:waves.map(w=>({age:+w.age.toFixed(3),strength:+w.strength.toFixed(3)})),frames,grabHold:canGrabHold(),activePointers:[...pointers.values()].map(p=>({id:p.id,side:p.side,vx:p.vx,vy:p.vy,grabbed:!!p.grabbed})),panelOpen:panel.classList.contains('open'),renderer:fallback?'canvas':'webgl',size:[cssW,cssH],image:[W,H],framing:{x:ox,y:oy,width:drawW,height:drawH},model:{...model},preset:activePreset,audioState:audioContext?.state||'not-started',audioError:audioLastError,slapAudioEnabled,santaLaughEnabled,santaLaughSound,santaLaughTime,slapCount,flickCount,lastGesture,status:diagnostic}),kick:(side=0)=>{const c=currentCharacter();impulse(side,...c.bounceCenters[side],1);},switchCharacter:(id)=>chooseCharacter(typeof id==='number'?id:CHARACTERS.findIndex(c=>c.id===id))};
-motion=new PeachMotion.MotionInput({character:()=>currentCharacter().id,nodes:()=>nodes,busy:()=>pointers.size>0||characterSwitchPending||webglLost||!img});
+motion=new PeachMotion.MotionInput({character:()=>currentCharacter().id,nodes:()=>nodes,settings:()=>model,busy:()=>pointers.size>0||characterSwitchPending||webglLost||!img});
 const motionUI=PeachMotion.attachUI(motion,{onEnable:()=>openPanel(false)});
 window.__peachMotionDebug={snapshot:()=>({...motion.snapshot(),ui:motionUI.snapshot()})};
 presentCharacter();
@@ -1596,7 +1935,7 @@ getPhoto(activeCharacterIndex,photo=>{
  img=photo;
  backdrop.style.backgroundImage='url("'+currentCharacter().src+'")';
  try{initGL();}catch(e){console.warn('WebGL not available',e);try{initFallback();}catch(err){say('Unable to start graphics');return;}}
- needSize=true;showReady();say('');requestAnimationFrame(loop);
+ needSize=true;showDepthSetting();showReady();say('');requestAnimationFrame(loop);
  // Preload other character to make the first switch responsive without blocking play.
  CHARACTERS.forEach((c,index)=>{if(index===activeCharacterIndex)return;const prefetch=new Image();if(!c.src.startsWith('data:'))prefetch.crossOrigin='anonymous';prefetch.onload=()=>{loadedPhotos[index]=prefetch;};prefetch.src=c.src;});
 });

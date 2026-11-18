@@ -8,8 +8,8 @@ const calibration=Object.freeze({
 });
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 class MotionInput{
- constructor({character,nodes,busy,random=Math.random,onChange=()=>{}}){
-  Object.assign(this,{character,nodes,busy,random,onChange});
+ constructor({character,nodes,busy,settings=()=>({bounce:65,softness:65,settle:48}),random=Math.random,onChange=()=>{}}){
+  Object.assign(this,{character,nodes,busy,settings,random,onChange});
   this.shake=false;this.auto=false;this.visible=true;this.time=0;this.quietUntil=0;
   this.autoDrive=null;this.lastCharacter=character();this.counts={shakeSteps:0,autoSteps:0};this.clearSensor();
  }
@@ -71,6 +71,17 @@ class MotionInput{
    // A smooth fade prevents an activation kick. Two drifting phases per side
    // keep the input continuous without synchronized, repeating bounces.
    const ramp=clamp(drive.age/.7,0,1),fade=ramp*ramp*(3-2*ramp);
+   // Aurelia's two horizontal inputs close together twice per second.
+   if(this.character()==='aurelia'){
+    const {softness,settle,bounce}=this.settings(),driveOmega=4*Math.PI;
+    const omega=2*Math.PI*(4.3-softness*.018),damping=2*omega*(.13+settle*.0032)*.97;
+    const response=Math.hypot(omega*omega-driveOmega*driveOmega,damping*driveOmega);
+    const phase=drive.age*driveOmega,beat=Math.sin(phase)+.35*Math.sin(phase*2);
+    const impulse=(13+bounce*.085)*response*fade*beat*dt;
+    this.add(0,impulse,0);this.add(1,-impulse,0);
+    this.counts.autoSteps++;
+    return;
+   }
    for(let side=0;side<2;side++){
     const a=drive.sides[side];a.change-=dt;
     if(a.change<=0){a.target=.8+this.random()*.4;a.change=2+this.random()*3;}

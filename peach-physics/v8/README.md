@@ -1,3 +1,21 @@
+# Peach Physics R15
+
+The main app includes the four portraits from revision 7 of the approved 2.5D study (`909b47d`). Winter Ember has a damped screen-left diagonal release. Midnight Yule’s screen-left motion follows her right-side response with support through the upper trim. Aurelia Frost has the stronger horizontal Auto clap and a baked rebound. Holly Heartbreaker has softer coordinated movement and a supported cup and trim.
+
+New character profiles use the study’s Playful preset. Existing profiles and Auto Jiggle choices carry over. Depth sway is available in the gear menu on WebGL and defaults off when the device requests reduced motion. Canvas runs the calibrated motion in a flat view.
+
+Santa is retired from the picker and the offline download. An install that last used Santa opens on Ember and retains Santa’s saved profile. The offline cache is `peach-physics-v008-r15-four`.
+
+The release tests compare rendered frames and spring positions against the approved study in WebGL and Canvas. The upgrade test starts with the previous production worker and a saved Santa profile, disconnects the browser, and exercises the picker, touch and audio controls.
+
+```sh
+node peach-physics/v8/tests/artwork.cjs
+node peach-physics/v8/tests/motion-unit.cjs
+# Serve the repository root on localhost:8000 for the preview comparison.
+node peach-physics/v8/tests/four-portrait-release.cjs
+node peach-physics/v8/tests/four-portrait-upgrade.cjs
+```
+
 ## Winter Ember left-side boundary correction
 
 Winter Ember's screen-left garment edge, inner crease and lower fold now constrain the rendered movement during Auto Jiggle and manual interaction. Spring motion, artwork, other characters and saved profiles are preserved. Cache: `peach-physics-v008-r14-ember1`. [Details and validation](EMBER-FIX.md).
