@@ -125,21 +125,37 @@ class MotionInput{
  }
  snapshot(){return {shake:this.shake,auto:this.auto,visible:this.visible,counts:{...this.counts},force:[...this.force],cooldown:this.cooldown,autoActive:!!this.autoDrive,source:this.source};}
 }
-function attachUI(controller,{win=window,doc=document,storage,onEnable=()=>{}}={}){
+function attachUI(controller,{win=window,doc=document,storage,onEnable=()=>{},onAutoChange=()=>{}}={}){
  try{storage=storage||win.localStorage;}catch{storage=null;}
  const key='peach-r13-motion-options-v1',shake=doc.getElementById('shakeMotion'),auto=doc.getElementById('autoMotion'),status=doc.getElementById('motionStatus');
+ const quickAuto=doc.getElementById('quickAuto'),notice=doc.getElementById('motionNotice');
+ const noticeDuration=6000,fadeDuration=200;
+ let noticeTimer=null,noticeFade=null;
  let saved={shake:false,auto:true},needsAutoDefault=true,granted=false,pending=false,listening=false,epoch=0,timer=null,readings=false;
  // Enable Auto once for this release, then honor later saved On/Off choices.
  try{const value=JSON.parse(storage.getItem(key)||'null');if(value?.version===1){needsAutoDefault=value.autoDefault!=='holly-fullscreen-v1';saved={shake:value.shake===true,auto:needsAutoDefault||value.auto===true};}}catch{}
  const policy=doc.permissionsPolicy||doc.featurePolicy;
  const policyAllows=!policy?.allowsFeature||['accelerometer','gyroscope'].every(name=>policy.allowsFeature(name));
  const supported=!!win.DeviceMotionEvent&&win.isSecureContext&&policyAllows;
- function message(text){status.textContent=text;const notice=doc.getElementById('motionNotice');if(notice){notice.textContent=text;notice.hidden=false;}}
+ function hideNotice(){
+  win.clearTimeout(noticeTimer);noticeFade?.cancel();
+  if(notice)notice.hidden=true;
+ }
+ function message(text,brief=text){
+  status.textContent=text;
+  if(!notice)return;
+  hideNotice();
+  notice.textContent=brief;notice.hidden=false;
+  if(!win.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches){
+   noticeFade=notice.animate?.([{opacity:1},{opacity:0}],{delay:noticeDuration-fadeDuration,duration:fadeDuration,fill:'forwards'});
+  }
+  noticeTimer=win.setTimeout(hideNotice,noticeDuration);
+ }
  function persist(){try{storage.setItem(key,JSON.stringify({version:1,autoDefault:'holly-fullscreen-v1',...saved}));}catch{}}
  if(needsAutoDefault)persist();
- function refresh(){shake.setAttribute('aria-checked',String(controller.shake));auto.setAttribute('aria-checked',String(saved.auto));shake.disabled=!supported||pending;shake.textContent=pending?'Shake to Jiggle: requesting…':controller.shake?'Shake to Jiggle: on':saved.shake?'Shake to Jiggle: tap to enable':'Shake to Jiggle: off';auto.textContent='Auto Jiggle: '+(saved.auto?'on':'off');}
+ function refresh(){shake.setAttribute('aria-checked',String(controller.shake));auto.setAttribute('aria-checked',String(saved.auto));quickAuto?.setAttribute('aria-checked',String(saved.auto));shake.disabled=!supported||pending;shake.textContent=pending?'Shake to Jiggle: requesting…':controller.shake?'Shake to Jiggle: on':saved.shake?'Shake to Jiggle: tap to enable':'Shake to Jiggle: off';auto.textContent='Auto Jiggle: '+(saved.auto?'on':'off');}
  function detach(){if(listening)win.removeEventListener('devicemotion',onMotion);listening=false;win.clearTimeout(timer);timer=null;controller.clearSensor();}
- function onMotion(event){const angle=win.screen?.orientation?.angle??win.orientation??0;controller.sample(event,win.performance.now(),angle);const valid=value=>value&&Number.isFinite(value.x)&&Number.isFinite(value.y);if((valid(event.acceleration)||valid(event.accelerationIncludingGravity))&&!readings){readings=true;win.clearTimeout(timer);message('Motion ready. Move your phone gently; touch takes priority.');}}
+ function onMotion(event){const angle=win.screen?.orientation?.angle??win.orientation??0;controller.sample(event,win.performance.now(),angle);const valid=value=>value&&Number.isFinite(value.x)&&Number.isFinite(value.y);if((valid(event.acceleration)||valid(event.accelerationIncludingGravity))&&!readings){readings=true;win.clearTimeout(timer);message('Shake is on. Try a gentle flick.');}}
  function connect(){detach();if(!granted||!saved.shake||doc.hidden)return;readings=false;win.addEventListener('devicemotion',onMotion,{passive:true});listening=true;timer=win.setTimeout(()=>{if(!readings)message('No motion readings yet. Open this preview directly in Safari and enable Shake again. Auto Jiggle works without sensors.');},2500);}
  shake.addEventListener('click',async()=>{
   if(controller.shake){epoch++;saved.shake=false;granted=false;controller.setShake(false);detach();persist();message('Shake to Jiggle is off.');refresh();return;}
@@ -150,16 +166,22 @@ function attachUI(controller,{win=window,doc=document,storage,onEnable=()=>{}}={
    const permission=typeof win.DeviceMotionEvent.requestPermission==='function'?await win.DeviceMotionEvent.requestPermission():'granted';
    if(token!==epoch)return;
    granted=permission==='granted';saved.shake=granted;controller.setShake(granted);persist();
-   message(granted?'Move your phone gently. Touch takes priority.':'Motion permission was denied. You can retry after allowing Motion & Orientation in browser settings; Auto Jiggle still works.');
+   message(granted?'Waiting for motion…':'Motion permission was denied. You can retry after allowing Motion & Orientation in browser settings; Auto Jiggle still works.');
    if(granted){connect();onEnable('shake');}else detach();
   }catch{if(token===epoch){saved.shake=false;granted=false;controller.setShake(false);detach();persist();message('Motion permission could not be enabled. Auto Jiggle is still available.');}}
   finally{if(token===epoch){pending=false;refresh();}}
  });
  // Keep native switch keyboard activation from reaching R12's global Space-to-bounce shortcut.
- for(const control of [shake,auto])control.addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});
- auto.addEventListener('click',()=>{saved.auto=!saved.auto;controller.setAuto(saved.auto);persist();message(saved.auto?'Auto Jiggle is on. Continuous gentle motion; touch pauses the effect.':controller.shake?'Auto Jiggle is off. Shake remains on.':'Motion effects are off.');refresh();if(saved.auto)onEnable('auto');});
- doc.addEventListener('visibilitychange',()=>{controller.setVisible(!doc.hidden);if(doc.hidden)detach();else connect();});
- win.addEventListener('pagehide',()=>{controller.setVisible(false);detach();});
+ for(const control of [shake,auto,quickAuto])control?.addEventListener('keydown',event=>{if(event.code==='Space')event.stopPropagation();});
+ function toggleAuto(){
+  saved.auto=!saved.auto;controller.setAuto(saved.auto);persist();refresh();onAutoChange();
+  message(saved.auto?'Auto Jiggle is on. Continuous gentle motion; touch pauses the effect.':controller.shake?'Auto Jiggle is off. Shake remains on.':'Motion effects are off until enabled.',saved.auto?'Auto Jiggle on':'Auto Jiggle off');
+  if(saved.auto)onEnable('auto');
+ }
+ auto.addEventListener('click',toggleAuto);
+ quickAuto?.addEventListener('click',toggleAuto);
+ doc.addEventListener('visibilitychange',()=>{controller.setVisible(!doc.hidden);if(doc.hidden){hideNotice();detach();}else connect();});
+ win.addEventListener('pagehide',()=>{controller.setVisible(false);hideNotice();detach();});
  win.addEventListener('pageshow',()=>{controller.setVisible(!doc.hidden);connect();});
  win.addEventListener('orientationchange',()=>controller.interrupt());
  win.screen?.orientation?.addEventListener('change',()=>controller.interrupt());

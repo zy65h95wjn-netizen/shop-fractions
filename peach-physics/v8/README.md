@@ -1,3 +1,7 @@
+# Peach Physics R15.7
+
+The portrait has a Sound button at bottom left and an Auto Jiggle switch at bottom right. Both use the same preferences as Settings. The shake confirmation sits above the buttons and disappears after six seconds. Motion details remain available in Settings. The offline cache is `peach-physics-v008-r15-controls7`.
+
 # Peach Physics R15.6
 
 Shake to Jiggle gives small wrist flicks a stronger response. The sensor dead zone is 0.08 m/s² and the maximum shake force is 2.2. The offline cache is `peach-physics-v008-r15-light-shake6`.
