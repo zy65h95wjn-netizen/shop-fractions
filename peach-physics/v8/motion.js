@@ -3,7 +3,7 @@
 'use strict';
 const calibration=Object.freeze({
  ember:{accel:2200,auto:1375,autoHz:1.15,limit:240},midnight:{accel:2100,auto:1968.75,autoHz:1.12,limit:230},
- aurelia:{accel:1700,auto:1593.75,autoHz:1.10,limit:210},holly:{accel:500,auto:1420,autoHz:.85,limit:110},
+ aurelia:{accel:1700,auto:1593.75,autoHz:1.10,limit:210},holly:{accel:500,autoLift:9,autoHz:.85,limit:110},
  santa:{accel:500,auto:287.5,autoHz:.65,limit:210}
 });
 const autoClapCharacters=new Set(['ember','midnight','aurelia']);
@@ -12,7 +12,7 @@ class MotionInput{
  constructor({character,nodes,busy,settings=()=>({bounce:65,softness:65,settle:48}),random=Math.random,onChange=()=>{}}){
   Object.assign(this,{character,nodes,busy,settings,random,onChange});
   this.shake=false;this.auto=false;this.visible=true;this.time=0;this.quietUntil=0;
-  this.autoDrive=null;this.lastCharacter=character();this.counts={shakeSteps:0,autoSteps:0};this.clearSensor();
+  this.resetHollySupport();this.autoDrive=null;this.lastCharacter=character();this.counts={shakeSteps:0,autoSteps:0};this.clearSensor();
  }
  get usesAutoClap(){return autoClapCharacters.has(this.character());}
  clearSensor(){this.filtered=[0,0];this.gravity=null;this.lastEvent=null;this.lastSampleAt=-Infinity;this.warmup=0;this.source=null;this.force=[0,0];this.burst=0;this.cooldown=0;}
@@ -54,11 +54,28 @@ class MotionInput{
    if(Math.abs(n.vy)<config.limit)n.vy=clamp(n.vy+y*weight,-config.limit,config.limit);
   }
  }
+ resetHollySupport(){this.supportY=0;this.supportVelocity=0;}
+ moveHollySupport(target,dt,driven){
+  // A critically damped support follows the lift and returns smoothly when caught.
+  const rate=27,offset=this.supportY-target,oldVelocity=this.supportVelocity;
+  const c=oldVelocity+rate*offset,decay=Math.exp(-rate*dt);
+  this.supportY=target+(offset+c*dt)*decay;
+  this.supportVelocity=(oldVelocity-rate*c*dt)*decay;
+  if(driven){
+   const inertia=.84*(oldVelocity-this.supportVelocity);
+   this.add(0,0,inertia*.94);this.add(1,0,inertia);
+  }else if(Math.abs(this.supportY)<.005&&Math.abs(this.supportVelocity)<.04)this.resetHollySupport();
+ }
  tick(dt){
   if(!Number.isFinite(dt)||dt<=0)return;dt=Math.min(dt,.05);this.time+=dt;
+  const id=this.character();
+  if(id!==this.lastCharacter){this.lastCharacter=id;this.interrupt();this.resetHollySupport();}
+  const suspended=!this.visible||this.busy();
+  if(id==='holly'&&(this.supportY||this.supportVelocity)&&(!this.auto||suspended||this.time<this.quietUntil)){
+   this.moveHollySupport(0,dt,false);
+  }
   if(!this.shake&&!this.auto)return;
-  if(this.character()!==this.lastCharacter){this.lastCharacter=this.character();this.interrupt();}
-  if(!this.visible||this.busy()){this.interrupt();return;}
+  if(suspended){this.interrupt();return;}
   if(this.time<this.quietUntil)return;
   const config=calibration[this.character()];if(!config)return;
   this.sensorAge=(this.sensorAge||0)+dt;this.cooldown=Math.max(0,this.cooldown-dt);
@@ -84,17 +101,12 @@ class MotionInput{
     return;
    }
    if(this.lastCharacter==='holly'){
-    // Briefly load each side, then let its own springs carry the rebound.
-    const cycle=drive.age*config.autoHz+.76+.075*Math.sin(.9*drive.age);
-    const strength=config.auto*(.5+this.settings().bounce/100)*fade*(.92+.08*Math.cos(1.73*drive.age));
-    for(let side=0;side<2;side++){
-     const offset=cycle-side*.022; // About 26 ms of give across the garment.
-     const phase=offset-Math.floor(offset);
-     if(phase<.22){
-      const pulse=Math.sin(Math.PI*phase/.22);
-      this.add(side,0,strength*pulse*pulse*dt);
-     }
-    }
+    // The upper body rises first. Its acceleration excites the two springs.
+    const cycles=drive.age*config.autoHz+.91+.065*Math.sin(.9*drive.age);
+    const phase=cycles-Math.floor(cycles);
+    const lift=phase<.56?Math.sin(Math.PI*phase/.56)**4:0;
+    const strength=config.autoLift*(.45+this.settings().bounce/100)*fade;
+    this.moveHollySupport(-strength*lift,dt,true);
     this.counts.autoSteps++;
     return;
    }

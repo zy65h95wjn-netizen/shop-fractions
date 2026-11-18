@@ -12,13 +12,14 @@
 
 
 
-<title>Peach Physics — Elf Lab 0.0.8 r15.3</title>
+<title>Peach Physics — Elf Lab 0.0.8 r15.4</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;color-scheme:dark;--cream:#f5eadb;--pine:#0d1e1a;--gold:#ffcb91}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#0b100e;color:var(--cream)}
 body{-webkit-user-select:none;user-select:none;overscroll-behavior:none}
 #stage{position:fixed;inset:0;width:100%;height:100%;height:100dvh;overflow:hidden;background:#141815}
+@media(orientation:portrait){#stage[data-character="ember"]{height:auto}}
 #backdrop{position:absolute;inset:-36px;pointer-events:none;background-position:center;background-repeat:no-repeat;background-size:cover;filter:blur(25px) brightness(.52) saturate(.82);transform:scale(1.045);z-index:0}
 #game{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab;z-index:1}
 #game:active{cursor:grabbing}
@@ -94,7 +95,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
  <button id="gear" type="button" aria-label="Show physics controls" aria-expanded="false" aria-controls="panel" title="Physics controls"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.9 1.9 0 0 0 .38 2.1l.09.1-2.2 2.2-.1-.09a1.9 1.9 0 0 0-2.1-.38 1.9 1.9 0 0 0-1.15 1.74V21h-3.14v-.33A1.9 1.9 0 0 0 10.03 19a1.9 1.9 0 0 0-2.1.38l-.1.09-2.2-2.2.1-.1A1.9 1.9 0 0 0 6.12 15a1.9 1.9 0 0 0-1.74-1.15H4v-3.14h.38A1.9 1.9 0 0 0 6.12 9.6a1.9 1.9 0 0 0-.38-2.1l-.1-.1 2.2-2.2.1.09A1.9 1.9 0 0 0 10 5.67a1.9 1.9 0 0 0 1.14-1.74V3h3.14v.93a1.9 1.9 0 0 0 1.15 1.74 1.9 1.9 0 0 0 2.1-.38l.1-.09 2.2 2.2-.1.1a1.9 1.9 0 0 0-.38 2.1 1.9 1.9 0 0 0 1.74 1.15H21v3.14h-.33A1.9 1.9 0 0 0 19.4 15Z"/></svg></button>
  <p id="motionNotice" role="status" hidden style="position:absolute;z-index:5;pointer-events:none;top:max(12px,env(safe-area-inset-top));left:60px;right:60px;margin:0;padding:7px 10px;border-radius:12px;background:#07110fe8;color:#fff7eb;font-size:12px;text-align:center"></p><div id="scrim" aria-hidden="true"></div>
  <section id="panel" aria-label="Physics controls" aria-hidden="true">
-  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r15.3 · Four portraits</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
+  <div id="panelHead"><div><div class="kicker">The very serious science department · v0.0.8 · r15.4 · Four portraits</div><h1>Peach Physics <span aria-hidden="true">🍑</span></h1></div><button id="close" aria-label="Close settings">×</button></div>
    <div class="preset-head"><span>Character</span><span id="characterName">Winter Ember · 1/4</span></div>
    <div class="preset-head"><span>Physics preset</span><span id="presetName">Playful</span></div>
    <div class="presets" role="group" aria-label="Physics presets"><button type="button" data-preset="natural" aria-pressed="false">Natural</button><button type="button" data-preset="playful" aria-pressed="true">Playful</button><button type="button" data-preset="chaos" aria-pressed="false">Chaos</button></div>
@@ -110,7 +111,7 @@ input[type=range]::-webkit-slider-thumb{appearance:none;margin-top:-9px;height:2
   <p class="note">Tap the two-arrow button to switch characters. Each character has individually tuned deformation areas and remembers their own physics settings. Linked motion, taps, two-finger gestures, and optional sound are all preserved. No ads or tracking.</p>
  </section>
 </main>
-<script src="./motion.js?v=r15-holly3"></script>
+<script src="./motion.js?v=r15-ember-holly4"></script>
 <script>
 (() => {
 'use strict';
@@ -357,7 +358,7 @@ const outlines = {
  midnight: [[.18,1],[.18,.88],[.13,.77],[.14,.69],[.20,.60],[.32,.53],[.23,.49],[.22,.38],[.18,.29],[.23,.14],[.32,.06],[.51,.02],[.64,.04],[.72,.11],[.74,.22],[.78,.31],[.84,.38],[.80,.46],[.77,.56],[.83,.63],[.84,.77],[.76,.90],[.71,1]],
  aurelia: [[.22,1],[.17,.90],[.14,.78],[.16,.68],[.23,.60],[.18,.62],[.18,.51],[.23,.42],[.18,.39],[.18,.34],[.26,.32],[.28,.24],[.33,.16],[.35,.07],[.40,.02],[.60,0],[.74,.05],[.80,.15],[.84,.24],[.78,.28],[.76,.37],[.81,.40],[.78,.45],[.77,.57],[.74,.61],[.82,.68],[.85,.81],[.79,.94],[.75,1]]
 };
-let depthBuffer, depthAttribute, viewUniform, viewX=0, viewY=0;
+let depthBuffer, depthAttribute, liftUniform, viewUniform, viewX=0, viewY=0;
 let outline=[];
 function depthAt(x,y) {
  if (isHolly()) return reliefDepth(x,y)/W;
@@ -369,6 +370,8 @@ function depthAt(x,y) {
  }
  return edge*reliefPolygon(outline,x,y)*(.094+bulge);
 }
+// The shoulders and corset share a vertical lift that fades into the hips.
+function hollyBodyWeight(y,depth){return boundarySmooth(0,76,depth)*(1-boundarySmooth(655,1010,y));}
 function uploadDepth() {
  outline=(outlines[currentCharacter().id]||[]).map(([u,v])=>[u*W,v*H]);
  const data=new Float32Array(63*113);
@@ -399,6 +402,7 @@ function resize(){
  const rect=stage.getBoundingClientRect();cssW=Math.max(1,rect.width);cssH=Math.max(1,rect.height);
  const dpr=Math.min(window.devicePixelRatio||1,2.1);
  canvas.width=Math.max(2,Math.round(cssW*dpr));canvas.height=Math.max(2,Math.round(cssH*dpr));
+ hollyBodyBands=null;
  if(hollyBackground)hollyBackground.width=0;
  if(santaBackground)santaBackground.width=0;
  // Portrait: keep the entire head clear of the Dynamic Island, with soft photo-derived fill in the margins.
@@ -410,17 +414,15 @@ function resize(){
  // Midnight Yule is framed farther back in the source: enlarge only her portrait.
  // A top-safe anchor keeps her face and hat clear of the iPhone status area.
  const midnightZoom=portrait && (currentCharacter().id==='midnight'||currentCharacter().id==='aurelia');
- // Holly portrait: fill the viewport edge to edge without stretching.
- // Center the horizontal crop and keep the face and upper thighs in view.
- const hollyPortrait=isHolly()&&portrait;
- const hollyScale=portrait?Math.max(cssW/W,cssH/H):Math.min(cssW/W,cssH/H);
- const scale=isSanta()?Math.min(portrait?(cssW-32)/700:cssW/W,(cssH-topClear-bottomClear)/H):isHolly()?hollyScale:baseScale*(midnightZoom?1.12:1);
+ // Align edge-to-edge portraits at the top and center the horizontal crop.
+ const fullPortrait=portrait&&(currentCharacter().id==='ember'||isHolly());
+ const scale=fullPortrait?Math.max(cssW/W,cssH/H):isSanta()?Math.min(portrait?(cssW-32)/700:cssW/W,(cssH-topClear-bottomClear)/H):isHolly()?Math.min(cssW/W,cssH/H):baseScale*(midnightZoom?1.12:1);
  drawW=W*scale;drawH=H*scale;
  ox=(cssW-drawW)/2;
- oy=hollyPortrait?0:midnightZoom?Math.max(54,cssH*.066):(portrait?topClear+(cssH-topClear-bottomClear-drawH)/2:(cssH-drawH)/2);
+ oy=fullPortrait?0:midnightZoom?Math.max(54,cssH*.066):(portrait?topClear+(cssH-topClear-bottomClear-drawH)/2:(cssH-drawH)/2);
  uvCover=[cssW/drawW,cssH/drawH,-ox/drawW,-oy/drawH];
- // Retain edge feathering for the other portraits; Holly fills the screen.
- if(portrait&&!isHolly()){
+ // Feather only portraits that use the blurred backdrop at their edges.
+ if(portrait&&!fullPortrait){
   const top=Math.max(0,oy),bottom=Math.min(cssH,oy+drawH);
   const fade=`linear-gradient(to bottom, transparent ${top}px, black ${top+15}px, black ${bottom-17}px, transparent ${bottom}px)`;
   canvas.style.webkitMaskImage=fade;canvas.style.maskImage=fade;
@@ -432,9 +434,12 @@ function readPoint(e){
  if(needSize)resize();
  const r=canvas.getBoundingClientRect(),sx=e.clientX-r.left,sy=e.clientY-r.top;
  const rawX=(sx-ox)/drawW*W,rawY=(sy-oy)/drawH*H;
+ const lift=isHolly()?(motion?.supportY||0):0;
  let x=rawX,y=rawY;
- if(!fallback&&(viewX||viewY))for(let i=0;i<6;i++){
-  const depth=depthAt(x,y)*W;x=rawX-viewX*depth;y=rawY-viewY*depth;
+ if(lift||(!fallback&&(viewX||viewY)))for(let i=0;i<6;i++){
+  const depth=depthAt(x,y)*W;
+  x=rawX-(fallback?0:viewX*depth);
+  y=rawY-(fallback?0:viewY*depth)-(lift?lift*hollyBodyWeight(y,depth):0);
  }
  return {sx,sy,x,y};
 }
@@ -881,6 +886,37 @@ function renderHollyFabricPixel(x,y,active,weight,frame){
  for(let k=0;k<3;k++)frame.data[at+k]=(hollySource[i+k]*(1-fx)+hollySource[i+4+k]*fx)*(1-fy)+(hollySource[i+W*4+k]*(1-fx)+hollySource[i+W*4+4+k]*fx)*fy;
  frame.data[at+3]=255;
 }
+// Warp the composed Canvas portrait through the same vertical field as WebGL.
+let hollyBodyFrame=null,hollyBodyBands=null;
+function drawHollyLift(sc,lift){
+ if(!hollyBodyFrame)hollyBodyFrame=document.createElement('canvas');
+ if(!hollyBodyBands){
+  hollyBodyFrame.width=canvas.width;hollyBodyFrame.height=canvas.height;
+  hollyBodyBands=[];
+  const cell=Math.max(4,Math.round(8*sc)),row=cell*2;
+  for(let x=0;x<canvas.width;x+=cell){
+   const width=Math.min(cell,canvas.width-x),px=((x+width*.5)/sc-ox)*W/drawW;
+   const weight=y=>{
+    const py=(y/sc-oy)*H/drawH;
+    return hollyBodyWeight(py,reliefDepth(px,py));
+   };
+   let top=weight(0);
+   for(let y=0;y<canvas.height;y+=row){
+    const height=Math.min(row,canvas.height-y),bottom=weight(y+height);
+    if(top||bottom)hollyBodyBands.push({x,y,width,height,top,bottom});
+    top=bottom;
+   }
+  }
+ }
+ const frame=hollyBodyFrame.getContext('2d');
+ frame.globalCompositeOperation='copy';frame.drawImage(canvas,0,0);
+ const shift=lift*drawH/H*sc;
+ for(const {x,y,width,height,top,bottom} of hollyBodyBands){
+  const y0=y+shift*top,y1=y+height+shift*bottom;
+  const start=Math.round(y0),end=Math.round(y1),ratio=height/(y1-y0);
+  if(end>start)ctx2.drawImage(hollyBodyFrame,x,y+(start-y0)*ratio,width,(end-start)*ratio,x,start,width,end-start);
+ }
+}
 function renderHollyFallback(sc){
  if(!nodes.some(n=>n.dx||n.dy)||!hollySource){
   if(!impacts.some(p=>p.contact>.0002||p.v>.0002)&&!followers.some(f=>f.dx||f.dy))return;
@@ -1044,6 +1080,7 @@ function initGL(){
  attribute vec2 aPosition;
  attribute float aDepth;
  uniform vec2 uView;
+ uniform float uHollyLift;
  uniform vec4 uCover;
  uniform vec4 uRegions[2];
  uniform vec2 uSplit;
@@ -1174,7 +1211,11 @@ function initGL(){
    return motion/size*${HOLLY_JIGGLE_GAIN.toFixed(2)};
  }
  void main(){
-  vec2 projected=aPosition+uView*aDepth/uCover.xy;gl_Position=vec4(projected.x*2.0-1.0,1.0-projected.y*2.0,0.0,1.0);
+  vec2 projected=aPosition+uView*aDepth/uCover.xy;
+  float sourceY=(aPosition.y*uCover.y+uCover.w)*1280.;
+  float support=smoothstep(0.,76.,aDepth*754.)*(1.-smoothstep(655.,1010.,sourceY));
+  projected.y+=uHollyLift*support/(1280.*uCover.y);
+  gl_Position=vec4(projected.x*2.0-1.0,1.0-projected.y*2.0,0.0,1.0);
   vAureliaLeft=vec2(0.0);vAureliaRight=vec2(0.0);
   vLeftVelocity=vec2(0.0);
   vec2 uv=aPosition*uCover.xy+uCover.zw;
@@ -1369,6 +1410,7 @@ function initGL(){
  depthBuffer=gl.createBuffer();
  depthAttribute=gl.getAttribLocation(program,'aDepth');
  viewUniform=gl.getUniformLocation(program,'uView');
+ liftUniform=gl.getUniformLocation(program,'uHollyLift');
  uploadCharacterCalibration();
 }
 function uploadCharacterCalibration(){
@@ -1388,7 +1430,7 @@ function presentCharacter(){
  hint.textContent=isSanta()?'Tap · drag · flick':'Pull slowly · hold · release';
  document.getElementById('grabHold').disabled=isSanta();
  document.getElementById('grabHold').textContent=isSanta()?'Santa · original interaction':grabHoldEnabled?'Grab and hold: on':'Grab and hold: off';
- const c=currentCharacter();characterName.textContent=c.name+' · '+(activeCharacterIndex+1)+'/'+CHARACTERS.length;
+ const c=currentCharacter();stage.dataset.character=c.id;characterName.textContent=c.name+' · '+(activeCharacterIndex+1)+'/'+CHARACTERS.length;
  characterButton.setAttribute('aria-label','Switch character: currently '+c.name);
  characterButton.title='Switch character from '+c.name;
  document.getElementById('both').textContent=isSanta()?'Bounce belly':'Bounce both';
@@ -1540,7 +1582,9 @@ function renderPortrait(){
     hollyBackground.width=canvas.width;hollyBackground.height=canvas.height;
     hollyBackground.getContext('2d').drawImage(img,ox*sc,oy*sc,drawW*sc,drawH*sc);
    }
-   ctx2.drawImage(hollyBackground,0,0);renderHollyFallback(sc);return;
+   ctx2.drawImage(hollyBackground,0,0);renderHollyFallback(sc);
+   if(Math.abs(motion.supportY)>.01)drawHollyLift(sc,motion.supportY);
+   return;
   }
   ctx2.drawImage(img,ox*sc,oy*sc,drawW*sc,drawH*sc);
   // Fallback is photo-first: show a gentle localized crop motion rather than fabric seams.
@@ -1568,6 +1612,7 @@ function renderPortrait(){
  gl.useProgram(program);
  gl.uniform2fv(gl.getUniformLocation(program,'uDragBoundary'),dragBoundary);
  gl.uniform1f(gl.getUniformLocation(program,'uEmberBoundary'),currentCharacter().id==='ember'?1:0);
+ gl.uniform1f(liftUniform,isHolly()?motion.supportY:0);
  gl.uniform2f(viewUniform,viewX,viewY*W/H);
  gl.uniform4fv(coverLoc,new Float32Array(uvCover));
   gl.uniform2fv(offsetLoc,new Float32Array(nodes.flatMap(n=>[n.dx/W,n.dy/H])));
@@ -1866,6 +1911,7 @@ canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercan
 window.addEventListener('blur',()=>{pointers.clear();for(const p of impacts)p.target=0;});
 function bounceBoth(){if(isSanta()){santaImpulse(0,470,790,1.25);startSantaLaugh();wake();return;}const c=currentCharacter();impulse(0,...c.bounceCenters[0],1.05);impulse(1,...c.bounceCenters[1],.93);if(isAurelia()){addRebound(0,1);addRebound(1,.88);}wake();}
 function reset(){
+ motion?.resetHollySupport();
  reboundTime=0;nextAutoClap=.1;reboundPulses.forEach(p=>p.length=0);aureliaReleased.fill(-Infinity);
  depthTime=0;viewX=0;viewY=0;
  motion?.interrupt();dragBoundary.fill(0);stopSantaLaugh();for(const n of nodes){n.dx=0;n.dy=0;n.vx=0;n.vy=0;}for(const f of followers){f.dx=f.dy=f.vx=f.vy=0;}for(const p of impacts){p.v=p.contact=p.target=0;}for(const w of waves){w.age=1;w.strength=0;}pointers.clear();}

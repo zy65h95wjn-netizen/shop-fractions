@@ -50,14 +50,19 @@ window.releaseProbe={
 function trackAuto(){
   releaseProbe.prepare();resize();
   const id=currentCharacter().id;
-  const guards={ember:[[216,900],[210,1240]],midnight:[[320,895],[461,1430]],aurelia:[[270,754],[520,1040]],holly:[[410,610],[355,342]]};
+  const guards={ember:[[216,900],[210,1240]],midnight:[[320,895],[461,1430]],aurelia:[[270,754],[520,1040]],holly:[[103,475],[475,1100]]};
   const vertical=id==='holly',axis=vertical?1:0;
   const points=[...currentCharacter().impactCenters,...guards[id]];
-  if(vertical)points.push([320,531],[498,533]); // Sample the center of each supported fur trim.
+  if(vertical)points.push([320,531],[498,533],[355,342],[410,610]); // Trim, shoulder and corset landmarks.
   const portrait=img,patch=midnightPatch;
   const markers=document.createElement('canvas');markers.width=W;markers.height=H;
-  const ink=markers.getContext('2d');ink.fillRect(0,0,W,H);ink.fillStyle='white';
-  for(const [x,y] of points)ink.fillRect(x-4,y-4,8,8);
+  const ink=markers.getContext('2d');ink.fillRect(0,0,W,H);
+  // Keep the nearby trim out of the skin centroid when the portrait is reframed.
+  const channels=points.map((_,i)=>i<2?0:i===4||i===5?1:2);
+  points.forEach(([x,y],i)=>{
+    ink.fillStyle=['red','lime','blue'][channels[i]];
+    ink.fillRect(x-4,y-4,8,8);
+  });
   function useImage(image){
     img=image;midnightPatch=null;
     if(!fallback){gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,texture);
@@ -76,7 +81,7 @@ function trackAuto(){
       const w=2*r+1,data=read.getImageData(cx-r,cy-r,w,w).data;
       let mass=0,dx=0,dy=0;
       for(let j=0;j<w;j++)for(let k=0;k<w;k++){
-        const v=data[4*(j*w+k)];mass+=v;dx+=v*(k-r);dy+=v*(j-r);
+        const v=data[4*(j*w+k)+channels[i]];mass+=v;dx+=v*(k-r);dy+=v*(j-r);
       }
       if(!mass)throw Error(id+' missing Auto marker at '+[x,y]);
       return [dx/mass/scale,dy/mass/scale];
@@ -106,16 +111,22 @@ function trackAuto(){
     const common={catchError:Math.abs(beforeGrab-caught),paused,resumed,
       guards:peak(samples.flatMap(frame=>frame.slice(2,4).flat())),settled:peak(offsets().flat())};
     if(vertical){
-      const sides=[0,1].map(side=>samples.map(frame=>frame[side][axis]));
-      const moving=samples.filter(([l,r])=>Math.min(Math.abs(l[1]),Math.abs(r[1]))>1);
-      // After the large downward dip, smaller peaks should decay before the next load.
-      const dips=sides[0].filter((v,i,a)=>v>4&&v>a[i-1]&&v>=a[i+1]);
-      const quiet=samples.filter(([l,r])=>Math.max(Math.abs(l[1]),Math.abs(r[1]))<1).length/samples.length;
-      return {...common,up:sides.map(side=>-Math.min(...side)),down:sides.map(side=>Math.max(...side)),
-        together:moving.length>=30&&moving.filter(([l,r])=>l[1]*r[1]>0).length/moving.length>.90,
-        dips:dips.length,quiet,
-        horizontal:peak(samples.flatMap(frame=>frame.slice(0,2).map(p=>p[0]))),
-        trim:[4,5].map(i=>peak(samples.map(frame=>frame[i][1])))};
+      const shoulder=samples.map(frame=>frame[6][axis]),corset=samples.map(frame=>frame[7][axis]);
+      const travel=series=>Math.max(...series)-Math.min(...series);
+      const delays=[0,1].map(side=>{
+        // Measure the time between the shoulder crest and the skin crest on each lift.
+        const lags=[];
+        for(let i=5;i<samples.length-6;i++)if(shoulder[i]<-3&&shoulder[i]<shoulder[i-1]&&shoulder[i]<=shoulder[i+1]){
+          let crest=i-4;
+          for(let j=i-3;j<=i+5;j++)if(samples[j][side][axis]<samples[crest][side][axis])crest=j;
+          lags.push((crest-i)*1000/24);
+        }
+        return lags;
+      });
+      return {...common,shoulderTravel:travel(shoulder),corsetTravel:travel(corset),delays,
+        relativeTravel:[0,1].map(i=>travel(samples.map((frame,j)=>frame[i][axis]-shoulder[j]))),
+        trimTravel:[4,5].map(i=>travel(samples.map((frame,j)=>frame[i][axis]-corset[j]))),
+        horizontal:peak(samples.flatMap(frame=>frame.slice(0,2).map(p=>p[0])))};
     }
     const gap=samples.map(([[left],[right]])=>left-right);
     const lo=Math.min(...gap),hi=Math.max(...gap),middle=(lo+hi)/2;
@@ -212,10 +223,12 @@ async function check(renderer, browser) {
       assert(travel.catchError<.001&&travel.paused&&travel.resumed,id+' touch takeover');
       assert(travel.guards<.25&&travel.settled<.25,id+' moving guard or residual Auto');
       if(id==='holly'){
-        assert(travel.together&&travel.down.every((dip,i)=>dip>4&&dip<11&&travel.up[i]>1.6&&travel.up[i]<dip*.7),'Holly dip and smaller recoil');
-        assert(travel.dips>=3&&travel.dips<=5&&travel.quiet>.16,'Holly needs time to settle between dips');
-        assert(travel.horizontal<.5,'Holly sideways drift');
-        assert(travel.trim.every((v,i)=>v>.2&&v<travel.down[i]*.65),'Holly trim support');
+        assert(travel.shoulderTravel>3&&travel.shoulderTravel<9,'visible support motion');
+        assert(Math.abs(travel.shoulderTravel-travel.corsetTravel)<1,'connected shoulder and corset');
+        assert(travel.relativeTravel.every(v=>v>2&&v<12),'restrained secondary motion');
+        assert(travel.delays.every(lags=>lags.length>=3&&lags.every(ms=>ms>=0&&ms<=210)),'skin follows each lift');
+        assert(travel.horizontal<.8,'sideways drift');
+        assert(travel.trimTravel.every((v,i)=>v<travel.relativeTravel[i]*.65),'supported fur');
       }else{
         const minGap=renderer==='webgl'?12:8;
         assert(travel.inward>minGap&&travel.outward>minGap&&travel.opposite,id+' needs opposite, visible horizontal travel');

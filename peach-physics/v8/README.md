@@ -1,3 +1,7 @@
+# Peach Physics R15.4
+
+Winter Ember fills the portrait viewport edge to edge at the original aspect ratio. Holly’s Auto bounce starts with a small lift of her shoulders and corset. Her springs follow the lift and settle on the way down. Her portrait keeps its R15.3 position. The offline cache is `peach-physics-v008-r15-ember-holly4`.
+
 # Peach Physics R15.3
 
 Holly’s Auto bounce gives her springs a short downward push, with a slight delay on the second side. The springs carry the smaller rebound and settle between pushes. Timing and strength vary gently from beat to beat. The cache is `peach-physics-v008-r15-holly3`.
