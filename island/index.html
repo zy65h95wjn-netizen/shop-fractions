@@ -534,6 +534,9 @@ textarea.input{height:120px;padding:12px 14px;resize:vertical;line-height:1.4}
 #jar-paint{position:absolute;z-index:2;pointer-events:none;left:16.9454%;top:51.3699%;width:31.8841%;height:19.2922%}
 #jar-paint canvas,.jar-glass{position:absolute;inset:0;width:100%;height:100%}
 .jar-glass{opacity:0;background-size:100% 100%;mix-blend-mode:screen;mask-image:linear-gradient(to bottom,transparent calc(var(--lit-y) - var(--spread)),black var(--lit-y),transparent calc(var(--lit-y) + var(--spread)))}
+.pedestal-light{position:absolute;left:-15.385%;top:91.716%;width:129.371%;height:24.26%;pointer-events:none;opacity:0;background:url(img/pedestal-light.png) center/100% 100%;mix-blend-mode:screen;mask-image:radial-gradient(ellipse var(--width,22%) 85% at var(--center,50%) 35%,#000 0%,#000b 50%,transparent 100%)}
+.finish-list{margin:15px 0 2px;width:100%;text-align:left;padding:12px 15px;border-block:1px solid #b7a0cd40}.finish-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;color:var(--soft)}.finish-head b{font:17px Georgia,serif}.finish-head small{color:var(--muted)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.finish-list ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 12px;margin:9px 0 0;padding:0}.finish-list li{font-size:13px;color:#ffce8f}.finish-list li.caught{color:#e4e1d7}.finish-list li i{font-style:normal;margin-right:4px}
 .jar-glass.left{background-image:url(img/jar-glint-left.png)}.jar-glass.right{background-image:url(img/jar-glint-right.png)}
 .catalog-note{display:block;color:#ffcc97;margin-top:5px}
 </style>
@@ -1016,7 +1019,7 @@ function renderToday(){
   return '<section class="view" id="v-today"><div class="garden-scene">'+skyHtml()+
     '<div class="garden-heading"><div class="hello" id="hello"><span class="who"><span class="nm">Hello Beautiful</span></span><h1>Moonlit Drop</h1><span class="sub">A little magic after dark</span></div></div>'+
     '<div class="garden-actions"><button class="iconbtn" id="refreshAll" aria-label="Refresh">'+ICON.refresh+'</button>'+noteHtml+'</div>'+
-    '<div id="jar-paint" aria-hidden="true"><canvas width="286" height="338"></canvas><i class="jar-glass left"></i><i class="jar-glass right"></i></div>'+
+    '<div id="jar-paint" aria-hidden="true"><i class="pedestal-light"></i><canvas width="286" height="338"></canvas><i class="jar-glass left"></i><i class="jar-glass right"></i></div>'+
     '<button class="orb-jar" data-go="sprites" aria-label="Open sprite collection"></button>'+
     '<button class="orb-counter" data-go="sprites"><b>'+caught+'</b><span class="jar-denom"> / '+total+'</span><small>Tap to view your sprites</small></button>'+
     '<button class="garden-character" id="changeSkin" aria-label="Change go-to skin">'+(sk && sk.img ? imgTag(sk.img,sk.name) : '<span>Choose your character</span>')+'</button></div>'+
@@ -1289,6 +1292,28 @@ function bindSpriteGrid(grid){
     toggleSprite(b);
   });
 }
+function spriteFamilyKey(s){
+  if(s.sourceId){
+    var end=s.sourceId.lastIndexOf('_');
+    return end>0?s.sourceId.slice(0,end):s.sourceId;
+  }
+  var prefix=s.group+'-';
+  var key=s.id.startsWith(prefix)?s.id.slice(prefix.length):s.id;
+  return s.sourceSeason===4 && key==='bushranger'?'bush':key;
+}
+function finishLine(sprite,d,catches){
+  var family=spriteFamilyKey(sprite);
+  var rows=d.sprites.filter(v=>v.sourceSeason===sprite.sourceSeason &&
+    spriteFamilyKey(v)===family && (v.available!==false || v.id===sprite.id || catches[v.id]));
+  var count=rows.filter(v=>catches[v.id]).length;
+  var chips=rows.map(v=>{
+    var group=d.groups.find(g=>g.id===v.group);
+    var label=group?.name==='Basic'?'Base':group?.name||v.group;
+    var got=!!catches[v.id];
+    return '<li class="'+(got?'caught':'missing')+'"><i aria-hidden="true">'+(got?'✓':'○')+'</i>'+esc(label)+(got?' <span class="sr-only">caught</span>':' missing')+'</li>';
+  }).join('');
+  return '<div class="finish-list"><div class="finish-head"><b>'+(count===rows.length?'Family complete':sprite.archived?'Past collection':'Still hunting')+'</b><small>'+count+' of '+rows.length+' caught</small></div><ul>'+chips+'</ul></div>';
+}
 function openSprite(id){
   var d = S.spritesData, s = d && (d.sprites||[]).filter(function(x){ return x.id===id; })[0]; if(!s) return;
   if(!load('holdHintSeen', false)){ save('holdHintSeen', true); var h = $('.sp.hint'); if(h) h.classList.remove('hint'); }
@@ -1300,6 +1325,7 @@ function openSprite(id){
   openSheet('<div class="grab"></div><div class="sp-card">'+
     '<div class="orb'+(got?'':' dim')+'" style="--c:'+col+'">'+spriteArt(s)+'</div>'+
     '<h2>'+esc(s.name)+'</h2>'+(meta?'<div class="meta">'+meta+'</div>':'')+
+    finishLine(s,d,S.got)+
     (s.does ? '<div class="how"><span>What it does</span><p>'+esc(s.does)+'</p>'+(s.levels ? '<p class="lv">'+esc(s.levels)+'</p>' : '')+'</div>' : (!s.archived ? '<div class="how"><span>What it does</span><p>Ability awaiting verification.</p></div>' : ''))+
     (bonus ? '<div class="how"><span>'+esc(grp)+' bonus</span><p>'+esc(bonus)+'</p></div>' : '')+
     (s.how || s.where ? '<div class="how"><span>Finding it</span>'+(s.how ? '<p>'+esc(s.how)+'</p>' : '')+(s.where ? '<p class="lv">Spotted: '+esc(s.where)+'</p>' : '')+'</div>' : '')+

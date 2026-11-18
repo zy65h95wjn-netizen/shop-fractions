@@ -11,7 +11,7 @@ window.MoonlitJar = (() => {
     gradient.addColorStop(at,color);
   brush.fillStyle = gradient; brush.fillRect(0,0,64,64);
   let surface, canvas, ctx, observer, frame = 0, visible = false, time = 0, last = 0, total = 197;
-  let walls = [], data = [];
+  let walls = [], pedestal, data = [];
   function randomFor(id) {
     let seed = 2166136261;
     for (const char of id) seed = Math.imul(seed ^ char.charCodeAt(0),16777619);
@@ -65,6 +65,7 @@ window.MoonlitJar = (() => {
     ctx.clearRect(0,0,W,H);
     const n=data.length, fill=Math.min(1,n/Math.max(1,total));
     const energy=[0,0], weightedY=[0,0];
+    let groundEnergy=0, groundX=0;
     for(const p of data){
       const t=reduced.matches ? 0 : time;
       const pos=point(p,t,fill);
@@ -89,6 +90,10 @@ window.MoonlitJar = (() => {
       }
       ctx.globalAlpha=Math.min(1,p.depth*1.06);
       ctx.drawImage(glow,pos.x-size,pos.y-size,2*size,2*size);
+      // Low wisps illuminate more stone. The combined light settles as the jar fills.
+      const bounce=p.depth*Math.exp((pos.y-295)/59);
+      groundEnergy+=bounce;
+      groundX+=pos.x*bounce;
       for(let side=0;side<2;side++){
         const distance=Math.abs(pos.x-(side?260:26));
         const intensity=Math.exp(-distance/39)*p.depth;
@@ -96,6 +101,12 @@ window.MoonlitJar = (() => {
       }
     }
     ctx.globalAlpha=1;
+    if(pedestal){
+      const x=groundEnergy ? groundX/groundEnergy : W/2;
+      pedestal.style.setProperty('--center',((44+x)/370*100).toFixed(2)+'%');
+      pedestal.style.setProperty('--width',(22+24*fill).toFixed(1)+'%');
+      pedestal.style.opacity=String(.74*(1-Math.exp(-groundEnergy*2.6)));
+    }
     walls.forEach((wall,side)=>{
       const amount=energy[side], y=amount?weightedY[side]/amount:H/2;
       wall.style.opacity=String(Math.min(.94,1-Math.exp(-amount*2.1)));
@@ -120,6 +131,7 @@ window.MoonlitJar = (() => {
     if(el!==surface) {
       observer?.disconnect(); surface=el; canvas=el?.querySelector('canvas'); ctx=canvas?.getContext('2d');
       walls=el?Array.from(el.querySelectorAll('.jar-glass')):[];
+      pedestal=el?.querySelector('.pedestal-light');
       visible=!!el;
       if(el && 'IntersectionObserver' in window){
         observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;resume();}); observer.observe(el);
