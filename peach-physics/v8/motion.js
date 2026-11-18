@@ -42,8 +42,9 @@ class MotionInput{
   const sx=x*c+y*s,sy=x*s-y*c+z*.65,alpha=1-Math.exp(-dt/.035);
   this.filtered[0]+=(sx-this.filtered[0])*alpha;this.filtered[1]+=(sy-this.filtered[1])*alpha;
   if(this.warmup<(source==='gravity'?.5:.05)){this.force=[0,0];return true;}
-  // High sensitivity near rest, smoothly limited force for vigorous shaking.
-  const length=Math.hypot(...this.filtered),gain=length>.08?2.2*Math.tanh((length-.08)*1.5/2.2)/length:0;
+  // The dead zone rejects sensor noise. The initial slope sets light-flick sensitivity.
+  const length=Math.hypot(...this.filtered),deadZone=.08,sensitivity=3,maxForce=2.2;
+  const gain=length>deadZone?maxForce*Math.tanh((length-deadZone)*sensitivity/maxForce)/length:0;
   this.force=this.filtered.map(v=>-v*gain);return true;
  }
  add(side,x,y,scale=1){

@@ -1,3 +1,7 @@
+# Peach Physics R15.6
+
+Shake to Jiggle gives small wrist flicks a stronger response. The sensor dead zone is 0.08 m/s² and the maximum shake force is 2.2. The offline cache is `peach-physics-v008-r15-light-shake6`.
+
 # Peach Physics R15.5
 
 Holly’s Auto bounce is confined to exposed skin above the fur. The trim and green cups stay fixed during Auto. Manual touch uses the existing garment response. The camera holds its current angle during Holly’s Auto motion and resumes depth sway when Auto is off. The offline cache is `peach-physics-v008-r15-holly-skin5`.
