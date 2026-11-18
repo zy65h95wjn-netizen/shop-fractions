@@ -1,3 +1,7 @@
+# Peach Physics R15.3
+
+Holly’s Auto bounce gives her springs a short downward push, with a slight delay on the second side. The springs carry the smaller rebound and settle between pushes. Timing and strength vary gently from beat to beat. The cache is `peach-physics-v008-r15-holly3`.
+
 # Peach Physics R15.2
 
 Holly’s Auto Jiggle moves both sides up and down together at 0.85 cycles per second. Bounce strength controls the travel, and her existing springs and garment support shape the rebound. The offline cache is `peach-physics-v008-r15-holly2`.

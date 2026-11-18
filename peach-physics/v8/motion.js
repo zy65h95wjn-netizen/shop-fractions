@@ -3,7 +3,7 @@
 'use strict';
 const calibration=Object.freeze({
  ember:{accel:2200,auto:1375,autoHz:1.15,limit:240},midnight:{accel:2100,auto:1968.75,autoHz:1.12,limit:230},
- aurelia:{accel:1700,auto:1593.75,autoHz:1.10,limit:210},holly:{accel:500,auto:1850,autoHz:.85,limit:110},
+ aurelia:{accel:1700,auto:1593.75,autoHz:1.10,limit:210},holly:{accel:500,auto:1420,autoHz:.85,limit:110},
  santa:{accel:500,auto:287.5,autoHz:.65,limit:210}
 });
 const autoClapCharacters=new Set(['ember','midnight','aurelia']);
@@ -84,11 +84,17 @@ class MotionInput{
     return;
    }
    if(this.lastCharacter==='holly'){
-    // A shared vertical beat lets Holly's two calibrated springs rebound together.
-    const phase=2*Math.PI*config.autoHz*drive.age;
-    const beat=Math.sin(phase)+.16*Math.sin(2*phase);
-    const impulse=config.auto*(.5+this.settings().bounce/100)*fade*beat*dt;
-    this.add(0,0,impulse);this.add(1,0,impulse);
+    // Briefly load each side, then let its own springs carry the rebound.
+    const cycle=drive.age*config.autoHz+.76+.075*Math.sin(.9*drive.age);
+    const strength=config.auto*(.5+this.settings().bounce/100)*fade*(.92+.08*Math.cos(1.73*drive.age));
+    for(let side=0;side<2;side++){
+     const offset=cycle-side*.022; // About 26 ms of give across the garment.
+     const phase=offset-Math.floor(offset);
+     if(phase<.22){
+      const pulse=Math.sin(Math.PI*phase/.22);
+      this.add(side,0,strength*pulse*pulse*dt);
+     }
+    }
     this.counts.autoSteps++;
     return;
    }

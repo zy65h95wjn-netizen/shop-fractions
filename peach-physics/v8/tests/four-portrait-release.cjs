@@ -88,7 +88,7 @@ function trackAuto(){
     releaseProbe.auto();releaseProbe.tick(180);
     const samples=[];
     let bakedTravel=0;
-    for(let n=0;n<48;n++){
+    for(let n=0;n<(vertical?120:48);n++){
       releaseProbe.tick(5);samples.push(offsets());
       bakedTravel=Math.max(bakedTravel,Math.abs(reboundOffset(1).x));
     }
@@ -108,8 +108,12 @@ function trackAuto(){
     if(vertical){
       const sides=[0,1].map(side=>samples.map(frame=>frame[side][axis]));
       const moving=samples.filter(([l,r])=>Math.min(Math.abs(l[1]),Math.abs(r[1]))>1);
+      // After the large downward dip, smaller peaks should decay before the next load.
+      const dips=sides[0].filter((v,i,a)=>v>4&&v>a[i-1]&&v>=a[i+1]);
+      const quiet=samples.filter(([l,r])=>Math.max(Math.abs(l[1]),Math.abs(r[1]))<1).length/samples.length;
       return {...common,up:sides.map(side=>-Math.min(...side)),down:sides.map(side=>Math.max(...side)),
-        together:moving.length>=32&&moving.every(([l,r])=>l[1]*r[1]>0),
+        together:moving.length>=30&&moving.filter(([l,r])=>l[1]*r[1]>0).length/moving.length>.90,
+        dips:dips.length,quiet,
         horizontal:peak(samples.flatMap(frame=>frame.slice(0,2).map(p=>p[0]))),
         trim:[4,5].map(i=>peak(samples.map(frame=>frame[i][1])))};
     }
@@ -208,9 +212,10 @@ async function check(renderer, browser) {
       assert(travel.catchError<.001&&travel.paused&&travel.resumed,id+' touch takeover');
       assert(travel.guards<.25&&travel.settled<.25,id+' moving guard or residual Auto');
       if(id==='holly'){
-        assert(Math.min(...travel.up,...travel.down)>4&&travel.together,'Holly needs visible vertical travel on both sides');
+        assert(travel.together&&travel.down.every((dip,i)=>dip>4&&dip<11&&travel.up[i]>1.6&&travel.up[i]<dip*.7),'Holly dip and smaller recoil');
+        assert(travel.dips>=3&&travel.dips<=5&&travel.quiet>.16,'Holly needs time to settle between dips');
         assert(travel.horizontal<.5,'Holly sideways drift');
-        assert(travel.trim.every((v,i)=>v>.2&&v<Math.min(travel.up[i],travel.down[i])*.65),'Holly trim support');
+        assert(travel.trim.every((v,i)=>v>.2&&v<travel.down[i]*.65),'Holly trim support');
       }else{
         const minGap=renderer==='webgl'?12:8;
         assert(travel.inward>minGap&&travel.outward>minGap&&travel.opposite,id+' needs opposite, visible horizontal travel');
