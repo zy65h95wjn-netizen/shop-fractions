@@ -3,7 +3,7 @@
 'use strict';
 const calibration=Object.freeze({
  ember:{accel:2200,auto:1375,autoHz:1.15,limit:240},midnight:{accel:2100,auto:1968.75,autoHz:1.12,limit:230},
- aurelia:{accel:1700,auto:1593.75,autoHz:1.10,limit:210},holly:{accel:500,auto:328.125,autoHz:.85,limit:110},
+ aurelia:{accel:1700,auto:1593.75,autoHz:1.10,limit:210},holly:{accel:500,auto:1850,autoHz:.85,limit:110},
  santa:{accel:500,auto:287.5,autoHz:.65,limit:210}
 });
 const autoClapCharacters=new Set(['ember','midnight','aurelia']);
@@ -80,6 +80,15 @@ class MotionInput{
     const phase=drive.age*driveOmega,beat=Math.sin(phase)+.35*Math.sin(phase*2);
     const impulse=(13+bounce*.085)*response*fade*beat*dt;
     this.add(0,impulse,0);this.add(1,-impulse,0);
+    this.counts.autoSteps++;
+    return;
+   }
+   if(this.lastCharacter==='holly'){
+    // A shared vertical beat lets Holly's two calibrated springs rebound together.
+    const phase=2*Math.PI*config.autoHz*drive.age;
+    const beat=Math.sin(phase)+.16*Math.sin(2*phase);
+    const impulse=config.auto*(.5+this.settings().bounce/100)*fade*beat*dt;
+    this.add(0,0,impulse);this.add(1,0,impulse);
     this.counts.autoSteps++;
     return;
    }

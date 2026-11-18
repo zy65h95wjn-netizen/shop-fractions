@@ -1,3 +1,7 @@
+# Peach Physics R15.2
+
+Holly’s Auto Jiggle moves both sides up and down together at 0.85 cycles per second. Bounce strength controls the travel, and her existing springs and garment support shape the rebound. The offline cache is `peach-physics-v008-r15-holly2`.
+
 # Peach Physics R15.1
 
 With Auto Jiggle on, Winter Ember and Midnight Yule now close and open twice per second. They use Aurelia’s horizontal drive and the same baked accent on each closing beat, with each portrait’s own springs, motion limits and garment support. The existing Auto switch controls the effect and remembers its setting. Touch pauses Auto while you drag and for 1.2 seconds after release.

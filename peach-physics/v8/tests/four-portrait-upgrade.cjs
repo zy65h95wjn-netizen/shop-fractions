@@ -1,10 +1,10 @@
-// Upgrade installations from R14 (Santa selected) and R15 (Midnight selected), then disconnect.
+// Upgrade from R14 (Santa), R15 (Midnight) and R15.1 (Holly), then disconnect.
 const {chromium,assert,fs,path,root}=require('./harness.cjs');
 const http=require('node:http'),{execFileSync}=require('node:child_process');
 const app=path.join(root,'peach-physics/v8'),prefix='/peach-physics/v8/';
 const active=['ember','midnight','aurelia','holly'],ids=[...active,'santa'];
-const cacheName='peach-physics-v008-r15-clap1';
-const releases={r14:'0b1444a',r15:'363d875'};
+const cacheName='peach-physics-v008-r15-holly2';
+const releases={r14:'0b1444a',r15:'363d875',r151:'511cd73'};
 const types={html:'text/html',js:'application/javascript',webmanifest:'application/manifest+json',jpg:'image/jpeg',png:'image/png'};
 function fixture(release){
   const old=Object.fromEntries(['index.html','sw.js','motion.js','manifest.webmanifest'].map(file=>[
@@ -30,7 +30,7 @@ async function ready(page){
   await page.waitForFunction(()=>window.__peachPhysicsDebug&&document.querySelector('#loader.hiding')&&__peachPhysicsDebug.snapshot().frames>0);
 }
 async function run(browser,renderer,release){
-  const selected=release==='r14'?'santa':'midnight',first=selected==='santa'?'ember':selected;
+  const selected=release==='r151'?'holly':release==='r14'?'santa':'midnight',first=selected==='santa'?'ember':selected;
   const fixtureServer=fixture(release),{server}=fixtureServer;
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
   const url='http://127.0.0.1:'+server.address().port+prefix;
@@ -62,14 +62,14 @@ async function run(browser,renderer,release){
     await page.waitForFunction(()=>navigator.serviceWorker.controller?.state==='activated');
     const cacheFiles=await page.evaluate(async name=>(await (await caches.open(name)).keys()).map(k=>k.url),cacheName);
     assert.deepEqual(cacheFiles.map(u=>u.slice(url.length)).sort(),[
-      '','index.html','motion.js?v=r15-clap1','assets/aurelia-frost.jpg','assets/holly-heartbreaker.png','manifest.webmanifest','apple-touch-icon.png'
+      '','index.html','motion.js?v=r15-holly2','assets/aurelia-frost.jpg','assets/holly-heartbreaker.png','manifest.webmanifest','apple-touch-icon.png'
     ].sort());
     await ctx.setOffline(true);
-    await page.goto(url+'?character=santa&v=r15.1');
+    await page.goto(url+'?character=santa&v=r15.2');
     await ready(page);
     await page.waitForFunction(async expected=>(await caches.keys()).every(key=>key===expected),cacheName);
     assert.equal(await page.evaluate(()=>localStorage.getItem('peach-physics-v008-active')),first);
-    const appBytes=await page.evaluate(async()=>Promise.all(['./','./index.html','./motion.js?v=r15-clap1','./manifest.webmanifest'].map(async file=>(await fetch(file)).text())));
+    const appBytes=await page.evaluate(async()=>Promise.all(['./','./index.html','./motion.js?v=r15-holly2','./manifest.webmanifest'].map(async file=>(await fetch(file)).text())));
     for(const [i,file] of ['index.html','index.html','motion.js','manifest.webmanifest'].entries())assert.equal(appBytes[i],fs.readFileSync(path.join(app,file),'utf8'),file);
     const start=active.indexOf(first),cycle=[...active.slice(start),...active.slice(0,start),first];
     for(const [i,id] of cycle.entries()){
@@ -86,15 +86,16 @@ async function run(browser,renderer,release){
     await page.locator('#gear').tap();
     await page.locator('#autoMotion').tap();
     await page.waitForFunction(()=>__peachMotionDebug.snapshot().counts.autoSteps>24);
-    const duringClap=await page.evaluate(()=>__peachPhysicsDebug.snapshot().nodes);
-    assert(duringClap.some(n=>Math.abs(n.dx)>.1)&&duringClap.every(n=>n.dy===0),'offline horizontal Auto');
+    const axis=selected==='holly'?'dy':'dx',cross=axis==='dy'?'dx':'dy';
+    await page.waitForFunction(axis=>__peachPhysicsDebug.snapshot().nodes.some(n=>Math.abs(n[axis])>1),axis);
+    assert(await page.evaluate(cross=>__peachPhysicsDebug.snapshot().nodes.every(n=>n[cross]===0),cross),'offline Auto direction');
     await page.locator('#gear').tap();await page.locator('#autoMotion').tap();
     assert.equal(await page.locator('#santaLaugh').isVisible(),false);
     assert.equal(await page.locator('#depthSway').isDisabled(),renderer==='canvas');
     if(renderer==='webgl')await page.locator('#depthSway').tap();
-    await page.locator('#slapAudio').tap();
-    await page.waitForFunction(()=>__peachPhysicsDebug.snapshot().audioState==='running');
+    if(!(await page.locator('#testSound').isEnabled()))await page.locator('#slapAudio').tap();
     await page.locator('#testSound').tap();
+    await page.waitForFunction(()=>__peachPhysicsDebug.snapshot().audioState==='running');
     await page.locator('#close').tap();
     const target=await page.evaluate(()=>{
       const {image,framing:f,regions}=__peachPhysicsDebug.snapshot(),r=regions[0];
@@ -102,11 +103,11 @@ async function run(browser,renderer,release){
     });
     await page.touchscreen.tap(...target);
     await page.waitForFunction(()=>__peachPhysicsDebug.snapshot().slapCount>0);
-    await page.goto(url+'?v=r15.1');await ready(page);
+    await page.goto(url+'?v=r15.2');await ready(page);
     assert.equal(await page.locator('#depthSway').getAttribute('aria-checked'),'false');
     assert.equal(await page.evaluate(()=>__peachMotionDebug.snapshot().auto),false);
     assert.deepEqual(errors,[]);
-    console.log(renderer,release,selected,'→ R15.1 offline, 4 picker entries, 5 saved profiles, motion preferences, audio and touch passed');
+    console.log(renderer,release,selected,'→ R15.2 offline, 4 picker entries, 5 saved profiles, motion preferences, audio and touch passed');
     if(renderer==='webgl'&&release==='r15'){
       const fresh=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
       try{
@@ -121,6 +122,6 @@ async function run(browser,renderer,release){
 }
 (async()=>{
   const browser=await chromium.launch({executablePath:process.env.CHROMIUM||'/usr/bin/chromium',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
-  try{for(const renderer of ['webgl','canvas'])for(const release of ['r15','r14'])await run(browser,renderer,release);}
+  try{for(const renderer of ['webgl','canvas'])for(const release of ['r151','r15','r14'])await run(browser,renderer,release);}
   finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
