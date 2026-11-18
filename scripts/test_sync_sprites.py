@@ -40,18 +40,39 @@ class DetailTests(unittest.TestCase):
         root=Path(__file__).resolve().parents[1]
         self.details=json.loads((root/'island/data/sprite-details.json').read_text())
         self.catalog=json.loads((root/'island/data/sprites.json').read_text())
-    def test_every_current_card_has_ability_finding_and_variant_bonus(self):
+    def test_reviewed_cards_keep_their_verified_details(self):
         from sync_sprites import apply_details
-        apply_details(self.catalog,self.details)
-        groups={g['id']:g for g in self.catalog['groups']}
-        current=[s for s in self.catalog['sprites'] if not s.get('archived')]
-        self.assertTrue(current)
-        for s in current:
-            self.assertTrue(s.get('does'),s['name'])
-            self.assertIn('Wanted Poster',s['how'])
-            self.assertNotIn('See the current in-game',s['how'])
-            if s['sourceId'].endswith(('_fortune','_cursed')):
-                self.assertTrue(groups[s['group']].get('bonus'),s['name'])
+        apply_details(self.catalog, self.details)
+        groups = {g['id']: g for g in self.catalog['groups']}
+        for sprite in self.catalog['sprites']:
+            if sprite.get('archived'):
+                continue
+            season = self.details['seasons'].get(str(sprite['sourceSeason']), {})
+            family = sprite['sourceId'].rsplit('_', 1)[0]
+            facts = season.get('families', {}).get(family)
+            if facts is not None:
+                self.assertEqual(sprite['does'], facts['does'])
+                self.assertIn(season['finding'], sprite['how'])
+                self.assertEqual(sprite['infoReviewed'], facts.get('reviewed', self.details['reviewed']))
+            group = groups[sprite['group']]
+            variant = season.get('variants', {}).get(group['name'])
+            if variant is not None:
+                self.assertEqual(group['bonus'], variant['bonus'])
+
+    def test_unknown_family_does_not_block_this_or_next_refresh(self):
+        rows = [{'id': f'new{i}_basic', 'name': f'New {i}', 'theme': 'Basic',
+                 'rarity': 'Rare', 'unreleased': False} for i in range(12)]
+        old = {'groups': [], 'sprites': [], 'updated': '2026-11-01'}
+        release = {'releasedIds': [], 'unreleasedIds': []}
+        first = merge(old, rows, release, '2026-11-18T09:00:00+00:00', details=self.details)
+        rows.append(dict(rows[0], id='new12_basic', name='New 12'))
+        again = merge(first, rows, release, '2026-11-18T15:00:00+00:00', details=self.details)
+        self.assertEqual(again['sprites'][:12], first['sprites'])
+        self.assertEqual(len(again['sprites']), 13)
+        self.assertNotIn('does', again['sprites'][-1])
+        self.assertNotIn('infoReviewed', again['sprites'][-1])
+        self.assertEqual(again['lastChecked'], '2026-11-18T15:00:00+00:00')
+
     def test_existing_archived_information_and_ids_unchanged(self):
         from sync_sprites import apply_details
         import copy

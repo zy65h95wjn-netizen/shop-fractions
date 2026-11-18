@@ -25,6 +25,10 @@
         "lilflacko": {"does": "Landing sends out a shockwave that pushes enemies away.", "findingExtra": "Another route: defeat A$AP Rocky on The $.$. Rocky for a chance at his Lil' Flacko drop."},
         "chester": {"does": "Prevents fall damage and can add loot to chests."},
         "sweetdreams": {"does": "Level-ups give random loot; the maximum level releases Mythic items."},
+        "liluzivertjr": {"reviewed": "2026-11-18", "does": "Restoring shields triggers a Chug Splash."},
+        "minimiku": {"reviewed": "2026-11-18", "does": "Emote to create a Friendship Bubble.", "levels": "The cooldown gets shorter with each level."},
+        "squiplash": {"reviewed": "2026-11-18", "does": "Triggers a healing smoke bomb when your health is low.", "levels": "Leveling up improves its cooldown, duration and healing."},
+        "zee": {"reviewed": "2026-11-18", "does": "Gives you Zero Point dash charges that recharge over time.", "levels": "Higher levels add charges and shorten the recharge time."},
         "transpondersnail": {"does": "Item pickups yield extra resources. Teammates carrying this Sprite also receive a share.", "levels": "The resource bonus grows as it levels up."}
       }
     }

@@ -56,9 +56,16 @@ def apply_details(out, details):
     for sprite in out['sprites']:
         season = seasons.get(str(sprite.get('sourceSeason')), {})
         family = sprite.get('sourceId','').rsplit('_',1)[0]
-        facts = season.get('families',{}).get(family)
-        if not facts:
+        families = season.get('families', {})
+        if family not in families:
+            # A verified release can arrive before its ability has been reviewed.
             continue
+        facts = families[family]
+        if not isinstance(facts, dict):
+            raise ValueError('Invalid reviewed family')
+        reviewed = facts.get('reviewed', details['reviewed'])
+        if not isinstance(reviewed, str) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', reviewed):
+            raise ValueError('Invalid family review date')
         for key in ('does',):
             if not isinstance(facts.get(key),str) or not 1<=len(facts[key])<=600:
                 raise ValueError('Invalid reviewed ability')
@@ -71,7 +78,7 @@ def apply_details(out, details):
         else:
             sprite.pop('levels',None)
         sprite['how'] = finding + (' '+facts['findingExtra'] if facts.get('findingExtra') else '')
-        sprite['infoReviewed'] = details['reviewed']
+        sprite['infoReviewed'] = reviewed
         sprite['infoSources'] = season['sources']
 
 def merge(old, rows, releases, now, season=5, title='Treasure Hunters', details=None):

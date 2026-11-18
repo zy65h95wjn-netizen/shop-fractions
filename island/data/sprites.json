@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10",
+ "updated": "2026-11-18",
  "season": "Treasure Hunters",
  "groups": [
   {
@@ -2891,9 +2891,16 @@
    "sourceId": "liluzivertjr_basic",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/liluzivertjr_basic.png",
-   "how": "Finding instructions are awaiting verification.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Restoring shields triggers a Chug Splash.",
+   "infoReviewed": "2026-11-18",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-liluzivertjr_fortune",
@@ -2904,9 +2911,16 @@
    "sourceId": "liluzivertjr_fortune",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/liluzivertjr_fortune.png",
-   "how": "Finding instructions are awaiting verification.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Restoring shields triggers a Chug Splash.",
+   "infoReviewed": "2026-11-18",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   },
   {
    "id": "fn-s5-liluzivertjr_cursed",
@@ -2917,13 +2931,167 @@
    "sourceId": "liluzivertjr_cursed",
    "sourceSeason": 5,
    "img": "https://www.fnsprites.info/spriteimg/liluzivertjr_cursed.png",
-   "how": "Finding instructions are awaiting verification.",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
    "archived": false,
-   "available": true
+   "available": true,
+   "does": "Restoring shields triggers a Chug Splash.",
+   "infoReviewed": "2026-11-18",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-minimiku_basic",
+   "name": "Mini Miku Sprite",
+   "group": "fn-s5-basic",
+   "rarity": "mythic",
+   "added": "2026-11-18",
+   "sourceId": "minimiku_basic",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/minimiku_basic.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Emote to create a Friendship Bubble.",
+   "levels": "The cooldown gets shorter with each level.",
+   "infoReviewed": "2026-11-18",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-squiplash_basic",
+   "name": "Squiplash Sprite",
+   "group": "fn-s5-basic",
+   "rarity": "epic",
+   "added": "2026-11-18",
+   "sourceId": "squiplash_basic",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/squiplash_basic.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Triggers a healing smoke bomb when your health is low.",
+   "levels": "Leveling up improves its cooldown, duration and healing.",
+   "infoReviewed": "2026-11-18",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-zee_basic",
+   "name": "Zee Sprite",
+   "group": "fn-s5-basic",
+   "rarity": "mythic",
+   "added": "2026-11-18",
+   "sourceId": "zee_basic",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/zee_basic.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Gives you Zero Point dash charges that recharge over time.",
+   "levels": "Higher levels add charges and shorten the recharge time.",
+   "infoReviewed": "2026-11-18",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-minimiku_fortune",
+   "name": "Fortune Mini Miku Sprite",
+   "group": "fn-s5-fortune",
+   "rarity": "special",
+   "added": "2026-11-18",
+   "sourceId": "minimiku_fortune",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/minimiku_fortune.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Emote to create a Friendship Bubble.",
+   "levels": "The cooldown gets shorter with each level.",
+   "infoReviewed": "2026-11-18",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-minimiku_cursed",
+   "name": "Cursed Mini Miku Sprite",
+   "group": "fn-s5-cursed",
+   "rarity": "special",
+   "added": "2026-11-18",
+   "sourceId": "minimiku_cursed",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/minimiku_cursed.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Emote to create a Friendship Bubble.",
+   "levels": "The cooldown gets shorter with each level.",
+   "infoReviewed": "2026-11-18",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-squiplash_fortune",
+   "name": "Fortune Squiplash Sprite",
+   "group": "fn-s5-fortune",
+   "rarity": "special",
+   "added": "2026-11-18",
+   "sourceId": "squiplash_fortune",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/squiplash_fortune.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Triggers a healing smoke bomb when your health is low.",
+   "levels": "Leveling up improves its cooldown, duration and healing.",
+   "infoReviewed": "2026-11-18",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-squiplash_cursed",
+   "name": "Cursed Squiplash Sprite",
+   "group": "fn-s5-cursed",
+   "rarity": "special",
+   "added": "2026-11-18",
+   "sourceId": "squiplash_cursed",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/squiplash_cursed.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Triggers a healing smoke bomb when your health is low.",
+   "levels": "Leveling up improves its cooldown, duration and healing.",
+   "infoReviewed": "2026-11-18",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
   }
  ],
  "currentSeason": 5,
- "lastChecked": "2026-11-10T07:29:34+00:00",
+ "lastChecked": "2026-11-18T15:07:15+00:00",
  "source": "https://www.fnsprites.info/",
  "schemaVersion": 2
 }

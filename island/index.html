@@ -531,6 +531,11 @@ textarea.input{height:120px;padding:12px 14px;resize:vertical;line-height:1.4}
 @media(prefers-reduced-motion:reduce){.collected-orb,.collected-orb::before,.collected-orb::after{animation:none}}
 
 .garden-character::before{content:"";position:absolute;z-index:-1;left:12%;bottom:-1%;width:80%;height:5%;border-radius:50%;background:radial-gradient(ellipse,rgba(5,3,12,.8),transparent 70%);filter:blur(3px);pointer-events:none}
+#jar-paint{position:absolute;z-index:2;pointer-events:none;left:16.9454%;top:51.3699%;width:31.8841%;height:19.2922%}
+#jar-paint canvas,.jar-glass{position:absolute;inset:0;width:100%;height:100%}
+.jar-glass{opacity:0;background-size:100% 100%;mix-blend-mode:screen;mask-image:linear-gradient(to bottom,transparent calc(var(--lit-y) - var(--spread)),black var(--lit-y),transparent calc(var(--lit-y) + var(--spread)))}
+.jar-glass.left{background-image:url(img/jar-glint-left.png)}.jar-glass.right{background-image:url(img/jar-glint-right.png)}
+.catalog-note{display:block;color:#ffcc97;margin-top:5px}
 </style>
 </head>
 <body>
@@ -554,6 +559,8 @@ textarea.input{height:120px;padding:12px 14px;resize:vertical;line-height:1.4}
 <div id="sheet" class="sheet hidden" role="dialog" aria-modal="true"></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
+<script src="jar.js"></script>
+<script src="backup.js"></script>
 <script>
 (function(){
 'use strict';
@@ -581,8 +588,17 @@ var RARITY_NAME = {rare:'Rare',epic:'Epic',legendary:'Legendary',mythic:'Mythic'
 
 /* ================= storage ================= */
 function isFiller(t){ t=String(t||'').trim(); return !t || /^random .*description\.?$/i.test(t) || /^(tbd|placeholder|description)\.?$/i.test(t); }
-function load(k, d){ try{ var v = localStorage.getItem(LS+k); return v==null ? d : JSON.parse(v); }catch(e){ return d; } }
-function save(k, v){ try{ localStorage.setItem(LS+k, JSON.stringify(v)); return true; }catch(e){ return false; } }
+var profileKeys=['settings','sprites','wishlist','jarOrder'];
+function readProfile(){return JSON.parse(localStorage.getItem(LS+'profile') || 'null');}
+function load(k, d){
+  if(profileKeys.includes(k)){try{var profile=readProfile();if(profile && Object.hasOwn(profile,k))return profile[k];}catch(e){}}
+ try{ var v = localStorage.getItem(LS+k); return v==null ? d : JSON.parse(v); }catch(e){ return d; } }
+function save(k, v){ try{
+  if(profileKeys.includes(k)){
+    var profile=readProfile();
+    if(profile){profile[k]=v; localStorage.setItem(LS+'profile',JSON.stringify(profile));return true;}
+  }
+  localStorage.setItem(LS+k, JSON.stringify(v)); return true; }catch(e){ return false; } }
 function drop(k){ try{ localStorage.removeItem(LS+k); }catch(e){} }
 
 var S = {
@@ -884,12 +900,18 @@ function dropName(s, setName){
 }
 function nextDropLine(){
   var t = new Date(); t.setHours(0,0,0,0);
-  var nx = upcomingEvents().filter(function(x){ return x.kind === 'sprites' && x.d > t; })[0];
+  var nx = upcomingEvents().filter(function(x){ return x.kind === 'sprites' && x.d >= t; })[0];
   if(nx){
     var k = Math.round((nx.d - t)/86400000);
-    return 'Next drop · <b>'+esc(nx.name.replace(/\s+Sprites?$/i, ''))+'</b> · '+(k <= 0 ? 'today' : k === 1 ? 'tomorrow' : 'in '+k+' days');
+    return 'Next scheduled event · <b>'+esc(nx.name.replace(/\s+Sprites?$/i, ''))+'</b> · '+(k <= 0 ? 'today' : k === 1 ? 'tomorrow' : 'in '+k+' days');
   }
-  return 'New releases appear after the next catalog check';
+  return 'No upcoming release window listed';
+}
+function dropFreshness(){
+  var t=Date.parse((S.spritesData||{}).lastChecked||'');
+  if(!Number.isFinite(t))return '<small class="catalog-note">Last catalog check unknown</small>';
+  if(Date.now()-t<86400000)return '';
+  return '<small class="catalog-note">Catalog last checked '+esc(new Date(t).toLocaleDateString([],{month:'short',day:'numeric'}))+'</small>';
 }
 function dropCard(){
   var x = dropSet(); if(!x || !x.sprites.length) return '';
@@ -909,7 +931,7 @@ function dropCard(){
   var lbl = done ? crown+'Set complete' : age < 7 ? '<i class="dot"></i>New this week' : 'Latest drop';
   var when = x.date.toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'});
   return '<div class="drop'+(done?' done':'')+'" id="dropCard" data-title="'+esc(title)+'" style="--c:'+col+'">'+
-    '<div class="hd"><span class="lbl">'+lbl+'</span><h3>'+esc(title)+'</h3><span class="meta">'+n+' sprite'+(n===1?'':'s')+' · dropped '+esc(when)+'</span></div>'+
+    '<div class="hd"><span class="lbl">'+lbl+'</span><h3>'+esc(title)+'</h3><span class="meta">'+n+' sprite'+(n===1?'':'s')+' · first seen '+esc(when)+'</span>'+dropFreshness()+'</div>'+
     (x.g.bonus ? '<div class="bonus"><b>Set bonus</b> · '+esc(x.g.bonus)+'</div>' : '')+
     '<div class="drop-row">'+row+'</div>'+
     '<div class="dprog"><div class="row"><span><b id="dropGot">'+got+'</b> of '+n+' caught</span><span class="small muted" id="dropLeft">'+(done ? 'All of them' : (n-got)+' still to find')+'</span></div>'+
@@ -946,16 +968,17 @@ function todayMinis(){
   var spr = all.length ? '<button class="mini" data-go="sprites"><span class="k">Sprites</span><b>'+c.got+'<small> / '+all.length+'</small></b><span class="bar"><i style="width:'+c.pct.toFixed(1)+'%"></i></span><span class="s">'+(c.left ? c.left+' not marked in your collection' : 'Every last one.')+'</span></button>' : '';
   return '<div class="grid2">'+shop+spr+'</div>';
 }
-function gardenOrbs(caught,total){
-  var h='', cols=9, rows=Math.max(1,Math.ceil(total/cols));
-  var freedom=Math.pow(1-Math.min(1,caught/Math.max(1,total)),3);
-  for(var i=0;i<caught;i++){
-    var row=Math.floor(i/cols), col=i%cols, slots=Math.min(cols,caught-row*cols);
-    var x=slots===1?50:12+col*(76/Math.max(1,slots-1));
-    var y=8+row*(80/Math.max(1,rows-1));
-    h+='<i class="collected-orb" style="left:'+x+'%;bottom:'+y+'%;--drift:'+((i%2?1:-1)*(2+Math.min(x-6,94-x)*.35*freedom)).toFixed(2)+'px;--rise:'+(3+45*freedom).toFixed(2)+'px;--trail:'+(8+24*freedom).toFixed(2)+'px;--duration:'+(5.5+(i%7)*.43+2*(1-freedom)).toFixed(2)+'s;--delay:'+(-i*1.37)+'s;--orb-size:'+(caught<10?12:caught<40?8:5)+'px"></i>';
-  }
-  return h;
+function syncGardenJar(arrival){
+  var el=$('#jar-paint');
+  if(!el){MoonlitJar.sync(null,[],0);return;}
+  var catalog=(S.spritesData||{}).sprites||[];
+  var caught=new Set(catalog.filter(s=>S.got[s.id]).map(s=>s.id));
+  var order=Array.isArray(S.jarOrder)?S.jarOrder:[];
+  var ids=Array.from(new Set(order.concat(Array.from(caught)))).filter(id=>caught.has(id));
+  MoonlitJar.sync(el,ids,catalog.length,arrival);
+  $('.orb-counter b').textContent=ids.length;
+  $('.jar-denom').textContent=' / '+catalog.length;
+  $('.orb-jar').setAttribute('aria-label','Open sprite collection, '+ids.length+' of '+catalog.length+' collected');
 }
 function renderToday(){
   var st = S.settings || {}, sk = st.skin;
@@ -993,8 +1016,9 @@ function renderToday(){
   return '<section class="view" id="v-today"><div class="garden-scene">'+skyHtml()+
     '<div class="garden-heading"><div class="hello" id="hello"><span class="who"><span class="nm">Hello Beautiful</span></span><h1>Moonlit Drop</h1><span class="sub">A little magic after dark</span></div></div>'+
     '<div class="garden-actions"><button class="iconbtn" id="refreshAll" aria-label="Refresh">'+ICON.refresh+'</button>'+noteHtml+'</div>'+
-    '<button class="orb-jar" data-go="sprites" aria-label="Open sprite collection, '+caught+' of '+total+' collected"><span class="orb-interior" aria-hidden="true">'+gardenOrbs(caught,total)+'</span></button>'+
-    '<button class="orb-counter" data-go="sprites"><b>'+caught+'</b><span> / '+total+' collected</span><small>Tap to view your sprites</small></button>'+
+    '<div id="jar-paint" aria-hidden="true"><canvas width="286" height="338"></canvas><i class="jar-glass left"></i><i class="jar-glass right"></i></div>'+
+    '<button class="orb-jar" data-go="sprites" aria-label="Open sprite collection"></button>'+
+    '<button class="orb-counter" data-go="sprites"><b>'+caught+'</b><span class="jar-denom"> / '+total+'</span><small>Tap to view your sprites</small></button>'+
     '<button class="garden-character" id="changeSkin" aria-label="Change go-to skin">'+(sk && sk.img ? imgTag(sk.img,sk.name) : '<span>Choose your character</span>')+'</button></div>'+
     playerStrip() + (powerHourState().mode === 'none' ? '' : phCard()) + dropCard() + todayMinis() +
     (evHtml ? '<div class="list" style="gap:12px"><h2 class="rule">Coming up</h2>'+evHtml+'</div>' : '')+
@@ -1143,9 +1167,7 @@ function syncJarSouls(){
 }
 function updateSpriteCount(deferJar){
   var c = spriteCounts(), x;
-  if((x=$('.orb-interior'))) x.innerHTML=gardenOrbs(c.got,c.all.length);
-  if((x=$('.orb-counter b'))) x.textContent=String(c.got);
-  if((x=$('.orb-jar'))) x.setAttribute('aria-label','Open sprite collection, '+c.got+' of '+c.all.length+' collected');
+  syncGardenJar(deferJar ? S.jarOrder[S.jarOrder.length-1] : null);
   if((x=$('.mini[data-go="sprites"] b'))) x.innerHTML=c.got+'<small> / '+c.all.length+'</small>';
   if((x=$('.mini[data-go="sprites"] .s'))) x.textContent=c.left+' not marked in your collection';
   if((x=$('.mini[data-go="sprites"] .bar i'))) x.style.width=c.pct.toFixed(1)+'%';
@@ -1278,7 +1300,7 @@ function openSprite(id){
   openSheet('<div class="grab"></div><div class="sp-card">'+
     '<div class="orb'+(got?'':' dim')+'" style="--c:'+col+'">'+spriteArt(s)+'</div>'+
     '<h2>'+esc(s.name)+'</h2>'+(meta?'<div class="meta">'+meta+'</div>':'')+
-    (s.does ? '<div class="how"><span>What it does</span><p>'+esc(s.does)+'</p>'+(s.levels ? '<p class="lv">'+esc(s.levels)+'</p>' : '')+'</div>' : '')+
+    (s.does ? '<div class="how"><span>What it does</span><p>'+esc(s.does)+'</p>'+(s.levels ? '<p class="lv">'+esc(s.levels)+'</p>' : '')+'</div>' : (!s.archived ? '<div class="how"><span>What it does</span><p>Ability awaiting verification.</p></div>' : ''))+
     (bonus ? '<div class="how"><span>'+esc(grp)+' bonus</span><p>'+esc(bonus)+'</p></div>' : '')+
     (s.how || s.where ? '<div class="how"><span>Finding it</span>'+(s.how ? '<p>'+esc(s.how)+'</p>' : '')+(s.where ? '<p class="lv">Spotted: '+esc(s.where)+'</p>' : '')+'</div>' : '')+
     '</div><div style="height:16px"></div>'+
@@ -1371,7 +1393,7 @@ function render(){
   if(heroScene){ heroScene.destroy(); heroScene=null; }
   $('#views').innerHTML = RENDER[S.tab]();
   $$('.tab').forEach(function(t){ if(t.dataset.tab===S.tab) t.setAttribute('aria-current','page'); else t.removeAttribute('aria-current'); });
-  bindView();
+  bindView(); syncGardenJar();
   return y;
 }
 function rerender(tabs){ if(tabs.indexOf(S.tab)>=0 && !rerender.busy){ var y=window.scrollY; render(); window.scrollTo(0,y); } }
@@ -1803,17 +1825,25 @@ function showCode(code){
 }
 function openRestore(){
   openSheet('<div class="grab"></div><h2 style="margin-bottom:10px">Restore from backup</h2><textarea class="input" id="rCode" placeholder="Paste your backup code" style="height:140px;font-size:13px"></textarea><div style="height:12px"></div><button class="btn block" id="rGo">Restore</button><div style="height:10px"></div><button class="btn ghost block" data-close>Cancel</button>');
+  $('#rGo').textContent='Review backup';
   $('#rGo').onclick = function(){
+    var d;
     try{
-      var raw = $('#rCode').value.trim().replace(/^ISL1\./,'');
-      var d = JSON.parse(decodeURIComponent(escape(atob(raw))));
-      if(!d || d.v!==1) throw 0;
-      S.got = d.sprites||{}; S.wishlist = d.wishlist||[]; save('sprites', S.got); save('wishlist', S.wishlist);
-      S.jarOrder = ((S.spritesData && S.spritesData.sprites)||[]).filter(function(s){ return S.got[s.id]; }).map(function(s){ return s.id; });
-      save('jarOrder', S.jarOrder);
-      S.settings = S.settings || {}; ['name','epic','skin'].forEach(function(k){ if(d[k]) S.settings[k]=d[k]; }); save('settings', S.settings);
-      closeSheet(); render(); toast('Restored');
-    }catch(e){ toast('That code didn\'t work. Check it copied fully.'); }
+      var raw=$('#rCode').value.trim().replace(/^ISL1\./,'');
+      d=JSON.parse(decodeURIComponent(escape(atob(raw))));
+      if(!MoonlitBackup.validate(d))throw new Error('Invalid backup');
+    }catch(e){toast('Incomplete or invalid backup. Your collection is safe.');return;}
+    var caught=Object.keys(d.sprites).filter(id=>d.sprites[id]);
+    var current=Object.values(S.got).filter(Boolean).length;
+    openSheet('<div class="grab"></div><h2>Replace collection?</h2><p>On this device: '+current+' catches and '+S.wishlist.length+' wishlist items.</p><p>From backup: '+caught.length+' catches and '+d.wishlist.length+' wishlist items.</p><button class="btn block" id="confirmRestore">Replace collection</button><button class="btn ghost block" data-close>Cancel</button>');
+    $('#confirmRestore').onclick=function(){
+      var settings=Object.assign({},S.settings||{});
+      ['name','epic','skin'].forEach(k=>{if(d[k])settings[k]=d[k];});
+      var profile={settings:settings,sprites:d.sprites,wishlist:d.wishlist,jarOrder:caught};
+      if(!save('profile',profile)){toast('Could not save. Your collection is safe.');return;}
+      S.settings=settings; S.got=d.sprites; S.wishlist=d.wishlist; S.jarOrder=caught;
+      closeSheet();render();toast('Collection restored');
+    };
   };
 }
 
