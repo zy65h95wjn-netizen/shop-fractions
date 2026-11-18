@@ -1,3 +1,7 @@
+# Peach Physics R15.5
+
+Holly’s Auto bounce is confined to exposed skin above the fur. The trim and green cups stay fixed during Auto. Manual touch uses the existing garment response. The camera holds its current angle during Holly’s Auto motion and resumes depth sway when Auto is off. The offline cache is `peach-physics-v008-r15-holly-skin5`.
+
 # Peach Physics R15.4
 
 Winter Ember fills the portrait viewport edge to edge at the original aspect ratio. Holly’s Auto bounce starts with a small lift of her shoulders and corset. Her springs follow the lift and settle on the way down. Her portrait keeps its R15.3 position. The offline cache is `peach-physics-v008-r15-ember-holly4`.

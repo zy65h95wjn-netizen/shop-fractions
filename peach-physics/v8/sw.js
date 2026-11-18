@@ -1,6 +1,6 @@
 // The v0.0.8 cache is independent of all earlier Peach Physics releases.
-const CACHE = 'peach-physics-v008-r15-ember-holly4';
-const FILES = ['./', './index.html', './motion.js?v=r15-ember-holly4', './assets/aurelia-frost.jpg', './assets/holly-heartbreaker.png', './manifest.webmanifest', './apple-touch-icon.png'];
+const CACHE = 'peach-physics-v008-r15-holly-skin5';
+const FILES = ['./', './index.html', './motion.js?v=r15-holly-skin5', './assets/aurelia-frost.jpg', './assets/holly-heartbreaker.png', './manifest.webmanifest', './apple-touch-icon.png'];
 self.addEventListener('install', event => {
  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES.map(url=>new Request(url,{cache:'reload'})))).then(() => self.skipWaiting()));
 });
@@ -16,7 +16,7 @@ self.addEventListener('fetch', event => {
  if(req.method!=='GET' || u.origin !== self.location.origin || !u.pathname.startsWith(new URL(self.registration.scope).pathname))return;
  // A retired worker can finish a portrait write after this worker activates.
  if(req.mode==='navigate')event.waitUntil(Promise.all([
-  caches.delete('peach-physics-v008-r15-holly3'),caches.delete('peach-physics-v008-r15-holly2'),caches.delete('peach-physics-v008-r15-clap1'),caches.delete('peach-physics-v008-r15-four'),caches.delete('peach-physics-v008-r14-ember1')
+  caches.delete('peach-physics-v008-r15-ember-holly4'),caches.delete('peach-physics-v008-r15-holly3'),caches.delete('peach-physics-v008-r15-holly2'),caches.delete('peach-physics-v008-r15-clap1'),caches.delete('peach-physics-v008-r15-four'),caches.delete('peach-physics-v008-r14-ember1')
  ]));
  event.respondWith((async()=>{
   try {const res=await fetch(req); if(res.ok){const copy=res.clone();event.waitUntil(caches.open(CACHE).then(c=>c.put(req,copy)).catch(()=>{}));}return res;}

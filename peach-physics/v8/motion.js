@@ -101,7 +101,7 @@ class MotionInput{
     return;
    }
    if(this.lastCharacter==='holly'){
-    // The upper body rises first. Its acceleration excites the two springs.
+    // A virtual lift drives only the local springs through their vertical inertia.
     const cycles=drive.age*config.autoHz+.91+.065*Math.sin(.9*drive.age);
     const phase=cycles-Math.floor(cycles);
     const lift=phase<.56?Math.sin(Math.PI*phase/.56)**4:0;

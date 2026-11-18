@@ -53,7 +53,8 @@ function trackAuto(){
   const guards={ember:[[216,900],[210,1240]],midnight:[[320,895],[461,1430]],aurelia:[[270,754],[520,1040]],holly:[[103,475],[475,1100]]};
   const vertical=id==='holly',axis=vertical?1:0;
   const points=[...currentCharacter().impactCenters,...guards[id]];
-  if(vertical)points.push([320,531],[498,533],[355,342],[410,610]); // Trim, shoulder and corset landmarks.
+  // After the two trim samples, track head, shoulders, lacing, skirt and thigh.
+  if(vertical)points.push([320,531],[498,533],[397,200],[247,366],[550,365],[410,610],[409,847],[284,1030],[320,573],[498,576],[206,505],[616,502]);
   const portrait=img,patch=midnightPatch;
   const markers=document.createElement('canvas');markers.width=W;markers.height=H;
   const ink=markers.getContext('2d');ink.fillRect(0,0,W,H);
@@ -72,9 +73,47 @@ function trackAuto(){
   const surface=document.createElement('canvas');
   surface.width=canvas.width;surface.height=canvas.height;
   const read=surface.getContext('2d',{willReadFrequently:true});
+  function checkHollyPhoto(){
+    // Compare the actual portrait to rest, pixel by pixel, outside the two traced skin outlines.
+    const stencil=document.createElement('canvas');stencil.width=surface.width;stencil.height=surface.height;
+    const mask=stencil.getContext('2d'),scale=surface.width/cssW;
+    for(const contour of HOLLY_CONTOURS){
+      mask.beginPath();
+      contour.forEach(([x,y],i)=>mask[i?'lineTo':'moveTo']((ox+x/W*drawW)*scale,(oy+y/H*drawH)*scale));
+      mask.closePath();mask.fill();mask.lineWidth=2;mask.stroke();
+    }
+    // Exclude the trim and cups, including where the original skin outline overlaps a fiber.
+    mask.globalCompositeOperation='destination-out';
+    for(const fur of HOLLY_FUR){
+      mask.beginPath();
+      fur.forEach(([x,top],i)=>mask[i?'lineTo':'moveTo']((ox+x/W*drawW)*scale,(oy+top/H*drawH)*scale));
+      mask.lineTo((ox+fur[fur.length-1][0]/W*drawW)*scale,surface.height);
+      mask.lineTo((ox+fur[0][0]/W*drawW)*scale,surface.height);mask.closePath();mask.fill();
+    }
+    const inside=mask.getImageData(0,0,surface.width,surface.height).data;
+    const photo=()=>{
+      render();read.drawImage(canvas,0,0);
+      return read.getImageData(0,0,surface.width,surface.height).data;
+    };
+    const rest=photo();
+    let outsideDelta=0,changedInside=0;
+    releaseProbe.auto();
+    for(let frame=0;frame<27;frame++){
+      releaseProbe.tick(13);const now=photo();let moving=0;
+      for(let i=0;i<now.length;i+=4){
+        const diff=Math.max(Math.abs(rest[i]-now[i]),Math.abs(rest[i+1]-now[i+1]),Math.abs(rest[i+2]-now[i+2]));
+        if(!inside[i+3])outsideDelta=Math.max(outsideDelta,diff);
+        else if(diff>3)moving++;
+      }
+      changedInside=Math.max(changedInside,moving);
+    }
+    releaseProbe.prepare();resize();
+    return {outsideDelta,changedInside};
+  }
   function locate(){
-    // Measure the Auto motion independently of camera sway.
-    viewX=0;viewY=0;render();read.drawImage(canvas,0,0);
+    // For Holly, measure the pose seen with the actual camera enabled.
+    if(!vertical){viewX=0;viewY=0;}
+    render();read.drawImage(canvas,0,0);
     return points.map(([x,y],i)=>{
       const scale=canvas.width/cssW,r=Math.ceil((i<2?28:i>=4?12:5)*scale);
       const cx=Math.round((ox+x/W*drawW)*scale),cy=Math.round((oy+y/H*drawH)*scale);
@@ -88,8 +127,10 @@ function trackAuto(){
     });
   }
   try{
+    const portraitDiff=vertical?checkHollyPhoto():null;
     useImage(markers);
-    const rest=locate(),offsets=()=>locate().map(([x,y],i)=>[x-rest[i][0],y-rest[i][1]]);
+    if(vertical)releaseProbe.tick(50); // Enable Auto partway through the normal depth sway.
+    const startView=[viewX,viewY],rest=locate(),offsets=()=>locate().map(([x,y],i)=>[x-rest[i][0],y-rest[i][1]]);
     releaseProbe.auto();releaseProbe.tick(180);
     const samples=[];
     let bakedTravel=0;
@@ -107,25 +148,16 @@ function trackAuto(){
     releaseProbe.tick(24);
     const resumed=motion.counts.autoSteps>steps;
     motion.setAuto(false);releaseProbe.tick(540);
+    const swayResumed=!vertical||fallback||Math.abs(viewX-startView[0])>.001;
+    // Compare the settled pose at the original camera angle after sway has resumed.
+    if(vertical)[viewX,viewY]=startView;
     const peak=array=>Math.max(...array.map(Math.abs));
     const common={catchError:Math.abs(beforeGrab-caught),paused,resumed,
       guards:peak(samples.flatMap(frame=>frame.slice(2,4).flat())),settled:peak(offsets().flat())};
     if(vertical){
-      const shoulder=samples.map(frame=>frame[6][axis]),corset=samples.map(frame=>frame[7][axis]);
-      const travel=series=>Math.max(...series)-Math.min(...series);
-      const delays=[0,1].map(side=>{
-        // Measure the time between the shoulder crest and the skin crest on each lift.
-        const lags=[];
-        for(let i=5;i<samples.length-6;i++)if(shoulder[i]<-3&&shoulder[i]<shoulder[i-1]&&shoulder[i]<=shoulder[i+1]){
-          let crest=i-4;
-          for(let j=i-3;j<=i+5;j++)if(samples[j][side][axis]<samples[crest][side][axis])crest=j;
-          lags.push((crest-i)*1000/24);
-        }
-        return lags;
-      });
-      return {...common,shoulderTravel:travel(shoulder),corsetTravel:travel(corset),delays,
-        relativeTravel:[0,1].map(i=>travel(samples.map((frame,j)=>frame[i][axis]-shoulder[j]))),
-        trimTravel:[4,5].map(i=>travel(samples.map((frame,j)=>frame[i][axis]-corset[j]))),
+      const travel=i=>{const values=samples.map(frame=>frame[i][axis]);return Math.max(...values)-Math.min(...values);};
+      return {...common,swayResumed,portraitDiff,bodyMotion:peak(samples.flatMap(frame=>frame.slice(6).flat())),
+        skinTravel:[0,1].map(travel),trimTravel:[4,5].map(travel),
         horizontal:peak(samples.flatMap(frame=>frame.slice(0,2).map(p=>p[0])))};
     }
     const gap=samples.map(([[left],[right]])=>left-right);
@@ -223,12 +255,12 @@ async function check(renderer, browser) {
       assert(travel.catchError<.001&&travel.paused&&travel.resumed,id+' touch takeover');
       assert(travel.guards<.25&&travel.settled<.25,id+' moving guard or residual Auto');
       if(id==='holly'){
-        assert(travel.shoulderTravel>3&&travel.shoulderTravel<9,'visible support motion');
-        assert(Math.abs(travel.shoulderTravel-travel.corsetTravel)<1,'connected shoulder and corset');
-        assert(travel.relativeTravel.every(v=>v>2&&v<12),'restrained secondary motion');
-        assert(travel.delays.every(lags=>lags.length>=3&&lags.every(ms=>ms>=0&&ms<=210)),'skin follows each lift');
+        assert(travel.bodyMotion<.25,'Holly head, shoulders, lacing, skirt or thigh moved');
+        assert(travel.skinTravel.every(v=>v>2&&v<12),'visible local vertical bounce on both sides');
         assert(travel.horizontal<.8,'sideways drift');
-        assert(travel.trimTravel.every((v,i)=>v<travel.relativeTravel[i]*.65),'supported fur');
+        assert(travel.trimTravel.every(v=>v<.05),'stationary fur during Auto');
+        assert(travel.portraitDiff.outsideDelta===0&&travel.portraitDiff.changedInside>200,'Auto visible only inside the two skin outlines');
+        assert(travel.swayResumed,'depth sway resumes after Holly Auto');
       }else{
         const minGap=renderer==='webgl'?12:8;
         assert(travel.inward>minGap&&travel.outward>minGap&&travel.opposite,id+' needs opposite, visible horizontal travel');

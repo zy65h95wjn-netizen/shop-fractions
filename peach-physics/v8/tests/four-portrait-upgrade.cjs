@@ -1,10 +1,10 @@
-// Upgrade from R14 (Santa), R15 (Midnight) and R15.2/R15.3 (Holly), then disconnect.
+// Upgrade from R14 (Santa), R15 (Midnight) and R15.2 through R15.4 (Holly), then disconnect.
 const {chromium,assert,fs,path,root}=require('./harness.cjs');
 const http=require('node:http'),{execFileSync}=require('node:child_process');
 const app=path.join(root,'peach-physics/v8'),prefix='/peach-physics/v8/';
 const active=['ember','midnight','aurelia','holly'],ids=[...active,'santa'];
-const cacheName='peach-physics-v008-r15-ember-holly4';
-const releases={r14:'0b1444a',r15:'363d875',r152:'d8f1b50',r153:'ca33de2'};
+const cacheName='peach-physics-v008-r15-holly-skin5';
+const releases={r14:'0b1444a',r15:'363d875',r152:'d8f1b50',r153:'ca33de2',r154:'4342e1f'};
 const types={html:'text/html',js:'application/javascript',webmanifest:'application/manifest+json',jpg:'image/jpeg',png:'image/png'};
 function fixture(release){
   const old=Object.fromEntries(['index.html','sw.js','motion.js','manifest.webmanifest'].map(file=>[
@@ -30,7 +30,7 @@ async function ready(page){
   await page.waitForFunction(()=>window.__peachPhysicsDebug&&document.querySelector('#loader.hiding')&&__peachPhysicsDebug.snapshot().frames>0);
 }
 async function run(browser,renderer,release){
-  const selected=(release==='r152'||release==='r153')?'holly':release==='r14'?'santa':'midnight',first=selected==='santa'?'ember':selected;
+  const selected=['r152','r153','r154'].includes(release)?'holly':release==='r14'?'santa':'midnight',first=selected==='santa'?'ember':selected;
   const fixtureServer=fixture(release),{server}=fixtureServer;
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
   const url='http://127.0.0.1:'+server.address().port+prefix;
@@ -62,14 +62,14 @@ async function run(browser,renderer,release){
     await page.waitForFunction(()=>navigator.serviceWorker.controller?.state==='activated');
     const cacheFiles=await page.evaluate(async name=>(await (await caches.open(name)).keys()).map(k=>k.url),cacheName);
     assert.deepEqual(cacheFiles.map(u=>u.slice(url.length)).sort(),[
-      '','index.html','motion.js?v=r15-ember-holly4','assets/aurelia-frost.jpg','assets/holly-heartbreaker.png','manifest.webmanifest','apple-touch-icon.png'
+      '','index.html','motion.js?v=r15-holly-skin5','assets/aurelia-frost.jpg','assets/holly-heartbreaker.png','manifest.webmanifest','apple-touch-icon.png'
     ].sort());
     await ctx.setOffline(true);
-    await page.goto(url+'?character=santa&v=r15.4');
+    await page.goto(url+'?character=santa&v=r15.5');
     await ready(page);
     await page.waitForFunction(async expected=>(await caches.keys()).every(key=>key===expected),cacheName);
     assert.equal(await page.evaluate(()=>localStorage.getItem('peach-physics-v008-active')),first);
-    const appBytes=await page.evaluate(async()=>Promise.all(['./','./index.html','./motion.js?v=r15-ember-holly4','./manifest.webmanifest'].map(async file=>(await fetch(file)).text())));
+    const appBytes=await page.evaluate(async()=>Promise.all(['./','./index.html','./motion.js?v=r15-holly-skin5','./manifest.webmanifest'].map(async file=>(await fetch(file)).text())));
     for(const [i,file] of ['index.html','index.html','motion.js','manifest.webmanifest'].entries())assert.equal(appBytes[i],fs.readFileSync(path.join(app,file),'utf8'),file);
     const start=active.indexOf(first),cycle=[...active.slice(start),...active.slice(0,start),first];
     for(const [i,id] of cycle.entries()){
@@ -103,11 +103,11 @@ async function run(browser,renderer,release){
     });
     await page.touchscreen.tap(...target);
     await page.waitForFunction(()=>__peachPhysicsDebug.snapshot().slapCount>0);
-    await page.goto(url+'?v=r15.4');await ready(page);
+    await page.goto(url+'?v=r15.5');await ready(page);
     assert.equal(await page.locator('#depthSway').getAttribute('aria-checked'),'false');
     assert.equal(await page.evaluate(()=>__peachMotionDebug.snapshot().auto),false);
     assert.deepEqual(errors,[]);
-    console.log(renderer,release,selected,'→ R15.4 offline, 4 picker entries, 5 saved profiles, motion preferences, audio and touch passed');
+    console.log(renderer,release,selected,'→ R15.5 offline, 4 picker entries, 5 saved profiles, motion preferences, audio and touch passed');
     if(renderer==='webgl'&&release==='r15'){
       const fresh=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
       try{
@@ -122,6 +122,6 @@ async function run(browser,renderer,release){
 }
 (async()=>{
   const browser=await chromium.launch({executablePath:process.env.CHROMIUM||'/usr/bin/chromium',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
-  try{for(const renderer of ['webgl','canvas'])for(const release of ['r153','r152','r15','r14'])await run(browser,renderer,release);}
+  try{for(const renderer of ['webgl','canvas'])for(const release of ['r154','r153','r152','r15','r14'])await run(browser,renderer,release);}
   finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
