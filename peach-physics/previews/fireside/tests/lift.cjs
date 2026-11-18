@@ -108,17 +108,28 @@ function reviewPortrait() {
     advance(4);
     samples[mode + 'Hold'] = read();
     touch('pointercancel');
-    app.configure({ mode, auto: false, linked: true });
+    app.configure({ mode, auto: false, linked: false });
     document.querySelector('#bounce').click();
     advance(mode === 'blender' ? 38 : 36);
     samples[mode + 'Bounce'] = read();
-    app.configure({ mode, auto: true, linked: true });
+    app.configure({ mode, auto: true, linked: false });
     advance(mode === 'blender' ? 45 : 83);
     samples[mode + 'Auto'] = read();
     advance(54);
     samples[mode + 'AutoLater'] = read();
   }
-  return { samples, edgeChanges };
+  app.configure({ auto:false, linked:false });
+  app.pose(1,34,0);
+  const pulled=capture();
+  let shadowChange=0;
+  for(let y=608;y<=668;y+=3) {
+    const seam=677-.0046*(y-635)**2;
+    for(let x=Math.ceil(seam+10);x<=seam+23;x+=2)for(let k=0;k<3;k++){
+      const i=index(x,y)+k;
+      shadowChange=Math.max(shadowChange,Math.abs(pulled[i]-rest[i]));
+    }
+  }
+  return { samples, edgeChanges, shadowChange };
 }
 
 async function run() {
@@ -158,11 +169,17 @@ async function run() {
       for (const name of ['up', 'diagonal', 'blenderReturn', 'springsReturn', 'blenderBounce', 'springsBounce', 'blenderAuto', 'springsAuto']) {
         const [oldLeft, oldRight] = before[name], [left, right] = after[name];
         assert(oldLeft[1] < -3 && left[1] > oldLeft[1] && left[1] < -2, name + ' softer upward travel');
-        assert(Math.abs(left[0] - oldLeft[0]) <= 1, name + ' lateral movement');
-        assert.deepEqual(right, oldRight, name + ' right-side reference');
+        assert(Math.abs(left[0] - oldLeft[0]) <= 2, name + ' lateral movement');
+        if(name==='diagonal') {
+          assert(right[0]>=oldRight[0]*.7 && Math.abs(right[1])>=Math.abs(oldRight[1])*.75, 'rightward diagonal stays responsive');
+        }else{
+          assert(Math.abs(right[0]-oldRight[0])<=1 && Math.abs(right[1]-oldRight[1])<=1,name+' right-side reference');
+        }
       }
       assert(after.up[0][1] >= -20 && after.up[0][1] <= -17, 'left still responds to a full lift');
-      assert.deepEqual(after.sideways, before.sideways, 'lateral travel');
+      assert(Math.abs(after.sideways[0][0]-before.sideways[0][0])<=2,'left lateral travel');
+      assert(after.sideways[1][0]>=18 && after.sideways[1][0]<=before.sideways[1][0],'rightward travel inside the lit area');
+      assert(results[0].shadowChange>8 && results[1].shadowChange<=1,'painted inner shadow retains its color on an outward pull');
       for (const name of ['down', 'blenderDrop', 'springsDrop']) {
         for (const side of [0, 1]) {
           const [x, y] = after[name][side], [oldX, oldY] = before[name][side];

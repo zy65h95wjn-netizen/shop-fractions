@@ -2,9 +2,9 @@
 <style>
 :root{font-family:system-ui,-apple-system,sans-serif;color:#fff1dc;color-scheme:dark;background:#17130e}*{box-sizing:border-box}body{margin:0;height:100svh;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#49301e,#15150f 78%)}header{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 18px}h1{font-size:17px;font-weight:600;margin:0}small{font-size:10px;color:#d8b78d;letter-spacing:.16em;text-transform:uppercase}button{font:inherit;cursor:pointer;background:#303a27;color:#fff1dc;border:1px solid #6a6846;border-radius:24px;padding:11px 17px;touch-action:manipulation}button:focus-visible{outline:2px solid #f7c984;outline-offset:3px}button[aria-pressed=true]{background:#f2c794;border-color:#f2c794;color:#272015}#stage{height:calc(100svh - 143px);display:flex;align-items:center;justify-content:center;position:relative}canvas{display:block;touch-action:none;max-width:100%;border-radius:12px;box-shadow:0 12px 60px #0008}footer{height:85px;text-align:center;padding:9px 8px}footer .bar{display:flex;justify-content:center;gap:8px}#tip{font-size:11px;color:#d9c1a6;margin:8px 0 0}#settings{position:fixed;inset:auto 12px 96px;background:#17251af5;border:1px solid #65724d;border-radius:20px;padding:20px;max-width:420px;margin:auto;box-shadow:0 15px 70px #000b;z-index:2}#settings[hidden]{display:none}#settings p{font-size:12px;color:#c4cfbc;line-height:1.55}#settings .row{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}#settings h2{font-size:17px;margin:0 0 12px}#settings button{padding:9px 12px;font-size:13px}label{font-size:13px;display:flex;gap:8px;align-items:center}#status{position:absolute;bottom:12px;font-size:12px;background:#17251aee;border-radius:20px;padding:8px 14px;pointer-events:none}#status:empty{display:none}.tag{font-size:11px;color:#c6bf9b}#gear{padding:8px 12px;font-size:19px}@media(min-width:800px){header{max-width:660px;margin:auto}#settings{bottom:110px}}
 </style></head><body>
-<header><div><small>Peaches · preview 5</small><h1>Fireside</h1></div><button id="gear" aria-label="Motion settings" aria-expanded="false">⚙</button></header>
-<main id="stage"><canvas id="portrait" aria-label="Interactive portrait. Tap or drag either side or the right thigh. Keyboard users can use Bounce."></canvas><div id="status" role="status">Warming up…</div></main>
-<footer><div class="bar"><button id="bounce">Bounce ✦</button><button id="auto" aria-pressed="true">Auto on</button><button id="motion">Blender bounce</button></div><p id="tip">Tap or drag either side. Tap the right thigh for a shake.</p></footer>
+<header><div><small>Peaches · preview 6</small><h1>Fireside</h1></div><button id="gear" aria-label="Motion settings" aria-expanded="false">⚙</button></header>
+<main id="stage"><canvas id="portrait" aria-label="Interactive portrait. Tap or drag either side or the screen-left thigh. Keyboard users can use Bounce."></canvas><div id="status" role="status">Warming up…</div></main>
+<footer><div class="bar"><button id="bounce">Bounce ✦</button><button id="auto" aria-pressed="true">Auto on</button><button id="motion">Blender bounce</button></div><p id="tip">Tap or drag either side. Tap the left thigh for a shake.</p></footer>
 <section id="settings" hidden aria-label="Motion settings"><h2>A little more playful</h2><div class="row" role="group" aria-label="Intensity"><button data-preset="gentle">Gentle</button><button data-preset="playful" aria-pressed="true">Playful</button><button data-preset="bold">Bold</button></div><label><input id="linked" type="checkbox" checked> Gentle linked movement</label><p id="explain">Blender sets the upper bounce timing for taps and Auto. Drags and the thigh use live springs.</p><p class="tag">An isolated 2D portrait experiment. Original artwork, silent playback, no account or network needed. Session-only settings.</p><div class="row"><button id="reset">Reset motion</button><button id="close">Done</button></div></section>
 <script>
 'use strict';
@@ -18,15 +18,19 @@ function envelope(x,y,poly){let inside=false,d=Infinity;for(let i=0,j=poly.lengt
  const vx=bx-ax,vy=by-ay,t=clamp(((x-ax)*vx+(y-ay)*vy)/(vx*vx+vy*vy),0,1);d=Math.min(d,Math.hypot(x-ax-t*vx,y-ay-t*vy));
 }return inside?smooth(d/22):0;}
 const mask=new Uint8Array(box.w*box.h*4);
-// Keep the left field inside the photographed skin, before the curved inner shadow.
-// The broad fade prevents the upper crease being pulled into a sharp notch.
-function leftInnerSupport(x,y){const edge=676-.0055*(y-645)*(y-645);return smooth((edge-8-x)/48);}
+// The painted crease stays anchored. The rounder lower portion can travel closer to it.
+function leftInnerSupport(x,y){
+ const edge=676-.0055*(y-645)*(y-645);
+ const fade=48-29*smooth((y-555)/78);
+ return smooth((edge-8-x)/fade);
+}
 // Upper edges of the two white trims in original portrait pixels.
 const trimEdges=[
  [[505,608],[530,623],[550,642],[570,657],[590,669],[610,679],[630,695],[650,713]],
  [[674,718],[696,714],[716,712],[735,707],[755,699],[775,689],[790,676],[800,664],[810,644],[814,625]]
 ];
-function trimHeight(points,x){
+const lowerCurl=[[558,538],[570,544],[581,546],[589,546],[596,543],[604,538],[610,531],[615,523]];
+function contourAt(points,x){
  if(x<=points[0][0])return points[0][1];
  for(let i=1;i<points.length;i++){
   const [ax,ay]=points[i-1],[bx,by]=points[i];
@@ -34,33 +38,44 @@ function trimHeight(points,x){
  }
  return points[points.length-1][1];
 }
+const curlX=Array.from({length:box.h},(_,y)=>contourAt(lowerCurl,box.y+y+.5));
 for(let x=0;x<box.w;x++){
  const px=box.x+x+.5;
- const trim=trimEdges.map(edge=>trimHeight(edge,px));
+ const trim=trimEdges.map(edge=>contourAt(edge,px));
  for(let y=0;y<box.h;y++){
   const py=box.y+y+.5,i=(y*box.w+x)*4;
   // The left curl follows the outer edge. The right curl ends above the moving region.
   const leftCurlEdge=547-.006*(py-577)*(py-577);
-  const leftSupport=leftInnerSupport(px,py)*smooth((px-leftCurlEdge-4)/24);
+  const upperHair=smooth((px-leftCurlEdge-4)/15);
+  const tipDistance=Math.hypot(px-curlX[y],Math.max(0,py-615));
+  const lowerHair=smooth((tipDistance-8)/18);
+  const hairSupport=upperHair+(lowerHair-upperHair)*smooth((py-560)/34);
+  const shoulder=.28+.72*smooth((py-531)/79);
+  const leftSupport=shoulder*leftInnerSupport(px,py)*hairSupport;
   const rightSupport=smooth((py-548)/32);
   const leftGap=trim[0]-py-8, rightGap=trim[1]-py-7;
   mask[i]=Math.round(255*envelope(px,py,polygons[0])*leftSupport*smooth(leftGap/27));
   mask[i+1]=Math.round(255*envelope(px,py,polygons[1])*rightSupport*smooth(rightGap/28));
   // Spread downward compression across the skin above the cup, with zero travel at its lip.
-  mask[i+2]=Math.round(mask[i]*smooth(leftGap/63));
-  mask[i+3]=Math.round(mask[i+1]*smooth(rightGap/70));
+  // The two skin regions have a gap, so their downward weights share one channel.
+  mask[i+2]=Math.round(mask[i]*smooth(leftGap/63)+mask[i+1]*smooth(rightGap/70));
+  const innerShadow=677-.0046*(py-635)*(py-635);
+  const outerRim=813-.004*(py-630)*(py-630);
+  mask[i+3]=Math.round(mask[i+1]*smooth((px-innerShadow-27)/61)*smooth((outerRim-px-2)/40));
  }
 }
 function weight(x,y,side){x-=box.x+.5;y-=box.y+.5;if(x<0||y<0||x>=box.w-1||y>=box.h-1)return 0;const ix=x|0,iy=y|0,tx=x-ix,ty=y-iy,i=(iy*box.w+ix)*4+side;return ((mask[i]*(1-tx)+mask[i+4]*tx)*(1-ty)+(mask[i+box.w*4]*(1-tx)+mask[i+box.w*4+4]*tx)*ty)/255;}
-const thighBox={x:439,y:934,w:153,h:191};
-const thighOutline=[[464,972],[478,956],[496,946],[513,954],[535,949],[547,946],[556,977],[563,992],[555,1013],[559,1042],[577,1080],[572,1095],[545,1100],[508,1105],[471,1113],[450,1118],[446,1101],[450,1055],[455,1014]];
+const thighBox={x:35,y:741,w:311,h:369};
+const thighOutline=[[83,755],[108,774],[133,789],[153,810],[167,835],[191,853],[218,861],[240,861],[254,874],[268,895],[291,907],[313,922],[327,950],[333,982],[332,1024],[327,1066],[320,1102],[117,1102],[103,1071],[88,1031],[76,993],[63,953],[50,915],[43,882],[44,848],[50,813],[61,781]];
 const thighMask=new Uint8Array(thighBox.w*thighBox.h*4);
 for(let y=0;y<thighBox.h;y++)for(let x=0;x<thighBox.w;x++){
  const i=(y*thighBox.w+x)*4;
- thighMask[i]=thighMask[i+2]=Math.round(255*envelope(thighBox.x+x+.5,thighBox.y+y+.5,thighOutline));
+ const py=thighBox.y+y+.5;
+ thighMask[i]=thighMask[i+2]=Math.round(255*envelope(thighBox.x+x+.5,py,thighOutline)*smooth((1103-py)/66));
 }
 let ready=false,mode='blender',preset='playful',auto=true,linked=true,time=0,previous=0,accumulator=0,renderer='webgl';
 const nodes=Array.from({length:2},()=>({x:0,y:0,vx:0,vy:0,fx:0,fy:0})),holds=new Map(),pulses=[[],[]],nextPulse=[.05,.48];
+const transfer=Array.from({length:2},()=>({x:0,y:0,vx:0,vy:0}));
 const settings={gentle:{amp:17,hz:2.3,damping:.27},playful:{amp:27,hz:2.55,damping:.19},bold:{amp:34,hz:2.7,damping:.16}};
 let quietUntil=0;
 const thigh={x:0,y:0,vx:0,vy:0};
@@ -90,10 +105,27 @@ const releasedAt=[-Infinity,-Infinity];
 // Give drag releases a full first rebound, then damp the smaller trailing oscillations.
 function releaseDamping(side,base){const age=time-releasedAt[side];return age<1.2?base*.92+.18*smooth((age-.16)/.5):base;}
 function curve(side,age){const a=BAKE.curves[side],at=age*BAKE.fps,i=Math.floor(at);return i<0||i>=a.length-1?0:a[i]+(a[i+1]-a[i])*(at-i);}
-function kick(side,power=1,dx=0,chain=true){
+function kick(side,power=1,dx=0){
  releasedAt[side]=-Infinity;const a=settings[preset].amp*power;if(mode==='blender')pulses[side].push({t:time,x:dx||((side?1:-1)*a*.18),y:a});
  else {const n=nodes[side],omega=settings[preset].hz*2*Math.PI;n.vy+=a*omega;n.vx+=(dx||((side?1:-1)*a*.18))*omega;}
- if(linked&&chain)kick(1-side,power*.15,-dx*.1,false);
+}
+// Drive the neighboring spring from the primary gesture. Its own response never feeds back into the source.
+function stepTransfer(dt,activeHolds){
+ const direct=linked?nodes.map((_,side)=>primaryOffset(side)):null,leg=thighOffset();
+ for(let side=0;side<2;side++){
+  if(activeHolds.some(h=>h.side===side))continue;
+  const t=transfer[side];
+  let targetX=0,targetY=0;
+  if(direct){
+   const [x,y]=direct[1-side],inward=side===1 ? x>0 : x<0;
+   const bodyShare=side===0 ? .36 : .23;
+   targetX=x*(inward ? .47 : .32)+leg[0]*bodyShare;
+   targetY=y*.41+leg[1]*bodyShare;
+  }
+  t.vx+=((targetX-t.x)*420-32*t.vx)*dt;
+  t.vy+=((targetY-t.y)*420-32*t.vy)*dt;
+  t.x+=t.vx*dt;t.y+=t.vy*dt;
+ }
 }
 function step(dt){
  time+=dt;
@@ -105,7 +137,7 @@ function step(dt){
   else {const damping=releaseDamping(side,s.damping);let ax=-omega*omega*n.x-2*damping*omega*n.vx,ay=-omega*omega*n.y-2*damping*omega*n.vy;
    if(auto&&time>quietUntil&&!upperHeld){
     if(mode==='springs'){ax+=s.amp*omega*omega*.18*Math.sin(time*6.4+side*1.9);ay+=s.amp*omega*omega*.32*Math.sin(time*7.7+side*2.1);}
-    else if(time>=nextPulse[side]){kick(side,.52,.12*s.amp*Math.sin(time*2+side),false);nextPulse[side]=time+1.07+side*.19;}
+    else if(time>=nextPulse[side]){kick(side,.52,.12*s.amp*Math.sin(time*2+side));nextPulse[side]=time+1.07+side*.19;}
    }
    n.vx+=ax*dt;n.vy+=ay*dt;n.x+=n.vx*dt;n.y+=n.vy*dt;
    for(const k of ['x','y']){if(Math.abs(n[k])>38){n[k]=Math.sign(n[k])*38;n['v'+k]*=-.1;}}
@@ -113,9 +145,25 @@ function step(dt){
   const f=1-Math.exp(-dt*11);n.fx+=(n.x-n.fx)*f;n.fy+=(n.y-n.fy)*f;
   pulses[side]=pulses[side].filter(p=>time-p.t<(BAKE.curves[side].length-1)/BAKE.fps);
  }
+ stepTransfer(dt,activeHolds);
 }
-function offsets(){return nodes.map((n,side)=>{let x=n.x*.78+n.fx*.22,y=n.y*.78+n.fy*.22;for(const p of pulses[side]){const k=curve(side,time-p.t);x+=p.x*k;y+=p.y*k}const length=Math.hypot(x,y),limit=34,scale=length>limit?limit/length:1;return[x*scale,y*scale]})}
-function reset(){holds.clear();releasedAt.fill(-Infinity);pulses.forEach(p=>p.length=0);nodes.forEach(n=>Object.keys(n).forEach(k=>n[k]=0));Object.assign(thigh,{x:0,y:0,vx:0,vy:0});time=0;quietUntil=0;thighQuietUntil=0;nextThigh=.78;nextPulse[0]=.05;nextPulse[1]=.48;previous=0;accumulator=0;}
+function boundedOffset(x,y){
+ const length=Math.hypot(x,y),scale=length>34 ? 34/length : 1;
+ return [x*scale,y*scale];
+}
+function primaryOffset(side){
+ const n=nodes[side];let x=n.x*.78+n.fx*.22,y=n.y*.78+n.fy*.22;
+ for(const p of pulses[side]){const k=curve(side,time-p.t);x+=p.x*k;y+=p.y*k;}
+ return boundedOffset(x,y);
+}
+function offsets(){
+ return transfer.map((t,side)=>{
+  const primary=primaryOffset(side);
+  return t.x===0&&t.y===0 ? primary : boundedOffset(primary[0]+t.x,primary[1]+t.y);
+ });
+}
+function clearTransfer(side){Object.assign(transfer[side],{x:0,y:0,vx:0,vy:0});}
+function reset(){holds.clear();releasedAt.fill(-Infinity);pulses.forEach(p=>p.length=0);nodes.forEach(n=>Object.keys(n).forEach(k=>n[k]=0));clearTransfer(0);clearTransfer(1);Object.assign(thigh,{x:0,y:0,vx:0,vy:0});time=0;quietUntil=0;thighQuietUntil=0;nextThigh=.78;nextPulse[0]=.05;nextPulse[1]=.48;previous=0;accumulator=0;}
 const photo=new Image();let gl,ctx,program,offsetLoc,thighLoc,original,background,upperLayer,thighLayer;
 function initGL(){
  gl=canvas.getContext('webgl',{alpha:false,preserveDrawingBuffer:true,antialias:false});if(!gl)throw Error('WebGL unavailable');
@@ -132,9 +180,14 @@ function initGL(){
   if(inside(p,chestBox)){
    vec2 horizontal=vec2(offsets[0].x,offsets[1].x),vertical=vec2(offsets[0].y,offsets[1].y);
    vec2 supported=vertical*smoothstep(vec2(0.),vec2(21.),vertical);
+   float outward=horizontal.y*smoothstep(0.,6.,horizontal.y);
+   float guard=smoothstep(0.,13.,horizontal.y-.8*abs(vertical.y));
    for(int i=0;i<6;i++){
     vec4 w=texture2D(mask,(p-chestBox.xy)/chestBox.zw);
-    p-=vec2(dot(horizontal,w.rg),dot(vertical-supported,w.rg)+dot(supported,w.ba))/6.;
+    float dx=horizontal.x*w.r+(horizontal.y-outward)*w.g+outward*w.a;
+    float dy=(vertical.x-supported.x)*w.r+(vertical.y-supported.y)*mix(w.g,w.a,guard);
+    dy+=w.g>0.?supported.y*mix(w.b,min(w.a,w.b),guard):supported.x*w.b;
+    p-=vec2(dx,dy)/6.;
    }
   }else if(inside(p,legBox)){
    for(int i=0;i<6;i++)p-=legOffset*texture2D(thighMask,(p-legBox.xy)/legBox.zw).r/6.;
@@ -171,9 +224,14 @@ function drawLayer(layer,x0,y0,x1,y1){
  if(Math.max(Math.abs(x0),Math.abs(y0),Math.abs(x1),Math.abs(y1))<.001)return;
  const {area,weights,flow,buffer,patch,patchCtx}=layer;
  const supported0=y0*smooth(y0/21),supported1=y1*smooth(y1/21),stride=2*area.w;
+ const outward=x1*smooth(x1/6);
+ const guard=smooth((x1-.8*Math.abs(y1))/13);
  for(let i=0,j=0;i<weights.length;i+=4,j+=2){
-  flow[j]=(weights[i]*x0+weights[i+1]*x1)/(255*6);
-  flow[j+1]=(weights[i]*(y0-supported0)+weights[i+1]*(y1-supported1)+weights[i+2]*supported0+weights[i+3]*supported1)/(255*6);
+  flow[j]=(weights[i]*x0+weights[i+1]*(x1-outward)+weights[i+3]*outward)/(255*6);
+  const r=weights[i+1],down=weights[i+2],out=weights[i+3];
+  const upper=(y0-supported0)*weights[i]+(y1-supported1)*(r+guard*(out-r));
+  const lower=r ? supported1*(down+guard*(Math.min(out,down)-down)) : supported0*down;
+  flow[j+1]=(upper+lower)/(255*6);
  }
  for(let y=0;y<area.h;y++)for(let x=0;x<area.w;x++){
   const at=(y*area.w+x)*4;
@@ -197,7 +255,7 @@ function resize(){const s=Math.min(stage.clientWidth/W,stage.clientHeight/H),dpr
 function point(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}}
 canvas.addEventListener('pointerdown',e=>{
  if(!ready||e.button>0)return;
- const p=point(e),weights=[...polygons,thighOutline].map(poly=>envelope(p.x,p.y,poly));
+ const p=point(e),weights=[weight(p.x,p.y,0),weight(p.x,p.y,1),envelope(p.x,p.y,thighOutline)];
  const strongest=Math.max(...weights),side=weights.indexOf(strongest);
  if(strongest<.03||[...holds.values()].some(h=>h.side===side))return;
  e.preventDefault();try{canvas.setPointerCapture(e.pointerId)}catch{}
@@ -207,7 +265,7 @@ canvas.addEventListener('pointerdown',e=>{
  }else{
   // Transfer the combined motion into both parts of the spring before clearing a baked bounce.
   o=offsets()[side];Object.assign(nodes[side],{x:o[0],y:o[1],fx:o[0],fy:o[1],vx:0,vy:0});
-  pulses[side]=[];releasedAt[side]=-Infinity;quietUntil=time+1.2;
+  clearTransfer(side);pulses[side]=[];releasedAt[side]=-Infinity;quietUntil=time+1.2;
  }
  holds.set(e.pointerId,{side,start:p,last:p,x:o[0],y:o[1],base:o,at:performance.now(),lastAt:performance.now(),vx:0,vy:0,travel:0});
 });
@@ -236,7 +294,7 @@ function release(e){
  }
 }
 for(const e of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(e,release);
-document.getElementById('bounce').onclick=()=>{quietUntil=time+.8;thighQuietUntil=time+.8;kick(0,1);kick(1,.88,0,false);shakeThigh(.78)};
+document.getElementById('bounce').onclick=()=>{quietUntil=time+.8;thighQuietUntil=time+.8;kick(0,1);kick(1,.88);shakeThigh(.78)};
 document.getElementById('auto').onclick=()=>{auto=!auto;const b=document.getElementById('auto');b.textContent=auto?'Auto on':'Auto off';b.setAttribute('aria-pressed',auto);nextPulse[0]=time+.05;nextPulse[1]=time+.48;nextThigh=time+.78;};
 document.getElementById('motion').onclick=()=>{mode=mode==='blender'?'springs':'blender';reset();document.getElementById('motion').textContent=mode==='blender'?'Blender bounce':'Live springs';document.getElementById('explain').textContent=mode==='blender'?'Blender sets the upper bounce timing for taps and Auto. Drags and the thigh use live springs.':'Live springs calculate each side’s response continuously. Switch back to compare the Blender bounce.';};
 function panel(open){document.getElementById('settings').hidden=!open;document.getElementById('gear').setAttribute('aria-expanded',open)}

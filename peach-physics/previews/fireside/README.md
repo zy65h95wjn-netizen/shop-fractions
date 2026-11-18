@@ -2,7 +2,7 @@
 
 A separate, user-authorized phone preview of the tested Fireside prototype.
 
-[Open Fireside preview 5](https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/previews/fireside/?v=5)
+[Open Fireside preview 6](https://zy65h95wjn-netizen.github.io/shop-fractions/peach-physics/previews/fireside/?v=6)
 
 The original supplied portrait and Blender spring-rig response are embedded in a single HTML file. Tap, hold, drag, flick, Auto, and the Blender/live-springs comparison are available. Preferences are session-only. No production profiles or service worker are used.
 
@@ -37,3 +37,11 @@ As either side presses into the cup, the skin slows over a wider area above the 
 Tap or drag the screen-right thigh just above the striped stocking. Its spring moves the skin and stocking together, settles after release, and gives a smaller shake during Bounce and Auto. The foreground arm, skirt trim, garter bow and blanket anchor the movement.
 
 `node peach-physics/previews/fireside/tests/contact.cjs` measures straight and diagonal pulls with a coordinate ruler and checks the thigh through touch, Bounce, Auto and multitouch. The contact, lift and release checks run in Chromium. Contact and lift exercise both WebGL and Canvas at a phone viewport.
+
+## Preview 6 — linked motion and the screen-left thigh
+
+Tap the large foreground thigh above the stocking on screen-left. The skin, garter and upper stocking move together. With linked movement enabled, the thigh shake also gives the upper body a small nudge. An inward drag on either side carries more motion to its neighbor than an outward pull. Each hand takes control of the side it holds.
+
+The left bounce now reaches the rounded area above the cup and tapers toward the shoulder. On the Playful tap rebound, four lower-left samples rose 16 portrait pixels each, compared with 7–12 in preview 5. The fur and loose curls still anchor the edges. A rightward drag now moves the lit area of the right side while the inner shadow holds its original position.
+
+The contact check compares previews 5 and 6 in phone-sized Chromium with WebGL and Canvas. The neighboring side peaked eight physics steps after a tap, about 67 milliseconds. The sampled right shadow moved 15 portrait pixels during an outward pull in preview 5 and zero in preview 6. The lift check also compares the actual shadow colors against the resting portrait.
