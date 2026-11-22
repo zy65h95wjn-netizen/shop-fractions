@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18",
+ "updated": "2026-11-22",
  "season": "Treasure Hunters",
  "groups": [
   {
@@ -50,6 +50,12 @@
    "name": "Cursed",
    "sourceSeason": 5,
    "bonus": "Improves rare-variant odds. Being in water deals damage while this Sprite is equipped."
+  },
+  {
+   "id": "fn-s5-gold",
+   "name": "Gold",
+   "sourceSeason": 5,
+   "bonus": "Adds elimination XP for your Sprite."
   }
  ],
  "sprites": [
@@ -3088,10 +3094,349 @@
     "https://www.fnsprites.info/sprite-info.js",
     "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
    ]
+  },
+  {
+   "id": "fn-s5-halfpeeld_gold",
+   "name": "Gold Halfpeel'd Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "halfpeeld_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/halfpeeld_gold.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Shows elimination locations on your map.",
+   "levels": "Each level expands its detection radius.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-repete_gold",
+   "name": "Gold Re-Pete Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "repete_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/repete_gold.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Speeds up reloading; some reloads return ammunition.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-barryofish_gold",
+   "name": "Gold Barry O'Fish Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "barryofish_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/barryofish_gold.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Lowers stamina use when sprinting through water.",
+   "levels": "At maximum level, also provides Slap.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-wayfinder_gold",
+   "name": "Gold Wayfinder Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "wayfinder_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/wayfinder_gold.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Detects nearby Sprites and improves buried-chest loot.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-kelper_gold",
+   "name": "Gold Kelper Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "kelper_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/kelper_gold.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Heals you gradually while you are in water.",
+   "levels": "Higher levels restore more health.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-exmarks_gold",
+   "name": "Gold Exmarks Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "exmarks_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/exmarks_gold.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Locates Wanted Posters and Treasure Maps.",
+   "levels": "At maximum level, produces a Treasure Map.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-plundarrgh_gold",
+   "name": "Gold Plundarrgh Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "plundarrgh_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/plundarrgh_gold.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Chest openings boost movement and pickaxe speed.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-lilsquibbly_gold",
+   "name": "Gold Lil' Squibbly Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "lilsquibbly_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/lilsquibbly_gold.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Leaping into a fishing hole catches fish and extra loot.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-lilflacko_gold",
+   "name": "Gold Lil' Flacko Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "lilflacko_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/lilflacko_gold.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random. Another route: defeat A$AP Rocky on The $.$. Rocky for a chance at his Lil' Flacko drop.",
+   "archived": false,
+   "available": true,
+   "does": "Landing sends out a shockwave that pushes enemies away.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-chester_gold",
+   "name": "Gold Chester Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "chester_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/chester_gold.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Prevents fall damage and can add loot to chests.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-sweetdreams_gold",
+   "name": "Gold Sweet Dreams Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "sweetdreams_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/sweetdreams_gold.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Level-ups give random loot; the maximum level releases Mythic items.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-transpondersnail_gold",
+   "name": "Gold Transponder Snail Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "transpondersnail_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/transpondersnail_gold.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Item pickups yield extra resources. Teammates carrying this Sprite also receive a share.",
+   "levels": "The resource bonus grows as it levels up.",
+   "infoReviewed": "2026-11-02",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-siroscarthesecond_basic",
+   "name": "Sir Oscar the Second Sprite",
+   "group": "fn-s5-basic",
+   "rarity": "legendary",
+   "added": "2026-11-22",
+   "sourceId": "siroscarthesecond_basic",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/siroscarthesecond_basic.png",
+   "how": "Finding instructions are awaiting verification.",
+   "archived": false,
+   "available": true
+  },
+  {
+   "id": "fn-s5-minimiku_gold",
+   "name": "Gold Mini Miku Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "minimiku_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/minimiku_gold.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Emote to create a Friendship Bubble.",
+   "levels": "The cooldown gets shorter with each level.",
+   "infoReviewed": "2026-11-18",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-squiplash_gold",
+   "name": "Gold Squiplash Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "squiplash_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/squiplash_gold.png",
+   "how": "On Crossbones Isle, tear a Wanted Poster off a wall. Follow its Sprite Treasure Map, dig at the marked spot with your pickaxe, then open the buried Sprite Chest. The Sprite you receive is random.",
+   "archived": false,
+   "available": true,
+   "does": "Triggers a healing smoke bomb when your health is low.",
+   "levels": "Leveling up improves its cooldown, duration and healing.",
+   "infoReviewed": "2026-11-18",
+   "infoSources": [
+    "https://communities.epicgames.com/thread/set-sail-for-fortnite-treasure-hunters-the-greatest-adventure-of-all-time/Pmud/",
+    "https://www.fnsprites.info/sprite-info.js",
+    "https://www.fortnitetools.com/guides/how-to/how-to-hunt-sprites-treasure-hunters"
+   ]
+  },
+  {
+   "id": "fn-s5-siroscarthesecond_fortune",
+   "name": "Fortune Sir Oscar the Second Sprite",
+   "group": "fn-s5-fortune",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "siroscarthesecond_fortune",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/siroscarthesecond_fortune.png",
+   "how": "Finding instructions are awaiting verification.",
+   "archived": false,
+   "available": true
+  },
+  {
+   "id": "fn-s5-siroscarthesecond_cursed",
+   "name": "Cursed Sir Oscar the Second Sprite",
+   "group": "fn-s5-cursed",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "siroscarthesecond_cursed",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/siroscarthesecond_cursed.png",
+   "how": "Finding instructions are awaiting verification.",
+   "archived": false,
+   "available": true
+  },
+  {
+   "id": "fn-s5-siroscarthesecond_gold",
+   "name": "Gold Sir Oscar the Second Sprite",
+   "group": "fn-s5-gold",
+   "rarity": "special",
+   "added": "2026-11-22",
+   "sourceId": "siroscarthesecond_gold",
+   "sourceSeason": 5,
+   "img": "https://www.fnsprites.info/spriteimg/siroscarthesecond_gold.png",
+   "how": "Finding instructions are awaiting verification.",
+   "archived": false,
+   "available": true
   }
  ],
  "currentSeason": 5,
- "lastChecked": "2026-11-22T07:05:22+00:00",
+ "lastChecked": "2026-11-22T19:50:06+00:00",
  "source": "https://www.fnsprites.info/",
  "schemaVersion": 2
 }
